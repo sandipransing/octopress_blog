@@ -4,7 +4,7 @@
   <title><![CDATA[Sandip Ransing]]></title>
   <link href="http://sandipransing.github.io/atom.xml" rel="self"/>
   <link href="http://sandipransing.github.io/"/>
-  <updated>2014-02-09T17:20:18+05:30</updated>
+  <updated>2014-02-09T18:35:27+05:30</updated>
   <id>http://sandipransing.github.io/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -112,6 +112,17 @@ almost exactly like the default, right pullquotes, but a little different.
 <p>AngularJS is a client-side JavaScript framework.A video tutorial to help you get started with AngularJS.
 <a href="http://youtube.com/watch?v=WuiHuZq_cg4"><img src="http://img.youtube.com/vi/WuiHuZq_cg4/0.jpg" alt="Angular JS" /></a></p>
 
+<h2>Inline HTML</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="o">&lt;</span><span class="nx">div</span> <span class="k">class</span><span class="o">=</span><span class="s">&#39;well&#39;</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="nx">All</span> <span class="o">is</span> <span class="nx">well</span><span class="p">.</span> <span class="nx">Way</span> <span class="nx">to</span> <span class="nx">go</span> <span class="o">!!</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="nx">div</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
 <h2>About Author</h2>
 
 <p><img class="left" src="http://www.gravatar.com/avatar/37e0a0772ffc4ce993cedfb49c6ee6d2.png" title="Sandip Ransing" >
@@ -120,11 +131,150 @@ Sandip is a ruby on rails developer based in pune and also a blogger at funonrai
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Hello Octopress and Github pages]]></title>
-    <link href="http://sandipransing.github.io/blog/2014/02/07/hello-octopress-and-github-pages/"/>
+    <title type="html"><![CDATA[Getting started: Octopress powered and Github hosted blog]]></title>
+    <link href="http://sandipransing.github.io/blog/2014/02/07/octopress-powered-and-github-hosted-blog/"/>
     <updated>2014-02-07T19:20:07+05:30</updated>
-    <id>http://sandipransing.github.io/blog/2014/02/07/hello-octopress-and-github-pages</id>
-    <content type="html"><![CDATA[
+    <id>http://sandipransing.github.io/blog/2014/02/07/octopress-powered-and-github-hosted-blog</id>
+    <content type="html"><![CDATA[<p>There are various blogging sites like <code>blogspot</code>, <code>wordpress</code>, <code>posterious</code>, and many more. But each has their own limitations.
+Anyone who has some technical background can start with octopress blog. This gives us the power of freedom of doing anything.
+So, Lets first understand about octopress framework and its features.</p>
+
+<h2>Octopress</h2>
+
+<blockquote><p>Octopress is a framework designed by Brandon Mathis for Jekyll, the blog aware static site generator. more info can be found <a href="http://octopress.org/2011/07/23/octopress-20-surfaces/">here</a></p></blockquote>
+
+<h2>Octopress Setup</h2>
+
+<ol>
+<li>Before starting make sure you have <code>git</code> installed. If not then &ndash;</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install git</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Install <code>ruby</code> 1.9.3 or higher</li>
+</ol>
+
+
+<p>Make git clone of octopress source code</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git://github.com/imathis/octopress.git octopress
+</span><span class='line'>cd octopress
+</span><span class='line'>bundle install</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Installing Octopress theme</h2>
+
+<p>Install the default Octopress theme using</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In order to install custom themes,
+Please <a href="http://opthemes.com/">browse through themes</a> and make a selection for your blog.
+Once choice is made, you need to do <code>git clone</code> of theme source and install it.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd octopress
+</span><span class='line'>git clone https://github.com/kAworu/octostrap3 .themes/octostrap3
+</span><span class='line'>rake 'install[octostrap3]'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To genrate infrastrcture for your blog i.e. <code>layouts</code>, <code>js</code> and <code>css</code></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake generate</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Edit <code>_config.yml</code> to configure blog <code>title</code>, <code>header</code>, <code>metadata</code>, <code>plugins</code> and <code>3rd Party Settings</code>.
+more on configurations can be found <a href="http://octopress.org/docs/configuring/">here</a>.</p>
+
+<p>We are almost done, and now ready to create our first blog post &ndash;</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake new_post["My first octopress post"]
+</span><span class='line'>mkdir -p source/_posts
+</span><span class='line'>Creating new post: source/_posts/2014-02-09-my-first-octopress-post.markdown</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now you can open a post inside editor and change as you wanted. More on writing markdown can be found <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet#wiki-html">here</a> and <a href="http://daringfireball.net/projects/markdown/syntax">here too</a></p>
+
+<p>Well, now its time to view how our blog looks like &ndash;</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd octopress
+</span><span class='line'>rake watch
+</span><span class='line'>rake preview</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Visit browser <code>http://localhost:4000</code> and you should be seeing blog running there.</p>
+
+<h2>Deployment</h2>
+
+<p>There are ways to deploy this blog. You can either deploy this blog on <code>heroku</code> or on <code>github</code> using github pages.</p>
+
+<h3>Heroku</h3>
+
+<p>More on Heroku deployment can be found <a href="http://def.reyssi.net/blog/2012/01/14/get-blogging-with-octopress-on-heroku/">here</a></p>
+
+<h3>With Github Project pages</h3>
+
+<p>Github deployment is simple. First you need to create a github repository called <code>username.github.io</code></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake setup_github_pages
+</span><span class='line'>git remote add origin git@github.com:username/username.github.io.git
+</span><span class='line'>rake generate
+</span><span class='line'>rake deploy</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Visit <code>http://username.github.io</code> to see your blog hosted on github.
+Also, do not forget to commit and push your source code on github.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git add .
+</span><span class='line'>git commit -m 'octopress first blog'
+</span><span class='line'>git push origin source</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Adding custom domain</h2>
+
+<p>First create a <code>CNAME</code> file and add naked domain name to it.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>echo 'funonrails.com' &gt;&gt; source/CNAME</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then goto your domain provider website and point your <code>domain</code> i.e A record to github ip address <code>204.232.175.78</code>.</p>
+
+<h3>Subdomain</h3>
+
+<p>If you want to point subdomain to github blog then &ndash;</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>echo 'blog.sandipransing.in' &gt;&gt; source/CNAME</span></code></pre></td></tr></table></div></figure>
+
+
+<p>then goto your domain provider website and create a CNAME record for your <code>subdomain</code> i.e. <code>blog</code> pointing to <code>yourname.github.io.</code>
+If you want more help then see <a href="http://octopress.org/docs/deploying/github/">here</a> and also <a href="http://help.github.com/pages/#custom_domains">here</a></p>
 ]]></content>
   </entry>
   
