@@ -9,7 +9,7 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Delayed Job & Monit configurationWe were struggling through how to monit delayed_job from past few months because monit doesn&#8217;t work &hellip;">
+  <meta name="description" content="Delayed Job &amp; Monit configuration We were struggling through how to monit delayed_job from past few months because monit doesn&rsquo;t work &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -91,8 +91,133 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-<b>Delayed Job & Monit configuration</b><br/>We were struggling through how to monit delayed_job from past few months because monit doesn&#8217;t work seamlessly with delayed_job start/stop commands and finally we got able to monit delayed_job. <br/><b>Here is our old configuration that wasn&#8217;t working anyhow-</b><br/><pre class=ruby>check process delayed_job with pidfile /home/sandip/shared/pids/delayed_job.pid     stop program = "/bin/bash -c 'cd /home/sandip/current && RAILS_ENV=production script/delayed_job stop'"     start program = "/bin/bash -c 'cd /home/sandip/current && RAILS_ENV=production script/delayed_job start'"     if totalmem > 100.0 MB for 3 cycles then restart     if cpu usage > 95% for 3 cycles then restart </pre><br/>After doing google & looking at stackoverflow, we found different solutions to work with but none of them found useful to me. :( <br/>After reading google group someone (not remembering exactly) directed to write a init script for delayed_job server and that perfectly worked for me and my headache of self moniting delayed_job ended up ;)<br/> <b>Here is delayed_job init script</b><br/>## /etc/init.d/delayed_job<br/><pre class=ruby>#! /bin/sh set_path="cd /home/sandip/current"  case "$1" in     start)     echo -n "Starting delayed_job: "     su - root -c "$set_path; RAILS_ENV=production script/delayed_job start" >> /var/log/delayed_job.log 2>&1     echo "done."     ;;     stop)     echo -n "Stopping delayed_job: "     su - root -c "$set_path; RAILS_ENV=production script/delayed_job stop" >> /var/log/delayed_job.log 2>&1     echo "done."     ;;     *)     echo "Usage: $N {start|stop}" >&2     exit 1     ;; esac  exit 0 </pre><b>finally here is the working monit delayed_job configuration</b><br/> <pre class=ruby>check process delayed_job with pidfile /home/sandip/shared/pids/delayed_job.pid     stop program = "/etc/init.d/delayed_job stop"     start program = "/etc/init.d/delayed_job start"     if totalmem > 100.0 MB for 3 cycles then restart     if cpu usage > 95% for 3 cycles then restart </pre> <b>Thinking Sphinx monit configuration</b><br/><pre class=ruby>check process sphinx with pidfile /home/sandip/shared/pids/searchd.pid     stop program = "/bin/bash -c 'cd /home/sandip/current && /usr/bin/rake RAILS_ENV=production ts:stop'"     start program = "/bin/bash -c 'cd /home/sandip/current && /usr/bin/rake RAILS_ENV=production ts:start'"     if totalmem > 85.0 MB for 3 cycles then restart     if cpu usage > 95% for 3 cycles then restart </pre> <b>Adhearsion (ahn) monit confiuration</b><br/><pre class=ruby>check process ahn with pidfile /home/josh/shared/pids/ahnctl.pid     stop program = "/bin/bash -c 'cd /home/sandip/current && /usr/bin/ahnctl stop adhearsion'"     start program = "/bin/bash -c 'cd /home/sandip/current && /usr/bin/ahnctl start adhearsion'"     if totalmem > 100.0 MB for 3 cycles then restart     if cpu usage > 95% for 3 cycles then restart </pre> <b>Nginx monit configuration</b><br/><pre class=ruby>check process nginx with pidfile /opt/nginx/logs/nginx.pid     start program = "/opt/nginx/sbin/nginx"     stop  program = "/opt/nginx/sbin/nginx -s stop"     if cpu is greater than 70% for 3 cycles then alert     if cpu > 80% for 5 cycles then restart     if 10 restarts within 10 cycles then timeout </pre></div>
+<div class="entry-content"><p>Delayed Job &amp; Monit configuration</p>
+
+<p>We were struggling through how to monit delayed_job from past few months because monit doesn&rsquo;t work seamlessly with delayed_job start/stop commands and finally we got able to monit delayed_job.</p>
+
+<p>Here is our old configuration that wasn&rsquo;t working anyhow-</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>check process delayed_job with pidfile /home/sandip/shared/pids/delayed_job.pid
+</span><span class='line'>    stop program = "/bin/bash -c 'cd /home/sandip/current && RAILS_ENV=production script/delayed_job stop'"
+</span><span class='line'>    start program = "/bin/bash -c 'cd /home/sandip/current && RAILS_ENV=production script/delayed_job start'"
+</span><span class='line'>    if totalmem &gt; 100.0 MB for 3 cycles then restart
+</span><span class='line'>    if cpu usage &gt; 95% for 3 cycles then restart</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After doing google &amp; looking at stackoverflow, we found different solutions to work with but none of them found useful to me. :(</p>
+
+<p>After reading google group someone (not remembering exactly) directed to write a init script for delayed_job server and that perfectly worked for me and my headache of self moniting delayed_job ended up ;)</p>
+
+<p>Here is delayed_job init script</p>
+
+<h1>/etc/init.d/delayed_job</h1>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#! /bin/sh
+</span><span class='line'>set_path="cd /home/sandip/current"
+</span><span class='line'>
+</span><span class='line'>case "$1" in
+</span><span class='line'>    start)
+</span><span class='line'>    echo -n "Starting delayed_job: "
+</span><span class='line'>    su - root -c "$set_path; RAILS_ENV=production script/delayed_job start" &gt;&gt; /var/log/delayed_job.log 2&gt;&1
+</span><span class='line'>    echo "done."
+</span><span class='line'>    ;;
+</span><span class='line'>    stop)
+</span><span class='line'>    echo -n "Stopping delayed_job: "
+</span><span class='line'>    su - root -c "$set_path; RAILS_ENV=production script/delayed_job stop" &gt;&gt; /var/log/delayed_job.log 2&gt;&1
+</span><span class='line'>    echo "done."
+</span><span class='line'>    ;;
+</span><span class='line'>    *)
+</span><span class='line'>    echo "Usage: $N {start|stop}" &gt;&2
+</span><span class='line'>    exit 1
+</span><span class='line'>    ;;
+</span><span class='line'>esac
+</span><span class='line'>
+</span><span class='line'>exit 0</span></code></pre></td></tr></table></div></figure>
+
+
+<p>finally here is the working monit delayed_job configuration</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>check process delayed_job with pidfile /home/sandip/shared/pids/delayed_job.pid
+</span><span class='line'>    stop program = "/etc/init.d/delayed_job stop"
+</span><span class='line'>    start program = "/etc/init.d/delayed_job start"
+</span><span class='line'>    if totalmem &gt; 100.0 MB for 3 cycles then restart
+</span><span class='line'>    if cpu usage &gt; 95% for 3 cycles then restart</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Thinking Sphinx monit configuration</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>check process sphinx with pidfile /home/sandip/shared/pids/searchd.pid
+</span><span class='line'>    stop program = "/bin/bash -c 'cd /home/sandip/current && /usr/bin/rake RAILS_ENV=production ts:stop'"
+</span><span class='line'>    start program = "/bin/bash -c 'cd /home/sandip/current && /usr/bin/rake RAILS_ENV=production ts:start'"
+</span><span class='line'>    if totalmem &gt; 85.0 MB for 3 cycles then restart
+</span><span class='line'>    if cpu usage &gt; 95% for 3 cycles then restart</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Adhearsion (ahn) monit confiuration</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>check process ahn with pidfile /home/josh/shared/pids/ahnctl.pid
+</span><span class='line'>    stop program = "/bin/bash -c 'cd /home/sandip/current && /usr/bin/ahnctl stop adhearsion'"
+</span><span class='line'>    start program = "/bin/bash -c 'cd /home/sandip/current && /usr/bin/ahnctl start adhearsion'"
+</span><span class='line'>    if totalmem &gt; 100.0 MB for 3 cycles then restart
+</span><span class='line'>    if cpu usage &gt; 95% for 3 cycles then restart</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Nginx monit configuration</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>check process nginx with pidfile /opt/nginx/logs/nginx.pid
+</span><span class='line'>    start program = "/opt/nginx/sbin/nginx"
+</span><span class='line'>    stop  program = "/opt/nginx/sbin/nginx -s stop"
+</span><span class='line'>    if cpu is greater than 70% for 3 cycles then alert
+</span><span class='line'>    if cpu &gt; 80% for 5 cycles then restart
+</span><span class='line'>    if 10 restarts within 10 cycles then timeout</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 
@@ -143,7 +268,7 @@
         <a class="basic-alignment left" href="/2011/03/getting-started-with-rails-3-postgres/" title="Previous Post: Getting started with rails 3 & postgres database">&laquo; Getting started with rails 3 & postgres database</a>
       
       
-        <a class="basic-alignment right" href="/2011/03/monitor-delayedjob-in-rails/" title="Next Post: Monitor Delayed Job in rails">Monitor Delayed Job in rails &raquo;</a>
+        <a class="basic-alignment right" href="/2011/03/accessing-view-helpers-routes-in-rails/" title="Next Post: Accessing View Helpers & Routes in Rails Console, Rake Tasks and Mailers">Accessing View Helpers & Routes in Rails Console, Rake Tasks and Mailers &raquo;</a>
       
     </p>
   </footer>

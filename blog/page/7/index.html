@@ -9,9 +9,9 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="
-Check out this SlideShare Presentation: Introduction To Delayed JobView more presentations from Jonathan Julian.
-">
+  <meta name="description" content="Array of years using range
+((yr=Date.current.year)-9..yr).to_a
+#=&gt; [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010] Array of years &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,43 +67,6 @@ Check out this SlideShare Presentation: Introduction To Delayed JobView more pre
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/10/introduction-to-delayed-job/">Introduction to Delayed Job</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-10-04T21:12:00+05:30" pubdate data-updated="true">Oct 4<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-Check out this SlideShare Presentation: <div style="width:425px" id="__ss_2467230"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/jonathanjulian/introduction-to-delayed-job" title="Introduction To Delayed Job">Introduction To Delayed Job</a></strong><object id="__sse2467230" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=introtodelayedjob-091110110012-phpapp01&stripped_title=introduction-to-delayed-job&userName=jonathanjulian" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse2467230" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=introtodelayedjob-091110110012-phpapp01&stripped_title=introduction-to-delayed-job&userName=jonathanjulian" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/jonathanjulian">Jonathan Julian</a>.</div></div></div>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -633,6 +596,43 @@ Wrong English is an often problem while developing any website product as it giv
 
   <div class="entry-content"><div class='post'>
 Check out this SlideShare Presentation: <div style="width:425px" id="__ss_3219240"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/GreggPollack/rails-3-beautiful-code-3219240" title="Rails 3 Beautiful Code">Rails 3 Beautiful Code</a></strong><object id="__sse3219240" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=beautifulcodeinrails3-greggpollack-100218130149-phpapp02&stripped_title=rails-3-beautiful-code-3219240" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse3219240" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=beautifulcodeinrails3-greggpollack-100218130149-phpapp02&stripped_title=rails-3-beautiful-code-3219240" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/GreggPollack">GreggPollack</a>.</div></div></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/08/pdf-in-rails-using-prawn-library/">PDF in Rails Using Prawn Library</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-08-01T16:45:00+05:30" pubdate data-updated="true">Aug 1<span>st</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+Building PDF Document in ruby &amp; rails application using prawn Library<br /><b>Brief</b><br />Before getting started with this tutorial, I would like to thanks <b>Greg and <br />Prawn team</b> for their awesome work towards ruby and rails community. <br />Installing prawn (core, layout, format, security) <br /><pre class=ruby>gem install prawn</pre>or <br />Add following line in rails environment file inside initializer block. <pre class=ruby>config.gem 'prawn'</pre>Optionally you can specify version to be used and then run task <pre class=ruby>rake gems:install</pre>Generating pdf using rails console <pre class=ruby>./script/console pdf = Prawn::Document.new </pre>It creates new pdf document object. Here you can additionally pass options parameters such as - <pre class=ruby>Prawn::Document.new(:page_size   =&gt; [11.32, 8.49], :page_layout =&gt; :portrait) Prawn::Document.new(A0) Here A0 is page size. Prawn::Document.new(:page_layout =&gt; :portrait,                      :left_margin =&gt; 10.mm,    # different                      :right_margin =&gt; 1.cm,    # units                      :top_margin =&gt; 0.1.dm,    # work                      :bottom_margin =&gt; 0.01.m, # well                      :page_size =&gt; 'A4')  pdf.text("Prawn Rocks") =&gt; 12  pdf.render_file('prawn.pdf') =&gt; #<file:prawn.pdf (closed)=""></file:prawn.pdf></pre>Here is output file generated [<a href="http://github.com/sandipransing/prawn-example/raw/master/sample/prawn.pdf">click</a>] <br />Now let&#8217;s go through other goodness of prawn. <pre class=ruby>pdf  = Prawn::Document.new('A3') do </pre><br /><ol><li>FONTS [<a href="http://github.com/sandipransing/prawn-example/raw/master/sample/font.pdf">click</a>]</li><pre class=ruby># Specify font to be used or specify path to font file. font "times.ttf" font("/times.ttf") </pre><li>TEXT [<a href="http://github.com/sandipransing/prawn-example/raw/master/sample/font.pdf">click</a>]</li><pre class=ruby>text 'Sandip Ransing', :size =&gt; 41, :position =&gt; :center, :style =&gt; :bold </pre><li>STROKE LINE [<a href="http://github.com/sandipransing/prawn-example/raw/master/sample/stroke.pdf">click</a>]</li><pre class=ruby>stroke do       rectangle [300,300], 100, 200  end </pre><li>IMAGE [<a href="http://github.com/sandipransing/prawn-example/raw/master/sample/image.pdf">click</a>]</li>Display Local file system Image <pre class=ruby>image 'sandip.png', :height =&gt; 50, :position =&gt; :center, :border =&gt; 2 </pre>Scale Image <pre class=ruby>image 'sandip.png', :scale =&gt; 0.5, :position =&gt; :left </pre>Display Remote image from Internet inside pdf <pre class=ruby>require "open-uri"  image open('http://t2.gstatic.com/images?q=tbn:kTG6gAKrnou2gM:http://www.facebook.com/profile/pic.php?uid=AAAAAQAQrLXvTWfyY2ANjttV8D1c0QAAAAnDHPFJe0pPFR84iIzXPKro&amp;t=1") end </pre><li>LINE BREAKS</li><pre class=ruby>movedown(20) </pre><li>TABLE/GRID [<a href="http://github.com/sandipransing/prawn-example/raw/master/sample/table.pdf">click</a>]</li><pre class=ruby>data = [     ["Name", {:text =&gt; 'Sandip Ransing', :font_style =&gt; :bold, :colspan =&gt; 4 }],     ["Address", {:text =&gt; 'SHIVAJINAGAR, PUNE 411005', :colspan =&gt; 4 }],     ["Landmark",{:text =&gt; 'NEAR FC COLLEGE', :colspan =&gt; 4 }],     ["Mobile","9860648108", {:text =&gt; "", :colspan =&gt; 3 }],     ["Education", {:text =&gt; "Bachelor in Computer Engineering", :colspan =&gt; 4 }],       ["Vehicle", 'Hero Honda',"Reg. No.", {:text =&gt; "MH 12 EN 921", :colspan =&gt; 3 }],       ["Additional", "GDCA", "class", 'First', ""],       [{:text =&gt; "Areas of Speciality", :font_style =&gt; :bold}, {:text =&gt; "Ruby, Rails, Radiant, Asterisk, Adhearsion, Geokit, Prawn, ....,...", :font_style =&gt; :bold, :colspan =&gt; 4}],       [{:text =&gt; "Website", :colspan =&gt; 2},{:text =&gt; "www.funonrails.com", :colspan =&gt; 3}],       [{:text =&gt; "Company", :colspan =&gt; 2},{:text =&gt; "Josh Software", :colspan =&gt; 3}]   ] table data,      :border_style =&gt; :grid, #:underline_header     :font_size  =&gt; 10,      :horizontal_padding =&gt; 6,     :vertical_padding   =&gt; 3,     :border_width =&gt; 0.7,      :column_widths =&gt; { 0 =&gt; 130, 1 =&gt; 100, 2 =&gt; 100, 3 =&gt; 100, 4 =&gt; 80 },      :position =&gt; :left,     :align =&gt; { 0 =&gt; :left, 1 =&gt; :right, 2 =&gt; :left, 3 =&gt; :right, 4 =&gt; :right } </pre><li>LINKS [<a href="http://github.com/sandipransing/prawn-example/raw/master/sample/link.pdf">click</a>]</li><pre class=ruby>link_annotation([200, 200, 500, 40],:Border =&gt; [0,0,1], :A =&gt; { :Type =&gt; :Action, :S =&gt; :URI, :URI =&gt; Prawn::LiteralString.new("http://twitter.com/sandipransing") } ) link_annotation(([0, 100, 100, 150]), :Border =&gt; [0,0,1], :Dest =&gt; s"http://funonrails.com") </pre><li>PDF Security [<a href="http://github.com/sandipransing/prawn-example/raw/master/sample/secure.pdf">click</a>]</li><pre class=ruby>encrypt_document :user_password =&gt; 'hello', :owner_password =&gt; 'railer',     :permissions =&gt; { :print_document =&gt; false } </pre><li>Prawn Inline Formatting</li>Prawn-format supports inline text formatting that gives user enough flexibility to use html tags. <pre class=ruby>require 'prawn/format' text 'This is <b>Strong </b> text', :inline_format =&gt; true text 'This is <b>bold</b> text \n It should be on newline.', :inline_format =&gt; true </pre></ol>SAVE PDF File <pre class=ruby>end pdf.render_file 'my.pdf' </pre> !!! NOTE: As of time now &#8216;prawn-format&#8217; is incompatible with latest prawn gem, It is compatible with prawn version  &lt;= 0.6 s</div>
 </div>
   
   

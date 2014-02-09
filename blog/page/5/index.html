@@ -205,43 +205,6 @@ rails has built in <i>number_to_currency</i> helper which takes options like uni
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-<b>Delayed Job & Monit configuration</b><br/>We were struggling through how to monit delayed_job from past few months because monit doesn&#8217;t work seamlessly with delayed_job start/stop commands and finally we got able to monit delayed_job. <br/><b>Here is our old configuration that wasn&#8217;t working anyhow-</b><br/><pre class=ruby>check process delayed_job with pidfile /home/sandip/shared/pids/delayed_job.pid     stop program = "/bin/bash -c 'cd /home/sandip/current && RAILS_ENV=production script/delayed_job stop'"     start program = "/bin/bash -c 'cd /home/sandip/current && RAILS_ENV=production script/delayed_job start'"     if totalmem > 100.0 MB for 3 cycles then restart     if cpu usage > 95% for 3 cycles then restart </pre><br/>After doing google & looking at stackoverflow, we found different solutions to work with but none of them found useful to me. :( <br/>After reading google group someone (not remembering exactly) directed to write a init script for delayed_job server and that perfectly worked for me and my headache of self moniting delayed_job ended up ;)<br/> <b>Here is delayed_job init script</b><br/>## /etc/init.d/delayed_job<br/><pre class=ruby>#! /bin/sh set_path="cd /home/sandip/current"  case "$1" in     start)     echo -n "Starting delayed_job: "     su - root -c "$set_path; RAILS_ENV=production script/delayed_job start" >> /var/log/delayed_job.log 2>&1     echo "done."     ;;     stop)     echo -n "Stopping delayed_job: "     su - root -c "$set_path; RAILS_ENV=production script/delayed_job stop" >> /var/log/delayed_job.log 2>&1     echo "done."     ;;     *)     echo "Usage: $N {start|stop}" >&2     exit 1     ;; esac  exit 0 </pre><b>finally here is the working monit delayed_job configuration</b><br/> <pre class=ruby>check process delayed_job with pidfile /home/sandip/shared/pids/delayed_job.pid     stop program = "/etc/init.d/delayed_job stop"     start program = "/etc/init.d/delayed_job start"     if totalmem > 100.0 MB for 3 cycles then restart     if cpu usage > 95% for 3 cycles then restart </pre> <b>Thinking Sphinx monit configuration</b><br/><pre class=ruby>check process sphinx with pidfile /home/sandip/shared/pids/searchd.pid     stop program = "/bin/bash -c 'cd /home/sandip/current && /usr/bin/rake RAILS_ENV=production ts:stop'"     start program = "/bin/bash -c 'cd /home/sandip/current && /usr/bin/rake RAILS_ENV=production ts:start'"     if totalmem > 85.0 MB for 3 cycles then restart     if cpu usage > 95% for 3 cycles then restart </pre> <b>Adhearsion (ahn) monit confiuration</b><br/><pre class=ruby>check process ahn with pidfile /home/josh/shared/pids/ahnctl.pid     stop program = "/bin/bash -c 'cd /home/sandip/current && /usr/bin/ahnctl stop adhearsion'"     start program = "/bin/bash -c 'cd /home/sandip/current && /usr/bin/ahnctl start adhearsion'"     if totalmem > 100.0 MB for 3 cycles then restart     if cpu usage > 95% for 3 cycles then restart </pre> <b>Nginx monit configuration</b><br/><pre class=ruby>check process nginx with pidfile /opt/nginx/logs/nginx.pid     start program = "/opt/nginx/sbin/nginx"     stop  program = "/opt/nginx/sbin/nginx -s stop"     if cpu is greater than 70% for 3 cycles then alert     if cpu > 80% for 5 cycles then restart     if 10 restarts within 10 cycles then timeout </pre></div>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/03/monitor-delayedjob-in-rails/">Monitor Delayed Job in Rails</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-03-01T01:22:00+05:30" pubdate data-updated="true">Mar 1<span>st</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
   <div class="entry-content"><p>Delayed Job &amp; Monit configuration</p>
 
 <p>We were struggling through how to monit delayed_job from past few months because monit doesn&rsquo;t work seamlessly with delayed_job start/stop commands and finally we got able to monit delayed_job.</p>
@@ -733,6 +696,43 @@ While working on remote machine we often get headache of entering password for s
 
   <div class="entry-content"><div class='post'>
 <b>Testing restful &amp; polymorphic resource routes on rails console</b><br />Open rails console<br /><pre class=ruby>rails c # In rails 3 OR ruby script/console </pre><br />app object of URL <pre class=ruby>&gt;&gt; app<br />=&gt; #&lt;ActionController::Integration::Session:0xc164fac @result=nil, @status=nil, @accept="text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5", @path=nil, @request_count=0, @application=#&lt;ActionController::Dispatcher:0xc1644f8 @output=#&lt;IO:0x85e34ec&gt;&gt;, @remote_addr="127.0.0.1", @host="www.example.com", @controller=nil, @https=false, @request=nil, @headers=nil, @cookies={}, @status_message=nil, @named_routes_configured=true, @response=nil&gt;<br /></pre>Root URL<br/><pre class=ruby>&gt;&gt; app.root_url<br />=&gt; "http://www.example.com/"<br /></pre>Plural paths <pre class=ruby><br />&gt;&gt; app.calls_path<br />=&gt; "/calls"<br /></pre>Singular routes <pre class=ruby><br />&gt;&gt; app.audio_call_path<br />ActionController::RoutingError: audio_call_url failed&nbsp; <br /> &gt;&gt; app.audio_call_path(1)<br />=&gt; "/calls/1/audio"<br /><br />&gt;&gt; app.audio_call_path(13)<br />=&gt; "/calls/13/audio"<br /><br />&gt;&gt; app.audio_call_path(13, :name =&gt; 'san')<br />=&gt; "/calls/13/audio?name=san"<br /></pre><b>Polymorphic URLS</b><br/><pre class=ruby>&nbsp;app.polymorphic_path(Call.first, :action =&gt; 'audio')<br />=&gt; "/calls/253/audio"<br /><br />&gt;&gt; app.polymorphic_path(Call.new)<br />=&gt; "/calls"<br /></pre><br /></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/01/getting-started-with-mysql-on-amazon/">Getting Started With MySQL on Amazon Web Services</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-15T18:30:00+05:30" pubdate data-updated="true">Jan 15<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div style="width:425px" id="__ss_1327730"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/ronaldbradford/getting-started-with-mysql-in-amazon-web-services" title="Getting started with MySQL on Amazon Web Services">Getting started with MySQL on Amazon Web Services</a></strong><object id="__sse1327730" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=usingamazonwebservices-090422111735-phpapp01&stripped_title=getting-started-with-mysql-in-amazon-web-services&userName=ronaldbradford" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse1327730" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=usingamazonwebservices-090422111735-phpapp01&stripped_title=getting-started-with-mysql-in-amazon-web-services&userName=ronaldbradford" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/ronaldbradford">Ronald Bradford</a>.</div></div></div>
 </div>
   
   

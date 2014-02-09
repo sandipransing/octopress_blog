@@ -9,7 +9,7 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="3rd worm game&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;- Flash Puzzle Games&nbsp; Racing Game&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212 &hellip;">
+  <meta name="description" content="Collect all rotating circles with the black ball. You can move the ball by drawing shapes with mouse and using physics. The ways of completing a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,43 +65,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/11/3rd-worm-game/">Flash Games</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-11-24T17:59:00+05:30" pubdate data-updated="true">Nov 24<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<div style="text-align: left;"><b>3rd worm game</b>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-  <embed align="center" allowscriptaccess="never" height="400" pluginspage="http://www.macromedia.com/go/getflashplayer" quality="high" src="http://www.layoutshack.net/games/puzzle/1.swf" width="600"></embed><br /></div><div style="text-align: center;"><a href="http://www.layoutshack.net/games/puzzle/" target="_blank">Flash Puzzle Games</a><br /></div><div style="text-align: left;">&nbsp; <b>Racing Game</b>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-<br /></div><div style="text-align: center;">&nbsp;  <embed align="center" allowscriptaccess="never" height="400" pluginspage="http://www.macromedia.com/go/getflashplayer" quality="high" src="http://www.layoutshack.net/games/racing/2.swf" width="600"></embed><br /></div><div style="text-align: center;"><a href="http://www.layoutshack.net/games/racing/" target="_blank">Flash Racing Games</a><br /></div></div>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -450,6 +413,43 @@ getting for the code above uninitialized constant YAML (NameError)<br /><br />wh
 
   <div class="entry-content"><div class='post'>
 <div style="text-align: left;">Rake tasks itself defines that “they are bunch of ruby code that performs some task.” Rake tasks are placed in lib/tasks directory of application and files have .rake extension. There are many lovable tasks defined in rails. read more  Rake tasks are executed from console.  Benefit of writing rake task are Testing of code   Scheduled rake tasks ( backgroundRb and scheduled tasks using cron )   Simplifies code Lets, understand what is code inside rake tasks.<br /></div><div style="text-align: left;"><b><br /></b><br /></div><div style="text-align: left;"><b>Simple greet rake task  </b><br /></div><pre class="ruby" name="code"> <br /># lib/tasks/welcome.rake<br />task :greet do<br />  puts “Hello !!”<br />end<br /><br />## Execute task<br />rake greet<br /></pre><b><br /></b><br /><b>Adding description to rake task  </b><br /><pre class="ruby" name="code"> <br /># lib/tasks/welcome.rake<br />desc “This is new style of greet”<br />task :greet do<br />  puts “Hello !!”<br />end<br /></pre><pre class="ruby" name="code">## Execute task<br />rake greet<br /></pre><br /><b>Adding namespace to rake tasks</b><br /><br />It&#8217;s nothing but prefix that takes while executing rake task. Benefit of adding namespace is to categories similar rake tasks.  <br /><pre class="ruby" name="code"> <br /># lib/tasks/welcome.rake<br />namespace :introduction do<br />desc “This is one style of introduction”<br />task :greet do<br />  puts “Hello !!”<br />end<br />desc “This is 2nd style of introduction”<br />task :hi do<br />  puts “Hi ”<br />end<br />end<br /></pre><pre class="ruby" name="code">## Execute task<br />rake introduction:greet<br />rake introduction:hi<br /><br /></pre><b>Passing arguments to rake tasks </b><br /><pre class="ruby" name="code"> <br /># lib/tasks/welcome.rake<br /><br />namespace :introduction do<br />desc “This is one style of introduction”<br />task :greet do<br />  puts “Hello !!”<br />end<br /><br />desc “This is 2nd style of introduction”<br />task :hi =&gt; :enviroment do<br />  puts “Hi #{ENV['name']}”<br />end<br />end<br /></pre><pre class="ruby" name="code">## Execute task<br />rake introduction:hi name=Raj<br /></pre><a href="http://www.blogger.com/For%20more%20reference%20http://railsenvy.com/2007/6/11/ruby-on-rails-rake-tutorial#namespaces">read more</a><br /></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/understanding-and-creating-radinat/">Understanding and Creating Radinat Extensions</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-10T13:52:00+05:30" pubdate data-updated="true">Nov 10<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+Understanding and creating radinat extensions To start with, first of all lets know what is radiant and why to use it ? Radiant is a open source content management system designed that serves cms needs for small organisations Creating new radint application <pre class='ruby' name='code'><br /> radiant -d  mysql cms<br />    create<br />    create    CHANGELOG<br />    create    CONTRIBUTORS<br />    create    INSTALL<br />    create    LICENSE<br />    create    README<br />    create    config<br />    create    config/environments<br />    .....<br /></pre>Radiant supports extensions. It means one can add extra features to radiant based cms to add extra capabilities. Extension directory structure is almost similar to any standard rails application Radiant Extension Directory structure  <pre class='ruby' name='code'><br />       |-- app<br />              |-- controllers<br />              |-- helpers<br />              |-- models<br />              |-- views<br />       |-- db<br />              |-- migrate<br />              |-- seeds.rb<br />       |-- lib<br />              |-- spec<br />                 |-- controllers<br />                 |-- helpers<br />                 |-- models<br />                 |-- spec.opts<br />                 |-- spec_helper<br />                 |-- views<br /></pre>Creating radiant extension radiant has generators to create new radint extension script/generate extension ExtensionName Lets create session management extension for radint cms It will create directory structure for extension. <pre class='ruby' name='code'><br />script/generate extension session_management<br /></pre><pre class='ruby' name='code'><br />    create    vendor/extensions/session_management/app/controllers<br />    create    vendor/extensions/session_management/app/helpers<br />    create    vendor/extensions/session_management/app/models<br />    create    vendor/extensions/session_management/app/views<br />     create vendor/extensions/session_management/db/migrate<br />     create vendor/extensions/session_management/lib/tasks<br />     create vendor/extensions/session_management/README<br />     create vendor/extensions/session_management/session_management_extension.rb<br />     create<br />vendor/extensions/session_management/lib/tasks/session_management_extension_tasks.rake<br />     create vendor/extensions/session_management/spec/controllers<br />     create vendor/extensions/session_management/spec/models<br />     create vendor/extensions/session_management/spec/views<br />     create vendor/extensions/session_management/spec/helpers<br />     create vendor/extensions/session_management/features/support<br />     create vendor/extensions/session_management/features/step_definitions/admin<br />     create vendor/extensions/session_management/Rakefile<br />     create vendor/extensions/session_management/spec/spec_helper.rb<br />     create vendor/extensions/session_management/spec/spec.opts<br />     create vendor/extensions/session_management/cucumber.yml<br />     create vendor/extensions/session_management/features/support/env.rb<br />     create vendor/extensions/session_management/features/support/paths.rb<br /></pre>Edit session_management_extension.rb where extension version, description and website url can be added. <pre class='ruby' name='code'><br /># require_dependency 'application_controller'<br />class SessionManagementExtension < Radiant::Extension<br />  version "1.0"<br />  description "Describe your extension here"<br />  url "http://yourwebsite.com/session_management"<br />  # define_routes do |map|<br />  # map.namespace :admin, :member => { :remove => :get } do |admin|<br />  #     admin.resources :session_management<br />  # end<br />  # end<br />  def activate<br />    # admin.tabs.add "Session Management", "/admin/session_management", :after =><br />"Layouts", :visibility => [:all]<br />  end<br />  def deactivate<br />    # admin.tabs.remove "Session Management"<br />  end<br /></pre>In activate block, specify what are the library files , modules that needs to be activated while application starts. In my case, activate method looks like below.. <pre class='ruby' name='code'><br />  def activate<br />    # admin.tabs.add "Session Management", "/admin/session_management", :after =><br />"Layouts", :visibility => [:all]<br />   ApplicationController.send(:include, SessionManagementExt::ApplicationControllerExt)<br />  end<br /></pre>Generating models and controllers. <pre class='ruby' name='code'><br /> script/generate extension_model session_management session_info<br />session_id:string url:string ip:string<br /></pre>In above command first attribute is the extension name and next is model name and rest specifies attributes that needs to created. It will create <pre class='ruby' name='code'><br />     exists   app/models/<br />     exists   spec/models/<br />     create   app/models/session_info.rb<br />     create   spec/models/session_info_spec.rb<br />     exists   db/migrate<br />     create   db/migrate/20091110075042_create_session_infos.rb<br /></pre>Generating controller <pre class='ruby' name='code'><br />script/generate extension_controller session_management admin/session_managements<br /></pre>It will create an output <pre class='ruby' name='code'><br />create app/controllers/admin<br />     create app/helpers/admin<br />     create app/views/admin/session_managements<br />     create spec/controllers/admin<br />     create spec/helpers/admin<br />     create spec/views/admin/session_managements<br />     create spec/controllers/admin/session_managements_controller_spec.rb<br />     create spec/helpers/admin/session_managements_helper_spec.rb<br />     create app/controllers/admin/session_managements_controller.rb<br />     create app/helpers/admin/session_managements_helper.rb<br /></pre>Modify session managements controller for displaying sesssion infos tracked. We need before filter for every request that will capture session, ip and page url so, we need to override behaviour of application controller to add before_filter We have already added ApplicationControllerExt in activate of extension. <pre class='ruby' name='code'><br />   ApplicationController.send(:include, SessionManagementExt::ApplicationControllerExt)<br />Lets look into ApplicationControllerExt module.<br />module SessionManagementExt<br />  module ApplicationControllerExt<br />    def self.included(base)<br />     base.class_eval do<br />       before_filter :track_session<br />     end<br />    end<br />    def track_session<br />     #**"Hello from Session tracker !!!"**<br />     #TODO: location track<br />     # It can be delayed task<br />     #sudo gem install geoip_city -- --with-geoip-dir=/opt/GeoIP<br />     # require 'geoip_city'<br />     # g = GeoIPCity::Database.new('/opt/GeoIP/share/GeoIP/GeoLiteCity.dat')<br />     # res = g.look_up('201.231.22.125')<br />     # {:latitude=>-33.13330078125, :country_code3=>"ARG",<br />:longitude=>-64.3499984741211, :city=>"Río Cuarto", :country_name=>"Argentina",<br />:country_code=>"AR", :region=>"05"}<br />     SessionInfo.create( :ip => request.remote_ip, :page_url =><br />"http://#{request.env["HTTP_HOST"]}#{request.request_uri}", :session_id =><br />request.session.session_id )<br />    end<br />  end<br />end<br /></pre>That&#8217;s all Creating rake task for extension module here is default genrated rake task for session management under vendor/extensions/session_management/lib/tasks/session_management_extension_tasks.rake It includes task to migrate database and update extension <pre class='ruby' name='code'><br />namespace :radiant do<br />  namespace :extensions do<br />    namespace :session_management do<br />     desc "Runs the migration of the Session Management extension"<br />     task :migrate => :environment do<br />       require 'radiant/extension_migrator'<br />       if ENV["VERSION"]<br />         SessionManagementExtension.migrator.migrate(ENV["VERSION"].to_i)<br />       else<br />         SessionManagementExtension.migrator.migrate<br />       end<br />     end<br />     desc "Copies public assets of the Session Management to the instance public/ directory."<br />     task :update => :environment do<br />       is_svn_or_dir = proc {|path| path =~ /\.svn/ || File.directory?(path) }<br />       puts "Copying assets from SessionManagementExtension"<br />       Dir[SessionManagementExtension.root + "/public/**/*"].reject(&is_svn_or_dir).each do<br />|file|<br />         path = file.sub(SessionManagementExtension.root, '')<br />         directory = File.dirname(path)<br />         mkdir_p RAILS_ROOT + directory, :verbose => false<br />         cp file, RAILS_ROOT + path, :verbose => false<br />       end<br />     end<br />    end<br />  end<br />end<br /></pre>Add as many custom tasks needed inside this file without changing default tasks.  Migrate all radiant extensions <pre class='ruby' name='code'><br />rake db:migrate:extensions<br /></pre></div>
 </div>
   
   
