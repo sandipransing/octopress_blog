@@ -1,0 +1,70 @@
+---
+layout: post
+title: "Writing Octopress blog posts using markdown"
+date: 2014-02-07 19:20:07 +0530
+comments: false
+author: Sandip Ransing
+published: true
+categories: octopress 
+---
+**Hello Octopress!**
+This an example post for more information see:
+
+## Blockquote
+{% blockquote @TheJeetBanerjee http://twitter.com/TheJeetBanerjee %}
+Don't stop when you're tired, stop when you're done.
+{% endblockquote %}
+{% blockquote @Vivek Paul %}
+We have to go for what we think we're fully capable of, not limit ourselves by what we've been in the past.
+{% endblockquote %}
+
+## Ruby
+```ruby
+class A
+  def abc
+    puts 'hii'
+  end
+end
+```
+
+## Console
+```console
+$ sudo apt-get install cakePHP
+```
+```
+$ git clone git@github.com:imathis/octopress.git # fork octopress
+```
+
+## Coffeescript
+```coffeescript
+$('.help').html "(?)"
+console.log "print something"
+
+```
+
+## Gist Embedding
+{% gist cc14d6039f1ff35b4be3  multiple-ssh-config %}
+
+## Include Code Snippets
+{% include_code [title] [lang:language] path/to/file [start:#] [end:#] [range:#-#] [mark:#,#-#] [linenos:false] %}
+
+## Selecting tags from sentence
+This is a `ruby` and `rails` blog
+
+## Pullquote
+{% pullquote left %}
+Left-aligning pullquotes are good to alternate breaks in the text. They're
+{" almost exactly like the default, "} right pullquotes, but a little different.
+{% endpullquote %}
+
+## Images
+{% img http://placekitten.com/890/280 %}
+
+
+## AngularJS Tutorial - YouTube
+AngularJS is a client-side JavaScript framework.A video tutorial to help you get started with AngularJS.
+[![Angular JS](http://img.youtube.com/vi/WuiHuZq_cg4/0.jpg)](http://youtube.com/watch?v=WuiHuZq_cg4)
+
+## About Author
+{% img left http://www.gravatar.com/avatar/37e0a0772ffc4ce993cedfb49c6ee6d2.png Sandip Ransing %}
+Sandip is a ruby on rails developer based in pune and also a blogger at funonrails. Opensource contributor and working with Josh software. Follow Sandip on [Twitter](http://twitter.com/sandipransing) for updates. He shares code at [github](http://github.com/sandipransing).
