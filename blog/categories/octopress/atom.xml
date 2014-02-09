@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: octopress | Sandip Ransing]]></title>
+  <link href="http://sandipransing.github.io/blog/categories/octopress/atom.xml" rel="self"/>
+  <link href="http://sandipransing.github.io/"/>
+  <updated>2014-02-09T17:20:18+05:30</updated>
+  <id>http://sandipransing.github.io/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Writing Octopress blog posts using markdown]]></title>
+    <link href="http://sandipransing.github.io/blog/2014/02/07/writing-octopress-blog-posts-using-markdown/"/>
+    <updated>2014-02-07T19:20:07+05:30</updated>
+    <id>http://sandipransing.github.io/blog/2014/02/07/writing-octopress-blog-posts-using-markdown</id>
+    <content type="html"><![CDATA[<p><strong>Hello Octopress!</strong>
+This an example post for more information see:</p>
+
+<h2>Blockquote</h2>
+
+<p><blockquote><p>Don&rsquo;t stop when you&rsquo;re tired, stop when you&rsquo;re done.</p><footer><strong>@TheJeetBanerjee <a href="http://twitter.com/TheJeetBanerjee">http://twitter.com/TheJeetBanerjee</a></strong></footer></blockquote>
+<blockquote><p>We have to go for what we think we&rsquo;re fully capable of, not limit ourselves by what we&rsquo;ve been in the past.</p><footer><strong>@Vivek Paul</strong></footer></blockquote></p>
+
+<h2>Ruby</h2>
+
+<p>```ruby
+class A
+  def abc</p>
+
+<pre><code>puts 'hii'
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<h2>Console</h2>
+
+<p><code>console
+$ sudo apt-get install cakePHP
+</code>
+<code>
+$ git clone git@github.com:imathis/octopress.git # fork octopress
+</code></p>
+
+<h2>Coffeescript</h2>
+
+<p>```coffeescript
+$(&lsquo;.help&rsquo;).html &ldquo;(?)&rdquo;
+console.log &ldquo;print something&rdquo;</p>
+
+<p>```</p>
+
+<h2>Gist Embedding</h2>
+
+<p><div><script src='https://gist.github.com/cc14d6039f1ff35b4be3.js?file=multiple-ssh-config'></script>
+<noscript><pre><code># Default GitHub user (sandip)
+Host github.com
+  HostName github.com
+  User git
+  IdentityFile /home/sandip/.ssh/id_rsa
+
+# github user (client)
+Host github-client
+  HostName github.com
+  User git
+  IdentityFile /home/sandip/.ssh/id_rsa_client
+
+# github user (friend)
+Host github-swapnil
+  HostName github.com
+  User git
+  IdentityFile /home/sandip/.ssh/id_dsa_swapnil
+</code></pre></noscript></div>
+</p>
+
+<h2>Include Code Snippets</h2>
+
+<p>File /home/sandip/octopress/source/downloads/code/[linenos:false] could not be found</p>
+
+<h2>Selecting tags from sentence</h2>
+
+<p>This is a <code>ruby</code> and <code>rails</code> blog</p>
+
+<h2>Pullquote</h2>
+
+<p>Surround your pullquote like this {" text to be quoted "}</p>
+
+<h2>Images</h2>
+
+<p><img class="<a" src="href="http://placekitten.com/890/280">http://placekitten.com/890/280</a>"></p>
+
+<h2>AngularJS Tutorial &ndash; YouTube</h2>
+
+<p>AngularJS is a client-side JavaScript framework.A video tutorial to help you get started with AngularJS.
+<a href="http://youtube.com/watch?v=WuiHuZq_cg4"><img src="http://img.youtube.com/vi/WuiHuZq_cg4/0.jpg" alt="Angular JS" /></a></p>
+
+<h2>About Author</h2>
+
+<p><img class="left <a" src="href="http://www.gravatar.com/avatar/37e0a0772ffc4ce993cedfb49c6ee6d2.png">http://www.gravatar.com/avatar/37e0a0772ffc4ce993cedfb49c6ee6d2.png</a>" title="Sandip Ransing" >
+Sandip is a ruby on rails developer based in pune and also a blogger at funonrails. Opensource contributor and working with Josh software. Follow Sandip on <a href="http://twitter.com/sandipransing">Twitter</a> for updates. He shares code at <a href="http://github.com/sandipransing">github</a>.</p>
+]]></content>
+  </entry>
+  
+</feed>
