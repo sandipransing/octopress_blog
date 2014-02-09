@@ -92,7 +92,7 @@
 
 
 <div class="entry-content"><div class='post'>
-Wrong English is an often problem while developing any website product as it gives bad view to website user and thus does direct impact on product.  <b>BOSSMan</b> is a ruby gem that interacts with <b>yahoo web service</b> and provides a simplest way to overcome such errors.<br /><b>Installation:</b><br /><code>gem sources -a http://gems.github.com gem install jpignata-bossman </code><b>Apply and get Application ID from yahoo developer network</b><code><b>URl</b> https://developer.apps.yahoo.com/</code>Make sure to note it for reference<br /><b>Usage in ruby app</b><br /><code>require 'rubygems' require 'bossman' include BOSSMan  BOSSMan.application_id = "Your Application ID here" </code><br /><b>Spelling Suggestions</b><br /><code>text = BOSSMan::Search.spelling("gooogle") =&gt; #<bossman::resultset:0xa993b44 ,="" @count="1" @deephits="1" @response="{&quot;ysearchresponse&quot;=" @responsecode="200" @start="0" @suggestion="google" @totalhits="1">{"resultset_spell"=&gt;[{"suggestion"=&gt;"google"}], "responsecode"=&gt;"200", "deephits"=&gt;"1", "start"=&gt;"0", "count"=&gt;"1", "totalhits"=&gt;"1"}}&gt;  text.suggestion  =&gt; "google" </bossman::resultset:0xa993b44></code><br /><b>More sophisticated way of use -</b><br />1. Create a YML file containing list of kewords <br />2. Load YML file <br />3. Iterate YML hash to find out spell suggestions<br /><b>Example: spelling.yml</b><br /><console>  1 keywords:   2   gooogle:   3   Barack Oabama:   4   Indian:   5   Latuur: </console><br /><code>keywords = YAML.load_file('spelling.yml')['keywords'].keys    puts "Correction suggested"   keywords.each do |keyword|     text = BOSSMan::Search.spelling(keyword)     if defined? text.suggestion       puts "#{keyword} =&gt; #{text.suggestion}"     end   end </code><br /><b>Output</b><br /><console>Correction suggested gooogle =&gt; google Barack Oabama =&gt; Barack Obama Latuur =&gt; Latour </console><br />Analyze suggestions manually and make neccesary corrections..</div>
+Wrong English is an often problem while developing any website product as it gives bad view to website user and thus does direct impact on product.  <b>BOSSMan</b> is a ruby gem that interacts with <b>yahoo web service</b> and provides a simplest way to overcome such errors.<br /><b>Installation:</b><br /><pre class=ruby>gem sources -a http://gems.github.com gem install jpignata-bossman </pre><b>Apply and get Application ID from yahoo developer network</b><pre class=ruby><b>URl</b> https://developer.apps.yahoo.com/</pre>Make sure to note it for reference<br /><b>Usage in ruby app</b><br /><pre class=ruby>require 'rubygems' require 'bossman' include BOSSMan  BOSSMan.application_id = "Your Application ID here" </pre><br /><b>Spelling Suggestions</b><br /><pre class=ruby>text = BOSSMan::Search.spelling("gooogle") =&gt; #<bossman::resultset:0xa993b44 ,="" @count="1" @deephits="1" @response="{&quot;ysearchresponse&quot;=" @responsecode="200" @start="0" @suggestion="google" @totalhits="1">{"resultset_spell"=&gt;[{"suggestion"=&gt;"google"}], "responsecode"=&gt;"200", "deephits"=&gt;"1", "start"=&gt;"0", "count"=&gt;"1", "totalhits"=&gt;"1"}}&gt;  text.suggestion  =&gt; "google" </bossman::resultset:0xa993b44></pre><br /><b>More sophisticated way of use -</b><br />1. Create a YML file containing list of kewords <br />2. Load YML file <br />3. Iterate YML hash to find out spell suggestions<br /><b>Example: spelling.yml</b><br /><pre class=ruby>  1 keywords:   2   gooogle:   3   Barack Oabama:   4   Indian:   5   Latuur: </pre><br /><pre class=ruby>keywords = YAML.load_file('spelling.yml')['keywords'].keys    puts "Correction suggested"   keywords.each do |keyword|     text = BOSSMan::Search.spelling(keyword)     if defined? text.suggestion       puts "#{keyword} =&gt; #{text.suggestion}"     end   end </pre><br /><b>Output</b><br /><pre class=ruby>Correction suggested gooogle =&gt; google Barack Oabama =&gt; Barack Obama Latuur =&gt; Latour </pre><br />Analyze suggestions manually and make neccesary corrections..</div>
 </div>
 
 
@@ -129,7 +129,7 @@ Wrong English is an often problem while developing any website product as it giv
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2010/08/spell-check-in-ruby-and-rails-using" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2010/08/spell-check-in-ruby-and-rails-using" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2010/08/spell-check-in-ruby-and-rails-using/" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2010/08/spell-check-in-ruby-and-rails-using/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -140,10 +140,10 @@ Wrong English is an often problem while developing any website product as it giv
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2010/08/rails-3-beautiful-code" title="Previous Post: Rails 3 Beautiful Code">&laquo; Rails 3 Beautiful Code</a>
+        <a class="basic-alignment left" href="/2010/08/rails-3-beautiful-code/" title="Previous Post: Rails 3 Beautiful Code">&laquo; Rails 3 Beautiful Code</a>
       
       
-        <a class="basic-alignment right" href="/2010/08/multiple-sites-hosting-using-radiant" title="Next Post: Multiple sites hosting using radiant cms">Multiple sites hosting using radiant cms &raquo;</a>
+        <a class="basic-alignment right" href="/2010/08/multiple-sites-hosting-using-radiant/" title="Next Post: Multiple sites hosting using radiant cms">Multiple sites hosting using radiant cms &raquo;</a>
       
     </p>
   </footer>
@@ -159,23 +159,23 @@ Wrong English is an often problem while developing any website product as it giv
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

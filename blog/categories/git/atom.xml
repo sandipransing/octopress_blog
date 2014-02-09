@@ -4,7 +4,7 @@
   <title><![CDATA[Category: git | Fun On Rails]]></title>
   <link href="http://sandipransing.github.io/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://sandipransing.github.io/"/>
-  <updated>2014-02-09T20:36:37+05:30</updated>
+  <updated>2014-02-09T23:18:57+05:30</updated>
   <id>http://sandipransing.github.io/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -15,11 +15,11 @@
   
   <entry>
     <title type="html"><![CDATA[Migrating from svn to git]]></title>
-    <link href="http://sandipransing.github.io/2011/08/migrating-from-svn-to-git"/>
+    <link href="http://sandipransing.github.io/2011/08/migrating-from-svn-to-git/"/>
     <updated>2011-08-17T19:44:00+05:30</updated>
     <id>http://sandipransing.github.io/2011/08/migrating-from-svn-to-git</id>
     <content type="html"><![CDATA[<div class='post'>
-<b>Migrating from svn to git </b><br/> <b>1. Install git-svn</b><br/><console>sudo apt-get install git-svn </console> <b>2. Clone svn repositoy </b><console>git svn clone -s svn://server/project_myt/trunk proj </console> <b>To add svn users and git users mapping</b><br/><b>Create author-file</b><br/><console>#vi authorsfile  sandip = sandipransing <sandip@funonrails.com>amit = amitk <amit@gmail.com>root = sandipransing <sandip@funonrails.com></console><br/><console>git svn --author-file=authorfile clone -s svn://server/project_myt/trunk proj </console><b>3. Add git repository url</b><br/><console>cd proj git remote add git@github.com:USERNAME/project.git </console><b>4. Push repository to git</b><br/><console>git push origin master </console> <b>To do svn pull for latest changes</b><br/><console>git svn rebase </console></div>
+<b>Migrating from svn to git </b><br/> <b>1. Install git-svn</b><br/><pre class=ruby>sudo apt-get install git-svn </pre> <b>2. Clone svn repositoy </b><pre class=ruby>git svn clone -s svn://server/project_myt/trunk proj </pre> <b>To add svn users and git users mapping</b><br/><b>Create author-file</b><br/><pre class=ruby>#vi authorsfile  sandip = sandipransing <sandip@funonrails.com>amit = amitk <amit@gmail.com>root = sandipransing <sandip@funonrails.com></pre><br/><pre class=ruby>git svn --author-file=authorfile clone -s svn://server/project_myt/trunk proj </pre><b>3. Add git repository url</b><br/><pre class=ruby>cd proj git remote add git@github.com:USERNAME/project.git </pre><b>4. Push repository to git</b><br/><pre class=ruby>git push origin master </pre> <b>To do svn pull for latest changes</b><br/><pre class=ruby>git svn rebase </pre></div>
 
 ]]></content>
   </entry>

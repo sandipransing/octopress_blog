@@ -92,7 +92,7 @@
 
 
 <div class="entry-content"><div class='post'>
-<div dir="ltr" style="text-align: left;" trbidi="on">While looking for accessing rails template tags to be accessed on rails console in order to examine whatever written needs to be correct, found that - rails template tags can be tested on rails console using <i>helper</i> object<br /><code>module ApplicationHelper   def display_amount(amount)     number_to_currency amount, :precision =&gt; 0   end   end </code> <b>Helpers on rails console</b><br /><console>rails c &gt;&gt; helper.text_field_tag :name, &#8216;sandip&#8217; =&gt; &#8220;&lt;input id=&#8221;name&#8221; name=&#8221;name&#8221; type=&#8221;text&#8221; value=&#8221;sandip&#8221; /&gt;&#8221; &gt;&gt; helper.link_to &#8216;my blog&#8217;, &#8216;http://funonrails.com&#8217; =&gt; &#8220;&lt;a href=&#8221;http://funonrails.com&gt;my blog&lt;/a&gt;&#8221; &gt;&gt; helper.display_amount(2000) =&gt; &#8220;$2,000&#8221; </console> isn&#8217;t cool ? though it&#8217;s not finished yet. we can include helper files on console and access custom helper methods too <br /><console>&gt;&gt; include ActionView::Helpers =&gt; Object &gt;&gt; include ApplicationHelper =&gt; Object &gt;&gt; include ActionView::Helpers::ApplicationHelper^C &gt;&gt; display_amount 2500 =&gt; &#8220;$2,500&#8221; </console> Using same way one can make use helpers in rake tasks file. Make sure environment is getting loaded into rake task.<br /><code># lib/tasks/helper_task.rake namespace :helper do  desc 'Access helper methods in rake tasks'  task :test =&gt; :environment do   include ActionView::Helpers   include ApplicationHelper    puts display_amount 2500  #=&gt; "$2,500"  end end </code> <b>Accessing helpers in Action Mailers</b><br /><code>class Notifier &lt; ActionMailer::Base   add_template_helper(ApplicationHelper)   def greet(user)     subject "Hello #{user.name}"     from          'no-reply@example.com'     recipients    user.email     sent_on       Time.now     @user = user   end  # app/views/notifier/greet.html.erb Hi &lt;%= @user.try(:name)%&gt;, <br /><br />Greetings !!! You have got &lt;%= display_amount(3000) %&gt; </code><b>Rails routes on rails console</b><br /><console>rails c &gt;&gt; app.root_url =&gt; &#8220;http://www.example.com/&#8221; &gt;&gt; app.change_password_path =&gt; &#8220;/change/password&#8221; &gt;&gt; app.change_password_url =&gt; &#8220;http://www.example.com/change/password&#8221; </console>Now you may have got requirement to access routes inside rake tasks. Here is the way to do that- <br /><code># lib/tasks/route_test.rake namespace :routes do  desc 'Access helper methods in rake tasks'  task :test =&gt; :environment do   include ActionController::UrlWriter   default_url_options[:host] = "myroutes.check"   puts root_url  #=&gt; "http://myroutes.check"  end end </code>Optionally you can set value of host parameter from action mailer host configuration using<br /><code>default_url_options[:host] = ActionMailer::Base.default_url_options[:hos] </code><br />Attention: This is my preferred way to use helpers and routes when needed and there may have other choices to do same. Anyone having better approach please feel free to add your valuable comment. I will definitely incorporate that in further developments.<br />Got Easy, Cheers ;)</div></div>
+<div dir="ltr" style="text-align: left;" trbidi="on">While looking for accessing rails template tags to be accessed on rails console in order to examine whatever written needs to be correct, found that - rails template tags can be tested on rails console using <i>helper</i> object<br /><pre class=ruby>module ApplicationHelper   def display_amount(amount)     number_to_currency amount, :precision =&gt; 0   end   end </pre> <b>Helpers on rails console</b><br /><pre class=ruby>rails c &gt;&gt; helper.text_field_tag :name, 'sandip' =&gt; "&lt;input id="name" name="name" type="text" value="sandip" /&gt;" &gt;&gt; helper.link_to 'my blog', 'http://funonrails.com' =&gt; "&lt;a href=''http://funonrails.com&gt;my blog&lt;/a&gt;" &gt;&gt; helper.display_amount(2000) =&gt; "$2,000" </pre> isn&#8217;t cool ? though it&#8217;s not finished yet. we can include helper files on console and access custom helper methods too <br /><pre class=ruby>&gt;&gt; include ActionView::Helpers =&gt; Object &gt;&gt; include ApplicationHelper =&gt; Object &gt;&gt; include ActionView::Helpers::ApplicationHelper^C &gt;&gt; display_amount 2500 =&gt; "$2,500" </pre> Using same way one can make use helpers in rake tasks file. Make sure environment is getting loaded into rake task.<br /><pre class=ruby># lib/tasks/helper_task.rake namespace :helper do  desc 'Access helper methods in rake tasks'  task :test =&gt; :environment do   include ActionView::Helpers   include ApplicationHelper    puts display_amount 2500  #=&gt; "$2,500"  end end </pre> <b>Accessing helpers in Action Mailers</b><br /><pre class=ruby>class Notifier &lt; ActionMailer::Base   add_template_helper(ApplicationHelper)   def greet(user)     subject "Hello #{user.name}"     from          'no-reply@example.com'     recipients    user.email     sent_on       Time.now     @user = user   end  # app/views/notifier/greet.html.erb Hi &lt;%= @user.try(:name)%&gt;, <br /><br />Greetings !!! You have got &lt;%= display_amount(3000) %&gt; </pre><b>Rails routes on rails console</b><br /><pre class=ruby>rails c &gt;&gt; app.root_url =&gt; "http://www.example.com/" &gt;&gt; app.change_password_path =&gt; "/change/password" &gt;&gt; app.change_password_url =&gt; "http://www.example.com/change/password" </pre>Now you may have got requirement to access routes inside rake tasks. Here is the way to do that- <br /><pre class=ruby># lib/tasks/route_test.rake namespace :routes do  desc 'Access helper methods in rake tasks'  task :test =&gt; :environment do   include ActionController::UrlWriter   default_url_options[:host] = "myroutes.check"   puts root_url  #=&gt; "http://myroutes.check"  end end </pre>Optionally you can set value of host parameter from action mailer host configuration using<br /><pre class=ruby>default_url_options[:host] = ActionMailer::Base.default_url_options[:hos] </pre><br />Attention: This is my preferred way to use helpers and routes when needed and there may have other choices to do same. Anyone having better approach please feel free to add your valuable comment. I will definitely incorporate that in further developments.<br />Got Easy, Cheers ;)</div></div>
 </div>
 
 
@@ -129,7 +129,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2011/03/accessing-view-helpers-routes-in-rails" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2011/03/accessing-view-helpers-routes-in-rails" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2011/03/accessing-view-helpers-routes-in-rails/" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2011/03/accessing-view-helpers-routes-in-rails/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -140,10 +140,10 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2011/03/monitor-delayedjob-in-rails" title="Previous Post: Monitor Delayed Job in rails">&laquo; Monitor Delayed Job in rails</a>
+        <a class="basic-alignment left" href="/2011/03/monitor-delayedjob-in-rails/" title="Previous Post: Monitor Delayed Job in rails">&laquo; Monitor Delayed Job in rails</a>
       
       
-        <a class="basic-alignment right" href="/2011/03/number-to-indian-currency-helper-for" title="Next Post: number to indian currency helper for rails with WebRupee">number to indian currency helper for rails with WebRupee &raquo;</a>
+        <a class="basic-alignment right" href="/2011/03/number-to-indian-currency-helper-for/" title="Next Post: number to indian currency helper for rails with WebRupee">number to indian currency helper for rails with WebRupee &raquo;</a>
       
     </p>
   </footer>
@@ -159,23 +159,23 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

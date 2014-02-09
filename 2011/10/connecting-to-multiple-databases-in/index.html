@@ -92,7 +92,7 @@
 
 
 <div class="entry-content"><div class='post'>
-While developing rails application we often come across situation where you wanted different rails models connecting different tables of different databases. <br/>Example: We are having ndnc model holding ndnc records associated with database ndnc. <br/>Lets create ConnectionBase model that will connect to other databse &#8216;ndnc&#8217; and that will be extended from ActiveRecordBase and put that inside library files <br/><code>vi lib/connection_base.rb   class ConnectionBase < ActiveRecord::Base    establish_connection(     :adapter => "postgresql",     :username=> "sandip",     :password => "2121",     :database => "ndnc" ) end </code><br/><br/>Wherever you wanted to connect to other database i.e. ndnc  you can extend that particular model with ConnectionBase <br/><code>class Ndnc < ConnectionBase # connects to ndnc table of ndnc database end </code><br/>Please make sure library files are loaded while server startup<br/><code># vi config/application.rb config.autoload_paths += %W(#{config.root}/lib) </code><br/>Done !<br/>In cases where you want only one particular model connecting other database table, you can put connection setting itself in that model.<br/></div>
+While developing rails application we often come across situation where you wanted different rails models connecting different tables of different databases. <br/>Example: We are having ndnc model holding ndnc records associated with database ndnc. <br/>Lets create ConnectionBase model that will connect to other databse &#8216;ndnc&#8217; and that will be extended from ActiveRecordBase and put that inside library files <br/><pre class=ruby>vi lib/connection_base.rb   class ConnectionBase < ActiveRecord::Base    establish_connection(     :adapter => "postgresql",     :username=> "sandip",     :password => "2121",     :database => "ndnc" ) end </pre><br/><br/>Wherever you wanted to connect to other database i.e. ndnc  you can extend that particular model with ConnectionBase <br/><pre class=ruby>class Ndnc < ConnectionBase # connects to ndnc table of ndnc database end </pre><br/>Please make sure library files are loaded while server startup<br/><pre class=ruby># vi config/application.rb config.autoload_paths += %W(#{config.root}/lib) </pre><br/>Done !<br/>In cases where you want only one particular model connecting other database table, you can put connection setting itself in that model.<br/></div>
 </div>
 
 
@@ -129,7 +129,7 @@ While developing rails application we often come across situation where you want
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2011/10/connecting-to-multiple-databases-in" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2011/10/connecting-to-multiple-databases-in" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2011/10/connecting-to-multiple-databases-in/" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2011/10/connecting-to-multiple-databases-in/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -140,10 +140,10 @@ While developing rails application we often come across situation where you want
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2011/09/print-particular-div-inside-html-page" title="Previous Post: Print particular DIV inside HTML Page">&laquo; Print particular DIV inside HTML Page</a>
+        <a class="basic-alignment left" href="/2011/09/print-particular-div-inside-html-page/" title="Previous Post: Print particular DIV inside HTML Page">&laquo; Print particular DIV inside HTML Page</a>
       
       
-        <a class="basic-alignment right" href="/2011/11/paperclip-image-upload-via-url" title="Next Post: Paperclip image upload via URL">Paperclip image upload via URL &raquo;</a>
+        <a class="basic-alignment right" href="/2011/11/paperclip-image-upload-via-url/" title="Next Post: Paperclip image upload via URL">Paperclip image upload via URL &raquo;</a>
       
     </p>
   </footer>
@@ -159,23 +159,23 @@ While developing rails application we often come across situation where you want
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

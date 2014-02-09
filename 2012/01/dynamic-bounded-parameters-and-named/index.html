@@ -92,7 +92,7 @@
 
 
 <div class="entry-content"><div class='post'>
-Rails routes can be customized as your own routes with parameters but first you should understand how routes behaves. <br/> <b>Adding dynamic parameters to routes </b> <br/>Here exact parameters are matched to route and presence of each parameter is mandatory in order to construct urls. blank parameter will raise RoutingError exception. <br/>Exact matched named route declared as -  <code>  match ':a/:b/:c', :to => 'home#index', :as => :q </code> now go to the rails console - <code> ruby-1.9.3-head :005 > app.q_url(:a, :b, :c)   => "http://www.example.com/a/b/c"        ruby-1.9.3-head :006 > app.q_url(:a, :b, '')   ActionController::RoutingError: No route matches {:controller=>"home", :a=>:a, :b=>:b, :c=>""} </code><b>Bound parameters to named routes</b><br/>If you are too sure that certain parameter can be blank then you can define it as optional parameter inside route -  <br/><code> match ':a/:b(/:c)', :to => 'home#index', :as => :q </code><b>rails console</b><code> ruby-1.9.3-head :010 > app.q_url(:a, :b, '')   => "http://www.example.com/a/b?c="   ruby-1.9.3-head :011 > app.q_url(:a, :b)   => "http://www.example.com/a/b" </code></div>
+Rails routes can be customized as your own routes with parameters but first you should understand how routes behaves. <br/> <b>Adding dynamic parameters to routes </b> <br/>Here exact parameters are matched to route and presence of each parameter is mandatory in order to construct urls. blank parameter will raise RoutingError exception. <br/>Exact matched named route declared as -  <pre class=ruby>  match ':a/:b/:c', :to => 'home#index', :as => :q </pre> now go to the rails console - <pre class=ruby> ruby-1.9.3-head :005 > app.q_url(:a, :b, :c)   => "http://www.example.com/a/b/c"        ruby-1.9.3-head :006 > app.q_url(:a, :b, '')   ActionController::RoutingError: No route matches {:controller=>"home", :a=>:a, :b=>:b, :c=>""} </pre><b>Bound parameters to named routes</b><br/>If you are too sure that certain parameter can be blank then you can define it as optional parameter inside route -  <br/><pre class=ruby> match ':a/:b(/:c)', :to => 'home#index', :as => :q </pre><b>rails console</b><pre class=ruby> ruby-1.9.3-head :010 > app.q_url(:a, :b, '')   => "http://www.example.com/a/b?c="   ruby-1.9.3-head :011 > app.q_url(:a, :b)   => "http://www.example.com/a/b" </pre></div>
 </div>
 
 
@@ -129,7 +129,7 @@ Rails routes can be customized as your own routes with parameters but first you 
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2012/01/dynamic-bounded-parameters-and-named" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2012/01/dynamic-bounded-parameters-and-named" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2012/01/dynamic-bounded-parameters-and-named/" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2012/01/dynamic-bounded-parameters-and-named/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -140,10 +140,10 @@ Rails routes can be customized as your own routes with parameters but first you 
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/01/puts-tos-and-inspect-on-ruby-object" title="Previous Post: puts, to_s and inspect on ruby object">&laquo; puts, to_s and inspect on ruby object</a>
+        <a class="basic-alignment left" href="/2012/01/puts-tos-and-inspect-on-ruby-object/" title="Previous Post: puts, to_s and inspect on ruby object">&laquo; puts, to_s and inspect on ruby object</a>
       
       
-        <a class="basic-alignment right" href="/2012/02/ruby-enumerable-toproc-ampersond-colon" title="Next Post: ruby enumerable & to_proc (ampersond & symbol shortcut)">ruby enumerable & to_proc (ampersond & symbol shortcut) &raquo;</a>
+        <a class="basic-alignment right" href="/2012/02/ruby-enumerable-toproc-ampersond-colon/" title="Next Post: ruby enumerable & to_proc (ampersond & symbol shortcut)">ruby enumerable & to_proc (ampersond & symbol shortcut) &raquo;</a>
       
     </p>
   </footer>
@@ -159,23 +159,23 @@ Rails routes can be customized as your own routes with parameters but first you 
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

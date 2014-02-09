@@ -92,7 +92,7 @@
 
 
 <div class="entry-content"><div class='post'>
-<b>ActiveRecord find with join options retrieves object as readonly</b><br/><code>station = Station.find( :first, :joins => :call, :conditions => ["customer_id = ? and date(insurance_expiry_date) = ?", customer.id, insurance_expiry_date ] ) </code><br/> Readonly object cannot modified and hence below line raises &#8220;ActiveRecord::ReadOnlyRecord&#8221; error. <br/><code>station.update_attributes({ :customer_id => 12 }) </code><br/>If you have to write on read only object then you can pass following option to find query<br/><code>:readonly => false </code><br/>Now below find is permitted to do write on fetched object records. <br/><code>station = Station.find( :first, :joins => :call, :conditions => ["customer_id = ? and date(insurance_expiry_date) = ?", customer.id, insurance_expiry_date ], :readonly => false ) </code></div>
+<b>ActiveRecord find with join options retrieves object as readonly</b><br/><pre class=ruby>station = Station.find( :first, :joins => :call, :conditions => ["customer_id = ? and date(insurance_expiry_date) = ?", customer.id, insurance_expiry_date ] ) </pre><br/> Readonly object cannot modified and hence below line raises &#8220;ActiveRecord::ReadOnlyRecord&#8221; error. <br/><pre class=ruby>station.update_attributes({ :customer_id => 12 }) </pre><br/>If you have to write on read only object then you can pass following option to find query<br/><pre class=ruby>:readonly => false </pre><br/>Now below find is permitted to do write on fetched object records. <br/><pre class=ruby>station = Station.find( :first, :joins => :call, :conditions => ["customer_id = ? and date(insurance_expiry_date) = ?", customer.id, insurance_expiry_date ], :readonly => false ) </pre></div>
 </div>
 
 
@@ -129,7 +129,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2010/02/activerecordreadonlyrecord-while" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2010/02/activerecordreadonlyrecord-while" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2010/02/activerecordreadonlyrecord-while/" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2010/02/activerecordreadonlyrecord-while/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -140,10 +140,10 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2010/02/mysql-cheatsheet" title="Previous Post: Mysql cheatsheet">&laquo; Mysql cheatsheet</a>
+        <a class="basic-alignment left" href="/2010/02/about/" title="Previous Post: About">&laquo; About</a>
       
       
-        <a class="basic-alignment right" href="/2010/02/nginx-passenger-configuration-for-rails" title="Next Post: nginx passenger configuration for rails application">nginx passenger configuration for rails application &raquo;</a>
+        <a class="basic-alignment right" href="/2010/02/nginx-passenger-configuration-for-rails/" title="Next Post: nginx passenger configuration for rails application">nginx passenger configuration for rails application &raquo;</a>
       
     </p>
   </footer>
@@ -159,23 +159,23 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

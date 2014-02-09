@@ -71,7 +71,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2011/11/rails-311-haml-sass-jquery-coffee-rails">Rails 3.1.1 Haml Sass Jquery Coffee-rails Devise Twitter-bootstrap Railroady Heroku</a></h1>
+      <h1 class="entry-title"><a href="/2011/11/rails-311-haml-sass-jquery-coffee-rails/">Rails 3.1.1 Haml Sass Jquery Coffee-rails Devise Twitter-bootstrap Railroady Heroku</a></h1>
     
     
       <p class="meta">
@@ -95,7 +95,7 @@
 
 
   <div class="entry-content"><div class='post'>
-<b> Install RVM first </b><br/> <console>  bash < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvminstaller) </console> <b> rvm list known</b> <console>  # MRI Rubies   [ruby-]1.8.6-head   [ruby-]1.8.7[-p352]   [ruby-]1.9.3-head   ruby-head    # JRuby   jruby-1.2.0   jruby-head    # Rubinius   rbx-1.0.1   rbx-2.0.0pre    # Ruby Enterprise Edition   ree-1.8.6   ree-1.8.7-head </console> <b>Install ruby 1.9.3</b><br/> <console>  rvm install 1.9.3-head   rvm gemset create rails311   rvm use 1.9.3-head@rails311 &#8211;default      gem install rails -v3.1.1 &#8211;no-rdoc &#8211;no-ri      gem install heroku   gem install rb-readline </console> <b>Create new rails project </b><br/> <console>  rails new cdc -m http://railswizard.org/b22092a4358bbebb3a46.rb -J -T </console> <b>Heroku Deployment Done </b><br/> <console>  http://railsblank.heroku.com/ (production) </console> <b> Local System nginx-passenger setup</b><br/> <console>  gem install passenger   rvmsudo passenger-install-nginx-module </console> If you find pcre download error then make sure you libpcre-dev pkg installed on your system otherwise install it and re-run<br/><console>  sudo apt-get install libpcre3-dev </console> <b>Nginx Configuration</b><br/> <console>http {   passenger_root /home/sandip/.rvm/gems/ruby-1.9.3-head@rails311/gems/passenger-3.0.9;   passenger_ruby /home/sandip/.rvm/wrappers/ruby-1.9.3-head@rails311/ruby;      server {     listen 80;     server_name railsblank.local;     root /home/sandip/railsblank/public;     rails_env development;     passenger_enabled on; } </console> <b>git source code </b><br/><console>  git clone git://github.com/sandipransing/rails_blank.git </console></div>
+<b> Install RVM first </b><br/> <pre class=ruby>  bash < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvminstaller) </pre> <b> rvm list known</b> <pre class=ruby>  # MRI Rubies   [ruby-]1.8.6-head   [ruby-]1.8.7[-p352]   [ruby-]1.9.3-head   ruby-head    # JRuby   jruby-1.2.0   jruby-head    # Rubinius   rbx-1.0.1   rbx-2.0.0pre    # Ruby Enterprise Edition   ree-1.8.6   ree-1.8.7-head </pre> <b>Install ruby 1.9.3</b><br/> <pre class=ruby>  rvm install 1.9.3-head   rvm gemset create rails311   rvm use 1.9.3-head@rails311 --default      gem install rails -v3.1.1 --no-rdoc --no-ri      gem install heroku   gem install rb-readline </pre> <b>Create new rails project </b><br/> <pre class=ruby>  rails new cdc -m http://railswizard.org/b22092a4358bbebb3a46.rb -J -T </pre> <b>Heroku Deployment Done </b><br/> <pre class=ruby>  http://railsblank.heroku.com/ (production) </pre> <b> Local System nginx-passenger setup</b><br/> <pre class=ruby>  gem install passenger   rvmsudo passenger-install-nginx-module </pre> If you find pcre download error then make sure you libpcre-dev pkg installed on your system otherwise install it and re-run<br/><pre class=ruby>  sudo apt-get install libpcre3-dev </pre> <b>Nginx Configuration</b><br/> <pre class=ruby>http {   passenger_root /home/sandip/.rvm/gems/ruby-1.9.3-head@rails311/gems/passenger-3.0.9;   passenger_ruby /home/sandip/.rvm/wrappers/ruby-1.9.3-head@rails311/ruby;      server {     listen 80;     server_name railsblank.local;     root /home/sandip/railsblank/public;     rails_env development;     passenger_enabled on; } </pre> <b>git source code </b><br/><pre class=ruby>  git clone git://github.com/sandipransing/rails_blank.git </pre></div>
 </div>
   
   
@@ -108,7 +108,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2011/11/paperclip-options-aws-s3-config-and">Paperclip Options Aws-s3 Config and Rails</a></h1>
+      <h1 class="entry-title"><a href="/2011/11/paperclip-options-aws-s3-config-and/">Paperclip Options Aws-s3 Config and Rails</a></h1>
     
     
       <p class="meta">
@@ -132,7 +132,7 @@
 
 
   <div class="entry-content"><div class='post'>
-Stepwise guide to configure paperclip default options, setting up aws-s3 storage in rails <br/> Inside Gemfile<br/><console>gem &#8216;aws-s3&#8217;,               :require => &#8216;aws/s3&#8217; gem &#8216;paperclip&#8217; </console><br/><console>bundle install </console> Generate Print model to hold image <br/><console> rails g model print image_file_name:string image_content_type:string image_file_size:string </console><br/><console>rake db:migrate </console> Add s3 credentials to YML file<br/><console># config/s3.yml  access_key_id: DASDFG7KACNxIJdJXHPQ secret_access_key: BnDrTnzCTX+R707wYEP/aCEqAsDFG7sgW </console>Add default paperclip attachment options to initializer<br/><console># Make sure to add host url inside config/environments # HOSTNAME = &#8216;http://lordganesha.com&#8217;  Paperclip::Attachment.default_options.merge!(   :storage => &#8216;s3&#8217;,   :s3_credentials => YAML.load_file(&#8220;#{Rails.root}/config/s3.yml&#8221;),   :path => &#8220;:class/:attachment/#{Rails.env}/:id/:style/:basename.:extension&#8221;,     :default_url => &#8220;http://#{HOSTNAME}/images/paperclip/:class/:attachment/default.jpg&#8221;,   :bucket => &#8216;ganesha&#8217; ) </console>Add image attachment code to print model<br/><console># app/models/print.rb class Print < ActiveRecord::Base   has_attached_file :image,     :styles => {:medium => [&#8220;400x400#&#8221;, :jpg],                  :thumb => [&#8220;100x100#&#8221;, :jpg],                  :slider => [&#8220;300x300#&#8221;, :jpg]}   #validates_attachment_presence :image   validates_attachment_size :image, :less_than => 1.megabytes, :message => &#8216;file size maximum 1 MB allowed&#8217;   validates_attachment_content_type :image, :content_type => [&#8216;image/jpeg&#8217;, &#8216;image/png&#8217;, &#8216;image/gif&#8217;, &#8216;image/bmp&#8217;, &#8216;image/pjpeg&#8217;, &#8216;image/x-png&#8217;] end </console> Inside views<br/><console>  # inside new.html.haml    = form_for @print do     f.file_field :image </console></div>
+Stepwise guide to configure paperclip default options, setting up aws-s3 storage in rails <br/> Inside Gemfile<br/><pre class=ruby>gem 'aws-s3',               :require => 'aws/s3' gem 'paperclip' </pre><br/><pre class=ruby>bundle install </pre> Generate Print model to hold image <br/><pre class=ruby> rails g model print image_file_name:string image_content_type:string image_file_size:string </pre><br/><pre class=ruby>rake db:migrate </pre> Add s3 credentials to YML file<br/><pre class=ruby># config/s3.yml  access_key_id: DASDFG7KACNxIJdJXHPQ secret_access_key: BnDrTnzCTX+R707wYEP/aCEqAsDFG7sgW </pre>Add default paperclip attachment options to initializer<br/><pre class=ruby># Make sure to add host url inside config/environments # HOSTNAME = 'http://lordganesha.com'  Paperclip::Attachment.default_options.merge!(   :storage => 's3',   :s3_credentials => YAML.load_file("#{Rails.root}/config/s3.yml"),   :path => ":class/:attachment/#{Rails.env}/:id/:style/:basename.:extension",     :default_url => "http://#{HOSTNAME}/images/paperclip/:class/:attachment/default.jpg",   :bucket => 'ganesha' ) </pre>Add image attachment code to print model<br/><pre class=ruby># app/models/print.rb class Print < ActiveRecord::Base   has_attached_file :image,     :styles => {:medium => ["400x400#", :jpg],                  :thumb => ["100x100#", :jpg],                  :slider => ["300x300#", :jpg]}   #validates_attachment_presence :image   validates_attachment_size :image, :less_than => 1.megabytes, :message => 'file size maximum 1 MB allowed'   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png', 'image/gif', 'image/bmp', 'image/pjpeg', 'image/x-png'] end </pre> Inside views<br/><pre class=ruby>  # inside new.html.haml    = form_for @print do     f.file_field :image </pre></div>
 </div>
   
   
@@ -145,7 +145,7 @@ Stepwise guide to configure paperclip default options, setting up aws-s3 storage
       
   <header>
     
-      <h1 class="entry-title"><a href="/2011/11/paperclip-image-upload-via-url">Paperclip Image Upload via URL</a></h1>
+      <h1 class="entry-title"><a href="/2011/11/paperclip-image-upload-via-url/">Paperclip Image Upload via URL</a></h1>
     
     
       <p class="meta">
@@ -169,7 +169,7 @@ Stepwise guide to configure paperclip default options, setting up aws-s3 storage
 
 
   <div class="entry-content"><div class='post'>
-Upload image via paperclip via passing URL instead of file upload <br/>  <code># Consider Print instance with image as file attachment class Print < ActiveRecord::Base   has_attached_file :image   def upload_image(url)     begin       io = open(URI.escape(url))       if io         def io.original_filename; base_uri.path.split('/').last; end         io.original_filename.blank? ? nil : io         p.image = io       end       p.save(false)     rescue Exception => e       logger.info "EXCEPTION# #{e.message}"     end   end end  </code> Text code from console<br/><console>p = Print.new url = &#8220;http://ocdevel.com/sites/ocdevel.com/files/images/rails.png&#8221; p.upload_image(url) </console></div>
+Upload image via paperclip via passing URL instead of file upload <br/>  <pre class=ruby># Consider Print instance with image as file attachment class Print < ActiveRecord::Base   has_attached_file :image   def upload_image(url)     begin       io = open(URI.escape(url))       if io         def io.original_filename; base_uri.path.split('/').last; end         io.original_filename.blank? ? nil : io         p.image = io       end       p.save(false)     rescue Exception => e       logger.info "EXCEPTION# #{e.message}"     end   end end  </pre> Text code from console<br/><pre class=ruby>p = Print.new url = "http://ocdevel.com/sites/ocdevel.com/files/images/rails.png" p.upload_image(url) </pre></div>
 </div>
   
   
@@ -182,7 +182,7 @@ Upload image via paperclip via passing URL instead of file upload <br/>  <code>#
       
   <header>
     
-      <h1 class="entry-title"><a href="/2011/10/connecting-to-multiple-databases-in">Legacy Database Connections in Rails</a></h1>
+      <h1 class="entry-title"><a href="/2011/10/connecting-to-multiple-databases-in/">Legacy Database Connections in Rails</a></h1>
     
     
       <p class="meta">
@@ -206,7 +206,7 @@ Upload image via paperclip via passing URL instead of file upload <br/>  <code>#
 
 
   <div class="entry-content"><div class='post'>
-While developing rails application we often come across situation where you wanted different rails models connecting different tables of different databases. <br/>Example: We are having ndnc model holding ndnc records associated with database ndnc. <br/>Lets create ConnectionBase model that will connect to other databse &#8216;ndnc&#8217; and that will be extended from ActiveRecordBase and put that inside library files <br/><code>vi lib/connection_base.rb   class ConnectionBase < ActiveRecord::Base    establish_connection(     :adapter => "postgresql",     :username=> "sandip",     :password => "2121",     :database => "ndnc" ) end </code><br/><br/>Wherever you wanted to connect to other database i.e. ndnc  you can extend that particular model with ConnectionBase <br/><code>class Ndnc < ConnectionBase # connects to ndnc table of ndnc database end </code><br/>Please make sure library files are loaded while server startup<br/><code># vi config/application.rb config.autoload_paths += %W(#{config.root}/lib) </code><br/>Done !<br/>In cases where you want only one particular model connecting other database table, you can put connection setting itself in that model.<br/></div>
+While developing rails application we often come across situation where you wanted different rails models connecting different tables of different databases. <br/>Example: We are having ndnc model holding ndnc records associated with database ndnc. <br/>Lets create ConnectionBase model that will connect to other databse &#8216;ndnc&#8217; and that will be extended from ActiveRecordBase and put that inside library files <br/><pre class=ruby>vi lib/connection_base.rb   class ConnectionBase < ActiveRecord::Base    establish_connection(     :adapter => "postgresql",     :username=> "sandip",     :password => "2121",     :database => "ndnc" ) end </pre><br/><br/>Wherever you wanted to connect to other database i.e. ndnc  you can extend that particular model with ConnectionBase <br/><pre class=ruby>class Ndnc < ConnectionBase # connects to ndnc table of ndnc database end </pre><br/>Please make sure library files are loaded while server startup<br/><pre class=ruby># vi config/application.rb config.autoload_paths += %W(#{config.root}/lib) </pre><br/>Done !<br/>In cases where you want only one particular model connecting other database table, you can put connection setting itself in that model.<br/></div>
 </div>
   
   
@@ -219,7 +219,7 @@ While developing rails application we often come across situation where you want
       
   <header>
     
-      <h1 class="entry-title"><a href="/2011/09/print-particular-div-inside-html-page">Print Particular DIV Inside HTML Page</a></h1>
+      <h1 class="entry-title"><a href="/2011/09/print-particular-div-inside-html-page/">Print Particular DIV Inside HTML Page</a></h1>
     
     
       <p class="meta">
@@ -243,7 +243,7 @@ While developing rails application we often come across situation where you want
 
 
   <div class="entry-content"><div class='post'>
-<div dir="ltr" style="text-align: left;" trbidi="on"><div class="gmail_quote">Hiding Whole page content and displaying only particular div using css<br /><br /></div><code>&lt;style media="print" type="text/css"&gt;<br />&nbsp; @media print<br />&nbsp; {<br />&nbsp;&nbsp;&nbsp; body * { visibility: hidden; }<br />&nbsp;&nbsp;&nbsp; #PrintDiv * { visibility: visible; }<br />&nbsp;&nbsp;&nbsp; #PrintDiv { position: absolute; top: 40px; left: 30px; }<br />&nbsp; }<br />&lt;/style&gt; </code></div></div>
+<div dir="ltr" style="text-align: left;" trbidi="on"><div class="gmail_quote">Hiding Whole page content and displaying only particular div using css<br /><br /></div><pre class=ruby>&lt;style media="print" type="text/css"&gt;<br />&nbsp; @media print<br />&nbsp; {<br />&nbsp;&nbsp;&nbsp; body * { visibility: hidden; }<br />&nbsp;&nbsp;&nbsp; #PrintDiv * { visibility: visible; }<br />&nbsp;&nbsp;&nbsp; #PrintDiv { position: absolute; top: 40px; left: 30px; }<br />&nbsp; }<br />&lt;/style&gt; </pre></div></div>
 </div>
   
   
@@ -256,7 +256,7 @@ While developing rails application we often come across situation where you want
       
   <header>
     
-      <h1 class="entry-title"><a href="/2011/08/migrating-from-svn-to-git">Migrating From Svn to Git</a></h1>
+      <h1 class="entry-title"><a href="/2011/08/migrating-from-svn-to-git/">Migrating From Svn to Git</a></h1>
     
     
       <p class="meta">
@@ -280,7 +280,7 @@ While developing rails application we often come across situation where you want
 
 
   <div class="entry-content"><div class='post'>
-<b>Migrating from svn to git </b><br/> <b>1. Install git-svn</b><br/><console>sudo apt-get install git-svn </console> <b>2. Clone svn repositoy </b><console>git svn clone -s svn://server/project_myt/trunk proj </console> <b>To add svn users and git users mapping</b><br/><b>Create author-file</b><br/><console>#vi authorsfile  sandip = sandipransing <sandip@funonrails.com>amit = amitk <amit@gmail.com>root = sandipransing <sandip@funonrails.com></console><br/><console>git svn &#8211;author-file=authorfile clone -s svn://server/project_myt/trunk proj </console><b>3. Add git repository url</b><br/><console>cd proj git remote add git@github.com:USERNAME/project.git </console><b>4. Push repository to git</b><br/><console>git push origin master </console> <b>To do svn pull for latest changes</b><br/><console>git svn rebase </console></div>
+<b>Migrating from svn to git </b><br/> <b>1. Install git-svn</b><br/><pre class=ruby>sudo apt-get install git-svn </pre> <b>2. Clone svn repositoy </b><pre class=ruby>git svn clone -s svn://server/project_myt/trunk proj </pre> <b>To add svn users and git users mapping</b><br/><b>Create author-file</b><br/><pre class=ruby>#vi authorsfile  sandip = sandipransing <sandip@funonrails.com>amit = amitk <amit@gmail.com>root = sandipransing <sandip@funonrails.com></pre><br/><pre class=ruby>git svn --author-file=authorfile clone -s svn://server/project_myt/trunk proj </pre><b>3. Add git repository url</b><br/><pre class=ruby>cd proj git remote add git@github.com:USERNAME/project.git </pre><b>4. Push repository to git</b><br/><pre class=ruby>git push origin master </pre> <b>To do svn pull for latest changes</b><br/><pre class=ruby>git svn rebase </pre></div>
 </div>
   
   
@@ -293,7 +293,7 @@ While developing rails application we often come across situation where you want
       
   <header>
     
-      <h1 class="entry-title"><a href="/2011/07/how-to-get-started-with-tata-photon-on">How to Get Started With Tata Photon on Ubuntu Machine</a></h1>
+      <h1 class="entry-title"><a href="/2011/07/how-to-get-started-with-tata-photon-on/">How to Get Started With Tata Photon on Ubuntu Machine</a></h1>
     
     
       <p class="meta">
@@ -317,7 +317,7 @@ While developing rails application we often come across situation where you want
 
 
   <div class="entry-content"><div class='post'>
-In order to get tata photon working on ubuntu machine you need to install following packages <br/>1. usb-modeswitch-data 2. usb-modeswitch <br/>Either you can download them from ubuntu site and install locally or install using apt manager <br/>Download links<br/><code>http://packages.debian.org/squeeze/usb-modeswitch-data http://packages.debian.org/squeeze/usb-modeswitch </code><br/><b>apt installation</b><br/><console>sudo apt-get install usb-modeswitch-data usb-modeswitch usb-modeswitch </console><br/>After successful installation,<br/>1. Connect photon usb card<br/>2. Execute following commands one after another. <console>sudo usb_modeswitch -c /etc/usb_modeswitch.d/12d1\:1446 wvdial </console><br/>&#8230;and you should get connected via photon!</div>
+In order to get tata photon working on ubuntu machine you need to install following packages <br/>1. usb-modeswitch-data 2. usb-modeswitch <br/>Either you can download them from ubuntu site and install locally or install using apt manager <br/>Download links<br/><pre class=ruby>http://packages.debian.org/squeeze/usb-modeswitch-data http://packages.debian.org/squeeze/usb-modeswitch </pre><br/><b>apt installation</b><br/><pre class=ruby>sudo apt-get install usb-modeswitch-data usb-modeswitch usb-modeswitch </pre><br/>After successful installation,<br/>1. Connect photon usb card<br/>2. Execute following commands one after another. <pre class=ruby>sudo usb_modeswitch -c /etc/usb_modeswitch.d/12d1\:1446 wvdial </pre><br/>&#8230;and you should get connected via photon!</div>
 </div>
   
   
@@ -330,7 +330,7 @@ In order to get tata photon working on ubuntu machine you need to install follow
       
   <header>
     
-      <h1 class="entry-title"><a href="/2011/04/setup-active-scaffold-with-rails-3">Setup Active Scaffold With Rails 3 Using jQuery</a></h1>
+      <h1 class="entry-title"><a href="/2011/04/setup-active-scaffold-with-rails-3/">Setup Active Scaffold With Rails 3 Using jQuery</a></h1>
     
     
       <p class="meta">
@@ -354,7 +354,7 @@ In order to get tata photon working on ubuntu machine you need to install follow
 
 
   <div class="entry-content"><div class='post'>
-<b>Create new rails project</b><br /><console>  rails new demo -d mysql </console> <b>Add active_scaffold gem to bundler</b><br /> <code>  gem "active_scaffold_vho" </code>Run bundle install command <br /><console>  bundle install </console> Setup active scaffold to use jQuery <br /><console>  rails g active_scaffold_setup jquery       create  public/javascripts/rails_jquery.js       create  public/javascripts/jquery-ui-timepicker-addon.js       create  config/initializers/active_scaffold.rb       insert  app/views/layouts/application.html.erb       insert  config/locales/en.yml       gsub  app/views/layouts/application.html.erb </console> Generate active scaffold for resource city &amp; zone<br /><console>  rails g active_scaffold City name:string       invoke  active_record       create    db/migrate/20110408123206_create_cities.rb       create    app/models/city.rb       invoke    test_unit       create      test/unit/city_test.rb       create      test/fixtures/cities.yml       route  resources :cities do as_routes end       invoke  active_scaffold_controller       create    app/controllers/cities_controller.rb       create    app/helpers/cities_helper.rb       invoke    test_unit       create    test/functional/cities_controller_test.rb       create    app/views/cities </console> <console>rails g active_scaffold Zone name:string city:references             invoke  active_record       create    db/migrate/20110408123531_create_zones.rb       create    app/models/zone.rb       invoke    test_unit       create      test/unit/zone_test.rb       create      test/fixtures/zones.yml        route  resources :zones do as_routes end       invoke  active_scaffold_controller       create    app/controllers/zones_controller.rb       create    app/helpers/zones_helper.rb       invoke    test_unit       create      test/functional/zones_controller_test.rb       create    app/views/zones </console><b>Add Associations</b><br /><code> class City &lt; ActiveRecord::Base  end   class Zone &lt; ActiveRecord::Base    belongs_to :city  end   class City &lt; ActiveRecord::Base    has_many :zones  end </code> <b> Migrate database </b><br /><console>  rake db:create   rake db:migrate   ==  CreateCities: migrating ===================================   &#8211; create_table(:cities)    -&gt; 0.1411s   ==  CreateCities: migrated (0.1413s) ==========================    ==  CreateZones: migrating ====================================   &#8211; create_table(:zones)    -&gt; 0.1507s   ==  CreateZones: migrated (0.1510s) =========================== </console>Start Server <br /><console>rails s </console> Visit Browser URL: http://localhost:3000/cities<br /><br /><b>Snap</b><br/> <img src="http://4.bp.blogspot.com/-CJgSXg5EJyE/TZ8EDHwCwaI/AAAAAAAABPs/81dNxWDwYm0/s1600/active_scaffold.png" alt="http://4.bp.blogspot.com/-CJgSXg5EJyE/TZ8EDHwCwaI/AAAAAAAABPs/81dNxWDwYm0/s1600/active_scaffold.png" style="cursor: -moz-zoom-out"></div>
+<b>Create new rails project</b><br /><pre class=ruby>  rails new demo -d mysql </pre> <b>Add active_scaffold gem to bundler</b><br /> <pre class=ruby>  gem "active_scaffold_vho" </pre>Run bundle install command <br /><pre class=ruby>  bundle install </pre> Setup active scaffold to use jQuery <br /><pre class=ruby>  rails g active_scaffold_setup jquery       create  public/javascripts/rails_jquery.js       create  public/javascripts/jquery-ui-timepicker-addon.js       create  config/initializers/active_scaffold.rb       insert  app/views/layouts/application.html.erb       insert  config/locales/en.yml       gsub  app/views/layouts/application.html.erb </pre> Generate active scaffold for resource city &amp; zone<br /><pre class=ruby>  rails g active_scaffold City name:string       invoke  active_record       create    db/migrate/20110408123206_create_cities.rb       create    app/models/city.rb       invoke    test_unit       create      test/unit/city_test.rb       create      test/fixtures/cities.yml       route  resources :cities do as_routes end       invoke  active_scaffold_controller       create    app/controllers/cities_controller.rb       create    app/helpers/cities_helper.rb       invoke    test_unit       create    test/functional/cities_controller_test.rb       create    app/views/cities </pre> <pre class=ruby>rails g active_scaffold Zone name:string city:references             invoke  active_record       create    db/migrate/20110408123531_create_zones.rb       create    app/models/zone.rb       invoke    test_unit       create      test/unit/zone_test.rb       create      test/fixtures/zones.yml        route  resources :zones do as_routes end       invoke  active_scaffold_controller       create    app/controllers/zones_controller.rb       create    app/helpers/zones_helper.rb       invoke    test_unit       create      test/functional/zones_controller_test.rb       create    app/views/zones </pre><b>Add Associations</b><br /><pre class=ruby> class City &lt; ActiveRecord::Base  end   class Zone &lt; ActiveRecord::Base    belongs_to :city  end   class City &lt; ActiveRecord::Base    has_many :zones  end </pre> <b> Migrate database </b><br /><pre class=ruby>  rake db:create   rake db:migrate   ==  CreateCities: migrating ===================================   -- create_table(:cities)    -&gt; 0.1411s   ==  CreateCities: migrated (0.1413s) ==========================    ==  CreateZones: migrating ====================================   -- create_table(:zones)    -&gt; 0.1507s   ==  CreateZones: migrated (0.1510s) =========================== </pre>Start Server <br /><pre class=ruby>rails s </pre> Visit Browser URL: http://localhost:3000/cities<br /><br /><b>Snap</b><br/> <img src="http://4.bp.blogspot.com/-CJgSXg5EJyE/TZ8EDHwCwaI/AAAAAAAABPs/81dNxWDwYm0/s1600/active_scaffold.png" alt="http://4.bp.blogspot.com/-CJgSXg5EJyE/TZ8EDHwCwaI/AAAAAAAABPs/81dNxWDwYm0/s1600/active_scaffold.png" style="cursor: -moz-zoom-out"></div>
 </div>
   
   
@@ -367,7 +367,7 @@ In order to get tata photon working on ubuntu machine you need to install follow
       
   <header>
     
-      <h1 class="entry-title"><a href="/2011/04/ghostype-input-placeholder-for-search">Ghostype Input Placeholder for Search Text Fields Using jQuery</a></h1>
+      <h1 class="entry-title"><a href="/2011/04/ghostype-input-placeholder-for-search/">Ghostype Input Placeholder for Search Text Fields Using jQuery</a></h1>
     
     
       <p class="meta">
@@ -391,7 +391,7 @@ In order to get tata photon working on ubuntu machine you need to install follow
 
 
   <div class="entry-content"><div class='post'>
-<b>Placeholder Demo</b><br/><input type="search" placeholder="Enter search text here" class="query"><br/><b>Ghostpe Demo</b><br/><script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script> <input type="search" placeholder="Enter search text here" id="home-search" class="query"><script type="text/javascript">    $(document).ready(function(){       var search = "#home-search";       var chars = $(search).attr('placeholder').split('');       $.each(chars, function(i, v){         setTimeout(function() {           $(search).val((chars.slice(0, i+1).join('')));         }, 100*i);       });     }); </script><br/>jQuery placeholder plugin can be used to display default text inside input text fields. HTML5 introduced type search fields with placeholder attribute support.<br /><code> &lt;input class="query" id="home-search" placeholder="Enter search text here" type="search" /&gt;</code><br /> It should display default text &#8220;Enter search text here&#8221; inside text-field and when user tries to type something it disappears.<br />In order to achieve text marquee like effect to default text value with jQery use following jQuery code. It will type text character by character from left to right.<br />Same effect can be achieved by creating gif image of typing and placing it as background-image to text field with certain drawbacks like changing default text on the fly.<br />Place below code inside javascript tag in your html file<br /><b> jQuery Code </b><code>      $(document).ready(function(){         var search = "#home-search";         var chars = $(search).attr('placeholder').split('');         $.each(chars, function(i, v){           setTimeout(function() {             $(search).val((chars.slice(0, i+1).join('')));           }, 100*i);         });       }); </code><br/>Got easy ??</div>
+<b>Placeholder Demo</b><br/><input type="search" placeholder="Enter search text here" class="query"><br/><b>Ghostpe Demo</b><br/><script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script> <input type="search" placeholder="Enter search text here" id="home-search" class="query"><script type="text/javascript">    $(document).ready(function(){       var search = "#home-search";       var chars = $(search).attr('placeholder').split('');       $.each(chars, function(i, v){         setTimeout(function() {           $(search).val((chars.slice(0, i+1).join('')));         }, 100*i);       });     }); </script><br/>jQuery placeholder plugin can be used to display default text inside input text fields. HTML5 introduced type search fields with placeholder attribute support.<br /><pre class=ruby> &lt;input class="query" id="home-search" placeholder="Enter search text here" type="search" /&gt;</pre><br /> It should display default text &#8220;Enter search text here&#8221; inside text-field and when user tries to type something it disappears.<br />In order to achieve text marquee like effect to default text value with jQery use following jQuery code. It will type text character by character from left to right.<br />Same effect can be achieved by creating gif image of typing and placing it as background-image to text field with certain drawbacks like changing default text on the fly.<br />Place below code inside javascript tag in your html file<br /><b> jQuery Code </b><pre class=ruby>      $(document).ready(function(){         var search = "#home-search";         var chars = $(search).attr('placeholder').split('');         $.each(chars, function(i, v){           setTimeout(function() {             $(search).val((chars.slice(0, i+1).join('')));           }, 100*i);         });       }); </pre><br/>Got easy ??</div>
 </div>
   
   
@@ -404,7 +404,7 @@ In order to get tata photon working on ubuntu machine you need to install follow
       
   <header>
     
-      <h1 class="entry-title"><a href="/2011/03/setting-up-nginx-maximum-upload-size">Setting Up Nginx Maximum Upload Size</a></h1>
+      <h1 class="entry-title"><a href="/2011/03/setting-up-nginx-maximum-upload-size/">Setting Up Nginx Maximum Upload Size</a></h1>
     
     
       <p class="meta">
@@ -428,7 +428,7 @@ In order to get tata photon working on ubuntu machine you need to install follow
 
 
   <div class="entry-content"><div class='post'>
-Edit nginx configuration and look for html block.<br/>Inside html block add following line.<br/><code>http {     include conf/mime.types;     default_type application/octet-stream;     client_max_body_size 10m;     .... } </code><br/>In above configuration &#8220;application/octet-stream&#8221; supports any kind of file upload.</div>
+Edit nginx configuration and look for html block.<br/>Inside html block add following line.<br/><pre class=ruby>http {     include conf/mime.types;     default_type application/octet-stream;     client_max_body_size 10m;     .... } </pre><br/>In above configuration &#8220;application/octet-stream&#8221; supports any kind of file upload.</div>
 </div>
   
   
@@ -453,23 +453,23 @@ Edit nginx configuration and look for html block.<br/>Inside html block add foll
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

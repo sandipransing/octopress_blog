@@ -9,7 +9,7 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="While working with many projects that uses different ruby versions and rails versions, one big problem arises that how do we manage all this ?We &hellip;">
+  <meta name="description" content="There are many ways that can be used to submit sitemap to search engines.Lets discuss approaches1. Put sitemap.xml in public folder and you are done &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,7 +71,122 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2009/09/managing-multiple-ruby-versions-and">Managing Multiple Ruby Versions and Rails Versions With Rvm</a></h1>
+      <h1 class="entry-title"><a href="/2009/10/how-to-submit-sitemap-to-search-engines/">How to Submit Sitemap to Search Engines</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-10-01T22:57:00+05:30" pubdate data-updated="true">Oct 1<span>st</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<br />There are many ways that can be used to submit sitemap to search engines.<br /><br />Lets discuss approaches<br /><br />1. Put sitemap.xml in public folder and you are done.<br />&nbsp;&nbsp; &nbsp;Crawlers will find it through url<br />&nbsp;&nbsp; &nbsp;http://yourdomain.com/sitemap.xml<br /><br />2. There are many online sites which generates sitemaps for you.<br />&nbsp;&nbsp; &nbsp;like http://www.xml-sitemaps.com/<br /><br />3. Open following urls in browser.&nbsp;Be sure to add xml sitemap path for your site.<br /><br />a. <b>Google submit</b><br />&nbsp;&nbsp; &nbsp;http://www.google.com/webmasters/tools/ping?sitemap=XML_SITEMAP_PATH<br /><br />b. <b>Yahoo Submit</b><br />&nbsp;&nbsp; &nbsp;http://search.yahooapis.com/SiteExplorerService/V1/ping?sitemap=XML_SITEMAP_PATH<br /><br />c. <b>Ask Submit</b><br /><b></b>&nbsp;&nbsp; &nbsp;http://submissions.ask.com/ping?sitemap=XML_SITEMAP_PATH<br /><br />d. <b>Webmaster submit</b><br />&nbsp;&nbsp; &nbsp;http://webmaster.live.com/ping.aspx?siteMap=XML_SITEMAP_PATH<br /><br />5. Best practices in rails to submit sitemap is scheduled task (cron job).<br />&nbsp;&nbsp; &nbsp;Write a rake task that will generate sitemap in rails public folder and<br />&nbsp;&nbsp; &nbsp;will submit sitemap.xml file to search engines. ( as mentioned above.)<br /><br />Got easy :)<br /></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>moooynvn</div>
+<div class='content'>
+This comment has been removed by a blog administrator.</div>
+</div>
+<div class='comment'>
+<div class='author'>Kiliaquarry</div>
+<div class='content'>
+hi, how are you? <a href="http://dotnet.org.za/members/cheap-synthroid-online.aspx" rel="nofollow" rel="nofollow">synthroid online</a> <a href="http://dotnet.org.za/members/cheap-synthroid-online.aspx" rel="nofollow" rel="nofollow">cheap synthroid</a> http://dotnet.org.za/members/cheap-synthroid-online.aspx online</div>
+</div>
+<div class='comment'>
+<div class='author'>SoulSmasher</div>
+<div class='content'>
+And this is for bing:<br>http://www.bing.com/webmaster/ping.aspx?sitemap=www.YourWebAddress.com/sitemap.xml</div>
+</div>
+<div class='comment'>
+<div class='author'>blobaduby</div>
+<div class='content'>
+<a href="http://fi.worldos.ru/map.html" rel="nofollow" rel="nofollow">скачать кино новинки 2009 года</a><br><a href="http://allmy.worldos.ru/map.html" rel="nofollow" rel="nofollow">кино комедии скачать бесплатно</a><br><a href="http://worldos.ru/map.html" rel="nofollow" rel="nofollow">кино комедии и боевики бесплатно скачать бесплатно</a></div>
+</div>
+<div class='comment'>
+<div class='author'>Polprav</div>
+<div class='content'>
+Hello from Russia!<br>Can I quote a post in your blog with the link to you?</div>
+</div>
+<div class='comment'>
+<div class='author'>Garry</div>
+<div class='content'>
+Thanks. It&#39;s very useful.<br><a href="http://www.cometosell.com" title="Free online classifieds" rel="nofollow" rel="nofollow">ComeToSell - classifieds</a></div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/09/no-ri-no-rdoc-for-ruby-gem-installation/">&#8211;no-ri &#8211;no-rdoc for Ruby Gem Installation</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-09-30T23:27:00+05:30" pubdate data-updated="true">Sep 30<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+One can install gem without rdoc using<br /><br />gem install GEM_NAME &#8211;no-ri &#8211;no-rdoc<br /><br /><br />Skip ri rdoc for all gem installation as i haven&#8217;t seen anyone using it.<br /><br />Edit gemrc file<br />Add following line to it<br /><pre class=ruby>vi ~/.gemrc<br />:gem: --no-ri --no-rdoc</pre><br /><br />Here is my ~/.gemrc file<br /><pre class=ruby>---<br />:verbose: true<br />gem: --no-ri --no-rdoc<br />:update_sources: true<br />:sources:<br />- http://gems.rubyforge.org<br />- http://gems.github.com<br />:backtrace: false<br />:bulk_threshold: 1000<br />:benchmark: false</pre><br /><br />That&#8217;s it !</div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Tnelson</div>
+<div class='content'>
+I don’t usually reply to posts but I will in this case, great info&#8230;I will add a backlink and bookmark your site. Keep up the good work!</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/09/managing-multiple-ruby-versions-and/">Managing Multiple Ruby Versions and Rails Versions With Rvm</a></h1>
     
     
       <p class="meta">
@@ -95,7 +210,7 @@
 
 
   <div class="entry-content"><div class='post'>
-While working with many projects that uses different ruby versions and rails versions, one big problem arises that how do we manage all this ?<br/><br/>We know that managing multiple rails versions wont be problem at all.<br/>but what about ruby versions, How one can manage multiple ruby versions. also while upgrading or degrading ruby version, we need to install all gems again including rails. <br/>i know this is a big pain :(<br/>How we can overcome this headache. meantime there must be some incompatibilities between two different ruby and rails versions.<br/><br/>Yesterday, i did some research and came to know that&#8230;<br/><br/>+ ruby 1.8.7 and rails 2.3.3 got quite stability and effectively. we can use it in next developments.<br/>+ Also, after installing ruby 1.9.1 and dependent gems for my project, <br/>and wondering that there are many incompatibilities while installing new gems with ruby 1.9.1<br/><br/>Some of the gems are mysql, ferret, acts_as_ferret, erubies, etc.<br/><br/>Today, while google, i found rvm gem and that seems very nice to manage multiple ruby versions.<br/><br/><br/>Here are some steps explaining how to use it.<br/><br/># Install rvm gem to manage multiple ruby version<br/># pre-requisite is that we already have ruby and rubygems installation<br/><code>1. sudo gem install rvm</code><br/><br/># Install rvm for a particular user<br/># It will also show how to use gem<br/><code>2. rvm-install</code><br/><br/>3. Open new shell<br/><br/># Show all ruby, jruby installations<br/><code>4. rvm list</code><br/><br/># Install ruby<br/># specify ruby version<br/><code>5. rvm install RUBY_VERSION_TO_BE_INSTALLED</code><br/>    (rvm install 1.9.1)<br/><br/># Install jruby<br/># By default it will install jruby-1.3.1<br/><code>6. rvm install jruby</code><br/><br/># Specify which ruby version to use ?<br/># Note: Be sure that ruby version is installed<br/><code>7. rvm use RUBY_VERSION_TO_USE </code><br/>    (rvm use 1.9.1)<br/><br/>#. Default i.e. version before rvm gem installation<br/><code>8. rvm use default</code><br/><br/>Sounds, cool :)</div>
+While working with many projects that uses different ruby versions and rails versions, one big problem arises that how do we manage all this ?<br/><br/>We know that managing multiple rails versions wont be problem at all.<br/>but what about ruby versions, How one can manage multiple ruby versions. also while upgrading or degrading ruby version, we need to install all gems again including rails. <br/>i know this is a big pain :(<br/>How we can overcome this headache. meantime there must be some incompatibilities between two different ruby and rails versions.<br/><br/>Yesterday, i did some research and came to know that&#8230;<br/><br/>+ ruby 1.8.7 and rails 2.3.3 got quite stability and effectively. we can use it in next developments.<br/>+ Also, after installing ruby 1.9.1 and dependent gems for my project, <br/>and wondering that there are many incompatibilities while installing new gems with ruby 1.9.1<br/><br/>Some of the gems are mysql, ferret, acts_as_ferret, erubies, etc.<br/><br/>Today, while google, i found rvm gem and that seems very nice to manage multiple ruby versions.<br/><br/><br/>Here are some steps explaining how to use it.<br/><br/># Install rvm gem to manage multiple ruby version<br/># pre-requisite is that we already have ruby and rubygems installation<br/><pre class=ruby>1. sudo gem install rvm</pre><br/><br/># Install rvm for a particular user<br/># It will also show how to use gem<br/><pre class=ruby>2. rvm-install</pre><br/><br/>3. Open new shell<br/><br/># Show all ruby, jruby installations<br/><pre class=ruby>4. rvm list</pre><br/><br/># Install ruby<br/># specify ruby version<br/><pre class=ruby>5. rvm install RUBY_VERSION_TO_BE_INSTALLED</pre><br/>    (rvm install 1.9.1)<br/><br/># Install jruby<br/># By default it will install jruby-1.3.1<br/><pre class=ruby>6. rvm install jruby</pre><br/><br/># Specify which ruby version to use ?<br/># Note: Be sure that ruby version is installed<br/><pre class=ruby>7. rvm use RUBY_VERSION_TO_USE </pre><br/>    (rvm use 1.9.1)<br/><br/>#. Default i.e. version before rvm gem installation<br/><pre class=ruby>8. rvm use default</pre><br/><br/>Sounds, cool :)</div>
 <h2>Comments</h2>
 <div class='comments'>
 <div class='comment'>
@@ -121,7 +236,7 @@ hello,<br><br><br>Thank you for the great quality of your blog, each  time i com
       
   <header>
     
-      <h1 class="entry-title"><a href="/2009/09/jruby-rails-installation-on-ubuntu">Jruby Rails Installation on Ubuntu Interpid</a></h1>
+      <h1 class="entry-title"><a href="/2009/09/jruby-rails-installation-on-ubuntu/">Jruby Rails Installation on Ubuntu Interpid</a></h1>
     
     
       <p class="meta">
@@ -166,7 +281,7 @@ Very helpful article. Please keep up the great work! :-)</div>
       
   <header>
     
-      <h1 class="entry-title"><a href="/2009/09/upgrading-rails-version">Upgrading Rails Version</a></h1>
+      <h1 class="entry-title"><a href="/2009/09/upgrading-rails-version/">Upgrading Rails Version</a></h1>
     
     
       <p class="meta">
@@ -203,7 +318,7 @@ Here are the simple steps to be followed while upgrading rails version to use.<b
       
   <header>
     
-      <h1 class="entry-title"><a href="/2009/09/installing-ruby-191">Installing Ruby 1.9.1</a></h1>
+      <h1 class="entry-title"><a href="/2009/09/installing-ruby-191/">Installing Ruby 1.9.1</a></h1>
     
     
       <p class="meta">
@@ -240,7 +355,7 @@ installing ruby 1.9.1 is very easy &#8230;&#8230;.<br/>follow simple steps<br/><
       
   <header>
     
-      <h1 class="entry-title"><a href="/2009/09/migrating-project-from-rails-210-to">Migrating Project From Rails 2.1.0 to Edge Rails 2.3.3</a></h1>
+      <h1 class="entry-title"><a href="/2009/09/migrating-project-from-rails-210-to/">Migrating Project From Rails 2.1.0 to Edge Rails 2.3.3</a></h1>
     
     
       <p class="meta">
@@ -264,7 +379,7 @@ installing ruby 1.9.1 is very easy &#8230;&#8230;.<br/>follow simple steps<br/><
 
 
   <div class="entry-content"><div class='post'>
-I wanted to migrate my project from rails 2.1.0 to rails 2.3.3<br/>so, i performed following steps, but it shows me memcached-client error.<br/><br/>vi config/environment.rb<br/><br/><code># Specifies gem version of Rails to use when vendor/rails is not present<br/>RAILS_GEM_VERSION = '2.3.3' unless defined? RAILS_GEM_VERSION</code><br/><br/>ruby script/server<br/><br/>It shows me error<br/><code> `install_memcached': 'memcache-client' client requested but not installed. Try 'sudo gem install memcache-client'. (Interlock::ConfigurationError)</code><br/><br/>so, i installed memcache-client gem<br/><br/><code>gem install memcache-client</code><br/><br/>but still i am showing same error, any ideas ??</div>
+I wanted to migrate my project from rails 2.1.0 to rails 2.3.3<br/>so, i performed following steps, but it shows me memcached-client error.<br/><br/>vi config/environment.rb<br/><br/><pre class=ruby># Specifies gem version of Rails to use when vendor/rails is not present<br/>RAILS_GEM_VERSION = '2.3.3' unless defined? RAILS_GEM_VERSION</pre><br/><br/>ruby script/server<br/><br/>It shows me error<br/><pre class=ruby> `install_memcached': 'memcache-client' client requested but not installed. Try 'sudo gem install memcache-client'. (Interlock::ConfigurationError)</pre><br/><br/>so, i installed memcache-client gem<br/><br/><pre class=ruby>gem install memcache-client</pre><br/><br/>but still i am showing same error, any ideas ??</div>
 <h2>Comments</h2>
 <div class='comments'>
 <div class='comment'>
@@ -285,7 +400,7 @@ I don&#39;t know If I said it already but &#8230;I&#39;m so glad I found this si
       
   <header>
     
-      <h1 class="entry-title"><a href="/2009/09/thank-you">Thank You</a></h1>
+      <h1 class="entry-title"><a href="/2009/09/thank-you/">Thank You</a></h1>
     
     
       <p class="meta">
@@ -322,7 +437,7 @@ Thanks for your valuable feedback!</div>
       
   <header>
     
-      <h1 class="entry-title"><a href="/2009/09/contact-me">Contact Me</a></h1>
+      <h1 class="entry-title"><a href="/2009/09/contact-me/">Contact Me</a></h1>
     
     
       <p class="meta">
@@ -359,7 +474,7 @@ Thanks for your valuable feedback!</div>
       
   <header>
     
-      <h1 class="entry-title"><a href="/2009/09/watch-live-india-vs-srilanka-cricket">Watch Live India vs Srilanka Cricket</a></h1>
+      <h1 class="entry-title"><a href="/2009/09/watch-live-india-vs-srilanka-cricket/">Watch Live India vs Srilanka Cricket</a></h1>
     
     
       <p class="meta">
@@ -391,126 +506,6 @@ http://watch-online-cricket.blogspot.com/2009/01/watch-india-vs-srilanka-cricket
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/09/4-steps-to-install-nginx-with-passenger">4 Steps to Install Nginx With Passenger</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-09-09T23:47:00+05:30" pubdate data-updated="true">Sep 9<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-Install passenger program that will run your rails application<br/><strong>1. sudo gem install passenger</strong><br/>Install nginx server with passenger enabled<br/><strong>2. passenger-install-nginx-module</strong><br/><br/>it will open apt, click &#8220;Enter&#8221; to contine<br/>then select option 1 for default install<br/>then it will ask<br/>Where do you want to install Nginx to?<br/><br/>Please specify a prefix directory [/opt/nginx]:<br/>press enter<br/><br/>then copy following block<br/><br/><strong> server {<br/>listen 80;<br/>server_name <a href="http://www.yourhost.com/" target="_blank">www.yourhost.com</a>;<br/>root /somewhere/public;   # &lt;&#8212; be sure to point to &#8216;public&#8217;!<br/>passenger_enabled on;<br/>}</strong><br/><br/>Make nginx Configuration<br/>3. vi /opt/nginx/conf/nginx.conf<br/>Make passenger_root and passenger_ruby path to configuration<br/><strong><br/><br/>http {<br/>passenger_root /usr/local/lib/ruby/gems/1.8/gems/passenger-2.2.4;<br/>passenger_ruby /usr/local/bin/ruby;<br/></strong><br/><br/>then add server configuration block inside http block<br/>http{<br/>&#8230;<br/><strong> server {<br/>listen 80;<br/>server_name <a href="http://www.yourhost.com/" target="_blank">www.yourhost.com</a>; //Make sure this dns entry inside /etc/hosts<br/>root /carsonline/public;   # &lt;&#8212; be sure to point to &#8216;public&#8217;! //here carsonline is RAILS_ROOT<br/>passenger_enabled on;<br/>}</strong><br/><br/>Thats, all<br/><br/>4. Launch Server<br/><br/>/opt/nginx/sbin/nginx</div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>sandip Ransing</div>
-<div class='content'>
-You are right..but sometimes we have to manually configure it when there are multiple ruby installations.</div>
-</div>
-<div class='comment'>
-<div class='author'>gautamrege</div>
-<div class='content'>
-I think passenger_root and passenger_ruby get automatically configured during installation.<br><br>Good article.</div>
-</div>
-</div>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/09/how-do-i-generate-seo-sitemap-in-rails">How Do I Generate SEO Sitemap in Rails ?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-09-09T21:44:00+05:30" pubdate data-updated="true">Sep 9<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<strong>What is sitemap ? </strong><br/><br/>Sitemap is nothing but a .xml file containing urls available on your site<br/><br/>It contains URL, last modified date, frequency of content change and priority ( between 0..1 )<br/><br/><strong>Why we need sitemap ? </strong><br/><br/>We can submit sitemap file to search engine. It will help them in analysing what urls on your site are available for crawling.<br/><br/><strong>What is xml pattern ? </strong><br/><pre>   &lt;?xml version="1.0" encoding="UTF-8"?&gt;<br/>      &lt;urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"&gt;<br/><br/>        &lt;url&gt;<br/>           &lt;loc&gt;http://www.example.com/&lt;/loc&gt;<br/>           &lt;lastmod&gt;2005-01-01&lt;/lastmod&gt;<br/>           &lt;changefreq&gt;monthly&lt;/changefreq&gt;<br/>           &lt;priority&gt;0.8&lt;/priority&gt;<br/>        &lt;/url&gt;<br/>       ...<br/>       ...<br/>    &lt;/urlset&gt;</pre><br/><strong> What will be the path for sitemap ? </strong><br/><br/>&#8220;www.example.com/sitemap.xml&#8221;<br/><br/><strong>Are we going to generate sitemap manually ? </strong><br/><br/>No&#8230; there is mephisto sitemap plugin.We can use it.<br/><br/>script/plugin install  http://svn.appelsiini.net/svn/rails/plugins/mephisto_sitemap/<br/><br/><strong>Am i needed to generate to sitemap for each request ? </strong><br/><br/>No &#8230;&#8230;&#8230;..we can generate it in background task daily basis.<br/><br/><strong>How it will be accessed for request to sitemap ? </strong><br/><br/>we can define path to local file in routes.<br/><br/>map.connect &#8220;sitemap.xml&#8221;, :controller =&gt; :sitemap<br/><br/>Class SitemapController<br/><br/>def index<br/><br/>render &#8220;some local file path&#8221;<br/><br/>end<br/><br/>&#8230;.<br/><br/><strong>Here are the reference links </strong><br/><br/>http://www.fortytwo.gr/blog/19/Generating-Sitemaps-With-Rails<br/><br/>http://www.bestechvideos.com/2008/07/04/ruby-plus-71-how-to-create-a-seo-sitemap-for-rails-apps</div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>welkins</div>
-<div class='content'>
-how to generate xml file for cooliris portfolio in wordpress<br><br><br>-welkins</div>
-</div>
-<div class='comment'>
-<div class='author'>sitemap « Fun On Rails</div>
-<div class='content'>
-[&#8230;] How do i generate SEO sitemap in rails ? « Fun On Rails [&#8230;]</div>
-</div>
-<div class='comment'>
-<div class='author'>info ternak</div>
-<div class='content'>
-i got lots of information from your site, thank for your sharing&#8230; :)</div>
-</div>
-<div class='comment'>
-<div class='author'>Elena Morgan</div>
-<div class='content'>
-Search engines generate nearly 90% of all Internet traffic and are responsible for 55% of all E-commerce transactions. Today, it is essential for all online businesses to make SEO an integral part of their online business strategy.<br><br>So I would like to recommend one of my client who helps you define, evolve and implement a powerful SEO strategy to leverage your online business potential<br><br>http://www.redalkemi.com/</div>
-</div>
-<div class='comment'>
-<div class='author'>sandipransing</div>
-<div class='content'>
-Link mentioned is very good !<br>but it has limitation that we will not have any control over urls <br>that will be submitted to search engines :)</div>
-</div>
-<div class='comment'>
-<div class='author'>Sethupathi</div>
-<div class='content'>
-How to create sitemap.xml<br>======================<br>From the following link you can generate the site-map.xml if your application is not in https. Just by giving the application link it will generate the xml for you.<br><br>http://www.xml-sitemaps.com/</div>
-</div>
-</div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/15/">&larr; Older</a>
@@ -528,23 +523,23 @@ How to create sitemap.xml<br>======================<br>From the following link y
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

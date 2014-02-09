@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ubuntu | Fun On Rails]]></title>
   <link href="http://sandipransing.github.io/blog/categories/ubuntu/atom.xml" rel="self"/>
   <link href="http://sandipransing.github.io/"/>
-  <updated>2014-02-09T20:36:37+05:30</updated>
+  <updated>2014-02-09T23:18:57+05:30</updated>
   <id>http://sandipransing.github.io/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -15,18 +15,18 @@
   
   <entry>
     <title type="html"><![CDATA[How to get started with tata photon on ubuntu machine]]></title>
-    <link href="http://sandipransing.github.io/2011/07/how-to-get-started-with-tata-photon-on"/>
+    <link href="http://sandipransing.github.io/2011/07/how-to-get-started-with-tata-photon-on/"/>
     <updated>2011-07-05T14:06:00+05:30</updated>
     <id>http://sandipransing.github.io/2011/07/how-to-get-started-with-tata-photon-on</id>
     <content type="html"><![CDATA[<div class='post'>
-In order to get tata photon working on ubuntu machine you need to install following packages <br/>1. usb-modeswitch-data 2. usb-modeswitch <br/>Either you can download them from ubuntu site and install locally or install using apt manager <br/>Download links<br/><code>http://packages.debian.org/squeeze/usb-modeswitch-data http://packages.debian.org/squeeze/usb-modeswitch </code><br/><b>apt installation</b><br/><console>sudo apt-get install usb-modeswitch-data usb-modeswitch usb-modeswitch </console><br/>After successful installation,<br/>1. Connect photon usb card<br/>2. Execute following commands one after another. <console>sudo usb_modeswitch -c /etc/usb_modeswitch.d/12d1\:1446 wvdial </console><br/>...and you should get connected via photon!</div>
+In order to get tata photon working on ubuntu machine you need to install following packages <br/>1. usb-modeswitch-data 2. usb-modeswitch <br/>Either you can download them from ubuntu site and install locally or install using apt manager <br/>Download links<br/><pre class=ruby>http://packages.debian.org/squeeze/usb-modeswitch-data http://packages.debian.org/squeeze/usb-modeswitch </pre><br/><b>apt installation</b><br/><pre class=ruby>sudo apt-get install usb-modeswitch-data usb-modeswitch usb-modeswitch </pre><br/>After successful installation,<br/>1. Connect photon usb card<br/>2. Execute following commands one after another. <pre class=ruby>sudo usb_modeswitch -c /etc/usb_modeswitch.d/12d1\:1446 wvdial </pre><br/>...and you should get connected via photon!</div>
 
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[ruby on rails installation on fresh ubuntu machine]]></title>
-    <link href="http://sandipransing.github.io/2010/03/ruby-on-rails-installation-on-fresh"/>
+    <link href="http://sandipransing.github.io/2010/03/ruby-on-rails-installation-on-fresh/"/>
     <updated>2010-03-25T23:36:00+05:30</updated>
     <id>http://sandipransing.github.io/2010/03/ruby-on-rails-installation-on-fresh</id>
     <content type="html"><![CDATA[<div class='post'>
@@ -37,7 +37,7 @@ In order to get tata photon working on ubuntu machine you need to install follow
   
   <entry>
     <title type="html"><![CDATA[Imagemagick/ RMagick Installation on ubuntu]]></title>
-    <link href="http://sandipransing.github.io/2010/03/imagemagick-rmagick-installation-on"/>
+    <link href="http://sandipransing.github.io/2010/03/imagemagick-rmagick-installation-on/"/>
     <updated>2010-03-23T18:11:00+05:30</updated>
     <id>http://sandipransing.github.io/2010/03/imagemagick-rmagick-installation-on</id>
     <content type="html"><![CDATA[<div class='post'>
@@ -48,7 +48,7 @@ In order to get tata photon working on ubuntu machine you need to install follow
   
   <entry>
     <title type="html"><![CDATA[alternative for tortoise svn on ubuntu]]></title>
-    <link href="http://sandipransing.github.io/2010/03/alternative-for-tortoise-svn-on-ubuntu"/>
+    <link href="http://sandipransing.github.io/2010/03/alternative-for-tortoise-svn-on-ubuntu/"/>
     <updated>2010-03-11T16:59:00+05:30</updated>
     <id>http://sandipransing.github.io/2010/03/alternative-for-tortoise-svn-on-ubuntu</id>
     <content type="html"><![CDATA[<div class='post'>
@@ -59,7 +59,7 @@ The Tortoise svn client on windows is one of my favorite svn client.<br />I am w
   
   <entry>
     <title type="html"><![CDATA[Programming ruby Linux basics]]></title>
-    <link href="http://sandipransing.github.io/2010/03/remove-svn-files-inside-directory-rm-rf"/>
+    <link href="http://sandipransing.github.io/2010/03/remove-svn-files-inside-directory-rm-rf/"/>
     <updated>2010-03-02T12:29:00+05:30</updated>
     <id>http://sandipransing.github.io/2010/03/remove-svn-files-inside-directory-rm-rf</id>
     <content type="html"><![CDATA[<div class='post'>

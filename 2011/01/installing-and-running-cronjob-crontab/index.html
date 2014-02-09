@@ -92,7 +92,7 @@
 
 
 <div class="entry-content"><div class='post'>
-<b>Basic commands to open/Edit crontab file</b> <b>Editing crontab file</b><br/><console>crontab -e</console> <b>Displaying crontab file</b><br/><console>crontab -l</console> <b>Remove crontab</b><br/><console>crontab -r</console> <b>crontab syntax</b>cron command basically takes 6 input parameters of which each input can take multiple arguments for that one can make use of comma or pipe separator<br/> <console># min hour dom mon dow   command *   *   *   *   * (command) </console>Here * means for every. Above command will get executed for every minute<br/> <b>Detailed syntax</b> <console>*     *     *   *    *        command to be executed -     -     -   -    - |     |     |   |    | |     |     |   |    +&#8212;&#8211; day of week (0 - 6) (Sunday=0) |     |     |   +&#8212;&#8212;- month (1 - 12) |     |     +&#8212;&#8212;&#8212; day of month (1 - 31) |     +&#8212;&#8212;&#8212;- hour (0 - 23) +&#8212;&#8212;- min (0 - 59) </console> <b>Example commands</b><br/> <console># Generate progressive report for every active user at 11:45 p.m. 45 23 * * * (cd /home/sandip/current/; rake ace:daily_progressive_report RAILS_ENV=production)  # Take database backup every night 59 2 * * * (cd /home/sandip/current/; rake db:backup RAILS_ENV=production)  # Initialize grouping on database every sunday 29 3 * * 0 (cd /home/sandip/current/; rake ace:initializeCarGrouping RAILS_ENV=production)  # Generate daily stats on 4:30 AM & 12:30 PM and 4:30 PM 30 4,12,16 * * * (cd /home/sandip/current/; rake ace:daily_call_statistics RAILS_ENV=production)  # Rotate sphinx indexes updated evry hour if missed out somehow 0 * * * * (cd /user/local/bin/; indexer &#8211;rotate &#8211;config /home/sandip/current/config/production.sphinx.conf) </console></div>
+<b>Basic commands to open/Edit crontab file</b> <b>Editing crontab file</b><br/><pre class=ruby>crontab -e</pre> <b>Displaying crontab file</b><br/><pre class=ruby>crontab -l</pre> <b>Remove crontab</b><br/><pre class=ruby>crontab -r</pre> <b>crontab syntax</b>cron command basically takes 6 input parameters of which each input can take multiple arguments for that one can make use of comma or pipe separator<br/> <pre class=ruby># min hour dom mon dow   command *   *   *   *   * (command) </pre>Here * means for every. Above command will get executed for every minute<br/> <b>Detailed syntax</b> <pre class=ruby>*     *     *   *    *        command to be executed -     -     -   -    - |     |     |   |    | |     |     |   |    +----- day of week (0 - 6) (Sunday=0) |     |     |   +------- month (1 - 12) |     |     +--------- day of month (1 - 31) |     +---------- hour (0 - 23) +------- min (0 - 59) </pre> <b>Example commands</b><br/> <pre class=ruby># Generate progressive report for every active user at 11:45 p.m. 45 23 * * * (cd /home/sandip/current/; rake ace:daily_progressive_report RAILS_ENV=production)  # Take database backup every night 59 2 * * * (cd /home/sandip/current/; rake db:backup RAILS_ENV=production)  # Initialize grouping on database every sunday 29 3 * * 0 (cd /home/sandip/current/; rake ace:initializeCarGrouping RAILS_ENV=production)  # Generate daily stats on 4:30 AM & 12:30 PM and 4:30 PM 30 4,12,16 * * * (cd /home/sandip/current/; rake ace:daily_call_statistics RAILS_ENV=production)  # Rotate sphinx indexes updated evry hour if missed out somehow 0 * * * * (cd /user/local/bin/; indexer --rotate --config /home/sandip/current/config/production.sphinx.conf) </pre></div>
 </div>
 
 
@@ -129,7 +129,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2011/01/installing-and-running-cronjob-crontab" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2011/01/installing-and-running-cronjob-crontab" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2011/01/installing-and-running-cronjob-crontab/" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2011/01/installing-and-running-cronjob-crontab/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -140,10 +140,10 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2011/01/testing-restful-polymorphic-resource" title="Previous Post: Testing restful & polymorphic resource routes on rails console">&laquo; Testing restful & polymorphic resource routes on rails console</a>
+        <a class="basic-alignment left" href="/2011/01/testing-restful-polymorphic-resource/" title="Previous Post: Testing restful & polymorphic resource routes on rails console">&laquo; Testing restful & polymorphic resource routes on rails console</a>
       
       
-        <a class="basic-alignment right" href="/2011/01/using-hoptoad-notifier-as-gem-in-rails" title="Next Post: Using hoptoad notifier as gem in rails 2.3">Using hoptoad notifier as gem in rails 2.3 &raquo;</a>
+        <a class="basic-alignment right" href="/2011/01/using-hoptoad-notifier-as-gem-in-rails/" title="Next Post: Using hoptoad notifier as gem in rails 2.3">Using hoptoad notifier as gem in rails 2.3 &raquo;</a>
       
     </p>
   </footer>
@@ -159,23 +159,23 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

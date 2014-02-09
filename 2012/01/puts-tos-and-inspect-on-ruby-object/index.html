@@ -92,7 +92,7 @@
 
 
 <div class="entry-content"><div class='post'>
-`puts` converts ruby object into string by invoking to_s method on object. The default to_s prints the object&#8217;s class and an encoding of the object id. In order to print human readable form of object use inspect<br/> <code>locs = Location.find_by_sql('select * from locations')   Location Load (0.5ms)  select * from locations </code><b>Puts Object internally invokes to_s method on object to print</b><code>locs.each do |l|   # it calls to_s method on object   puts l end  #&lt;Location:0x000000055bb328&gt; #&lt;Location:0x000000055bb058&gt; </code><br/><b>puts object followed by subsequent invoke of inspect method outputs readable object</b><code>locs.each do |l|   puts l.inspect # prints actual object end  #&lt;Location id: 15, name: &quot;Annettaside3&quot;, street: &quot;71838 Ritchie Cape&quot;, city: &quot;East Destanystad&quot;, state: &quot;Utah&quot;, zip: &quot;58054&quot;, phone: 123456, other_phone: 987654, staff_strength: 40, is_active: true, created_at: &quot;2012-01-25 11:17:26&quot;, updated_at: &quot;2012-01-25 11:17:26&quot;, country_name: &quot;Korea&quot;&gt; #&lt;Location id: 16, name: &quot;Sporerbury4&quot;, street: &quot;73057 Jerad Shoal&quot;, city: &quot;South Kyliefurt&quot;, state: &quot;Delaware&quot;, zip: &quot;46553-3376&quot;, phone: 123456, other_phone: 987654, staff_strength: 40, is_active: true, created_at: &quot;2012-01-25 11:24:48&quot;, updated_at: &quot;2012-01-25 11:24:48&quot;, country_name: &quot;Australia&quot;&gt; </code></div>
+`puts` converts ruby object into string by invoking to_s method on object. The default to_s prints the object&#8217;s class and an encoding of the object id. In order to print human readable form of object use inspect<br/> <pre class=ruby>locs = Location.find_by_sql('select * from locations')   Location Load (0.5ms)  select * from locations </pre><b>Puts Object internally invokes to_s method on object to print</b><pre class=ruby>locs.each do |l|   # it calls to_s method on object   puts l end  #&lt;Location:0x000000055bb328&gt; #&lt;Location:0x000000055bb058&gt; </pre><br/><b>puts object followed by subsequent invoke of inspect method outputs readable object</b><pre class=ruby>locs.each do |l|   puts l.inspect # prints actual object end  #&lt;Location id: 15, name: &quot;Annettaside3&quot;, street: &quot;71838 Ritchie Cape&quot;, city: &quot;East Destanystad&quot;, state: &quot;Utah&quot;, zip: &quot;58054&quot;, phone: 123456, other_phone: 987654, staff_strength: 40, is_active: true, created_at: &quot;2012-01-25 11:17:26&quot;, updated_at: &quot;2012-01-25 11:17:26&quot;, country_name: &quot;Korea&quot;&gt; #&lt;Location id: 16, name: &quot;Sporerbury4&quot;, street: &quot;73057 Jerad Shoal&quot;, city: &quot;South Kyliefurt&quot;, state: &quot;Delaware&quot;, zip: &quot;46553-3376&quot;, phone: 123456, other_phone: 987654, staff_strength: 40, is_active: true, created_at: &quot;2012-01-25 11:24:48&quot;, updated_at: &quot;2012-01-25 11:24:48&quot;, country_name: &quot;Australia&quot;&gt; </pre></div>
 </div>
 
 
@@ -129,7 +129,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2012/01/puts-tos-and-inspect-on-ruby-object" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2012/01/puts-tos-and-inspect-on-ruby-object" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2012/01/puts-tos-and-inspect-on-ruby-object/" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2012/01/puts-tos-and-inspect-on-ruby-object/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -140,10 +140,10 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/01/csv-file-importexport-in-rails-3" title="Previous Post: csv file import / export in rails 3">&laquo; csv file import / export in rails 3</a>
+        <a class="basic-alignment left" href="/2012/01/csv-file-importexport-in-rails-3/" title="Previous Post: csv file import / export in rails 3">&laquo; csv file import / export in rails 3</a>
       
       
-        <a class="basic-alignment right" href="/2012/01/dynamic-bounded-parameters-and-named" title="Next Post: dynamic & bounded parameters and named routes">dynamic & bounded parameters and named routes &raquo;</a>
+        <a class="basic-alignment right" href="/2012/01/dynamic-bounded-parameters-and-named/" title="Next Post: dynamic & bounded parameters and named routes">dynamic & bounded parameters and named routes &raquo;</a>
       
     </p>
   </footer>
@@ -159,23 +159,23 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: imagemagick | Fun On Rails]]></title>
   <link href="http://sandipransing.github.io/blog/categories/imagemagick/atom.xml" rel="self"/>
   <link href="http://sandipransing.github.io/"/>
-  <updated>2014-02-09T20:36:37+05:30</updated>
+  <updated>2014-02-09T23:18:57+05:30</updated>
   <id>http://sandipransing.github.io/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -15,18 +15,18 @@
   
   <entry>
     <title type="html"><![CDATA[Paperclip image upload via URL]]></title>
-    <link href="http://sandipransing.github.io/2011/11/paperclip-image-upload-via-url"/>
+    <link href="http://sandipransing.github.io/2011/11/paperclip-image-upload-via-url/"/>
     <updated>2011-11-21T17:56:00+05:30</updated>
     <id>http://sandipransing.github.io/2011/11/paperclip-image-upload-via-url</id>
     <content type="html"><![CDATA[<div class='post'>
-Upload image via paperclip via passing URL instead of file upload <br/>  <code># Consider Print instance with image as file attachment class Print < ActiveRecord::Base   has_attached_file :image   def upload_image(url)     begin       io = open(URI.escape(url))       if io         def io.original_filename; base_uri.path.split('/').last; end         io.original_filename.blank? ? nil : io         p.image = io       end       p.save(false)     rescue Exception => e       logger.info "EXCEPTION# #{e.message}"     end   end end  </code> Text code from console<br/><console>p = Print.new url = "http://ocdevel.com/sites/ocdevel.com/files/images/rails.png" p.upload_image(url) </console></div>
+Upload image via paperclip via passing URL instead of file upload <br/>  <pre class=ruby># Consider Print instance with image as file attachment class Print < ActiveRecord::Base   has_attached_file :image   def upload_image(url)     begin       io = open(URI.escape(url))       if io         def io.original_filename; base_uri.path.split('/').last; end         io.original_filename.blank? ? nil : io         p.image = io       end       p.save(false)     rescue Exception => e       logger.info "EXCEPTION# #{e.message}"     end   end end  </pre> Text code from console<br/><pre class=ruby>p = Print.new url = "http://ocdevel.com/sites/ocdevel.com/files/images/rails.png" p.upload_image(url) </pre></div>
 
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Imagemagick/ RMagick Installation on ubuntu]]></title>
-    <link href="http://sandipransing.github.io/2010/03/imagemagick-rmagick-installation-on"/>
+    <link href="http://sandipransing.github.io/2010/03/imagemagick-rmagick-installation-on/"/>
     <updated>2010-03-23T18:11:00+05:30</updated>
     <id>http://sandipransing.github.io/2010/03/imagemagick-rmagick-installation-on</id>
     <content type="html"><![CDATA[<div class='post'>

@@ -92,7 +92,7 @@
 
 
 <div class="entry-content"><div class='post'>
-<b> Install RVM first </b><br/> <console>  bash < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvminstaller) </console> <b> rvm list known</b> <console>  # MRI Rubies   [ruby-]1.8.6-head   [ruby-]1.8.7[-p352]   [ruby-]1.9.3-head   ruby-head    # JRuby   jruby-1.2.0   jruby-head    # Rubinius   rbx-1.0.1   rbx-2.0.0pre    # Ruby Enterprise Edition   ree-1.8.6   ree-1.8.7-head </console> <b>Install ruby 1.9.3</b><br/> <console>  rvm install 1.9.3-head   rvm gemset create rails311   rvm use 1.9.3-head@rails311 &#8211;default      gem install rails -v3.1.1 &#8211;no-rdoc &#8211;no-ri      gem install heroku   gem install rb-readline </console> <b>Create new rails project </b><br/> <console>  rails new cdc -m http://railswizard.org/b22092a4358bbebb3a46.rb -J -T </console> <b>Heroku Deployment Done </b><br/> <console>  http://railsblank.heroku.com/ (production) </console> <b> Local System nginx-passenger setup</b><br/> <console>  gem install passenger   rvmsudo passenger-install-nginx-module </console> If you find pcre download error then make sure you libpcre-dev pkg installed on your system otherwise install it and re-run<br/><console>  sudo apt-get install libpcre3-dev </console> <b>Nginx Configuration</b><br/> <console>http {   passenger_root /home/sandip/.rvm/gems/ruby-1.9.3-head@rails311/gems/passenger-3.0.9;   passenger_ruby /home/sandip/.rvm/wrappers/ruby-1.9.3-head@rails311/ruby;      server {     listen 80;     server_name railsblank.local;     root /home/sandip/railsblank/public;     rails_env development;     passenger_enabled on; } </console> <b>git source code </b><br/><console>  git clone git://github.com/sandipransing/rails_blank.git </console></div>
+<b> Install RVM first </b><br/> <pre class=ruby>  bash < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvminstaller) </pre> <b> rvm list known</b> <pre class=ruby>  # MRI Rubies   [ruby-]1.8.6-head   [ruby-]1.8.7[-p352]   [ruby-]1.9.3-head   ruby-head    # JRuby   jruby-1.2.0   jruby-head    # Rubinius   rbx-1.0.1   rbx-2.0.0pre    # Ruby Enterprise Edition   ree-1.8.6   ree-1.8.7-head </pre> <b>Install ruby 1.9.3</b><br/> <pre class=ruby>  rvm install 1.9.3-head   rvm gemset create rails311   rvm use 1.9.3-head@rails311 --default      gem install rails -v3.1.1 --no-rdoc --no-ri      gem install heroku   gem install rb-readline </pre> <b>Create new rails project </b><br/> <pre class=ruby>  rails new cdc -m http://railswizard.org/b22092a4358bbebb3a46.rb -J -T </pre> <b>Heroku Deployment Done </b><br/> <pre class=ruby>  http://railsblank.heroku.com/ (production) </pre> <b> Local System nginx-passenger setup</b><br/> <pre class=ruby>  gem install passenger   rvmsudo passenger-install-nginx-module </pre> If you find pcre download error then make sure you libpcre-dev pkg installed on your system otherwise install it and re-run<br/><pre class=ruby>  sudo apt-get install libpcre3-dev </pre> <b>Nginx Configuration</b><br/> <pre class=ruby>http {   passenger_root /home/sandip/.rvm/gems/ruby-1.9.3-head@rails311/gems/passenger-3.0.9;   passenger_ruby /home/sandip/.rvm/wrappers/ruby-1.9.3-head@rails311/ruby;      server {     listen 80;     server_name railsblank.local;     root /home/sandip/railsblank/public;     rails_env development;     passenger_enabled on; } </pre> <b>git source code </b><br/><pre class=ruby>  git clone git://github.com/sandipransing/rails_blank.git </pre></div>
 </div>
 
 
@@ -129,7 +129,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2011/11/rails-311-haml-sass-jquery-coffee-rails" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2011/11/rails-311-haml-sass-jquery-coffee-rails" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2011/11/rails-311-haml-sass-jquery-coffee-rails/" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2011/11/rails-311-haml-sass-jquery-coffee-rails/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -140,10 +140,10 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2011/11/paperclip-options-aws-s3-config-and" title="Previous Post: paperclip options aws-s3 config and rails">&laquo; paperclip options aws-s3 config and rails</a>
+        <a class="basic-alignment left" href="/2011/11/paperclip-options-aws-s3-config-and/" title="Previous Post: paperclip options aws-s3 config and rails">&laquo; paperclip options aws-s3 config and rails</a>
       
       
-        <a class="basic-alignment right" href="/2011/12/multiple-resources-registrations-with" title="Next Post: Multiple resources, registrations with devise, STI and single sign sign on">Multiple resources, registrations with devise, STI and single sign sign on &raquo;</a>
+        <a class="basic-alignment right" href="/2011/12/multiple-resources-registrations-with/" title="Next Post: Multiple resources, registrations with devise, STI and single sign sign on">Multiple resources, registrations with devise, STI and single sign sign on &raquo;</a>
       
     </p>
   </footer>
@@ -159,23 +159,23 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

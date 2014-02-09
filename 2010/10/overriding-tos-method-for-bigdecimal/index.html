@@ -92,7 +92,7 @@
 
 
 <div class="entry-content"><div class='post'>
-requirement was to display decimal numbers which are having scale values present to be displayed in decimal format otherwise display them as integer.<br/><br/><b>Output expected</b><br/>12.23 => 12.23<br/>12.00 => 12<br/><br/><br/>While rendering any object on html page by default &#8220;to_s&#8221; method gets executed. So, i overwrote &#8220;to_s&#8221; method of BigDecimal class as below. <br/><br/>Anyone having better solution. Please reply with your solutions. Many thanks!<br/>Put below code in file &#8220;config/intializers/core_extensions.rb&#8221; <br/><br/><code>  class BigDecimal     alias :old_s :to_s     def to_s       return to_i.to_s if eql? to_i       self.old_s     end   end </code></div>
+requirement was to display decimal numbers which are having scale values present to be displayed in decimal format otherwise display them as integer.<br/><br/><b>Output expected</b><br/>12.23 => 12.23<br/>12.00 => 12<br/><br/><br/>While rendering any object on html page by default &#8220;to_s&#8221; method gets executed. So, i overwrote &#8220;to_s&#8221; method of BigDecimal class as below. <br/><br/>Anyone having better solution. Please reply with your solutions. Many thanks!<br/>Put below code in file &#8220;config/intializers/core_extensions.rb&#8221; <br/><br/><pre class=ruby>  class BigDecimal     alias :old_s :to_s     def to_s       return to_i.to_s if eql? to_i       self.old_s     end   end </pre></div>
 </div>
 
 
@@ -129,7 +129,7 @@ requirement was to display decimal numbers which are having scale values present
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2010/10/overriding-tos-method-for-bigdecimal" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2010/10/overriding-tos-method-for-bigdecimal" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2010/10/overriding-tos-method-for-bigdecimal/" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2010/10/overriding-tos-method-for-bigdecimal/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -140,10 +140,10 @@ requirement was to display decimal numbers which are having scale values present
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2010/10/twinkle-ff-setup-click-to-call-using" title="Previous Post: Twinkle + FF Setup (Click To Call) using telify">&laquo; Twinkle + FF Setup (Click To Call) using telify</a>
+        <a class="basic-alignment left" href="/2010/10/twinkle-ff-setup-click-to-call-using/" title="Previous Post: Twinkle + FF Setup (Click To Call) using telify">&laquo; Twinkle + FF Setup (Click To Call) using telify</a>
       
       
-        <a class="basic-alignment right" href="/2010/11/getting-started-with-heroku" title="Next Post: Getting started with heroku">Getting started with heroku &raquo;</a>
+        <a class="basic-alignment right" href="/2010/11/getting-started-with-heroku/" title="Next Post: Getting started with heroku">Getting started with heroku &raquo;</a>
       
     </p>
   </footer>
@@ -159,23 +159,23 @@ requirement was to display decimal numbers which are having scale values present
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

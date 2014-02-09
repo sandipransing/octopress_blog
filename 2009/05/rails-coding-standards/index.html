@@ -92,7 +92,7 @@
 
 
 <div class="entry-content"><div class='post'>
-<strong> IN ESSENCE: ALL CODE SHOULD BE READABLE!</strong><br/><br/># DO NOT OPTIMISE for performance - OPTIMISE FOR CLARITY OF CODE<br/><br/># STYLE: use 2 spaces for indent (not tabs)<br/><br/># STYLE: Line up hash arrows for readability<br/><br/># STYLE: put spaces around =&gt; hash arrows<br/><br/># STYLE: put spaces after &#8216;,&#8217; in method params - but none between method names and &#8216;(&#8217;<br/><br/># VIEWS: use HAML for views<br/><br/># VIEWS: break up the structure with white space to help readability - VERTICALLY TOO!<br/><br/># VIEWS STYLE: Rely on structure of page, without having to insert messages or new components&#8230;<br/><br/># LOGIC:  <strong>Rails Models should be as heavy as in logic and controllers should be lightweight as much as .</strong><br/><br/>* Example: Effect to visually highlight then drop out an existing element rather than flash a message<br/><br/>* Example: Highlight newly added row rather than a message about it<br/><br/># AVOID logic in views - they should be simple<br/><br/># Views indentation should be well formatted.<br/>not like this<br/><code><br/>&lt;% for joke in @jokes %&gt;<br/>&lt;div class="joke"&gt;<br/>&lt;p&gt;<br/>&lt;%= h(truncate(joke.joketext, 20)) %&gt;<br/>&lt;%= link_to 'Read this joke', {:action =&gt; 'show_joke', :id =&gt; joke} %&gt;<br/>&lt;/p&gt;<br/>&lt;p class="author&gt;<br/>by &lt;%= h(joke.author.full_name) %&gt;&lt;/p&gt;<br/>&lt;/div&gt;<br/>&lt;% end %&gt;</code><br/><br/>* put html generating logic into helpers<br/><br/>* instead of inline ruby logic, add to models (filtering, checking)<br/><br/># NEVER use ActiveRecord models in migrations unless you re-define them within the migration<br/><br/>* &#8230;otherwise the migration fails when you later remove/rename the AR class<br/><br/>* BETTER SOLUTION: use bootstrapping until deployed!!!<br/><br/># AJAX only for sub-components of an object, and avoid over-use<br/><br/><hr /><br/><br/><strong>CONTROLLER CODING STANDARDS<br/></strong><br/><br/>1. Before filter should be added at the top of controller.<br/><br/>2. Before filter implementation should be immediate after filter declaration<br/><br/>3. Standard rails actions<br/><br/>4. Own custom actions<br/><br/>5. Inter-related actions should be clubbed together.<br/><br/>6. please, try to use of protected, private methods and they should be declared at the bottom of page in order.<br/><br/>7. Controller Actions should be like -<br/>use 2 spaces for indent (not tabs)<br/><code><br/>def self.published_jokes<br/>find(:all, :conditions =&gt; "published = 1")<br/>end</code><br/><br/><strong>MODEL CODING STANDARDS</strong><br/><br/><code><br/>#======= HEADER SECTION=========</code><br/><code><br/># SCHEMA INFORMATION WILL BE HERE<br/># REQUIRE FILES WILL GO HERE</code><br/><br/>class Model &lt; ActiveRecord::Base<br/><br/><code> #======== TOP ===================</code><br/><code><br/># LIBRARY OR INCLUDE METHODS<br/># MODEL RELATIONSHIPS<br/># VIRTUAL ATTRIBUTES<br/># ACTIVE RECORD VALIDATIONS</code><br/><code> #======== MIDDLE ===============</code><br/><code> # CUSTOM VALIDATIONS<br/># PUBLIC METHODS</code><br/><code> #======== BASE ==================</code><br/><code> # PROTECTED METHODS<br/># PRIVATE METHODS</code><br/>end<br/><br/>Cheers !!!<br/>Sandip</div>
+<strong> IN ESSENCE: ALL CODE SHOULD BE READABLE!</strong><br/><br/># DO NOT OPTIMISE for performance - OPTIMISE FOR CLARITY OF CODE<br/><br/># STYLE: use 2 spaces for indent (not tabs)<br/><br/># STYLE: Line up hash arrows for readability<br/><br/># STYLE: put spaces around =&gt; hash arrows<br/><br/># STYLE: put spaces after &#8216;,&#8217; in method params - but none between method names and &#8216;(&#8217;<br/><br/># VIEWS: use HAML for views<br/><br/># VIEWS: break up the structure with white space to help readability - VERTICALLY TOO!<br/><br/># VIEWS STYLE: Rely on structure of page, without having to insert messages or new components&#8230;<br/><br/># LOGIC:  <strong>Rails Models should be as heavy as in logic and controllers should be lightweight as much as .</strong><br/><br/>* Example: Effect to visually highlight then drop out an existing element rather than flash a message<br/><br/>* Example: Highlight newly added row rather than a message about it<br/><br/># AVOID logic in views - they should be simple<br/><br/># Views indentation should be well formatted.<br/>not like this<br/><pre class=ruby><br/>&lt;% for joke in @jokes %&gt;<br/>&lt;div class="joke"&gt;<br/>&lt;p&gt;<br/>&lt;%= h(truncate(joke.joketext, 20)) %&gt;<br/>&lt;%= link_to 'Read this joke', {:action =&gt; 'show_joke', :id =&gt; joke} %&gt;<br/>&lt;/p&gt;<br/>&lt;p class="author&gt;<br/>by &lt;%= h(joke.author.full_name) %&gt;&lt;/p&gt;<br/>&lt;/div&gt;<br/>&lt;% end %&gt;</pre><br/><br/>* put html generating logic into helpers<br/><br/>* instead of inline ruby logic, add to models (filtering, checking)<br/><br/># NEVER use ActiveRecord models in migrations unless you re-define them within the migration<br/><br/>* &#8230;otherwise the migration fails when you later remove/rename the AR class<br/><br/>* BETTER SOLUTION: use bootstrapping until deployed!!!<br/><br/># AJAX only for sub-components of an object, and avoid over-use<br/><br/><hr /><br/><br/><strong>CONTROLLER CODING STANDARDS<br/></strong><br/><br/>1. Before filter should be added at the top of controller.<br/><br/>2. Before filter implementation should be immediate after filter declaration<br/><br/>3. Standard rails actions<br/><br/>4. Own custom actions<br/><br/>5. Inter-related actions should be clubbed together.<br/><br/>6. please, try to use of protected, private methods and they should be declared at the bottom of page in order.<br/><br/>7. Controller Actions should be like -<br/>use 2 spaces for indent (not tabs)<br/><pre class=ruby><br/>def self.published_jokes<br/>find(:all, :conditions =&gt; "published = 1")<br/>end</pre><br/><br/><strong>MODEL CODING STANDARDS</strong><br/><br/><pre class=ruby><br/>#======= HEADER SECTION=========</pre><br/><pre class=ruby><br/># SCHEMA INFORMATION WILL BE HERE<br/># REQUIRE FILES WILL GO HERE</pre><br/><br/>class Model &lt; ActiveRecord::Base<br/><br/><pre class=ruby> #======== TOP ===================</pre><br/><pre class=ruby><br/># LIBRARY OR INCLUDE METHODS<br/># MODEL RELATIONSHIPS<br/># VIRTUAL ATTRIBUTES<br/># ACTIVE RECORD VALIDATIONS</pre><br/><pre class=ruby> #======== MIDDLE ===============</pre><br/><pre class=ruby> # CUSTOM VALIDATIONS<br/># PUBLIC METHODS</pre><br/><pre class=ruby> #======== BASE ==================</pre><br/><pre class=ruby> # PROTECTED METHODS<br/># PRIVATE METHODS</pre><br/>end<br/><br/>Cheers !!!<br/>Sandip</div>
 <h2>Comments</h2>
 <div class='comments'>
 <div class='comment'>
@@ -137,7 +137,7 @@ Some more &#8230;&#8230;&#8230;.<br>http://rails.learnhub.com/lesson/5017-ruby-c
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2009/05/rails-coding-standards" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2009/05/rails-coding-standards" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2009/05/rails-coding-standards/" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2009/05/rails-coding-standards/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -148,10 +148,10 @@ Some more &#8230;&#8230;&#8230;.<br>http://rails.learnhub.com/lesson/5017-ruby-c
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2009/05/high-performance-rails-hosting" title="Previous Post: High Performance Rails Hosting">&laquo; High Performance Rails Hosting</a>
+        <a class="basic-alignment left" href="/2009/05/high-performance-rails-hosting/" title="Previous Post: High Performance Rails Hosting">&laquo; High Performance Rails Hosting</a>
       
       
-        <a class="basic-alignment right" href="/2009/05/fix-for-ruby-187-incompatibity" title="Next Post: Fix for ruby 1.8.7 incompatibity">Fix for ruby 1.8.7 incompatibity &raquo;</a>
+        <a class="basic-alignment right" href="/2009/05/fix-for-ruby-187-incompatibity/" title="Next Post: Fix for ruby 1.8.7 incompatibity">Fix for ruby 1.8.7 incompatibity &raquo;</a>
       
     </p>
   </footer>
@@ -167,23 +167,23 @@ Some more &#8230;&#8230;&#8230;.<br>http://rails.learnhub.com/lesson/5017-ruby-c
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

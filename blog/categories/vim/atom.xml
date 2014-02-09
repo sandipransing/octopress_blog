@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vim | Fun On Rails]]></title>
   <link href="http://sandipransing.github.io/blog/categories/vim/atom.xml" rel="self"/>
   <link href="http://sandipransing.github.io/"/>
-  <updated>2014-02-09T20:36:37+05:30</updated>
+  <updated>2014-02-09T23:18:57+05:30</updated>
   <id>http://sandipransing.github.io/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -15,7 +15,7 @@
   
   <entry>
     <title type="html"><![CDATA[Vim editor for ruby on rails development using rails.vim]]></title>
-    <link href="http://sandipransing.github.io/2010/02/vim-editor-for-ruby-on-rails"/>
+    <link href="http://sandipransing.github.io/2010/02/vim-editor-for-ruby-on-rails/"/>
     <updated>2010-02-19T20:20:00+05:30</updated>
     <id>http://sandipransing.github.io/2010/02/vim-editor-for-ruby-on-rails</id>
     <content type="html"><![CDATA[<div class='post'>
@@ -26,7 +26,7 @@
   
   <entry>
     <title type="html"><![CDATA[Get hand over VI / VIM editor]]></title>
-    <link href="http://sandipransing.github.io/2009/11/get-hand-over-vi-vim-editor"/>
+    <link href="http://sandipransing.github.io/2009/11/get-hand-over-vi-vim-editor/"/>
     <updated>2009-11-18T01:20:00+05:30</updated>
     <id>http://sandipransing.github.io/2009/11/get-hand-over-vi-vim-editor</id>
     <content type="html"><![CDATA[<div class='post'>
@@ -49,11 +49,11 @@ Remove blank lines in vim<br /><br />:g/^ *$/d</div>
   
   <entry>
     <title type="html"><![CDATA[vi / vim Shortcuts]]></title>
-    <link href="http://sandipransing.github.io/2009/05/vi-vim-shortcuts"/>
+    <link href="http://sandipransing.github.io/2009/05/vi-vim-shortcuts/"/>
     <updated>2009-05-22T18:23:00+05:30</updated>
     <id>http://sandipransing.github.io/2009/05/vi-vim-shortcuts</id>
     <content type="html"><![CDATA[<div class='post'>
-Open file<br/><code>vi filename</code><br/>As i am newb on linux macine, i dont know vi shortcuts.<br/>so, i am listing down shortcuts which i am getting familier. :)<br/><br/>Insert in file<br/><code>i</code><br/><br/>Exit file<br/><code>q</code><br/><br/>forced exit<br/><code>q!</code><br/><br/>save file<br/><code>wq</code><br/><br/>forced save<br/><code>wq!</code><br/><br/>Copy no of lines<br/>yy<br/><br/>Paste copied lines<br/><code>pp</code><br/><br/>Undo changes<br/><code>uu</code><br/><br/>Delete lines<br/><code>dd</code><br/><br/>To search and replace string in vi<br/><code> :%s/search_string/replacement_string/g</code><br/><br/>To find particular word in file<br/><code>?string1</code><br/><br/>If you have any quick list. please, let me know</div>
+Open file<br/><pre class=ruby>vi filename</pre><br/>As i am newb on linux macine, i dont know vi shortcuts.<br/>so, i am listing down shortcuts which i am getting familier. :)<br/><br/>Insert in file<br/><pre class=ruby>i</pre><br/><br/>Exit file<br/><pre class=ruby>q</pre><br/><br/>forced exit<br/><pre class=ruby>q!</pre><br/><br/>save file<br/><pre class=ruby>wq</pre><br/><br/>forced save<br/><pre class=ruby>wq!</pre><br/><br/>Copy no of lines<br/>yy<br/><br/>Paste copied lines<br/><pre class=ruby>pp</pre><br/><br/>Undo changes<br/><pre class=ruby>uu</pre><br/><br/>Delete lines<br/><pre class=ruby>dd</pre><br/><br/>To search and replace string in vi<br/><pre class=ruby> :%s/search_string/replacement_string/g</pre><br/><br/>To find particular word in file<br/><pre class=ruby>?string1</pre><br/><br/>If you have any quick list. please, let me know</div>
 
 
 <h2>Comments</h2>

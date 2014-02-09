@@ -92,7 +92,7 @@
 
 
 <div class="entry-content"><div class='post'>
-<b>Testing restful &amp; polymorphic resource routes on rails console</b><br />Open rails console<br /><console>rails c # In rails 3 OR ruby script/console </console><br />app object of URL <console>&gt;&gt; app<br />=&gt; #&lt;ActionController::Integration::Session:0xc164fac @result=nil, @status=nil, @accept=&#8221;text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5&#8221;, @path=nil, @request_count=0, @application=#&lt;ActionController::Dispatcher:0xc1644f8 @output=#&lt;IO:0x85e34ec&gt;&gt;, @remote_addr=&#8221;127.0.0.1&#8221;, @host=&#8221;www.example.com&#8221;, @controller=nil, @https=false, @request=nil, @headers=nil, @cookies={}, @status_message=nil, @named_routes_configured=true, @response=nil&gt;<br /></console>Root URL<br/><code>&gt;&gt; app.root_url<br />=&gt; "http://www.example.com/"<br /></code>Plural paths <code><br />&gt;&gt; app.calls_path<br />=&gt; "/calls"<br /></code>Singular routes <code><br />&gt;&gt; app.audio_call_path<br />ActionController::RoutingError: audio_call_url failed&nbsp; <br /> &gt;&gt; app.audio_call_path(1)<br />=&gt; "/calls/1/audio"<br /><br />&gt;&gt; app.audio_call_path(13)<br />=&gt; "/calls/13/audio"<br /><br />&gt;&gt; app.audio_call_path(13, :name =&gt; 'san')<br />=&gt; "/calls/13/audio?name=san"<br /></code><b>Polymorphic URLS</b><br/><console>&nbsp;app.polymorphic_path(Call.first, :action =&gt; &#8216;audio&#8217;)<br />=&gt; &#8220;/calls/253/audio&#8221;<br /><br />&gt;&gt; app.polymorphic_path(Call.new)<br />=&gt; &#8220;/calls&#8221;<br /></console><br /></div>
+<b>Testing restful &amp; polymorphic resource routes on rails console</b><br />Open rails console<br /><pre class=ruby>rails c # In rails 3 OR ruby script/console </pre><br />app object of URL <pre class=ruby>&gt;&gt; app<br />=&gt; #&lt;ActionController::Integration::Session:0xc164fac @result=nil, @status=nil, @accept="text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5", @path=nil, @request_count=0, @application=#&lt;ActionController::Dispatcher:0xc1644f8 @output=#&lt;IO:0x85e34ec&gt;&gt;, @remote_addr="127.0.0.1", @host="www.example.com", @controller=nil, @https=false, @request=nil, @headers=nil, @cookies={}, @status_message=nil, @named_routes_configured=true, @response=nil&gt;<br /></pre>Root URL<br/><pre class=ruby>&gt;&gt; app.root_url<br />=&gt; "http://www.example.com/"<br /></pre>Plural paths <pre class=ruby><br />&gt;&gt; app.calls_path<br />=&gt; "/calls"<br /></pre>Singular routes <pre class=ruby><br />&gt;&gt; app.audio_call_path<br />ActionController::RoutingError: audio_call_url failed&nbsp; <br /> &gt;&gt; app.audio_call_path(1)<br />=&gt; "/calls/1/audio"<br /><br />&gt;&gt; app.audio_call_path(13)<br />=&gt; "/calls/13/audio"<br /><br />&gt;&gt; app.audio_call_path(13, :name =&gt; 'san')<br />=&gt; "/calls/13/audio?name=san"<br /></pre><b>Polymorphic URLS</b><br/><pre class=ruby>&nbsp;app.polymorphic_path(Call.first, :action =&gt; 'audio')<br />=&gt; "/calls/253/audio"<br /><br />&gt;&gt; app.polymorphic_path(Call.new)<br />=&gt; "/calls"<br /></pre><br /></div>
 </div>
 
 
@@ -129,7 +129,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2011/01/testing-restful-polymorphic-resource" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2011/01/testing-restful-polymorphic-resource" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2011/01/testing-restful-polymorphic-resource/" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2011/01/testing-restful-polymorphic-resource/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -140,10 +140,10 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2011/01/getting-started-with-mysql-on-amazon" title="Previous Post: Getting started with MySQL on Amazon Web Services">&laquo; Getting started with MySQL on Amazon Web Services</a>
+        <a class="basic-alignment left" href="/2011/01/getting-started-with-mysql-on-amazon/" title="Previous Post: Getting started with MySQL on Amazon Web Services">&laquo; Getting started with MySQL on Amazon Web Services</a>
       
       
-        <a class="basic-alignment right" href="/2011/01/installing-and-running-cronjob-crontab" title="Next Post: Installing and running cronjob (crontab basics)">Installing and running cronjob (crontab basics) &raquo;</a>
+        <a class="basic-alignment right" href="/2011/01/installing-and-running-cronjob-crontab/" title="Next Post: Installing and running cronjob (crontab basics)">Installing and running cronjob (crontab basics) &raquo;</a>
       
     </p>
   </footer>
@@ -159,23 +159,23 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

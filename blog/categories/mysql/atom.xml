@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mysql | Fun On Rails]]></title>
   <link href="http://sandipransing.github.io/blog/categories/mysql/atom.xml" rel="self"/>
   <link href="http://sandipransing.github.io/"/>
-  <updated>2014-02-09T20:36:37+05:30</updated>
+  <updated>2014-02-09T23:18:57+05:30</updated>
   <id>http://sandipransing.github.io/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -15,7 +15,7 @@
   
   <entry>
     <title type="html"><![CDATA[Getting started with MySQL on Amazon Web Services]]></title>
-    <link href="http://sandipransing.github.io/2011/01/getting-started-with-mysql-on-amazon"/>
+    <link href="http://sandipransing.github.io/2011/01/getting-started-with-mysql-on-amazon/"/>
     <updated>2011-01-15T18:30:00+05:30</updated>
     <id>http://sandipransing.github.io/2011/01/getting-started-with-mysql-on-amazon</id>
     <content type="html"><![CDATA[<div class='post'>
@@ -26,18 +26,18 @@
   
   <entry>
     <title type="html"><![CDATA[Copy database to another database through command]]></title>
-    <link href="http://sandipransing.github.io/2010/02/copy-database-to-another-database"/>
+    <link href="http://sandipransing.github.io/2010/02/copy-database-to-another-database/"/>
     <updated>2010-02-16T16:53:00+05:30</updated>
     <id>http://sandipransing.github.io/2010/02/copy-database-to-another-database</id>
     <content type="html"><![CDATA[<div class='post'>
-<b>1. Copy One database to another database on same host </b><br/><console> mysqldump -uroot -p <source_database_name> | mysql -uroot <dest_database_name></console> <b>2. Copy database to another database on remote host</b><br/><console> mysqldump -uroot -p <source_database> | ssh host2 "mysql -uroot <dest_database>" </console></div>
+<b>1. Copy One database to another database on same host </b><br/><pre class=ruby> mysqldump -uroot -p <source_database_name> | mysql -uroot <dest_database_name></pre> <b>2. Copy database to another database on remote host</b><br/><pre class=ruby> mysqldump -uroot -p <source_database> | ssh host2 "mysql -uroot <dest_database>" </pre></div>
 
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Mysql cheatsheet]]></title>
-    <link href="http://sandipransing.github.io/2010/02/mysql-cheatsheet"/>
+    <link href="http://sandipransing.github.io/2010/02/mysql-cheatsheet/"/>
     <updated>2010-02-04T17:29:00+05:30</updated>
     <id>http://sandipransing.github.io/2010/02/mysql-cheatsheet</id>
     <content type="html"><![CDATA[<div class='post'>
@@ -48,11 +48,11 @@
   
   <entry>
     <title type="html"><![CDATA[Manual active record db connection in ruby using mysql adapter]]></title>
-    <link href="http://sandipransing.github.io/2009/11/manual-active-record-db-connection-in"/>
+    <link href="http://sandipransing.github.io/2009/11/manual-active-record-db-connection-in/"/>
     <updated>2009-11-12T20:27:00+05:30</updated>
     <id>http://sandipransing.github.io/2009/11/manual-active-record-db-connection-in</id>
     <content type="html"><![CDATA[<div class='post'>
-Below is ruby code to establish manual database connection. <br/><code>require 'active_record' ActiveRecord::Base.establish_connection(     :adapter  => "mysql",     :host     => "localhost",     :username => "root",     :password => "abcd",     :database => "funonrails"   ) </code><br/>Snippet of database.yml file <br/><code>common: &common   adapter: mysql   database: students_dev   username: root   password:   host: localhost  students_development:   <<: *common   database: students_dev  students_production:   <<: *common   database: students </code><br/>Load database configurations from yml file<br/><code>dbconfig = YAML::load(File.open('database.yml'))  ActiveRecord::Base.establish_connection( dbconfig[:students_development] ) </code><br/><b>Active Record Model & DB connection </b><br/><code>class Student < ActiveRecord::Base   establish_connection "students_production"   set_table_name "student"   set_primary_key "stud_number" end </code></div>
+Below is ruby code to establish manual database connection. <br/><pre class=ruby>require 'active_record' ActiveRecord::Base.establish_connection(     :adapter  => "mysql",     :host     => "localhost",     :username => "root",     :password => "abcd",     :database => "funonrails"   ) </pre><br/>Snippet of database.yml file <br/><pre class=ruby>common: &common   adapter: mysql   database: students_dev   username: root   password:   host: localhost  students_development:   <<: *common   database: students_dev  students_production:   <<: *common   database: students </pre><br/>Load database configurations from yml file<br/><pre class=ruby>dbconfig = YAML::load(File.open('database.yml'))  ActiveRecord::Base.establish_connection( dbconfig[:students_development] ) </pre><br/><b>Active Record Model & DB connection </b><br/><pre class=ruby>class Student < ActiveRecord::Base   establish_connection "students_production"   set_table_name "student"   set_primary_key "stud_number" end </pre></div>
 
 
 <h2>Comments</h2>

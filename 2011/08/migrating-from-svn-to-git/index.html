@@ -92,7 +92,7 @@
 
 
 <div class="entry-content"><div class='post'>
-<b>Migrating from svn to git </b><br/> <b>1. Install git-svn</b><br/><console>sudo apt-get install git-svn </console> <b>2. Clone svn repositoy </b><console>git svn clone -s svn://server/project_myt/trunk proj </console> <b>To add svn users and git users mapping</b><br/><b>Create author-file</b><br/><console>#vi authorsfile  sandip = sandipransing <sandip@funonrails.com>amit = amitk <amit@gmail.com>root = sandipransing <sandip@funonrails.com></console><br/><console>git svn &#8211;author-file=authorfile clone -s svn://server/project_myt/trunk proj </console><b>3. Add git repository url</b><br/><console>cd proj git remote add git@github.com:USERNAME/project.git </console><b>4. Push repository to git</b><br/><console>git push origin master </console> <b>To do svn pull for latest changes</b><br/><console>git svn rebase </console></div>
+<b>Migrating from svn to git </b><br/> <b>1. Install git-svn</b><br/><pre class=ruby>sudo apt-get install git-svn </pre> <b>2. Clone svn repositoy </b><pre class=ruby>git svn clone -s svn://server/project_myt/trunk proj </pre> <b>To add svn users and git users mapping</b><br/><b>Create author-file</b><br/><pre class=ruby>#vi authorsfile  sandip = sandipransing <sandip@funonrails.com>amit = amitk <amit@gmail.com>root = sandipransing <sandip@funonrails.com></pre><br/><pre class=ruby>git svn --author-file=authorfile clone -s svn://server/project_myt/trunk proj </pre><b>3. Add git repository url</b><br/><pre class=ruby>cd proj git remote add git@github.com:USERNAME/project.git </pre><b>4. Push repository to git</b><br/><pre class=ruby>git push origin master </pre> <b>To do svn pull for latest changes</b><br/><pre class=ruby>git svn rebase </pre></div>
 </div>
 
 
@@ -129,7 +129,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2011/08/migrating-from-svn-to-git" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2011/08/migrating-from-svn-to-git" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2011/08/migrating-from-svn-to-git/" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2011/08/migrating-from-svn-to-git/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -140,10 +140,10 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2011/07/how-to-get-started-with-tata-photon-on" title="Previous Post: How to get started with tata photon on ubuntu machine">&laquo; How to get started with tata photon on ubuntu machine</a>
+        <a class="basic-alignment left" href="/2011/07/how-to-get-started-with-tata-photon-on/" title="Previous Post: How to get started with tata photon on ubuntu machine">&laquo; How to get started with tata photon on ubuntu machine</a>
       
       
-        <a class="basic-alignment right" href="/2011/09/print-particular-div-inside-html-page" title="Next Post: Print particular DIV inside HTML Page">Print particular DIV inside HTML Page &raquo;</a>
+        <a class="basic-alignment right" href="/2011/09/print-particular-div-inside-html-page/" title="Next Post: Print particular DIV inside HTML Page">Print particular DIV inside HTML Page &raquo;</a>
       
     </p>
   </footer>
@@ -159,23 +159,23 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

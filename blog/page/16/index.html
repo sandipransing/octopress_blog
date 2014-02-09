@@ -9,7 +9,7 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="IN ESSENCE: ALL CODE SHOULD BE READABLE!# DO NOT OPTIMISE for performance - OPTIMISE FOR CLARITY OF CODE# STYLE: use 2 spaces for indent (not tabs &hellip;">
+  <meta name="description" content="Execute following commands in order to install ruby and rails.sudo apt-get install build-essentialBelow command will install all necessary packages. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,7 +71,89 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2009/05/rails-coding-standards">Rails Coding Standards</a></h1>
+      <h1 class="entry-title"><a href="/2009/05/ruby-187-and-rails-installation-on/">Ruby 1.8.7 and Rails Installation on Ubuntu Interpid</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-13T20:02:00+05:30" pubdate data-updated="true">May 13<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+Execute following commands in order to install ruby and rails.<br/><br/><pre class=ruby>sudo apt-get install build-essential</pre><br/><br/>Below command will install all necessary packages.<br/>if you dont want any remove it from command.<br/><br/><pre class=ruby>sudo apt-get install ruby ri rdoc mysql-server libmysql-ruby ruby1.8-dev irb1.8 libdbd-mysql-perl libdbi-perl libmysql-ruby1.8 libmysqlclient15off libnet-daemon-perl libplrpc-perl libreadline-ruby1.8 libruby1.8 mysql-client-5.0 mysql-common mysql-server-5.0 rdoc1.8 ri1.8 ruby1.8 irb libopenssl-ruby libopenssl-ruby1.8 libterm-readkey-perl psmisc</pre><br/><br/>Gem Installation<br/>Please find latest stable gem version on rubyforge.<br/><br/><pre class=ruby>wget http://rubyforge.org/frs/download.php/45905/rubygems-1.3.1.tgz<br/>tar xvzf rubygems-1.3.1.tgz<br/>cd rubygems-1.3.1<br/>sudo ruby setup.rb</pre><br/><br/>And last to install rails without documentation<br/><br/><pre class=ruby>sudo gem install rails --no-rdoc --no-ri</pre><br/><br/>and finally rails server, you can install apache mongrel, nginx + thin, whichever you feel suitable.<br/><br/>for mongrel install<br/><br/><pre class=ruby>sudu gem install mongrel</pre></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Anonymous</div>
+<div class='content'>
+Very helpful, thank you!</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/fix-for-ruby-187-incompatibity/">Fix for Ruby 1.8.7 Incompatibity</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-13T19:22:00+05:30" pubdate data-updated="true">May 13<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+Last week i moved from ruby version 1.8.6 to 1.8.7.<br/>then over a week i found that my 1.2.3 and applications developed in ruby 1.8.6 are not working in ruby 1.8.7.<br/><br/>From lot of search on google, i found that its issue with ruby 1.8.7.<br/><br/>Then, i started searching fix / solution for this incompatibity.<br/>And, Finally i got solution.<br/><br/>We just need to fix file delegate.rb<br/>here is fix<br/><br/><pre class=ruby><strong>Diff of /branches/ruby_1_8_7/lib/delegate.rb</strong></pre><br/><br/><pre class=ruby><pre>--- branches/ruby_1_8_7/lib/delegate.rb 2008/05/31 15:17:53 16732<br/>+++ branches/ruby_1_8_7/lib/delegate.rb 2008/06/02 10:52:07 16756<br/>@@ -163,9 +163,9 @@<br/>   # Checks for a method provided by this the delegate object by fowarding the <br/><br/>   # call through \_\_getobj\_\_.<br/>   # <br/>-  def respond_to?(m)<br/>+  def respond_to?(m, include_private = false)<br/>     return true if super<br/>-    return self.__getobj__.respond_to?(m)<br/>+    return self.__getobj__.respond_to?(m, include_private)<br/><br/>   end<br/><br/>   #<br/>@@ -270,9 +270,9 @@<br/>       end<br/>       @_dc_obj.__send__(m, *args)<br/>     end<br/>-    def respond_to?(m)  # :nodoc:<br/>+    def respond_to?(m, include_private = false)  # :nodoc:<br/>       return true if super<br/><br/>-      return @_dc_obj.respond_to?(m)<br/>+      return @_dc_obj.respond_to?(m, include_private)<br/>     end<br/>     def __getobj__  # :nodoc:<br/>       @_dc_obj</pre></pre><br/>You have to make necessary changes and you are ready to work with ruby 1.8.7.<br/>need not downgrade ruby version :)<br/><br/>for Hash error<br/><br/>Add following line in config/environment.rb<br/><pre class=ruby> unless '1.9'.respond_to?(:force_encoding)<br/>     String.class_eval do<br/>       begin<br/>         remove_method :chars<br/>       rescue NameError<br/>         # OK<br/>       end<br/>     end<br/>   end</pre><br/><br/>Cheers !<br/><br/>Sandip</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/rails-coding-standards/">Rails Coding Standards</a></h1>
     
     
       <p class="meta">
@@ -95,7 +177,7 @@
 
 
   <div class="entry-content"><div class='post'>
-<strong> IN ESSENCE: ALL CODE SHOULD BE READABLE!</strong><br/><br/># DO NOT OPTIMISE for performance - OPTIMISE FOR CLARITY OF CODE<br/><br/># STYLE: use 2 spaces for indent (not tabs)<br/><br/># STYLE: Line up hash arrows for readability<br/><br/># STYLE: put spaces around =&gt; hash arrows<br/><br/># STYLE: put spaces after &#8216;,&#8217; in method params - but none between method names and &#8216;(&#8217;<br/><br/># VIEWS: use HAML for views<br/><br/># VIEWS: break up the structure with white space to help readability - VERTICALLY TOO!<br/><br/># VIEWS STYLE: Rely on structure of page, without having to insert messages or new components&#8230;<br/><br/># LOGIC:  <strong>Rails Models should be as heavy as in logic and controllers should be lightweight as much as .</strong><br/><br/>* Example: Effect to visually highlight then drop out an existing element rather than flash a message<br/><br/>* Example: Highlight newly added row rather than a message about it<br/><br/># AVOID logic in views - they should be simple<br/><br/># Views indentation should be well formatted.<br/>not like this<br/><code><br/>&lt;% for joke in @jokes %&gt;<br/>&lt;div class="joke"&gt;<br/>&lt;p&gt;<br/>&lt;%= h(truncate(joke.joketext, 20)) %&gt;<br/>&lt;%= link_to 'Read this joke', {:action =&gt; 'show_joke', :id =&gt; joke} %&gt;<br/>&lt;/p&gt;<br/>&lt;p class="author&gt;<br/>by &lt;%= h(joke.author.full_name) %&gt;&lt;/p&gt;<br/>&lt;/div&gt;<br/>&lt;% end %&gt;</code><br/><br/>* put html generating logic into helpers<br/><br/>* instead of inline ruby logic, add to models (filtering, checking)<br/><br/># NEVER use ActiveRecord models in migrations unless you re-define them within the migration<br/><br/>* &#8230;otherwise the migration fails when you later remove/rename the AR class<br/><br/>* BETTER SOLUTION: use bootstrapping until deployed!!!<br/><br/># AJAX only for sub-components of an object, and avoid over-use<br/><br/><hr /><br/><br/><strong>CONTROLLER CODING STANDARDS<br/></strong><br/><br/>1. Before filter should be added at the top of controller.<br/><br/>2. Before filter implementation should be immediate after filter declaration<br/><br/>3. Standard rails actions<br/><br/>4. Own custom actions<br/><br/>5. Inter-related actions should be clubbed together.<br/><br/>6. please, try to use of protected, private methods and they should be declared at the bottom of page in order.<br/><br/>7. Controller Actions should be like -<br/>use 2 spaces for indent (not tabs)<br/><code><br/>def self.published_jokes<br/>find(:all, :conditions =&gt; "published = 1")<br/>end</code><br/><br/><strong>MODEL CODING STANDARDS</strong><br/><br/><code><br/>#======= HEADER SECTION=========</code><br/><code><br/># SCHEMA INFORMATION WILL BE HERE<br/># REQUIRE FILES WILL GO HERE</code><br/><br/>class Model &lt; ActiveRecord::Base<br/><br/><code> #======== TOP ===================</code><br/><code><br/># LIBRARY OR INCLUDE METHODS<br/># MODEL RELATIONSHIPS<br/># VIRTUAL ATTRIBUTES<br/># ACTIVE RECORD VALIDATIONS</code><br/><code> #======== MIDDLE ===============</code><br/><code> # CUSTOM VALIDATIONS<br/># PUBLIC METHODS</code><br/><code> #======== BASE ==================</code><br/><code> # PROTECTED METHODS<br/># PRIVATE METHODS</code><br/>end<br/><br/>Cheers !!!<br/>Sandip</div>
+<strong> IN ESSENCE: ALL CODE SHOULD BE READABLE!</strong><br/><br/># DO NOT OPTIMISE for performance - OPTIMISE FOR CLARITY OF CODE<br/><br/># STYLE: use 2 spaces for indent (not tabs)<br/><br/># STYLE: Line up hash arrows for readability<br/><br/># STYLE: put spaces around =&gt; hash arrows<br/><br/># STYLE: put spaces after &#8216;,&#8217; in method params - but none between method names and &#8216;(&#8217;<br/><br/># VIEWS: use HAML for views<br/><br/># VIEWS: break up the structure with white space to help readability - VERTICALLY TOO!<br/><br/># VIEWS STYLE: Rely on structure of page, without having to insert messages or new components&#8230;<br/><br/># LOGIC:  <strong>Rails Models should be as heavy as in logic and controllers should be lightweight as much as .</strong><br/><br/>* Example: Effect to visually highlight then drop out an existing element rather than flash a message<br/><br/>* Example: Highlight newly added row rather than a message about it<br/><br/># AVOID logic in views - they should be simple<br/><br/># Views indentation should be well formatted.<br/>not like this<br/><pre class=ruby><br/>&lt;% for joke in @jokes %&gt;<br/>&lt;div class="joke"&gt;<br/>&lt;p&gt;<br/>&lt;%= h(truncate(joke.joketext, 20)) %&gt;<br/>&lt;%= link_to 'Read this joke', {:action =&gt; 'show_joke', :id =&gt; joke} %&gt;<br/>&lt;/p&gt;<br/>&lt;p class="author&gt;<br/>by &lt;%= h(joke.author.full_name) %&gt;&lt;/p&gt;<br/>&lt;/div&gt;<br/>&lt;% end %&gt;</pre><br/><br/>* put html generating logic into helpers<br/><br/>* instead of inline ruby logic, add to models (filtering, checking)<br/><br/># NEVER use ActiveRecord models in migrations unless you re-define them within the migration<br/><br/>* &#8230;otherwise the migration fails when you later remove/rename the AR class<br/><br/>* BETTER SOLUTION: use bootstrapping until deployed!!!<br/><br/># AJAX only for sub-components of an object, and avoid over-use<br/><br/><hr /><br/><br/><strong>CONTROLLER CODING STANDARDS<br/></strong><br/><br/>1. Before filter should be added at the top of controller.<br/><br/>2. Before filter implementation should be immediate after filter declaration<br/><br/>3. Standard rails actions<br/><br/>4. Own custom actions<br/><br/>5. Inter-related actions should be clubbed together.<br/><br/>6. please, try to use of protected, private methods and they should be declared at the bottom of page in order.<br/><br/>7. Controller Actions should be like -<br/>use 2 spaces for indent (not tabs)<br/><pre class=ruby><br/>def self.published_jokes<br/>find(:all, :conditions =&gt; "published = 1")<br/>end</pre><br/><br/><strong>MODEL CODING STANDARDS</strong><br/><br/><pre class=ruby><br/>#======= HEADER SECTION=========</pre><br/><pre class=ruby><br/># SCHEMA INFORMATION WILL BE HERE<br/># REQUIRE FILES WILL GO HERE</pre><br/><br/>class Model &lt; ActiveRecord::Base<br/><br/><pre class=ruby> #======== TOP ===================</pre><br/><pre class=ruby><br/># LIBRARY OR INCLUDE METHODS<br/># MODEL RELATIONSHIPS<br/># VIRTUAL ATTRIBUTES<br/># ACTIVE RECORD VALIDATIONS</pre><br/><pre class=ruby> #======== MIDDLE ===============</pre><br/><pre class=ruby> # CUSTOM VALIDATIONS<br/># PUBLIC METHODS</pre><br/><pre class=ruby> #======== BASE ==================</pre><br/><pre class=ruby> # PROTECTED METHODS<br/># PRIVATE METHODS</pre><br/>end<br/><br/>Cheers !!!<br/>Sandip</div>
 <h2>Comments</h2>
 <div class='comments'>
 <div class='comment'>
@@ -116,7 +198,7 @@ Some more &#8230;&#8230;&#8230;.<br>http://rails.learnhub.com/lesson/5017-ruby-c
       
   <header>
     
-      <h1 class="entry-title"><a href="/2009/05/high-performance-rails-hosting">High Performance Rails Hosting</a></h1>
+      <h1 class="entry-title"><a href="/2009/05/high-performance-rails-hosting/">High Performance Rails Hosting</a></h1>
     
     
       <p class="meta">
@@ -161,7 +243,7 @@ There are lot of rails hosting, like wired tree,&#8230;, <br/>i am still in sear
       
   <header>
     
-      <h1 class="entry-title"><a href="/2009/05/awesome-working-with-rails-console-and">Awesome: Working With the Rails Console and All the Tricks</a></h1>
+      <h1 class="entry-title"><a href="/2009/05/awesome-working-with-rails-console-and/">Awesome: Working With the Rails Console and All the Tricks</a></h1>
     
     
       <p class="meta">
@@ -185,7 +267,7 @@ There are lot of rails hosting, like wired tree,&#8230;, <br/>i am still in sear
 
 
   <div class="entry-content"><div class='post'>
-Testing your active record methods using script/console<br/><br/>If you are using windows, you start the console by using this command:<br/><br/><code>ruby script\console</code><br/>Linux:<br/><br/><code>./script/console</code><br/><br/>Just use the following command whenever you make changes to your model objects:<br/><br/><code>reload!</code><br/><br/>Instead of accessing your MySQL database with<br/><br/><code>mysql -u  -p</code><br/><br/>You can instead do<br/><br/><code>script/dbconsole</code><br/><br/>and if you database has a password, just do<br/><br/><code>script/dbconsole -p</code><br/><br/><code><br/>% script/dbconsole     # connect to development database (or $RAILS_ENV)<br/>% script/dbconsole production    # connect to production database</code><br/><br/>Cheers !<br/><br/><a href="http://sandip.sosblog.com">$@ndip</a></div>
+Testing your active record methods using script/console<br/><br/>If you are using windows, you start the console by using this command:<br/><br/><pre class=ruby>ruby script\console</pre><br/>Linux:<br/><br/><pre class=ruby>./script/console</pre><br/><br/>Just use the following command whenever you make changes to your model objects:<br/><br/><pre class=ruby>reload!</pre><br/><br/>Instead of accessing your MySQL database with<br/><br/><pre class=ruby>mysql -u  -p</pre><br/><br/>You can instead do<br/><br/><pre class=ruby>script/dbconsole</pre><br/><br/>and if you database has a password, just do<br/><br/><pre class=ruby>script/dbconsole -p</pre><br/><br/><pre class=ruby><br/>% script/dbconsole     # connect to development database (or $RAILS_ENV)<br/>% script/dbconsole production    # connect to production database</pre><br/><br/>Cheers !<br/><br/><a href="http://sandip.sosblog.com">$@ndip</a></div>
 <h2>Comments</h2>
 <div class='comments'>
 <div class='comment'>
@@ -206,7 +288,7 @@ Testing your active record methods using script/console<br/><br/>If you are usin
       
   <header>
     
-      <h1 class="entry-title"><a href="/2009/05/using-rails-acts-as-taggable-on-plugin">Using Rails Acts as Taggable on Plugin</a></h1>
+      <h1 class="entry-title"><a href="/2009/05/using-rails-acts-as-taggable-on-plugin/">Using Rails Acts as Taggable on Plugin</a></h1>
     
     
       <p class="meta">
@@ -230,7 +312,7 @@ Testing your active record methods using script/console<br/><br/>If you are usin
 
 
   <div class="entry-content"><div class='post'>
-A tagging plugin for Rails applications that allows for custom tagging along dynamic contexts.<br/><br/>Plugin Installation<br/><br/><code>script/plugin install git://github.com/mbleigh/acts-as-taggable-on.git</code><br/><br/>Gem Installation<br/><br/><br/><code>gem install mbleigh-acts-as-taggable-on --source http://gems.github.com</code><br/><br/><br/>Auto Install<br/>include following line in environment.rb<br/><br/><code>config.gem "mbleigh-acts-as-taggable-on", :source =&gt; "http://gems.github.com", :lib =&gt; "acts-as-taggable-on"</code><br/><br/><br/>Post Installation (Rails)<br/><code><br/>1. script/generate acts_as_taggable_on_migration<br/>2. rake db:migrate<br/></code><br/><br/>Usage<br/>Add following line in your model for which you wanted to be tagged.<br/><br/><code>acts_as_taggable_on :tags</code><br/><br/>Example<br/><br/><code>class Post &lt; ActiveRecord::Base<br/>  acts_as_taggable_on :tags<br/>end</code><br/><br/>In your View for Post<br/><code><br/><br/></code><br/><br/>In your controller create action<br/><br/><code>@post = Post.new (params[:post])<br/># Or just hardcode to test<br/>@post.tag_list ="awesome, slick, hefty"   <br/>@post.save<br/></code><br/><br/>What are the methods provided ??<br/><br/><code>@post.tag_list = "awesome, slick, hefty"   <br/><br/>Post.tagged_with("awesome", :on =&gt; :tags) # =&gt; [@post1, @post2]</code><br/><br/><code>Post.tag_counts # =&gt; [,...]</code><br/><br/>Named Scope<br/><code><br/>class Post  "created_at DESC"<br/>end</code><br/><br/><code>Post.tagged_with("awesome").by_creation</code><br/><br/>Pagination can be added on list of tags using will_paginate plugin<br/><code><br/>List Of Tags .paginate(:page =&gt; params[:page], :per_page =&gt; 20)</code><br/><code><br/>@post.find_related_tags # =&gt; will give related posts having related tags. [ @post1, @post2, ...]</code><br/><br/><br/>Tag Owners<br/><br/><code>class User &lt; ActiveRecord::Base<br/>  acts_as_tagger<br/>end</code><br/><br/><br/><code>class Post &lt; ActiveRecord::Base<br/>  acts_as_taggable_on :tags<br/>end</code><br/><code><br/>@some_user.tag(@some_post, :with =&gt; "paris, normandy", :on =&gt; :tags)<br/>@some_user.owned_taggings<br/>@some_user.owned_tags<br/>@some_post.tags_from(@some_user)</code><br/><br/><br/>Cheers !<br/>$@ndip</div>
+A tagging plugin for Rails applications that allows for custom tagging along dynamic contexts.<br/><br/>Plugin Installation<br/><br/><pre class=ruby>script/plugin install git://github.com/mbleigh/acts-as-taggable-on.git</pre><br/><br/>Gem Installation<br/><br/><br/><pre class=ruby>gem install mbleigh-acts-as-taggable-on --source http://gems.github.com</pre><br/><br/><br/>Auto Install<br/>include following line in environment.rb<br/><br/><pre class=ruby>config.gem "mbleigh-acts-as-taggable-on", :source =&gt; "http://gems.github.com", :lib =&gt; "acts-as-taggable-on"</pre><br/><br/><br/>Post Installation (Rails)<br/><pre class=ruby><br/>1. script/generate acts_as_taggable_on_migration<br/>2. rake db:migrate<br/></pre><br/><br/>Usage<br/>Add following line in your model for which you wanted to be tagged.<br/><br/><pre class=ruby>acts_as_taggable_on :tags</pre><br/><br/>Example<br/><br/><pre class=ruby>class Post &lt; ActiveRecord::Base<br/>  acts_as_taggable_on :tags<br/>end</pre><br/><br/>In your View for Post<br/><pre class=ruby><br/><br/></pre><br/><br/>In your controller create action<br/><br/><pre class=ruby>@post = Post.new (params[:post])<br/># Or just hardcode to test<br/>@post.tag_list ="awesome, slick, hefty"   <br/>@post.save<br/></pre><br/><br/>What are the methods provided ??<br/><br/><pre class=ruby>@post.tag_list = "awesome, slick, hefty"   <br/><br/>Post.tagged_with("awesome", :on =&gt; :tags) # =&gt; [@post1, @post2]</pre><br/><br/><pre class=ruby>Post.tag_counts # =&gt; [,...]</pre><br/><br/>Named Scope<br/><pre class=ruby><br/>class Post  "created_at DESC"<br/>end</pre><br/><br/><pre class=ruby>Post.tagged_with("awesome").by_creation</pre><br/><br/>Pagination can be added on list of tags using will_paginate plugin<br/><pre class=ruby><br/>List Of Tags .paginate(:page =&gt; params[:page], :per_page =&gt; 20)</pre><br/><pre class=ruby><br/>@post.find_related_tags # =&gt; will give related posts having related tags. [ @post1, @post2, ...]</pre><br/><br/><br/>Tag Owners<br/><br/><pre class=ruby>class User &lt; ActiveRecord::Base<br/>  acts_as_tagger<br/>end</pre><br/><br/><br/><pre class=ruby>class Post &lt; ActiveRecord::Base<br/>  acts_as_taggable_on :tags<br/>end</pre><br/><pre class=ruby><br/>@some_user.tag(@some_post, :with =&gt; "paris, normandy", :on =&gt; :tags)<br/>@some_user.owned_taggings<br/>@some_user.owned_tags<br/>@some_post.tags_from(@some_user)</pre><br/><br/><br/>Cheers !<br/>$@ndip</div>
 <h2>Comments</h2>
 <div class='comments'>
 <div class='comment'>
@@ -261,23 +343,23 @@ A tagging plugin for Rails applications that allows for custom tagging along dyn
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

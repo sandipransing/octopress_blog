@@ -92,7 +92,7 @@
 
 
 <div class="entry-content"><div class='post'>
-Below is ruby code to establish manual database connection. <br/><code>require 'active_record' ActiveRecord::Base.establish_connection(     :adapter  => "mysql",     :host     => "localhost",     :username => "root",     :password => "abcd",     :database => "funonrails"   ) </code><br/>Snippet of database.yml file <br/><code>common: &common   adapter: mysql   database: students_dev   username: root   password:   host: localhost  students_development:   <<: *common   database: students_dev  students_production:   <<: *common   database: students </code><br/>Load database configurations from yml file<br/><code>dbconfig = YAML::load(File.open('database.yml'))  ActiveRecord::Base.establish_connection( dbconfig[:students_development] ) </code><br/><b>Active Record Model & DB connection </b><br/><code>class Student < ActiveRecord::Base   establish_connection "students_production"   set_table_name "student"   set_primary_key "stud_number" end </code></div>
+Below is ruby code to establish manual database connection. <br/><pre class=ruby>require 'active_record' ActiveRecord::Base.establish_connection(     :adapter  => "mysql",     :host     => "localhost",     :username => "root",     :password => "abcd",     :database => "funonrails"   ) </pre><br/>Snippet of database.yml file <br/><pre class=ruby>common: &common   adapter: mysql   database: students_dev   username: root   password:   host: localhost  students_development:   <<: *common   database: students_dev  students_production:   <<: *common   database: students </pre><br/>Load database configurations from yml file<br/><pre class=ruby>dbconfig = YAML::load(File.open('database.yml'))  ActiveRecord::Base.establish_connection( dbconfig[:students_development] ) </pre><br/><b>Active Record Model & DB connection </b><br/><pre class=ruby>class Student < ActiveRecord::Base   establish_connection "students_production"   set_table_name "student"   set_primary_key "stud_number" end </pre></div>
 <h2>Comments</h2>
 <div class='comments'>
 <div class='comment'>
@@ -142,7 +142,7 @@ getting for the code above uninitialized constant YAML (NameError)<br /><br />wh
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2009/11/manual-active-record-db-connection-in" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2009/11/manual-active-record-db-connection-in" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2009/11/manual-active-record-db-connection-in/" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2009/11/manual-active-record-db-connection-in/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -153,10 +153,10 @@ getting for the code above uninitialized constant YAML (NameError)<br /><br />wh
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2009/11/writing-rake-task-in-rails-with" title="Previous Post: Writing rake task in rails with namespace, parameters">&laquo; Writing rake task in rails with namespace, parameters</a>
+        <a class="basic-alignment left" href="/2009/11/writing-rake-task-in-rails-with/" title="Previous Post: Writing rake task in rails with namespace, parameters">&laquo; Writing rake task in rails with namespace, parameters</a>
       
       
-        <a class="basic-alignment right" href="/2009/11/how-to-remove-extra-spaces-in-ruby" title="Next Post: How to remove extra spaces in ruby strings">How to remove extra spaces in ruby strings &raquo;</a>
+        <a class="basic-alignment right" href="/2009/11/how-to-remove-extra-spaces-in-ruby/" title="Next Post: How to remove extra spaces in ruby strings">How to remove extra spaces in ruby strings &raquo;</a>
       
     </p>
   </footer>
@@ -172,23 +172,23 @@ getting for the code above uninitialized constant YAML (NameError)<br /><br />wh
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

@@ -92,7 +92,7 @@
 
 
 <div class="entry-content"><div class='post'>
-If your application is currently on any version of Rails 2.1.x, The following changes needs to be done for upgrading your application to Rails 2.3.11<br /><br />1. First install Rails version 2.3.11<br /><code><br />gem install rails -v2.3.11<br /></code><br /><br />2. Freeze app ruby gems<br /><code><br />rake rails:freeze:gems<br /></code><br />Hopefully it should work for you but it gave me following error <br /><code><br />undefined method `manage_gems' for Gem:Module <br /></code><br /><br />3. Create sample rails 2.3.11 app<br /><code><br />rails _2.3.11_ testsapp<br /></code><br /><br />Now, Copy all missing &#8220;config/initializers/*&#8221; files from new &#8220;testapp to the application that to be upgraded.<br /><code><br />cp testapp/config/initializers/* config/initializers<br /></code><br /><br />4. Change Rails version inside <i>environment.rb</i> to <i>Rails 2.3.11</i><br /><code> <br /># Specifies gem version of Rails to use when vendor/rails is not present <br />RAILS_GEM_VERSION = '2.3.11'<br /></code><br /><br />5. Rename <i>app/controllers/application.rb</i> file to <i>app/controllers/application_controller.rb</i><br /><br /><b>OR</b><br /><br /><code><br />rails:update:application_controller<br /></code><br /><br />6. Start rails server and fix the issues one by one.<br /><code><br />ruby script/server<br /></code></div>
+If your application is currently on any version of Rails 2.1.x, The following changes needs to be done for upgrading your application to Rails 2.3.11<br /><br />1. First install Rails version 2.3.11<br /><pre class=ruby><br />gem install rails -v2.3.11<br /></pre><br /><br />2. Freeze app ruby gems<br /><pre class=ruby><br />rake rails:freeze:gems<br /></pre><br />Hopefully it should work for you but it gave me following error <br /><pre class=ruby><br />undefined method `manage_gems' for Gem:Module <br /></pre><br /><br />3. Create sample rails 2.3.11 app<br /><pre class=ruby><br />rails _2.3.11_ testsapp<br /></pre><br /><br />Now, Copy all missing &#8220;config/initializers/*&#8221; files from new &#8220;testapp to the application that to be upgraded.<br /><pre class=ruby><br />cp testapp/config/initializers/* config/initializers<br /></pre><br /><br />4. Change Rails version inside <i>environment.rb</i> to <i>Rails 2.3.11</i><br /><pre class=ruby> <br /># Specifies gem version of Rails to use when vendor/rails is not present <br />RAILS_GEM_VERSION = '2.3.11'<br /></pre><br /><br />5. Rename <i>app/controllers/application.rb</i> file to <i>app/controllers/application_controller.rb</i><br /><br /><b>OR</b><br /><br /><pre class=ruby><br />rails:update:application_controller<br /></pre><br /><br />6. Start rails server and fix the issues one by one.<br /><pre class=ruby><br />ruby script/server<br /></pre></div>
 </div>
 
 
@@ -129,7 +129,7 @@ If your application is currently on any version of Rails 2.1.x, The following ch
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2012/04/upgrading-from-rails-21x-to-rails-2311" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2012/04/upgrading-from-rails-21x-to-rails-2311" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2012/04/upgrading-from-rails-21x-to-rails-2311/" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2012/04/upgrading-from-rails-21x-to-rails-2311/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -140,10 +140,10 @@ If your application is currently on any version of Rails 2.1.x, The following ch
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/02/ruby-enumerable-toproc-ampersond-colon" title="Previous Post: ruby enumerable & to_proc (ampersond & symbol shortcut)">&laquo; ruby enumerable & to_proc (ampersond & symbol shortcut)</a>
+        <a class="basic-alignment left" href="/2012/02/ruby-enumerable-toproc-ampersond-colon/" title="Previous Post: ruby enumerable & to_proc (ampersond & symbol shortcut)">&laquo; ruby enumerable & to_proc (ampersond & symbol shortcut)</a>
       
       
-        <a class="basic-alignment right" href="/2012/10/dynamic-conditions-to-rails-associations" title="Next Post: Dynamic conditions to rails associations">Dynamic conditions to rails associations &raquo;</a>
+        <a class="basic-alignment right" href="/2012/10/dynamic-conditions-to-rails-associations/" title="Next Post: Dynamic conditions to rails associations">Dynamic conditions to rails associations &raquo;</a>
       
     </p>
   </footer>
@@ -159,23 +159,23 @@ If your application is currently on any version of Rails 2.1.x, The following ch
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

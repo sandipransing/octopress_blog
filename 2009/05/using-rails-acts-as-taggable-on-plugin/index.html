@@ -92,7 +92,7 @@
 
 
 <div class="entry-content"><div class='post'>
-A tagging plugin for Rails applications that allows for custom tagging along dynamic contexts.<br/><br/>Plugin Installation<br/><br/><code>script/plugin install git://github.com/mbleigh/acts-as-taggable-on.git</code><br/><br/>Gem Installation<br/><br/><br/><code>gem install mbleigh-acts-as-taggable-on --source http://gems.github.com</code><br/><br/><br/>Auto Install<br/>include following line in environment.rb<br/><br/><code>config.gem "mbleigh-acts-as-taggable-on", :source =&gt; "http://gems.github.com", :lib =&gt; "acts-as-taggable-on"</code><br/><br/><br/>Post Installation (Rails)<br/><code><br/>1. script/generate acts_as_taggable_on_migration<br/>2. rake db:migrate<br/></code><br/><br/>Usage<br/>Add following line in your model for which you wanted to be tagged.<br/><br/><code>acts_as_taggable_on :tags</code><br/><br/>Example<br/><br/><code>class Post &lt; ActiveRecord::Base<br/>  acts_as_taggable_on :tags<br/>end</code><br/><br/>In your View for Post<br/><code><br/><br/></code><br/><br/>In your controller create action<br/><br/><code>@post = Post.new (params[:post])<br/># Or just hardcode to test<br/>@post.tag_list ="awesome, slick, hefty"   <br/>@post.save<br/></code><br/><br/>What are the methods provided ??<br/><br/><code>@post.tag_list = "awesome, slick, hefty"   <br/><br/>Post.tagged_with("awesome", :on =&gt; :tags) # =&gt; [@post1, @post2]</code><br/><br/><code>Post.tag_counts # =&gt; [,...]</code><br/><br/>Named Scope<br/><code><br/>class Post  "created_at DESC"<br/>end</code><br/><br/><code>Post.tagged_with("awesome").by_creation</code><br/><br/>Pagination can be added on list of tags using will_paginate plugin<br/><code><br/>List Of Tags .paginate(:page =&gt; params[:page], :per_page =&gt; 20)</code><br/><code><br/>@post.find_related_tags # =&gt; will give related posts having related tags. [ @post1, @post2, ...]</code><br/><br/><br/>Tag Owners<br/><br/><code>class User &lt; ActiveRecord::Base<br/>  acts_as_tagger<br/>end</code><br/><br/><br/><code>class Post &lt; ActiveRecord::Base<br/>  acts_as_taggable_on :tags<br/>end</code><br/><code><br/>@some_user.tag(@some_post, :with =&gt; "paris, normandy", :on =&gt; :tags)<br/>@some_user.owned_taggings<br/>@some_user.owned_tags<br/>@some_post.tags_from(@some_user)</code><br/><br/><br/>Cheers !<br/>$@ndip</div>
+A tagging plugin for Rails applications that allows for custom tagging along dynamic contexts.<br/><br/>Plugin Installation<br/><br/><pre class=ruby>script/plugin install git://github.com/mbleigh/acts-as-taggable-on.git</pre><br/><br/>Gem Installation<br/><br/><br/><pre class=ruby>gem install mbleigh-acts-as-taggable-on --source http://gems.github.com</pre><br/><br/><br/>Auto Install<br/>include following line in environment.rb<br/><br/><pre class=ruby>config.gem "mbleigh-acts-as-taggable-on", :source =&gt; "http://gems.github.com", :lib =&gt; "acts-as-taggable-on"</pre><br/><br/><br/>Post Installation (Rails)<br/><pre class=ruby><br/>1. script/generate acts_as_taggable_on_migration<br/>2. rake db:migrate<br/></pre><br/><br/>Usage<br/>Add following line in your model for which you wanted to be tagged.<br/><br/><pre class=ruby>acts_as_taggable_on :tags</pre><br/><br/>Example<br/><br/><pre class=ruby>class Post &lt; ActiveRecord::Base<br/>  acts_as_taggable_on :tags<br/>end</pre><br/><br/>In your View for Post<br/><pre class=ruby><br/><br/></pre><br/><br/>In your controller create action<br/><br/><pre class=ruby>@post = Post.new (params[:post])<br/># Or just hardcode to test<br/>@post.tag_list ="awesome, slick, hefty"   <br/>@post.save<br/></pre><br/><br/>What are the methods provided ??<br/><br/><pre class=ruby>@post.tag_list = "awesome, slick, hefty"   <br/><br/>Post.tagged_with("awesome", :on =&gt; :tags) # =&gt; [@post1, @post2]</pre><br/><br/><pre class=ruby>Post.tag_counts # =&gt; [,...]</pre><br/><br/>Named Scope<br/><pre class=ruby><br/>class Post  "created_at DESC"<br/>end</pre><br/><br/><pre class=ruby>Post.tagged_with("awesome").by_creation</pre><br/><br/>Pagination can be added on list of tags using will_paginate plugin<br/><pre class=ruby><br/>List Of Tags .paginate(:page =&gt; params[:page], :per_page =&gt; 20)</pre><br/><pre class=ruby><br/>@post.find_related_tags # =&gt; will give related posts having related tags. [ @post1, @post2, ...]</pre><br/><br/><br/>Tag Owners<br/><br/><pre class=ruby>class User &lt; ActiveRecord::Base<br/>  acts_as_tagger<br/>end</pre><br/><br/><br/><pre class=ruby>class Post &lt; ActiveRecord::Base<br/>  acts_as_taggable_on :tags<br/>end</pre><br/><pre class=ruby><br/>@some_user.tag(@some_post, :with =&gt; "paris, normandy", :on =&gt; :tags)<br/>@some_user.owned_taggings<br/>@some_user.owned_tags<br/>@some_post.tags_from(@some_user)</pre><br/><br/><br/>Cheers !<br/>$@ndip</div>
 <h2>Comments</h2>
 <div class='comments'>
 <div class='comment'>
@@ -131,7 +131,7 @@ A tagging plugin for Rails applications that allows for custom tagging along dyn
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2009/05/using-rails-acts-as-taggable-on-plugin" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2009/05/using-rails-acts-as-taggable-on-plugin" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2009/05/using-rails-acts-as-taggable-on-plugin/" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2009/05/using-rails-acts-as-taggable-on-plugin/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -143,7 +143,7 @@ A tagging plugin for Rails applications that allows for custom tagging along dyn
     <p class="meta">
       
       
-        <a class="basic-alignment right" href="/2009/05/awesome-working-with-rails-console-and" title="Next Post: Awesome: Working with the Rails console and all the tricks">Awesome: Working with the Rails console and all the tricks &raquo;</a>
+        <a class="basic-alignment right" href="/2009/05/awesome-working-with-rails-console-and/" title="Next Post: Awesome: Working with the Rails console and all the tricks">Awesome: Working with the Rails console and all the tricks &raquo;</a>
       
     </p>
   </footer>
@@ -159,23 +159,23 @@ A tagging plugin for Rails applications that allows for custom tagging along dyn
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

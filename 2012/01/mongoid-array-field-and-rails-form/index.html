@@ -92,7 +92,7 @@
 
 
 <div class="entry-content"><div class='post'>
-mongoid document supports array as field. array field in mongoid document is a ruby array but its quite complex to manage array field in rails forms.<br/>After lot of google and reading comments from stack-overflow at last i felt helpless. Finally after doing research on rails form helper object(form_for, fields_for) am pleased to get it working as expected :)<br/>In below example, product can have multiple categories<br/><code>class Product   CATEGORIES = %w(Apparel Media Software Sports Agri Education)   include Mongoid::Document   field :name, :type => String   field :categories, :type => Array end </code>Here is form code <br/><code>= form_for(@product) do |f|   = f.text_field :name   - Product::CATEGORIES.each do |category|     = f.check_box :categories, :name => "product[categories][]", category </code><br/>Here is products controller code <br/><code>class ProductsController < ApplicationController   before_filter :load_product, :only => [:new, :create]      [...]      # We don't need new action to be defined      def create     @product.attributes = params[:product]     # Here we need to reject blank categories     @product.categories.reject!(&:blank?)     if @product.save       flash[:notice] = I18n.t('product.create.success')       redirect_to(:action => :index)     else       render :action => :new     end   end      [...]      private   def load_product     @product = Product.new   end end </code></div>
+mongoid document supports array as field. array field in mongoid document is a ruby array but its quite complex to manage array field in rails forms.<br/>After lot of google and reading comments from stack-overflow at last i felt helpless. Finally after doing research on rails form helper object(form_for, fields_for) am pleased to get it working as expected :)<br/>In below example, product can have multiple categories<br/><pre class=ruby>class Product   CATEGORIES = %w(Apparel Media Software Sports Agri Education)   include Mongoid::Document   field :name, :type => String   field :categories, :type => Array end </pre>Here is form code <br/><pre class=ruby>= form_for(@product) do |f|   = f.text_field :name   - Product::CATEGORIES.each do |category|     = f.check_box :categories, :name => "product[categories][]", category </pre><br/>Here is products controller code <br/><pre class=ruby>class ProductsController < ApplicationController   before_filter :load_product, :only => [:new, :create]      [...]      # We don't need new action to be defined      def create     @product.attributes = params[:product]     # Here we need to reject blank categories     @product.categories.reject!(&:blank?)     if @product.save       flash[:notice] = I18n.t('product.create.success')       redirect_to(:action => :index)     else       render :action => :new     end   end      [...]      private   def load_product     @product = Product.new   end end </pre></div>
 </div>
 
 
@@ -129,7 +129,7 @@ mongoid document supports array as field. array field in mongoid document is a r
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2012/01/mongoid-array-field-and-rails-form" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2012/01/mongoid-array-field-and-rails-form" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2012/01/mongoid-array-field-and-rails-form/" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2012/01/mongoid-array-field-and-rails-form/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -140,10 +140,10 @@ mongoid document supports array as field. array field in mongoid document is a r
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/01/twitter-bootstrap-form-builder-for" title="Previous Post: twitter-bootstrap form builder for rails">&laquo; twitter-bootstrap form builder for rails</a>
+        <a class="basic-alignment left" href="/2012/01/twitter-bootstrap-form-builder-for/" title="Previous Post: twitter-bootstrap form builder for rails">&laquo; twitter-bootstrap form builder for rails</a>
       
       
-        <a class="basic-alignment right" href="/2012/01/mongoid-embededin-and-array-field" title="Next Post: Mongoid embeded_in and Array field management">Mongoid embeded_in and Array field management &raquo;</a>
+        <a class="basic-alignment right" href="/2012/01/mongoid-embededin-and-array-field/" title="Next Post: Mongoid embeded_in and Array field management">Mongoid embeded_in and Array field management &raquo;</a>
       
     </p>
   </footer>
@@ -159,23 +159,23 @@ mongoid document supports array as field. array field in mongoid document is a r
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

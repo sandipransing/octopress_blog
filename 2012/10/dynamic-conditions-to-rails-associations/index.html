@@ -92,7 +92,7 @@
 
 
 <div class="entry-content"><div class='post'>
-<div dir="ltr" style="text-align: left;" trbidi="on">We all know that rails models associations gets defined while class definitions are loaded and once defined can&#8217;t be changed. But still you can make use of block parameter to conditions to have dynamic query conditions inside associations.<br /><br />Below line explains <b>how to</b> define dynamic associations -<br /><br /><console>has_one :code_sequence, :class_name =&gt; &#8216;Sequence&#8217;, :conditions =&gt; &#8216;kind = &#8220;#{self.kind}&#8221;&#8217;</console><br /><br />Please make a note that below code won&#8217;t be working - <br /><console>has_one :code_sequence, :class_name =&gt; &#8216;Sequence&#8217;, :conditions =&gt; proc { |c| [&#8216;kind = ?&#8217;, c.kind] }</console></div></div>
+<div dir="ltr" style="text-align: left;" trbidi="on">We all know that rails models associations gets defined while class definitions are loaded and once defined can&#8217;t be changed. But still you can make use of block parameter to conditions to have dynamic query conditions inside associations.<br /><br />Below line explains <b>how to</b> define dynamic associations -<br /><br /><pre class=ruby>has_one :code_sequence, :class_name =&gt; 'Sequence', :conditions =&gt; 'kind = "#{self.kind}"'</pre><br /><br />Please make a note that below code won&#8217;t be working - <br /><pre class=ruby>has_one :code_sequence, :class_name =&gt; 'Sequence', :conditions =&gt; proc { |c| ['kind = ?', c.kind] }</pre></div></div>
 </div>
 
 
@@ -123,7 +123,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2012/10/dynamic-conditions-to-rails-associations" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2012/10/dynamic-conditions-to-rails-associations" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2012/10/dynamic-conditions-to-rails-associations/" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2012/10/dynamic-conditions-to-rails-associations/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -134,10 +134,10 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/04/upgrading-from-rails-21x-to-rails-2311" title="Previous Post: Upgrading from Rails 2.1.x to Rails 2.3.11">&laquo; Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a class="basic-alignment left" href="/2012/04/upgrading-from-rails-21x-to-rails-2311/" title="Previous Post: Upgrading from Rails 2.1.x to Rails 2.3.11">&laquo; Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       
       
-        <a class="basic-alignment right" href="/2014/02/octopress-powered-and-github-hosted-blog" title="Next Post: Getting started: Octopress powered and Github hosted blog">Getting started: Octopress powered and Github hosted blog &raquo;</a>
+        <a class="basic-alignment right" href="/2014/02/octopress-powered-and-github-hosted-blog/" title="Next Post: Getting started: Octopress powered and Github hosted blog">Getting started: Octopress powered and Github hosted blog &raquo;</a>
       
     </p>
   </footer>
@@ -153,23 +153,23 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

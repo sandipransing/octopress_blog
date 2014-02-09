@@ -9,7 +9,9 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Movementsb previous wordw next worde end of word0/^ begining of line$ end of lineG end of file1G/gg begining of file/pattern search next?pattern &hellip;">
+  <meta name="description" content="
+Follow simple steps defined in this post for smooth upgrade of openoffice in linux.click here
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,7 +73,81 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2009/11/get-hand-over-vi-vim-editor">Get Hand Over VI / VIM Editor</a></h1>
+      <h1 class="entry-title"><a href="/2009/11/upgrading-openoffice-in-ubuntu-interpid/">Upgrading Openoffice in Ubuntu Interpid</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-23T16:17:00+05:30" pubdate data-updated="true">Nov 23<span>rd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div style="text-align: left;">Follow simple steps defined <a href="http://ubuntumanual.org/posts/175/upgrade-to-open-office-3-1-in-ubuntu-jaunty-intrepid-hardy">in this post</a> for smooth upgrade of openoffice in linux.<br /></div><br /><a href="http://ubuntumanual.org/posts/175/upgrade-to-open-office-3-1-in-ubuntu-jaunty-intrepid-hardy">click here</a><br /></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/bundling-gems-in-rails-application/">Bundling Gems in Rails Application</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-23T14:47:00+05:30" pubdate data-updated="true">Nov 23<span>rd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div style="text-align: left;">Gem Bundling is basically used to maintain all required gems at your application level. It downloads necessary gems and maintain it under &#8220;/vender/gems&#8221; directory.  Its very easy to use gem bundle.<br /></div>1. Insatll gemcutter gem ( Its gem hosting )<br /><pre class="ruby" name="code">gem install gemcutter<br /></pre>2. Install bundler ( Its<span style="font-family: helvetica, arial, freesans, clean, sans-serif; font-size: 13px; line-height: 20px;">&nbsp;a tool that manages gem dependencies for your ruby application. )</span><br /><pre class="ruby" name="code">gem install bundler<br /></pre>3. Start using <br /><pre class="ruby" name="code">gem bundle<br /></pre></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/get-hand-over-vi-vim-editor/">Get Hand Over VI / VIM Editor</a></h1>
     
     
       <p class="meta">
@@ -116,7 +192,7 @@ Remove blank lines in vim<br /><br />:g/^ *$/d</div>
       
   <header>
     
-      <h1 class="entry-title"><a href="/2009/11/yaml-file-configuration-in-ruby-rails">YAML File Configuration in Ruby & Rails</a></h1>
+      <h1 class="entry-title"><a href="/2009/11/yaml-file-configuration-in-ruby-rails/">YAML File Configuration in Ruby & Rails</a></h1>
     
     
       <p class="meta">
@@ -153,7 +229,7 @@ Remove blank lines in vim<br /><br />:g/^ *$/d</div>
       
   <header>
     
-      <h1 class="entry-title"><a href="/2009/11/pidgin-install-and-update-pidgin">Pidgin Install and Update Pidgin Messenger on Ubuntu Interpid</a></h1>
+      <h1 class="entry-title"><a href="/2009/11/pidgin-install-and-update-pidgin/">Pidgin Install and Update Pidgin Messenger on Ubuntu Interpid</a></h1>
     
     
       <p class="meta">
@@ -190,7 +266,7 @@ Remove blank lines in vim<br /><br />:g/^ *$/d</div>
       
   <header>
     
-      <h1 class="entry-title"><a href="/2009/11/how-to-remove-extra-spaces-in-ruby">How to Remove Extra Spaces in Ruby Strings</a></h1>
+      <h1 class="entry-title"><a href="/2009/11/how-to-remove-extra-spaces-in-ruby/">How to Remove Extra Spaces in Ruby Strings</a></h1>
     
     
       <p class="meta">
@@ -227,7 +303,7 @@ Remove blank lines in vim<br /><br />:g/^ *$/d</div>
       
   <header>
     
-      <h1 class="entry-title"><a href="/2009/11/manual-active-record-db-connection-in">Manual Active Record Db Connection in Ruby Using Mysql Adapter</a></h1>
+      <h1 class="entry-title"><a href="/2009/11/manual-active-record-db-connection-in/">Manual Active Record Db Connection in Ruby Using Mysql Adapter</a></h1>
     
     
       <p class="meta">
@@ -251,7 +327,7 @@ Remove blank lines in vim<br /><br />:g/^ *$/d</div>
 
 
   <div class="entry-content"><div class='post'>
-Below is ruby code to establish manual database connection. <br/><code>require 'active_record' ActiveRecord::Base.establish_connection(     :adapter  => "mysql",     :host     => "localhost",     :username => "root",     :password => "abcd",     :database => "funonrails"   ) </code><br/>Snippet of database.yml file <br/><code>common: &common   adapter: mysql   database: students_dev   username: root   password:   host: localhost  students_development:   <<: *common   database: students_dev  students_production:   <<: *common   database: students </code><br/>Load database configurations from yml file<br/><code>dbconfig = YAML::load(File.open('database.yml'))  ActiveRecord::Base.establish_connection( dbconfig[:students_development] ) </code><br/><b>Active Record Model & DB connection </b><br/><code>class Student < ActiveRecord::Base   establish_connection "students_production"   set_table_name "student"   set_primary_key "stud_number" end </code></div>
+Below is ruby code to establish manual database connection. <br/><pre class=ruby>require 'active_record' ActiveRecord::Base.establish_connection(     :adapter  => "mysql",     :host     => "localhost",     :username => "root",     :password => "abcd",     :database => "funonrails"   ) </pre><br/>Snippet of database.yml file <br/><pre class=ruby>common: &common   adapter: mysql   database: students_dev   username: root   password:   host: localhost  students_development:   <<: *common   database: students_dev  students_production:   <<: *common   database: students </pre><br/>Load database configurations from yml file<br/><pre class=ruby>dbconfig = YAML::load(File.open('database.yml'))  ActiveRecord::Base.establish_connection( dbconfig[:students_development] ) </pre><br/><b>Active Record Model & DB connection </b><br/><pre class=ruby>class Student < ActiveRecord::Base   establish_connection "students_production"   set_table_name "student"   set_primary_key "stud_number" end </pre></div>
 <h2>Comments</h2>
 <div class='comments'>
 <div class='comment'>
@@ -277,7 +353,7 @@ getting for the code above uninitialized constant YAML (NameError)<br /><br />wh
       
   <header>
     
-      <h1 class="entry-title"><a href="/2009/11/writing-rake-task-in-rails-with">Writing Rake Task in Rails With Namespace, Parameters</a></h1>
+      <h1 class="entry-title"><a href="/2009/11/writing-rake-task-in-rails-with/">Writing Rake Task in Rails With Namespace, Parameters</a></h1>
     
     
       <p class="meta">
@@ -314,7 +390,7 @@ getting for the code above uninitialized constant YAML (NameError)<br /><br />wh
       
   <header>
     
-      <h1 class="entry-title"><a href="/2009/11/understanding-and-creating-radinat">Understanding and Creating Radinat Extensions</a></h1>
+      <h1 class="entry-title"><a href="/2009/11/understanding-and-creating-radinat/">Understanding and Creating Radinat Extensions</a></h1>
     
     
       <p class="meta">
@@ -351,7 +427,7 @@ Understanding and creating radinat extensions To start with, first of all lets k
       
   <header>
     
-      <h1 class="entry-title"><a href="/2009/11/linux-commands-for-remote-access">Linux Commands for Remote Access, Compress, Decompress</a></h1>
+      <h1 class="entry-title"><a href="/2009/11/linux-commands-for-remote-access/">Linux Commands for Remote Access, Compress, Decompress</a></h1>
     
     
       <p class="meta">
@@ -383,88 +459,6 @@ Understanding and creating radinat extensions To start with, first of all lets k
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/11/variables-initialization-assignments">Variables Initialization, Assignments and Swapping in Ruby</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-11-05T18:02:00+05:30" pubdate data-updated="true">Nov 5<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<span style="font-family: Arial; font-size: small;"><span class="Apple-style-span" style="background-color: white; font-size: 13px;">Just a single line variable swap in ruby<br /></span></span><blockquote>x,y=y,x</blockquote>Example:<br /><br /><blockquote>irb&gt;&gt; x = &#8220;Fun&#8221;</blockquote><blockquote>=&gt; &#8220;Fun&#8221;</blockquote><blockquote>irb&gt;&gt; y = &#8220;Rails&#8221;</blockquote><blockquote>=&gt; &#8220;Rails&#8221;</blockquote><blockquote>irb&gt;&gt; x,y = y,x</blockquote><blockquote>=&gt; [&#8220;Rails&#8221;, &#8220;Fun&#8221;]</blockquote><blockquote>irb&gt;&gt; p x</blockquote><blockquote>&#8220;Rails&#8221;</blockquote><blockquote>=&gt; nil</blockquote><blockquote>&gt;&gt; p y</blockquote><blockquote>&#8220;Fun&#8221;</blockquote><div><b>Variable assignments in Ruby</b></div>we can do multiple assignments in a single line.<br /><br /><blockquote>irb&gt;&gt; a,b,c,d = 1,2,3,4</blockquote><blockquote>=&gt; [1, 2, 3, 4]</blockquote><br /><br />here is interpretation of above line<br /><br /><blockquote>irb&gt;&gt;&nbsp;p &#8220;a =&gt; #{a} b =&gt; #{b} c =&gt; #{c} d =&gt; #{d}&#8221;</blockquote><blockquote>&#8220;a =&gt; 1 b =&gt; 2 c =&gt; 3 d =&gt; 4&#8221;</blockquote><br /><b>Multiple assignments in ruby</b><br /><b><br /></b><br /><blockquote>a = b = c = d = 12</blockquote><br />This means a,b,c,d variables has value 12<br /></div>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/11/ruby-on-rails-developers-in-india">Ruby on Rails Developers in India</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-11-03T16:45:00+05:30" pubdate data-updated="true">Nov 3<span>rd</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-Hello ROR lovers,<br/><br/>      I wanted to list down ruby on rails developers in india. I would glad to see your name in this list. Lets, see how much rails hobbies are there in india.<br/>      <br/>Thanks,<br/>Sandip<br/><br/>List goes here&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;<br/><br/><blockquote><b>Name:</b> Sandip Ransing<br/><b>ROR Experience:</b> 2.1 yrs<br/><b>Overall:</b> 2.8+ yrs<br/><b>Location:</b> Pune<br/><b>Company:</b> Josh Software Private Limited.</blockquote><blockquote><b>Name:</b> Amit Yadav<br/><b>Experience:</b> 2.5 yrs<br/><b>Overall:</b> 5.8 yrs<br/><b>Location:</b> Pune<br/><b>Company:</b> Globallogic<br/></blockquote><blockquote><b>Name:</b> Haribhau Ingale<br/><b>ROR Experience:</b> 4 yrs<br/><b>Overall:</b> 5+ yrs<br/>location: Pune<br/><b>Company:</b> Persistent Systems Ltd.<br/></blockquote><blockquote><b>Name:</b> ABHISHEK V. AMBAVANE<br/><b>ROR Experience:</b> WITHOUT ADOBE FLEX AROUND 6 MONTHS WITH FLEX,AIR IS AROUND 1 YR.<br/><b>Overall:</b> 2.8 YRS.<br/><b>Location:</b> PUNE<br/><b>Company:</b> BETTERLABS<br/></blockquote><blockquote><b>Name:</b> Sunny Bogawat<br/><b>ROR Experience:</b> 1.5 YR.<br/><b>Location:</b> PUNE<br/><b>Company:</b> Neova solutions<br/></blockquote><blockquote><b>Name:</b> Kiran Chaudhari<br/><b>ROR Experience:</b> 1.8 YR.<br/><b>Location:</b> PUNE<br/><b>Company:</b> Josh Software Private Limited.<br/></blockquote><blockquote><b>Name:</b> Swati Verma<br/><b>ROR Experience:</b> 1.2 YR.<br/><b>Location:</b> Jaipur<br/><b>Company:</b> Rising Sun Technologies<br/></blockquote><blockquote><b>Name:</b> Satish Talim<br/><b>Ruby Experience:</b> 4 yrs<br/><b>Overall:</b> 32+ yrs<br/><b>Location:</b> Pune<br/><b>Company:</b> RubyLearning portals<br/></blockquote><blockquote><b>Name:</b> Arun Agrawal<br/>Ruby <b>Experience:</b> 3 yrs<br/><b>Overall:</b> 3+ yrs<br/><b>Location:</b> Jaipur<br/><b>Company:</b> Rising Sun(Jaipur)<br/></blockquote><blockquote><b>Name:</b> Piyush Gajjariya<br/><b>ROR Experience:</b> 2.5 Years<br/><b>Location:</b> Bangalore<br/><b>Company:</b> Pramata Knowledge Solutions<br/></blockquote><blockquote><b>Name:</b> Puneet Pandey<br/><b>ROR Experience:</b> 2 yrs<br/><b>Overall:</b> 3 Yrs<br/><b>Location:</b> Hyderabad<br/><b>Company:</b> Zibika Infotech Pvt. Ltd<br/></blockquote><blockquote><b>Name:</b> Uma Mahesh Varma<br/><b>ROR Experience:</b> 2 yrs<br/><b>Overall:</b> 3 Yrs<br/><b>Location:</b> Kakinada<br/><b>Company:</b> Nyros Technologies, Kakinada<br/></blockquote><blockquote><b>Name:</b> Mohammed Imran Ahmed<br/><b>ROR Experience:</b> 1 year<br/><b>Overall:</b> 2 year 3months Yrs<br/><b>Location:</b> Hyderabad<br/><b>Company:</b> Prithvi Information Solutions, Hyd<br/></blockquote><blockquote><b>Name:</b> Amit Kulkarni<br/><b>Title</b>: QA,Rspec Testing in ROR<br/><b>Overall:</b> 1.5 yrs<br/><b>Location:</b> Pune<br/><b>Company:</b> Josh Software Private Limited.<br/></blockquote><blockquote>I am a Software Engineer with more than three years of experience in Information Technology Industry. I worked on different Business Intelligence / Data Warehousing Projects in my experience.<br/>I am a C, C++ & UNIX enthu. I recently learnt ruby & looking forward to work in this.<br/>Thanks,<br/>Pankaj Sisodiya<br/></blockquote><blockquote><b>Name:</b> M B Chowdari<br/><b>ROR Experience:</b> 1.3 yrs<br/><b>Overall:</b> 2.3 Yrs<br/><b>Location:</b> Kakinada<br/><b>Company:</b> Nyros Technologies, Kakinada<br/></blockquote>Now your turn<br/></div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>Anonymous</div>
-<div class='content'>
-Name: Santosh Turamari<br />RoR Experience: 1.5 Yrs<br />Overall: 1.5 Yrs<br />Location: Bangalore, Karnataka<br />Company: SourceBits Technology, Bangalore</div>
-</div>
-</div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/13/">&larr; Older</a>
@@ -482,23 +476,23 @@ Name: Santosh Turamari<br />RoR Experience: 1.5 Yrs<br />Overall: 1.5 Yrs<br />L
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

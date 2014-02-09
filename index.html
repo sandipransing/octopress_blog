@@ -72,7 +72,7 @@ But as the years went there were many more blogging sites came &hellip;">
       
   <header>
     
-      <h1 class="entry-title"><a href="/2014/02/migrating-from-blogger-to-octopress">Migrating From Blogger to Octopress</a></h1>
+      <h1 class="entry-title"><a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating From Blogger to Octopress</a></h1>
     
     
       <p class="meta">
@@ -148,7 +148,7 @@ After successful run, this will be creating static markdown octopress formatted 
       
   <header>
     
-      <h1 class="entry-title"><a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress Blog Posts Using Markdown</a></h1>
+      <h1 class="entry-title"><a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress Blog Posts Using Markdown</a></h1>
     
     
       <p class="meta">
@@ -292,7 +292,7 @@ Sandip is a ruby on rails developer based in pune and also a blogger at funonrai
       
   <header>
     
-      <h1 class="entry-title"><a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting Started: Octopress Powered and Github Hosted Blog</a></h1>
+      <h1 class="entry-title"><a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting Started: Octopress Powered and Github Hosted Blog</a></h1>
     
     
       <p class="meta">
@@ -467,7 +467,7 @@ If you want more help then see <a href="http://octopress.org/docs/deploying/gith
       
   <header>
     
-      <h1 class="entry-title"><a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic Conditions to Rails Associations</a></h1>
+      <h1 class="entry-title"><a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic Conditions to Rails Associations</a></h1>
     
     
       <p class="meta">
@@ -491,7 +491,7 @@ If you want more help then see <a href="http://octopress.org/docs/deploying/gith
 
 
   <div class="entry-content"><div class='post'>
-<div dir="ltr" style="text-align: left;" trbidi="on">We all know that rails models associations gets defined while class definitions are loaded and once defined can&#8217;t be changed. But still you can make use of block parameter to conditions to have dynamic query conditions inside associations.<br /><br />Below line explains <b>how to</b> define dynamic associations -<br /><br /><console>has_one :code_sequence, :class_name =&gt; &#8216;Sequence&#8217;, :conditions =&gt; &#8216;kind = &#8220;#{self.kind}&#8221;&#8217;</console><br /><br />Please make a note that below code won&#8217;t be working - <br /><console>has_one :code_sequence, :class_name =&gt; &#8216;Sequence&#8217;, :conditions =&gt; proc { |c| [&#8216;kind = ?&#8217;, c.kind] }</console></div></div>
+<div dir="ltr" style="text-align: left;" trbidi="on">We all know that rails models associations gets defined while class definitions are loaded and once defined can&#8217;t be changed. But still you can make use of block parameter to conditions to have dynamic query conditions inside associations.<br /><br />Below line explains <b>how to</b> define dynamic associations -<br /><br /><pre class=ruby>has_one :code_sequence, :class_name =&gt; 'Sequence', :conditions =&gt; 'kind = "#{self.kind}"'</pre><br /><br />Please make a note that below code won&#8217;t be working - <br /><pre class=ruby>has_one :code_sequence, :class_name =&gt; 'Sequence', :conditions =&gt; proc { |c| ['kind = ?', c.kind] }</pre></div></div>
 </div>
   
   
@@ -504,7 +504,7 @@ If you want more help then see <a href="http://octopress.org/docs/deploying/gith
       
   <header>
     
-      <h1 class="entry-title"><a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading From Rails 2.1.x to Rails 2.3.11</a></h1>
+      <h1 class="entry-title"><a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading From Rails 2.1.x to Rails 2.3.11</a></h1>
     
     
       <p class="meta">
@@ -528,7 +528,7 @@ If you want more help then see <a href="http://octopress.org/docs/deploying/gith
 
 
   <div class="entry-content"><div class='post'>
-If your application is currently on any version of Rails 2.1.x, The following changes needs to be done for upgrading your application to Rails 2.3.11<br /><br />1. First install Rails version 2.3.11<br /><code><br />gem install rails -v2.3.11<br /></code><br /><br />2. Freeze app ruby gems<br /><code><br />rake rails:freeze:gems<br /></code><br />Hopefully it should work for you but it gave me following error <br /><code><br />undefined method `manage_gems' for Gem:Module <br /></code><br /><br />3. Create sample rails 2.3.11 app<br /><code><br />rails _2.3.11_ testsapp<br /></code><br /><br />Now, Copy all missing &#8220;config/initializers/*&#8221; files from new &#8220;testapp to the application that to be upgraded.<br /><code><br />cp testapp/config/initializers/* config/initializers<br /></code><br /><br />4. Change Rails version inside <i>environment.rb</i> to <i>Rails 2.3.11</i><br /><code> <br /># Specifies gem version of Rails to use when vendor/rails is not present <br />RAILS_GEM_VERSION = '2.3.11'<br /></code><br /><br />5. Rename <i>app/controllers/application.rb</i> file to <i>app/controllers/application_controller.rb</i><br /><br /><b>OR</b><br /><br /><code><br />rails:update:application_controller<br /></code><br /><br />6. Start rails server and fix the issues one by one.<br /><code><br />ruby script/server<br /></code></div>
+If your application is currently on any version of Rails 2.1.x, The following changes needs to be done for upgrading your application to Rails 2.3.11<br /><br />1. First install Rails version 2.3.11<br /><pre class=ruby><br />gem install rails -v2.3.11<br /></pre><br /><br />2. Freeze app ruby gems<br /><pre class=ruby><br />rake rails:freeze:gems<br /></pre><br />Hopefully it should work for you but it gave me following error <br /><pre class=ruby><br />undefined method `manage_gems' for Gem:Module <br /></pre><br /><br />3. Create sample rails 2.3.11 app<br /><pre class=ruby><br />rails _2.3.11_ testsapp<br /></pre><br /><br />Now, Copy all missing &#8220;config/initializers/*&#8221; files from new &#8220;testapp to the application that to be upgraded.<br /><pre class=ruby><br />cp testapp/config/initializers/* config/initializers<br /></pre><br /><br />4. Change Rails version inside <i>environment.rb</i> to <i>Rails 2.3.11</i><br /><pre class=ruby> <br /># Specifies gem version of Rails to use when vendor/rails is not present <br />RAILS_GEM_VERSION = '2.3.11'<br /></pre><br /><br />5. Rename <i>app/controllers/application.rb</i> file to <i>app/controllers/application_controller.rb</i><br /><br /><b>OR</b><br /><br /><pre class=ruby><br />rails:update:application_controller<br /></pre><br /><br />6. Start rails server and fix the issues one by one.<br /><pre class=ruby><br />ruby script/server<br /></pre></div>
 </div>
   
   
@@ -541,7 +541,7 @@ If your application is currently on any version of Rails 2.1.x, The following ch
       
   <header>
     
-      <h1 class="entry-title"><a href="/2012/02/ruby-enumerable-toproc-ampersond-colon">Ruby Enumerable & To_proc (Ampersond & Symbol Shortcut)</a></h1>
+      <h1 class="entry-title"><a href="/2012/02/ruby-enumerable-toproc-ampersond-colon/">Ruby Enumerable & To_proc (Ampersond & Symbol Shortcut)</a></h1>
     
     
       <p class="meta">
@@ -565,7 +565,7 @@ If your application is currently on any version of Rails 2.1.x, The following ch
 
 
   <div class="entry-content"><div class='post'>
-Basically Enumerable mixin gives collection classes a variety of traverse, search, sort methods.<br/> <b>understanding ruby blocks i.e. proc </b><br/>blocks are statements of code written in ruby. one can take them as similar to c language macro&#8217;s<br/> <b>Different ways to define blocks</b><br/><code>a = proc do   puts "hello" end a.call #=> hello  b = lambda do |u|   puts "hello #{u}" end b.call('sandip')#=> hello sandip  c = proc {|user| puts user } c.call('sandip') #=> sandip </code> <b>Passing block to enumerator </b><br/>Lets assume we have collection array of strings and we want to print it<br/> <code> a = ['hi', 'sandip', 'how', 'you', 'doing', '?'] => ["hi", "sandip", "how", "you", "doing", "?"]  a.each {|w| puts w }  q = proc {|w| puts w } => #<Proc:0x00007f9d2be13140@(irb):89> a.each(&q) #=>hi sandip how you doing ?  a.map{|r| q.call(r)} #=>hi sandip how you doing ? </code>  <b>Understanding symbol#to_proc </b><br/>Symbol has method to_proc which converts symbol to block where symbol is taken as method to be executed on first argument of proc<br/><b>How to_proc got implemented inside Symbol class</b><code>class Symbol   def to_proc     Proc.new { |*args| args.shift.__send__(self, *args) }   end end </code>Lets have some examples <br/><code>v = :even?.to_proc # equivalent to proc {|a| a.even?} #=> #<Proc:0x00007f9d2bddcb90@(irb):97> q = [1, 2, 3, 5, 67]  q.map(&v) => [false, true, false, false, false] </code> <b>Is there any shortcut?</b><br/>Yes, there is shortcut to have block passed to enumerators on the fly using ampersand followed by colon (i.e. symbol)<br/> <code>q = [1, 2, 3, 5, 67]  q.map(&:even?) <=> q.map(&:even?.to_proc)  q.map(&:even?.to_proc) #=> [false, true, false, false, false]  q.map(&:even?) #=> [false, true, false, false, false] </code> <b>Some handy examples </b><br/><code>[1, 2, 3, 5, 67].inject(&:+) #=> 78 [1, 2, 3, 5, 67].inject(:+) #=> 78 [1, 2, 3, 5, 67].any?(&:even?) #=> true [1, 2, 3, 5, 67].detect(&:even?) #=> 2 ['ruby', 'on', 'rails'].map(&:upcase) #=> ["RUBY", "ON", "RAILS"] </code></div>
+Basically Enumerable mixin gives collection classes a variety of traverse, search, sort methods.<br/> <b>understanding ruby blocks i.e. proc </b><br/>blocks are statements of code written in ruby. one can take them as similar to c language macro&#8217;s<br/> <b>Different ways to define blocks</b><br/><pre class=ruby>a = proc do   puts "hello" end a.call #=> hello  b = lambda do |u|   puts "hello #{u}" end b.call('sandip')#=> hello sandip  c = proc {|user| puts user } c.call('sandip') #=> sandip </pre> <b>Passing block to enumerator </b><br/>Lets assume we have collection array of strings and we want to print it<br/> <pre class=ruby> a = ['hi', 'sandip', 'how', 'you', 'doing', '?'] => ["hi", "sandip", "how", "you", "doing", "?"]  a.each {|w| puts w }  q = proc {|w| puts w } => #<Proc:0x00007f9d2be13140@(irb):89> a.each(&q) #=>hi sandip how you doing ?  a.map{|r| q.call(r)} #=>hi sandip how you doing ? </pre>  <b>Understanding symbol#to_proc </b><br/>Symbol has method to_proc which converts symbol to block where symbol is taken as method to be executed on first argument of proc<br/><b>How to_proc got implemented inside Symbol class</b><pre class=ruby>class Symbol   def to_proc     Proc.new { |*args| args.shift.__send__(self, *args) }   end end </pre>Lets have some examples <br/><pre class=ruby>v = :even?.to_proc # equivalent to proc {|a| a.even?} #=> #<Proc:0x00007f9d2bddcb90@(irb):97> q = [1, 2, 3, 5, 67]  q.map(&v) => [false, true, false, false, false] </pre> <b>Is there any shortcut?</b><br/>Yes, there is shortcut to have block passed to enumerators on the fly using ampersand followed by colon (i.e. symbol)<br/> <pre class=ruby>q = [1, 2, 3, 5, 67]  q.map(&:even?) <=> q.map(&:even?.to_proc)  q.map(&:even?.to_proc) #=> [false, true, false, false, false]  q.map(&:even?) #=> [false, true, false, false, false] </pre> <b>Some handy examples </b><br/><pre class=ruby>[1, 2, 3, 5, 67].inject(&:+) #=> 78 [1, 2, 3, 5, 67].inject(:+) #=> 78 [1, 2, 3, 5, 67].any?(&:even?) #=> true [1, 2, 3, 5, 67].detect(&:even?) #=> 2 ['ruby', 'on', 'rails'].map(&:upcase) #=> ["RUBY", "ON", "RAILS"] </pre></div>
 </div>
   
   
@@ -578,7 +578,7 @@ Basically Enumerable mixin gives collection classes a variety of traverse, searc
       
   <header>
     
-      <h1 class="entry-title"><a href="/2012/01/dynamic-bounded-parameters-and-named">Dynamic & Bounded Parameters and Named Routes</a></h1>
+      <h1 class="entry-title"><a href="/2012/01/dynamic-bounded-parameters-and-named/">Dynamic & Bounded Parameters and Named Routes</a></h1>
     
     
       <p class="meta">
@@ -602,7 +602,7 @@ Basically Enumerable mixin gives collection classes a variety of traverse, searc
 
 
   <div class="entry-content"><div class='post'>
-Rails routes can be customized as your own routes with parameters but first you should understand how routes behaves. <br/> <b>Adding dynamic parameters to routes </b> <br/>Here exact parameters are matched to route and presence of each parameter is mandatory in order to construct urls. blank parameter will raise RoutingError exception. <br/>Exact matched named route declared as -  <code>  match ':a/:b/:c', :to => 'home#index', :as => :q </code> now go to the rails console - <code> ruby-1.9.3-head :005 > app.q_url(:a, :b, :c)   => "http://www.example.com/a/b/c"        ruby-1.9.3-head :006 > app.q_url(:a, :b, '')   ActionController::RoutingError: No route matches {:controller=>"home", :a=>:a, :b=>:b, :c=>""} </code><b>Bound parameters to named routes</b><br/>If you are too sure that certain parameter can be blank then you can define it as optional parameter inside route -  <br/><code> match ':a/:b(/:c)', :to => 'home#index', :as => :q </code><b>rails console</b><code> ruby-1.9.3-head :010 > app.q_url(:a, :b, '')   => "http://www.example.com/a/b?c="   ruby-1.9.3-head :011 > app.q_url(:a, :b)   => "http://www.example.com/a/b" </code></div>
+Rails routes can be customized as your own routes with parameters but first you should understand how routes behaves. <br/> <b>Adding dynamic parameters to routes </b> <br/>Here exact parameters are matched to route and presence of each parameter is mandatory in order to construct urls. blank parameter will raise RoutingError exception. <br/>Exact matched named route declared as -  <pre class=ruby>  match ':a/:b/:c', :to => 'home#index', :as => :q </pre> now go to the rails console - <pre class=ruby> ruby-1.9.3-head :005 > app.q_url(:a, :b, :c)   => "http://www.example.com/a/b/c"        ruby-1.9.3-head :006 > app.q_url(:a, :b, '')   ActionController::RoutingError: No route matches {:controller=>"home", :a=>:a, :b=>:b, :c=>""} </pre><b>Bound parameters to named routes</b><br/>If you are too sure that certain parameter can be blank then you can define it as optional parameter inside route -  <br/><pre class=ruby> match ':a/:b(/:c)', :to => 'home#index', :as => :q </pre><b>rails console</b><pre class=ruby> ruby-1.9.3-head :010 > app.q_url(:a, :b, '')   => "http://www.example.com/a/b?c="   ruby-1.9.3-head :011 > app.q_url(:a, :b)   => "http://www.example.com/a/b" </pre></div>
 </div>
   
   
@@ -615,7 +615,7 @@ Rails routes can be customized as your own routes with parameters but first you 
       
   <header>
     
-      <h1 class="entry-title"><a href="/2012/01/puts-tos-and-inspect-on-ruby-object">Puts, To_s and Inspect on Ruby Object</a></h1>
+      <h1 class="entry-title"><a href="/2012/01/puts-tos-and-inspect-on-ruby-object/">Puts, To_s and Inspect on Ruby Object</a></h1>
     
     
       <p class="meta">
@@ -639,7 +639,7 @@ Rails routes can be customized as your own routes with parameters but first you 
 
 
   <div class="entry-content"><div class='post'>
-`puts` converts ruby object into string by invoking to_s method on object. The default to_s prints the object&#8217;s class and an encoding of the object id. In order to print human readable form of object use inspect<br/> <code>locs = Location.find_by_sql('select * from locations')   Location Load (0.5ms)  select * from locations </code><b>Puts Object internally invokes to_s method on object to print</b><code>locs.each do |l|   # it calls to_s method on object   puts l end  #&lt;Location:0x000000055bb328&gt; #&lt;Location:0x000000055bb058&gt; </code><br/><b>puts object followed by subsequent invoke of inspect method outputs readable object</b><code>locs.each do |l|   puts l.inspect # prints actual object end  #&lt;Location id: 15, name: &quot;Annettaside3&quot;, street: &quot;71838 Ritchie Cape&quot;, city: &quot;East Destanystad&quot;, state: &quot;Utah&quot;, zip: &quot;58054&quot;, phone: 123456, other_phone: 987654, staff_strength: 40, is_active: true, created_at: &quot;2012-01-25 11:17:26&quot;, updated_at: &quot;2012-01-25 11:17:26&quot;, country_name: &quot;Korea&quot;&gt; #&lt;Location id: 16, name: &quot;Sporerbury4&quot;, street: &quot;73057 Jerad Shoal&quot;, city: &quot;South Kyliefurt&quot;, state: &quot;Delaware&quot;, zip: &quot;46553-3376&quot;, phone: 123456, other_phone: 987654, staff_strength: 40, is_active: true, created_at: &quot;2012-01-25 11:24:48&quot;, updated_at: &quot;2012-01-25 11:24:48&quot;, country_name: &quot;Australia&quot;&gt; </code></div>
+`puts` converts ruby object into string by invoking to_s method on object. The default to_s prints the object&#8217;s class and an encoding of the object id. In order to print human readable form of object use inspect<br/> <pre class=ruby>locs = Location.find_by_sql('select * from locations')   Location Load (0.5ms)  select * from locations </pre><b>Puts Object internally invokes to_s method on object to print</b><pre class=ruby>locs.each do |l|   # it calls to_s method on object   puts l end  #&lt;Location:0x000000055bb328&gt; #&lt;Location:0x000000055bb058&gt; </pre><br/><b>puts object followed by subsequent invoke of inspect method outputs readable object</b><pre class=ruby>locs.each do |l|   puts l.inspect # prints actual object end  #&lt;Location id: 15, name: &quot;Annettaside3&quot;, street: &quot;71838 Ritchie Cape&quot;, city: &quot;East Destanystad&quot;, state: &quot;Utah&quot;, zip: &quot;58054&quot;, phone: 123456, other_phone: 987654, staff_strength: 40, is_active: true, created_at: &quot;2012-01-25 11:17:26&quot;, updated_at: &quot;2012-01-25 11:17:26&quot;, country_name: &quot;Korea&quot;&gt; #&lt;Location id: 16, name: &quot;Sporerbury4&quot;, street: &quot;73057 Jerad Shoal&quot;, city: &quot;South Kyliefurt&quot;, state: &quot;Delaware&quot;, zip: &quot;46553-3376&quot;, phone: 123456, other_phone: 987654, staff_strength: 40, is_active: true, created_at: &quot;2012-01-25 11:24:48&quot;, updated_at: &quot;2012-01-25 11:24:48&quot;, country_name: &quot;Australia&quot;&gt; </pre></div>
 </div>
   
   
@@ -652,7 +652,7 @@ Rails routes can be customized as your own routes with parameters but first you 
       
   <header>
     
-      <h1 class="entry-title"><a href="/2012/01/csv-file-importexport-in-rails-3">Csv File Import / Export in Rails 3</a></h1>
+      <h1 class="entry-title"><a href="/2012/01/csv-file-importexport-in-rails-3/">Csv File Import / Export in Rails 3</a></h1>
     
     
       <p class="meta">
@@ -676,7 +676,7 @@ Rails routes can be customized as your own routes with parameters but first you 
 
 
   <div class="entry-content"><div class='post'>
-CSV (comma separated values) files are frequently used to import/export data. <br/>In rails 3, FasterCSV comes as default and below is the way to upload csv files inside rails applications. The code below will also show you how to generate csv in memory, parse on csv data, skip header, iterate over records, save records inside db, export upload error file and many more. <br/>First, View to upload file <br/><code>= form_tag upload_url, :multipart => true do   %label{:for => "file"} File to Upload   = file_field_tag "file"   = submit_tag </code>Assume upload_url maps to import action of customers controller <br/>Controller code <br/><code>class CustomersController < ApplicationController     [...]    def import     if request.post? && params[:file].present?       infile = params[:file].read       n, errs = 0, []        CSV.parse(infile) do |row|         n += 1         # SKIP: header i.e. first row OR blank row         next if n == 1 or row.join.blank?         # build_from_csv method will map customer attributes &          # build new customer record         customer = Customer.build_from_csv(row)         # Save upon valid          # otherwise collect error records to export         if customer.valid?           customer.save         else           errs << row         end       end       # Export Error file for later upload upon correction       if errs.any?         errFile ="errors_#{Date.today.strftime('%d%b%y')}.csv"         errs.insert(0, Customer.csv_header)         errCSV = CSV.generate do |csv|           errs.each {|row| csv << row}         end         send_data errCSV,           :type => 'text/csv; charset=iso-8859-1; header=present',           :disposition => "attachment; filename=#{errFile}.csv"       else         flash[:notice] = I18n.t('customer.import.success')         redirect_to import_url #GET       end     end   end   [...] end </code>Customer model <br/><code>class Customer < ActiveRecord::Base   scope :active, where(:active => true)   scope :latest, order('created_at desc')      def self.csv_header     "First Name,Last Name,Email,Phone,Mobile, Address, FAX, City".split(',')   end      def self.build_from_csv(row)     # find existing customer from email or create new     cust = find_or_initialize_by_email(row[2])     cust.attributes ={:first_name => row[0],       :last_name => row[1],       :email => row[3],       :phone => row[4],       :mobile => row[5],       :address => row[6],       :fax => row[7],       :city => row[8]}     return cust   end      def to_csv     [first_name, last_name, email, phone, mobile, address, fax, city]   end end </code><br/>Export customer records in CSV format<br/>Below code loads customer records from database then generate csv_data inside memory and  exports data to browser using send_data method.<br/>Note: As we are not writing on file system hence code can easily work heroku. <code>  def export     # CRITERIA : to select customer records     #=> Customer.active.latest.limit(100)     custs = Customer.limit(10)     filename ="customers_#{Date.today.strftime('%d%b%y')}"     csv_data = FasterCSV.generate do |csv|       csv << Customer.csv_header       custs.each do |c|          csv << c.to_csv       end      end      send_data csv_data,       :type => 'text/csv; charset=iso-8859-1; header=present',       :disposition => "attachment; filename=#{filename}.csv"   end  </code></div>
+CSV (comma separated values) files are frequently used to import/export data. <br/>In rails 3, FasterCSV comes as default and below is the way to upload csv files inside rails applications. The code below will also show you how to generate csv in memory, parse on csv data, skip header, iterate over records, save records inside db, export upload error file and many more. <br/>First, View to upload file <br/><pre class=ruby>= form_tag upload_url, :multipart => true do   %label{:for => "file"} File to Upload   = file_field_tag "file"   = submit_tag </pre>Assume upload_url maps to import action of customers controller <br/>Controller code <br/><pre class=ruby>class CustomersController < ApplicationController     [...]    def import     if request.post? && params[:file].present?       infile = params[:file].read       n, errs = 0, []        CSV.parse(infile) do |row|         n += 1         # SKIP: header i.e. first row OR blank row         next if n == 1 or row.join.blank?         # build_from_csv method will map customer attributes &          # build new customer record         customer = Customer.build_from_csv(row)         # Save upon valid          # otherwise collect error records to export         if customer.valid?           customer.save         else           errs << row         end       end       # Export Error file for later upload upon correction       if errs.any?         errFile ="errors_#{Date.today.strftime('%d%b%y')}.csv"         errs.insert(0, Customer.csv_header)         errCSV = CSV.generate do |csv|           errs.each {|row| csv << row}         end         send_data errCSV,           :type => 'text/csv; charset=iso-8859-1; header=present',           :disposition => "attachment; filename=#{errFile}.csv"       else         flash[:notice] = I18n.t('customer.import.success')         redirect_to import_url #GET       end     end   end   [...] end </pre>Customer model <br/><pre class=ruby>class Customer < ActiveRecord::Base   scope :active, where(:active => true)   scope :latest, order('created_at desc')      def self.csv_header     "First Name,Last Name,Email,Phone,Mobile, Address, FAX, City".split(',')   end      def self.build_from_csv(row)     # find existing customer from email or create new     cust = find_or_initialize_by_email(row[2])     cust.attributes ={:first_name => row[0],       :last_name => row[1],       :email => row[3],       :phone => row[4],       :mobile => row[5],       :address => row[6],       :fax => row[7],       :city => row[8]}     return cust   end      def to_csv     [first_name, last_name, email, phone, mobile, address, fax, city]   end end </pre><br/>Export customer records in CSV format<br/>Below code loads customer records from database then generate csv_data inside memory and  exports data to browser using send_data method.<br/>Note: As we are not writing on file system hence code can easily work heroku. <pre class=ruby>  def export     # CRITERIA : to select customer records     #=> Customer.active.latest.limit(100)     custs = Customer.limit(10)     filename ="customers_#{Date.today.strftime('%d%b%y')}"     csv_data = FasterCSV.generate do |csv|       csv << Customer.csv_header       custs.each do |c|          csv << c.to_csv       end      end      send_data csv_data,       :type => 'text/csv; charset=iso-8859-1; header=present',       :disposition => "attachment; filename=#{filename}.csv"   end  </pre></div>
 </div>
   
   
@@ -689,7 +689,7 @@ CSV (comma separated values) files are frequently used to import/export data. <b
       
   <header>
     
-      <h1 class="entry-title"><a href="/2012/01/mongoid-embededin-and-array-field">Mongoid Embeded_in and Array Field Management</a></h1>
+      <h1 class="entry-title"><a href="/2012/01/mongoid-embededin-and-array-field/">Mongoid Embeded_in and Array Field Management</a></h1>
     
     
       <p class="meta">
@@ -713,7 +713,7 @@ CSV (comma separated values) files are frequently used to import/export data. <b
 
 
   <div class="entry-content"><div class='post'>
-Previous post explains on <a href="http://www.funonrails.com/2012/01/mongoid-array-field-and-rails-form.html">mongoid document array field and rails form implementation</a><br/>Below example shows rails form integration of array field of embedded mongoid document <br/>consider scenario, student embeds one family who has many assets<br/><code>class Student   include Mongoid::Document    field :name   field :phone      embeds_one  :family    validates_associated :family   accepts_nested_attributes_for :family end </code><br/><code>class Family   include Mongoid::Document   ASSETS = ['flat', 'car', 'business', 'bunglow', 'cash']      field :members, type: Integer   field :assets, type: Array   field :religon    embedded_in :student end </code>Brief controller code </br/>  <code>class StudentsController < ApplicationController  def new    @student = Student.new    @student.family ||= @student.build_family  end   def create    @student = Student.new(params[:student])    @student.family.assets.reject!(&:blank?)    if @student.save      [...]    else      render :action => :new    end  end end </code>view form will look like- <br/><code>= form_for(@student) do |s|   = s.text_field :name   = s.text_field :phone   - s.fields_for :family do |f|     = f.text_field :members     = f.text_field :religion     - Family::ASSETS.each do |asset|       /Here f.object_name #=> student[family]       = f.check_box :assets, :name => "#{f.object_name}[assets][]", asset </code></div>
+Previous post explains on <a href="http://www.funonrails.com/2012/01/mongoid-array-field-and-rails-form.html">mongoid document array field and rails form implementation</a><br/>Below example shows rails form integration of array field of embedded mongoid document <br/>consider scenario, student embeds one family who has many assets<br/><pre class=ruby>class Student   include Mongoid::Document    field :name   field :phone      embeds_one  :family    validates_associated :family   accepts_nested_attributes_for :family end </pre><br/><pre class=ruby>class Family   include Mongoid::Document   ASSETS = ['flat', 'car', 'business', 'bunglow', 'cash']      field :members, type: Integer   field :assets, type: Array   field :religon    embedded_in :student end </pre>Brief controller code </br/>  <pre class=ruby>class StudentsController < ApplicationController  def new    @student = Student.new    @student.family ||= @student.build_family  end   def create    @student = Student.new(params[:student])    @student.family.assets.reject!(&:blank?)    if @student.save      [...]    else      render :action => :new    end  end end </pre>view form will look like- <br/><pre class=ruby>= form_for(@student) do |s|   = s.text_field :name   = s.text_field :phone   - s.fields_for :family do |f|     = f.text_field :members     = f.text_field :religion     - Family::ASSETS.each do |asset|       /Here f.object_name #=> student[family]       = f.check_box :assets, :name => "#{f.object_name}[assets][]", asset </pre></div>
 </div>
   
   
@@ -736,23 +736,23 @@ Previous post explains on <a href="http://www.funonrails.com/2012/01/mongoid-arr
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

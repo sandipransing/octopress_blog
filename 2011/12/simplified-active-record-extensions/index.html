@@ -92,7 +92,7 @@
 
 
 <div class="entry-content"><div class='post'>
-Below extensions to active record base simplifies its usage while coding.<br/><console># config/initializers/core_extensions.rb  class ActiveRecord::Base    def self.pagination(options)     paginate :per_page => options[:per_page] || per_page, :page => options[:page]   end    def self.options_for_select(opts={})     opts[:name] ||= :name     opts[:attr] ||= :id     opts[:prompt] ||= &#8216;Please Select&#8217;     all.collect{|c| [c.send(opts[:name].to_sym), c.send(opts[:attr].to_sym)]}.insert(0, [opts[:prompt], nil])   end end </console>Usage<br/><console>class Student< ActiveRecord::Base  #attributes #=> name, age end  ##  Student.pagination({:page => 10}) Student.pagination({:per_page => 2, :page => 2}) Student.options_for_select Student.options_for_select({:prompt => &#8216;Please select&#8217;}) Student.options_for_select({:name => :age}) </console></div>
+Below extensions to active record base simplifies its usage while coding.<br/><pre class=ruby># config/initializers/core_extensions.rb  class ActiveRecord::Base    def self.pagination(options)     paginate :per_page => options[:per_page] || per_page, :page => options[:page]   end    def self.options_for_select(opts={})     opts[:name] ||= :name     opts[:attr] ||= :id     opts[:prompt] ||= 'Please Select'     all.collect{|c| [c.send(opts[:name].to_sym), c.send(opts[:attr].to_sym)]}.insert(0, [opts[:prompt], nil])   end end </pre>Usage<br/><pre class=ruby>class Student< ActiveRecord::Base  #attributes #=> name, age end  ##  Student.pagination({:page => 10}) Student.pagination({:per_page => 2, :page => 2}) Student.options_for_select Student.options_for_select({:prompt => 'Please select'}) Student.options_for_select({:name => :age}) </pre></div>
 </div>
 
 
@@ -129,7 +129,7 @@ Below extensions to active record base simplifies its usage while coding.<br/><c
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2011/12/simplified-active-record-extensions" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2011/12/simplified-active-record-extensions" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2011/12/simplified-active-record-extensions/" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2011/12/simplified-active-record-extensions/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -140,10 +140,10 @@ Below extensions to active record base simplifies its usage while coding.<br/><c
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2011/12/twitter-bootstrap-paginate-and-rails-3" title="Previous Post: twitter bootstrap paginate and rails 3">&laquo; twitter bootstrap paginate and rails 3</a>
+        <a class="basic-alignment left" href="/2011/12/twitter-bootstrap-paginate-and-rails-3/" title="Previous Post: twitter bootstrap paginate and rails 3">&laquo; twitter bootstrap paginate and rails 3</a>
       
       
-        <a class="basic-alignment right" href="/2011/12/active-admin-sass-and-rails-3" title="Next Post: active-admin sass and rails 3">active-admin sass and rails 3 &raquo;</a>
+        <a class="basic-alignment right" href="/2011/12/active-admin-sass-and-rails-3/" title="Next Post: active-admin sass and rails 3">active-admin sass and rails 3 &raquo;</a>
       
     </p>
   </footer>
@@ -159,23 +159,23 @@ Below extensions to active record base simplifies its usage while coding.<br/><c
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

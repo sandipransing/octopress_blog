@@ -92,7 +92,7 @@
 
 
 <div class="entry-content"><div class='post'>
-Authorize Net SIM gateway transaction skips merchant side creditcard details form and directs transaction to be take place on gateway server.<br/> <console>  # Gemfile   gem &#8216;authorize-net&#8217; </console><br/>Register for authorize net sandbox account <a href='https://developer.authorize.net/testaccount/'>click here</a><br/><br/><b>Payment gateway credentials</b><br/><console># config/gateway.yml development: &development     mode: test     login: 9gdLh6T     key: 67fu45xw6VP92LX1  production:    <<: *development  test:    <<: *development </console><br/> <b>Generate & Migrate Payment Model</b><br/><console>  rails g model payment status:string amount:float transaction_number:string   rake db:migrate </console><br/> SIM gateway methods extracted and added to payment model <br/><console># app/models/payment.rb class Payment < ActiveRecord::Base      PROCESSING, FAILED, SUCCESS = 1, 2, 3      validates :amount, :presence => true, :numericality => { :greater_than => 0 }    def self.conf     @@gateway_conf ||= YAML.load_file(Rails.root.join(&#8216;config/gateway.yml&#8217;).to_s)[Rails.env]   end      def success?     self.status == SUCCESS   end    ## Authorize :: SIM   def setup_transaction(options ={})     options.merge!(:link_method => AuthorizeNet::SIM::HostedReceiptPage::LinkMethod::POST)     t = AuthorizeNet::SIM::Transaction.new(       auth[&#8216;login&#8217;], auth[&#8216;key&#8217;], amount,       :hosted_payment_form => true,       :test => auth[&#8216;mode&#8217;]     )     t.set_hosted_payment_receipt(AuthorizeNet::SIM::HostedReceiptPage.new(options))     return t   end    def auth     self.class.conf   end end </console>Payment routes <br><console> ## Callback URL   match &#8216;/billing/:id/confirm&#8217;, :to => &#8216;billing#authorize&#8217;, :as => :confirm_billing     ## Request URL   match &#8216;/billing/:id&#8217;, :to => &#8216;billing#checkout&#8217;, :as => :billing   match &#8216;/billing/:id/thank_you&#8217;, :to => &#8216;billing#thank_you&#8217;, :as => :thank_you_billing </console> Billing controller <br/><console># app/controllers/billing_controller.rb  class BillingController < ApplicationController   helper :authorize_net    before_filter :get_order, :only => [:checkout, :authorize, :thank_you]    def checkout     # ASSUMPTION order is valid means amount is entered     @transaction = @order.setup_transaction(       {:link_text => &#8216;Continue&#8217;,         :link_url => confirm_billing_url(@order)})   end    ## CALL BACK   def authorize     resp = AuthorizeNet::SIM::Response.new(params)     if resp.approved?       @order.status = Payment::SUCCESS       @order.transaction_num = resp.transaction_id     else       @order.status = Payment::FAILED      end     @order.save(:validate => false)     redirect_to thank_you_billing_url(@order)   end    private   def auth     Payment.conf   end    def get_order     @order = Payment.find_by_id(params[:id])     @order && @order.valid? || invalid_url   end end </console><br/>Views Forms<br/><console># app/views/billing/checkout.html.haml  = form_for :sim_transaction, :url => AuthorizeNet::SIM::Transaction::Gateway::TEST, :html => {:id => :authForm} do |f|   = sim_fields(@transaction) :javascript   $(document).ready(function(){     $(&#8216;#authForm&#8217;).submit();   }) </console><br/><console># app/views/billing/thank_you.html.haml  - if @order.success?   %p The transaction is successfully completed - else   %p The transaction failed </console></div>
+Authorize Net SIM gateway transaction skips merchant side creditcard details form and directs transaction to be take place on gateway server.<br/> <pre class=ruby>  # Gemfile   gem 'authorize-net' </pre><br/>Register for authorize net sandbox account <a href='https://developer.authorize.net/testaccount/'>click here</a><br/><br/><b>Payment gateway credentials</b><br/><pre class=ruby># config/gateway.yml development: &development     mode: test     login: 9gdLh6T     key: 67fu45xw6VP92LX1  production:    <<: *development  test:    <<: *development </pre><br/> <b>Generate & Migrate Payment Model</b><br/><pre class=ruby>  rails g model payment status:string amount:float transaction_number:string   rake db:migrate </pre><br/> SIM gateway methods extracted and added to payment model <br/><pre class=ruby># app/models/payment.rb class Payment < ActiveRecord::Base      PROCESSING, FAILED, SUCCESS = 1, 2, 3      validates :amount, :presence => true, :numericality => { :greater_than => 0 }    def self.conf     @@gateway_conf ||= YAML.load_file(Rails.root.join('config/gateway.yml').to_s)[Rails.env]   end      def success?     self.status == SUCCESS   end    ## Authorize :: SIM   def setup_transaction(options ={})     options.merge!(:link_method => AuthorizeNet::SIM::HostedReceiptPage::LinkMethod::POST)     t = AuthorizeNet::SIM::Transaction.new(       auth['login'], auth['key'], amount,       :hosted_payment_form => true,       :test => auth['mode']     )     t.set_hosted_payment_receipt(AuthorizeNet::SIM::HostedReceiptPage.new(options))     return t   end    def auth     self.class.conf   end end </pre>Payment routes <br><pre class=ruby> ## Callback URL   match '/billing/:id/confirm', :to => 'billing#authorize', :as => :confirm_billing     ## Request URL   match '/billing/:id', :to => 'billing#checkout', :as => :billing   match '/billing/:id/thank_you', :to => 'billing#thank_you', :as => :thank_you_billing </pre> Billing controller <br/><pre class=ruby># app/controllers/billing_controller.rb  class BillingController < ApplicationController   helper :authorize_net    before_filter :get_order, :only => [:checkout, :authorize, :thank_you]    def checkout     # ASSUMPTION order is valid means amount is entered     @transaction = @order.setup_transaction(       {:link_text => 'Continue',         :link_url => confirm_billing_url(@order)})   end    ## CALL BACK   def authorize     resp = AuthorizeNet::SIM::Response.new(params)     if resp.approved?       @order.status = Payment::SUCCESS       @order.transaction_num = resp.transaction_id     else       @order.status = Payment::FAILED      end     @order.save(:validate => false)     redirect_to thank_you_billing_url(@order)   end    private   def auth     Payment.conf   end    def get_order     @order = Payment.find_by_id(params[:id])     @order && @order.valid? || invalid_url   end end </pre><br/>Views Forms<br/><pre class=ruby># app/views/billing/checkout.html.haml  = form_for :sim_transaction, :url => AuthorizeNet::SIM::Transaction::Gateway::TEST, :html => {:id => :authForm} do |f|   = sim_fields(@transaction) :javascript   $(document).ready(function(){     $('#authForm').submit();   }) </pre><br/><pre class=ruby># app/views/billing/thank_you.html.haml  - if @order.success?   %p The transaction is successfully completed - else   %p The transaction failed </pre></div>
 </div>
 
 
@@ -129,7 +129,7 @@ Authorize Net SIM gateway transaction skips merchant side creditcard details for
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2011/12/authorize-net-sim-payment-integration" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2011/12/authorize-net-sim-payment-integration" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2011/12/authorize-net-sim-payment-integration/" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2011/12/authorize-net-sim-payment-integration/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -140,10 +140,10 @@ Authorize Net SIM gateway transaction skips merchant side creditcard details for
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2011/12/using-formbuilder-in-rails" title="Previous Post: Customizing rails default form builder">&laquo; Customizing rails default form builder</a>
+        <a class="basic-alignment left" href="/2011/12/using-formbuilder-in-rails/" title="Previous Post: Customizing rails default form builder">&laquo; Customizing rails default form builder</a>
       
       
-        <a class="basic-alignment right" href="/2011/12/paypal-payments-integration-with-rails" title="Next Post: Paypal payments integration with rails">Paypal payments integration with rails &raquo;</a>
+        <a class="basic-alignment right" href="/2011/12/paypal-payments-integration-with-rails/" title="Next Post: Paypal payments integration with rails">Paypal payments integration with rails &raquo;</a>
       
     </p>
   </footer>
@@ -159,23 +159,23 @@ Authorize Net SIM gateway transaction skips merchant side creditcard details for
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

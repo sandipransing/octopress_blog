@@ -92,7 +92,7 @@
 
 
 <div class="entry-content"><div class='post'>
-Heroku is readonly file system hence write operations can only be done inside tmp directory. <br/> Asset compilation on heroku can be handled in different ways <br/><console>#1. compiling locally and placing inside assets directory  RAILS_ENV=production bundle exec rake assets:precompile  #2. It compiles assets while slug compiles </console><br/> <console>#3. Run time asset compilation # It compiles assets for every rails request if it notifies assets got modified  # config/application.rb     # Enable the asset pipeline     config.assets.enabled = true      # Version of your assets, change this if you want to expire all your assets     config.assets.version = &#8216;1.0&#8217;     config.assets.prefix = Rails.root.join(&#8216;tmp/assets&#8217;).to_s  # config/environments/production.rb   # Don&#8217;t fallback to assets pipeline if a precompiled asset is missed   config.assets.compile = true </console><br/> Note: write operation made inside tmp directory can not make any guarantee of being persisted hence be careful while using.</div>
+Heroku is readonly file system hence write operations can only be done inside tmp directory. <br/> Asset compilation on heroku can be handled in different ways <br/><pre class=ruby>#1. compiling locally and placing inside assets directory  RAILS_ENV=production bundle exec rake assets:precompile  #2. It compiles assets while slug compiles </pre><br/> <pre class=ruby>#3. Run time asset compilation # It compiles assets for every rails request if it notifies assets got modified  # config/application.rb     # Enable the asset pipeline     config.assets.enabled = true      # Version of your assets, change this if you want to expire all your assets     config.assets.version = '1.0'     config.assets.prefix = Rails.root.join('tmp/assets').to_s  # config/environments/production.rb   # Don't fallback to assets pipeline if a precompiled asset is missed   config.assets.compile = true </pre><br/> Note: write operation made inside tmp directory can not make any guarantee of being persisted hence be careful while using.</div>
 </div>
 
 
@@ -129,7 +129,7 @@ Heroku is readonly file system hence write operations can only be done inside tm
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2011/12/getting-assets-working-on-heroku" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2011/12/getting-assets-working-on-heroku" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2011/12/getting-assets-working-on-heroku/" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2011/12/getting-assets-working-on-heroku/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -140,10 +140,10 @@ Heroku is readonly file system hence write operations can only be done inside tm
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2011/12/multiple-resources-registrations-with" title="Previous Post: Multiple resources, registrations with devise, STI and single sign sign on">&laquo; Multiple resources, registrations with devise, STI and single sign sign on</a>
+        <a class="basic-alignment left" href="/2011/12/multiple-resources-registrations-with/" title="Previous Post: Multiple resources, registrations with devise, STI and single sign sign on">&laquo; Multiple resources, registrations with devise, STI and single sign sign on</a>
       
       
-        <a class="basic-alignment right" href="/2011/12/using-jquery-rails-and-datepicker" title="Next Post: using jQuery-rails and datepicker, timepicker & datetimepicker">using jQuery-rails and datepicker, timepicker & datetimepicker &raquo;</a>
+        <a class="basic-alignment right" href="/2011/12/using-jquery-rails-and-datepicker/" title="Next Post: using jQuery-rails and datepicker, timepicker & datetimepicker">using jQuery-rails and datepicker, timepicker & datetimepicker &raquo;</a>
       
     </p>
   </footer>
@@ -159,23 +159,23 @@ Heroku is readonly file system hence write operations can only be done inside tm
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

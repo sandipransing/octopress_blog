@@ -92,7 +92,7 @@
 
 
 <div class="entry-content"><div class='post'>
-jQuery datepicker plugin is used to display inline calendar popup that eases user input experience while entering date/time fields. Calendar can be easily binded to any html DOM element. To Apply different styles download css from <a href="http://jqueryui.com/demos/datepicker">here</a> <console># Gemfile  gem &#8220;jquery-rails&#8221; </console><br/><console># console  bundle install </console><br/><console># app/assets/javascripts/application.js.coffee  //= require jquery //= require jquery_ujs //= require jquery-ui </console><br/> <console># app/views/layouts/application.html.haml  = stylesheet_link_tag &#8220;application&#8221;  = stylesheet_link_tag &#8220;http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css&#8221;  = javascript_include_tag &#8220;application&#8221; </console> <br/>Before using timepicker download jquery-ui-timepicker js <br/><code>wget http://trentrichardson.com/examples/timepicker/js/jquery-ui-timepicker-addon.js app/assets/javascripts/ </code>Add timepcker js to application.js.coffee<br/><code>//= require jquery-ui-timepicker-addon </code><br/><console>## inside views # app/views/users/_form.html.haml = form_for @user ||= User.new do |f|   = f.text_field :birth_date, :id => &#8216;birthDate&#8217;   = f.text_field :birth_time, :id => &#8216;birthTime&#8217;   = f.text_field :exam_on, :id => &#8216;examOn&#8217; :javascript   $(document).ready(function() {     $(&#8220;#birthDate&#8221;).datepicker();     $(&#8220;#birthTime&#8221;).timepicker();     $(&#8220;#examOn&#8221;).datetimepicker();     $(&#8216;#ui-datepicker-div&#8217;).removeClass(&#8216;ui-helper-hidden-accessible&#8217;) </console><br/><console># customizations $(&#8216;#birth_date&#8217;).datepicker({ dateFormat: &#8216;dd-mm-yy&#8217; }); $(&#8216;#birth_date&#8217;).datepicker({ disabled: true }); $(&#8220;#examOn&#8221;).datetimepicker({ ampm: true }); $(&#8220;#examOn&#8221;).datetimepicker({ timeFormat: &#8216;h:m&#8217;, separator: &#8217; @ &#8217; }); </console></div>
+jQuery datepicker plugin is used to display inline calendar popup that eases user input experience while entering date/time fields. Calendar can be easily binded to any html DOM element. To Apply different styles download css from <a href="http://jqueryui.com/demos/datepicker">here</a> <pre class=ruby># Gemfile  gem "jquery-rails" </pre><br/><pre class=ruby># console  bundle install </pre><br/><pre class=ruby># app/assets/javascripts/application.js.coffee  //= require jquery //= require jquery_ujs //= require jquery-ui </pre><br/> <pre class=ruby># app/views/layouts/application.html.haml  = stylesheet_link_tag "application"  = stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css"  = javascript_include_tag "application" </pre> <br/>Before using timepicker download jquery-ui-timepicker js <br/><pre class=ruby>wget http://trentrichardson.com/examples/timepicker/js/jquery-ui-timepicker-addon.js app/assets/javascripts/ </pre>Add timepcker js to application.js.coffee<br/><pre class=ruby>//= require jquery-ui-timepicker-addon </pre><br/><pre class=ruby>## inside views # app/views/users/_form.html.haml = form_for @user ||= User.new do |f|   = f.text_field :birth_date, :id => 'birthDate'   = f.text_field :birth_time, :id => 'birthTime'   = f.text_field :exam_on, :id => 'examOn' :javascript   $(document).ready(function() {     $("#birthDate").datepicker();     $("#birthTime").timepicker();     $("#examOn").datetimepicker();     $('#ui-datepicker-div').removeClass('ui-helper-hidden-accessible') </pre><br/><pre class=ruby># customizations $('#birth_date').datepicker({ dateFormat: 'dd-mm-yy' }); $('#birth_date').datepicker({ disabled: true }); $("#examOn").datetimepicker({ ampm: true }); $("#examOn").datetimepicker({ timeFormat: 'h:m', separator: ' @ ' }); </pre></div>
 </div>
 
 
@@ -129,7 +129,7 @@ jQuery datepicker plugin is used to display inline calendar popup that eases use
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2011/12/using-jquery-rails-and-datepicker" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2011/12/using-jquery-rails-and-datepicker" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2011/12/using-jquery-rails-and-datepicker/" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2011/12/using-jquery-rails-and-datepicker/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -140,10 +140,10 @@ jQuery datepicker plugin is used to display inline calendar popup that eases use
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2011/12/getting-assets-working-on-heroku" title="Previous Post: Getting assets pipeline working on heroku">&laquo; Getting assets pipeline working on heroku</a>
+        <a class="basic-alignment left" href="/2011/12/getting-assets-working-on-heroku/" title="Previous Post: Getting assets pipeline working on heroku">&laquo; Getting assets pipeline working on heroku</a>
       
       
-        <a class="basic-alignment right" href="/2011/12/dynamic-methods-inside-ruby-classes" title="Next Post: Dynamic methods inside ruby classes">Dynamic methods inside ruby classes &raquo;</a>
+        <a class="basic-alignment right" href="/2011/12/dynamic-methods-inside-ruby-classes/" title="Next Post: Dynamic methods inside ruby classes">Dynamic methods inside ruby classes &raquo;</a>
       
     </p>
   </footer>
@@ -159,23 +159,23 @@ jQuery datepicker plugin is used to display inline calendar popup that eases use
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

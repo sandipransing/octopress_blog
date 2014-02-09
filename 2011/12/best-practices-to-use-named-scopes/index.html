@@ -92,7 +92,7 @@
 
 
 <div class="entry-content"><div class='post'>
-Scopes are partial query conditions to database queries. scopes are always prefixed to class finders. There are several ways to use scopes inside rails models.  <console># 1. Scope defined below gets loaded while class definition loads scope :active, where(:active => true) scope :archived, where(:archived => true, :post_type => :general) # 2.Dynamic scopes needs to be always defined inside lambda  scope :not_expired, lambda { where(&#8216;expiry_date <= ?', Date.today) } # 3.Combining scopes scope :visible, published.not_expired </console><br/><console># 4. Passing parameters to scopes # avoid below scope :created_by_user, lambda {|user|   where(&#8216;user_id = ?&#8217;, user) } # use this scope :created_by_user, lambda {|user|   where(:user_id => user) } </console><br/><console># 5. passing multiple parameters # avoid below scope :made_between, lambda{|from, to|   where(&#8216;created_date >= ? and created_date <= ?', from, to) } # use this scope :made_between, lambda{|from, to|   where('created_date >= :from and created_date <= :to', :from => from, :to => to) } </console><br/><console># 6. associations inside scope (joins and includes) # below will perform eager loading effective when rendering posts with comments scope :with_user_comments, lambda{|user|   includes(:comments).where(&#8216;comments.user_id = ?&#8217;, user) }  # faster # also can be done as post.comments.where(:user_id => user) scope :with_user_comments, lambda{|user|   joins(:comments).where(&#8216;comments.user_id = ?&#8217;, user) } </console><br/>So, at last would suggest making use of symbols when there are multiple parameters to scopes and make maximum use of scopes rather than having where conditions everywhere :)</div>
+Scopes are partial query conditions to database queries. scopes are always prefixed to class finders. There are several ways to use scopes inside rails models.  <pre class=ruby># 1. Scope defined below gets loaded while class definition loads scope :active, where(:active => true) scope :archived, where(:archived => true, :post_type => :general) # 2.Dynamic scopes needs to be always defined inside lambda  scope :not_expired, lambda { where('expiry_date <= ?', Date.today) } # 3.Combining scopes scope :visible, published.not_expired </pre><br/><pre class=ruby># 4. Passing parameters to scopes # avoid below scope :created_by_user, lambda {|user|   where('user_id = ?', user) } # use this scope :created_by_user, lambda {|user|   where(:user_id => user) } </pre><br/><pre class=ruby># 5. passing multiple parameters # avoid below scope :made_between, lambda{|from, to|   where('created_date >= ? and created_date <= ?', from, to) } # use this scope :made_between, lambda{|from, to|   where('created_date >= :from and created_date <= :to', :from => from, :to => to) } </pre><br/><pre class=ruby># 6. associations inside scope (joins and includes) # below will perform eager loading effective when rendering posts with comments scope :with_user_comments, lambda{|user|   includes(:comments).where('comments.user_id = ?', user) }  # faster # also can be done as post.comments.where(:user_id => user) scope :with_user_comments, lambda{|user|   joins(:comments).where('comments.user_id = ?', user) } </pre><br/>So, at last would suggest making use of symbols when there are multiple parameters to scopes and make maximum use of scopes rather than having where conditions everywhere :)</div>
 </div>
 
 
@@ -129,7 +129,7 @@ Scopes are partial query conditions to database queries. scopes are always prefi
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2011/12/best-practices-to-use-named-scopes" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2011/12/best-practices-to-use-named-scopes" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2011/12/best-practices-to-use-named-scopes/" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2011/12/best-practices-to-use-named-scopes/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -140,10 +140,10 @@ Scopes are partial query conditions to database queries. scopes are always prefi
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2011/12/dynamic-methods-inside-ruby-classes" title="Previous Post: Dynamic methods inside ruby classes">&laquo; Dynamic methods inside ruby classes</a>
+        <a class="basic-alignment left" href="/2011/12/dynamic-methods-inside-ruby-classes/" title="Previous Post: Dynamic methods inside ruby classes">&laquo; Dynamic methods inside ruby classes</a>
       
       
-        <a class="basic-alignment right" href="/2011/12/twitter-bootstrap-paginate-and-rails-3" title="Next Post: twitter bootstrap paginate and rails 3">twitter bootstrap paginate and rails 3 &raquo;</a>
+        <a class="basic-alignment right" href="/2011/12/twitter-bootstrap-paginate-and-rails-3/" title="Next Post: twitter bootstrap paginate and rails 3">twitter bootstrap paginate and rails 3 &raquo;</a>
       
     </p>
   </footer>
@@ -159,23 +159,23 @@ Scopes are partial query conditions to database queries. scopes are always prefi
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

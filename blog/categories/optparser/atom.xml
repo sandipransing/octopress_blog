@@ -4,7 +4,7 @@
   <title><![CDATA[Category: optparser | Fun On Rails]]></title>
   <link href="http://sandipransing.github.io/blog/categories/optparser/atom.xml" rel="self"/>
   <link href="http://sandipransing.github.io/"/>
-  <updated>2014-02-09T20:36:37+05:30</updated>
+  <updated>2014-02-09T23:18:57+05:30</updated>
   <id>http://sandipransing.github.io/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -15,7 +15,7 @@
   
   <entry>
     <title type="html"><![CDATA[Passing commandline parameter (arguments) to ruby file using optparser]]></title>
-    <link href="http://sandipransing.github.io/2009/11/passing-commandline-parameter-arguments"/>
+    <link href="http://sandipransing.github.io/2009/11/passing-commandline-parameter-arguments/"/>
     <updated>2009-11-27T19:13:00+05:30</updated>
     <id>http://sandipransing.github.io/2009/11/passing-commandline-parameter-arguments</id>
     <content type="html"><![CDATA[<div class='post'>

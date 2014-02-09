@@ -92,7 +92,7 @@
 
 
 <div class="entry-content"><div class='post'>
-We all know Active Support library constantly keeps adding new extensions to ruby core library and hence rails framework.<br/> Do you know now inside ruby class we can have class_attribute placeholder. <br/> <console>class A   class_attribute :counter, :access_time end  A.counter = 12 A.counter #=> 12 A.new.counter #=> 12 </console><br/><b>Inheritance </b><console>class B < A end  B.counter #=> 12 B.access_time #=> nil B.access_time = Time.now B.access_time #=> Wed Dec 28 18:55:06 +0530 2011 B.new.access_time #=> Wed Dec 28 18:55:06 +0530 2011 A.access_time = nil </console><br/>Restricting instance from writing class_attributes <br/><console>class V   class_attribute :counter, :instance_writer => false end  V.new.counter = 12 NoMethodError: undefined method `counter=&#8217; for #<V:0x7f8f9d66fee8></console><br/>Other ways <br/><console>a_class = Class.new{class_atrribute :counter}  a_class.counter = 13 a_class.counter #=> 13 a_class.new.counter #=> 13  p = Class.new { class_attribute :help, :instance_writer => false } p.new.help = &#8216;Got a second!&#8217; NoMethodError: undefined method `help=&#8217; for #<#<Class:0x7f8f9d5c2fb8>:0x7f8f9d5b1038>p.help = &#8216;Got a second!&#8217; p.help #=> &#8220;Got a second!&#8221; </console></div>
+We all know Active Support library constantly keeps adding new extensions to ruby core library and hence rails framework.<br/> Do you know now inside ruby class we can have class_attribute placeholder. <br/> <pre class=ruby>class A   class_attribute :counter, :access_time end  A.counter = 12 A.counter #=> 12 A.new.counter #=> 12 </pre><br/><b>Inheritance </b><pre class=ruby>class B < A end  B.counter #=> 12 B.access_time #=> nil B.access_time = Time.now B.access_time #=> Wed Dec 28 18:55:06 +0530 2011 B.new.access_time #=> Wed Dec 28 18:55:06 +0530 2011 A.access_time = nil </pre><br/>Restricting instance from writing class_attributes <br/><pre class=ruby>class V   class_attribute :counter, :instance_writer => false end  V.new.counter = 12 NoMethodError: undefined method `counter=' for #<V:0x7f8f9d66fee8></pre><br/>Other ways <br/><pre class=ruby>a_class = Class.new{class_atrribute :counter}  a_class.counter = 13 a_class.counter #=> 13 a_class.new.counter #=> 13  p = Class.new { class_attribute :help, :instance_writer => false } p.new.help = 'Got a second!' NoMethodError: undefined method `help=' for #<#<Class:0x7f8f9d5c2fb8>:0x7f8f9d5b1038>p.help = 'Got a second!' p.help #=> "Got a second!" </pre></div>
 </div>
 
 
@@ -129,7 +129,7 @@ We all know Active Support library constantly keeps adding new extensions to rub
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2011/12/bugging-around-active-supports" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2011/12/bugging-around-active-supports" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2011/12/bugging-around-active-supports/" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2011/12/bugging-around-active-supports/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -140,10 +140,10 @@ We all know Active Support library constantly keeps adding new extensions to rub
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2011/12/authorizenet-aim-payment-integration" title="Previous Post: Authorize Net (AIM) payment integration with rails">&laquo; Authorize Net (AIM) payment integration with rails</a>
+        <a class="basic-alignment left" href="/2011/12/authorizenet-aim-payment-integration/" title="Previous Post: Authorize Net (AIM) payment integration with rails">&laquo; Authorize Net (AIM) payment integration with rails</a>
       
       
-        <a class="basic-alignment right" href="/2011/12/railroady-uml-diagram-generator-for" title="Next Post: railroady UML diagram generator for rails">railroady UML diagram generator for rails &raquo;</a>
+        <a class="basic-alignment right" href="/2011/12/railroady-uml-diagram-generator-for/" title="Next Post: railroady UML diagram generator for rails">railroady UML diagram generator for rails &raquo;</a>
       
     </p>
   </footer>
@@ -159,23 +159,23 @@ We all know Active Support library constantly keeps adding new extensions to rub
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

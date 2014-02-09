@@ -9,7 +9,7 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Stepwise guide to configure paperclip default options, setting up aws-s3 storage in rails Inside Gemfilegem &#8216;aws-s3&#8217;, :require => &#8216 &hellip;">
+  <meta name="description" content="Stepwise guide to configure paperclip default options, setting up aws-s3 storage in rails Inside Gemfilegem 'aws-s3', :require => 'aws/s3' gem ' &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -92,7 +92,7 @@
 
 
 <div class="entry-content"><div class='post'>
-Stepwise guide to configure paperclip default options, setting up aws-s3 storage in rails <br/> Inside Gemfile<br/><console>gem &#8216;aws-s3&#8217;,               :require => &#8216;aws/s3&#8217; gem &#8216;paperclip&#8217; </console><br/><console>bundle install </console> Generate Print model to hold image <br/><console> rails g model print image_file_name:string image_content_type:string image_file_size:string </console><br/><console>rake db:migrate </console> Add s3 credentials to YML file<br/><console># config/s3.yml  access_key_id: DASDFG7KACNxIJdJXHPQ secret_access_key: BnDrTnzCTX+R707wYEP/aCEqAsDFG7sgW </console>Add default paperclip attachment options to initializer<br/><console># Make sure to add host url inside config/environments # HOSTNAME = &#8216;http://lordganesha.com&#8217;  Paperclip::Attachment.default_options.merge!(   :storage => &#8216;s3&#8217;,   :s3_credentials => YAML.load_file(&#8220;#{Rails.root}/config/s3.yml&#8221;),   :path => &#8220;:class/:attachment/#{Rails.env}/:id/:style/:basename.:extension&#8221;,     :default_url => &#8220;http://#{HOSTNAME}/images/paperclip/:class/:attachment/default.jpg&#8221;,   :bucket => &#8216;ganesha&#8217; ) </console>Add image attachment code to print model<br/><console># app/models/print.rb class Print < ActiveRecord::Base   has_attached_file :image,     :styles => {:medium => [&#8220;400x400#&#8221;, :jpg],                  :thumb => [&#8220;100x100#&#8221;, :jpg],                  :slider => [&#8220;300x300#&#8221;, :jpg]}   #validates_attachment_presence :image   validates_attachment_size :image, :less_than => 1.megabytes, :message => &#8216;file size maximum 1 MB allowed&#8217;   validates_attachment_content_type :image, :content_type => [&#8216;image/jpeg&#8217;, &#8216;image/png&#8217;, &#8216;image/gif&#8217;, &#8216;image/bmp&#8217;, &#8216;image/pjpeg&#8217;, &#8216;image/x-png&#8217;] end </console> Inside views<br/><console>  # inside new.html.haml    = form_for @print do     f.file_field :image </console></div>
+Stepwise guide to configure paperclip default options, setting up aws-s3 storage in rails <br/> Inside Gemfile<br/><pre class=ruby>gem 'aws-s3',               :require => 'aws/s3' gem 'paperclip' </pre><br/><pre class=ruby>bundle install </pre> Generate Print model to hold image <br/><pre class=ruby> rails g model print image_file_name:string image_content_type:string image_file_size:string </pre><br/><pre class=ruby>rake db:migrate </pre> Add s3 credentials to YML file<br/><pre class=ruby># config/s3.yml  access_key_id: DASDFG7KACNxIJdJXHPQ secret_access_key: BnDrTnzCTX+R707wYEP/aCEqAsDFG7sgW </pre>Add default paperclip attachment options to initializer<br/><pre class=ruby># Make sure to add host url inside config/environments # HOSTNAME = 'http://lordganesha.com'  Paperclip::Attachment.default_options.merge!(   :storage => 's3',   :s3_credentials => YAML.load_file("#{Rails.root}/config/s3.yml"),   :path => ":class/:attachment/#{Rails.env}/:id/:style/:basename.:extension",     :default_url => "http://#{HOSTNAME}/images/paperclip/:class/:attachment/default.jpg",   :bucket => 'ganesha' ) </pre>Add image attachment code to print model<br/><pre class=ruby># app/models/print.rb class Print < ActiveRecord::Base   has_attached_file :image,     :styles => {:medium => ["400x400#", :jpg],                  :thumb => ["100x100#", :jpg],                  :slider => ["300x300#", :jpg]}   #validates_attachment_presence :image   validates_attachment_size :image, :less_than => 1.megabytes, :message => 'file size maximum 1 MB allowed'   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png', 'image/gif', 'image/bmp', 'image/pjpeg', 'image/x-png'] end </pre> Inside views<br/><pre class=ruby>  # inside new.html.haml    = form_for @print do     f.file_field :image </pre></div>
 </div>
 
 
@@ -129,7 +129,7 @@ Stepwise guide to configure paperclip default options, setting up aws-s3 storage
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2011/11/paperclip-options-aws-s3-config-and" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2011/11/paperclip-options-aws-s3-config-and" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2011/11/paperclip-options-aws-s3-config-and/" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2011/11/paperclip-options-aws-s3-config-and/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -140,10 +140,10 @@ Stepwise guide to configure paperclip default options, setting up aws-s3 storage
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2011/11/paperclip-image-upload-via-url" title="Previous Post: Paperclip image upload via URL">&laquo; Paperclip image upload via URL</a>
+        <a class="basic-alignment left" href="/2011/11/paperclip-image-upload-via-url/" title="Previous Post: Paperclip image upload via URL">&laquo; Paperclip image upload via URL</a>
       
       
-        <a class="basic-alignment right" href="/2011/11/rails-311-haml-sass-jquery-coffee-rails" title="Next Post: rails 3.1.1 haml sass jquery coffee-rails devise twitter-bootstrap railroady heroku">rails 3.1.1 haml sass jquery coffee-rails devise twitter-bootstrap railroady heroku &raquo;</a>
+        <a class="basic-alignment right" href="/2011/11/rails-311-haml-sass-jquery-coffee-rails/" title="Next Post: rails 3.1.1 haml sass jquery coffee-rails devise twitter-bootstrap railroady heroku">rails 3.1.1 haml sass jquery coffee-rails devise twitter-bootstrap railroady heroku &raquo;</a>
       
     </p>
   </footer>
@@ -159,23 +159,23 @@ Stepwise guide to configure paperclip default options, setting up aws-s3 storage
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

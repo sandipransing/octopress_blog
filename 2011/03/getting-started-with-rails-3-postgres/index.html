@@ -92,7 +92,7 @@
 
 
 <div class="entry-content"><div class='post'>
-<b>Rails 3 Installation</b><br/><console>sudo gem install rails -v3.0.4 </console> <b>postgres as db installation</b><>br/ <console>$ sudo apt-get install postgresql </console><br/> <b>Rails 3 App with postgres as database</b><br/><console>$ rails new pg -d postgres </console><b>bundle installation</b><br/>It will install dependency gems & postgres adapter for db connection<br/><console>bundle install </console><br/>Here by default &#8216;postgres&#8217; database user gets created while installation but i recommend to  create new db user with name same as of system user owning project directory permissions. <br/>User owning file permission can be found using<br/><console>ls -l pg drwxr-xr-x 7 sandip sandip 4096 2011-02-23 15:38 app drwxr-xr-x 5 sandip sandip 4096 2011-02-23 18:14 config -rw-r&#8211;r&#8211; 1 sandip sandip  152 2011-02-23 15:38 config.ru &#8230; </console> Default &#8216;postgres&#8217; database user gets created while installation<br/> <code>## Snap of database.yml development:   adapter: postgresql   encoding: unicode   database: pg_development   username: sandip   pool: 5 </code> <b> Create new database user</b><br/><console>pg $ sudo su postgres pg $ createuser sandip Shall the new role be a superuser? (y/n) y pg $ exit exit </console><br/><b> Create a first development database:</b><br/><console>pg $ psql template1 Welcome to psql 8.4.6, the PostgreSQL interactive terminal. &#8230;  template1=# \l         List of databases    Name    |  Owner   | Encoding  &#8212;&#8212;&#8212;&#8211;+&#8212;&#8212;&#8212;-+&#8212;&#8212;&#8212;-  postgres  | postgres | UTF8  template0 | postgres | UTF8  template1 | postgres | UTF8 (3 rows)  template1=# CREATE DATABASE pg_development; CREATE DATABASE template1=# \l             List of databases        Name        |  Owner   | Encoding  &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-+&#8212;&#8212;&#8212;-+&#8212;&#8212;&#8212;-  postgres          | postgres | UTF8  pg_development | sandip   | UTF8  template0         | postgres | UTF8  template1         | postgres | UTF8 (4 rows)  template1=# \q </console><br/> <b> Start rails server</b><br/><console>pg $ rails s </console> <b>Getting hands on postgres terminal</b><br/><b>1. Login onto terminal</b><br/><console>psql -U DB_USERNAME -d DB_NAME -W DB_PASSWORD </console><b>2. List databases</b><br/><console>\l </console><b>3. Display tables</b><br/><console>\dt </console><b>4. Exit from terminal</b><br/><console>\q </console></div>
+<b>Rails 3 Installation</b><br/><pre class=ruby>sudo gem install rails -v3.0.4 </pre> <b>postgres as db installation</b><>br/ <pre class=ruby>$ sudo apt-get install postgresql </pre><br/> <b>Rails 3 App with postgres as database</b><br/><pre class=ruby>$ rails new pg -d postgres </pre><b>bundle installation</b><br/>It will install dependency gems & postgres adapter for db connection<br/><pre class=ruby>bundle install </pre><br/>Here by default &#8216;postgres&#8217; database user gets created while installation but i recommend to  create new db user with name same as of system user owning project directory permissions. <br/>User owning file permission can be found using<br/><pre class=ruby>ls -l pg drwxr-xr-x 7 sandip sandip 4096 2011-02-23 15:38 app drwxr-xr-x 5 sandip sandip 4096 2011-02-23 18:14 config -rw-r--r-- 1 sandip sandip  152 2011-02-23 15:38 config.ru ... </pre> Default &#8216;postgres&#8217; database user gets created while installation<br/> <pre class=ruby>## Snap of database.yml development:   adapter: postgresql   encoding: unicode   database: pg_development   username: sandip   pool: 5 </pre> <b> Create new database user</b><br/><pre class=ruby>pg $ sudo su postgres pg $ createuser sandip Shall the new role be a superuser? (y/n) y pg $ exit exit </pre><br/><b> Create a first development database:</b><br/><pre class=ruby>pg $ psql template1 Welcome to psql 8.4.6, the PostgreSQL interactive terminal. ...  template1=# \l         List of databases    Name    |  Owner   | Encoding  -----------+----------+----------  postgres  | postgres | UTF8  template0 | postgres | UTF8  template1 | postgres | UTF8 (3 rows)  template1=# CREATE DATABASE pg_development; CREATE DATABASE template1=# \l             List of databases        Name        |  Owner   | Encoding  -------------------+----------+----------  postgres          | postgres | UTF8  pg_development | sandip   | UTF8  template0         | postgres | UTF8  template1         | postgres | UTF8 (4 rows)  template1=# \q </pre><br/> <b> Start rails server</b><br/><pre class=ruby>pg $ rails s </pre> <b>Getting hands on postgres terminal</b><br/><b>1. Login onto terminal</b><br/><pre class=ruby>psql -U DB_USERNAME -d DB_NAME -W DB_PASSWORD </pre><b>2. List databases</b><br/><pre class=ruby>\l </pre><b>3. Display tables</b><br/><pre class=ruby>\dt </pre><b>4. Exit from terminal</b><br/><pre class=ruby>\q </pre></div>
 </div>
 
 
@@ -129,7 +129,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2011/03/getting-started-with-rails-3-postgres" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2011/03/getting-started-with-rails-3-postgres" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2011/03/getting-started-with-rails-3-postgres/" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2011/03/getting-started-with-rails-3-postgres/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -140,10 +140,10 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2011/02/auto-login-remote-server-by-copying-ssh" title="Previous Post: Auto login remote server by copying ssh public key to authorized keys">&laquo; Auto login remote server by copying ssh public key to authorized keys</a>
+        <a class="basic-alignment left" href="/2011/02/auto-login-remote-server-by-copying-ssh/" title="Previous Post: Auto login remote server by copying ssh public key to authorized keys">&laquo; Auto login remote server by copying ssh public key to authorized keys</a>
       
       
-        <a class="basic-alignment right" href="/2011/03/monitor-delayedjob-in-rails" title="Next Post: Monitor Delayed Job in rails">Monitor Delayed Job in rails &raquo;</a>
+        <a class="basic-alignment right" href="/2011/03/monitor-delayedjob-in-rails/" title="Next Post: Monitor Delayed Job in rails">Monitor Delayed Job in rails &raquo;</a>
       
     </p>
   </footer>
@@ -159,23 +159,23 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

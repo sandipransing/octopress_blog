@@ -92,7 +92,7 @@
 
 
 <div class="entry-content"><div class='post'>
-Previous post explains on <a href="http://www.funonrails.com/2012/01/mongoid-array-field-and-rails-form.html">mongoid document array field and rails form implementation</a><br/>Below example shows rails form integration of array field of embedded mongoid document <br/>consider scenario, student embeds one family who has many assets<br/><code>class Student   include Mongoid::Document    field :name   field :phone      embeds_one  :family    validates_associated :family   accepts_nested_attributes_for :family end </code><br/><code>class Family   include Mongoid::Document   ASSETS = ['flat', 'car', 'business', 'bunglow', 'cash']      field :members, type: Integer   field :assets, type: Array   field :religon    embedded_in :student end </code>Brief controller code </br/>  <code>class StudentsController < ApplicationController  def new    @student = Student.new    @student.family ||= @student.build_family  end   def create    @student = Student.new(params[:student])    @student.family.assets.reject!(&:blank?)    if @student.save      [...]    else      render :action => :new    end  end end </code>view form will look like- <br/><code>= form_for(@student) do |s|   = s.text_field :name   = s.text_field :phone   - s.fields_for :family do |f|     = f.text_field :members     = f.text_field :religion     - Family::ASSETS.each do |asset|       /Here f.object_name #=> student[family]       = f.check_box :assets, :name => "#{f.object_name}[assets][]", asset </code></div>
+Previous post explains on <a href="http://www.funonrails.com/2012/01/mongoid-array-field-and-rails-form.html">mongoid document array field and rails form implementation</a><br/>Below example shows rails form integration of array field of embedded mongoid document <br/>consider scenario, student embeds one family who has many assets<br/><pre class=ruby>class Student   include Mongoid::Document    field :name   field :phone      embeds_one  :family    validates_associated :family   accepts_nested_attributes_for :family end </pre><br/><pre class=ruby>class Family   include Mongoid::Document   ASSETS = ['flat', 'car', 'business', 'bunglow', 'cash']      field :members, type: Integer   field :assets, type: Array   field :religon    embedded_in :student end </pre>Brief controller code </br/>  <pre class=ruby>class StudentsController < ApplicationController  def new    @student = Student.new    @student.family ||= @student.build_family  end   def create    @student = Student.new(params[:student])    @student.family.assets.reject!(&:blank?)    if @student.save      [...]    else      render :action => :new    end  end end </pre>view form will look like- <br/><pre class=ruby>= form_for(@student) do |s|   = s.text_field :name   = s.text_field :phone   - s.fields_for :family do |f|     = f.text_field :members     = f.text_field :religion     - Family::ASSETS.each do |asset|       /Here f.object_name #=> student[family]       = f.check_box :assets, :name => "#{f.object_name}[assets][]", asset </pre></div>
 </div>
 
 
@@ -129,7 +129,7 @@ Previous post explains on <a href="http://www.funonrails.com/2012/01/mongoid-arr
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2012/01/mongoid-embededin-and-array-field" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2012/01/mongoid-embededin-and-array-field" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2012/01/mongoid-embededin-and-array-field/" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2012/01/mongoid-embededin-and-array-field/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -140,10 +140,10 @@ Previous post explains on <a href="http://www.funonrails.com/2012/01/mongoid-arr
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/01/mongoid-array-field-and-rails-form" title="Previous Post: mongoid array field and rails form">&laquo; mongoid array field and rails form</a>
+        <a class="basic-alignment left" href="/2012/01/mongoid-array-field-and-rails-form/" title="Previous Post: mongoid array field and rails form">&laquo; mongoid array field and rails form</a>
       
       
-        <a class="basic-alignment right" href="/2012/01/csv-file-importexport-in-rails-3" title="Next Post: csv file import / export in rails 3">csv file import / export in rails 3 &raquo;</a>
+        <a class="basic-alignment right" href="/2012/01/csv-file-importexport-in-rails-3/" title="Next Post: csv file import / export in rails 3">csv file import / export in rails 3 &raquo;</a>
       
     </p>
   </footer>
@@ -159,23 +159,23 @@ Previous post explains on <a href="http://www.funonrails.com/2012/01/mongoid-arr
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

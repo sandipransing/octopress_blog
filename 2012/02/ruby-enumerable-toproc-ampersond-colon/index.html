@@ -92,7 +92,7 @@
 
 
 <div class="entry-content"><div class='post'>
-Basically Enumerable mixin gives collection classes a variety of traverse, search, sort methods.<br/> <b>understanding ruby blocks i.e. proc </b><br/>blocks are statements of code written in ruby. one can take them as similar to c language macro&#8217;s<br/> <b>Different ways to define blocks</b><br/><code>a = proc do   puts "hello" end a.call #=> hello  b = lambda do |u|   puts "hello #{u}" end b.call('sandip')#=> hello sandip  c = proc {|user| puts user } c.call('sandip') #=> sandip </code> <b>Passing block to enumerator </b><br/>Lets assume we have collection array of strings and we want to print it<br/> <code> a = ['hi', 'sandip', 'how', 'you', 'doing', '?'] => ["hi", "sandip", "how", "you", "doing", "?"]  a.each {|w| puts w }  q = proc {|w| puts w } => #<Proc:0x00007f9d2be13140@(irb):89> a.each(&q) #=>hi sandip how you doing ?  a.map{|r| q.call(r)} #=>hi sandip how you doing ? </code>  <b>Understanding symbol#to_proc </b><br/>Symbol has method to_proc which converts symbol to block where symbol is taken as method to be executed on first argument of proc<br/><b>How to_proc got implemented inside Symbol class</b><code>class Symbol   def to_proc     Proc.new { |*args| args.shift.__send__(self, *args) }   end end </code>Lets have some examples <br/><code>v = :even?.to_proc # equivalent to proc {|a| a.even?} #=> #<Proc:0x00007f9d2bddcb90@(irb):97> q = [1, 2, 3, 5, 67]  q.map(&v) => [false, true, false, false, false] </code> <b>Is there any shortcut?</b><br/>Yes, there is shortcut to have block passed to enumerators on the fly using ampersand followed by colon (i.e. symbol)<br/> <code>q = [1, 2, 3, 5, 67]  q.map(&:even?) <=> q.map(&:even?.to_proc)  q.map(&:even?.to_proc) #=> [false, true, false, false, false]  q.map(&:even?) #=> [false, true, false, false, false] </code> <b>Some handy examples </b><br/><code>[1, 2, 3, 5, 67].inject(&:+) #=> 78 [1, 2, 3, 5, 67].inject(:+) #=> 78 [1, 2, 3, 5, 67].any?(&:even?) #=> true [1, 2, 3, 5, 67].detect(&:even?) #=> 2 ['ruby', 'on', 'rails'].map(&:upcase) #=> ["RUBY", "ON", "RAILS"] </code></div>
+Basically Enumerable mixin gives collection classes a variety of traverse, search, sort methods.<br/> <b>understanding ruby blocks i.e. proc </b><br/>blocks are statements of code written in ruby. one can take them as similar to c language macro&#8217;s<br/> <b>Different ways to define blocks</b><br/><pre class=ruby>a = proc do   puts "hello" end a.call #=> hello  b = lambda do |u|   puts "hello #{u}" end b.call('sandip')#=> hello sandip  c = proc {|user| puts user } c.call('sandip') #=> sandip </pre> <b>Passing block to enumerator </b><br/>Lets assume we have collection array of strings and we want to print it<br/> <pre class=ruby> a = ['hi', 'sandip', 'how', 'you', 'doing', '?'] => ["hi", "sandip", "how", "you", "doing", "?"]  a.each {|w| puts w }  q = proc {|w| puts w } => #<Proc:0x00007f9d2be13140@(irb):89> a.each(&q) #=>hi sandip how you doing ?  a.map{|r| q.call(r)} #=>hi sandip how you doing ? </pre>  <b>Understanding symbol#to_proc </b><br/>Symbol has method to_proc which converts symbol to block where symbol is taken as method to be executed on first argument of proc<br/><b>How to_proc got implemented inside Symbol class</b><pre class=ruby>class Symbol   def to_proc     Proc.new { |*args| args.shift.__send__(self, *args) }   end end </pre>Lets have some examples <br/><pre class=ruby>v = :even?.to_proc # equivalent to proc {|a| a.even?} #=> #<Proc:0x00007f9d2bddcb90@(irb):97> q = [1, 2, 3, 5, 67]  q.map(&v) => [false, true, false, false, false] </pre> <b>Is there any shortcut?</b><br/>Yes, there is shortcut to have block passed to enumerators on the fly using ampersand followed by colon (i.e. symbol)<br/> <pre class=ruby>q = [1, 2, 3, 5, 67]  q.map(&:even?) <=> q.map(&:even?.to_proc)  q.map(&:even?.to_proc) #=> [false, true, false, false, false]  q.map(&:even?) #=> [false, true, false, false, false] </pre> <b>Some handy examples </b><br/><pre class=ruby>[1, 2, 3, 5, 67].inject(&:+) #=> 78 [1, 2, 3, 5, 67].inject(:+) #=> 78 [1, 2, 3, 5, 67].any?(&:even?) #=> true [1, 2, 3, 5, 67].detect(&:even?) #=> 2 ['ruby', 'on', 'rails'].map(&:upcase) #=> ["RUBY", "ON", "RAILS"] </pre></div>
 </div>
 
 
@@ -129,7 +129,7 @@ Basically Enumerable mixin gives collection classes a variety of traverse, searc
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2012/02/ruby-enumerable-toproc-ampersond-colon" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2012/02/ruby-enumerable-toproc-ampersond-colon" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2012/02/ruby-enumerable-toproc-ampersond-colon/" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2012/02/ruby-enumerable-toproc-ampersond-colon/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -140,10 +140,10 @@ Basically Enumerable mixin gives collection classes a variety of traverse, searc
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/01/dynamic-bounded-parameters-and-named" title="Previous Post: dynamic & bounded parameters and named routes">&laquo; dynamic & bounded parameters and named routes</a>
+        <a class="basic-alignment left" href="/2012/01/dynamic-bounded-parameters-and-named/" title="Previous Post: dynamic & bounded parameters and named routes">&laquo; dynamic & bounded parameters and named routes</a>
       
       
-        <a class="basic-alignment right" href="/2012/04/upgrading-from-rails-21x-to-rails-2311" title="Next Post: Upgrading from Rails 2.1.x to Rails 2.3.11">Upgrading from Rails 2.1.x to Rails 2.3.11 &raquo;</a>
+        <a class="basic-alignment right" href="/2012/04/upgrading-from-rails-21x-to-rails-2311/" title="Next Post: Upgrading from Rails 2.1.x to Rails 2.3.11">Upgrading from Rails 2.1.x to Rails 2.3.11 &raquo;</a>
       
     </p>
   </footer>
@@ -159,23 +159,23 @@ Basically Enumerable mixin gives collection classes a variety of traverse, searc
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

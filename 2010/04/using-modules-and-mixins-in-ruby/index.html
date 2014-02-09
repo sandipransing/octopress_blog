@@ -92,7 +92,7 @@
 
 
 <div class="entry-content"><div class='post'>
-Before getting started with modules and mixins, lets first find out the need of module & mixins in OOP.<br/><br/> In object oriented programming languages multiple inheritance is basic paradigm (child class extends behavior of base class).<br/><br/> C++ supports multiple inheritance. Java does support  same using interfaces.<br/> In ruby language, multiple inheritance is achieved very easily using mixin  of modules & classes and that makes ruby as powerful language.<br/><br/> Ruby has classes, modules. Modules can be included inside other classes (mixins) to achieve multiple inheritance.<br/><br/> <b>Modules</b><code>  module Greeting     # here below is the instance method     # and that can be accessed using object of class ONLY     def hi       puts 'Guest'     end   end      </code>Module methods can be called using scope resolution operator (::) or dot operator (.)<br/><console>Greeting::hi  # => undefined method `hi&#8217; for Greeting:Module (NoMethodError) </console>It is obivous to have an error because we are calling class method and that is not present inside module.<br/><br/> <b>Mixins</b> Lets include greeting module inside person class<br/><code>class Person    include Greeting end </code><console>person = Person.new person.hi #=> &#8220;Guest&#8221; </console>Lets see how module methods can be defined. It can be done using either self or class_name.<br/><code>module Greeting   # here below is the instance method   # and that can be accessed using object of class ONLY   def hi     puts 'Guest'   end   # Below are module methods   # this methods can be invoked   # using Greeting::hi   # OR Greeting.hi   def self.hi     puts 'hi Sandip'   end   # here is one more way to declare   # module methods   def Greeting.bye     puts 'Bye Sandip!'   end end </code>Lets invoke methods<br/><console>Greeting::hi #=> &#8220;hi Sandip&#8221; Greeting.bye #=> &#8220;Bye Sandip!&#8221; </console> <b>Extending class behavior using modules</b><br/><code>class Person     def self.included(base)     base.extend Greeting   end end </code> Got easy ?? Cheers!</div>
+Before getting started with modules and mixins, lets first find out the need of module & mixins in OOP.<br/><br/> In object oriented programming languages multiple inheritance is basic paradigm (child class extends behavior of base class).<br/><br/> C++ supports multiple inheritance. Java does support  same using interfaces.<br/> In ruby language, multiple inheritance is achieved very easily using mixin  of modules & classes and that makes ruby as powerful language.<br/><br/> Ruby has classes, modules. Modules can be included inside other classes (mixins) to achieve multiple inheritance.<br/><br/> <b>Modules</b><pre class=ruby>  module Greeting     # here below is the instance method     # and that can be accessed using object of class ONLY     def hi       puts 'Guest'     end   end      </pre>Module methods can be called using scope resolution operator (::) or dot operator (.)<br/><pre class=ruby>Greeting::hi  # => undefined method `hi' for Greeting:Module (NoMethodError) </pre>It is obivous to have an error because we are calling class method and that is not present inside module.<br/><br/> <b>Mixins</b> Lets include greeting module inside person class<br/><pre class=ruby>class Person    include Greeting end </pre><pre class=ruby>person = Person.new person.hi #=> "Guest" </pre>Lets see how module methods can be defined. It can be done using either self or class_name.<br/><pre class=ruby>module Greeting   # here below is the instance method   # and that can be accessed using object of class ONLY   def hi     puts 'Guest'   end   # Below are module methods   # this methods can be invoked   # using Greeting::hi   # OR Greeting.hi   def self.hi     puts 'hi Sandip'   end   # here is one more way to declare   # module methods   def Greeting.bye     puts 'Bye Sandip!'   end end </pre>Lets invoke methods<br/><pre class=ruby>Greeting::hi #=> "hi Sandip" Greeting.bye #=> "Bye Sandip!" </pre> <b>Extending class behavior using modules</b><br/><pre class=ruby>class Person     def self.included(base)     base.extend Greeting   end end </pre> Got easy ?? Cheers!</div>
 </div>
 
 
@@ -129,7 +129,7 @@ Before getting started with modules and mixins, lets first find out the need of 
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2010/04/using-modules-and-mixins-in-ruby" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2010/04/using-modules-and-mixins-in-ruby" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2010/04/using-modules-and-mixins-in-ruby/" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2010/04/using-modules-and-mixins-in-ruby/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -140,10 +140,10 @@ Before getting started with modules and mixins, lets first find out the need of 
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2010/04/using-thinking-sphinx-search-in-rails" title="Previous Post: using thinking sphinx search in rails app">&laquo; using thinking sphinx search in rails app</a>
+        <a class="basic-alignment left" href="/2010/04/using-thinking-sphinx-search-in-rails/" title="Previous Post: using thinking sphinx search in rails app">&laquo; using thinking sphinx search in rails app</a>
       
       
-        <a class="basic-alignment right" href="/2010/05/specify-rails-version-to-use-while" title="Next Post: Specify rails version to new rails app">Specify rails version to new rails app &raquo;</a>
+        <a class="basic-alignment right" href="/2010/05/specify-rails-version-to-use-while/" title="Next Post: Specify rails version to new rails app">Specify rails version to new rails app &raquo;</a>
       
     </p>
   </footer>
@@ -159,23 +159,23 @@ Before getting started with modules and mixins, lets first find out the need of 
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

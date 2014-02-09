@@ -4,7 +4,7 @@
   <title><![CDATA[Category: associations | Fun On Rails]]></title>
   <link href="http://sandipransing.github.io/blog/categories/associations/atom.xml" rel="self"/>
   <link href="http://sandipransing.github.io/"/>
-  <updated>2014-02-09T20:36:37+05:30</updated>
+  <updated>2014-02-09T23:18:57+05:30</updated>
   <id>http://sandipransing.github.io/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -15,18 +15,18 @@
   
   <entry>
     <title type="html"><![CDATA[has_many => through association for rails polymorphic model]]></title>
-    <link href="http://sandipransing.github.io/2010/02/hasmany-through-association-for-rails"/>
+    <link href="http://sandipransing.github.io/2010/02/hasmany-through-association-for-rails/"/>
     <updated>2010-02-15T21:54:00+05:30</updated>
     <id>http://sandipransing.github.io/2010/02/hasmany-through-association-for-rails</id>
     <content type="html"><![CDATA[<div class='post'>
-Example of polymorphic association using has_many, through, source. <br/> Here post is polymorphic resource which belongs to the author [can be student, teacher]<br/><console># app/models/student.rb class Student < ActiveRecord::Base    has_many :posts, :as => author end  # app/models/teacher.rb class Teacher < ActiveRecord::Base    has_many :posts, :as => author end  # app/models/post.rb class Post < ActiveRecord::Base    belongs to :author, :polymorphic => true end </console><br/>Has_many through association on polymorphic models <br/><console># app/models/student.rb class Student < ActiveRecord::Base    belongs_to :division   has_many :posts, :as => author end  # app/models/division.rb class Division < ActiveRecord::Base    has_many :students   has_many :student_posts, :through => :students, :source => :posts end </console><b> Examples </b><br/><console>ruby script/console div = Division.first div.student_posts </console></div>
+Example of polymorphic association using has_many, through, source. <br/> Here post is polymorphic resource which belongs to the author [can be student, teacher]<br/><pre class=ruby># app/models/student.rb class Student < ActiveRecord::Base    has_many :posts, :as => author end  # app/models/teacher.rb class Teacher < ActiveRecord::Base    has_many :posts, :as => author end  # app/models/post.rb class Post < ActiveRecord::Base    belongs to :author, :polymorphic => true end </pre><br/>Has_many through association on polymorphic models <br/><pre class=ruby># app/models/student.rb class Student < ActiveRecord::Base    belongs_to :division   has_many :posts, :as => author end  # app/models/division.rb class Division < ActiveRecord::Base    has_many :students   has_many :student_posts, :through => :students, :source => :posts end </pre><b> Examples </b><br/><pre class=ruby>ruby script/console div = Division.first div.student_posts </pre></div>
 
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[How to get all associated models of rails model]]></title>
-    <link href="http://sandipransing.github.io/2009/11/how-to-get-all-associted-models-of"/>
+    <link href="http://sandipransing.github.io/2009/11/how-to-get-all-associted-models-of/"/>
     <updated>2009-11-26T20:40:00+05:30</updated>
     <id>http://sandipransing.github.io/2009/11/how-to-get-all-associted-models-of</id>
     <content type="html"><![CDATA[<div class='post'>

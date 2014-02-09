@@ -92,7 +92,7 @@
 
 
 <div class="entry-content"><div class='post'>
-<b>Array of years using range</b><br /><code>((yr=Date.current.year)-9..yr).to_a #=&gt; [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010] </code><br /><b>Array of years using lambda</b><br /><code> Array.new(10){|i| Date.current.year-i} #=&gt; [2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001] </code><br /><b>Array of months</b><br /><code>Date::MONTHNAMES.compact #=> ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"] </code> <br /><b>Array of abbreviated months</b><br /><code>Date::ABBR_MONTHNAMES.compact #=> ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] </code>  <br /><b>Array of abbreviated months with index (ps. collect_with_index is core extension method added to array)</b><br /><code>Date::ABBR_MONTHNAMES.compact.collect_with_index{|m, i| [m, i]} #=> [["Jan", 1], ["Feb", 2], ["Mar", 3], ["Apr", 4], ["May", 5], ["Jun", 6], ["Jul", 7], ["Aug", 8], ["Sep", 9], ["Oct", 10], ["Nov", 11], ["Dec", 12]]  OR  Date::ABBR_MONTHNAMES.compact.each_with_index.collect{|m, i| [m, i+1]} #=> [["Jan", 1], ["Feb", 2], ["Mar", 3], ["Apr", 4], ["May", 5], ["Jun", 6], ["Jul", 7], ["Aug", 8], ["Sep", 9], ["Oct", 10], ["Nov", 11], ["Dec", 12]] </code></div>
+<b>Array of years using range</b><br /><pre class=ruby>((yr=Date.current.year)-9..yr).to_a #=&gt; [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010] </pre><br /><b>Array of years using lambda</b><br /><pre class=ruby> Array.new(10){|i| Date.current.year-i} #=&gt; [2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001] </pre><br /><b>Array of months</b><br /><pre class=ruby>Date::MONTHNAMES.compact #=> ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"] </pre> <br /><b>Array of abbreviated months</b><br /><pre class=ruby>Date::ABBR_MONTHNAMES.compact #=> ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] </pre>  <br /><b>Array of abbreviated months with index (ps. collect_with_index is core extension method added to array)</b><br /><pre class=ruby>Date::ABBR_MONTHNAMES.compact.collect_with_index{|m, i| [m, i]} #=> [["Jan", 1], ["Feb", 2], ["Mar", 3], ["Apr", 4], ["May", 5], ["Jun", 6], ["Jul", 7], ["Aug", 8], ["Sep", 9], ["Oct", 10], ["Nov", 11], ["Dec", 12]]  OR  Date::ABBR_MONTHNAMES.compact.each_with_index.collect{|m, i| [m, i+1]} #=> [["Jan", 1], ["Feb", 2], ["Mar", 3], ["Apr", 4], ["May", 5], ["Jun", 6], ["Jul", 7], ["Aug", 8], ["Sep", 9], ["Oct", 10], ["Nov", 11], ["Dec", 12]] </pre></div>
 </div>
 
 
@@ -129,7 +129,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2010/09/best-ways-to-populate-dynamic-array-of" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2010/09/best-ways-to-populate-dynamic-array-of" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2010/09/best-ways-to-populate-dynamic-array-of/" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2010/09/best-ways-to-populate-dynamic-array-of/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -140,10 +140,10 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2010/09/rails-3-beautiful-code" title="Previous Post: Rails 3 Beautiful Code">&laquo; Rails 3 Beautiful Code</a>
+        <a class="basic-alignment left" href="/2010/09/rails-3-beautiful-code/" title="Previous Post: Rails 3 Beautiful Code">&laquo; Rails 3 Beautiful Code</a>
       
       
-        <a class="basic-alignment right" href="/2010/10/introduction-to-delayed-job" title="Next Post: Introduction To Delayed Job">Introduction To Delayed Job &raquo;</a>
+        <a class="basic-alignment right" href="/2010/10/introduction-to-delayed-job/" title="Next Post: Introduction To Delayed Job">Introduction To Delayed Job &raquo;</a>
       
     </p>
   </footer>
@@ -159,23 +159,23 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

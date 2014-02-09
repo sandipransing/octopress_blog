@@ -92,7 +92,7 @@
 
 
 <div class="entry-content"><div class='post'>
-How to get collection of models inside your application. Certainly there are many ways to do it.<br/>Lets have a look at different ways starting from worst - <br/><b> Get table names inside database and then iterating over to get model name</b><code>@models = ActiveRecord::Base.connection.tables.collect{|t| t.underscore.singularize.camelize}  #=> ["AdhearsionAudit", "AudioLog", "AuditDetail","TinyPrint", "TinyVideo", "UnknownCall", "UserAudit", "User"] </code><br/><b>Select those with associated class</b><br/><code>@models.delete_if{|m| m.constantize rescue true} </code><br/><b>Load models dir</b><br/><code>@models = Dir['app/models/*.rb'].map {|f| File.basename(f, '.*').camelize.constantize.name } </code><b>Select ActiveRecord::Base extended class only</b><code>@models.reject!{|m| m.constantize.superclass != ActiveRecord::Base } </code><b>Get Active Record subclasses</b><br/><code># make sure relevant models are loaded otherwise # require them prior # Dir.glob(RAILS_ROOT + '/app/models/*.rb').each { |file| require file } class A < ActiveRecord::Base end class B < A end ActiveRecord::Base.send(:subclasses).collect(&:name) #=> [...., A] </code><b>How to get Inherited models too</b> <br/><code>class A < ActiveRecord::Base end class B < A end ActiveRecord::Base.descendants.collect(&:name) #=> [...., A, B] </code> Below is more elegant solution provide by <a href="http://stackoverflow.com/users/268/vincent-robert">Vincent-robert</a> over stack overflow which recursively looks for subsequent descendent&#8217;s of class and gives you list from all over application<br/><code>class Class   def extend?(klass)     not superclass.nil? and ( superclass == klass or superclass.extend? klass )   end end  def models    Module.constants.select do |constant_name|     constant = eval constant_name     if not constant.nil? and constant.is_a? Class and constant.extend? ActiveRecord::Base     constant     end   end end </code></div>
+How to get collection of models inside your application. Certainly there are many ways to do it.<br/>Lets have a look at different ways starting from worst - <br/><b> Get table names inside database and then iterating over to get model name</b><pre class=ruby>@models = ActiveRecord::Base.connection.tables.collect{|t| t.underscore.singularize.camelize}  #=> ["AdhearsionAudit", "AudioLog", "AuditDetail","TinyPrint", "TinyVideo", "UnknownCall", "UserAudit", "User"] </pre><br/><b>Select those with associated class</b><br/><pre class=ruby>@models.delete_if{|m| m.constantize rescue true} </pre><br/><b>Load models dir</b><br/><pre class=ruby>@models = Dir['app/models/*.rb'].map {|f| File.basename(f, '.*').camelize.constantize.name } </pre><b>Select ActiveRecord::Base extended class only</b><pre class=ruby>@models.reject!{|m| m.constantize.superclass != ActiveRecord::Base } </pre><b>Get Active Record subclasses</b><br/><pre class=ruby># make sure relevant models are loaded otherwise # require them prior # Dir.glob(RAILS_ROOT + '/app/models/*.rb').each { |file| require file } class A < ActiveRecord::Base end class B < A end ActiveRecord::Base.send(:subclasses).collect(&:name) #=> [...., A] </pre><b>How to get Inherited models too</b> <br/><pre class=ruby>class A < ActiveRecord::Base end class B < A end ActiveRecord::Base.descendants.collect(&:name) #=> [...., A, B] </pre> Below is more elegant solution provide by <a href="http://stackoverflow.com/users/268/vincent-robert">Vincent-robert</a> over stack overflow which recursively looks for subsequent descendent&#8217;s of class and gives you list from all over application<br/><pre class=ruby>class Class   def extend?(klass)     not superclass.nil? and ( superclass == klass or superclass.extend? klass )   end end  def models    Module.constants.select do |constant_name|     constant = eval constant_name     if not constant.nil? and constant.is_a? Class and constant.extend? ActiveRecord::Base     constant     end   end end </pre></div>
 </div>
 
 
@@ -129,7 +129,7 @@ How to get collection of models inside your application. Certainly there are man
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2012/01/get-models-list-inside-rails-app" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2012/01/get-models-list-inside-rails-app" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2012/01/get-models-list-inside-rails-app/" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2012/01/get-models-list-inside-rails-app/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -140,10 +140,10 @@ How to get collection of models inside your application. Certainly there are man
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/01/stripe-gateway-payment-integration-with" title="Previous Post: stripe gateway payment integration with rails">&laquo; stripe gateway payment integration with rails</a>
+        <a class="basic-alignment left" href="/2012/01/stripe-gateway-payment-integration-with/" title="Previous Post: stripe gateway payment integration with rails">&laquo; stripe gateway payment integration with rails</a>
       
       
-        <a class="basic-alignment right" href="/2012/01/twitter-bootstrap-form-builder-for" title="Next Post: twitter-bootstrap form builder for rails">twitter-bootstrap form builder for rails &raquo;</a>
+        <a class="basic-alignment right" href="/2012/01/twitter-bootstrap-form-builder-for/" title="Next Post: twitter-bootstrap form builder for rails">twitter-bootstrap form builder for rails &raquo;</a>
       
     </p>
   </footer>
@@ -159,23 +159,23 @@ How to get collection of models inside your application. Certainly there are man
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

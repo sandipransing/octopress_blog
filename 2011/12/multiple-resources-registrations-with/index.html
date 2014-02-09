@@ -92,7 +92,7 @@
 
 
 <div class="entry-content"><div class='post'>
-Devise handles authentication, authorization part inside rails application quite easily and its customizable too. One can always customize default devise configurations. <br/> This Post will show how to manage multiple resources (like admin, staff, employees, guests etc.) through devise and STI with individual registrations process but login section will be the same for all. <br/><console># Gemfile gem &#8216;devise&#8217; </console><br/> <console># console bundle install rails g devise_install rails g devise User rake db:migrate rake routes </console><br/><console># User model class User < ActiveRecord::Base   # Include default devise modules. Others available are:   # :token_authenticatable, :lockable, :timeoutable, :confirmable and :activatable   devise :database_authenticatable, :registerable,          :recoverable, :rememberable, :trackable, :validatable    # Setup accessible (or protected) attributes for your model   attr_accessible :email, :password, :password_confirmation end  ## Single Table Inheritance # Admin model class Admin < User end  # Staff class Staff < User end  # Employee class Employee < User end  # Guest class Guest < User end </console><br/> <console># routes devise_for :users, :skip => :registrations devise_for :admins, :skip => :sessions devise_for :staffs, :skip => :sessions devise_for :employees, :skip => :sessions devise_for :guests, :skip => :sessions </console><br/> <console># customizing default login/logout routes, views, actions devise_for :users, :controller => {:sessions  => &#8216;sessions&#8217;}, :skip => [:sessions, :registrations] do     delete &#8216;/logout&#8217;, :to => &#8216;sessions#destroy&#8217;, :as => :destroy_user_session     get &#8216;/login&#8217;, :to => &#8216;sessions#new&#8217;, :as => :new_user_session     post &#8216;/login&#8217;, :to => &#8216;sessions#create&#8217;, :as => :user_session end  # app/controllers/sessions_controller class SessionsController < Devise::SessionsController end </console><br/><console>## overriding default after sign in path # app/controller/application_controller.rb class ApplicationController < ActionController::Base   protect_from_forgery   helper_method :account_url   def account_url     return new_user_session_url unless user_signed_in?     case current_user.class.name     when 'Customer'       edit_customer_registration_url     when 'Admin'       edit_home_page_section_url     else       root_url     end if user_signed_in?   end end  # app/controllers/sessions_controller.rb  class SessionsController < Devise::SessionsController    def after_sign_in_path_for(resource)     stored_location_for(resource) || account_url   end end </console><br/> <console>## Changing default login field email to username # config/initializers/devise.rb  config.authentication_keys = [ :username ]  # app/models/user.rb   validates :username, :presence => true,      :uniqueness => {:allow_blank => true},     :format => {:with => /^\w+[\w\s:?&#8217;]+$/i, :allow_blank => true}    def email_required?     false   end  </console><br/>Adding devise authentication and authorization helper methods for above resources. <a href="http://www.funonrails.com/2011/12/dynamic-methods-inside-ruby-classes.html">read more here</a></div>
+Devise handles authentication, authorization part inside rails application quite easily and its customizable too. One can always customize default devise configurations. <br/> This Post will show how to manage multiple resources (like admin, staff, employees, guests etc.) through devise and STI with individual registrations process but login section will be the same for all. <br/><pre class=ruby># Gemfile gem 'devise' </pre><br/> <pre class=ruby># console bundle install rails g devise_install rails g devise User rake db:migrate rake routes </pre><br/><pre class=ruby># User model class User < ActiveRecord::Base   # Include default devise modules. Others available are:   # :token_authenticatable, :lockable, :timeoutable, :confirmable and :activatable   devise :database_authenticatable, :registerable,          :recoverable, :rememberable, :trackable, :validatable    # Setup accessible (or protected) attributes for your model   attr_accessible :email, :password, :password_confirmation end  ## Single Table Inheritance # Admin model class Admin < User end  # Staff class Staff < User end  # Employee class Employee < User end  # Guest class Guest < User end </pre><br/> <pre class=ruby># routes devise_for :users, :skip => :registrations devise_for :admins, :skip => :sessions devise_for :staffs, :skip => :sessions devise_for :employees, :skip => :sessions devise_for :guests, :skip => :sessions </pre><br/> <pre class=ruby># customizing default login/logout routes, views, actions devise_for :users, :controller => {:sessions  => 'sessions'}, :skip => [:sessions, :registrations] do     delete '/logout', :to => 'sessions#destroy', :as => :destroy_user_session     get '/login', :to => 'sessions#new', :as => :new_user_session     post '/login', :to => 'sessions#create', :as => :user_session end  # app/controllers/sessions_controller class SessionsController < Devise::SessionsController end </pre><br/><pre class=ruby>## overriding default after sign in path # app/controller/application_controller.rb class ApplicationController < ActionController::Base   protect_from_forgery   helper_method :account_url   def account_url     return new_user_session_url unless user_signed_in?     case current_user.class.name     when 'Customer'       edit_customer_registration_url     when 'Admin'       edit_home_page_section_url     else       root_url     end if user_signed_in?   end end  # app/controllers/sessions_controller.rb  class SessionsController < Devise::SessionsController    def after_sign_in_path_for(resource)     stored_location_for(resource) || account_url   end end </pre><br/> <pre class=ruby>## Changing default login field email to username # config/initializers/devise.rb  config.authentication_keys = [ :username ]  # app/models/user.rb   validates :username, :presence => true,      :uniqueness => {:allow_blank => true},     :format => {:with => /^\w+[\w\s:?']+$/i, :allow_blank => true}    def email_required?     false   end  </pre><br/>Adding devise authentication and authorization helper methods for above resources. <a href="http://www.funonrails.com/2011/12/dynamic-methods-inside-ruby-classes.html">read more here</a></div>
 </div>
 
 
@@ -129,7 +129,7 @@ Devise handles authentication, authorization part inside rails application quite
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2011/12/multiple-resources-registrations-with" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2011/12/multiple-resources-registrations-with" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2011/12/multiple-resources-registrations-with/" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2011/12/multiple-resources-registrations-with/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -140,10 +140,10 @@ Devise handles authentication, authorization part inside rails application quite
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2011/11/rails-311-haml-sass-jquery-coffee-rails" title="Previous Post: rails 3.1.1 haml sass jquery coffee-rails devise twitter-bootstrap railroady heroku">&laquo; rails 3.1.1 haml sass jquery coffee-rails devise twitter-bootstrap railroady heroku</a>
+        <a class="basic-alignment left" href="/2011/11/rails-311-haml-sass-jquery-coffee-rails/" title="Previous Post: rails 3.1.1 haml sass jquery coffee-rails devise twitter-bootstrap railroady heroku">&laquo; rails 3.1.1 haml sass jquery coffee-rails devise twitter-bootstrap railroady heroku</a>
       
       
-        <a class="basic-alignment right" href="/2011/12/getting-assets-working-on-heroku" title="Next Post: Getting assets pipeline working on heroku">Getting assets pipeline working on heroku &raquo;</a>
+        <a class="basic-alignment right" href="/2011/12/getting-assets-working-on-heroku/" title="Next Post: Getting assets pipeline working on heroku">Getting assets pipeline working on heroku &raquo;</a>
       
     </p>
   </footer>
@@ -159,23 +159,23 @@ Devise handles authentication, authorization part inside rails application quite
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

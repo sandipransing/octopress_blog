@@ -92,7 +92,7 @@
 
 
 <div class="entry-content"><div class='post'>
-active_admin is the good way to provide rails administrative interface.<br/>It provides front-end db administration and its customizable too :)<br/> <console># Gemfile   gem &#8216;activeadmin&#8217;   gem &#8216;sass-rails&#8217;   gem &#8220;meta_search&#8221;,    &#8216;>= 1.1.0.pre&#8217; </console><br/>Bundle install, generate config & migrate db <br/><console>bundle install rails g active_admin:install rake db:migrate </console> Config <br/><console># config/initializers/active_admin.rb  ActiveAdmin.setup do |config|   config.site_title = &#8220;Web Site :: Admin Panel&#8221;   config.site_title_link = &#8220;/&#8221;   config.default_namespace = :siteadmin   config.authentication_method = :authenticate_admin_user!   config.current_user_method = :current_admin_user   config.logout_link_method = :delete end </console><br/>Registering new resource <br/><console>rails generate active_admin:resource category </console>Customization<br/><console># app/admin/categories.rb  ActiveAdmin.register Category do   scope :published    form do |f|     f.inputs do       f.input :name, :label => &#8216;Name&#8217;       f.input :for_type, :label => &#8220;Category Type&#8221;     end     f.buttons   end end </console>Adding Dashboard<br/><console>ActiveAdmin::Dashboards.build do   section &#8220;Recent Categories&#8221; do     table_for Category.published.recent.limit(2) do       column :name do |c|         link_to c.name, [:admin, c]       end       column :created_at     end     strong { link_to &#8220;View All Categories&#8221;, admin_categories_path }   end end </console></div>
+active_admin is the good way to provide rails administrative interface.<br/>It provides front-end db administration and its customizable too :)<br/> <pre class=ruby># Gemfile   gem 'activeadmin'   gem 'sass-rails'   gem "meta_search",    '>= 1.1.0.pre' </pre><br/>Bundle install, generate config & migrate db <br/><pre class=ruby>bundle install rails g active_admin:install rake db:migrate </pre> Config <br/><pre class=ruby># config/initializers/active_admin.rb  ActiveAdmin.setup do |config|   config.site_title = "Web Site :: Admin Panel"   config.site_title_link = "/"   config.default_namespace = :siteadmin   config.authentication_method = :authenticate_admin_user!   config.current_user_method = :current_admin_user   config.logout_link_method = :delete end </pre><br/>Registering new resource <br/><pre class=ruby>rails generate active_admin:resource category </pre>Customization<br/><pre class=ruby># app/admin/categories.rb  ActiveAdmin.register Category do   scope :published    form do |f|     f.inputs do       f.input :name, :label => 'Name'       f.input :for_type, :label => "Category Type"     end     f.buttons   end end </pre>Adding Dashboard<br/><pre class=ruby>ActiveAdmin::Dashboards.build do   section "Recent Categories" do     table_for Category.published.recent.limit(2) do       column :name do |c|         link_to c.name, [:admin, c]       end       column :created_at     end     strong { link_to "View All Categories", admin_categories_path }   end end </pre></div>
 </div>
 
 
@@ -129,7 +129,7 @@ active_admin is the good way to provide rails administrative interface.<br/>It p
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2011/12/active-admin-sass-and-rails-3" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2011/12/active-admin-sass-and-rails-3" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2011/12/active-admin-sass-and-rails-3/" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2011/12/active-admin-sass-and-rails-3/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -140,10 +140,10 @@ active_admin is the good way to provide rails administrative interface.<br/>It p
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2011/12/simplified-active-record-extensions" title="Previous Post: Simplified Active Record Extensions">&laquo; Simplified Active Record Extensions</a>
+        <a class="basic-alignment left" href="/2011/12/simplified-active-record-extensions/" title="Previous Post: Simplified Active Record Extensions">&laquo; Simplified Active Record Extensions</a>
       
       
-        <a class="basic-alignment right" href="/2011/12/authorizenet-aim-payment-integration" title="Next Post: Authorize Net (AIM) payment integration with rails">Authorize Net (AIM) payment integration with rails &raquo;</a>
+        <a class="basic-alignment right" href="/2011/12/authorizenet-aim-payment-integration/" title="Next Post: Authorize Net (AIM) payment integration with rails">Authorize Net (AIM) payment integration with rails &raquo;</a>
       
     </p>
   </footer>
@@ -159,23 +159,23 @@ active_admin is the good way to provide rails administrative interface.<br/>It p
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: aws | Fun On Rails]]></title>
   <link href="http://sandipransing.github.io/blog/categories/aws/atom.xml" rel="self"/>
   <link href="http://sandipransing.github.io/"/>
-  <updated>2014-02-09T20:36:37+05:30</updated>
+  <updated>2014-02-09T23:18:57+05:30</updated>
   <id>http://sandipransing.github.io/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -15,18 +15,18 @@
   
   <entry>
     <title type="html"><![CDATA[paperclip options aws-s3 config and rails]]></title>
-    <link href="http://sandipransing.github.io/2011/11/paperclip-options-aws-s3-config-and"/>
+    <link href="http://sandipransing.github.io/2011/11/paperclip-options-aws-s3-config-and/"/>
     <updated>2011-11-21T23:23:00+05:30</updated>
     <id>http://sandipransing.github.io/2011/11/paperclip-options-aws-s3-config-and</id>
     <content type="html"><![CDATA[<div class='post'>
-Stepwise guide to configure paperclip default options, setting up aws-s3 storage in rails <br/> Inside Gemfile<br/><console>gem 'aws-s3',               :require => 'aws/s3' gem 'paperclip' </console><br/><console>bundle install </console> Generate Print model to hold image <br/><console> rails g model print image_file_name:string image_content_type:string image_file_size:string </console><br/><console>rake db:migrate </console> Add s3 credentials to YML file<br/><console># config/s3.yml  access_key_id: DASDFG7KACNxIJdJXHPQ secret_access_key: BnDrTnzCTX+R707wYEP/aCEqAsDFG7sgW </console>Add default paperclip attachment options to initializer<br/><console># Make sure to add host url inside config/environments # HOSTNAME = 'http://lordganesha.com'  Paperclip::Attachment.default_options.merge!(   :storage => 's3',   :s3_credentials => YAML.load_file("#{Rails.root}/config/s3.yml"),   :path => ":class/:attachment/#{Rails.env}/:id/:style/:basename.:extension",     :default_url => "http://#{HOSTNAME}/images/paperclip/:class/:attachment/default.jpg",   :bucket => 'ganesha' ) </console>Add image attachment code to print model<br/><console># app/models/print.rb class Print < ActiveRecord::Base   has_attached_file :image,     :styles => {:medium => ["400x400#", :jpg],                  :thumb => ["100x100#", :jpg],                  :slider => ["300x300#", :jpg]}   #validates_attachment_presence :image   validates_attachment_size :image, :less_than => 1.megabytes, :message => 'file size maximum 1 MB allowed'   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png', 'image/gif', 'image/bmp', 'image/pjpeg', 'image/x-png'] end </console> Inside views<br/><console>  # inside new.html.haml    = form_for @print do     f.file_field :image </console></div>
+Stepwise guide to configure paperclip default options, setting up aws-s3 storage in rails <br/> Inside Gemfile<br/><pre class=ruby>gem 'aws-s3',               :require => 'aws/s3' gem 'paperclip' </pre><br/><pre class=ruby>bundle install </pre> Generate Print model to hold image <br/><pre class=ruby> rails g model print image_file_name:string image_content_type:string image_file_size:string </pre><br/><pre class=ruby>rake db:migrate </pre> Add s3 credentials to YML file<br/><pre class=ruby># config/s3.yml  access_key_id: DASDFG7KACNxIJdJXHPQ secret_access_key: BnDrTnzCTX+R707wYEP/aCEqAsDFG7sgW </pre>Add default paperclip attachment options to initializer<br/><pre class=ruby># Make sure to add host url inside config/environments # HOSTNAME = 'http://lordganesha.com'  Paperclip::Attachment.default_options.merge!(   :storage => 's3',   :s3_credentials => YAML.load_file("#{Rails.root}/config/s3.yml"),   :path => ":class/:attachment/#{Rails.env}/:id/:style/:basename.:extension",     :default_url => "http://#{HOSTNAME}/images/paperclip/:class/:attachment/default.jpg",   :bucket => 'ganesha' ) </pre>Add image attachment code to print model<br/><pre class=ruby># app/models/print.rb class Print < ActiveRecord::Base   has_attached_file :image,     :styles => {:medium => ["400x400#", :jpg],                  :thumb => ["100x100#", :jpg],                  :slider => ["300x300#", :jpg]}   #validates_attachment_presence :image   validates_attachment_size :image, :less_than => 1.megabytes, :message => 'file size maximum 1 MB allowed'   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png', 'image/gif', 'image/bmp', 'image/pjpeg', 'image/x-png'] end </pre> Inside views<br/><pre class=ruby>  # inside new.html.haml    = form_for @print do     f.file_field :image </pre></div>
 
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Getting started with MySQL on Amazon Web Services]]></title>
-    <link href="http://sandipransing.github.io/2011/01/getting-started-with-mysql-on-amazon"/>
+    <link href="http://sandipransing.github.io/2011/01/getting-started-with-mysql-on-amazon/"/>
     <updated>2011-01-15T18:30:00+05:30</updated>
     <id>http://sandipransing.github.io/2011/01/getting-started-with-mysql-on-amazon</id>
     <content type="html"><![CDATA[<div class='post'>

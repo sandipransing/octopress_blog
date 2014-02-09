@@ -4,7 +4,7 @@
   <title><![CDATA[Category: gemrc | Fun On Rails]]></title>
   <link href="http://sandipransing.github.io/blog/categories/gemrc/atom.xml" rel="self"/>
   <link href="http://sandipransing.github.io/"/>
-  <updated>2014-02-09T20:36:37+05:30</updated>
+  <updated>2014-02-09T23:18:57+05:30</updated>
   <id>http://sandipransing.github.io/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -15,11 +15,11 @@
   
   <entry>
     <title type="html"><![CDATA[--no-ri --no-rdoc for ruby gem installation]]></title>
-    <link href="http://sandipransing.github.io/2009/09/no-ri-no-rdoc-for-ruby-gem-installation"/>
+    <link href="http://sandipransing.github.io/2009/09/no-ri-no-rdoc-for-ruby-gem-installation/"/>
     <updated>2009-09-30T23:27:00+05:30</updated>
     <id>http://sandipransing.github.io/2009/09/no-ri-no-rdoc-for-ruby-gem-installation</id>
     <content type="html"><![CDATA[<div class='post'>
-One can install gem without rdoc using<br /><br />gem install GEM_NAME --no-ri --no-rdoc<br /><br /><br />Skip ri rdoc for all gem installation as i haven't seen anyone using it.<br /><br />Edit gemrc file<br />Add following line to it<br /><code>vi ~/.gemrc<br />:gem: --no-ri --no-rdoc</code><br /><br />Here is my ~/.gemrc file<br /><code>---<br />:verbose: true<br />gem: --no-ri --no-rdoc<br />:update_sources: true<br />:sources:<br />- http://gems.rubyforge.org<br />- http://gems.github.com<br />:backtrace: false<br />:bulk_threshold: 1000<br />:benchmark: false</code><br /><br />That's it !</div>
+One can install gem without rdoc using<br /><br />gem install GEM_NAME --no-ri --no-rdoc<br /><br /><br />Skip ri rdoc for all gem installation as i haven't seen anyone using it.<br /><br />Edit gemrc file<br />Add following line to it<br /><pre class=ruby>vi ~/.gemrc<br />:gem: --no-ri --no-rdoc</pre><br /><br />Here is my ~/.gemrc file<br /><pre class=ruby>---<br />:verbose: true<br />gem: --no-ri --no-rdoc<br />:update_sources: true<br />:sources:<br />- http://gems.rubyforge.org<br />- http://gems.github.com<br />:backtrace: false<br />:bulk_threshold: 1000<br />:benchmark: false</pre><br /><br />That's it !</div>
 
 
 <h2>Comments</h2>

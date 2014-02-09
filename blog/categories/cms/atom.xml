@@ -4,7 +4,7 @@
   <title><![CDATA[Category: cms | Fun On Rails]]></title>
   <link href="http://sandipransing.github.io/blog/categories/cms/atom.xml" rel="self"/>
   <link href="http://sandipransing.github.io/"/>
-  <updated>2014-02-09T20:36:37+05:30</updated>
+  <updated>2014-02-09T23:18:57+05:30</updated>
   <id>http://sandipransing.github.io/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -15,7 +15,7 @@
   
   <entry>
     <title type="html"><![CDATA[Multiple sites hosting using radiant cms]]></title>
-    <link href="http://sandipransing.github.io/2010/08/multiple-sites-hosting-using-radiant"/>
+    <link href="http://sandipransing.github.io/2010/08/multiple-sites-hosting-using-radiant/"/>
     <updated>2010-08-07T20:49:00+05:30</updated>
     <id>http://sandipransing.github.io/2010/08/multiple-sites-hosting-using-radiant</id>
     <content type="html"><![CDATA[<div class='post'>
@@ -53,7 +53,7 @@ you can skip a few steps by doing &quot;script/extension install multi_site&quot
   
   <entry>
     <title type="html"><![CDATA[Page Cache control in radiant cms]]></title>
-    <link href="http://sandipransing.github.io/2010/03/page-cache-control-in-radiant-cms"/>
+    <link href="http://sandipransing.github.io/2010/03/page-cache-control-in-radiant-cms/"/>
     <updated>2010-03-04T00:43:00+05:30</updated>
     <id>http://sandipransing.github.io/2010/03/page-cache-control-in-radiant-cms</id>
     <content type="html"><![CDATA[<div class='post'>
@@ -64,7 +64,7 @@ you can skip a few steps by doing &quot;script/extension install multi_site&quot
   
   <entry>
     <title type="html"><![CDATA[Understanding and creating radinat extensions]]></title>
-    <link href="http://sandipransing.github.io/2009/11/understanding-and-creating-radinat"/>
+    <link href="http://sandipransing.github.io/2009/11/understanding-and-creating-radinat/"/>
     <updated>2009-11-10T13:52:00+05:30</updated>
     <id>http://sandipransing.github.io/2009/11/understanding-and-creating-radinat</id>
     <content type="html"><![CDATA[<div class='post'>

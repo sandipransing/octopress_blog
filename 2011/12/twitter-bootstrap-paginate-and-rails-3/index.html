@@ -92,7 +92,7 @@
 
 
 <div class="entry-content"><div class='post'>
-Twitter bootstrap is css toolkit for rapid front-end UI development.<br/>To get will-paginate working with bootstrap css we need to override default pagination link renderer.<br/> Using Bootstrap-sass for rails 3 <br/><console># Gemfile  gem &#8216;sass-rails&#8217;  gem &#8216;bootstrap-sass&#8217; </console><br/><console># app/assets/stylesheets/application.css.sass  // Place all the styles related to the home controller here. // They will automatically be included in application.css. // You can use Sass (SCSS) here: http://sass-lang.com/ //= require bootstrap </console> Add WillPaginate LinkRenderer to intitializer<br/><console># config/initializers/will_paginate.rb  module WillPaginate   module ActiveRecord     module RelationMethods       alias_method :per, :per_page       alias_method :num_pages, :total_pages       alias_method :total_count, :count     end   end    module ActionView     def will_paginate(collection = nil, options = {})       options[:inner_window] ||= 0       options[:outer_window] ||= 0       options[:class] ||= &#8216;pagination pull-left&#8217;        options[:renderer] ||= BootstrapLinkRenderer       super.try :html_safe     end      class BootstrapLinkRenderer < LinkRenderer       protected        def html_container(html)         tag :div, tag(:ul, html), container_attributes       end        def page_number(page)         tag :li, link(page, page, :rel => rel_value(page)), :class => (&#8216;active&#8217; if page == current_page)       end        def previous_or_next_page(page, text, classname)         tag :li, link(text, page || &#8216;javascript:void(0)&#8217;), :class => [classname[0..3], classname, (&#8216;disabled&#8217; unless page)].join(&#8217; &#8216;)       end        def gap         tag :li, link(super, &#8216;javascript:void(0)&#8217;), :class => &#8216;disabled&#8217;       end      end   end end </console></div>
+Twitter bootstrap is css toolkit for rapid front-end UI development.<br/>To get will-paginate working with bootstrap css we need to override default pagination link renderer.<br/> Using Bootstrap-sass for rails 3 <br/><pre class=ruby># Gemfile  gem 'sass-rails'  gem 'bootstrap-sass' </pre><br/><pre class=ruby># app/assets/stylesheets/application.css.sass  // Place all the styles related to the home controller here. // They will automatically be included in application.css. // You can use Sass (SCSS) here: http://sass-lang.com/ //= require bootstrap </pre> Add WillPaginate LinkRenderer to intitializer<br/><pre class=ruby># config/initializers/will_paginate.rb  module WillPaginate   module ActiveRecord     module RelationMethods       alias_method :per, :per_page       alias_method :num_pages, :total_pages       alias_method :total_count, :count     end   end    module ActionView     def will_paginate(collection = nil, options = {})       options[:inner_window] ||= 0       options[:outer_window] ||= 0       options[:class] ||= 'pagination pull-left'        options[:renderer] ||= BootstrapLinkRenderer       super.try :html_safe     end      class BootstrapLinkRenderer < LinkRenderer       protected        def html_container(html)         tag :div, tag(:ul, html), container_attributes       end        def page_number(page)         tag :li, link(page, page, :rel => rel_value(page)), :class => ('active' if page == current_page)       end        def previous_or_next_page(page, text, classname)         tag :li, link(text, page || 'javascript:void(0)'), :class => [classname[0..3], classname, ('disabled' unless page)].join(' ')       end        def gap         tag :li, link(super, 'javascript:void(0)'), :class => 'disabled'       end      end   end end </pre></div>
 </div>
 
 
@@ -129,7 +129,7 @@ Twitter bootstrap is css toolkit for rapid front-end UI development.<br/>To get 
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2011/12/twitter-bootstrap-paginate-and-rails-3" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2011/12/twitter-bootstrap-paginate-and-rails-3" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2011/12/twitter-bootstrap-paginate-and-rails-3/" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2011/12/twitter-bootstrap-paginate-and-rails-3/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -140,10 +140,10 @@ Twitter bootstrap is css toolkit for rapid front-end UI development.<br/>To get 
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2011/12/best-practices-to-use-named-scopes" title="Previous Post: Best practices to use named scopes inside models">&laquo; Best practices to use named scopes inside models</a>
+        <a class="basic-alignment left" href="/2011/12/best-practices-to-use-named-scopes/" title="Previous Post: Best practices to use named scopes inside models">&laquo; Best practices to use named scopes inside models</a>
       
       
-        <a class="basic-alignment right" href="/2011/12/simplified-active-record-extensions" title="Next Post: Simplified Active Record Extensions">Simplified Active Record Extensions &raquo;</a>
+        <a class="basic-alignment right" href="/2011/12/simplified-active-record-extensions/" title="Next Post: Simplified Active Record Extensions">Simplified Active Record Extensions &raquo;</a>
       
     </p>
   </footer>
@@ -159,23 +159,23 @@ Twitter bootstrap is css toolkit for rapid front-end UI development.<br/>To get 
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

@@ -9,7 +9,7 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Ruby language is dynamic and robust. We can define methods inside ruby classes at runtime. # bash class A define_method :a do puts &#8220;hello&# &hellip;">
+  <meta name="description" content="Ruby language is dynamic and robust. We can define methods inside ruby classes at runtime. # bash class A define_method :a do puts "hello" end &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -92,7 +92,7 @@
 
 
 <div class="entry-content"><div class='post'>
-Ruby language is dynamic and robust. We can define methods inside ruby classes at runtime. <br/> <console># bash class A   define_method :a do     puts &#8220;hello&#8221;   end      define_method :greeting do |message|     puts message   end end  A.new.a #=> hello A.new.greeting &#8216;Ram ram&#8217; #=> Ram ram </console><br/> Can you imagine using dynamic methods below 24 lines of code is optimized to just 8 lines <br/>To know more on below code <a href="http://www.funonrails.com/2011/12/multiple-resources-registrations-with.html">read</a><console># Earlier code class ApplicationController < ActionController::Base   protect_from_forgery   helper_method :current_staff, :current_employee, current_admin    def authenticate_staff!(opts={})     current_staff || not_authorized   end    def current_staff     current_user if current_user.is_a? Staff   end    def authenticate_employee!(opts={})     current_employee || not_authorized   end    def current_employee     current_user if current_user.is_a? Employee   end      def authenticate_admin!(opts={})     current_admin || not_authorized   end    def current_admin     current_user if current_user.is_a? Admin   end end </console><br/><console># New Version using dynamic methods   %w(Staff Employee Admin).each do |k|     define_method &#8220;current_#{k.underscore}&#8221; do       current_user if current_user.is_a?(k.constantize)     end          define_method &#8220;authenticate_#{k.underscore}!&#8221; do |opts={}|       send(&#8220;current_#{k.underscore}&#8221;) || not_authorized     end   end </console></div>
+Ruby language is dynamic and robust. We can define methods inside ruby classes at runtime. <br/> <pre class=ruby># bash class A   define_method :a do     puts "hello"   end      define_method :greeting do |message|     puts message   end end  A.new.a #=> hello A.new.greeting 'Ram ram' #=> Ram ram </pre><br/> Can you imagine using dynamic methods below 24 lines of code is optimized to just 8 lines <br/>To know more on below code <a href="http://www.funonrails.com/2011/12/multiple-resources-registrations-with.html">read</a><pre class=ruby># Earlier code class ApplicationController < ActionController::Base   protect_from_forgery   helper_method :current_staff, :current_employee, current_admin    def authenticate_staff!(opts={})     current_staff || not_authorized   end    def current_staff     current_user if current_user.is_a? Staff   end    def authenticate_employee!(opts={})     current_employee || not_authorized   end    def current_employee     current_user if current_user.is_a? Employee   end      def authenticate_admin!(opts={})     current_admin || not_authorized   end    def current_admin     current_user if current_user.is_a? Admin   end end </pre><br/><pre class=ruby># New Version using dynamic methods   %w(Staff Employee Admin).each do |k|     define_method "current_#{k.underscore}" do       current_user if current_user.is_a?(k.constantize)     end          define_method "authenticate_#{k.underscore}!" do |opts={}|       send("current_#{k.underscore}") || not_authorized     end   end </pre></div>
 </div>
 
 
@@ -129,7 +129,7 @@ Ruby language is dynamic and robust. We can define methods inside ruby classes a
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2011/12/dynamic-methods-inside-ruby-classes" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2011/12/dynamic-methods-inside-ruby-classes" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2011/12/dynamic-methods-inside-ruby-classes/" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2011/12/dynamic-methods-inside-ruby-classes/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -140,10 +140,10 @@ Ruby language is dynamic and robust. We can define methods inside ruby classes a
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2011/12/using-jquery-rails-and-datepicker" title="Previous Post: using jQuery-rails and datepicker, timepicker & datetimepicker">&laquo; using jQuery-rails and datepicker, timepicker & datetimepicker</a>
+        <a class="basic-alignment left" href="/2011/12/using-jquery-rails-and-datepicker/" title="Previous Post: using jQuery-rails and datepicker, timepicker & datetimepicker">&laquo; using jQuery-rails and datepicker, timepicker & datetimepicker</a>
       
       
-        <a class="basic-alignment right" href="/2011/12/best-practices-to-use-named-scopes" title="Next Post: Best practices to use named scopes inside models">Best practices to use named scopes inside models &raquo;</a>
+        <a class="basic-alignment right" href="/2011/12/best-practices-to-use-named-scopes/" title="Next Post: Best practices to use named scopes inside models">Best practices to use named scopes inside models &raquo;</a>
       
     </p>
   </footer>
@@ -159,23 +159,23 @@ Ruby language is dynamic and robust. We can define methods inside ruby classes a
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

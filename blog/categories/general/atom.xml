@@ -4,7 +4,7 @@
   <title><![CDATA[Category: general | Fun On Rails]]></title>
   <link href="http://sandipransing.github.io/blog/categories/general/atom.xml" rel="self"/>
   <link href="http://sandipransing.github.io/"/>
-  <updated>2014-02-09T20:36:37+05:30</updated>
+  <updated>2014-02-09T23:18:57+05:30</updated>
   <id>http://sandipransing.github.io/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -15,29 +15,29 @@
   
   <entry>
     <title type="html"><![CDATA[Print particular DIV inside HTML Page]]></title>
-    <link href="http://sandipransing.github.io/2011/09/print-particular-div-inside-html-page"/>
+    <link href="http://sandipransing.github.io/2011/09/print-particular-div-inside-html-page/"/>
     <updated>2011-09-12T13:26:00+05:30</updated>
     <id>http://sandipransing.github.io/2011/09/print-particular-div-inside-html-page</id>
     <content type="html"><![CDATA[<div class='post'>
-<div dir="ltr" style="text-align: left;" trbidi="on"><div class="gmail_quote">Hiding Whole page content and displaying only particular div using css<br /><br /></div><code>&lt;style media="print" type="text/css"&gt;<br />&nbsp; @media print<br />&nbsp; {<br />&nbsp;&nbsp;&nbsp; body * { visibility: hidden; }<br />&nbsp;&nbsp;&nbsp; #PrintDiv * { visibility: visible; }<br />&nbsp;&nbsp;&nbsp; #PrintDiv { position: absolute; top: 40px; left: 30px; }<br />&nbsp; }<br />&lt;/style&gt; </code></div></div>
+<div dir="ltr" style="text-align: left;" trbidi="on"><div class="gmail_quote">Hiding Whole page content and displaying only particular div using css<br /><br /></div><pre class=ruby>&lt;style media="print" type="text/css"&gt;<br />&nbsp; @media print<br />&nbsp; {<br />&nbsp;&nbsp;&nbsp; body * { visibility: hidden; }<br />&nbsp;&nbsp;&nbsp; #PrintDiv * { visibility: visible; }<br />&nbsp;&nbsp;&nbsp; #PrintDiv { position: absolute; top: 40px; left: 30px; }<br />&nbsp; }<br />&lt;/style&gt; </pre></div></div>
 
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Twitter share and facebook like button for haml-rails, html/erb]]></title>
-    <link href="http://sandipransing.github.io/2011/03/twitter-share-and-facebook-like-button"/>
+    <link href="http://sandipransing.github.io/2011/03/twitter-share-and-facebook-like-button/"/>
     <updated>2011-03-17T02:45:00+05:30</updated>
     <id>http://sandipransing.github.io/2011/03/twitter-share-and-facebook-like-button</id>
     <content type="html"><![CDATA[<div class='post'>
-<b>Twitter share and facebook like button for html/erb</b><br/><code>&lt;div class='spread'&gt;  &nbsp;&lt;div class='twshare left'&gt;   &nbsp; &lt;a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="funonrails"&gt;Tweet&lt;/a&gt;&lt;script type="text/javascript" src="http://platform.twitter.com/widgets.js"&gt;&lt;/script&gt;  &nbsp;&lt;/div&gt;  &nbsp;&lt;script src="http://connect.facebook.net/en_US/all.js#xfbml=1"&gt;&lt;/script&gt;&lt;fb:like href="" layout="button_count" show_faces="false" width="450" font=""&gt;&lt;/fb:like&gt; &lt;/div&gt; </code><b>Twitter share and facebook like button for haml</b><br/><code>.spread   .twshare.left     %a.twitter-share-button.left{"data-count" => "horizontal", "data-via" => "fuonrails", :href => "http://twitter.com/share"} Tweet     %script{:src => "http://platform.twitter.com/widgets.js", :type => "text/javascript"}   .fshare.left{:style => 'padding-left: 0px; margin-left: 10px;'}     %script{:src => "http://connect.facebook.net/en_US/all.js#xfbml=1"}     %fb:like{:layout => "button_count", :show_faces => "false", :width => "450"}   .CLR </code><b>Sample Buttons</b><br/>  <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="funonrails">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script><script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script><fb:like href="" layout="button_count" show_faces="false" width="450" font=""></fb:like></div>
+<b>Twitter share and facebook like button for html/erb</b><br/><pre class=ruby>&lt;div class='spread'&gt;  &nbsp;&lt;div class='twshare left'&gt;   &nbsp; &lt;a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="funonrails"&gt;Tweet&lt;/a&gt;&lt;script type="text/javascript" src="http://platform.twitter.com/widgets.js"&gt;&lt;/script&gt;  &nbsp;&lt;/div&gt;  &nbsp;&lt;script src="http://connect.facebook.net/en_US/all.js#xfbml=1"&gt;&lt;/script&gt;&lt;fb:like href="" layout="button_count" show_faces="false" width="450" font=""&gt;&lt;/fb:like&gt; &lt;/div&gt; </pre><b>Twitter share and facebook like button for haml</b><br/><pre class=ruby>.spread   .twshare.left     %a.twitter-share-button.left{"data-count" => "horizontal", "data-via" => "fuonrails", :href => "http://twitter.com/share"} Tweet     %script{:src => "http://platform.twitter.com/widgets.js", :type => "text/javascript"}   .fshare.left{:style => 'padding-left: 0px; margin-left: 10px;'}     %script{:src => "http://connect.facebook.net/en_US/all.js#xfbml=1"}     %fb:like{:layout => "button_count", :show_faces => "false", :width => "450"}   .CLR </pre><b>Sample Buttons</b><br/>  <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="funonrails">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script><script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script><fb:like href="" layout="button_count" show_faces="false" width="450" font=""></fb:like></div>
 
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[blogger tips]]></title>
-    <link href="http://sandipransing.github.io/2010/03/blogger-tips"/>
+    <link href="http://sandipransing.github.io/2010/03/blogger-tips/"/>
     <updated>2010-03-11T01:19:00+05:30</updated>
     <id>http://sandipransing.github.io/2010/03/blogger-tips</id>
     <content type="html"><![CDATA[<div class='post'>
@@ -48,18 +48,18 @@
   
   <entry>
     <title type="html"><![CDATA[Copy database to another database through command]]></title>
-    <link href="http://sandipransing.github.io/2010/02/copy-database-to-another-database"/>
+    <link href="http://sandipransing.github.io/2010/02/copy-database-to-another-database/"/>
     <updated>2010-02-16T16:53:00+05:30</updated>
     <id>http://sandipransing.github.io/2010/02/copy-database-to-another-database</id>
     <content type="html"><![CDATA[<div class='post'>
-<b>1. Copy One database to another database on same host </b><br/><console> mysqldump -uroot -p <source_database_name> | mysql -uroot <dest_database_name></console> <b>2. Copy database to another database on remote host</b><br/><console> mysqldump -uroot -p <source_database> | ssh host2 "mysql -uroot <dest_database>" </console></div>
+<b>1. Copy One database to another database on same host </b><br/><pre class=ruby> mysqldump -uroot -p <source_database_name> | mysql -uroot <dest_database_name></pre> <b>2. Copy database to another database on remote host</b><br/><pre class=ruby> mysqldump -uroot -p <source_database> | ssh host2 "mysql -uroot <dest_database>" </pre></div>
 
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Flash games]]></title>
-    <link href="http://sandipransing.github.io/2009/11/3rd-worm-game"/>
+    <link href="http://sandipransing.github.io/2009/11/3rd-worm-game/"/>
     <updated>2009-11-24T17:59:00+05:30</updated>
     <id>http://sandipransing.github.io/2009/11/3rd-worm-game</id>
     <content type="html"><![CDATA[<div class='post'>

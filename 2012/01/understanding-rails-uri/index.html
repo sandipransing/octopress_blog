@@ -92,7 +92,7 @@
 
 
 <div class="entry-content"><div class='post'>
-rails-uri module provide us with url manipulation methods<br/> <b>Parse string url</b><code>url = URI.parse('http://funonrails.com/search/label/rails3') url.host #=> "http://funonrails.com" url.port #=> 80 </code><br/><b>URL with Basic Authentication </b><br/><code>url = URI.parse('http://sandip:2121@funonrails.com/search/label/rails3') url.user #=> "sandip" url.password #=> "2121" </code><br/><b>Extracting urls form string paragraph</b><br/><code>URI.extract('http://funonrails.com is rails blog authored by http://sandipransing.github.com contact mailto://sandip@funonrails.com') #=> ["http://funonrails.com", "http://sandipransing.github.com", "mailto://sandip@funonrails.com"] </code> <b>Split & Join URI</b><br/><code>URI.split('http://sandip:2121@funonrails.com/search/label/rails3') #=> ["http", "sandip:2121", "funonrails.com", nil, nil, "/search/label/rails3", nil, nil, nil]  <=> [Scheme, Userinfo, Host, Port, Registry, Path, Opaque, Query, Fragment]    URI.join('http://funonrails.com','search/label/rails3') #=> #<URI::HTTP:0x7fbf9202efc8 URL:http://funonrails.com/search/label/rails3></code><br/><b>Escape & Unescape alias encode/decode URI</b><br/><code>URI.escape('http://funonrails.com/search/?label=\\rails\3') URI.encode('http://funonrails.com/search/?label=\\rails\3') #=> "http://funonrails.com/search/?label=%5Crails%5C3"  URI.unescape("http://funonrails.com/search/?label=%5Crails%5C3") URI.decode("http://funonrails.com/search/?label=%5Crails%5C3") #=> "http://funonrails.com/search/?label=\\rails\\3" </code><br/><b>Match urls using regular expressions </b><br/><code>"http://funonrails.com/search/label/rails3".sub(URI.regexp(['search'])) do |*matchs|   p $& end #=> "http://funonrails.com/search/label/rails3" </code><br/><b>Getting requested url inside rails</b><br/><code>request.request_uri request.env['REQUEST_URI'] </code><br/><b>Getting previous page url inside rails</b><br/><code>request.referrer </code></div>
+rails-uri module provide us with url manipulation methods<br/> <b>Parse string url</b><pre class=ruby>url = URI.parse('http://funonrails.com/search/label/rails3') url.host #=> "http://funonrails.com" url.port #=> 80 </pre><br/><b>URL with Basic Authentication </b><br/><pre class=ruby>url = URI.parse('http://sandip:2121@funonrails.com/search/label/rails3') url.user #=> "sandip" url.password #=> "2121" </pre><br/><b>Extracting urls form string paragraph</b><br/><pre class=ruby>URI.extract('http://funonrails.com is rails blog authored by http://sandipransing.github.com contact mailto://sandip@funonrails.com') #=> ["http://funonrails.com", "http://sandipransing.github.com", "mailto://sandip@funonrails.com"] </pre> <b>Split & Join URI</b><br/><pre class=ruby>URI.split('http://sandip:2121@funonrails.com/search/label/rails3') #=> ["http", "sandip:2121", "funonrails.com", nil, nil, "/search/label/rails3", nil, nil, nil]  <=> [Scheme, Userinfo, Host, Port, Registry, Path, Opaque, Query, Fragment]    URI.join('http://funonrails.com','search/label/rails3') #=> #<URI::HTTP:0x7fbf9202efc8 URL:http://funonrails.com/search/label/rails3></pre><br/><b>Escape & Unescape alias encode/decode URI</b><br/><pre class=ruby>URI.escape('http://funonrails.com/search/?label=\\rails\3') URI.encode('http://funonrails.com/search/?label=\\rails\3') #=> "http://funonrails.com/search/?label=%5Crails%5C3"  URI.unescape("http://funonrails.com/search/?label=%5Crails%5C3") URI.decode("http://funonrails.com/search/?label=%5Crails%5C3") #=> "http://funonrails.com/search/?label=\\rails\\3" </pre><br/><b>Match urls using regular expressions </b><br/><pre class=ruby>"http://funonrails.com/search/label/rails3".sub(URI.regexp(['search'])) do |*matchs|   p $& end #=> "http://funonrails.com/search/label/rails3" </pre><br/><b>Getting requested url inside rails</b><br/><pre class=ruby>request.request_uri request.env['REQUEST_URI'] </pre><br/><b>Getting previous page url inside rails</b><br/><pre class=ruby>request.referrer </pre></div>
 </div>
 
 
@@ -129,7 +129,7 @@ rails-uri module provide us with url manipulation methods<br/> <b>Parse string u
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2012/01/understanding-rails-uri" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2012/01/understanding-rails-uri" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2012/01/understanding-rails-uri/" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2012/01/understanding-rails-uri/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -140,10 +140,10 @@ rails-uri module provide us with url manipulation methods<br/> <b>Parse string u
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2011/12/paypal-payments-integration-with-rails" title="Previous Post: Paypal payments integration with rails">&laquo; Paypal payments integration with rails</a>
+        <a class="basic-alignment left" href="/2011/12/paypal-payments-integration-with-rails/" title="Previous Post: Paypal payments integration with rails">&laquo; Paypal payments integration with rails</a>
       
       
-        <a class="basic-alignment right" href="/2012/01/stripe-gateway-payment-integration-with" title="Next Post: stripe gateway payment integration with rails">stripe gateway payment integration with rails &raquo;</a>
+        <a class="basic-alignment right" href="/2012/01/stripe-gateway-payment-integration-with/" title="Next Post: stripe gateway payment integration with rails">stripe gateway payment integration with rails &raquo;</a>
       
     </p>
   </footer>
@@ -159,23 +159,23 @@ rails-uri module provide us with url manipulation methods<br/> <b>Parse string u
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
       <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
       <li class="post">
-        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>
