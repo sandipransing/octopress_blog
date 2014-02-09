@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: meta-programming | Fun On Rails]]></title>
+  <link href="http://sandipransing.github.io/blog/categories/meta-programming/atom.xml" rel="self"/>
+  <link href="http://sandipransing.github.io/"/>
+  <updated>2014-02-09T20:36:37+05:30</updated>
+  <id>http://sandipransing.github.io/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Dynamic methods inside ruby classes]]></title>
+    <link href="http://sandipransing.github.io/2011/12/dynamic-methods-inside-ruby-classes"/>
+    <updated>2011-12-22T17:54:00+05:30</updated>
+    <id>http://sandipransing.github.io/2011/12/dynamic-methods-inside-ruby-classes</id>
+    <content type="html"><![CDATA[<div class='post'>
+Ruby language is dynamic and robust. We can define methods inside ruby classes at runtime. <br/> <console># bash class A   define_method :a do     puts "hello"   end      define_method :greeting do |message|     puts message   end end  A.new.a #=> hello A.new.greeting 'Ram ram' #=> Ram ram </console><br/> Can you imagine using dynamic methods below 24 lines of code is optimized to just 8 lines <br/>To know more on below code <a href="http://www.funonrails.com/2011/12/multiple-resources-registrations-with.html">read</a><console># Earlier code class ApplicationController < ActionController::Base   protect_from_forgery   helper_method :current_staff, :current_employee, current_admin    def authenticate_staff!(opts={})     current_staff || not_authorized   end    def current_staff     current_user if current_user.is_a? Staff   end    def authenticate_employee!(opts={})     current_employee || not_authorized   end    def current_employee     current_user if current_user.is_a? Employee   end      def authenticate_admin!(opts={})     current_admin || not_authorized   end    def current_admin     current_user if current_user.is_a? Admin   end end </console><br/><console># New Version using dynamic methods   %w(Staff Employee Admin).each do |k|     define_method "current_#{k.underscore}" do       current_user if current_user.is_a?(k.constantize)     end          define_method "authenticate_#{k.underscore}!" do |opts={}|       send("current_#{k.underscore}") || not_authorized     end   end </console></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[alias methods in ruby]]></title>
+    <link href="http://sandipransing.github.io/2010/03/aliasmethod-in-ruby"/>
+    <updated>2010-03-31T17:46:00+05:30</updated>
+    <id>http://sandipransing.github.io/2010/03/aliasmethod-in-ruby</id>
+    <content type="html"><![CDATA[<div class='post'>
+<b>Alias method in ruby</b><br />Ruby classes provides a alias_method that can be used to reuse the existing methods.<br />Consider a situation where you need different methods which has same code and ONLY  they have different names.<br /><br />In this case alias_method uses suits best choice instead duplicating same code or writing common method that will get used in all methods, as i did before.  Example, I have methods search, home, index all are doing same functionality.<br/> <b>Old approach</b><code># URL /  def index   list  end  # URL /search def search   list  end   #URL /home  def home   list  end  private  def list  # code here  end  </code> <b>Correct approach in ruby</b><code>def index   # code here  end  alias_method :home, :index  alias_method :search, :index  </code><b>Attributes aliasing in ruby</b><br/>Same way one can easily rename existing class attribute names using alias_attribute method.<br/><b>alias_attribute(new_name, old_name)</b><code>alias_attrinute :username, :login </code><b>More practical use</b><br/>while deprecating attributes, methods in gems, plugins, extensions, libraries always use aliases in order to maintain backward compatibility.<br/> Got easy ??<br/>that's where ruby rocks !</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Dynamic creation of variables in ruby]]></title>
+    <link href="http://sandipransing.github.io/2010/02/dynamic-creation-of-variables-in-ruby"/>
+    <updated>2010-02-16T16:12:00+05:30</updated>
+    <id>http://sandipransing.github.io/2010/02/dynamic-creation-of-variables-in-ruby</id>
+    <content type="html"><![CDATA[<div class='post'>
+<div style="text-align: left;">1. To create local variables in ruby dynamically.</div><div style="text-align: left;">Use eval method in ruby</div><br /><div style="text-align: left;">ree-1.8.7-2010.01 &gt; eval("local=4")</div><div style="text-align: left;">&nbsp;=&gt; 4&nbsp;</div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; p local</div><div style="text-align: left;">4</div><div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; eval("local_#{1}=4")</div><div style="text-align: left;">&nbsp;=&gt; 4&nbsp;</div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; puts local_1</div><div style="text-align: left;">4</div><div style="text-align: left;"><br /></div><div style="text-align: left;">2. To create &amp; get instance variables dynamically in ruby.</div><div style="text-align: left;">instance_varaiable_set &amp;&nbsp;instance_varaiable_get methods are provided and no need to do it using eval.</div><div style="text-align: left;"><br /></div><div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; (0..3).each do |i|</div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; &nbsp; &nbsp; instance_variable_set("@instance_#{i}", i*i+1)</div><div style="text-align: left;">ree-1.8.7-2010.01 ?&gt; &nbsp;end</div><div style="text-align: left;">&nbsp;=&gt; 0..3&nbsp;</div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; @instance_0</div><div style="text-align: left;">&nbsp;=&gt; 1&nbsp;</div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; @instance_2</div><div style="text-align: left;">&nbsp;=&gt; 5&nbsp;</div><div style="text-align: left;"><br /></div><div style="text-align: left;">3. Dynamic constant variable creation in ruby</div><div style="text-align: left;"><br /></div><div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; class Example</div><div style="text-align: left;">ree-1.8.7-2010.01 ?&gt; &nbsp;end</div><div style="text-align: left;">&nbsp;=&gt; nil&nbsp;</div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; Example.const_set('A',200)</div><div style="text-align: left;">&nbsp;=&gt; 200&nbsp;</div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; Example::A</div><div style="text-align: left;">&nbsp;=&gt; 200&nbsp;</div><div style="text-align: left;"><br /></div></div></div></div></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Eval method in ruby]]></title>
+    <link href="http://sandipransing.github.io/2010/02/eval-method-in-ruby"/>
+    <updated>2010-02-16T15:34:00+05:30</updated>
+    <id>http://sandipransing.github.io/2010/02/eval-method-in-ruby</id>
+    <content type="html"><![CDATA[<div class='post'>
+Eval method in ruby executes string/expression passed as parameter. <br/> <b>Example:</b><br/><code>irb > eval("5+3")  => 8   irb > eval("a=5")  => 5   irb > eval("b||=a")  => 5   </code><br/>Its part of ruby meta-programming and not recommended approach unless there is no any alternative to do.</div>
+
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: paperclip | Fun On Rails]]></title>
+  <link href="http://sandipransing.github.io/blog/categories/paperclip/atom.xml" rel="self"/>
+  <link href="http://sandipransing.github.io/"/>
+  <updated>2014-02-09T20:36:37+05:30</updated>
+  <id>http://sandipransing.github.io/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[paperclip options aws-s3 config and rails]]></title>
+    <link href="http://sandipransing.github.io/2011/11/paperclip-options-aws-s3-config-and"/>
+    <updated>2011-11-21T23:23:00+05:30</updated>
+    <id>http://sandipransing.github.io/2011/11/paperclip-options-aws-s3-config-and</id>
+    <content type="html"><![CDATA[<div class='post'>
+Stepwise guide to configure paperclip default options, setting up aws-s3 storage in rails <br/> Inside Gemfile<br/><console>gem 'aws-s3',               :require => 'aws/s3' gem 'paperclip' </console><br/><console>bundle install </console> Generate Print model to hold image <br/><console> rails g model print image_file_name:string image_content_type:string image_file_size:string </console><br/><console>rake db:migrate </console> Add s3 credentials to YML file<br/><console># config/s3.yml  access_key_id: DASDFG7KACNxIJdJXHPQ secret_access_key: BnDrTnzCTX+R707wYEP/aCEqAsDFG7sgW </console>Add default paperclip attachment options to initializer<br/><console># Make sure to add host url inside config/environments # HOSTNAME = 'http://lordganesha.com'  Paperclip::Attachment.default_options.merge!(   :storage => 's3',   :s3_credentials => YAML.load_file("#{Rails.root}/config/s3.yml"),   :path => ":class/:attachment/#{Rails.env}/:id/:style/:basename.:extension",     :default_url => "http://#{HOSTNAME}/images/paperclip/:class/:attachment/default.jpg",   :bucket => 'ganesha' ) </console>Add image attachment code to print model<br/><console># app/models/print.rb class Print < ActiveRecord::Base   has_attached_file :image,     :styles => {:medium => ["400x400#", :jpg],                  :thumb => ["100x100#", :jpg],                  :slider => ["300x300#", :jpg]}   #validates_attachment_presence :image   validates_attachment_size :image, :less_than => 1.megabytes, :message => 'file size maximum 1 MB allowed'   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png', 'image/gif', 'image/bmp', 'image/pjpeg', 'image/x-png'] end </console> Inside views<br/><console>  # inside new.html.haml    = form_for @print do     f.file_field :image </console></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Paperclip image upload via URL]]></title>
+    <link href="http://sandipransing.github.io/2011/11/paperclip-image-upload-via-url"/>
+    <updated>2011-11-21T17:56:00+05:30</updated>
+    <id>http://sandipransing.github.io/2011/11/paperclip-image-upload-via-url</id>
+    <content type="html"><![CDATA[<div class='post'>
+Upload image via paperclip via passing URL instead of file upload <br/>  <code># Consider Print instance with image as file attachment class Print < ActiveRecord::Base   has_attached_file :image   def upload_image(url)     begin       io = open(URI.escape(url))       if io         def io.original_filename; base_uri.path.split('/').last; end         io.original_filename.blank? ? nil : io         p.image = io       end       p.save(false)     rescue Exception => e       logger.info "EXCEPTION# #{e.message}"     end   end end  </code> Text code from console<br/><console>p = Print.new url = "http://ocdevel.com/sites/ocdevel.com/files/images/rails.png" p.upload_image(url) </console></div>
+
+]]></content>
+  </entry>
+  
+</feed>

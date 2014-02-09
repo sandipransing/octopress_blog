@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: active record | Fun On Rails]]></title>
+  <link href="http://sandipransing.github.io/blog/categories/active-record/atom.xml" rel="self"/>
+  <link href="http://sandipransing.github.io/"/>
+  <updated>2014-02-09T20:36:37+05:30</updated>
+  <id>http://sandipransing.github.io/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Get models list inside rails app]]></title>
+    <link href="http://sandipransing.github.io/2012/01/get-models-list-inside-rails-app"/>
+    <updated>2012-01-17T05:16:00+05:30</updated>
+    <id>http://sandipransing.github.io/2012/01/get-models-list-inside-rails-app</id>
+    <content type="html"><![CDATA[<div class='post'>
+How to get collection of models inside your application. Certainly there are many ways to do it.<br/>Lets have a look at different ways starting from worst - <br/><b> Get table names inside database and then iterating over to get model name</b><code>@models = ActiveRecord::Base.connection.tables.collect{|t| t.underscore.singularize.camelize}  #=> ["AdhearsionAudit", "AudioLog", "AuditDetail","TinyPrint", "TinyVideo", "UnknownCall", "UserAudit", "User"] </code><br/><b>Select those with associated class</b><br/><code>@models.delete_if{|m| m.constantize rescue true} </code><br/><b>Load models dir</b><br/><code>@models = Dir['app/models/*.rb'].map {|f| File.basename(f, '.*').camelize.constantize.name } </code><b>Select ActiveRecord::Base extended class only</b><code>@models.reject!{|m| m.constantize.superclass != ActiveRecord::Base } </code><b>Get Active Record subclasses</b><br/><code># make sure relevant models are loaded otherwise # require them prior # Dir.glob(RAILS_ROOT + '/app/models/*.rb').each { |file| require file } class A < ActiveRecord::Base end class B < A end ActiveRecord::Base.send(:subclasses).collect(&:name) #=> [...., A] </code><b>How to get Inherited models too</b> <br/><code>class A < ActiveRecord::Base end class B < A end ActiveRecord::Base.descendants.collect(&:name) #=> [...., A, B] </code> Below is more elegant solution provide by <a href="http://stackoverflow.com/users/268/vincent-robert">Vincent-robert</a> over stack overflow which recursively looks for subsequent descendent's of class and gives you list from all over application<br/><code>class Class   def extend?(klass)     not superclass.nil? and ( superclass == klass or superclass.extend? klass )   end end  def models    Module.constants.select do |constant_name|     constant = eval constant_name     if not constant.nil? and constant.is_a? Class and constant.extend? ActiveRecord::Base     constant     end   end end </code></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Simplified Active Record Extensions]]></title>
+    <link href="http://sandipransing.github.io/2011/12/simplified-active-record-extensions"/>
+    <updated>2011-12-28T14:21:00+05:30</updated>
+    <id>http://sandipransing.github.io/2011/12/simplified-active-record-extensions</id>
+    <content type="html"><![CDATA[<div class='post'>
+Below extensions to active record base simplifies its usage while coding.<br/><console># config/initializers/core_extensions.rb  class ActiveRecord::Base    def self.pagination(options)     paginate :per_page => options[:per_page] || per_page, :page => options[:page]   end    def self.options_for_select(opts={})     opts[:name] ||= :name     opts[:attr] ||= :id     opts[:prompt] ||= 'Please Select'     all.collect{|c| [c.send(opts[:name].to_sym), c.send(opts[:attr].to_sym)]}.insert(0, [opts[:prompt], nil])   end end </console>Usage<br/><console>class Student< ActiveRecord::Base  #attributes #=> name, age end  ##  Student.pagination({:page => 10}) Student.pagination({:per_page => 2, :page => 2}) Student.options_for_select Student.options_for_select({:prompt => 'Please select'}) Student.options_for_select({:name => :age}) </console></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Best practices to use named scopes inside models]]></title>
+    <link href="http://sandipransing.github.io/2011/12/best-practices-to-use-named-scopes"/>
+    <updated>2011-12-22T18:50:00+05:30</updated>
+    <id>http://sandipransing.github.io/2011/12/best-practices-to-use-named-scopes</id>
+    <content type="html"><![CDATA[<div class='post'>
+Scopes are partial query conditions to database queries. scopes are always prefixed to class finders. There are several ways to use scopes inside rails models.  <console># 1. Scope defined below gets loaded while class definition loads scope :active, where(:active => true) scope :archived, where(:archived => true, :post_type => :general) # 2.Dynamic scopes needs to be always defined inside lambda  scope :not_expired, lambda { where('expiry_date <= ?', Date.today) } # 3.Combining scopes scope :visible, published.not_expired </console><br/><console># 4. Passing parameters to scopes # avoid below scope :created_by_user, lambda {|user|   where('user_id = ?', user) } # use this scope :created_by_user, lambda {|user|   where(:user_id => user) } </console><br/><console># 5. passing multiple parameters # avoid below scope :made_between, lambda{|from, to|   where('created_date >= ? and created_date <= ?', from, to) } # use this scope :made_between, lambda{|from, to|   where('created_date >= :from and created_date <= :to', :from => from, :to => to) } </console><br/><console># 6. associations inside scope (joins and includes) # below will perform eager loading effective when rendering posts with comments scope :with_user_comments, lambda{|user|   includes(:comments).where('comments.user_id = ?', user) }  # faster # also can be done as post.comments.where(:user_id => user) scope :with_user_comments, lambda{|user|   joins(:comments).where('comments.user_id = ?', user) } </console><br/>So, at last would suggest making use of symbols when there are multiple parameters to scopes and make maximum use of scopes rather than having where conditions everywhere :)</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Legacy database connections in rails]]></title>
+    <link href="http://sandipransing.github.io/2011/10/connecting-to-multiple-databases-in"/>
+    <updated>2011-10-05T13:13:00+05:30</updated>
+    <id>http://sandipransing.github.io/2011/10/connecting-to-multiple-databases-in</id>
+    <content type="html"><![CDATA[<div class='post'>
+While developing rails application we often come across situation where you wanted different rails models connecting different tables of different databases. <br/>Example: We are having ndnc model holding ndnc records associated with database ndnc. <br/>Lets create ConnectionBase model that will connect to other databse 'ndnc' and that will be extended from ActiveRecordBase and put that inside library files <br/><code>vi lib/connection_base.rb   class ConnectionBase < ActiveRecord::Base    establish_connection(     :adapter => "postgresql",     :username=> "sandip",     :password => "2121",     :database => "ndnc" ) end </code><br/><br/>Wherever you wanted to connect to other database i.e. ndnc  you can extend that particular model with ConnectionBase <br/><code>class Ndnc < ConnectionBase # connects to ndnc table of ndnc database end </code><br/>Please make sure library files are loaded while server startup<br/><code># vi config/application.rb config.autoload_paths += %W(#{config.root}/lib) </code><br/>Done !<br/>In cases where you want only one particular model connecting other database table, you can put connection setting itself in that model.<br/></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ActiveRecord::ReadOnlyRecord while updating object fetched by joins]]></title>
+    <link href="http://sandipransing.github.io/2010/02/activerecordreadonlyrecord-while"/>
+    <updated>2010-02-15T21:34:00+05:30</updated>
+    <id>http://sandipransing.github.io/2010/02/activerecordreadonlyrecord-while</id>
+    <content type="html"><![CDATA[<div class='post'>
+<b>ActiveRecord find with join options retrieves object as readonly</b><br/><code>station = Station.find( :first, :joins => :call, :conditions => ["customer_id = ? and date(insurance_expiry_date) = ?", customer.id, insurance_expiry_date ] ) </code><br/> Readonly object cannot modified and hence below line raises "ActiveRecord::ReadOnlyRecord" error. <br/><code>station.update_attributes({ :customer_id => 12 }) </code><br/>If you have to write on read only object then you can pass following option to find query<br/><code>:readonly => false </code><br/>Now below find is permitted to do write on fetched object records. <br/><code>station = Station.find( :first, :joins => :call, :conditions => ["customer_id = ? and date(insurance_expiry_date) = ?", customer.id, insurance_expiry_date ], :readonly => false ) </code></div>
+
+]]></content>
+  </entry>
+  
+</feed>

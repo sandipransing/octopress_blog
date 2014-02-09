@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: named-scopes | Fun On Rails]]></title>
+  <link href="http://sandipransing.github.io/blog/categories/named-scopes/atom.xml" rel="self"/>
+  <link href="http://sandipransing.github.io/"/>
+  <updated>2014-02-09T20:36:37+05:30</updated>
+  <id>http://sandipransing.github.io/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Best practices to use named scopes inside models]]></title>
+    <link href="http://sandipransing.github.io/2011/12/best-practices-to-use-named-scopes"/>
+    <updated>2011-12-22T18:50:00+05:30</updated>
+    <id>http://sandipransing.github.io/2011/12/best-practices-to-use-named-scopes</id>
+    <content type="html"><![CDATA[<div class='post'>
+Scopes are partial query conditions to database queries. scopes are always prefixed to class finders. There are several ways to use scopes inside rails models.  <console># 1. Scope defined below gets loaded while class definition loads scope :active, where(:active => true) scope :archived, where(:archived => true, :post_type => :general) # 2.Dynamic scopes needs to be always defined inside lambda  scope :not_expired, lambda { where('expiry_date <= ?', Date.today) } # 3.Combining scopes scope :visible, published.not_expired </console><br/><console># 4. Passing parameters to scopes # avoid below scope :created_by_user, lambda {|user|   where('user_id = ?', user) } # use this scope :created_by_user, lambda {|user|   where(:user_id => user) } </console><br/><console># 5. passing multiple parameters # avoid below scope :made_between, lambda{|from, to|   where('created_date >= ? and created_date <= ?', from, to) } # use this scope :made_between, lambda{|from, to|   where('created_date >= :from and created_date <= :to', :from => from, :to => to) } </console><br/><console># 6. associations inside scope (joins and includes) # below will perform eager loading effective when rendering posts with comments scope :with_user_comments, lambda{|user|   includes(:comments).where('comments.user_id = ?', user) }  # faster # also can be done as post.comments.where(:user_id => user) scope :with_user_comments, lambda{|user|   joins(:comments).where('comments.user_id = ?', user) } </console><br/>So, at last would suggest making use of symbols when there are multiple parameters to scopes and make maximum use of scopes rather than having where conditions everywhere :)</div>
+
+]]></content>
+  </entry>
+  
+</feed>

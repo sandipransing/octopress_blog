@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: bossman | Fun On Rails]]></title>
+  <link href="http://sandipransing.github.io/blog/categories/bossman/atom.xml" rel="self"/>
+  <link href="http://sandipransing.github.io/"/>
+  <updated>2014-02-09T20:36:37+05:30</updated>
+  <id>http://sandipransing.github.io/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Spell Check in ruby and rails using BOSSMan]]></title>
+    <link href="http://sandipransing.github.io/2010/08/spell-check-in-ruby-and-rails-using"/>
+    <updated>2010-08-04T02:26:00+05:30</updated>
+    <id>http://sandipransing.github.io/2010/08/spell-check-in-ruby-and-rails-using</id>
+    <content type="html"><![CDATA[<div class='post'>
+Wrong English is an often problem while developing any website product as it gives bad view to website user and thus does direct impact on product.  <b>BOSSMan</b> is a ruby gem that interacts with <b>yahoo web service</b> and provides a simplest way to overcome such errors.<br /><b>Installation:</b><br /><code>gem sources -a http://gems.github.com gem install jpignata-bossman </code><b>Apply and get Application ID from yahoo developer network</b><code><b>URl</b> https://developer.apps.yahoo.com/</code>Make sure to note it for reference<br /><b>Usage in ruby app</b><br /><code>require 'rubygems' require 'bossman' include BOSSMan  BOSSMan.application_id = "Your Application ID here" </code><br /><b>Spelling Suggestions</b><br /><code>text = BOSSMan::Search.spelling("gooogle") =&gt; #<bossman::resultset:0xa993b44 ,="" @count="1" @deephits="1" @response="{&quot;ysearchresponse&quot;=" @responsecode="200" @start="0" @suggestion="google" @totalhits="1">{"resultset_spell"=&gt;[{"suggestion"=&gt;"google"}], "responsecode"=&gt;"200", "deephits"=&gt;"1", "start"=&gt;"0", "count"=&gt;"1", "totalhits"=&gt;"1"}}&gt;  text.suggestion  =&gt; "google" </bossman::resultset:0xa993b44></code><br /><b>More sophisticated way of use -</b><br />1. Create a YML file containing list of kewords <br />2. Load YML file <br />3. Iterate YML hash to find out spell suggestions<br /><b>Example: spelling.yml</b><br /><console>  1 keywords:   2   gooogle:   3   Barack Oabama:   4   Indian:   5   Latuur: </console><br /><code>keywords = YAML.load_file('spelling.yml')['keywords'].keys    puts "Correction suggested"   keywords.each do |keyword|     text = BOSSMan::Search.spelling(keyword)     if defined? text.suggestion       puts "#{keyword} =&gt; #{text.suggestion}"     end   end </code><br /><b>Output</b><br /><console>Correction suggested gooogle =&gt; google Barack Oabama =&gt; Barack Obama Latuur =&gt; Latour </console><br />Analyze suggestions manually and make neccesary corrections..</div>
+
+]]></content>
+  </entry>
+  
+</feed>

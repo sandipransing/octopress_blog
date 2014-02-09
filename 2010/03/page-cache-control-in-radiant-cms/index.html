@@ -1,0 +1,263 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Page Cache control in radiant cms - Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="Radiant CachingRadiant cms is very powerful and customizable cms as of now which has&nbsp;inbuilt support for page caching.Radiant caching &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://sandipransing.github.io/2010/03/page-cache-control-in-radiant-cms">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:sandipransing.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Page Cache Control in Radiant Cms</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-03-04T00:43:00+05:30" pubdate data-updated="true">Mar 4<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><div class='post'>
+<span class="Apple-style-span" style="font-family: Arial; font-size: small;"><span class="Apple-style-span" style="font-size: 13px;"><div><b>Radiant Caching</b></div><div><br /></div><div>Radiant cms is very powerful and customizable cms as of now which has&nbsp;inbuilt support for page caching.</div><div>Radiant caching mechanisam is somehow similar&nbsp;to action caching in rails.</div><div><br /></div><div><b>In latest radiant version i.e. &gt; 0.8 Responsecache has been replaced with Radiant::Cache.</b></div><div><br /></div><div>By default radiant cache gets automatically invalidated after every 5&nbsp;</div><div>minutes and that is configurable.</div><div><br /></div><div>The interval is easily configurable by adding following lines inside environment</div><div><br /></div><blockquote>if defined? ResponseCache == &#8216;constant&#8217; &nbsp; &nbsp;</blockquote><blockquote>&nbsp;&nbsp; &nbsp;ResponseCache.defaults[:expire_time] = 4.hours</blockquote><blockquote>else</blockquote><blockquote>&nbsp;&nbsp; &nbsp;SiteController.cache_timeout = 4.hours</blockquote><blockquote>end</blockquote><div>There are situations where automatic cache inavalidation won&#8217;t work</div><div>and we need to clear radiant cache on the fly.</div><div>There are two ways to do that to invalidate radiant cache immediately.</div><div><br /></div><div>1. <b>Navigate to the root of your Radiant project and delete the cache directory.</b></div><div><br /></div><blockquote>cd /home/deploy/radiant_site/tmp</blockquote><blockquote>rm -r cache</blockquote><div><br /></div><div>2.<b> Clearing the page cache from within your code</b></div><div>&nbsp;&nbsp; &nbsp;</div><blockquote>if defined? ResponseCache == &#8216;constant&#8217;</blockquote><blockquote>&nbsp;&nbsp; &nbsp;ResponseCache.instance.clear</blockquote><blockquote>else</blockquote><blockquote>&nbsp;&nbsp; &nbsp;Radiant::Cache.clear</blockquote><blockquote>end</blockquote><div><br /></div><div>While building website using radiant cms, it happens that there are certain pages they are static and not going to change frequently that time configuring cache expiry time to long interval is going to be always beneficial and for pages which conatins dynamic content (displaying logged in user on homepage), we need to disable radiant cache for such pages. this can be done by using page_options extension.</div><div><br /></div><div><b>Installation for radiant version &nbsp;0.7</b></div><div>From your RADIANT_ROOT:</div><div><br /></div><blockquote>$ script/extension install page_options</blockquote><div><br /></div><div><b>Installation for radiant version &nbsp;0.8 and higher</b></div><blockquote>git clone git://github.com/sandipransing/radiant-page_options-extension.git vendor/extensions/page_options</blockquote><div><br /></div><div>Restart server</div><div><br /></div><div><b>Usage</b></div><div><br /></div><div>1. Goto /admin/pages</div><div>2. Edit any page</div><div>3. Click on more link and edit cache settings.</div><div><br /></div><div>For more information <a href="http://github.com/avonderluft/radiant-page_options-extension">visit</a></div><div><br /></div></span></span></div>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">sandipransing</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-03-04T00:43:00+05:30" pubdate data-updated="true">Mar 4<span>th</span>, 2010</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/cms/'>cms</a>, <a class='category' href='/blog/categories/radiant/'>radiant</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2010/03/page-cache-control-in-radiant-cms" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2010/03/page-cache-control-in-radiant-cms" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2010/03/remove-svn-files-inside-directory-rm-rf" title="Previous Post: Programming ruby Linux basics">&laquo; Programming ruby Linux basics</a>
+      
+      
+        <a class="basic-alignment right" href="/2010/03/railstinymce-rich-text-editor-for-ruby" title="Next Post: Rails Tiny MCE - A Rich Text Editor for ruby on rails">Rails Tiny MCE - A Rich Text Editor for ruby on rails &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/sandipransing">@sandipransing</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'sandipransing',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

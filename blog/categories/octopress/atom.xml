@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: octopress | Sandip Ransing]]></title>
+  <title><![CDATA[Category: octopress | Fun On Rails]]></title>
   <link href="http://sandipransing.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://sandipransing.github.io/"/>
-  <updated>2014-02-09T18:35:27+05:30</updated>
+  <updated>2014-02-09T20:36:37+05:30</updated>
   <id>http://sandipransing.github.io/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Writing Octopress blog posts using markdown]]></title>
-    <link href="http://sandipransing.github.io/blog/2014/02/07/writing-octopress-blog-posts-using-markdown/"/>
+    <link href="http://sandipransing.github.io/2014/02/writing-octopress-blog-posts-using-markdown"/>
     <updated>2014-02-07T19:20:07+05:30</updated>
-    <id>http://sandipransing.github.io/blog/2014/02/07/writing-octopress-blog-posts-using-markdown</id>
+    <id>http://sandipransing.github.io/2014/02/writing-octopress-blog-posts-using-markdown</id>
     <content type="html"><![CDATA[<p><strong>Hello Octopress!</strong>
 This an example post for more information see:</p>
 
@@ -120,9 +120,9 @@ Sandip is a ruby on rails developer based in pune and also a blogger at funonrai
   
   <entry>
     <title type="html"><![CDATA[Getting started: Octopress powered and Github hosted blog]]></title>
-    <link href="http://sandipransing.github.io/blog/2014/02/07/octopress-powered-and-github-hosted-blog/"/>
+    <link href="http://sandipransing.github.io/2014/02/octopress-powered-and-github-hosted-blog"/>
     <updated>2014-02-07T19:20:07+05:30</updated>
-    <id>http://sandipransing.github.io/blog/2014/02/07/octopress-powered-and-github-hosted-blog</id>
+    <id>http://sandipransing.github.io/2014/02/octopress-powered-and-github-hosted-blog</id>
     <content type="html"><![CDATA[<p>There are various blogging sites like <code>blogspot</code>, <code>wordpress</code>, <code>posterious</code>, and many more. But each has their own limitations.
 Anyone who has some technical background can start with octopress blog. This gives us the power of freedom of doing anything.
 So, Lets first understand about octopress framework and its features.</p>

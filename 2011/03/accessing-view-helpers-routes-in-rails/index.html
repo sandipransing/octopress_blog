@@ -1,0 +1,263 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Accessing View Helpers & Routes in Rails Console, Rake Tasks and Mailers - Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="While looking for accessing rails template tags to be accessed on rails console in order to examine whatever written needs to be correct, found that &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://sandipransing.github.io/2011/03/accessing-view-helpers-routes-in-rails">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:sandipransing.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Accessing View Helpers & Routes in Rails Console, Rake Tasks and Mailers</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-17T01:01:00+05:30" pubdate data-updated="true">Mar 17<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on">While looking for accessing rails template tags to be accessed on rails console in order to examine whatever written needs to be correct, found that - rails template tags can be tested on rails console using <i>helper</i> object<br /><code>module ApplicationHelper   def display_amount(amount)     number_to_currency amount, :precision =&gt; 0   end   end </code> <b>Helpers on rails console</b><br /><console>rails c &gt;&gt; helper.text_field_tag :name, &#8216;sandip&#8217; =&gt; &#8220;&lt;input id=&#8221;name&#8221; name=&#8221;name&#8221; type=&#8221;text&#8221; value=&#8221;sandip&#8221; /&gt;&#8221; &gt;&gt; helper.link_to &#8216;my blog&#8217;, &#8216;http://funonrails.com&#8217; =&gt; &#8220;&lt;a href=&#8221;http://funonrails.com&gt;my blog&lt;/a&gt;&#8221; &gt;&gt; helper.display_amount(2000) =&gt; &#8220;$2,000&#8221; </console> isn&#8217;t cool ? though it&#8217;s not finished yet. we can include helper files on console and access custom helper methods too <br /><console>&gt;&gt; include ActionView::Helpers =&gt; Object &gt;&gt; include ApplicationHelper =&gt; Object &gt;&gt; include ActionView::Helpers::ApplicationHelper^C &gt;&gt; display_amount 2500 =&gt; &#8220;$2,500&#8221; </console> Using same way one can make use helpers in rake tasks file. Make sure environment is getting loaded into rake task.<br /><code># lib/tasks/helper_task.rake namespace :helper do  desc 'Access helper methods in rake tasks'  task :test =&gt; :environment do   include ActionView::Helpers   include ApplicationHelper    puts display_amount 2500  #=&gt; "$2,500"  end end </code> <b>Accessing helpers in Action Mailers</b><br /><code>class Notifier &lt; ActionMailer::Base   add_template_helper(ApplicationHelper)   def greet(user)     subject "Hello #{user.name}"     from          'no-reply@example.com'     recipients    user.email     sent_on       Time.now     @user = user   end  # app/views/notifier/greet.html.erb Hi &lt;%= @user.try(:name)%&gt;, <br /><br />Greetings !!! You have got &lt;%= display_amount(3000) %&gt; </code><b>Rails routes on rails console</b><br /><console>rails c &gt;&gt; app.root_url =&gt; &#8220;http://www.example.com/&#8221; &gt;&gt; app.change_password_path =&gt; &#8220;/change/password&#8221; &gt;&gt; app.change_password_url =&gt; &#8220;http://www.example.com/change/password&#8221; </console>Now you may have got requirement to access routes inside rake tasks. Here is the way to do that- <br /><code># lib/tasks/route_test.rake namespace :routes do  desc 'Access helper methods in rake tasks'  task :test =&gt; :environment do   include ActionController::UrlWriter   default_url_options[:host] = "myroutes.check"   puts root_url  #=&gt; "http://myroutes.check"  end end </code>Optionally you can set value of host parameter from action mailer host configuration using<br /><code>default_url_options[:host] = ActionMailer::Base.default_url_options[:hos] </code><br />Attention: This is my preferred way to use helpers and routes when needed and there may have other choices to do same. Anyone having better approach please feel free to add your valuable comment. I will definitely incorporate that in further developments.<br />Got Easy, Cheers ;)</div></div>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">sandipransing</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-17T01:01:00+05:30" pubdate data-updated="true">Mar 17<span>th</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/rails/'>rails</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2011/03/accessing-view-helpers-routes-in-rails" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2011/03/accessing-view-helpers-routes-in-rails" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2011/03/monitor-delayedjob-in-rails" title="Previous Post: Monitor Delayed Job in rails">&laquo; Monitor Delayed Job in rails</a>
+      
+      
+        <a class="basic-alignment right" href="/2011/03/number-to-indian-currency-helper-for" title="Next Post: number to indian currency helper for rails with WebRupee">number to indian currency helper for rails with WebRupee &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/sandipransing">@sandipransing</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'sandipransing',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

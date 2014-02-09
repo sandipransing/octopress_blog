@@ -1,0 +1,263 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Email attachments in ruby & rails - Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="1. Add ActionMailer configuration in environment.This configuration can be different for development and production.# Include your application &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://sandipransing.github.io/2010/08/email-attachments-in-ruby-rails">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:sandipransing.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Email Attachments in Ruby & Rails</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-08-21T03:30:00+05:30" pubdate data-updated="true">Aug 21<span>st</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><div class='post'>
+<b>1. Add ActionMailer configuration in environment.</b><br/>This configuration can be different for development and production.<br/><code># Include your application configuration below # You can set two configurations sendmail as well as smtp # To use SMTP you need to provide your email account credentials # Sendmail is a unix package that needs to be installed and configured while  # using sendmail settings # Chances of getting emails into recipient's inbox are 100% for smtp settings # whereas sendmail needs some other configurations to be done before using.  ActionMailer::Base.delivery_method = :smtp  ActionMailer::Base.default_content_type = "text/html" </code> <b>2. Create Mailer Model and add method to deliver email</b><code>class EmailMailer < ActionMailer::Base    def email_with_attachments(email, files=[])       # content type also can be set in environment file as     # ActionMailer::Base.default_content_type = "text/html"     @headers = {content_type => 'text/html'}      @sent_on = Time.now       @recipients = email.recipients     @from = email.from     @cc = FEEDBACK_RECIPIENT     @subject = email.subject     @body = email.message          # attach files       files.each do |file|         attachment "application/octet-stream" do |a|           a.body = file.read           a.filename = file.original_filename         end unless file.blank?       end    end </code> <b>3. Email Model</b><code># This is the virtual model in rails which has no database table associated with it class Email < ActiveRecord::Base   # It uses has_no_table plugin to create virtual model   # This can also be done using following lines of code   #    # def self.columns() @columns ||= []; end   # def self.column(name, sql_type = nil, default = nil, null = true)   #  columns << ActiveRecord::ConnectionAdapters::Column.new(name.to_s, default, sql_type.to_s, null)   # end   #    has_no_table   #insert the names of the form fields here   column :from, :string   column :recipients, :string   column :subject, :string   column :message, :text   column :call_id, :integer    attr_accessor :is_subscribed    #Validations goes here   validates_presence_of :from, :message => "You dont have Email ID, you cannot continue!", :unless => "call_id.blank?"   validates_format_of :from, :with => /^([^@]+)@((?:[-a-z0-9]+.)+[a-z]{2,})$/i, :unless => "from.blank?"   validates_presence_of :recipients   validates_format_of :recipients, :with => /^([^@]+)@((?:[-a-z0-9]+.)+[a-z]{2,})$/i, :message => "Invalid email format", :unless => "recipients.blank?"   validates_presence_of :subject, :message end  </code> 4. Usage from console or controller <code># Here email is the valid object of email model # attachments is the area of files to be attached with email # In my case attachments are of kind of pdf files # you can specify type of attachment in your mailer method EmailMailer.deliver_email_with_attachements(email, attachments) if email.valid? </code>  <b>Sending data stream as email attachments in rails.</b><br/>In some cases, We need to dynamically generate files and you don&#8217;t want to store them locally on file system instead you always like to email them from memory itself. <br/>Here is the way to do that.<br/> <b>1. Mailer data stream as attachment method</b><code>class EmailMailer < ActionMailer::Base    def email_with_data_stream(email, data_stream=[])       @headers = {}       @sent_on = Time.now       @recipients = email.recipients     @from = email.from     @subject = email.subject     @body = email.message      # attach files       data_stream.each do |data|          attachment "application/octet-stream" do |a|           a.body = data[0]         a.filename = data[1]        end unless data_stream.blank?       end     end   end </code> <b>2. Lets take example of pdf renderer.</b><code># Assume we have object of pdf attachements = [] data = pdf.render # Attach as many files you wanted. Be careful about email maximum size ;) attachments << data EmailMailer.deliver_email_with_data_stream(email, attachments) </code></div>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">sandipransing</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-08-21T03:30:00+05:30" pubdate data-updated="true">Aug 21<span>st</span>, 2010</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/action-mailer/'>action-mailer</a>, <a class='category' href='/blog/categories/rails/'>rails</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2010/08/email-attachments-in-ruby-rails" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2010/08/email-attachments-in-ruby-rails" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2010/08/multiple-sites-hosting-using-radiant" title="Previous Post: Multiple sites hosting using radiant cms">&laquo; Multiple sites hosting using radiant cms</a>
+      
+      
+        <a class="basic-alignment right" href="/2010/08/actionmailer-smtp-settings-in-rails" title="Next Post: ActionMailer SMTP settings in rails">ActionMailer SMTP settings in rails &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/sandipransing">@sandipransing</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'sandipransing',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

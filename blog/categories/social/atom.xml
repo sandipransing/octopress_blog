@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: social | Fun On Rails]]></title>
+  <link href="http://sandipransing.github.io/blog/categories/social/atom.xml" rel="self"/>
+  <link href="http://sandipransing.github.io/"/>
+  <updated>2014-02-09T20:36:37+05:30</updated>
+  <id>http://sandipransing.github.io/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Twitter share and facebook like button for haml-rails, html/erb]]></title>
+    <link href="http://sandipransing.github.io/2011/03/twitter-share-and-facebook-like-button"/>
+    <updated>2011-03-17T02:45:00+05:30</updated>
+    <id>http://sandipransing.github.io/2011/03/twitter-share-and-facebook-like-button</id>
+    <content type="html"><![CDATA[<div class='post'>
+<b>Twitter share and facebook like button for html/erb</b><br/><code>&lt;div class='spread'&gt;  &nbsp;&lt;div class='twshare left'&gt;   &nbsp; &lt;a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="funonrails"&gt;Tweet&lt;/a&gt;&lt;script type="text/javascript" src="http://platform.twitter.com/widgets.js"&gt;&lt;/script&gt;  &nbsp;&lt;/div&gt;  &nbsp;&lt;script src="http://connect.facebook.net/en_US/all.js#xfbml=1"&gt;&lt;/script&gt;&lt;fb:like href="" layout="button_count" show_faces="false" width="450" font=""&gt;&lt;/fb:like&gt; &lt;/div&gt; </code><b>Twitter share and facebook like button for haml</b><br/><code>.spread   .twshare.left     %a.twitter-share-button.left{"data-count" => "horizontal", "data-via" => "fuonrails", :href => "http://twitter.com/share"} Tweet     %script{:src => "http://platform.twitter.com/widgets.js", :type => "text/javascript"}   .fshare.left{:style => 'padding-left: 0px; margin-left: 10px;'}     %script{:src => "http://connect.facebook.net/en_US/all.js#xfbml=1"}     %fb:like{:layout => "button_count", :show_faces => "false", :width => "450"}   .CLR </code><b>Sample Buttons</b><br/>  <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="funonrails">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script><script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script><fb:like href="" layout="button_count" show_faces="false" width="450" font=""></fb:like></div>
+
+]]></content>
+  </entry>
+  
+</feed>

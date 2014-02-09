@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: postgres | Fun On Rails]]></title>
+  <link href="http://sandipransing.github.io/blog/categories/postgres/atom.xml" rel="self"/>
+  <link href="http://sandipransing.github.io/"/>
+  <updated>2014-02-09T20:36:37+05:30</updated>
+  <id>http://sandipransing.github.io/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Getting started with rails 3 & postgres database]]></title>
+    <link href="http://sandipransing.github.io/2011/03/getting-started-with-rails-3-postgres"/>
+    <updated>2011-03-01T00:40:00+05:30</updated>
+    <id>http://sandipransing.github.io/2011/03/getting-started-with-rails-3-postgres</id>
+    <content type="html"><![CDATA[<div class='post'>
+<b>Rails 3 Installation</b><br/><console>sudo gem install rails -v3.0.4 </console> <b>postgres as db installation</b><>br/ <console>$ sudo apt-get install postgresql </console><br/> <b>Rails 3 App with postgres as database</b><br/><console>$ rails new pg -d postgres </console><b>bundle installation</b><br/>It will install dependency gems & postgres adapter for db connection<br/><console>bundle install </console><br/>Here by default 'postgres' database user gets created while installation but i recommend to  create new db user with name same as of system user owning project directory permissions. <br/>User owning file permission can be found using<br/><console>ls -l pg drwxr-xr-x 7 sandip sandip 4096 2011-02-23 15:38 app drwxr-xr-x 5 sandip sandip 4096 2011-02-23 18:14 config -rw-r--r-- 1 sandip sandip  152 2011-02-23 15:38 config.ru ... </console> Default 'postgres' database user gets created while installation<br/> <code>## Snap of database.yml development:   adapter: postgresql   encoding: unicode   database: pg_development   username: sandip   pool: 5 </code> <b> Create new database user</b><br/><console>pg $ sudo su postgres pg $ createuser sandip Shall the new role be a superuser? (y/n) y pg $ exit exit </console><br/><b> Create a first development database:</b><br/><console>pg $ psql template1 Welcome to psql 8.4.6, the PostgreSQL interactive terminal. ...  template1=# \l         List of databases    Name    |  Owner   | Encoding  -----------+----------+----------  postgres  | postgres | UTF8  template0 | postgres | UTF8  template1 | postgres | UTF8 (3 rows)  template1=# CREATE DATABASE pg_development; CREATE DATABASE template1=# \l             List of databases        Name        |  Owner   | Encoding  -------------------+----------+----------  postgres          | postgres | UTF8  pg_development | sandip   | UTF8  template0         | postgres | UTF8  template1         | postgres | UTF8 (4 rows)  template1=# \q </console><br/> <b> Start rails server</b><br/><console>pg $ rails s </console> <b>Getting hands on postgres terminal</b><br/><b>1. Login onto terminal</b><br/><console>psql -U DB_USERNAME -d DB_NAME -W DB_PASSWORD </console><b>2. List databases</b><br/><console>\l </console><b>3. Display tables</b><br/><console>\dt </console><b>4. Exit from terminal</b><br/><console>\q </console></div>
+
+]]></content>
+  </entry>
+  
+</feed>

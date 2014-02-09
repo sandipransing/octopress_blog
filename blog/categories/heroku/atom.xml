@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: heroku | Fun On Rails]]></title>
+  <link href="http://sandipransing.github.io/blog/categories/heroku/atom.xml" rel="self"/>
+  <link href="http://sandipransing.github.io/"/>
+  <updated>2014-02-09T20:36:37+05:30</updated>
+  <id>http://sandipransing.github.io/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Getting assets pipeline working on heroku]]></title>
+    <link href="http://sandipransing.github.io/2011/12/getting-assets-working-on-heroku"/>
+    <updated>2011-12-22T03:14:00+05:30</updated>
+    <id>http://sandipransing.github.io/2011/12/getting-assets-working-on-heroku</id>
+    <content type="html"><![CDATA[<div class='post'>
+Heroku is readonly file system hence write operations can only be done inside tmp directory. <br/> Asset compilation on heroku can be handled in different ways <br/><console>#1. compiling locally and placing inside assets directory  RAILS_ENV=production bundle exec rake assets:precompile  #2. It compiles assets while slug compiles </console><br/> <console>#3. Run time asset compilation # It compiles assets for every rails request if it notifies assets got modified  # config/application.rb     # Enable the asset pipeline     config.assets.enabled = true      # Version of your assets, change this if you want to expire all your assets     config.assets.version = '1.0'     config.assets.prefix = Rails.root.join('tmp/assets').to_s  # config/environments/production.rb   # Don't fallback to assets pipeline if a precompiled asset is missed   config.assets.compile = true </console><br/> Note: write operation made inside tmp directory can not make any guarantee of being persisted hence be careful while using.</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[rails 3.1.1 haml sass jquery coffee-rails devise twitter-bootstrap railroady heroku]]></title>
+    <link href="http://sandipransing.github.io/2011/11/rails-311-haml-sass-jquery-coffee-rails"/>
+    <updated>2011-11-22T00:07:00+05:30</updated>
+    <id>http://sandipransing.github.io/2011/11/rails-311-haml-sass-jquery-coffee-rails</id>
+    <content type="html"><![CDATA[<div class='post'>
+<b> Install RVM first </b><br/> <console>  bash < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvminstaller) </console> <b> rvm list known</b> <console>  # MRI Rubies   [ruby-]1.8.6-head   [ruby-]1.8.7[-p352]   [ruby-]1.9.3-head   ruby-head    # JRuby   jruby-1.2.0   jruby-head    # Rubinius   rbx-1.0.1   rbx-2.0.0pre    # Ruby Enterprise Edition   ree-1.8.6   ree-1.8.7-head </console> <b>Install ruby 1.9.3</b><br/> <console>  rvm install 1.9.3-head   rvm gemset create rails311   rvm use 1.9.3-head@rails311 --default      gem install rails -v3.1.1 --no-rdoc --no-ri      gem install heroku   gem install rb-readline </console> <b>Create new rails project </b><br/> <console>  rails new cdc -m http://railswizard.org/b22092a4358bbebb3a46.rb -J -T </console> <b>Heroku Deployment Done </b><br/> <console>  http://railsblank.heroku.com/ (production) </console> <b> Local System nginx-passenger setup</b><br/> <console>  gem install passenger   rvmsudo passenger-install-nginx-module </console> If you find pcre download error then make sure you libpcre-dev pkg installed on your system otherwise install it and re-run<br/><console>  sudo apt-get install libpcre3-dev </console> <b>Nginx Configuration</b><br/> <console>http {   passenger_root /home/sandip/.rvm/gems/ruby-1.9.3-head@rails311/gems/passenger-3.0.9;   passenger_ruby /home/sandip/.rvm/wrappers/ruby-1.9.3-head@rails311/ruby;      server {     listen 80;     server_name railsblank.local;     root /home/sandip/railsblank/public;     rails_env development;     passenger_enabled on; } </console> <b>git source code </b><br/><console>  git clone git://github.com/sandipransing/rails_blank.git </console></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Getting started with heroku]]></title>
+    <link href="http://sandipransing.github.io/2010/11/getting-started-with-heroku"/>
+    <updated>2010-11-18T12:31:00+05:30</updated>
+    <id>http://sandipransing.github.io/2010/11/getting-started-with-heroku</id>
+    <content type="html"><![CDATA[<div class='post'>
+<a href="http://nodeknockout.posterous.com/countdown-to-knockout-post-8-deploying-to-her">Heroku basics</a> <br /><br /><object data="http://nodeknockout.posterous.com/countdown-to-knockout-post-8-deploying-to-her" width="550" height='700'> </object></div>
+
+]]></content>
+  </entry>
+  
+</feed>

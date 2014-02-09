@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: activeadmin | Fun On Rails]]></title>
+  <link href="http://sandipransing.github.io/blog/categories/activeadmin/atom.xml" rel="self"/>
+  <link href="http://sandipransing.github.io/"/>
+  <updated>2014-02-09T20:36:37+05:30</updated>
+  <id>http://sandipransing.github.io/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[active-admin sass and rails 3]]></title>
+    <link href="http://sandipransing.github.io/2011/12/active-admin-sass-and-rails-3"/>
+    <updated>2011-12-28T14:58:00+05:30</updated>
+    <id>http://sandipransing.github.io/2011/12/active-admin-sass-and-rails-3</id>
+    <content type="html"><![CDATA[<div class='post'>
+active_admin is the good way to provide rails administrative interface.<br/>It provides front-end db administration and its customizable too :)<br/> <console># Gemfile   gem 'activeadmin'   gem 'sass-rails'   gem "meta_search",    '>= 1.1.0.pre' </console><br/>Bundle install, generate config & migrate db <br/><console>bundle install rails g active_admin:install rake db:migrate </console> Config <br/><console># config/initializers/active_admin.rb  ActiveAdmin.setup do |config|   config.site_title = "Web Site :: Admin Panel"   config.site_title_link = "/"   config.default_namespace = :siteadmin   config.authentication_method = :authenticate_admin_user!   config.current_user_method = :current_admin_user   config.logout_link_method = :delete end </console><br/>Registering new resource <br/><console>rails generate active_admin:resource category </console>Customization<br/><console># app/admin/categories.rb  ActiveAdmin.register Category do   scope :published    form do |f|     f.inputs do       f.input :name, :label => 'Name'       f.input :for_type, :label => "Category Type"     end     f.buttons   end end </console>Adding Dashboard<br/><console>ActiveAdmin::Dashboards.build do   section "Recent Categories" do     table_for Category.published.recent.limit(2) do       column :name do |c|         link_to c.name, [:admin, c]       end       column :created_at     end     strong { link_to "View All Categories", admin_categories_path }   end end </console></div>
+
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: vim | Fun On Rails]]></title>
+  <link href="http://sandipransing.github.io/blog/categories/vim/atom.xml" rel="self"/>
+  <link href="http://sandipransing.github.io/"/>
+  <updated>2014-02-09T20:36:37+05:30</updated>
+  <id>http://sandipransing.github.io/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Vim editor for ruby on rails development using rails.vim]]></title>
+    <link href="http://sandipransing.github.io/2010/02/vim-editor-for-ruby-on-rails"/>
+    <updated>2010-02-19T20:20:00+05:30</updated>
+    <id>http://sandipransing.github.io/2010/02/vim-editor-for-ruby-on-rails</id>
+    <content type="html"><![CDATA[<div class='post'>
+<b>Vim install On CentOS</b><br /><pre class="console">yum install vim-enhanced</pre><b>Vim install on Ubuntu machine</b><br /><br />Install vim-full using command<br /><pre class="console">apt-get install vim</pre><br />While coding with ruby, html, erb, haml, js and stylesheets.<br />It is great pain to indent code. Using rails vim one can easily<br />keep code always indented.<br /><br />This increases code readability and minimizes effort, bugs and<br />finally proves ease of using vim editor.<br /><br /><b>rails.vim</b> script contains lot of syntax highlighter and indentation<br />plugins that really helps development needs.<br /><br />If you have git installed then clone it under <b>.vim</b> directory of your profile<br /><pre class="console">git clone git://github.com/sandipransing/rails_vim.git ~/.vim</pre><br />To install from zip file download &amp;amp; extract it inside ~/.vim directory<br /><br /><b>download link</b>: http://www.vim.org/scripts/download_script.php?src_id=11920<br /><pre class="console">wget http://www.vim.org/scripts/download_script.php?src_id=11920 /rails.vim </pre>This is how my editor looks like<br /><br /><div class="separator" style="clear: both; text-align: center;"><a href="http://1.bp.blogspot.com/_WmOmsgqsanw/S5voyvHVstI/AAAAAAAAAJI/bi-mSfyN5no/s1600-h/IDE.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="215" src="http://1.bp.blogspot.com/_WmOmsgqsanw/S5voyvHVstI/AAAAAAAAAJI/bi-mSfyN5no/s400/IDE.png" width="500" /></a></div><br /><br /><br /><div style="margin: 0px;">Open your ~/.bashrc and at the bottom add:</div><div style="margin: 0px;"><br /></div><div style="margin: 0px;"><b>alias vi=vim</b></div><div style="margin: 0px;"><b>export EDITOR=vim</b></div></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Get hand over VI / VIM editor]]></title>
+    <link href="http://sandipransing.github.io/2009/11/get-hand-over-vi-vim-editor"/>
+    <updated>2009-11-18T01:20:00+05:30</updated>
+    <id>http://sandipransing.github.io/2009/11/get-hand-over-vi-vim-editor</id>
+    <content type="html"><![CDATA[<div class='post'>
+<span style="font-family: Arial; font-size: small;"><span style="background-color: white; font-size: 13px;"> </span></span><br /><span style="font-family: Arial; font-size: small;"><span style="background-color: white; font-size: 13px;"><pre><b><span style="color: #351c75;">Movements</span></b></pre><pre>b   previous word<br />w   next word<br />e        end of word<br />0/^      begining of line<br />$        end of line<br />G        end of file<br />1G/gg    begining of file<br />/pattern  search next<br />?pattern  search previous<br />n         repeat    search forword ( i.e next occurence )<br />N         repeat    search backword<br />:line     goto line specified<br /><br />  *****Modes****<br />  i   insert mode<br />  r   replace mode<br />  s   delete character under cursor and eneter insert mode<br /><br />  *****Delete******<br />  x    delete character under cursor<br />  dd   delete current line<br />  line dd delete number of lines specified<br /><br />  ****copy********<br />  yy        copy current line<br />  pp        print copied contents<br />  line yy   copy number of lines specified<br /><br />  *******visual******<br /><br />  v     enter visual mode<br />  aw    highlight word<br />  as    highlight sentence<br />  ap    highlight paragraph<br />  ab    highlight block<br /><br />  ******undo/redo******<br />  u       undo<br />  cntrl+r redo<br /><br />  ******autocomplete****<br />  cntrl+x   enter completion mode<br />  cntrl+p   display autocomplete options<br /><br />  ******uppercase/lowercase*****<br />  guu   lowercase line<br />  gUU   uppercase line<br /><br />  *******Regx replace****<br /><br />  range s/foo/bar/arg - replace foo with bar in ‘range’ with<br /><br />  Values of 'range':<br />  %               whole file<br />  number          that particular line<br />  none            apply to current line only<br /><br />  values of 'arg':<br />  none  apply to first occurrence<br />  g     global (all occurrences)<br /><br />Select/Macros<br />  qchar      start recording macro storing it in register ‘char’<br />  q          end recording<br />  @char      replay the macro stored in ‘char’<br />  :1,10 norm! @char run the macro stored in ‘char’ over the 1-10 line range<br /></pre></span></span><br /></div>
+
+
+<h2>Comments</h2>
+
+
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Sandip Ransing</div>
+<div class='content'>
+Remove blank lines in vim<br /><br />:g/^ *$/d</div>
+</div>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[vi / vim Shortcuts]]></title>
+    <link href="http://sandipransing.github.io/2009/05/vi-vim-shortcuts"/>
+    <updated>2009-05-22T18:23:00+05:30</updated>
+    <id>http://sandipransing.github.io/2009/05/vi-vim-shortcuts</id>
+    <content type="html"><![CDATA[<div class='post'>
+Open file<br/><code>vi filename</code><br/>As i am newb on linux macine, i dont know vi shortcuts.<br/>so, i am listing down shortcuts which i am getting familier. :)<br/><br/>Insert in file<br/><code>i</code><br/><br/>Exit file<br/><code>q</code><br/><br/>forced exit<br/><code>q!</code><br/><br/>save file<br/><code>wq</code><br/><br/>forced save<br/><code>wq!</code><br/><br/>Copy no of lines<br/>yy<br/><br/>Paste copied lines<br/><code>pp</code><br/><br/>Undo changes<br/><code>uu</code><br/><br/>Delete lines<br/><code>dd</code><br/><br/>To search and replace string in vi<br/><code> :%s/search_string/replacement_string/g</code><br/><br/>To find particular word in file<br/><code>?string1</code><br/><br/>If you have any quick list. please, let me know</div>
+
+
+<h2>Comments</h2>
+
+
+<div class='comments'>
+<div class='comment'>
+<div class='author'>sitemap « Fun On Rails</div>
+<div class='content'>
+[...] vi / vim Shortcuts « Fun On Rails [...]</div>
+</div>
+<div class='comment'>
+<div class='author'>sandipransing</div>
+<div class='content'>
+original post at http://nakuls77.wordpress.com/2008/09/14/using-vi-editor/#comment-144<br><br><br><br>Vi is a very powerful editor that has been part of nearly every linux/unix distro for a very long time. Many people stray away from Vi due to the curve involved in learning this editor. This guide will help you dive into the world of Vi. Once you do, you will understand why many prefer Vi over other editors.<br><br>There are countless options for Vi that can be set up inside the /etc/vimrc file.<br><br>Auto-indent and creating a macro to change the color of the background.<br># vi /etc/vimrc<br><br>Auto-Indent Option -<br>This option is so when you tab-space out a line and then press enter, the cursor will move to the next line, automatically indented to the start of the previous line. This helps programmers indent out code easily to create clean looking code. To implement this feature, please add the following line to the bottom of your /etc/vimrc file:<br><br>set ai<br><br>Please note that generally speaking only programmers will want to turn ON auto-indent.<br><br>Background Color -<br>Some SSH clients have white backgrounds and some have black backgrounds. This can make it very difficult to see the screen depending on the color of the text. This macro allows you to configure F11 to change the background color &amp; color of the text. To implement this feature, please add the following lines to the bottom of your /etc/vimrc file:<br><br>set background=dark<br>map :let &amp;background = ( &amp;background == “dark”? “light” : “dark” )<br><br>I would highly recommend adding in the Background Color option. However if you do not wish to implement either of these features, then please proceed on in the guide.<br><br>Commands<br><br>Cursor Movement<br>0  (Zero) Start of Line<br>^ – First non-Blank Character of Line<br>$ – End of Line<br>G  Go To Command (prefix with number 5G goes to line 5)<br><br>Insert Mode  Inserting/Appending Text<br>Insert  Start Insert Mode at Cursor<br>A  Append at the end of the Line<br>o  open (append) blank link below current line<br>I  Open blank line above current line<br>Esc  Exit Insert Mode<br><br>Editing<br>r  Replace a single character (does not use insert mode)<br>J  Join line below with the current one<br>cc  Change (replace) an entire line<br>cw  Change (replace) to the end of word<br>c$ – Change (replace) to the end of line<br>s  Delete character at cursor and substitute text<br>S  Delete line at cursor and substitute text (same as cc)<br>u  Undo<br>. – Repeat last command<br><br>Cut and Paste<br>yy  Copy(yank) a line<br>2yy  Copy(yank) two lines<br>yw  Copy(yank) word<br>p  Paste the clipboard after the cursor<br>P  Paste the clipboard before the cursor<br>dd  Delete a line<br>dw  Delete the current word<br>x  Delete the current character<br><br>Exiting<br>:w  Write (save) the file, but don’t exit<br>:wq  Write &amp; Quit<br>:q  Quit<br>:q! – Quit and don’t save changes<br><br>Searching<br>/pattern  Search for a pattern<br>?pattern  Search backward for a pattern<br>n  Repeat last search in same direction<br>N  Repeat last search in opposite direction<br>:%2/old/new/g  Replace all old with new throughout file<br>:%s/old/new/gc  Replace all old with new throughout file with confirmations<br><br>Working with Multiple Files<br>:e filename  Edit a file in a new buffer<br>:bn  Go to next buffer<br>:bp  Go to previous buffer<br>:bd  Close file(buffer)<br>:sp filename  Open a file in a new buffer and split window<br>ctrl-ws  Split windows<br>ctrl-ww  Switch between windows<br>ctrl-wq  Quite a window<br>ctrl-wv  Split windows vertically<br>ctrl-wq  Quite a window<br>ctrl-wv  Split windows vertically</div>
+</div>
+</div>
+
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,569 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="mongoid document supports array as field. array field in mongoid document is a ruby array but its quite complex to manage array field in rails forms &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://sandipransing.github.io/blog/page/2">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:sandipransing.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/01/mongoid-array-field-and-rails-form">Mongoid Array Field and Rails Form</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-19T23:59:00+05:30" pubdate data-updated="true">Jan 19<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+mongoid document supports array as field. array field in mongoid document is a ruby array but its quite complex to manage array field in rails forms.<br/>After lot of google and reading comments from stack-overflow at last i felt helpless. Finally after doing research on rails form helper object(form_for, fields_for) am pleased to get it working as expected :)<br/>In below example, product can have multiple categories<br/><code>class Product   CATEGORIES = %w(Apparel Media Software Sports Agri Education)   include Mongoid::Document   field :name, :type => String   field :categories, :type => Array end </code>Here is form code <br/><code>= form_for(@product) do |f|   = f.text_field :name   - Product::CATEGORIES.each do |category|     = f.check_box :categories, :name => "product[categories][]", category </code><br/>Here is products controller code <br/><code>class ProductsController < ApplicationController   before_filter :load_product, :only => [:new, :create]      [...]      # We don't need new action to be defined      def create     @product.attributes = params[:product]     # Here we need to reject blank categories     @product.categories.reject!(&:blank?)     if @product.save       flash[:notice] = I18n.t('product.create.success')       redirect_to(:action => :index)     else       render :action => :new     end   end      [...]      private   def load_product     @product = Product.new   end end </code></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/01/twitter-bootstrap-form-builder-for">Twitter-bootstrap Form Builder for Rails</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-17T05:39:00+05:30" pubdate data-updated="true">Jan 17<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<a href="http://twitter.github.com/bootstrap/">twitter-bootstrap</a> is pluggable css suit provided by twitter. <br/>To know more about how to get started on it <a href="http://www.funonrails.com/2011/11/rails-311-haml-sass-jquery-coffee-rails.html">click here</a><br/>Below post will help you out in getting started bootstrap css with rails app. One need to add below files to helpers directory. MainForm can be used as base version of form builder and can be overriden for its subsequent use inside other custom form builders. <br/><b>1. MainForm </b> <br/><code># app/helpers/main_form.rb  class MainForm < ActionView::Helpers::FormBuilder # NestedForm::Builder   CSS = {     :label => 'label-control',     :hint => 'hint',     :hint_ptr => 'hint-pointer',     :error => 'help-inline',     :field_error => 'error',     :main_class => 'clearfix'   }    FIELDS = %w(radio_button check_box text_field text_area password_field select file_field collection_select email_field date_select)      def main_class(error=nil)     return CSS[:main_class] unless error     [CSS[:main_class], CSS[:field_error]].join(' ')   end    def required(name)     object.class.validators_on(name).map(&:class).include?(ActiveModel::Validations::PresenceValidator) rescue nil   end    def cancel(options={})     link = options.fetch(:return, "/")     @template.content_tag(:a, "Cancel", :href => link, :class => "btn_form button np_cancel_btn #{options[:class]}")   end    def submit(value="Save", options={})     options[:class] = "send_form_btn #{options[:class]}"     super   end    def label_class     {:class => CSS[:label]}   end    def label_tag(attribute, arg)     # Incase its a mandatory field, the '*' is added to the field.     txt = arg[:label] && arg[:label].to_s || attribute.to_s.titleize     txt<< '*' if(arg[:required] || required(attribute)) && arg[:required] != false     label(attribute, txt, label_class)   end    def error_tag(method_name, attribute)     errs = field_error(method_name, attribute)     @template.content_tag(:span, errs.first, :class => CSS[:error]) if errs.present?   end    def field_error(method_name, attribute)     return if @object && @object.errors.blank?     return @object.errors[attribute] if method_name != 'file_field'     @object.errors["#{attribute.to_s}_file_name"] | @object.errors["#{attribute.to_s}_file_size"] | @object.errors["#{attribute.to_s}_content_type"]   end    def hint_tag(txt)     hintPtr = @template.content_tag(:span, '', :class => CSS[:hint_ptr])     hintT = @template.content_tag(:span, txt + hintPtr, {:class => CSS[:hint]}, false)    end     def spinner_tag     @template.image_tag('spinner.gif', :class => :spinner,:id => :spinner)    end end   </code>ZeroForm is custom form builder which is inherited from main_form and its going to be actually used inside forms. Feel free to make custom form related changes inside this<br/><b>ZeroForm</b><br/><code>cat app/helpers/zero_form.rb  class ZeroForm < MainForm   # Overridden label_class here as we dont need class to be applied   def label_class     {}   end    def self.create_tagged_field(method_name)     define_method(method_name) do |attribute, *args|       arg = args.last && args.last.is_a?(Hash) && args.last || {}        # Bypass form-builder and do your own custom stuff!       return super(attribute, *args) if arg[:skip] && args.last.delete(:skip)        errT = error_tag(method_name, attribute)       labelT = label_tag(attribute, arg)        mainT = super(attribute, *args)       baseT = @template.content_tag(:div, mainT + errT)        hintT = hint_tag(arg[:hint]) if arg[:hint]       spinnerT = spinner_tag if arg[:spinner]        allT = labelT + baseT + spinnerT + hintT       @template.content_tag(:div, allT, :class => main_class(errT))     end   end    FIELDS.each do |name|     create_tagged_field(name)   end end </code><br/>In order to use Nested Forms you need to extend MainForm with NestedForm Builder<br/><b>Integrate NestedForm with FormBuilder</b><code>class MainForm < NestedForm::Builder end </code><b>View Form</b><br/><code>= form_for @address ||= Address.new, :builder => ZeroForm do |f|   = f.text_field :street_address   = f.text_area :detail_address, :rows => 2   = f.text_field :city   = f.select :state, %w(US IN AUS UK UKRAINE)   = f.submit 'Save & Continue', :class => 'btn primary'   = link_to 'Skip &raquo', '#' </code><br/>To know more on twitter-bootstrap pagination in rails <a herf="http://www.funonrails.com/2011/12/twitter-bootstrap-paginate-and-rails-3.html">click here</a></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/01/get-models-list-inside-rails-app">Get Models List Inside Rails App</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-17T05:16:00+05:30" pubdate data-updated="true">Jan 17<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+How to get collection of models inside your application. Certainly there are many ways to do it.<br/>Lets have a look at different ways starting from worst - <br/><b> Get table names inside database and then iterating over to get model name</b><code>@models = ActiveRecord::Base.connection.tables.collect{|t| t.underscore.singularize.camelize}  #=> ["AdhearsionAudit", "AudioLog", "AuditDetail","TinyPrint", "TinyVideo", "UnknownCall", "UserAudit", "User"] </code><br/><b>Select those with associated class</b><br/><code>@models.delete_if{|m| m.constantize rescue true} </code><br/><b>Load models dir</b><br/><code>@models = Dir['app/models/*.rb'].map {|f| File.basename(f, '.*').camelize.constantize.name } </code><b>Select ActiveRecord::Base extended class only</b><code>@models.reject!{|m| m.constantize.superclass != ActiveRecord::Base } </code><b>Get Active Record subclasses</b><br/><code># make sure relevant models are loaded otherwise # require them prior # Dir.glob(RAILS_ROOT + '/app/models/*.rb').each { |file| require file } class A < ActiveRecord::Base end class B < A end ActiveRecord::Base.send(:subclasses).collect(&:name) #=> [...., A] </code><b>How to get Inherited models too</b> <br/><code>class A < ActiveRecord::Base end class B < A end ActiveRecord::Base.descendants.collect(&:name) #=> [...., A, B] </code> Below is more elegant solution provide by <a href="http://stackoverflow.com/users/268/vincent-robert">Vincent-robert</a> over stack overflow which recursively looks for subsequent descendent&#8217;s of class and gives you list from all over application<br/><code>class Class   def extend?(klass)     not superclass.nil? and ( superclass == klass or superclass.extend? klass )   end end  def models    Module.constants.select do |constant_name|     constant = eval constant_name     if not constant.nil? and constant.is_a? Class and constant.extend? ActiveRecord::Base     constant     end   end end </code></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/01/stripe-gateway-payment-integration-with">Stripe Gateway Payment Integration With Rails</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-15T00:53:00+05:30" pubdate data-updated="true">Jan 15<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+Stripe is simple website payment solution and its very easy to easy setup<br/>It currently supports only in US and seems to be very popular compared to other payment gateways because of its api & pricing<br/><br/>Stripe API provides -<br/>1. charge (regular payments)<br/>2. subscription (recurring payments)<br/>3. managing customers (via stripe_customer_token)<br/> <br/><b>What you need to do ?</b><br/>Create a stripe account by providing email address and password. There after go to the <a href="https://manage.stripe.com/account">manage account page</a> to obtain stripe public & api keys.<br/> <b>Rails Integration</b><br/><code># Gemfile   gem stripe </code><br/><code># config/initializers/stripe.rb  Stripe.api_key = "rGaNWsIG3Gy6zvXB8wv4rEcizJp6XjF5" STRIPE_PUBLIC_KEY = "vk_BcSyS2qPWdT5SdrwkQg0vTSyhZgqN" </code><br/><code># app/views/layouts/application.html.haml  = javascript_include_tag 'https://js.stripe.com/v1/' = tag :meta, :name => 'stripe-key', :content => STRIPE_PUBLIC_KEY </code><br/><b>Payment Form</b><br/><code># app/views/payments/new.html.haml   #stripe_error   %noscript JavaScript is not enabled and is required for this form. First enable it in your web browser settings.  = form_for @payment ||= Payment.new, :html => {:id => :payForm} do |p|   = p.hidden_field :stripe_card_token   .field     = p.text_field :amount   .credit_card_form     %h3.title       Enter Credit Card     - if @payment.stripe_card_token.present?       Credit card has been provided.     - else       .field         = label_tag :card_number, "Credit Card Number"         = text_field_tag :card_number, nil, name: nil       .field         = label_tag :card_code, "Security Code (CVV)"         = text_field_tag :card_code, nil, name: nil       .field         = label_tag :card_month, "Expiry Date"         = select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}         = select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"}   </code><br/><b>Javascript Code</b><br/><code> # app/views/payments/new.js   var payment; jQuery(function() {    Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'));   return payment.setupForm(); });  payment = {    setupForm: function() {      $('.head').click(function() {       $(this).css('disabled', true);        if($('#payment_stripe_card_token').val()){         $('#payForm').submit();       }       else{         payment.processCard();       }     });   },    processCard: function() {      var card;     card = {       number: $('#card_number').val(),       cvc: $('#card_code').val(),       expMonth: $('#card_month').val(),       expYear: $('#card_year').val()     };     return Stripe.createToken(card, payment.handleStripeResponse);   },   handleStripeResponse: function(status, response) {     if (status === 200) {       $('#payment_stripe_card_token').val(response.id)       $('#stripe_error').remove();       $('#payForm').submit();     } else {       $('#stripe_error').addClass('error').text(response.error.message);       $('.head').css('disabled', false);     }   } };  </code><br/><b>Generate & Migrate Payment Model</b><br/><code>  rails g model payment status:string amount:float email:string transaction_number:string   rake db:migrate </code><br/><b>Payment Model</b><br/><code># app/models/payment.rb  class Payment < ActiveRecord::Base   PROCESSING, FAILED, SUCCESS = 1, 2, 3      attr_accessible :stripe_card_token      validates :amount, :stripe_card_token, :presence => true, :numericality => { :greater_than => 0 }    def purchase     self.status = PROCESSING          customer = Stripe::Customer.create(description:email, card: stripe_card_token)     # OPTIONAL: save customer token for further reference     stripe_customer_token = customer.id          # Charge     charge = Stripe::Charge.create(      :amount => amount * 100, # $15.00 this time      :currency => "usd",      :customer => stripe_customer_token     )      if charge.paid       self.transaction_num = charge.id       self.status = SUCCESS     else       self.status = FAILED     end     return self   rescue Exception => e     errors.add :base, "There was a problem with your credit card."     self.status = FAILED     return self   end end </code><br/><b>Payments Controller</b><br/><code># app/controllers/payments_controller.rb   class PaymentsController < ApplicationController   def create     @payment = Payment.new(params[:payment])      if @payment.valid? && @payment.purchase       flash[:notice] = 'Thanks for Purchase!'       redirect_to root_url     else       render :action => :new     end   end end </code></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/01/understanding-rails-uri">Understanding Rails Uri</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-14T02:18:00+05:30" pubdate data-updated="true">Jan 14<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+rails-uri module provide us with url manipulation methods<br/> <b>Parse string url</b><code>url = URI.parse('http://funonrails.com/search/label/rails3') url.host #=> "http://funonrails.com" url.port #=> 80 </code><br/><b>URL with Basic Authentication </b><br/><code>url = URI.parse('http://sandip:2121@funonrails.com/search/label/rails3') url.user #=> "sandip" url.password #=> "2121" </code><br/><b>Extracting urls form string paragraph</b><br/><code>URI.extract('http://funonrails.com is rails blog authored by http://sandipransing.github.com contact mailto://sandip@funonrails.com') #=> ["http://funonrails.com", "http://sandipransing.github.com", "mailto://sandip@funonrails.com"] </code> <b>Split & Join URI</b><br/><code>URI.split('http://sandip:2121@funonrails.com/search/label/rails3') #=> ["http", "sandip:2121", "funonrails.com", nil, nil, "/search/label/rails3", nil, nil, nil]  <=> [Scheme, Userinfo, Host, Port, Registry, Path, Opaque, Query, Fragment]    URI.join('http://funonrails.com','search/label/rails3') #=> #<URI::HTTP:0x7fbf9202efc8 URL:http://funonrails.com/search/label/rails3></code><br/><b>Escape & Unescape alias encode/decode URI</b><br/><code>URI.escape('http://funonrails.com/search/?label=\\rails\3') URI.encode('http://funonrails.com/search/?label=\\rails\3') #=> "http://funonrails.com/search/?label=%5Crails%5C3"  URI.unescape("http://funonrails.com/search/?label=%5Crails%5C3") URI.decode("http://funonrails.com/search/?label=%5Crails%5C3") #=> "http://funonrails.com/search/?label=\\rails\\3" </code><br/><b>Match urls using regular expressions </b><br/><code>"http://funonrails.com/search/label/rails3".sub(URI.regexp(['search'])) do |*matchs|   p $& end #=> "http://funonrails.com/search/label/rails3" </code><br/><b>Getting requested url inside rails</b><br/><code>request.request_uri request.env['REQUEST_URI'] </code><br/><b>Getting previous page url inside rails</b><br/><code>request.referrer </code></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/12/paypal-payments-integration-with-rails">Paypal Payments Integration With Rails</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-30T18:00:00+05:30" pubdate data-updated="true">Dec 30<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+Paypal standard website payment service allows online payment transactions for websites. <br />Before implementing payments inside rails app needs to have following things in place- <br />1. <a href="http://developer.paypal.com/">Register Paypal sandbox account</a><br />2. Paypal Merchant account api credentials i.e. login, password, signature, application_id<br />3. Paypal Buyer account creds to test payments<br /><br /><b>Bundle Install</b><br /><pre class='ruby'># Gemfile     <br />gem 'activemerchant <br /></pre><b>Gateway config</b><br /><pre class='ruby'># config/gateway.yml <br />development: &development     <br />  mode: test     <br />  login: rana_1317365002_biz_api1.gmail.com     <br />  password: '1311235050'     <br />  signature: ACxcVrB3mFChvPIe8aDWQlLhAPN46oPBQCj7rJWPza6CDZmBURg.     <br />  application_id: APP-76y884485P519543T  <br /><br />production:    <br />  <<: *development<br /><br />test:<br />  <<: *development<br /></pre><b>New Payment Form</b><pre class='ruby'>= form_for @payment ||= Payment.new, :url => pay_bill_url, :html => {:id => :payForm} do |p|    <br />  = p.text_field :amount   <br />  = p.submit 'Pay' <br /></pre><b>Generate & Migrate Payment Model</b><pre class='ruby'>rails g model payment status:string amount:float transaction_number:string   <br />rake db:migrate <br /></pre><b>Payment Model</b><pre class='ruby'># app/models/payment.rb  <br />class Payment < ActiveRecord::Base<br /><br />  PROCESSING, FAILED, SUCCESS = 1, 2, 3<br /><br />  validates :amount, :presence => true, :numericality => { :greater_than => 0 }    <br />  def self.conf<br />    @@gateway_conf ||= YAML.load_file(Rails.root.join('config/gateway.yml').to_s)[Rails.env]   <br />  end    <br />  <br />  ## Paypal    <br />  def setup_purchase(options)     <br />    gateway.setup_purchase(amount * 100, options)   <br />  end    <br />  <br />  def redirect_url_for(token)      <br />    gateway.redirect_url_for(token)   <br />  end <br />  <br />  def purchase(options={}) <br />    self.status = PROCESSING  <br />    #:ip       => request.remote_ip,<br />    #:payer_id => params[:payer_id],<br />    #:token    => params[:token]<br />    response = gateway.purchase(amt, options)      <br />    if response.success?       <br />      self.transaction_num = response.params['transaction_id']       <br />      self.status = SUCCESS     <br />    else       <br />      self.status = FAILED     <br />    end     <br />    return self   <br />  rescue Exception => e     <br />    self.status = FAILED     <br />    return self   <br />  end    <br /><br />  private   <br />  def gateway <br />    ActiveMerchant::Billing::Base.mode = auth['mode'].to_sym <br />    ActiveMerchant::Billing::PaypalExpressGateway.new(<br />      :login => auth['login'], :password => auth['password'],<br />      :signature => auth['signature']) <br />  end<br /><br />  def auth <br />    self.class.conf <br />  end<br />end <br /></pre><b>Billing routes </b><pre class='ruby'>## Callback URL   <br />match '/billing/paypal/:id/confirm', :to => 'billing#paypal', :as => :confirm_paypal   <br />## Create payment   <br />match '/billing', :to => 'billing#create', :as => :pay_bill   <br />## Request URL   <br />match '/billing/paypal/:id', :to => 'billing#checkout', :as => :billing   <br />match '/billing/thank_you/:id', :to => 'billing#checkout', :as => :billing_thank_you </pre><b>Billing Controller</b>  <pre class='ruby'># app/controllers/billing_controller.rb<br />class BillingController < ApplicationController<br />  before_filter :get_payment, :only => [:checkout, :paypal, :thank_you]      <br />  <br />  def create     <br />    @payment = Payment.new params[:payment]     <br />    if @payment.save       <br />      ## Paypal Checkout page       <br />      redirect_to billing_url    <br />    else     <br />      render :action => :new    <br />    end <br />  end    <br />  <br />  # ASSUMPTION   # payment is valid i.e. amount is entered   <br />  def checkout    <br />    response = @payment.setup_purchase(:return_url => confirm_paypal_url(@payment), :cancel_return_url => root_url)     <br />    redirect_to @payment.redirect_url_for(response.token)   <br />  end    <br />  <br />  ## CALL BACK   <br />  def paypal    <br />    @payment = @payment.purchase(:token => params[:token], :payer_id => params[:PayerID], :ip => request.remote_ip)    <br />    @payment.save    <br />    redirect_to thank_you_billing_url(@order)  <br />  end    <br />  <br />  private   <br />  def get_payment     <br />    @payment = Payment.find_by_id(params[:id])     <br />    @payment && @payment.valid? || invalid_url   <br />  end <br />end<br /></pre><b>Views</b><pre class='ruby'># app/views/billing/thank_you.html.haml  <br />- if @payment.success?   <br />  %p The transaction is successfully completed <br />- else   <br />  %p The transaction failed <br /></pre></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/12/authorize-net-sim-payment-integration">Authorize Net (SIM) Payment Integration With Rails</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-30T16:16:00+05:30" pubdate data-updated="true">Dec 30<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+Authorize Net SIM gateway transaction skips merchant side creditcard details form and directs transaction to be take place on gateway server.<br/> <console>  # Gemfile   gem &#8216;authorize-net&#8217; </console><br/>Register for authorize net sandbox account <a href='https://developer.authorize.net/testaccount/'>click here</a><br/><br/><b>Payment gateway credentials</b><br/><console># config/gateway.yml development: &development     mode: test     login: 9gdLh6T     key: 67fu45xw6VP92LX1  production:    <<: *development  test:    <<: *development </console><br/> <b>Generate & Migrate Payment Model</b><br/><console>  rails g model payment status:string amount:float transaction_number:string   rake db:migrate </console><br/> SIM gateway methods extracted and added to payment model <br/><console># app/models/payment.rb class Payment < ActiveRecord::Base      PROCESSING, FAILED, SUCCESS = 1, 2, 3      validates :amount, :presence => true, :numericality => { :greater_than => 0 }    def self.conf     @@gateway_conf ||= YAML.load_file(Rails.root.join(&#8216;config/gateway.yml&#8217;).to_s)[Rails.env]   end      def success?     self.status == SUCCESS   end    ## Authorize :: SIM   def setup_transaction(options ={})     options.merge!(:link_method => AuthorizeNet::SIM::HostedReceiptPage::LinkMethod::POST)     t = AuthorizeNet::SIM::Transaction.new(       auth[&#8216;login&#8217;], auth[&#8216;key&#8217;], amount,       :hosted_payment_form => true,       :test => auth[&#8216;mode&#8217;]     )     t.set_hosted_payment_receipt(AuthorizeNet::SIM::HostedReceiptPage.new(options))     return t   end    def auth     self.class.conf   end end </console>Payment routes <br><console> ## Callback URL   match &#8216;/billing/:id/confirm&#8217;, :to => &#8216;billing#authorize&#8217;, :as => :confirm_billing     ## Request URL   match &#8216;/billing/:id&#8217;, :to => &#8216;billing#checkout&#8217;, :as => :billing   match &#8216;/billing/:id/thank_you&#8217;, :to => &#8216;billing#thank_you&#8217;, :as => :thank_you_billing </console> Billing controller <br/><console># app/controllers/billing_controller.rb  class BillingController < ApplicationController   helper :authorize_net    before_filter :get_order, :only => [:checkout, :authorize, :thank_you]    def checkout     # ASSUMPTION order is valid means amount is entered     @transaction = @order.setup_transaction(       {:link_text => &#8216;Continue&#8217;,         :link_url => confirm_billing_url(@order)})   end    ## CALL BACK   def authorize     resp = AuthorizeNet::SIM::Response.new(params)     if resp.approved?       @order.status = Payment::SUCCESS       @order.transaction_num = resp.transaction_id     else       @order.status = Payment::FAILED      end     @order.save(:validate => false)     redirect_to thank_you_billing_url(@order)   end    private   def auth     Payment.conf   end    def get_order     @order = Payment.find_by_id(params[:id])     @order && @order.valid? || invalid_url   end end </console><br/>Views Forms<br/><console># app/views/billing/checkout.html.haml  = form_for :sim_transaction, :url => AuthorizeNet::SIM::Transaction::Gateway::TEST, :html => {:id => :authForm} do |f|   = sim_fields(@transaction) :javascript   $(document).ready(function(){     $(&#8216;#authForm&#8217;).submit();   }) </console><br/><console># app/views/billing/thank_you.html.haml  - if @order.success?   %p The transaction is successfully completed - else   %p The transaction failed </console></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/12/using-formbuilder-in-rails">Customizing Rails Default Form Builder</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-29T01:29:00+05:30" pubdate data-updated="true">Dec 29<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+Customizing default rails form builder to adopt for labels, input fields, errors, hints, etc. in order to build forms just in minutes <br/><br/><console># app/helpers/app_form_builder.rb class AppFormBuilder < ActionView::Helpers::FormBuilder      HELPERS = %w[check_box text_field text_area password_field select date_select datetime_select file_field collection_select state_select label calendar_date_select]   def self.create_tagged_field(method_name)     define_method(method_name) do |name, *args|       errs = object.errors.on(name.to_sym) if object && object.errors        # initialize some local variables       if args.last.is_a?(Hash)         label = args.last.delete(:label)         suffix = args.last.delete(:suffix)         klass = args.last.delete(:class)         req = args.last.delete(:required)       end       label = 'none' if method_name == 'hidden_field'        label ||= name.to_s.titleize       label = nil if label == 'none'        klass = klass ? [klass] : []       # Custom class if it exists       if method_name =~ /text_field|check_box|select/         klass << method_name       end       klass << 'f' #A default selector       klass << 'error' if errs.present?       klass = klass.join(' ')        # Required Field Notations       if req == 'all' || (req == 'new' && object.new_record?)         label << @template.content_tag(:span, :*, :class => :req)       end        suffix = @template.content_tag(:label, suffix) if suffix.present?       label = @template.content_tag(:label, label) if label.present?       errs = @template.content_tag(:span, errs.to_s, :class => :message) if errs.present?       reverse = true if method_name == &#8216;check_box&#8217;       if reverse         content = &#8220;#{super} #{suffix} #{label} #{errs}&#8221;       else         content = &#8220;#{label} #{super} #{suffix} #{errs}&#8221;       end        @template.content_tag(:div, content, :class => klass)     end   end    HELPERS.each do |name|     create_tagged_field(name)   end end </console></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/12/authorize-net-payment-gateway">Authorize Net Payment Gateway Integration With Rails</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-29T00:36:00+05:30" pubdate data-updated="true">Dec 29<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+Authorize Net Payment gateway provides api access to enable online payments  <br/>Gateway provides different api options to integrate- <br/><br/> <b>1. Direct Post Method</b><br/> In this method gateway handles all steps required in payment transaction flow securely and clean manner. To know more on this <a href="https://developer.authorize.net/api/dpm">click here</a><br/><br/> <b>2. Server Integration Method (SIM)</b><br/> Here, Payment form and creditcard detail form resides on gateway site and all the steps in transaction carried out at gateway server <br/><br/> <b>3. Advance Integration Method (AIM)</b><br/> Provides full control of all the transaction steps at merchant server. Payment form resides on merchant side. merchnat server sends authorization and payment capture requests to gateway server where actual transaction takes place and response is sent back to merchant server to notify transaction status. To know detail integration on this <a href="http://www.funonrails.com/2011/12/authorizenet-aim-payment-integration.html">click here</a><br/><br/> <b>Prerequisites before getting started with integration</b> <br/><a href="https://developer.authorize.net/testaccount">Sign up for a test account</a> to obtain an API Login ID and Transaction Key. These keys will authenticate requests to the payment gateway.</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/12/railroady-uml-diagram-generator-for">Railroady UML Diagram Generator for Rails</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-28T23:42:00+05:30" pubdate data-updated="true">Dec 28<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+railroady is UML class diagram generator for rails.<br/> First you need to install `graphviz` pkg in order to have `dot` , `neato` commands available<br/><console>group :development, :test do   gem railroady end </console><br/>Run below command to generate MVC diagrams<br/><console>bundle install  rake diagram:all </console><br/>Individual diagram generation<br/><b>Model Diagram</b><console>railroady -M | dot -Tpng > models.png </console><b>Controller Diagram</b><console>railroady -C | dot -Tpng > controllers.png </console><b>AASM Diagram</b><console>railroady -A | dot -Tpng > aasm.png </console> <b>Commands</b><br/><console>-M, &#8211;models                     Generate models diagram -C, &#8211;controllers                Generate controllers diagram -A, &#8211;aasm                       Generate &#8220;acts as state machine&#8221; diagram </console><br/><b>Options</b><br/><console># Common options -b, &#8211;brief                      Generate compact diagram                                    (no attributes nor methods) -s, &#8211;specify file1[,fileN]      Specify given files only for the diagram                                    (can take a glob pattern) -e, &#8211;exclude file1[,fileN]      Exclude given files                                    (can take a glob pattern) -i, &#8211;inheritance                Include inheritance relations -l, &#8211;label                      Add a label with diagram information                                    (type, date, migration, version) -o, &#8211;output FILE                Write diagram to file FILE -v, &#8211;verbose                    Enable verbose output                                    (produce messages to STDOUT) </console><br/><b>Models diagram options:</b><br/><console>-a, &#8211;all                        Include all models                                    (not only ActiveRecord::Base derived)     &#8211;all-columns                Show all columns                                     (not just content columns)     &#8211;hide-magic                 Hide magic field names     &#8211;hide-types                 Hide attributes type -j, &#8211;join                       Concentrate edges -m, &#8211;modules                    Include modules -p, &#8211;plugins-models             Include plugins models -t, &#8211;transitive                 Include transitive associations                                  (through inheritance) </console><br/><b>Controllers diagram options:</b><console>&#8211;hide-public                Hide public methods &#8211;hide-protected             Hide protected methods &#8211;hide-private               Hide private methods </console><br/><b>Other Options</b><console>-h, &#8211;help                       Show this message     &#8211;version                    Show version and copyright </console></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/3/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/sandipransing">@sandipransing</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'sandipransing',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'sandipr';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

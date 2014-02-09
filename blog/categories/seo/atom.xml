@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: seo | Fun On Rails]]></title>
+  <link href="http://sandipransing.github.io/blog/categories/seo/atom.xml" rel="self"/>
+  <link href="http://sandipransing.github.io/"/>
+  <updated>2014-02-09T20:36:37+05:30</updated>
+  <id>http://sandipransing.github.io/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How to submit sitemap to search engines]]></title>
+    <link href="http://sandipransing.github.io/2009/10/how-to-submit-sitemap-to-search-engines"/>
+    <updated>2009-10-01T22:57:00+05:30</updated>
+    <id>http://sandipransing.github.io/2009/10/how-to-submit-sitemap-to-search-engines</id>
+    <content type="html"><![CDATA[<div class='post'>
+<br />There are many ways that can be used to submit sitemap to search engines.<br /><br />Lets discuss approaches<br /><br />1. Put sitemap.xml in public folder and you are done.<br />&nbsp;&nbsp; &nbsp;Crawlers will find it through url<br />&nbsp;&nbsp; &nbsp;http://yourdomain.com/sitemap.xml<br /><br />2. There are many online sites which generates sitemaps for you.<br />&nbsp;&nbsp; &nbsp;like http://www.xml-sitemaps.com/<br /><br />3. Open following urls in browser.&nbsp;Be sure to add xml sitemap path for your site.<br /><br />a. <b>Google submit</b><br />&nbsp;&nbsp; &nbsp;http://www.google.com/webmasters/tools/ping?sitemap=XML_SITEMAP_PATH<br /><br />b. <b>Yahoo Submit</b><br />&nbsp;&nbsp; &nbsp;http://search.yahooapis.com/SiteExplorerService/V1/ping?sitemap=XML_SITEMAP_PATH<br /><br />c. <b>Ask Submit</b><br /><b></b>&nbsp;&nbsp; &nbsp;http://submissions.ask.com/ping?sitemap=XML_SITEMAP_PATH<br /><br />d. <b>Webmaster submit</b><br />&nbsp;&nbsp; &nbsp;http://webmaster.live.com/ping.aspx?siteMap=XML_SITEMAP_PATH<br /><br />5. Best practices in rails to submit sitemap is scheduled task (cron job).<br />&nbsp;&nbsp; &nbsp;Write a rake task that will generate sitemap in rails public folder and<br />&nbsp;&nbsp; &nbsp;will submit sitemap.xml file to search engines. ( as mentioned above.)<br /><br />Got easy :)<br /></div>
+
+
+<h2>Comments</h2>
+
+
+<div class='comments'>
+<div class='comment'>
+<div class='author'>moooynvn</div>
+<div class='content'>
+This comment has been removed by a blog administrator.</div>
+</div>
+<div class='comment'>
+<div class='author'>Kiliaquarry</div>
+<div class='content'>
+hi, how are you? <a href="http://dotnet.org.za/members/cheap-synthroid-online.aspx" rel="nofollow" rel="nofollow">synthroid online</a> <a href="http://dotnet.org.za/members/cheap-synthroid-online.aspx" rel="nofollow" rel="nofollow">cheap synthroid</a> http://dotnet.org.za/members/cheap-synthroid-online.aspx online</div>
+</div>
+<div class='comment'>
+<div class='author'>SoulSmasher</div>
+<div class='content'>
+And this is for bing:<br>http://www.bing.com/webmaster/ping.aspx?sitemap=www.YourWebAddress.com/sitemap.xml</div>
+</div>
+<div class='comment'>
+<div class='author'>blobaduby</div>
+<div class='content'>
+<a href="http://fi.worldos.ru/map.html" rel="nofollow" rel="nofollow">скачать кино новинки 2009 года</a><br><a href="http://allmy.worldos.ru/map.html" rel="nofollow" rel="nofollow">кино комедии скачать бесплатно</a><br><a href="http://worldos.ru/map.html" rel="nofollow" rel="nofollow">кино комедии и боевики бесплатно скачать бесплатно</a></div>
+</div>
+<div class='comment'>
+<div class='author'>Polprav</div>
+<div class='content'>
+Hello from Russia!<br>Can I quote a post in your blog with the link to you?</div>
+</div>
+<div class='comment'>
+<div class='author'>Garry</div>
+<div class='content'>
+Thanks. It&#39;s very useful.<br><a href="http://www.cometosell.com" title="Free online classifieds" rel="nofollow" rel="nofollow">ComeToSell - classifieds</a></div>
+</div>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How do i generate SEO sitemap in rails ?]]></title>
+    <link href="http://sandipransing.github.io/2009/09/how-do-i-generate-seo-sitemap-in-rails"/>
+    <updated>2009-09-09T21:44:00+05:30</updated>
+    <id>http://sandipransing.github.io/2009/09/how-do-i-generate-seo-sitemap-in-rails</id>
+    <content type="html"><![CDATA[<div class='post'>
+<strong>What is sitemap ? </strong><br/><br/>Sitemap is nothing but a .xml file containing urls available on your site<br/><br/>It contains URL, last modified date, frequency of content change and priority ( between 0..1 )<br/><br/><strong>Why we need sitemap ? </strong><br/><br/>We can submit sitemap file to search engine. It will help them in analysing what urls on your site are available for crawling.<br/><br/><strong>What is xml pattern ? </strong><br/><pre>   &lt;?xml version="1.0" encoding="UTF-8"?&gt;<br/>      &lt;urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"&gt;<br/><br/>        &lt;url&gt;<br/>           &lt;loc&gt;http://www.example.com/&lt;/loc&gt;<br/>           &lt;lastmod&gt;2005-01-01&lt;/lastmod&gt;<br/>           &lt;changefreq&gt;monthly&lt;/changefreq&gt;<br/>           &lt;priority&gt;0.8&lt;/priority&gt;<br/>        &lt;/url&gt;<br/>       ...<br/>       ...<br/>    &lt;/urlset&gt;</pre><br/><strong> What will be the path for sitemap ? </strong><br/><br/>"www.example.com/sitemap.xml"<br/><br/><strong>Are we going to generate sitemap manually ? </strong><br/><br/>No... there is mephisto sitemap plugin.We can use it.<br/><br/>script/plugin install  http://svn.appelsiini.net/svn/rails/plugins/mephisto_sitemap/<br/><br/><strong>Am i needed to generate to sitemap for each request ? </strong><br/><br/>No ...........we can generate it in background task daily basis.<br/><br/><strong>How it will be accessed for request to sitemap ? </strong><br/><br/>we can define path to local file in routes.<br/><br/>map.connect "sitemap.xml", :controller =&gt; :sitemap<br/><br/>Class SitemapController<br/><br/>def index<br/><br/>render "some local file path"<br/><br/>end<br/><br/>....<br/><br/><strong>Here are the reference links </strong><br/><br/>http://www.fortytwo.gr/blog/19/Generating-Sitemaps-With-Rails<br/><br/>http://www.bestechvideos.com/2008/07/04/ruby-plus-71-how-to-create-a-seo-sitemap-for-rails-apps</div>
+
+
+<h2>Comments</h2>
+
+
+<div class='comments'>
+<div class='comment'>
+<div class='author'>welkins</div>
+<div class='content'>
+how to generate xml file for cooliris portfolio in wordpress<br><br><br>-welkins</div>
+</div>
+<div class='comment'>
+<div class='author'>sitemap « Fun On Rails</div>
+<div class='content'>
+[...] How do i generate SEO sitemap in rails ? « Fun On Rails [...]</div>
+</div>
+<div class='comment'>
+<div class='author'>info ternak</div>
+<div class='content'>
+i got lots of information from your site, thank for your sharing... :)</div>
+</div>
+<div class='comment'>
+<div class='author'>Elena Morgan</div>
+<div class='content'>
+Search engines generate nearly 90% of all Internet traffic and are responsible for 55% of all E-commerce transactions. Today, it is essential for all online businesses to make SEO an integral part of their online business strategy.<br><br>So I would like to recommend one of my client who helps you define, evolve and implement a powerful SEO strategy to leverage your online business potential<br><br>http://www.redalkemi.com/</div>
+</div>
+<div class='comment'>
+<div class='author'>sandipransing</div>
+<div class='content'>
+Link mentioned is very good !<br>but it has limitation that we will not have any control over urls <br>that will be submitted to search engines :)</div>
+</div>
+<div class='comment'>
+<div class='author'>Sethupathi</div>
+<div class='content'>
+How to create sitemap.xml<br>======================<br>From the following link you can generate the site-map.xml if your application is not in https. Just by giving the application link it will generate the xml for you.<br><br>http://www.xml-sitemaps.com/</div>
+</div>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby On Rails Search Engine Optimization (SEO)]]></title>
+    <link href="http://sandipransing.github.io/2009/08/ruby-on-rails-search-engine"/>
+    <updated>2009-08-17T16:16:00+05:30</updated>
+    <id>http://sandipransing.github.io/2009/08/ruby-on-rails-search-engine</id>
+    <content type="html"><![CDATA[<div class='post'>
+Search Engines ( like google, yahoo ) mainly uses <strong>crawlers</strong> for returning results.<br/><br/><strong>Crawler</strong> is the program which searches world wide web ( www ) and returns ranked pages.<br/><br/>Lets see what are the search engine optimization (SEO) techniques we can adopt so that your rails<br/>website pages will appear in search results.<br/><br/><strong>1. Title Of Page</strong><br/><br/><strong>2. Meta tags</strong><br/><br/><strong>3. Page URL</strong><br/><br/><strong>4. Page Contents</strong> ( this includes anchors to other pages, headers, image titles and alt texts when image not found then normal texts )<br/><br/>We can easily skip some pages from search by mentioning them in robots.txt which is by default should be in application root.<br/><br/>And Ofcourse, we can manage all this in rails very easily..<br/><br/>How ????<br/><br/>We can have in rails<br/><br/><strong>1. Dynamic page titles,</strong><br/><br/><strong>2. Meta tags and</strong><br/><br/><strong>3. Sexy perma URLs in rails</strong><br/><br/><strong>4. Also, we can define some standard on page content development.</strong><br/><br/>...got Easy ......, Cheers !<br/><br/>$@ndip</div>
+
+]]></content>
+  </entry>
+  
+</feed>

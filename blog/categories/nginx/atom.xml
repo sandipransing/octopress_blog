@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: nginx | Fun On Rails]]></title>
+  <link href="http://sandipransing.github.io/blog/categories/nginx/atom.xml" rel="self"/>
+  <link href="http://sandipransing.github.io/"/>
+  <updated>2014-02-09T20:36:37+05:30</updated>
+  <id>http://sandipransing.github.io/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[rails 3.1.1 haml sass jquery coffee-rails devise twitter-bootstrap railroady heroku]]></title>
+    <link href="http://sandipransing.github.io/2011/11/rails-311-haml-sass-jquery-coffee-rails"/>
+    <updated>2011-11-22T00:07:00+05:30</updated>
+    <id>http://sandipransing.github.io/2011/11/rails-311-haml-sass-jquery-coffee-rails</id>
+    <content type="html"><![CDATA[<div class='post'>
+<b> Install RVM first </b><br/> <console>  bash < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvminstaller) </console> <b> rvm list known</b> <console>  # MRI Rubies   [ruby-]1.8.6-head   [ruby-]1.8.7[-p352]   [ruby-]1.9.3-head   ruby-head    # JRuby   jruby-1.2.0   jruby-head    # Rubinius   rbx-1.0.1   rbx-2.0.0pre    # Ruby Enterprise Edition   ree-1.8.6   ree-1.8.7-head </console> <b>Install ruby 1.9.3</b><br/> <console>  rvm install 1.9.3-head   rvm gemset create rails311   rvm use 1.9.3-head@rails311 --default      gem install rails -v3.1.1 --no-rdoc --no-ri      gem install heroku   gem install rb-readline </console> <b>Create new rails project </b><br/> <console>  rails new cdc -m http://railswizard.org/b22092a4358bbebb3a46.rb -J -T </console> <b>Heroku Deployment Done </b><br/> <console>  http://railsblank.heroku.com/ (production) </console> <b> Local System nginx-passenger setup</b><br/> <console>  gem install passenger   rvmsudo passenger-install-nginx-module </console> If you find pcre download error then make sure you libpcre-dev pkg installed on your system otherwise install it and re-run<br/><console>  sudo apt-get install libpcre3-dev </console> <b>Nginx Configuration</b><br/> <console>http {   passenger_root /home/sandip/.rvm/gems/ruby-1.9.3-head@rails311/gems/passenger-3.0.9;   passenger_ruby /home/sandip/.rvm/wrappers/ruby-1.9.3-head@rails311/ruby;      server {     listen 80;     server_name railsblank.local;     root /home/sandip/railsblank/public;     rails_env development;     passenger_enabled on; } </console> <b>git source code </b><br/><console>  git clone git://github.com/sandipransing/rails_blank.git </console></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Setting up nginx maximum upload size]]></title>
+    <link href="http://sandipransing.github.io/2011/03/setting-up-nginx-maximum-upload-size"/>
+    <updated>2011-03-31T15:56:00+05:30</updated>
+    <id>http://sandipransing.github.io/2011/03/setting-up-nginx-maximum-upload-size</id>
+    <content type="html"><![CDATA[<div class='post'>
+Edit nginx configuration and look for html block.<br/>Inside html block add following line.<br/><code>http {     include conf/mime.types;     default_type application/octet-stream;     client_max_body_size 10m;     .... } </code><br/>In above configuration "application/octet-stream" supports any kind of file upload.</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[nginx and thin installation and configuration]]></title>
+    <link href="http://sandipransing.github.io/2010/03/nginx-and-thin-installation-and"/>
+    <updated>2010-03-26T02:59:00+05:30</updated>
+    <id>http://sandipransing.github.io/2010/03/nginx-and-thin-installation-and</id>
+    <content type="html"><![CDATA[<div class='post'>
+<h3> Install nginx server using following command</h3><code>apt-get install nginx </code>Edit nginx configuration and add server block inside html block.&amp;nbsp;<br /><code>server {<br />&nbsp;&nbsp; &nbsp;listen &nbsp; &nbsp; &nbsp; 80;<br />&nbsp;&nbsp; &nbsp;server_name &nbsp;boost;<br /><br />&nbsp;&nbsp; &nbsp;root /home/sandip/rails_app/public;<br /><br />&nbsp;&nbsp; &nbsp;location / {<br />&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;proxy_set_header &nbsp;X-Real-IP &nbsp;$remote_addr;<br />&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;proxy_set_header &nbsp;X-Forwarded-For $proxy_add_x_forwarded_for;<br />&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;proxy_set_header Host $http_host;<br />&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;proxy_redirect off;<br /><br />&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;if (-f $request_filename/index.html) {<br />&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;rewrite (.*) $1/index.html break;<br />&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;}<br />&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;if (-f $request_filename.html) {<br />&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;rewrite (.*) $1.html break;<br />&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;}<br />&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;if (!-f $request_filename) {<br />&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;proxy_pass http://thin;<br />&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;break;<br />&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;}<br />&nbsp;&nbsp; &nbsp;}<br /><br />&nbsp;&nbsp; &nbsp;error_page &nbsp; 500 502 503 504 &nbsp;/50x.html;<br />&nbsp;&nbsp; &nbsp;location = /50x.html {<br />&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;root &nbsp; html;<br />&nbsp;&nbsp; &nbsp;}<br />}<br /></code><br />Install thin server as gem<br /><code>sudo gem install thin<br /><br />Building native extensions. &nbsp;This could take a while...<br />Building native extensions. &nbsp;This could take a while...<br />Successfully installed eventmachine-0.12.10<br />Successfully installed thin-1.2.7<br />2 gems installed<br /></code><br />Install thin service<br /><code>sudo thin install<br />Installing thin service at /etc/init.d/thin ...<br />mkdir -p /etc/init.d<br />writing /etc/init.d/thin<br />chmod +x /etc/init.d/thin<br />mkdir -p /etc/thin<br /></code><br />Configure thin to start at system boot<br /><code>sudo /usr/sbin/update-rc.d -f thin defaults<br /></code><br />Then put your config files in /etc/thin<br /><code>sudo /usr/sbin/update-rc.d -f thin defaults<br />update-rc.d: warning: thin stop runlevel arguments (0 1 6) do not match LSB Default-Stop values (S 0 1 6)<br />&nbsp;Adding system startup for /etc/init.d/thin ...<br />&nbsp;&nbsp; /etc/rc0.d/K20thin -&amp;gt; ../init.d/thin<br />&nbsp;&nbsp; /etc/rc1.d/K20thin -&amp;gt; ../init.d/thin<br />&nbsp;&nbsp; /etc/rc6.d/K20thin -&amp;gt; ../init.d/thin<br />&nbsp;&nbsp; /etc/rc2.d/S20thin -&amp;gt; ../init.d/thin<br />&nbsp;&nbsp; /etc/rc3.d/S20thin -&amp;gt; ../init.d/thin<br />&nbsp;&nbsp; /etc/rc4.d/S20thin -&amp;gt; ../init.d/thin<br />&nbsp;&nbsp; /etc/rc5.d/S20thin -&amp;gt; ../init.d/thin<br /></code><br />Create thin configuration<br /><code>sudo thin config -C /etc/thin/&lt;config-name&gt;.yml -c &lt;rails-app-root-path&gt; --servers &lt;number-of-threads&gt; -e &lt;environment&gt;<br />&lt;/environment&gt;&lt;/number-of-threads&gt;&lt;/rails-app-root-path&gt;&lt;/config-name&gt; </code><br />In my case,<br /><code>sudo thin config -C /etc/thin/rails_app.yml -c /home/sandip/rails_app --servers 3 -e production<br />&amp;gt;&amp;gt; Wrote configuration to /etc/thin/rails_app.yml<br /></code><br />thin configuration file will look like<br /><br />Start/stop/restart Nginx &amp;amp; thin server using command<br /><br /><code>sudo service nginx start|stop|restart<br />sudo service thin start|stop|restart<br /></code></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[nginx passenger configuration for rails application]]></title>
+    <link href="http://sandipransing.github.io/2010/02/nginx-passenger-configuration-for-rails"/>
+    <updated>2010-02-15T21:43:00+05:30</updated>
+    <id>http://sandipransing.github.io/2010/02/nginx-passenger-configuration-for-rails</id>
+    <content type="html"><![CDATA[<div class='post'>
+<br />#user &nbsp;nobody;<br />user www-data;<br />worker_processes &nbsp;2;<br /><br />#error_log &nbsp;logs/error.log;<br />#error_log &nbsp;logs/error.log &nbsp;notice;<br />#error_log &nbsp;logs/error.log &nbsp;info;<br /><br />#pid &nbsp; &nbsp; &nbsp; &nbsp;logs/nginx.pid;<br /><br />events {<br />&nbsp;&nbsp; &nbsp;worker_connections &nbsp;1024;<br />}<br /><br />http {<br />&nbsp;&nbsp; &nbsp;passenger_root /var/lib/gems/1.8/gems/passenger-2.2.8;<br />&nbsp;&nbsp; &nbsp;passenger_ruby /usr/bin/ruby1.8;<br />&nbsp;&nbsp; &nbsp;passenger_max_pool_size 3;<br /><br />&nbsp;&nbsp; &nbsp;include &nbsp; &nbsp; &nbsp; mime.types;<br /><div><div>default_type &nbsp;application/octet-stream;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp;#log_format &nbsp;main &nbsp;'$remote_addr - $remote_user [$time_local] "$request" '</div><div>&nbsp;&nbsp; &nbsp;# &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'$status $body_bytes_sent "$http_referer" '</div><div>&nbsp;&nbsp; &nbsp;# &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'"$http_user_agent" "$http_x_forwarded_for"';</div><div><br /></div><div>&nbsp;&nbsp; &nbsp;#access_log &nbsp;logs/access.log &nbsp;main;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp;sendfile &nbsp; &nbsp; &nbsp; &nbsp;on;</div><div>&nbsp;&nbsp; &nbsp;#tcp_nopush &nbsp; &nbsp; on;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp;#keepalive_timeout &nbsp;0;</div><div>&nbsp;&nbsp; &nbsp;keepalive_timeout &nbsp;65;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp;#gzip &nbsp;on;</div><div><div>&nbsp;server {</div><div>&nbsp;&nbsp; &nbsp; listen 80;</div><div>&nbsp;&nbsp; &nbsp; server_name localhost;</div><div>&nbsp;&nbsp; &nbsp; root /home/josh/current/public; &nbsp; # &lt;--- be sure to point to 'public'!</div><div>&nbsp;&nbsp; &nbsp; passenger_enabled on;</div><div>&nbsp;&nbsp; &nbsp; passenger_use_global_queue on;</div><div>&nbsp;&nbsp; }</div><div><br /></div><div>&nbsp;&nbsp; &nbsp;server {</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;listen &nbsp; &nbsp; &nbsp; 80;</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;server_name &nbsp;localhost;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;#charset koi8-r;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;#access_log &nbsp;logs/host.access.log &nbsp;main;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;location / {</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;root &nbsp; html;</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;index &nbsp;index.html index.htm;</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;}</div><div><div>&nbsp;&nbsp; &nbsp; #error_page &nbsp;404 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/404.html;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;# redirect server error pages to the static page /50x.html</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;#</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;error_page &nbsp; 500 502 503 504 &nbsp;/50x.html;</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;location = /50x.html {</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;root &nbsp; html;</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;}</div><div><div>&nbsp;&nbsp; }</div><div>}</div></div></div></div></div></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[4 steps to install nginx with passenger]]></title>
+    <link href="http://sandipransing.github.io/2009/09/4-steps-to-install-nginx-with-passenger"/>
+    <updated>2009-09-09T23:47:00+05:30</updated>
+    <id>http://sandipransing.github.io/2009/09/4-steps-to-install-nginx-with-passenger</id>
+    <content type="html"><![CDATA[<div class='post'>
+Install passenger program that will run your rails application<br/><strong>1. sudo gem install passenger</strong><br/>Install nginx server with passenger enabled<br/><strong>2. passenger-install-nginx-module</strong><br/><br/>it will open apt, click "Enter" to contine<br/>then select option 1 for default install<br/>then it will ask<br/>Where do you want to install Nginx to?<br/><br/>Please specify a prefix directory [/opt/nginx]:<br/>press enter<br/><br/>then copy following block<br/><br/><strong> server {<br/>listen 80;<br/>server_name <a href="http://www.yourhost.com/" target="_blank">www.yourhost.com</a>;<br/>root /somewhere/public;   # &lt;--- be sure to point to 'public'!<br/>passenger_enabled on;<br/>}</strong><br/><br/>Make nginx Configuration<br/>3. vi /opt/nginx/conf/nginx.conf<br/>Make passenger_root and passenger_ruby path to configuration<br/><strong><br/><br/>http {<br/>passenger_root /usr/local/lib/ruby/gems/1.8/gems/passenger-2.2.4;<br/>passenger_ruby /usr/local/bin/ruby;<br/></strong><br/><br/>then add server configuration block inside http block<br/>http{<br/>...<br/><strong> server {<br/>listen 80;<br/>server_name <a href="http://www.yourhost.com/" target="_blank">www.yourhost.com</a>; //Make sure this dns entry inside /etc/hosts<br/>root /carsonline/public;   # &lt;--- be sure to point to 'public'! //here carsonline is RAILS_ROOT<br/>passenger_enabled on;<br/>}</strong><br/><br/>Thats, all<br/><br/>4. Launch Server<br/><br/>/opt/nginx/sbin/nginx</div>
+
+
+<h2>Comments</h2>
+
+
+<div class='comments'>
+<div class='comment'>
+<div class='author'>sandip Ransing</div>
+<div class='content'>
+You are right..but sometimes we have to manually configure it when there are multiple ruby installations.</div>
+</div>
+<div class='comment'>
+<div class='author'>gautamrege</div>
+<div class='content'>
+I think passenger_root and passenger_ruby get automatically configured during installation.<br><br>Good article.</div>
+</div>
+</div>
+
+]]></content>
+  </entry>
+  
+</feed>

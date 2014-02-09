@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>vi / vim Shortcuts - Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="Open filevi filenameAs i am newb on linux macine, i dont know vi shortcuts.so, i am listing down shortcuts which i am getting familier. :)Insert in &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://sandipransing.github.io/2009/05/vi-vim-shortcuts">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:sandipransing.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Vi / Vim Shortcuts</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-22T18:23:00+05:30" pubdate data-updated="true">May 22<span>nd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><div class='post'>
+Open file<br/><code>vi filename</code><br/>As i am newb on linux macine, i dont know vi shortcuts.<br/>so, i am listing down shortcuts which i am getting familier. :)<br/><br/>Insert in file<br/><code>i</code><br/><br/>Exit file<br/><code>q</code><br/><br/>forced exit<br/><code>q!</code><br/><br/>save file<br/><code>wq</code><br/><br/>forced save<br/><code>wq!</code><br/><br/>Copy no of lines<br/>yy<br/><br/>Paste copied lines<br/><code>pp</code><br/><br/>Undo changes<br/><code>uu</code><br/><br/>Delete lines<br/><code>dd</code><br/><br/>To search and replace string in vi<br/><code> :%s/search_string/replacement_string/g</code><br/><br/>To find particular word in file<br/><code>?string1</code><br/><br/>If you have any quick list. please, let me know</div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>sitemap « Fun On Rails</div>
+<div class='content'>
+[&#8230;] vi / vim Shortcuts « Fun On Rails [&#8230;]</div>
+</div>
+<div class='comment'>
+<div class='author'>sandipransing</div>
+<div class='content'>
+original post at http://nakuls77.wordpress.com/2008/09/14/using-vi-editor/#comment-144<br><br><br><br>Vi is a very powerful editor that has been part of nearly every linux/unix distro for a very long time. Many people stray away from Vi due to the curve involved in learning this editor. This guide will help you dive into the world of Vi. Once you do, you will understand why many prefer Vi over other editors.<br><br>There are countless options for Vi that can be set up inside the /etc/vimrc file.<br><br>Auto-indent and creating a macro to change the color of the background.<br># vi /etc/vimrc<br><br>Auto-Indent Option -<br>This option is so when you tab-space out a line and then press enter, the cursor will move to the next line, automatically indented to the start of the previous line. This helps programmers indent out code easily to create clean looking code. To implement this feature, please add the following line to the bottom of your /etc/vimrc file:<br><br>set ai<br><br>Please note that generally speaking only programmers will want to turn ON auto-indent.<br><br>Background Color -<br>Some SSH clients have white backgrounds and some have black backgrounds. This can make it very difficult to see the screen depending on the color of the text. This macro allows you to configure F11 to change the background color &amp; color of the text. To implement this feature, please add the following lines to the bottom of your /etc/vimrc file:<br><br>set background=dark<br>map :let &amp;background = ( &amp;background == “dark”? “light” : “dark” )<br><br>I would highly recommend adding in the Background Color option. However if you do not wish to implement either of these features, then please proceed on in the guide.<br><br>Commands<br><br>Cursor Movement<br>0  (Zero) Start of Line<br>^ – First non-Blank Character of Line<br>$ – End of Line<br>G  Go To Command (prefix with number 5G goes to line 5)<br><br>Insert Mode  Inserting/Appending Text<br>Insert  Start Insert Mode at Cursor<br>A  Append at the end of the Line<br>o  open (append) blank link below current line<br>I  Open blank line above current line<br>Esc  Exit Insert Mode<br><br>Editing<br>r  Replace a single character (does not use insert mode)<br>J  Join line below with the current one<br>cc  Change (replace) an entire line<br>cw  Change (replace) to the end of word<br>c$ – Change (replace) to the end of line<br>s  Delete character at cursor and substitute text<br>S  Delete line at cursor and substitute text (same as cc)<br>u  Undo<br>. – Repeat last command<br><br>Cut and Paste<br>yy  Copy(yank) a line<br>2yy  Copy(yank) two lines<br>yw  Copy(yank) word<br>p  Paste the clipboard after the cursor<br>P  Paste the clipboard before the cursor<br>dd  Delete a line<br>dw  Delete the current word<br>x  Delete the current character<br><br>Exiting<br>:w  Write (save) the file, but don’t exit<br>:wq  Write &amp; Quit<br>:q  Quit<br>:q! – Quit and don’t save changes<br><br>Searching<br>/pattern  Search for a pattern<br>?pattern  Search backward for a pattern<br>n  Repeat last search in same direction<br>N  Repeat last search in opposite direction<br>:%2/old/new/g  Replace all old with new throughout file<br>:%s/old/new/gc  Replace all old with new throughout file with confirmations<br><br>Working with Multiple Files<br>:e filename  Edit a file in a new buffer<br>:bn  Go to next buffer<br>:bp  Go to previous buffer<br>:bd  Close file(buffer)<br>:sp filename  Open a file in a new buffer and split window<br>ctrl-ws  Split windows<br>ctrl-ww  Switch between windows<br>ctrl-wq  Quite a window<br>ctrl-wv  Split windows vertically<br>ctrl-wq  Quite a window<br>ctrl-wv  Split windows vertically</div>
+</div>
+</div>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">sandipransing</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-22T18:23:00+05:30" pubdate data-updated="true">May 22<span>nd</span>, 2009</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/rails/'>rails</a>, <a class='category' href='/blog/categories/ubuntu/'>ubuntu</a>, <a class='category' href='/blog/categories/vim/'>vim</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2009/05/vi-vim-shortcuts" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2009/05/vi-vim-shortcuts" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2009/05/working-with-multiple-ruby-versions-on" title="Previous Post: Working with multiple ruby versions on same server">&laquo; Working with multiple ruby versions on same server</a>
+      
+      
+        <a class="basic-alignment right" href="/2009/05/render-partial-or-view-from-another" title="Next Post: Render partial or view from another controller">Render partial or view from another controller &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/sandipransing">@sandipransing</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'sandipransing',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: hotoad | Fun On Rails]]></title>
+  <link href="http://sandipransing.github.io/blog/categories/hotoad/atom.xml" rel="self"/>
+  <link href="http://sandipransing.github.io/"/>
+  <updated>2014-02-09T20:36:37+05:30</updated>
+  <id>http://sandipransing.github.io/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Using hoptoad notifier as gem in rails 2.3]]></title>
+    <link href="http://sandipransing.github.io/2011/01/using-hoptoad-notifier-as-gem-in-rails"/>
+    <updated>2011-01-27T21:18:00+05:30</updated>
+    <id>http://sandipransing.github.io/2011/01/using-hoptoad-notifier-as-gem-in-rails</id>
+    <content type="html"><![CDATA[<div class='post'>
+<code># in config/environment.rb config.gem 'hoptoad_notifier'  # from your Rails root: $ rake gems:install $ rake gems:unpack GEM=hoptoad_notifier $ script/generate hoptoad --api-key your_key_here </code></div>
+
+]]></content>
+  </entry>
+  
+</feed>

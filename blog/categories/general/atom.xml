@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: general | Fun On Rails]]></title>
+  <link href="http://sandipransing.github.io/blog/categories/general/atom.xml" rel="self"/>
+  <link href="http://sandipransing.github.io/"/>
+  <updated>2014-02-09T20:36:37+05:30</updated>
+  <id>http://sandipransing.github.io/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Print particular DIV inside HTML Page]]></title>
+    <link href="http://sandipransing.github.io/2011/09/print-particular-div-inside-html-page"/>
+    <updated>2011-09-12T13:26:00+05:30</updated>
+    <id>http://sandipransing.github.io/2011/09/print-particular-div-inside-html-page</id>
+    <content type="html"><![CDATA[<div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on"><div class="gmail_quote">Hiding Whole page content and displaying only particular div using css<br /><br /></div><code>&lt;style media="print" type="text/css"&gt;<br />&nbsp; @media print<br />&nbsp; {<br />&nbsp;&nbsp;&nbsp; body * { visibility: hidden; }<br />&nbsp;&nbsp;&nbsp; #PrintDiv * { visibility: visible; }<br />&nbsp;&nbsp;&nbsp; #PrintDiv { position: absolute; top: 40px; left: 30px; }<br />&nbsp; }<br />&lt;/style&gt; </code></div></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Twitter share and facebook like button for haml-rails, html/erb]]></title>
+    <link href="http://sandipransing.github.io/2011/03/twitter-share-and-facebook-like-button"/>
+    <updated>2011-03-17T02:45:00+05:30</updated>
+    <id>http://sandipransing.github.io/2011/03/twitter-share-and-facebook-like-button</id>
+    <content type="html"><![CDATA[<div class='post'>
+<b>Twitter share and facebook like button for html/erb</b><br/><code>&lt;div class='spread'&gt;  &nbsp;&lt;div class='twshare left'&gt;   &nbsp; &lt;a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="funonrails"&gt;Tweet&lt;/a&gt;&lt;script type="text/javascript" src="http://platform.twitter.com/widgets.js"&gt;&lt;/script&gt;  &nbsp;&lt;/div&gt;  &nbsp;&lt;script src="http://connect.facebook.net/en_US/all.js#xfbml=1"&gt;&lt;/script&gt;&lt;fb:like href="" layout="button_count" show_faces="false" width="450" font=""&gt;&lt;/fb:like&gt; &lt;/div&gt; </code><b>Twitter share and facebook like button for haml</b><br/><code>.spread   .twshare.left     %a.twitter-share-button.left{"data-count" => "horizontal", "data-via" => "fuonrails", :href => "http://twitter.com/share"} Tweet     %script{:src => "http://platform.twitter.com/widgets.js", :type => "text/javascript"}   .fshare.left{:style => 'padding-left: 0px; margin-left: 10px;'}     %script{:src => "http://connect.facebook.net/en_US/all.js#xfbml=1"}     %fb:like{:layout => "button_count", :show_faces => "false", :width => "450"}   .CLR </code><b>Sample Buttons</b><br/>  <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="funonrails">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script><script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script><fb:like href="" layout="button_count" show_faces="false" width="450" font=""></fb:like></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[blogger tips]]></title>
+    <link href="http://sandipransing.github.io/2010/03/blogger-tips"/>
+    <updated>2010-03-11T01:19:00+05:30</updated>
+    <id>http://sandipransing.github.io/2010/03/blogger-tips</id>
+    <content type="html"><![CDATA[<div class='post'>
+<b><span class="Apple-style-span" style="font-size: large;">Change default favicon on blogger</span></b><br /><div class="separator" style="clear: both; text-align: left;">Go to the layout click on Edit HTML link<br /></div><div class="separator" style="clear: both; text-align: center;"><a href="http://lh4.ggpht.com/_WmOmsgqsanw/S5frfs8mKuI/AAAAAAAAAGs/flm5FFFGAxg/dashboard.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://lh4.ggpht.com/_WmOmsgqsanw/S5frfs8mKuI/AAAAAAAAAGs/flm5FFFGAxg/dashboard.jpg" /></a></div><div class="separator" style="clear: both; text-align: left;"><a href="http://lh4.ggpht.com/_WmOmsgqsanw/S5frfs8mKuI/AAAAAAAAAGs/flm5FFFGAxg/dashboard.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"></a></div><div class="separator" style="clear: both; text-align: left;">Insert following link code inside head tag</div><blockquote>&lt;link href='IMAGE_ICON_LINK' rel='icon' type='image/x-icon'/&gt;</blockquote>Replace&nbsp;IMAGE_ICON_LINK url with your icon file url on web<br /><br /><div class="separator" style="clear: both; text-align: center;"><a href="http://lh4.ggpht.com/_WmOmsgqsanw/S5fssi1aLcI/AAAAAAAAAG0/uIyPHdVVED4/favicon.jpg" imageanchor="1" style="display: inline !important; margin-left: 1em; margin-right: 1em;"><img border="0" height="70" src="http://lh4.ggpht.com/_WmOmsgqsanw/S5fssi1aLcI/AAAAAAAAAG0/uIyPHdVVED4/favicon.jpg" width="400" /></a></div><br /><div style="text-align: left;"><span class="Apple-style-span" style="font-family: arial, sans-serif; font-size: small;">Use&nbsp;<a class="l" href="http://tools.dynamicdrive.com/favicon/" onmousedown="return clk(this.href,'','','res','1','&amp;sig2=jqF0S1VsF0XMf7hsfg0bPw','0CAYQFjAA')"><em style="font-style: normal; font-weight: bold;"><span class="Apple-style-span" style="color: #351c75;">Dynamic Drive</span></em><span class="Apple-style-span" style="color: #351c75;">-&nbsp;</span><em style="font-style: normal; font-weight: bold;"><span class="Apple-style-span" style="color: #351c75;">FavIcon Generator</span></em></a>&nbsp;online tool to easily create a favorites icon (<em style="font-style: normal; font-weight: bold;">favicon</em>) for your site</span></div><div style="text-align: left;"><span class="Apple-style-span" style="font-family: arial, sans-serif; font-size: small;"><br /></span></div><div class="separator" style="clear: both; text-align: center;"><img border="0" src="http://tools.dynamicdrive.com/favicon/indexalt.php?demo=toolbar&amp;img=14f6c409d655c92ad136ca89a28de19f_16&amp;x=52&amp;y=5" /><img border="0" src="http://tools.dynamicdrive.com/favicon/export/faviconlogo1.jpg" /></div><div style="text-align: center;"><br /></div><br /></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Copy database to another database through command]]></title>
+    <link href="http://sandipransing.github.io/2010/02/copy-database-to-another-database"/>
+    <updated>2010-02-16T16:53:00+05:30</updated>
+    <id>http://sandipransing.github.io/2010/02/copy-database-to-another-database</id>
+    <content type="html"><![CDATA[<div class='post'>
+<b>1. Copy One database to another database on same host </b><br/><console> mysqldump -uroot -p <source_database_name> | mysql -uroot <dest_database_name></console> <b>2. Copy database to another database on remote host</b><br/><console> mysqldump -uroot -p <source_database> | ssh host2 "mysql -uroot <dest_database>" </console></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Flash games]]></title>
+    <link href="http://sandipransing.github.io/2009/11/3rd-worm-game"/>
+    <updated>2009-11-24T17:59:00+05:30</updated>
+    <id>http://sandipransing.github.io/2009/11/3rd-worm-game</id>
+    <content type="html"><![CDATA[<div class='post'>
+<div style="text-align: left;"><b>3rd worm game</b>----------------------  <embed align="center" allowscriptaccess="never" height="400" pluginspage="http://www.macromedia.com/go/getflashplayer" quality="high" src="http://www.layoutshack.net/games/puzzle/1.swf" width="600"></embed><br /></div><div style="text-align: center;"><a href="http://www.layoutshack.net/games/puzzle/" target="_blank">Flash Puzzle Games</a><br /></div><div style="text-align: left;">&nbsp; <b>Racing Game</b>----------------------<br /></div><div style="text-align: center;">&nbsp;  <embed align="center" allowscriptaccess="never" height="400" pluginspage="http://www.macromedia.com/go/getflashplayer" quality="high" src="http://www.layoutshack.net/games/racing/2.swf" width="600"></embed><br /></div><div style="text-align: center;"><a href="http://www.layoutshack.net/games/racing/" target="_blank">Flash Racing Games</a><br /></div></div>
+
+]]></content>
+  </entry>
+  
+</feed>

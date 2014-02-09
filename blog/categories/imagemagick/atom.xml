@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: imagemagick | Fun On Rails]]></title>
+  <link href="http://sandipransing.github.io/blog/categories/imagemagick/atom.xml" rel="self"/>
+  <link href="http://sandipransing.github.io/"/>
+  <updated>2014-02-09T20:36:37+05:30</updated>
+  <id>http://sandipransing.github.io/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Paperclip image upload via URL]]></title>
+    <link href="http://sandipransing.github.io/2011/11/paperclip-image-upload-via-url"/>
+    <updated>2011-11-21T17:56:00+05:30</updated>
+    <id>http://sandipransing.github.io/2011/11/paperclip-image-upload-via-url</id>
+    <content type="html"><![CDATA[<div class='post'>
+Upload image via paperclip via passing URL instead of file upload <br/>  <code># Consider Print instance with image as file attachment class Print < ActiveRecord::Base   has_attached_file :image   def upload_image(url)     begin       io = open(URI.escape(url))       if io         def io.original_filename; base_uri.path.split('/').last; end         io.original_filename.blank? ? nil : io         p.image = io       end       p.save(false)     rescue Exception => e       logger.info "EXCEPTION# #{e.message}"     end   end end  </code> Text code from console<br/><console>p = Print.new url = "http://ocdevel.com/sites/ocdevel.com/files/images/rails.png" p.upload_image(url) </console></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Imagemagick/ RMagick Installation on ubuntu]]></title>
+    <link href="http://sandipransing.github.io/2010/03/imagemagick-rmagick-installation-on"/>
+    <updated>2010-03-23T18:11:00+05:30</updated>
+    <id>http://sandipransing.github.io/2010/03/imagemagick-rmagick-installation-on</id>
+    <content type="html"><![CDATA[<div class='post'>
+<br /><b>ImageMagick Installation</b><br /><br />Ubuntu machine has default apt-get package manager.<br />To install imagemagick following packages needs to be installed.<br /><br /><i>apt-get install <b>imagemagick librmagick-ruby libmagickwand-dev</b></i><br /><br /><b>RMagick gem install</b><br /><br /><i>gem install </i><b><i>rmagick</i></b><br /><br />If you still facing problems with gem installation, Please look that following packages are installed<br />on your system.<br /><br /><i>dpkg -l | grep </i><b><i>libmagickcore-dev graphicsmagick-libmagick-dev-compat</i></b><br /><br />If there are no packages installed then try to install then first.<br /><br /><i>apt-get install </i><b><i>libmagickcore-dev graphicsmagick-libmagick-dev-compat</i></b><br /><br />Try to install rmagick gem again. Now it should be installed without any error.<br /><div><br /></div></div>
+
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,263 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Dynamic creation of variables in ruby - Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="1. To create local variables in ruby dynamically.Use eval method in rubyree-1.8.7-2010.01 &gt; eval(&#8220;local=4&#8221;)&nbsp;=&gt; 4&nbsp;ree-1.8 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://sandipransing.github.io/2010/02/dynamic-creation-of-variables-in-ruby">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:sandipransing.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Dynamic Creation of Variables in Ruby</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-02-16T16:12:00+05:30" pubdate data-updated="true">Feb 16<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><div class='post'>
+<div style="text-align: left;">1. To create local variables in ruby dynamically.</div><div style="text-align: left;">Use eval method in ruby</div><br /><div style="text-align: left;">ree-1.8.7-2010.01 &gt; eval(&#8220;local=4&#8221;)</div><div style="text-align: left;">&nbsp;=&gt; 4&nbsp;</div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; p local</div><div style="text-align: left;">4</div><div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; eval(&#8220;local_#{1}=4&#8221;)</div><div style="text-align: left;">&nbsp;=&gt; 4&nbsp;</div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; puts local_1</div><div style="text-align: left;">4</div><div style="text-align: left;"><br /></div><div style="text-align: left;">2. To create &amp; get instance variables dynamically in ruby.</div><div style="text-align: left;">instance_varaiable_set &amp;&nbsp;instance_varaiable_get methods are provided and no need to do it using eval.</div><div style="text-align: left;"><br /></div><div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; (0..3).each do |i|</div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; &nbsp; &nbsp; instance_variable_set(&#8220;@instance_#{i}&#8221;, i*i+1)</div><div style="text-align: left;">ree-1.8.7-2010.01 ?&gt; &nbsp;end</div><div style="text-align: left;">&nbsp;=&gt; 0..3&nbsp;</div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; @instance_0</div><div style="text-align: left;">&nbsp;=&gt; 1&nbsp;</div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; @instance_2</div><div style="text-align: left;">&nbsp;=&gt; 5&nbsp;</div><div style="text-align: left;"><br /></div><div style="text-align: left;">3. Dynamic constant variable creation in ruby</div><div style="text-align: left;"><br /></div><div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; class Example</div><div style="text-align: left;">ree-1.8.7-2010.01 ?&gt; &nbsp;end</div><div style="text-align: left;">&nbsp;=&gt; nil&nbsp;</div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; Example.const_set(&#8216;A&#8217;,200)</div><div style="text-align: left;">&nbsp;=&gt; 200&nbsp;</div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; Example::A</div><div style="text-align: left;">&nbsp;=&gt; 200&nbsp;</div><div style="text-align: left;"><br /></div></div></div></div></div>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">sandipransing</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-02-16T16:12:00+05:30" pubdate data-updated="true">Feb 16<span>th</span>, 2010</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/meta-programming/'>meta-programming</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2010/02/dynamic-creation-of-variables-in-ruby" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2010/02/dynamic-creation-of-variables-in-ruby" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2010/02/eval-method-in-ruby" title="Previous Post: Eval method in ruby">&laquo; Eval method in ruby</a>
+      
+      
+        <a class="basic-alignment right" href="/2010/02/copy-database-to-another-database" title="Next Post: Copy database to another database through command">Copy database to another database through command &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/sandipransing">@sandipransing</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'sandipransing',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: mysql | Fun On Rails]]></title>
+  <link href="http://sandipransing.github.io/blog/categories/mysql/atom.xml" rel="self"/>
+  <link href="http://sandipransing.github.io/"/>
+  <updated>2014-02-09T20:36:37+05:30</updated>
+  <id>http://sandipransing.github.io/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Getting started with MySQL on Amazon Web Services]]></title>
+    <link href="http://sandipransing.github.io/2011/01/getting-started-with-mysql-on-amazon"/>
+    <updated>2011-01-15T18:30:00+05:30</updated>
+    <id>http://sandipransing.github.io/2011/01/getting-started-with-mysql-on-amazon</id>
+    <content type="html"><![CDATA[<div class='post'>
+<div style="width:425px" id="__ss_1327730"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/ronaldbradford/getting-started-with-mysql-in-amazon-web-services" title="Getting started with MySQL on Amazon Web Services">Getting started with MySQL on Amazon Web Services</a></strong><object id="__sse1327730" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=usingamazonwebservices-090422111735-phpapp01&stripped_title=getting-started-with-mysql-in-amazon-web-services&userName=ronaldbradford" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse1327730" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=usingamazonwebservices-090422111735-phpapp01&stripped_title=getting-started-with-mysql-in-amazon-web-services&userName=ronaldbradford" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/ronaldbradford">Ronald Bradford</a>.</div></div></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Copy database to another database through command]]></title>
+    <link href="http://sandipransing.github.io/2010/02/copy-database-to-another-database"/>
+    <updated>2010-02-16T16:53:00+05:30</updated>
+    <id>http://sandipransing.github.io/2010/02/copy-database-to-another-database</id>
+    <content type="html"><![CDATA[<div class='post'>
+<b>1. Copy One database to another database on same host </b><br/><console> mysqldump -uroot -p <source_database_name> | mysql -uroot <dest_database_name></console> <b>2. Copy database to another database on remote host</b><br/><console> mysqldump -uroot -p <source_database> | ssh host2 "mysql -uroot <dest_database>" </console></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mysql cheatsheet]]></title>
+    <link href="http://sandipransing.github.io/2010/02/mysql-cheatsheet"/>
+    <updated>2010-02-04T17:29:00+05:30</updated>
+    <id>http://sandipransing.github.io/2010/02/mysql-cheatsheet</id>
+    <content type="html"><![CDATA[<div class='post'>
+<div style="text-align: left;"><b>Change Mysql password  </b><span class="Apple-style-span" style="color: #111111; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 14px; line-height: 22px;"></span></div><div style="text-align: left;"><br /></div><span class="Apple-style-span" style="color: #111111; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 14px; line-height: 22px;"></span><br /><span class="Apple-style-span" style="color: #111111; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 14px; line-height: 22px;"><pre style="background-attachment: initial; background-clip: initial; background-color: #eeeeee; background-image: initial; background-origin: initial; background-position: initial initial; background-repeat: initial initial; border-bottom-color: rgb(221, 221, 221); border-bottom-style: none; border-bottom-width: 1px; border-color: initial; border-left-color: rgb(221, 221, 221); border-left-style: none; border-left-width: 1px; border-right-color: rgb(221, 221, 221); border-right-style: none; border-right-width: 1px; border-top-color: rgb(221, 221, 221); border-top-style: none; border-top-width: 1px; border-width: initial; clear: both; font-family: Consolas, 'Andale Mono', Courier, 'Courier New'; font-size: 0.929em; line-height: 1.385em; margin-bottom: 1.692em; margin-left: 0px; margin-right: 0px; margin-top: 0px; overflow-x: auto; overflow-y: auto; padding-bottom: 0.615em; padding-left: 0.846em; padding-right: 0.846em; padding-top: 0.615em;"> mysqladmin -u root -p'oldpassword' password newpass</pre></span></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Manual active record db connection in ruby using mysql adapter]]></title>
+    <link href="http://sandipransing.github.io/2009/11/manual-active-record-db-connection-in"/>
+    <updated>2009-11-12T20:27:00+05:30</updated>
+    <id>http://sandipransing.github.io/2009/11/manual-active-record-db-connection-in</id>
+    <content type="html"><![CDATA[<div class='post'>
+Below is ruby code to establish manual database connection. <br/><code>require 'active_record' ActiveRecord::Base.establish_connection(     :adapter  => "mysql",     :host     => "localhost",     :username => "root",     :password => "abcd",     :database => "funonrails"   ) </code><br/>Snippet of database.yml file <br/><code>common: &common   adapter: mysql   database: students_dev   username: root   password:   host: localhost  students_development:   <<: *common   database: students_dev  students_production:   <<: *common   database: students </code><br/>Load database configurations from yml file<br/><code>dbconfig = YAML::load(File.open('database.yml'))  ActiveRecord::Base.establish_connection( dbconfig[:students_development] ) </code><br/><b>Active Record Model & DB connection </b><br/><code>class Student < ActiveRecord::Base   establish_connection "students_production"   set_table_name "student"   set_primary_key "stud_number" end </code></div>
+
+
+<h2>Comments</h2>
+
+
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Sandip Ransing</div>
+<div class='content'>
+This is because YAML libray is not installed or not in path.<br /><br />Add library to your code before that ensure it exists.<br /><br />require &quot;yaml&quot;<br /><br />dbconfig = YAML::load(File.open(&#39;database.yml&#39;))<br />ActiveRecord::Base.establish_connection( dbconfig )</div>
+</div>
+<div class='comment'>
+<div class='author'>Anonymous</div>
+<div class='content'>
+getting for the code above uninitialized constant YAML (NameError)<br /><br />what should i do?help me out</div>
+</div>
+</div>
+
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: views | Fun On Rails]]></title>
+  <link href="http://sandipransing.github.io/blog/categories/views/atom.xml" rel="self"/>
+  <link href="http://sandipransing.github.io/"/>
+  <updated>2014-02-09T20:36:37+05:30</updated>
+  <id>http://sandipransing.github.io/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[number to indian currency helper for rails with WebRupee]]></title>
+    <link href="http://sandipransing.github.io/2011/03/number-to-indian-currency-helper-for"/>
+    <updated>2011-03-17T02:13:00+05:30</updated>
+    <id>http://sandipransing.github.io/2011/03/number-to-indian-currency-helper-for</id>
+    <content type="html"><![CDATA[<div class='post'>
+rails has built in <i>number_to_currency</i> helper which takes options like unit, delimeter, seperator which displays foreign currency correctly but somehow it is not best suited for indian currency.<br/>Below is how we managed 2 years ago to display indian currency formatted properly with comma as seperator. personally i think it could be more better than what it is currently ;)<br/><b>Number to indian currency(rupees) helper</b><br/><code>module ApplicationHelper   def number_to_indian_currency(number)     if number       string = number.to_s.split('.')       number = string[0].gsub(/(\d+)(\d{3})$/){ p = $2;"#{$1.reverse.gsub(/(\d{2})/,'\1,').reverse},#{p}"}       number = number.gsub(/^,/, '') + '.' + string[1] if string[1]       # remove leading comma       number = number[1..-1] if number[0] == 44     end     "Rs.#{number}"   end </code> <b>Sample Output for different combinations</b><br/><console>>> helper.number_to_indian_currency(2000) => "Rs.2,000" >> helper.number_to_indian_currency(2040) => "Rs.2,040" >> helper.number_to_indian_currency(2040.50) => "Rs.2,040.5" >> helper.number_to_indian_currency(2040.54) => "Rs.2,040.54" >> helper.number_to_indian_currency(1222040.54) => "Rs.12,22,040.54" </console><br/>After doing google today found from <a href="http://pranjan.blogspot.com/2010/10/ruby-convert-numbers-to-indian-currency.html">Piyush Ranjan's Blog</a> that yes there are ways to optimize code.<br/><b>Optimized Version</b><code>module ApplicationHelper   def number_to_indian_currency(number)     "Rs.#{number.to_s.gsub(/(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/, "\\1,")}"   end end </code>Waw one line of code, Look at the beauty of regular expression :) Truely amazing !<br/> <b>Integrating Webrupee symbol </b><br/>First include follwing stylesheet in your layout<br/><code>//public/stylesheets/font.css  @font-face {   font-family: "WebRupee";   font-style: normal;   font-weight: normal;   src: local("WebRupee"), url("http://cdn.webrupee.com/WebRupee.V2.0.ttf") format("truetype"), url("http://cdn.webrupee.com/WebRupee.V2.0.woff") format("woff"), url("http://cdn.webrupee.com/WebRupee.V2.0.svg") format("svg"); } .WebRupee {   font-family: 'WebRupee'; } </code> <b>Improved Version of Helper</b><code>module ApplicationHelper   def number_to_indian_currency(number, html=true)     txt = html ? content_tag(:span, 'Rs.', :class => :WebRupee) : 'Rs.'     "#{txt} #{number.to_s.gsub(/(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/, "\\1,")}"   end end </code> <b>Usage</b><br/><console>>> helper.number_to_indian_currency(400) => "&lt;span class="WebRupee"&gt;Rs.&lt;/span&gt; 400" >> helper.number_to_indian_currency(5921, false) => "Rs. 5,921" >> helper.number_to_indian_currency(9921) => "&lt;span class="WebRupee"&gt;Rs.&lt;/span&gt; 9,921" </console><br/>This will show you rupees symbol on your webpages.</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Accessing Helper modules in rails]]></title>
+    <link href="http://sandipransing.github.io/2010/12/accessing-helper-modules-in-rails"/>
+    <updated>2010-12-06T15:51:00+05:30</updated>
+    <id>http://sandipransing.github.io/2010/12/accessing-helper-modules-in-rails</id>
+    <content type="html"><![CDATA[<div class='post'>
+<br />Methods defined in Helper modules can directly accessed in rails views because this is what they are pretended for but we often come across with situations where we wanted to use some helper methods in controllers, views, models and mailers and obvious we don't want to repeat same lines of code everywhere which also rail does not permit. forgotten DRY? Oh then how to do achieve same without violating rails principle.<br /><br />Certainly there are ways to do this ..<br /><br /><br />1. Helper methods all the time for views<br /><code>class ApplicationController &lt; ActionController::Base<br />  helper :all# include all helpers, all the time for views<br />end<br /></code><br />2. Controller methods in views<br /><code>class ApplicationController &lt; ActionController::Base<br />  helper_method :current_store<br />  #now controller_method can be accessed in views<br />end<br /><br />2. Helper methods in controller<br />class ApplicationController &lt; ActionController::Base<br />  include ActionView::Helpers::ApplicationHelper<br />end<br /></code><br />3. Helper methods in model<br /><code>class Student &lt; ActiveRecord::Base<br />  include ActionView::Helpers::ApplicationHelper<br />end<br /></code><br />4. Helper methods in mailer<br /><code>class Notifier &lt; ActionMailer::Base<br />  add_template_helper(ApplicationHelper)<br />  #...<br />end<br /></code></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Render partial or view from another controller]]></title>
+    <link href="http://sandipransing.github.io/2009/05/render-partial-or-view-from-another"/>
+    <updated>2009-05-22T19:50:00+05:30</updated>
+    <id>http://sandipransing.github.io/2009/05/render-partial-or-view-from-another</id>
+    <content type="html"><![CDATA[<div class='post'>
+To render view from another controller<br/><br/># In rail 2.3<br/><code>render "controller/action"</code><br/><br/># In rails 2.2 or below<br/><code>render :template =&gt; 'controller/action'</code><br/><br/>To render partial from another controller's views folder<br/><br/><code>render :partial =&gt; "controller/partial"</code><br/><br/>Cheers !<br/>Sandip</div>
+
+]]></content>
+  </entry>
+  
+</feed>

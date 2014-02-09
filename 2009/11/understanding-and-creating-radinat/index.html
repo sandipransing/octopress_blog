@@ -1,0 +1,263 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Understanding and creating radinat extensions - Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="Understanding and creating radinat extensions To start with, first of all lets know what is radiant and why to use it ? Radiant is a open source &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://sandipransing.github.io/2009/11/understanding-and-creating-radinat">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:sandipransing.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Understanding and Creating Radinat Extensions</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-10T13:52:00+05:30" pubdate data-updated="true">Nov 10<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><div class='post'>
+Understanding and creating radinat extensions To start with, first of all lets know what is radiant and why to use it ? Radiant is a open source content management system designed that serves cms needs for small organisations Creating new radint application <pre class='ruby' name='code'><br /> radiant -d  mysql cms<br />    create<br />    create    CHANGELOG<br />    create    CONTRIBUTORS<br />    create    INSTALL<br />    create    LICENSE<br />    create    README<br />    create    config<br />    create    config/environments<br />    .....<br /></pre>Radiant supports extensions. It means one can add extra features to radiant based cms to add extra capabilities. Extension directory structure is almost similar to any standard rails application Radiant Extension Directory structure  <pre class='ruby' name='code'><br />       |-- app<br />              |-- controllers<br />              |-- helpers<br />              |-- models<br />              |-- views<br />       |-- db<br />              |-- migrate<br />              |-- seeds.rb<br />       |-- lib<br />              |-- spec<br />                 |-- controllers<br />                 |-- helpers<br />                 |-- models<br />                 |-- spec.opts<br />                 |-- spec_helper<br />                 |-- views<br /></pre>Creating radiant extension radiant has generators to create new radint extension script/generate extension ExtensionName Lets create session management extension for radint cms It will create directory structure for extension. <pre class='ruby' name='code'><br />script/generate extension session_management<br /></pre><pre class='ruby' name='code'><br />    create    vendor/extensions/session_management/app/controllers<br />    create    vendor/extensions/session_management/app/helpers<br />    create    vendor/extensions/session_management/app/models<br />    create    vendor/extensions/session_management/app/views<br />     create vendor/extensions/session_management/db/migrate<br />     create vendor/extensions/session_management/lib/tasks<br />     create vendor/extensions/session_management/README<br />     create vendor/extensions/session_management/session_management_extension.rb<br />     create<br />vendor/extensions/session_management/lib/tasks/session_management_extension_tasks.rake<br />     create vendor/extensions/session_management/spec/controllers<br />     create vendor/extensions/session_management/spec/models<br />     create vendor/extensions/session_management/spec/views<br />     create vendor/extensions/session_management/spec/helpers<br />     create vendor/extensions/session_management/features/support<br />     create vendor/extensions/session_management/features/step_definitions/admin<br />     create vendor/extensions/session_management/Rakefile<br />     create vendor/extensions/session_management/spec/spec_helper.rb<br />     create vendor/extensions/session_management/spec/spec.opts<br />     create vendor/extensions/session_management/cucumber.yml<br />     create vendor/extensions/session_management/features/support/env.rb<br />     create vendor/extensions/session_management/features/support/paths.rb<br /></pre>Edit session_management_extension.rb where extension version, description and website url can be added. <pre class='ruby' name='code'><br /># require_dependency 'application_controller'<br />class SessionManagementExtension < Radiant::Extension<br />  version "1.0"<br />  description "Describe your extension here"<br />  url "http://yourwebsite.com/session_management"<br />  # define_routes do |map|<br />  # map.namespace :admin, :member => { :remove => :get } do |admin|<br />  #     admin.resources :session_management<br />  # end<br />  # end<br />  def activate<br />    # admin.tabs.add "Session Management", "/admin/session_management", :after =><br />"Layouts", :visibility => [:all]<br />  end<br />  def deactivate<br />    # admin.tabs.remove "Session Management"<br />  end<br /></pre>In activate block, specify what are the library files , modules that needs to be activated while application starts. In my case, activate method looks like below.. <pre class='ruby' name='code'><br />  def activate<br />    # admin.tabs.add "Session Management", "/admin/session_management", :after =><br />"Layouts", :visibility => [:all]<br />   ApplicationController.send(:include, SessionManagementExt::ApplicationControllerExt)<br />  end<br /></pre>Generating models and controllers. <pre class='ruby' name='code'><br /> script/generate extension_model session_management session_info<br />session_id:string url:string ip:string<br /></pre>In above command first attribute is the extension name and next is model name and rest specifies attributes that needs to created. It will create <pre class='ruby' name='code'><br />     exists   app/models/<br />     exists   spec/models/<br />     create   app/models/session_info.rb<br />     create   spec/models/session_info_spec.rb<br />     exists   db/migrate<br />     create   db/migrate/20091110075042_create_session_infos.rb<br /></pre>Generating controller <pre class='ruby' name='code'><br />script/generate extension_controller session_management admin/session_managements<br /></pre>It will create an output <pre class='ruby' name='code'><br />create app/controllers/admin<br />     create app/helpers/admin<br />     create app/views/admin/session_managements<br />     create spec/controllers/admin<br />     create spec/helpers/admin<br />     create spec/views/admin/session_managements<br />     create spec/controllers/admin/session_managements_controller_spec.rb<br />     create spec/helpers/admin/session_managements_helper_spec.rb<br />     create app/controllers/admin/session_managements_controller.rb<br />     create app/helpers/admin/session_managements_helper.rb<br /></pre>Modify session managements controller for displaying sesssion infos tracked. We need before filter for every request that will capture session, ip and page url so, we need to override behaviour of application controller to add before_filter We have already added ApplicationControllerExt in activate of extension. <pre class='ruby' name='code'><br />   ApplicationController.send(:include, SessionManagementExt::ApplicationControllerExt)<br />Lets look into ApplicationControllerExt module.<br />module SessionManagementExt<br />  module ApplicationControllerExt<br />    def self.included(base)<br />     base.class_eval do<br />       before_filter :track_session<br />     end<br />    end<br />    def track_session<br />     #**"Hello from Session tracker !!!"**<br />     #TODO: location track<br />     # It can be delayed task<br />     #sudo gem install geoip_city -- --with-geoip-dir=/opt/GeoIP<br />     # require 'geoip_city'<br />     # g = GeoIPCity::Database.new('/opt/GeoIP/share/GeoIP/GeoLiteCity.dat')<br />     # res = g.look_up('201.231.22.125')<br />     # {:latitude=>-33.13330078125, :country_code3=>"ARG",<br />:longitude=>-64.3499984741211, :city=>"Río Cuarto", :country_name=>"Argentina",<br />:country_code=>"AR", :region=>"05"}<br />     SessionInfo.create( :ip => request.remote_ip, :page_url =><br />"http://#{request.env["HTTP_HOST"]}#{request.request_uri}", :session_id =><br />request.session.session_id )<br />    end<br />  end<br />end<br /></pre>That&#8217;s all Creating rake task for extension module here is default genrated rake task for session management under vendor/extensions/session_management/lib/tasks/session_management_extension_tasks.rake It includes task to migrate database and update extension <pre class='ruby' name='code'><br />namespace :radiant do<br />  namespace :extensions do<br />    namespace :session_management do<br />     desc "Runs the migration of the Session Management extension"<br />     task :migrate => :environment do<br />       require 'radiant/extension_migrator'<br />       if ENV["VERSION"]<br />         SessionManagementExtension.migrator.migrate(ENV["VERSION"].to_i)<br />       else<br />         SessionManagementExtension.migrator.migrate<br />       end<br />     end<br />     desc "Copies public assets of the Session Management to the instance public/ directory."<br />     task :update => :environment do<br />       is_svn_or_dir = proc {|path| path =~ /\.svn/ || File.directory?(path) }<br />       puts "Copying assets from SessionManagementExtension"<br />       Dir[SessionManagementExtension.root + "/public/**/*"].reject(&is_svn_or_dir).each do<br />|file|<br />         path = file.sub(SessionManagementExtension.root, '')<br />         directory = File.dirname(path)<br />         mkdir_p RAILS_ROOT + directory, :verbose => false<br />         cp file, RAILS_ROOT + path, :verbose => false<br />       end<br />     end<br />    end<br />  end<br />end<br /></pre>Add as many custom tasks needed inside this file without changing default tasks.  Migrate all radiant extensions <pre class='ruby' name='code'><br />rake db:migrate:extensions<br /></pre></div>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">sandipransing</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-10T13:52:00+05:30" pubdate data-updated="true">Nov 10<span>th</span>, 2009</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/cms/'>cms</a>, <a class='category' href='/blog/categories/radiant/'>radiant</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2009/11/understanding-and-creating-radinat" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2009/11/understanding-and-creating-radinat" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2009/11/linux-commands-for-remote-access" title="Previous Post: Linux commands for remote access, compress, decompress">&laquo; Linux commands for remote access, compress, decompress</a>
+      
+      
+        <a class="basic-alignment right" href="/2009/11/writing-rake-task-in-rails-with" title="Next Post: Writing rake task in rails with namespace, parameters">Writing rake task in rails with namespace, parameters &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/sandipransing">@sandipransing</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'sandipransing',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

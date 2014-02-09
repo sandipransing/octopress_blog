@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: regular expression | Fun On Rails]]></title>
+  <link href="http://sandipransing.github.io/blog/categories/regular-expression/atom.xml" rel="self"/>
+  <link href="http://sandipransing.github.io/"/>
+  <updated>2014-02-09T20:36:37+05:30</updated>
+  <id>http://sandipransing.github.io/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How to remove extra spaces in ruby strings]]></title>
+    <link href="http://sandipransing.github.io/2009/11/how-to-remove-extra-spaces-in-ruby"/>
+    <updated>2009-11-13T14:15:00+05:30</updated>
+    <id>http://sandipransing.github.io/2009/11/how-to-remove-extra-spaces-in-ruby</id>
+    <content type="html"><![CDATA[<div class='post'>
+<div style="text-align: left;">In ruby, one can write multiple codes to remove multiple blank spaces inside strings (sentenses)  <br /></div><pre class="ruby" name="code"> <br />"Write &nbsp; &nbsp; &nbsp;your &nbsp; &nbsp; &nbsp; string &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;here &nbsp; ".squeeze.strip<br />"This &nbsp; &nbsp; is my &nbsp; &nbsp; &nbsp;input &nbsp;string &nbsp; &nbsp; ".gsub(/ +/, ' ')<br />"Write &nbsp; &nbsp; &nbsp;your &nbsp; &nbsp; &nbsp; string &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;here &nbsp; ".split(' &nbsp;').join(' ')<br /></pre></div>
+
+]]></content>
+  </entry>
+  
+</feed>

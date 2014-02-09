@@ -1,0 +1,377 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="IN ESSENCE: ALL CODE SHOULD BE READABLE!# DO NOT OPTIMISE for performance - OPTIMISE FOR CLARITY OF CODE# STYLE: use 2 spaces for indent (not tabs &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://sandipransing.github.io/blog/page/16">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:sandipransing.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/rails-coding-standards">Rails Coding Standards</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-13T16:48:00+05:30" pubdate data-updated="true">May 13<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<strong> IN ESSENCE: ALL CODE SHOULD BE READABLE!</strong><br/><br/># DO NOT OPTIMISE for performance - OPTIMISE FOR CLARITY OF CODE<br/><br/># STYLE: use 2 spaces for indent (not tabs)<br/><br/># STYLE: Line up hash arrows for readability<br/><br/># STYLE: put spaces around =&gt; hash arrows<br/><br/># STYLE: put spaces after &#8216;,&#8217; in method params - but none between method names and &#8216;(&#8217;<br/><br/># VIEWS: use HAML for views<br/><br/># VIEWS: break up the structure with white space to help readability - VERTICALLY TOO!<br/><br/># VIEWS STYLE: Rely on structure of page, without having to insert messages or new components&#8230;<br/><br/># LOGIC:  <strong>Rails Models should be as heavy as in logic and controllers should be lightweight as much as .</strong><br/><br/>* Example: Effect to visually highlight then drop out an existing element rather than flash a message<br/><br/>* Example: Highlight newly added row rather than a message about it<br/><br/># AVOID logic in views - they should be simple<br/><br/># Views indentation should be well formatted.<br/>not like this<br/><code><br/>&lt;% for joke in @jokes %&gt;<br/>&lt;div class="joke"&gt;<br/>&lt;p&gt;<br/>&lt;%= h(truncate(joke.joketext, 20)) %&gt;<br/>&lt;%= link_to 'Read this joke', {:action =&gt; 'show_joke', :id =&gt; joke} %&gt;<br/>&lt;/p&gt;<br/>&lt;p class="author&gt;<br/>by &lt;%= h(joke.author.full_name) %&gt;&lt;/p&gt;<br/>&lt;/div&gt;<br/>&lt;% end %&gt;</code><br/><br/>* put html generating logic into helpers<br/><br/>* instead of inline ruby logic, add to models (filtering, checking)<br/><br/># NEVER use ActiveRecord models in migrations unless you re-define them within the migration<br/><br/>* &#8230;otherwise the migration fails when you later remove/rename the AR class<br/><br/>* BETTER SOLUTION: use bootstrapping until deployed!!!<br/><br/># AJAX only for sub-components of an object, and avoid over-use<br/><br/><hr /><br/><br/><strong>CONTROLLER CODING STANDARDS<br/></strong><br/><br/>1. Before filter should be added at the top of controller.<br/><br/>2. Before filter implementation should be immediate after filter declaration<br/><br/>3. Standard rails actions<br/><br/>4. Own custom actions<br/><br/>5. Inter-related actions should be clubbed together.<br/><br/>6. please, try to use of protected, private methods and they should be declared at the bottom of page in order.<br/><br/>7. Controller Actions should be like -<br/>use 2 spaces for indent (not tabs)<br/><code><br/>def self.published_jokes<br/>find(:all, :conditions =&gt; "published = 1")<br/>end</code><br/><br/><strong>MODEL CODING STANDARDS</strong><br/><br/><code><br/>#======= HEADER SECTION=========</code><br/><code><br/># SCHEMA INFORMATION WILL BE HERE<br/># REQUIRE FILES WILL GO HERE</code><br/><br/>class Model &lt; ActiveRecord::Base<br/><br/><code> #======== TOP ===================</code><br/><code><br/># LIBRARY OR INCLUDE METHODS<br/># MODEL RELATIONSHIPS<br/># VIRTUAL ATTRIBUTES<br/># ACTIVE RECORD VALIDATIONS</code><br/><code> #======== MIDDLE ===============</code><br/><code> # CUSTOM VALIDATIONS<br/># PUBLIC METHODS</code><br/><code> #======== BASE ==================</code><br/><code> # PROTECTED METHODS<br/># PRIVATE METHODS</code><br/>end<br/><br/>Cheers !!!<br/>Sandip</div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>sandipransing</div>
+<div class='content'>
+Some more &#8230;&#8230;&#8230;.<br>http://rails.learnhub.com/lesson/5017-ruby-coding-convention</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/high-performance-rails-hosting">High Performance Rails Hosting</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-08T17:48:00+05:30" pubdate data-updated="true">May 8<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+There are lot of rails hosting, like wired tree,&#8230;, <br/>i am still in search of cost effective and high performance hosting. <br/><br/>recently i came across with joyent rails hosting, please let me know your opinions..<br/><br/><br/><strong>Scale on Demand</strong><br/><br/>Your rails infrastructure can be dynamically expanded or reduced within minutes.<br/> <br/><strong>Support Billions of Hits</strong><br/><br/>The largest ruby on rails application running on Joyent does over 1 Billion page views a month. Joyent&#8217;s hardware load balancers make this kind of scale possible.<br/>Ruby 1.8.6, Rails 2.1, Mongrel, Nginx<br/><br/>Everything you need to get rolling is pre-installed, including Ruby 1.8.6 and Rails 2.1, Apache, lighttpd, nginx and Mongrel.<br/> <br/><strong>Extremely Cost Effective</strong><br/><br/>Static IPs, real storage, 10TB data transfer / bandwidth, and fantastic support all included.<br/>Lightning Fast Speed<br/><br/>We provide direct connections to tier 1 internet back-bones, Force10 switches and f5 BigIP load-balancers.<br/> <br/><strong>Trusted by Companies like LinkedIn</strong><br/><br/><br/>Check out their post<br/><strong>Official Ruby on Rails Host</strong><br/><br/>We&#8217;re the Official Ruby on Rails host. Go check it out at rubyonrails.org. &#8220;If you need hosting, Joyent is the official Ruby on Rails host, offering fantastic plans with a knowledgeable staff. Whether you need shared or dedicated hosting, these guys are experts in Ruby on Rails. &#8221;<br/><strong>Leverage a Large Community</strong><br/><br/>Over 2,400 companies run Rails applications on Joyent. You gain from our experience hosting them and you can connect directly with them through the Joyent Forums and the Joyent Wiki<br/> <br/><strong>Entirely Open Loving Cloud</strong><br/><br/>Joyent offers open protocols, open source solutions. Use any Language, any DB. You can move your application. No vendor lock-in. <br/><br/>please, help me&#8230;&#8230;:(</div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>sitemap « Fun On Rails</div>
+<div class='content'>
+[&#8230;] High Performance Rails Hosting « Fun On Rails [&#8230;]</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/awesome-working-with-rails-console-and">Awesome: Working With the Rails Console and All the Tricks</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-08T16:03:00+05:30" pubdate data-updated="true">May 8<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+Testing your active record methods using script/console<br/><br/>If you are using windows, you start the console by using this command:<br/><br/><code>ruby script\console</code><br/>Linux:<br/><br/><code>./script/console</code><br/><br/>Just use the following command whenever you make changes to your model objects:<br/><br/><code>reload!</code><br/><br/>Instead of accessing your MySQL database with<br/><br/><code>mysql -u  -p</code><br/><br/>You can instead do<br/><br/><code>script/dbconsole</code><br/><br/>and if you database has a password, just do<br/><br/><code>script/dbconsole -p</code><br/><br/><code><br/>% script/dbconsole     # connect to development database (or $RAILS_ENV)<br/>% script/dbconsole production    # connect to production database</code><br/><br/>Cheers !<br/><br/><a href="http://sandip.sosblog.com">$@ndip</a></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>sitemap « Fun On Rails</div>
+<div class='content'>
+[&#8230;] Awesome: Working with the Rails console and all the tricks « Fun On Rails [&#8230;]</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/using-rails-acts-as-taggable-on-plugin">Using Rails Acts as Taggable on Plugin</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-08T14:22:00+05:30" pubdate data-updated="true">May 8<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+A tagging plugin for Rails applications that allows for custom tagging along dynamic contexts.<br/><br/>Plugin Installation<br/><br/><code>script/plugin install git://github.com/mbleigh/acts-as-taggable-on.git</code><br/><br/>Gem Installation<br/><br/><br/><code>gem install mbleigh-acts-as-taggable-on --source http://gems.github.com</code><br/><br/><br/>Auto Install<br/>include following line in environment.rb<br/><br/><code>config.gem "mbleigh-acts-as-taggable-on", :source =&gt; "http://gems.github.com", :lib =&gt; "acts-as-taggable-on"</code><br/><br/><br/>Post Installation (Rails)<br/><code><br/>1. script/generate acts_as_taggable_on_migration<br/>2. rake db:migrate<br/></code><br/><br/>Usage<br/>Add following line in your model for which you wanted to be tagged.<br/><br/><code>acts_as_taggable_on :tags</code><br/><br/>Example<br/><br/><code>class Post &lt; ActiveRecord::Base<br/>  acts_as_taggable_on :tags<br/>end</code><br/><br/>In your View for Post<br/><code><br/><br/></code><br/><br/>In your controller create action<br/><br/><code>@post = Post.new (params[:post])<br/># Or just hardcode to test<br/>@post.tag_list ="awesome, slick, hefty"   <br/>@post.save<br/></code><br/><br/>What are the methods provided ??<br/><br/><code>@post.tag_list = "awesome, slick, hefty"   <br/><br/>Post.tagged_with("awesome", :on =&gt; :tags) # =&gt; [@post1, @post2]</code><br/><br/><code>Post.tag_counts # =&gt; [,...]</code><br/><br/>Named Scope<br/><code><br/>class Post  "created_at DESC"<br/>end</code><br/><br/><code>Post.tagged_with("awesome").by_creation</code><br/><br/>Pagination can be added on list of tags using will_paginate plugin<br/><code><br/>List Of Tags .paginate(:page =&gt; params[:page], :per_page =&gt; 20)</code><br/><code><br/>@post.find_related_tags # =&gt; will give related posts having related tags. [ @post1, @post2, ...]</code><br/><br/><br/>Tag Owners<br/><br/><code>class User &lt; ActiveRecord::Base<br/>  acts_as_tagger<br/>end</code><br/><br/><br/><code>class Post &lt; ActiveRecord::Base<br/>  acts_as_taggable_on :tags<br/>end</code><br/><code><br/>@some_user.tag(@some_post, :with =&gt; "paris, normandy", :on =&gt; :tags)<br/>@some_user.owned_taggings<br/>@some_user.owned_tags<br/>@some_post.tags_from(@some_user)</code><br/><br/><br/>Cheers !<br/>$@ndip</div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>sitemap « Fun On Rails</div>
+<div class='content'>
+[&#8230;] using rails acts as taggable on plugin « Fun On Rails [&#8230;]</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/15/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/sandipransing">@sandipransing</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'sandipransing',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'sandipr';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

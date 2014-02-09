@@ -1,0 +1,569 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="Twitter share and facebook like button for html/erb&lt;div class='spread'&gt; &nbsp;&lt;div class='twshare left'&gt; &nbsp; &lt;a href="http:// &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://sandipransing.github.io/blog/page/5">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:sandipransing.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/03/twitter-share-and-facebook-like-button">Twitter Share and Facebook Like Button for Haml-rails, Html/erb</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-17T02:45:00+05:30" pubdate data-updated="true">Mar 17<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<b>Twitter share and facebook like button for html/erb</b><br/><code>&lt;div class='spread'&gt;  &nbsp;&lt;div class='twshare left'&gt;   &nbsp; &lt;a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="funonrails"&gt;Tweet&lt;/a&gt;&lt;script type="text/javascript" src="http://platform.twitter.com/widgets.js"&gt;&lt;/script&gt;  &nbsp;&lt;/div&gt;  &nbsp;&lt;script src="http://connect.facebook.net/en_US/all.js#xfbml=1"&gt;&lt;/script&gt;&lt;fb:like href="" layout="button_count" show_faces="false" width="450" font=""&gt;&lt;/fb:like&gt; &lt;/div&gt; </code><b>Twitter share and facebook like button for haml</b><br/><code>.spread   .twshare.left     %a.twitter-share-button.left{"data-count" => "horizontal", "data-via" => "fuonrails", :href => "http://twitter.com/share"} Tweet     %script{:src => "http://platform.twitter.com/widgets.js", :type => "text/javascript"}   .fshare.left{:style => 'padding-left: 0px; margin-left: 10px;'}     %script{:src => "http://connect.facebook.net/en_US/all.js#xfbml=1"}     %fb:like{:layout => "button_count", :show_faces => "false", :width => "450"}   .CLR </code><b>Sample Buttons</b><br/>  <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="funonrails">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script><script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script><fb:like href="" layout="button_count" show_faces="false" width="450" font=""></fb:like></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/03/number-to-indian-currency-helper-for">Number to Indian Currency Helper for Rails With WebRupee</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-17T02:13:00+05:30" pubdate data-updated="true">Mar 17<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+rails has built in <i>number_to_currency</i> helper which takes options like unit, delimeter, seperator which displays foreign currency correctly but somehow it is not best suited for indian currency.<br/>Below is how we managed 2 years ago to display indian currency formatted properly with comma as seperator. personally i think it could be more better than what it is currently ;)<br/><b>Number to indian currency(rupees) helper</b><br/><code>module ApplicationHelper   def number_to_indian_currency(number)     if number       string = number.to_s.split('.')       number = string[0].gsub(/(\d+)(\d{3})$/){ p = $2;"#{$1.reverse.gsub(/(\d{2})/,'\1,').reverse},#{p}"}       number = number.gsub(/^,/, '') + '.' + string[1] if string[1]       # remove leading comma       number = number[1..-1] if number[0] == 44     end     "Rs.#{number}"   end </code> <b>Sample Output for different combinations</b><br/><console>>> helper.number_to_indian_currency(2000) => &#8220;Rs.2,000&#8221; >> helper.number_to_indian_currency(2040) => &#8220;Rs.2,040&#8221; >> helper.number_to_indian_currency(2040.50) => &#8220;Rs.2,040.5&#8221; >> helper.number_to_indian_currency(2040.54) => &#8220;Rs.2,040.54&#8221; >> helper.number_to_indian_currency(1222040.54) => &#8220;Rs.12,22,040.54&#8221; </console><br/>After doing google today found from <a href="http://pranjan.blogspot.com/2010/10/ruby-convert-numbers-to-indian-currency.html">Piyush Ranjan&#8217;s Blog</a> that yes there are ways to optimize code.<br/><b>Optimized Version</b><code>module ApplicationHelper   def number_to_indian_currency(number)     "Rs.#{number.to_s.gsub(/(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/, "\\1,")}"   end end </code>Waw one line of code, Look at the beauty of regular expression :) Truely amazing !<br/> <b>Integrating Webrupee symbol </b><br/>First include follwing stylesheet in your layout<br/><code>//public/stylesheets/font.css  @font-face {   font-family: "WebRupee";   font-style: normal;   font-weight: normal;   src: local("WebRupee"), url("http://cdn.webrupee.com/WebRupee.V2.0.ttf") format("truetype"), url("http://cdn.webrupee.com/WebRupee.V2.0.woff") format("woff"), url("http://cdn.webrupee.com/WebRupee.V2.0.svg") format("svg"); } .WebRupee {   font-family: 'WebRupee'; } </code> <b>Improved Version of Helper</b><code>module ApplicationHelper   def number_to_indian_currency(number, html=true)     txt = html ? content_tag(:span, 'Rs.', :class => :WebRupee) : 'Rs.'     "#{txt} #{number.to_s.gsub(/(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/, "\\1,")}"   end end </code> <b>Usage</b><br/><console>>> helper.number_to_indian_currency(400) => &#8220;&lt;span class=&#8221;WebRupee&#8221;&gt;Rs.&lt;/span&gt; 400&#8221; >> helper.number_to_indian_currency(5921, false) => &#8220;Rs. 5,921&#8221; >> helper.number_to_indian_currency(9921) => &#8220;&lt;span class=&#8221;WebRupee&#8221;&gt;Rs.&lt;/span&gt; 9,921&#8221; </console><br/>This will show you rupees symbol on your webpages.</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/03/accessing-view-helpers-routes-in-rails">Accessing View Helpers & Routes in Rails Console, Rake Tasks and Mailers</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-17T01:01:00+05:30" pubdate data-updated="true">Mar 17<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on">While looking for accessing rails template tags to be accessed on rails console in order to examine whatever written needs to be correct, found that - rails template tags can be tested on rails console using <i>helper</i> object<br /><code>module ApplicationHelper   def display_amount(amount)     number_to_currency amount, :precision =&gt; 0   end   end </code> <b>Helpers on rails console</b><br /><console>rails c &gt;&gt; helper.text_field_tag :name, &#8216;sandip&#8217; =&gt; &#8220;&lt;input id=&#8221;name&#8221; name=&#8221;name&#8221; type=&#8221;text&#8221; value=&#8221;sandip&#8221; /&gt;&#8221; &gt;&gt; helper.link_to &#8216;my blog&#8217;, &#8216;http://funonrails.com&#8217; =&gt; &#8220;&lt;a href=&#8221;http://funonrails.com&gt;my blog&lt;/a&gt;&#8221; &gt;&gt; helper.display_amount(2000) =&gt; &#8220;$2,000&#8221; </console> isn&#8217;t cool ? though it&#8217;s not finished yet. we can include helper files on console and access custom helper methods too <br /><console>&gt;&gt; include ActionView::Helpers =&gt; Object &gt;&gt; include ApplicationHelper =&gt; Object &gt;&gt; include ActionView::Helpers::ApplicationHelper^C &gt;&gt; display_amount 2500 =&gt; &#8220;$2,500&#8221; </console> Using same way one can make use helpers in rake tasks file. Make sure environment is getting loaded into rake task.<br /><code># lib/tasks/helper_task.rake namespace :helper do  desc 'Access helper methods in rake tasks'  task :test =&gt; :environment do   include ActionView::Helpers   include ApplicationHelper    puts display_amount 2500  #=&gt; "$2,500"  end end </code> <b>Accessing helpers in Action Mailers</b><br /><code>class Notifier &lt; ActionMailer::Base   add_template_helper(ApplicationHelper)   def greet(user)     subject "Hello #{user.name}"     from          'no-reply@example.com'     recipients    user.email     sent_on       Time.now     @user = user   end  # app/views/notifier/greet.html.erb Hi &lt;%= @user.try(:name)%&gt;, <br /><br />Greetings !!! You have got &lt;%= display_amount(3000) %&gt; </code><b>Rails routes on rails console</b><br /><console>rails c &gt;&gt; app.root_url =&gt; &#8220;http://www.example.com/&#8221; &gt;&gt; app.change_password_path =&gt; &#8220;/change/password&#8221; &gt;&gt; app.change_password_url =&gt; &#8220;http://www.example.com/change/password&#8221; </console>Now you may have got requirement to access routes inside rake tasks. Here is the way to do that- <br /><code># lib/tasks/route_test.rake namespace :routes do  desc 'Access helper methods in rake tasks'  task :test =&gt; :environment do   include ActionController::UrlWriter   default_url_options[:host] = "myroutes.check"   puts root_url  #=&gt; "http://myroutes.check"  end end </code>Optionally you can set value of host parameter from action mailer host configuration using<br /><code>default_url_options[:host] = ActionMailer::Base.default_url_options[:hos] </code><br />Attention: This is my preferred way to use helpers and routes when needed and there may have other choices to do same. Anyone having better approach please feel free to add your valuable comment. I will definitely incorporate that in further developments.<br />Got Easy, Cheers ;)</div></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/03/monitor-delayedjob-in-rails">Monitor Delayed Job in Rails</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-01T01:22:00+05:30" pubdate data-updated="true">Mar 1<span>st</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<b>Delayed Job & Monit configuration</b><br/>We were struggling through how to monit delayed_job from past few months because monit doesn&#8217;t work seamlessly with delayed_job start/stop commands and finally we got able to monit delayed_job. <br/><b>Here is our old configuration that wasn&#8217;t working anyhow-</b><br/><console>check process delayed_job with pidfile /home/sandip/shared/pids/delayed_job.pid     stop program = &#8220;/bin/bash -c &#8216;cd /home/sandip/current && RAILS_ENV=production script/delayed_job stop&#8217;&#8221;     start program = &#8220;/bin/bash -c &#8216;cd /home/sandip/current && RAILS_ENV=production script/delayed_job start&#8217;&#8221;     if totalmem > 100.0 MB for 3 cycles then restart     if cpu usage > 95% for 3 cycles then restart </console><br/>After doing google & looking at stackoverflow, we found different solutions to work with but none of them found useful to me. :( <br/>After reading google group someone (not remembering exactly) directed to write a init script for delayed_job server and that perfectly worked for me and my headache of self moniting delayed_job ended up ;)<br/> <b>Here is delayed_job init script</b><br/>## /etc/init.d/delayed_job<br/><console>#! /bin/sh set_path=&#8221;cd /home/sandip/current&#8221;  case &#8220;$1&#8221; in     start)     echo -n &#8220;Starting delayed_job: &#8221;     su - root -c &#8220;$set_path; RAILS_ENV=production script/delayed_job start&#8221; >> /var/log/delayed_job.log 2>&1     echo &#8220;done.&#8221;     ;;     stop)     echo -n &#8220;Stopping delayed_job: &#8221;     su - root -c &#8220;$set_path; RAILS_ENV=production script/delayed_job stop&#8221; >> /var/log/delayed_job.log 2>&1     echo &#8220;done.&#8221;     ;;     *)     echo &#8220;Usage: $N {start|stop}&#8221; >&2     exit 1     ;; esac  exit 0 </console><b>finally here is the working monit delayed_job configuration</b><br/> <console>check process delayed_job with pidfile /home/sandip/shared/pids/delayed_job.pid     stop program = &#8220;/etc/init.d/delayed_job stop&#8221;     start program = &#8220;/etc/init.d/delayed_job start&#8221;     if totalmem > 100.0 MB for 3 cycles then restart     if cpu usage > 95% for 3 cycles then restart </console> <b>Thinking Sphinx monit configuration</b><br/><console>check process sphinx with pidfile /home/sandip/shared/pids/searchd.pid     stop program = &#8220;/bin/bash -c &#8216;cd /home/sandip/current && /usr/bin/rake RAILS_ENV=production ts:stop&#8217;&#8221;     start program = &#8220;/bin/bash -c &#8216;cd /home/sandip/current && /usr/bin/rake RAILS_ENV=production ts:start&#8217;&#8221;     if totalmem > 85.0 MB for 3 cycles then restart     if cpu usage > 95% for 3 cycles then restart </console> <b>Adhearsion (ahn) monit confiuration</b><br/><console>check process ahn with pidfile /home/josh/shared/pids/ahnctl.pid     stop program = &#8220;/bin/bash -c &#8216;cd /home/sandip/current && /usr/bin/ahnctl stop adhearsion&#8217;&#8221;     start program = &#8220;/bin/bash -c &#8216;cd /home/sandip/current && /usr/bin/ahnctl start adhearsion&#8217;&#8221;     if totalmem > 100.0 MB for 3 cycles then restart     if cpu usage > 95% for 3 cycles then restart </console> <b>Nginx monit configuration</b><br/><console>check process nginx with pidfile /opt/nginx/logs/nginx.pid     start program = &#8220;/opt/nginx/sbin/nginx&#8221;     stop  program = &#8220;/opt/nginx/sbin/nginx -s stop&#8221;     if cpu is greater than 70% for 3 cycles then alert     if cpu > 80% for 5 cycles then restart     if 10 restarts within 10 cycles then timeout </console></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/03/getting-started-with-rails-3-postgres">Getting Started With Rails 3 & Postgres Database</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-01T00:40:00+05:30" pubdate data-updated="true">Mar 1<span>st</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<b>Rails 3 Installation</b><br/><console>sudo gem install rails -v3.0.4 </console> <b>postgres as db installation</b><>br/ <console>$ sudo apt-get install postgresql </console><br/> <b>Rails 3 App with postgres as database</b><br/><console>$ rails new pg -d postgres </console><b>bundle installation</b><br/>It will install dependency gems & postgres adapter for db connection<br/><console>bundle install </console><br/>Here by default &#8216;postgres&#8217; database user gets created while installation but i recommend to  create new db user with name same as of system user owning project directory permissions. <br/>User owning file permission can be found using<br/><console>ls -l pg drwxr-xr-x 7 sandip sandip 4096 2011-02-23 15:38 app drwxr-xr-x 5 sandip sandip 4096 2011-02-23 18:14 config -rw-r&#8211;r&#8211; 1 sandip sandip  152 2011-02-23 15:38 config.ru &#8230; </console> Default &#8216;postgres&#8217; database user gets created while installation<br/> <code>## Snap of database.yml development:   adapter: postgresql   encoding: unicode   database: pg_development   username: sandip   pool: 5 </code> <b> Create new database user</b><br/><console>pg $ sudo su postgres pg $ createuser sandip Shall the new role be a superuser? (y/n) y pg $ exit exit </console><br/><b> Create a first development database:</b><br/><console>pg $ psql template1 Welcome to psql 8.4.6, the PostgreSQL interactive terminal. &#8230;  template1=# \l         List of databases    Name    |  Owner   | Encoding  &#8212;&#8212;&#8212;&#8211;+&#8212;&#8212;&#8212;-+&#8212;&#8212;&#8212;-  postgres  | postgres | UTF8  template0 | postgres | UTF8  template1 | postgres | UTF8 (3 rows)  template1=# CREATE DATABASE pg_development; CREATE DATABASE template1=# \l             List of databases        Name        |  Owner   | Encoding  &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-+&#8212;&#8212;&#8212;-+&#8212;&#8212;&#8212;-  postgres          | postgres | UTF8  pg_development | sandip   | UTF8  template0         | postgres | UTF8  template1         | postgres | UTF8 (4 rows)  template1=# \q </console><br/> <b> Start rails server</b><br/><console>pg $ rails s </console> <b>Getting hands on postgres terminal</b><br/><b>1. Login onto terminal</b><br/><console>psql -U DB_USERNAME -d DB_NAME -W DB_PASSWORD </console><b>2. List databases</b><br/><console>\l </console><b>3. Display tables</b><br/><console>\dt </console><b>4. Exit from terminal</b><br/><console>\q </console></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/02/auto-login-remote-server-by-copying-ssh">Auto Login Remote Server by Copying Ssh Public Key to Authorized Keys</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-02-03T16:21:00+05:30" pubdate data-updated="true">Feb 3<span>rd</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+While working on remote machine we often get headache of entering password for ssh login, scp files from one server to another server. Adding public key as authorized_keys on remote server solves this problem. <br/> <b>Copying from my system to remote server </b><code>cat ~/.ssh/id_rsa.pub | ssh sandip@server 'cat >> ~/.ssh/authorized_keys' </code> <b>Copying from remote server to my system </b><br/><code>ssh server 'cat ~/.ssh/id_rsa.pub' | cat >> ~/.ssh/id_rsa_client.pub </code></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/01/using-hoptoad-notifier-as-gem-in-rails">Using Hoptoad Notifier as Gem in Rails 2.3</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-27T21:18:00+05:30" pubdate data-updated="true">Jan 27<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<code># in config/environment.rb config.gem 'hoptoad_notifier'  # from your Rails root: $ rake gems:install $ rake gems:unpack GEM=hoptoad_notifier $ script/generate hoptoad --api-key your_key_here </code></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/01/installing-and-running-cronjob-crontab">Installing and Running Cronjob (Crontab Basics)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-20T13:50:00+05:30" pubdate data-updated="true">Jan 20<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<b>Basic commands to open/Edit crontab file</b> <b>Editing crontab file</b><br/><console>crontab -e</console> <b>Displaying crontab file</b><br/><console>crontab -l</console> <b>Remove crontab</b><br/><console>crontab -r</console> <b>crontab syntax</b>cron command basically takes 6 input parameters of which each input can take multiple arguments for that one can make use of comma or pipe separator<br/> <console># min hour dom mon dow   command *   *   *   *   * (command) </console>Here * means for every. Above command will get executed for every minute<br/> <b>Detailed syntax</b> <console>*     *     *   *    *        command to be executed -     -     -   -    - |     |     |   |    | |     |     |   |    +&#8212;&#8211; day of week (0 - 6) (Sunday=0) |     |     |   +&#8212;&#8212;- month (1 - 12) |     |     +&#8212;&#8212;&#8212; day of month (1 - 31) |     +&#8212;&#8212;&#8212;- hour (0 - 23) +&#8212;&#8212;- min (0 - 59) </console> <b>Example commands</b><br/> <console># Generate progressive report for every active user at 11:45 p.m. 45 23 * * * (cd /home/sandip/current/; rake ace:daily_progressive_report RAILS_ENV=production)  # Take database backup every night 59 2 * * * (cd /home/sandip/current/; rake db:backup RAILS_ENV=production)  # Initialize grouping on database every sunday 29 3 * * 0 (cd /home/sandip/current/; rake ace:initializeCarGrouping RAILS_ENV=production)  # Generate daily stats on 4:30 AM & 12:30 PM and 4:30 PM 30 4,12,16 * * * (cd /home/sandip/current/; rake ace:daily_call_statistics RAILS_ENV=production)  # Rotate sphinx indexes updated evry hour if missed out somehow 0 * * * * (cd /user/local/bin/; indexer &#8211;rotate &#8211;config /home/sandip/current/config/production.sphinx.conf) </console></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/01/testing-restful-polymorphic-resource">Testing Restful & Polymorphic Resource Routes on Rails Console</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-19T15:05:00+05:30" pubdate data-updated="true">Jan 19<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<b>Testing restful &amp; polymorphic resource routes on rails console</b><br />Open rails console<br /><console>rails c # In rails 3 OR ruby script/console </console><br />app object of URL <console>&gt;&gt; app<br />=&gt; #&lt;ActionController::Integration::Session:0xc164fac @result=nil, @status=nil, @accept=&#8221;text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5&#8221;, @path=nil, @request_count=0, @application=#&lt;ActionController::Dispatcher:0xc1644f8 @output=#&lt;IO:0x85e34ec&gt;&gt;, @remote_addr=&#8221;127.0.0.1&#8221;, @host=&#8221;www.example.com&#8221;, @controller=nil, @https=false, @request=nil, @headers=nil, @cookies={}, @status_message=nil, @named_routes_configured=true, @response=nil&gt;<br /></console>Root URL<br/><code>&gt;&gt; app.root_url<br />=&gt; "http://www.example.com/"<br /></code>Plural paths <code><br />&gt;&gt; app.calls_path<br />=&gt; "/calls"<br /></code>Singular routes <code><br />&gt;&gt; app.audio_call_path<br />ActionController::RoutingError: audio_call_url failed&nbsp; <br /> &gt;&gt; app.audio_call_path(1)<br />=&gt; "/calls/1/audio"<br /><br />&gt;&gt; app.audio_call_path(13)<br />=&gt; "/calls/13/audio"<br /><br />&gt;&gt; app.audio_call_path(13, :name =&gt; 'san')<br />=&gt; "/calls/13/audio?name=san"<br /></code><b>Polymorphic URLS</b><br/><console>&nbsp;app.polymorphic_path(Call.first, :action =&gt; &#8216;audio&#8217;)<br />=&gt; &#8220;/calls/253/audio&#8221;<br /><br />&gt;&gt; app.polymorphic_path(Call.new)<br />=&gt; &#8220;/calls&#8221;<br /></console><br /></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/01/getting-started-with-mysql-on-amazon">Getting Started With MySQL on Amazon Web Services</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-15T18:30:00+05:30" pubdate data-updated="true">Jan 15<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div style="width:425px" id="__ss_1327730"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/ronaldbradford/getting-started-with-mysql-in-amazon-web-services" title="Getting started with MySQL on Amazon Web Services">Getting started with MySQL on Amazon Web Services</a></strong><object id="__sse1327730" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=usingamazonwebservices-090422111735-phpapp01&stripped_title=getting-started-with-mysql-in-amazon-web-services&userName=ronaldbradford" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse1327730" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=usingamazonwebservices-090422111735-phpapp01&stripped_title=getting-started-with-mysql-in-amazon-web-services&userName=ronaldbradford" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/ronaldbradford">Ronald Bradford</a>.</div></div></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/6/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/4/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/sandipransing">@sandipransing</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'sandipransing',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'sandipr';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

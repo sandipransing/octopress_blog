@@ -1,0 +1,577 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="Delayed job variables initialization written on at collectiveidea / delayed_job doesn&#8217;t work. # config/initializers/delayed_job_config.rb &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://sandipransing.github.io/blog/page/11">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:sandipransing.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/01/delayed-job-changing-job-parameters-in">Delayed Job Changing Job Parameters in Rails</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-01-13T19:59:00+05:30" pubdate data-updated="true">Jan 13<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+Delayed job variables initialization written on at collectiveidea / delayed_job doesn&#8217;t work.<br/><console> # config/initializers/delayed_job_config.rb  Delayed::Worker.destroy_failed_jobs = false  Delayed::Worker.sleep_delay = 60  Delayed::Worker.max_attempts = 3  Delayed::Worker.max_run_time = 5.minutes </console><br/>Here is the correct way of doing it as mentioned on tobi / delayed_job <br/><console> # config/initializers/delayed_job_config.rb  Delayed::Job.destroy_failed_jobs = false  silence_warnings do    Delayed::Job.const_set(&#8220;MAX_ATTEMPTS&#8221;, 3)    Delayed::Job.const_set(&#8220;MAX_RUN_TIME&#8221;, 5.minutes)  end </console></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/12/getting-wired-and-wireless-working-on">Getting Wired and Wireless Working on Ubuntu 9.0.4</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-14T15:39:00+05:30" pubdate data-updated="true">Dec 14<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div style="text-align: left;">It might be the case that earlier wireless was working and then it stopped working<br />Follow the simple steps here&#8230;.<br /></div>1. Restart networking <br /><pre class="ruby" name="code">sudo /etc/init.d/networking restart<br /></pre>2. Disable the &#8221;<b>Support for Atheros 802.11 wireless LAN cards</b>&#8221; on system/administration/Hardware Drivers, and reboot your box.<br />3. Restart  <br /><pre class="ruby" name="code">sudo reboot<br /></pre><br />That&#8217;s it, Cheers!  Still having problem follow the instructions <a href="http://www.funonrails.com/2009/10/getting-wireless-working-on-ubuntu.html">here</a><br /></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/12/hpricot-scraping-in-ruby">Hpricot Scraping in Ruby</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-02T18:24:00+05:30" pubdate data-updated="true">Dec 2<span>nd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div style="text-align: left;">Include gems/library required before getting started <br /></div><pre class="ruby" name="code">require 'hpricot'<br />require 'net/http'<br />require 'rio'<br /></pre><pre class="ruby" name="code"># Pass website url to be scraped<br />url = "www.funonrails.com"<br /><br /># Define filename to store file locally<br />file = "temp.html"<br /># Save page locally<br />rio(url) &lt; rio (file)<br /></pre><pre class="ruby" name="code"># Open page through hpricot<br />doc = Hpricot(open(file))<br /><br />Apply hpricot library to get right contents<br /><br />doc.at("div.pageTitle")<br />doc/"div.pageTitle"<br />doc.search("div.entry")<br />doc//"div.pageTitle"<br /></pre>Hpricot API Reference click here<br /></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Sandip Ransing</div>
+<div class='content'>
+Try hpricot library online http://hpricot.com</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/passing-commandline-parameter-arguments">Passing Commandline Parameter (Arguments) to Ruby File Using Optparser</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-27T19:13:00+05:30" pubdate data-updated="true">Nov 27<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div style="text-align: left;">Ruby file accepts from command prompt in the form of array. <br /></div><b>Passing parameters </b><br /><pre class="ruby" name="code">ruby input.rb TOI DH TimesNew<br /></pre><b>Accessing parameters  </b><br /><pre class="ruby" name="code"> # input.rb<br /> p ARGV<br /> # =&gt; ["TOI", "DH", "TimesNew"]<br /> p ARGV[0]<br /> # =&gt; "TOI"<br /> p ARGV[1]<br /> # =&gt; "DH"<br /></pre><b>Optparser</b> : parses commandline options in more effective way using OptParser class. and we can access options as hashed parameters.<br /><br /><b>Passing parameters  </b><br /><pre class="ruby" name="code">ruby input.rb -P"The Times of India" --category"article"<br /></pre><b>Accessing parameters  </b><br /><pre class="ruby" name="code"> <br /> # input.rb<br /> require 'optparser'<br /> <br /> options = ARGV.getopts("P:", 'category')<br /><br /> p options<br /> # =&gt; { 'P' =&gt; 'The Times of India', :category =&gt; 'article' }<br /><br /> p options['P']<br /> # =&gt; "The Times of India"<br /></pre></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/how-to-get-all-associted-models-of">How to Get All Associated Models of Rails Model</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-26T20:40:00+05:30" pubdate data-updated="true">Nov 26<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div style="text-align: left;">I have Site Model and i wanted to find all associated models of Site model which are having  belongs_to relationship.  After doing lot headache, here is the solution i found<br /></div><b><br /></b><br /><b>has_many models of Site Model</b> <br /><pre class="ruby" name="code"> Site.reflect_on_all_associations.map{|mac| mac.class_name if mac.macro==:has_many}.compact<br />=&gt; ["Layout", "User", "SubmenuLink", "Snippet", "Asset"]<br /><br /></pre><b>belongs_to model of Site Model</b> <br /><pre class="ruby" name="code">Site.reflect_on_all_associations.map{|mac| mac.class_name if mac.macro==:belongs_to}.compact<br />=&gt; ["User", "Page", "User"]<br /><br /></pre><b>To get all associations</b><br /><pre class="ruby" name="code">Site.reflect_on_all_associations.map{|mac| mac.class_name}.compact<br />=&gt; ["Layout", "User", "Page", "User", "SubmenuLink", "User", "Snippet", "Asset"]<br /><br /></pre>Hari, U rocks !<br /></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/cricket-challenge-flash-game">Cricket Challenge Flash Game</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-24T18:16:00+05:30" pubdate data-updated="true">Nov 24<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div style="text-align: center;"><b>Advanced cricket flash game</b><br /></div><div style="text-align: center;"><b><br /></b><br /></div><div style="text-align: center;"><b></b><object align="middle" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://www.adobe.com/go/getflashplayer" height="500" width="500"><param name="movie" value="http://img.bollywoodsargam.com/games/files/game_4f2a798477213b30a4802e716e31a9a6.swf" /> <param name="quality" value="high" /> <param name="salign" value="T" /> <embed src="http://img.bollywoodsargam.com/games/files/game_4f2a798477213b30a4802e716e31a9a6.swf" width="500" height="500" align="middle" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash"></embed></object><br /></div><div><div style="text-align: center;"><br /></div></div><div><div style="text-align: center;"><br /></div></div></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/3rd-worm-game">Flash Games</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-24T17:59:00+05:30" pubdate data-updated="true">Nov 24<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div style="text-align: left;"><b>3rd worm game</b>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-  <embed align="center" allowscriptaccess="never" height="400" pluginspage="http://www.macromedia.com/go/getflashplayer" quality="high" src="http://www.layoutshack.net/games/puzzle/1.swf" width="600"></embed><br /></div><div style="text-align: center;"><a href="http://www.layoutshack.net/games/puzzle/" target="_blank">Flash Puzzle Games</a><br /></div><div style="text-align: left;">&nbsp; <b>Racing Game</b>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-<br /></div><div style="text-align: center;">&nbsp;  <embed align="center" allowscriptaccess="never" height="400" pluginspage="http://www.macromedia.com/go/getflashplayer" quality="high" src="http://www.layoutshack.net/games/racing/2.swf" width="600"></embed><br /></div><div style="text-align: center;"><a href="http://www.layoutshack.net/games/racing/" target="_blank">Flash Racing Games</a><br /></div></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/gravity-master-game">Gravity Master Game Challenge</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-24T17:50:00+05:30" pubdate data-updated="true">Nov 24<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div style="text-align: left;">Collect all rotating circles with the black ball. You can move the ball by drawing shapes with mouse and using physics. The ways of completing a level is only limited by your imagination and line limit. Complete 15 levels to unlock level editor. I recommend to lower your mouse sesitivity. P.S. This is the first game I ever made <br /></div><embed height="600" menu="false" pluginspage="http://www.macromedia.com/go/getflashplayer" quality="high" src="http://games.mochiads.com/c/g/gravity-master/Gravity Master.swf" type="application/x-shockwave-flash" width="600"></embed><br /></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/upgrading-openoffice-in-ubuntu-interpid">Upgrading Openoffice in Ubuntu Interpid</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-23T16:17:00+05:30" pubdate data-updated="true">Nov 23<span>rd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div style="text-align: left;">Follow simple steps defined <a href="http://ubuntumanual.org/posts/175/upgrade-to-open-office-3-1-in-ubuntu-jaunty-intrepid-hardy">in this post</a> for smooth upgrade of openoffice in linux.<br /></div><br /><a href="http://ubuntumanual.org/posts/175/upgrade-to-open-office-3-1-in-ubuntu-jaunty-intrepid-hardy">click here</a><br /></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/bundling-gems-in-rails-application">Bundling Gems in Rails Application</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-23T14:47:00+05:30" pubdate data-updated="true">Nov 23<span>rd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div style="text-align: left;">Gem Bundling is basically used to maintain all required gems at your application level. It downloads necessary gems and maintain it under &#8220;/vender/gems&#8221; directory.  Its very easy to use gem bundle.<br /></div>1. Insatll gemcutter gem ( Its gem hosting )<br /><pre class="ruby" name="code">gem install gemcutter<br /></pre>2. Install bundler ( Its<span style="font-family: helvetica, arial, freesans, clean, sans-serif; font-size: 13px; line-height: 20px;">&nbsp;a tool that manages gem dependencies for your ruby application. )</span><br /><pre class="ruby" name="code">gem install bundler<br /></pre>3. Start using <br /><pre class="ruby" name="code">gem bundle<br /></pre></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/12/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/10/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/sandipransing">@sandipransing</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'sandipransing',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'sandipr';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,296 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>How do i generate SEO sitemap in rails ? - Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="What is sitemap ? Sitemap is nothing but a .xml file containing urls available on your siteIt contains URL, last modified date, frequency of content &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://sandipransing.github.io/2009/09/how-do-i-generate-seo-sitemap-in-rails">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:sandipransing.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">How Do I Generate SEO Sitemap in Rails ?</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-09-09T21:44:00+05:30" pubdate data-updated="true">Sep 9<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><div class='post'>
+<strong>What is sitemap ? </strong><br/><br/>Sitemap is nothing but a .xml file containing urls available on your site<br/><br/>It contains URL, last modified date, frequency of content change and priority ( between 0..1 )<br/><br/><strong>Why we need sitemap ? </strong><br/><br/>We can submit sitemap file to search engine. It will help them in analysing what urls on your site are available for crawling.<br/><br/><strong>What is xml pattern ? </strong><br/><pre>   &lt;?xml version="1.0" encoding="UTF-8"?&gt;<br/>      &lt;urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"&gt;<br/><br/>        &lt;url&gt;<br/>           &lt;loc&gt;http://www.example.com/&lt;/loc&gt;<br/>           &lt;lastmod&gt;2005-01-01&lt;/lastmod&gt;<br/>           &lt;changefreq&gt;monthly&lt;/changefreq&gt;<br/>           &lt;priority&gt;0.8&lt;/priority&gt;<br/>        &lt;/url&gt;<br/>       ...<br/>       ...<br/>    &lt;/urlset&gt;</pre><br/><strong> What will be the path for sitemap ? </strong><br/><br/>&#8220;www.example.com/sitemap.xml&#8221;<br/><br/><strong>Are we going to generate sitemap manually ? </strong><br/><br/>No&#8230; there is mephisto sitemap plugin.We can use it.<br/><br/>script/plugin install  http://svn.appelsiini.net/svn/rails/plugins/mephisto_sitemap/<br/><br/><strong>Am i needed to generate to sitemap for each request ? </strong><br/><br/>No &#8230;&#8230;&#8230;..we can generate it in background task daily basis.<br/><br/><strong>How it will be accessed for request to sitemap ? </strong><br/><br/>we can define path to local file in routes.<br/><br/>map.connect &#8220;sitemap.xml&#8221;, :controller =&gt; :sitemap<br/><br/>Class SitemapController<br/><br/>def index<br/><br/>render &#8220;some local file path&#8221;<br/><br/>end<br/><br/>&#8230;.<br/><br/><strong>Here are the reference links </strong><br/><br/>http://www.fortytwo.gr/blog/19/Generating-Sitemaps-With-Rails<br/><br/>http://www.bestechvideos.com/2008/07/04/ruby-plus-71-how-to-create-a-seo-sitemap-for-rails-apps</div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>welkins</div>
+<div class='content'>
+how to generate xml file for cooliris portfolio in wordpress<br><br><br>-welkins</div>
+</div>
+<div class='comment'>
+<div class='author'>sitemap « Fun On Rails</div>
+<div class='content'>
+[&#8230;] How do i generate SEO sitemap in rails ? « Fun On Rails [&#8230;]</div>
+</div>
+<div class='comment'>
+<div class='author'>info ternak</div>
+<div class='content'>
+i got lots of information from your site, thank for your sharing&#8230; :)</div>
+</div>
+<div class='comment'>
+<div class='author'>Elena Morgan</div>
+<div class='content'>
+Search engines generate nearly 90% of all Internet traffic and are responsible for 55% of all E-commerce transactions. Today, it is essential for all online businesses to make SEO an integral part of their online business strategy.<br><br>So I would like to recommend one of my client who helps you define, evolve and implement a powerful SEO strategy to leverage your online business potential<br><br>http://www.redalkemi.com/</div>
+</div>
+<div class='comment'>
+<div class='author'>sandipransing</div>
+<div class='content'>
+Link mentioned is very good !<br>but it has limitation that we will not have any control over urls <br>that will be submitted to search engines :)</div>
+</div>
+<div class='comment'>
+<div class='author'>Sethupathi</div>
+<div class='content'>
+How to create sitemap.xml<br>======================<br>From the following link you can generate the site-map.xml if your application is not in https. Just by giving the application link it will generate the xml for you.<br><br>http://www.xml-sitemaps.com/</div>
+</div>
+</div>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">sandipransing</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-09-09T21:44:00+05:30" pubdate data-updated="true">Sep 9<span>th</span>, 2009</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/rails/'>rails</a>, <a class='category' href='/blog/categories/seo/'>seo</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2009/09/how-do-i-generate-seo-sitemap-in-rails" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2009/09/how-do-i-generate-seo-sitemap-in-rails" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2009/09/social-media-overview" title="Previous Post: Social Media Overview">&laquo; Social Media Overview</a>
+      
+      
+        <a class="basic-alignment right" href="/2009/09/4-steps-to-install-nginx-with-passenger" title="Next Post: 4 steps to install nginx with passenger">4 steps to install nginx with passenger &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/sandipransing">@sandipransing</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'sandipransing',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

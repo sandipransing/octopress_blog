@@ -1,0 +1,263 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Paypal payments integration with rails - Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="Paypal standard website payment service allows online payment transactions for websites. Before implementing payments inside rails app needs to have &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://sandipransing.github.io/2011/12/paypal-payments-integration-with-rails">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:sandipransing.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Paypal Payments Integration With Rails</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-30T18:00:00+05:30" pubdate data-updated="true">Dec 30<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><div class='post'>
+Paypal standard website payment service allows online payment transactions for websites. <br />Before implementing payments inside rails app needs to have following things in place- <br />1. <a href="http://developer.paypal.com/">Register Paypal sandbox account</a><br />2. Paypal Merchant account api credentials i.e. login, password, signature, application_id<br />3. Paypal Buyer account creds to test payments<br /><br /><b>Bundle Install</b><br /><pre class='ruby'># Gemfile     <br />gem 'activemerchant <br /></pre><b>Gateway config</b><br /><pre class='ruby'># config/gateway.yml <br />development: &development     <br />  mode: test     <br />  login: rana_1317365002_biz_api1.gmail.com     <br />  password: '1311235050'     <br />  signature: ACxcVrB3mFChvPIe8aDWQlLhAPN46oPBQCj7rJWPza6CDZmBURg.     <br />  application_id: APP-76y884485P519543T  <br /><br />production:    <br />  <<: *development<br /><br />test:<br />  <<: *development<br /></pre><b>New Payment Form</b><pre class='ruby'>= form_for @payment ||= Payment.new, :url => pay_bill_url, :html => {:id => :payForm} do |p|    <br />  = p.text_field :amount   <br />  = p.submit 'Pay' <br /></pre><b>Generate & Migrate Payment Model</b><pre class='ruby'>rails g model payment status:string amount:float transaction_number:string   <br />rake db:migrate <br /></pre><b>Payment Model</b><pre class='ruby'># app/models/payment.rb  <br />class Payment < ActiveRecord::Base<br /><br />  PROCESSING, FAILED, SUCCESS = 1, 2, 3<br /><br />  validates :amount, :presence => true, :numericality => { :greater_than => 0 }    <br />  def self.conf<br />    @@gateway_conf ||= YAML.load_file(Rails.root.join('config/gateway.yml').to_s)[Rails.env]   <br />  end    <br />  <br />  ## Paypal    <br />  def setup_purchase(options)     <br />    gateway.setup_purchase(amount * 100, options)   <br />  end    <br />  <br />  def redirect_url_for(token)      <br />    gateway.redirect_url_for(token)   <br />  end <br />  <br />  def purchase(options={}) <br />    self.status = PROCESSING  <br />    #:ip       => request.remote_ip,<br />    #:payer_id => params[:payer_id],<br />    #:token    => params[:token]<br />    response = gateway.purchase(amt, options)      <br />    if response.success?       <br />      self.transaction_num = response.params['transaction_id']       <br />      self.status = SUCCESS     <br />    else       <br />      self.status = FAILED     <br />    end     <br />    return self   <br />  rescue Exception => e     <br />    self.status = FAILED     <br />    return self   <br />  end    <br /><br />  private   <br />  def gateway <br />    ActiveMerchant::Billing::Base.mode = auth['mode'].to_sym <br />    ActiveMerchant::Billing::PaypalExpressGateway.new(<br />      :login => auth['login'], :password => auth['password'],<br />      :signature => auth['signature']) <br />  end<br /><br />  def auth <br />    self.class.conf <br />  end<br />end <br /></pre><b>Billing routes </b><pre class='ruby'>## Callback URL   <br />match '/billing/paypal/:id/confirm', :to => 'billing#paypal', :as => :confirm_paypal   <br />## Create payment   <br />match '/billing', :to => 'billing#create', :as => :pay_bill   <br />## Request URL   <br />match '/billing/paypal/:id', :to => 'billing#checkout', :as => :billing   <br />match '/billing/thank_you/:id', :to => 'billing#checkout', :as => :billing_thank_you </pre><b>Billing Controller</b>  <pre class='ruby'># app/controllers/billing_controller.rb<br />class BillingController < ApplicationController<br />  before_filter :get_payment, :only => [:checkout, :paypal, :thank_you]      <br />  <br />  def create     <br />    @payment = Payment.new params[:payment]     <br />    if @payment.save       <br />      ## Paypal Checkout page       <br />      redirect_to billing_url    <br />    else     <br />      render :action => :new    <br />    end <br />  end    <br />  <br />  # ASSUMPTION   # payment is valid i.e. amount is entered   <br />  def checkout    <br />    response = @payment.setup_purchase(:return_url => confirm_paypal_url(@payment), :cancel_return_url => root_url)     <br />    redirect_to @payment.redirect_url_for(response.token)   <br />  end    <br />  <br />  ## CALL BACK   <br />  def paypal    <br />    @payment = @payment.purchase(:token => params[:token], :payer_id => params[:PayerID], :ip => request.remote_ip)    <br />    @payment.save    <br />    redirect_to thank_you_billing_url(@order)  <br />  end    <br />  <br />  private   <br />  def get_payment     <br />    @payment = Payment.find_by_id(params[:id])     <br />    @payment && @payment.valid? || invalid_url   <br />  end <br />end<br /></pre><b>Views</b><pre class='ruby'># app/views/billing/thank_you.html.haml  <br />- if @payment.success?   <br />  %p The transaction is successfully completed <br />- else   <br />  %p The transaction failed <br /></pre></div>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">sandipransing</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-30T18:00:00+05:30" pubdate data-updated="true">Dec 30<span>th</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/payment-gateway/'>payment gateway</a>, <a class='category' href='/blog/categories/paypal/'>paypal</a>, <a class='category' href='/blog/categories/rails/'>rails</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2011/12/paypal-payments-integration-with-rails" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2011/12/paypal-payments-integration-with-rails" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2011/12/authorize-net-sim-payment-integration" title="Previous Post: Authorize Net (SIM) payment integration with rails">&laquo; Authorize Net (SIM) payment integration with rails</a>
+      
+      
+        <a class="basic-alignment right" href="/2012/01/understanding-rails-uri" title="Next Post: understanding rails uri">understanding rails uri &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/02/migrating-from-blogger-to-octopress">Migrating from blogger to octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown">Writing Octopress blog posts using markdown</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog">Getting started: Octopress powered and Github hosted blog</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/10/dynamic-conditions-to-rails-associations">Dynamic conditions to rails associations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/sandipransing">@sandipransing</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'sandipransing',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

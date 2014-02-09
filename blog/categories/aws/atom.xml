@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: aws | Fun On Rails]]></title>
+  <link href="http://sandipransing.github.io/blog/categories/aws/atom.xml" rel="self"/>
+  <link href="http://sandipransing.github.io/"/>
+  <updated>2014-02-09T20:36:37+05:30</updated>
+  <id>http://sandipransing.github.io/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[paperclip options aws-s3 config and rails]]></title>
+    <link href="http://sandipransing.github.io/2011/11/paperclip-options-aws-s3-config-and"/>
+    <updated>2011-11-21T23:23:00+05:30</updated>
+    <id>http://sandipransing.github.io/2011/11/paperclip-options-aws-s3-config-and</id>
+    <content type="html"><![CDATA[<div class='post'>
+Stepwise guide to configure paperclip default options, setting up aws-s3 storage in rails <br/> Inside Gemfile<br/><console>gem 'aws-s3',               :require => 'aws/s3' gem 'paperclip' </console><br/><console>bundle install </console> Generate Print model to hold image <br/><console> rails g model print image_file_name:string image_content_type:string image_file_size:string </console><br/><console>rake db:migrate </console> Add s3 credentials to YML file<br/><console># config/s3.yml  access_key_id: DASDFG7KACNxIJdJXHPQ secret_access_key: BnDrTnzCTX+R707wYEP/aCEqAsDFG7sgW </console>Add default paperclip attachment options to initializer<br/><console># Make sure to add host url inside config/environments # HOSTNAME = 'http://lordganesha.com'  Paperclip::Attachment.default_options.merge!(   :storage => 's3',   :s3_credentials => YAML.load_file("#{Rails.root}/config/s3.yml"),   :path => ":class/:attachment/#{Rails.env}/:id/:style/:basename.:extension",     :default_url => "http://#{HOSTNAME}/images/paperclip/:class/:attachment/default.jpg",   :bucket => 'ganesha' ) </console>Add image attachment code to print model<br/><console># app/models/print.rb class Print < ActiveRecord::Base   has_attached_file :image,     :styles => {:medium => ["400x400#", :jpg],                  :thumb => ["100x100#", :jpg],                  :slider => ["300x300#", :jpg]}   #validates_attachment_presence :image   validates_attachment_size :image, :less_than => 1.megabytes, :message => 'file size maximum 1 MB allowed'   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png', 'image/gif', 'image/bmp', 'image/pjpeg', 'image/x-png'] end </console> Inside views<br/><console>  # inside new.html.haml    = form_for @print do     f.file_field :image </console></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Getting started with MySQL on Amazon Web Services]]></title>
+    <link href="http://sandipransing.github.io/2011/01/getting-started-with-mysql-on-amazon"/>
+    <updated>2011-01-15T18:30:00+05:30</updated>
+    <id>http://sandipransing.github.io/2011/01/getting-started-with-mysql-on-amazon</id>
+    <content type="html"><![CDATA[<div class='post'>
+<div style="width:425px" id="__ss_1327730"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/ronaldbradford/getting-started-with-mysql-in-amazon-web-services" title="Getting started with MySQL on Amazon Web Services">Getting started with MySQL on Amazon Web Services</a></strong><object id="__sse1327730" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=usingamazonwebservices-090422111735-phpapp01&stripped_title=getting-started-with-mysql-in-amazon-web-services&userName=ronaldbradford" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse1327730" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=usingamazonwebservices-090422111735-phpapp01&stripped_title=getting-started-with-mysql-in-amazon-web-services&userName=ronaldbradford" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/ronaldbradford">Ronald Bradford</a>.</div></div></div>
+
+]]></content>
+  </entry>
+  
+</feed>

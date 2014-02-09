@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: rails-uri | Fun On Rails]]></title>
+  <link href="http://sandipransing.github.io/blog/categories/rails-uri/atom.xml" rel="self"/>
+  <link href="http://sandipransing.github.io/"/>
+  <updated>2014-02-09T20:36:37+05:30</updated>
+  <id>http://sandipransing.github.io/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[understanding rails uri]]></title>
+    <link href="http://sandipransing.github.io/2012/01/understanding-rails-uri"/>
+    <updated>2012-01-14T02:18:00+05:30</updated>
+    <id>http://sandipransing.github.io/2012/01/understanding-rails-uri</id>
+    <content type="html"><![CDATA[<div class='post'>
+rails-uri module provide us with url manipulation methods<br/> <b>Parse string url</b><code>url = URI.parse('http://funonrails.com/search/label/rails3') url.host #=> "http://funonrails.com" url.port #=> 80 </code><br/><b>URL with Basic Authentication </b><br/><code>url = URI.parse('http://sandip:2121@funonrails.com/search/label/rails3') url.user #=> "sandip" url.password #=> "2121" </code><br/><b>Extracting urls form string paragraph</b><br/><code>URI.extract('http://funonrails.com is rails blog authored by http://sandipransing.github.com contact mailto://sandip@funonrails.com') #=> ["http://funonrails.com", "http://sandipransing.github.com", "mailto://sandip@funonrails.com"] </code> <b>Split & Join URI</b><br/><code>URI.split('http://sandip:2121@funonrails.com/search/label/rails3') #=> ["http", "sandip:2121", "funonrails.com", nil, nil, "/search/label/rails3", nil, nil, nil]  <=> [Scheme, Userinfo, Host, Port, Registry, Path, Opaque, Query, Fragment]    URI.join('http://funonrails.com','search/label/rails3') #=> #<URI::HTTP:0x7fbf9202efc8 URL:http://funonrails.com/search/label/rails3></code><br/><b>Escape & Unescape alias encode/decode URI</b><br/><code>URI.escape('http://funonrails.com/search/?label=\\rails\3') URI.encode('http://funonrails.com/search/?label=\\rails\3') #=> "http://funonrails.com/search/?label=%5Crails%5C3"  URI.unescape("http://funonrails.com/search/?label=%5Crails%5C3") URI.decode("http://funonrails.com/search/?label=%5Crails%5C3") #=> "http://funonrails.com/search/?label=\\rails\\3" </code><br/><b>Match urls using regular expressions </b><br/><code>"http://funonrails.com/search/label/rails3".sub(URI.regexp(['search'])) do |*matchs|   p $& end #=> "http://funonrails.com/search/label/rails3" </code><br/><b>Getting requested url inside rails</b><br/><code>request.request_uri request.env['REQUEST_URI'] </code><br/><b>Getting previous page url inside rails</b><br/><code>request.referrer </code></div>
+
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: authlogic | Fun On Rails]]></title>
+  <link href="http://sandipransing.github.io/blog/categories/authlogic/atom.xml" rel="self"/>
+  <link href="http://sandipransing.github.io/"/>
+  <updated>2014-02-09T20:36:37+05:30</updated>
+  <id>http://sandipransing.github.io/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[authlogic custom conditions for authentication]]></title>
+    <link href="http://sandipransing.github.io/2010/11/authlogic-custom-conditions-for"/>
+    <updated>2010-11-28T23:23:00+05:30</updated>
+    <id>http://sandipransing.github.io/2010/11/authlogic-custom-conditions-for</id>
+    <content type="html"><![CDATA[<div class='post'>
+To Add custom conditions to authlogic finders first of all we need to override authlogic find_by_login method. <br /><br /><code>class UserSession &lt; Authlogic::Session::Base<br />&nbsp; after_validation :check_if_verified<br />&nbsp; find_by_login_method :find_by_login_and_deleted_method<br />end </code><br /><br />Then we need to define overridden method inside User model <br /><br /><code>class User &lt; ActiveRecord::Base<br />&nbsp; acts_as_authentic<br />&nbsp; def self.find_by_login_and_deleted_method(login)<br />&nbsp;&nbsp;&nbsp; find_by_email_and_deleted(login, false)<br />&nbsp; end<br />end </code><br /><br />got easy..wooooooo :)</div>
+
+]]></content>
+  </entry>
+  
+</feed>
