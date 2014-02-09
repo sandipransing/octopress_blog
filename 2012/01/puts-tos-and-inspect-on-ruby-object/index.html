@@ -9,7 +9,7 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="`puts` converts ruby object into string by invoking to_s method on object. The default to_s prints the object&#8217;s class and an encoding of the &hellip;">
+  <meta name="description" content="puts converts ruby object into string by invoking to_s method on object. The default to_s prints the object&rsquo;s class and an encoding of the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -91,8 +91,50 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-`puts` converts ruby object into string by invoking to_s method on object. The default to_s prints the object&#8217;s class and an encoding of the object id. In order to print human readable form of object use inspect<br/> <pre class=ruby>locs = Location.find_by_sql('select * from locations')   Location Load (0.5ms)  select * from locations </pre><b>Puts Object internally invokes to_s method on object to print</b><pre class=ruby>locs.each do |l|   # it calls to_s method on object   puts l end  #&lt;Location:0x000000055bb328&gt; #&lt;Location:0x000000055bb058&gt; </pre><br/><b>puts object followed by subsequent invoke of inspect method outputs readable object</b><pre class=ruby>locs.each do |l|   puts l.inspect # prints actual object end  #&lt;Location id: 15, name: &quot;Annettaside3&quot;, street: &quot;71838 Ritchie Cape&quot;, city: &quot;East Destanystad&quot;, state: &quot;Utah&quot;, zip: &quot;58054&quot;, phone: 123456, other_phone: 987654, staff_strength: 40, is_active: true, created_at: &quot;2012-01-25 11:17:26&quot;, updated_at: &quot;2012-01-25 11:17:26&quot;, country_name: &quot;Korea&quot;&gt; #&lt;Location id: 16, name: &quot;Sporerbury4&quot;, street: &quot;73057 Jerad Shoal&quot;, city: &quot;South Kyliefurt&quot;, state: &quot;Delaware&quot;, zip: &quot;46553-3376&quot;, phone: 123456, other_phone: 987654, staff_strength: 40, is_active: true, created_at: &quot;2012-01-25 11:24:48&quot;, updated_at: &quot;2012-01-25 11:24:48&quot;, country_name: &quot;Australia&quot;&gt; </pre></div>
+<div class="entry-content"><p><code>puts</code> converts ruby object into string by invoking to_s method on object. The default to_s prints the object&rsquo;s class and an encoding of the object id. In order to print human readable form of object use inspect</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">locs</span> <span class="o">=</span> <span class="no">Location</span><span class="o">.</span><span class="n">find_by_sql</span><span class="p">(</span><span class="s1">&#39;select * from locations&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="no">Location</span> <span class="no">Load</span> <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span><span class="n">ms</span><span class="p">)</span>  <span class="nb">select</span> <span class="o">*</span> <span class="n">from</span> <span class="n">locations</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Puts Object internally invokes to_s method on object to print</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">locs</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">l</span><span class="o">|</span>
+</span><span class='line'>  <span class="c1"># it calls to_s method on object</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="n">l</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#&lt;Location:0x000000055bb328&gt;</span>
+</span><span class='line'><span class="c1">#&lt;Location:0x000000055bb058&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>puts object followed by subsequent invoke of inspect method outputs readable object</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">locs</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">l</span><span class="o">|</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="n">l</span><span class="o">.</span><span class="n">inspect</span> <span class="c1"># prints actual object</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#&lt;Location id: 15, name: &quot;Annettaside3&quot;, street: &quot;71838 Ritchie Cape&quot;, city: &quot;East Destanystad&quot;, state: &quot;Utah&quot;, zip: &quot;58054&quot;, phone: 123456, other_phone: 987654, staff_strength: 40, is_active: true, created_at: &quot;2012-01-25 11:17:26&quot;, updated_at: &quot;2012-01-25 11:17:26&quot;, country_name: &quot;Korea&quot;&gt;</span>
+</span><span class='line'><span class="c1">#&lt;Location id: 16, name: &quot;Sporerbury4&quot;, street: &quot;73057 Jerad Shoal&quot;, city: &quot;South Kyliefurt&quot;, state: &quot;Delaware&quot;, zip: &quot;46553-3376&quot;, phone: 123456, other_phone: 987654, staff_strength: 40, is_active: true, created_at: &quot;2012-01-25 11:24:48&quot;, updated_at: &quot;2012-01-25 11:24:48&quot;, country_name: &quot;Australia&quot;&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 

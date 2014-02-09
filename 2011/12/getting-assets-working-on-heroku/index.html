@@ -91,8 +91,47 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-Heroku is readonly file system hence write operations can only be done inside tmp directory. <br/> Asset compilation on heroku can be handled in different ways <br/><pre class=ruby>#1. compiling locally and placing inside assets directory  RAILS_ENV=production bundle exec rake assets:precompile  #2. It compiles assets while slug compiles </pre><br/> <pre class=ruby>#3. Run time asset compilation # It compiles assets for every rails request if it notifies assets got modified  # config/application.rb     # Enable the asset pipeline     config.assets.enabled = true      # Version of your assets, change this if you want to expire all your assets     config.assets.version = '1.0'     config.assets.prefix = Rails.root.join('tmp/assets').to_s  # config/environments/production.rb   # Don't fallback to assets pipeline if a precompiled asset is missed   config.assets.compile = true </pre><br/> Note: write operation made inside tmp directory can not make any guarantee of being persisted hence be careful while using.</div>
+<div class="entry-content"><blockquote><p>Heroku is readonly file system hence write operations can only be done inside tmp directory. Asset compilation on heroku can be handled in different ways.</p></blockquote>
+
+<p><strong>1. compiling locally and placing inside assets directory</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>RAILS_ENV=production bundle exec rake assets:precompile</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>2. It compiles assets while slug compiles</strong></p>
+
+<p><strong>3. Run time asset compilation</strong>
+It compiles assets for every rails request if it notifies assets got modified</p>
+
+<p>Configurations</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">config</span><span class="o">/</span><span class="n">application</span><span class="o">.</span><span class="n">rb</span>
+</span><span class='line'><span class="c1"># Enable the asset pipeline</span>
+</span><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">assets</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="kp">true</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Version of your assets, change this if you want to expire all your assets</span>
+</span><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">assets</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="s1">&#39;1.0&#39;</span>
+</span><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">assets</span><span class="o">.</span><span class="n">prefix</span> <span class="o">=</span> <span class="no">Rails</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;tmp/assets&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_s</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># config/environments/production.rb</span>
+</span><span class='line'><span class="c1"># Don&#39;t fallback to assets pipeline if a precompiled asset is missed</span>
+</span><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">assets</span><span class="o">.</span><span class="n">compile</span> <span class="o">=</span> <span class="kp">true</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note: write operation made inside tmp directory can not make any guarantee of being persisted hence be careful while using.</p>
 </div>
 
 
@@ -120,7 +159,7 @@ Heroku is readonly file system hence write operations can only be done inside tm
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/heroku/'>heroku</a>, <a class='category' href='/blog/categories/rails/'>rails</a>, <a class='category' href='/blog/categories/rails-3/'>rails 3</a>
+    <a class='category' href='/blog/categories/heroku/'>heroku</a>, <a class='category' href='/blog/categories/rails-3/'>rails 3</a>
   
 </span>
 

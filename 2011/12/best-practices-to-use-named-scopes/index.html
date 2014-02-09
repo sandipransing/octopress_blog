@@ -91,8 +91,101 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-Scopes are partial query conditions to database queries. scopes are always prefixed to class finders. There are several ways to use scopes inside rails models.  <pre class=ruby># 1. Scope defined below gets loaded while class definition loads scope :active, where(:active => true) scope :archived, where(:archived => true, :post_type => :general) # 2.Dynamic scopes needs to be always defined inside lambda  scope :not_expired, lambda { where('expiry_date <= ?', Date.today) } # 3.Combining scopes scope :visible, published.not_expired </pre><br/><pre class=ruby># 4. Passing parameters to scopes # avoid below scope :created_by_user, lambda {|user|   where('user_id = ?', user) } # use this scope :created_by_user, lambda {|user|   where(:user_id => user) } </pre><br/><pre class=ruby># 5. passing multiple parameters # avoid below scope :made_between, lambda{|from, to|   where('created_date >= ? and created_date <= ?', from, to) } # use this scope :made_between, lambda{|from, to|   where('created_date >= :from and created_date <= :to', :from => from, :to => to) } </pre><br/><pre class=ruby># 6. associations inside scope (joins and includes) # below will perform eager loading effective when rendering posts with comments scope :with_user_comments, lambda{|user|   includes(:comments).where('comments.user_id = ?', user) }  # faster # also can be done as post.comments.where(:user_id => user) scope :with_user_comments, lambda{|user|   joins(:comments).where('comments.user_id = ?', user) } </pre><br/>So, at last would suggest making use of symbols when there are multiple parameters to scopes and make maximum use of scopes rather than having where conditions everywhere :)</div>
+<div class="entry-content"><blockquote><p>Scopes are partial query conditions to database queries. scopes are always prefixed to class finders. There are several ways to use scopes inside rails models.</p></blockquote>
+
+<p><strong>1.  Scope defined below gets loaded while class definition loads</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">scope</span> <span class="ss">:active</span><span class="p">,</span> <span class="n">where</span><span class="p">(</span><span class="ss">:active</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">)</span>
+</span><span class='line'><span class="n">scope</span> <span class="ss">:archived</span><span class="p">,</span> <span class="n">where</span><span class="p">(</span><span class="ss">:archived</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">:post_type</span> <span class="o">=&gt;</span> <span class="ss">:general</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>2.  Dynamic scopes needs to be always defined inside lambda</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">scope</span> <span class="ss">:not_expired</span><span class="p">,</span> <span class="nb">lambda</span> <span class="p">{</span> <span class="n">where</span><span class="p">(</span><span class="s1">&#39;expiry_date &lt;= ?&#39;</span><span class="p">,</span> <span class="no">Date</span><span class="o">.</span><span class="n">today</span><span class="p">)</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>3.  Combining scopes</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">scope</span> <span class="ss">:visible</span><span class="p">,</span> <span class="n">published</span><span class="o">.</span><span class="n">not_expired</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>4.  Passing parameters to scopes</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># avoid below</span>
+</span><span class='line'><span class="n">scope</span> <span class="ss">:created_by_user</span><span class="p">,</span> <span class="nb">lambda</span> <span class="p">{</span><span class="o">|</span><span class="n">user</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">where</span><span class="p">(</span><span class="s1">&#39;user_id = ?&#39;</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># use this</span>
+</span><span class='line'><span class="n">scope</span> <span class="ss">:created_by_user</span><span class="p">,</span> <span class="nb">lambda</span> <span class="p">{</span><span class="o">|</span><span class="n">user</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">where</span><span class="p">(</span><span class="ss">:user_id</span> <span class="o">=&gt;</span> <span class="n">user</span><span class="p">)</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>5.  passing multiple parameters</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># avoid below</span>
+</span><span class='line'><span class="n">scope</span> <span class="ss">:made_between</span><span class="p">,</span> <span class="nb">lambda</span><span class="p">{</span><span class="o">|</span><span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">where</span><span class="p">(</span><span class="s1">&#39;created_date &gt;= ? and created_date &lt;= ?&#39;</span><span class="p">,</span> <span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="p">)</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="c1"># use this</span>
+</span><span class='line'><span class="n">scope</span> <span class="ss">:made_between</span><span class="p">,</span> <span class="nb">lambda</span><span class="p">{</span><span class="o">|</span><span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">where</span><span class="p">(</span><span class="s1">&#39;created_date &gt;= :from and created_date &lt;= :to&#39;</span><span class="p">,</span> <span class="ss">:from</span> <span class="o">=&gt;</span> <span class="n">from</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="n">to</span><span class="p">)</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>6.  associations inside scope (joins and includes)</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># below will perform eager loading effective when rendering posts with comments</span>
+</span><span class='line'><span class="n">scope</span> <span class="ss">:with_user_comments</span><span class="p">,</span> <span class="nb">lambda</span><span class="p">{</span><span class="o">|</span><span class="n">user</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">includes</span><span class="p">(</span><span class="ss">:comments</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s1">&#39;comments.user_id = ?&#39;</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># faster</span>
+</span><span class='line'><span class="c1"># also can be done as post.comments.where(:user_id =&gt; user)</span>
+</span><span class='line'><span class="n">scope</span> <span class="ss">:with_user_comments</span><span class="p">,</span> <span class="nb">lambda</span><span class="p">{</span><span class="o">|</span><span class="n">user</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">joins</span><span class="p">(</span><span class="ss">:comments</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s1">&#39;comments.user_id = ?&#39;</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, at last would suggest making use of symbols when there are multiple parameters to scopes and make maximum use of scopes rather than having where conditions everywhere :)</p>
 </div>
 
 

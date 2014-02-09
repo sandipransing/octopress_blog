@@ -9,7 +9,9 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Array of years using range((yr=Date.current.year)-9..yr).to_a #=&gt; [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010] Array of years &hellip;">
+  <meta name="description" content="
+Check out this SlideShare Presentation: Introduction To Delayed JobView more presentations from Jonathan Julian.
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,6 +73,43 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2010/10/introduction-to-delayed-job/">Introduction to Delayed Job</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-10-04T21:12:00+05:30" pubdate data-updated="true">Oct 4<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+Check out this SlideShare Presentation: <div style="width:425px" id="__ss_2467230"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/jonathanjulian/introduction-to-delayed-job" title="Introduction To Delayed Job">Introduction To Delayed Job</a></strong><object id="__sse2467230" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=introtodelayedjob-091110110012-phpapp01&stripped_title=introduction-to-delayed-job&userName=jonathanjulian" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse2467230" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=introtodelayedjob-091110110012-phpapp01&stripped_title=introduction-to-delayed-job&userName=jonathanjulian" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/jonathanjulian">Jonathan Julian</a>.</div></div></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2010/09/best-ways-to-populate-dynamic-array-of/">Best Ways to Populate Dynamic Array of Numbers in Ruby</a></h1>
     
     
@@ -95,7 +134,10 @@
 
 
   <div class="entry-content"><div class='post'>
-<b>Array of years using range</b><br /><pre class=ruby>((yr=Date.current.year)-9..yr).to_a #=&gt; [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010] </pre><br /><b>Array of years using lambda</b><br /><pre class=ruby> Array.new(10){|i| Date.current.year-i} #=&gt; [2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001] </pre><br /><b>Array of months</b><br /><pre class=ruby>Date::MONTHNAMES.compact #=> ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"] </pre> <br /><b>Array of abbreviated months</b><br /><pre class=ruby>Date::ABBR_MONTHNAMES.compact #=> ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] </pre>  <br /><b>Array of abbreviated months with index (ps. collect_with_index is core extension method added to array)</b><br /><pre class=ruby>Date::ABBR_MONTHNAMES.compact.collect_with_index{|m, i| [m, i]} #=> [["Jan", 1], ["Feb", 2], ["Mar", 3], ["Apr", 4], ["May", 5], ["Jun", 6], ["Jul", 7], ["Aug", 8], ["Sep", 9], ["Oct", 10], ["Nov", 11], ["Dec", 12]]  OR  Date::ABBR_MONTHNAMES.compact.each_with_index.collect{|m, i| [m, i+1]} #=> [["Jan", 1], ["Feb", 2], ["Mar", 3], ["Apr", 4], ["May", 5], ["Jun", 6], ["Jul", 7], ["Aug", 8], ["Sep", 9], ["Oct", 10], ["Nov", 11], ["Dec", 12]] </pre></div>
+<b>Array of years using range</b><br />
+<pre class=ruby>((yr=Date.current.year)-9..yr).to_a
+#=&gt; [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010] </pre>
+<br /><b>Array of years using lambda</b><br /><pre class=ruby> Array.new(10){|i| Date.current.year-i} #=&gt; [2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001] </pre><br /><b>Array of months</b><br /><pre class=ruby>Date::MONTHNAMES.compact #=> ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"] </pre> <br /><b>Array of abbreviated months</b><br /><pre class=ruby>Date::ABBR_MONTHNAMES.compact #=> ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] </pre>  <br /><b>Array of abbreviated months with index (ps. collect_with_index is core extension method added to array)</b><br /><pre class=ruby>Date::ABBR_MONTHNAMES.compact.collect_with_index{|m, i| [m, i]} #=> [["Jan", 1], ["Feb", 2], ["Mar", 3], ["Apr", 4], ["May", 5], ["Jun", 6], ["Jul", 7], ["Aug", 8], ["Sep", 9], ["Oct", 10], ["Nov", 11], ["Dec", 12]]  OR  Date::ABBR_MONTHNAMES.compact.each_with_index.collect{|m, i| [m, i+1]} #=> [["Jan", 1], ["Feb", 2], ["Mar", 3], ["Apr", 4], ["May", 5], ["Jun", 6], ["Jul", 7], ["Aug", 8], ["Sep", 9], ["Oct", 10], ["Nov", 11], ["Dec", 12]] </pre></div>
 </div>
   
   
@@ -145,7 +187,7 @@ Check out this SlideShare Presentation: <div style="width:425px" id="__ss_321924
       
   <header>
     
-      <h1 class="entry-title"><a href="/2010/08/zipcode-validation-using-geokit-in/">Zipcode Validation Using Geokit in Rails</a></h1>
+      <h1 class="entry-title"><a href="/2010/08/zipcode-validation-using-geokit-in1/">Zipcode Validation Using Geokit in Rails</a></h1>
     
     
       <p class="meta">
@@ -169,7 +211,220 @@ Check out this SlideShare Presentation: <div style="width:425px" id="__ss_321924
 
 
   <div class="entry-content"><div class='post'>
-<b>1.Install geokit gem</b><br/><pre class=ruby>gem install geokit</pre>OR  <pre class=ruby># Add following line inside rails initialize block Rails::Initializer.run do |config|  config.gem 'geokit' end </pre><br/>And then run command<br/><pre class=ruby>rake gems:install</pre> <b>2. Consider User model with zipcode as attribute field</b><br/><pre class=ruby>include Geokit::Geocoders    class User < ActiveRecord::Base      set_table_name :users      validate_presence_of :zipcode      validate :request_zipcode_validation_using_geokit, :if => :zipcode            private      def request_zipcode_validation_using_geokit       # Method request google api for location       # if location found then zipcode is valid otherwise       # add validation error on zipcode field       # as it method contacts with google api and takes time       # to return result, poll request only when zipcode gets       # changed       poll = true # default true for new objects       if self.id ## this means already existing user and zipcode is valid last time        # Hack to find where zipcode got modified or not         # old_user = User.find self.id        poll = false if old_user.zipcode == self.zipcode       end              # Actual requesting api to return location associated with zipcode       if poll        loc = MultiGeocoder.geocode(self.zip_code)       end       # Add Validation Error if location is not found       errors.add(:zip_code, "Unable to geocode your location from zipcode entered.") unless loc.success      end </pre> <br/>Please note that same method can also be used to validate state, city and country.<br/> Again we can use combination of fields to validate each other. <br/>Like -<br/><b>1. Based on country entered, state validation</b><br/><b>2. Based on state, city validation</b><br/><b>3. Based on city, zipcode validation</b><br/>or<br/><b>4. Based on zipcode and country, state and city validation</b><br/><br/>Here is another method to validate state and city based on zipcode and country.<br/>Lets take example of &#8216;US&#8217;<br/><pre class=ruby> def request_state_and_city_validation_based_on_zipcode       poll = true # default true for new objects       if self.id ## this means already existing user and all attributes were valid last time        # Hack to find any one of location attribute got modified        # old_user = User.find self.id        loc_attrs = %w{zipcode state city} # keep in mind country US is default assumed        if loc_attrs.all? {|attr| self.attribute_for_inspect(attr) == old_user.attribute_for_inspect(attr)}          self.poll = false        end       end              # Actual requesting api to return location associated with zipcode       if poll        loc = MultiGeocoder.geocode("#{self.zip_code}, US")       end       # Add Validation Error if location is not found       unless loc.success         errors.add(:zip_code, "Unable to geocode your location from zipcode entered.")       else       # Validate state and city fields in compare to loc object returned by geocode         errors.add(:state, "State doesn't matches with zipcode entered") if self.state != loc.state         errors.add(:city, "City doesn't matches with zipcode entered") if self.city != loc.city       end      end </pre><br/><b>Note*** </b><br/>If you are subscriber of blog and not displaying post correctly. I request you to visit post on blog itself. Somehow style is not getting correctly in email. I will try to fix this problem asap.<br/><br/> <b>Upcoming Posts</b><br/>1. Geokit finders: Find locations in/within/beyond particular radius from specified location using acts_as_mappable plugin<br/>2. Customizing authlogic for multiple sessions i.e. using different models for role based authentication.<br/></div>
+<b>1.Install geokit gem</b><br/>
+<pre class=ruby>
+gem install geokit</pre>
+OR  
+<pre class=ruby>
+# Add following line inside rails initialize block 
+Rails::Initializer.run do |config|  config.gem 'geokit' end </pre><br/>And then run command<br/><pre class=ruby>rake gems:install</pre> <b>2. Consider User model with zipcode as attribute field</b><br/><pre class=ruby>include Geokit::Geocoders    class User < ActiveRecord::Base      set_table_name :users      validate_presence_of :zipcode      validate :request_zipcode_validation_using_geokit, :if => :zipcode            private      def request_zipcode_validation_using_geokit       # Method request google api for location       # if location found then zipcode is valid otherwise       # add validation error on zipcode field       # as it method contacts with google api and takes time       # to return result, poll request only when zipcode gets       # changed       poll = true # default true for new objects       if self.id ## this means already existing user and zipcode is valid last time        # Hack to find where zipcode got modified or not         # old_user = User.find self.id        poll = false if old_user.zipcode == self.zipcode       end              # Actual requesting api to return location associated with zipcode       if poll        loc = MultiGeocoder.geocode(self.zip_code)       end       # Add Validation Error if location is not found       errors.add(:zip_code, "Unable to geocode your location from zipcode entered.") unless loc.success      end </pre> <br/>Please note that same method can also be used to validate state, city and country.<br/> Again we can use combination of fields to validate each other. <br/>Like -<br/><b>1. Based on country entered, state validation</b><br/><b>2. Based on state, city validation</b><br/><b>3. Based on city, zipcode validation</b><br/>or<br/><b>4. Based on zipcode and country, state and city validation</b><br/><br/>Here is another method to validate state and city based on zipcode and country.<br/>Lets take example of &#8216;US&#8217;<br/><pre class=ruby> def request_state_and_city_validation_based_on_zipcode       poll = true # default true for new objects       if self.id ## this means already existing user and all attributes were valid last time        # Hack to find any one of location attribute got modified        # old_user = User.find self.id        loc_attrs = %w{zipcode state city} # keep in mind country US is default assumed        if loc_attrs.all? {|attr| self.attribute_for_inspect(attr) == old_user.attribute_for_inspect(attr)}          self.poll = false        end       end              # Actual requesting api to return location associated with zipcode       if poll        loc = MultiGeocoder.geocode("#{self.zip_code}, US")       end       # Add Validation Error if location is not found       unless loc.success         errors.add(:zip_code, "Unable to geocode your location from zipcode entered.")       else       # Validate state and city fields in compare to loc object returned by geocode         errors.add(:state, "State doesn't matches with zipcode entered") if self.state != loc.state         errors.add(:city, "City doesn't matches with zipcode entered") if self.city != loc.city       end      end </pre><br/><b>Note*** </b><br/>If you are subscriber of blog and not displaying post correctly. I request you to visit post on blog itself. Somehow style is not getting correctly in email. I will try to fix this problem asap.<br/><br/> <b>Upcoming Posts</b><br/>1. Geokit finders: Find locations in/within/beyond particular radius from specified location using acts_as_mappable plugin<br/>2. Customizing authlogic for multiple sessions i.e. using different models for role based authentication.<br/></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/08/zipcode-validation-using-geokit-in/">Zipcode Validation Using Geokit in Rails</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-08-21T04:58:00+05:30" pubdate data-updated="true">Aug 21<span>st</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ol>
+<li><strong>Install geokit gem</strong></li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install geokit</span></code></pre></td></tr></table></div></figure>
+
+
+<p>OR</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Add following line inside rails initialize block</span>
+</span><span class='line'><span class="ss">Rails</span><span class="p">:</span><span class="ss">:Initializer</span><span class="o">.</span><span class="n">run</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+</span><span class='line'> <span class="n">config</span><span class="o">.</span><span class="n">gem</span> <span class="s1">&#39;geokit&#39;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And then run command</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rake</span> <span class="ss">gems</span><span class="p">:</span><span class="n">install</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li><strong>Consider User model with zipcode as attribute field</strong></li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="kp">include</span> <span class="ss">Geokit</span><span class="p">:</span><span class="ss">:Geocoders</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">set_table_name</span> <span class="ss">:users</span>
+</span><span class='line'>  <span class="n">validate_presence_of</span> <span class="ss">:zipcode</span>
+</span><span class='line'>  <span class="n">validate</span> <span class="ss">:request_zipcode_validation_using_geokit</span><span class="p">,</span> <span class="ss">:if</span> <span class="o">=&gt;</span> <span class="ss">:zipcode</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">private</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">request_zipcode_validation_using_geokit</span>
+</span><span class='line'>    <span class="c1"># Method request google api for location</span>
+</span><span class='line'>    <span class="c1"># if location found then zipcode is valid otherwise</span>
+</span><span class='line'>    <span class="c1"># add validation error on zipcode field</span>
+</span><span class='line'>    <span class="c1"># as it method contacts with google api and takes time</span>
+</span><span class='line'>    <span class="c1"># to return result, poll request only when zipcode gets</span>
+</span><span class='line'>    <span class="c1"># changed</span>
+</span><span class='line'>    <span class="n">poll</span> <span class="o">=</span> <span class="kp">true</span> <span class="c1"># default true for new objects</span>
+</span><span class='line'>    <span class="k">if</span> <span class="nb">self</span><span class="o">.</span><span class="n">id</span> <span class="c1">## this means already existing user and zipcode is valid last time</span>
+</span><span class='line'>      <span class="c1"># Hack to find where zipcode got modified or not </span>
+</span><span class='line'>      <span class="c1"># old_user = User.find self.id</span>
+</span><span class='line'>      <span class="n">poll</span> <span class="o">=</span> <span class="kp">false</span> <span class="k">if</span> <span class="n">old_user</span><span class="o">.</span><span class="n">zipcode</span> <span class="o">==</span> <span class="nb">self</span><span class="o">.</span><span class="n">zipcode</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1"># Actual requesting api to return location associated with zipcode</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">poll</span>
+</span><span class='line'>      <span class="n">loc</span> <span class="o">=</span> <span class="no">MultiGeocoder</span><span class="o">.</span><span class="n">geocode</span><span class="p">(</span><span class="nb">self</span><span class="o">.</span><span class="n">zip_code</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>    <span class="c1"># Add Validation Error if location is not found</span>
+</span><span class='line'>    <span class="n">errors</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="ss">:zip_code</span><span class="p">,</span> <span class="s2">&quot;Unable to geocode your location from zipcode entered.&quot;</span><span class="p">)</span> <span class="k">unless</span> <span class="n">loc</span><span class="o">.</span><span class="n">success</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Please note that same method can also be used to validate state, city and country.
+Again we can use combination of fields to validate each other.
+Like &ndash;</strong></p>
+
+<ol>
+<li><strong>Based on country entered, state validation</strong></li>
+<li><strong>Based on state, city validation</strong></li>
+<li><strong>Based on city, zipcode validation</strong>
+or</li>
+<li><strong>Based on zipcode and country, state and city validation</strong></li>
+</ol>
+
+
+<p>Here is another method to validate state and city based on zipcode and country.
+Lets take example of &lsquo;US&rsquo;</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">request_state_and_city_validation_based_on_zipcode</span>
+</span><span class='line'>  <span class="n">poll</span> <span class="o">=</span> <span class="kp">true</span> <span class="c1"># default true for new objects</span>
+</span><span class='line'>  <span class="k">if</span> <span class="nb">self</span><span class="o">.</span><span class="n">id</span> <span class="c1">## this means already existing user and all attributes were valid last time</span>
+</span><span class='line'>    <span class="c1"># Hack to find any one of location attribute got modified</span>
+</span><span class='line'>    <span class="c1"># old_user = User.find self.id</span>
+</span><span class='line'>    <span class="n">loc_attrs</span> <span class="o">=</span> <span class="sx">%w{zipcode state city}</span> <span class="c1"># keep in mind country US is default assumed</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">loc_attrs</span><span class="o">.</span><span class="n">all?</span> <span class="p">{</span><span class="o">|</span><span class="kp">attr</span><span class="o">|</span> <span class="nb">self</span><span class="o">.</span><span class="n">attribute_for_inspect</span><span class="p">(</span><span class="kp">attr</span><span class="p">)</span> <span class="o">==</span> <span class="n">old_user</span><span class="o">.</span><span class="n">attribute_for_inspect</span><span class="p">(</span><span class="kp">attr</span><span class="p">)}</span>
+</span><span class='line'>      <span class="nb">self</span><span class="o">.</span><span class="n">poll</span> <span class="o">=</span> <span class="kp">false</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># Actual requesting api to return location associated with zipcode</span>
+</span><span class='line'>  <span class="k">if</span> <span class="n">poll</span>
+</span><span class='line'>    <span class="n">loc</span> <span class="o">=</span> <span class="no">MultiGeocoder</span><span class="o">.</span><span class="n">geocode</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="nb">self</span><span class="o">.</span><span class="n">zip_code</span><span class="si">}</span><span class="s2">, US&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  <span class="c1"># Add Validation Error if location is not found</span>
+</span><span class='line'>  <span class="k">unless</span> <span class="n">loc</span><span class="o">.</span><span class="n">success</span>
+</span><span class='line'>    <span class="n">errors</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="ss">:zip_code</span><span class="p">,</span> <span class="s2">&quot;Unable to geocode your location from zipcode entered.&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>    <span class="c1"># Validate state and city fields in compare to loc object returned by geocode</span>
+</span><span class='line'>    <span class="n">errors</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="ss">:state</span><span class="p">,</span> <span class="s2">&quot;State doesn&#39;t matches with zipcode entered&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="nb">self</span><span class="o">.</span><span class="n">state</span> <span class="o">!=</span> <span class="n">loc</span><span class="o">.</span><span class="n">state</span>
+</span><span class='line'>    <span class="n">errors</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="ss">:city</span><span class="p">,</span> <span class="s2">&quot;City doesn&#39;t matches with zipcode entered&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="nb">self</span><span class="o">.</span><span class="n">city</span> <span class="o">!=</span> <span class="n">loc</span><span class="o">.</span><span class="n">city</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Note</strong> **
+If you are subscriber of blog and not displaying post correctly. I request you to visit post on blog itself. Somehow style is not getting correctly in email. I will try to fix this problem asap.</p>
+
+<p><strong>Upcoming Posts</strong></p>
+
+<ol>
+<li>Geokit finders: Find locations in/within/beyond particular radius from specified location using acts_as_mappable plugin</li>
+<li>Customizing authlogic for multiple sessions i.e. using different models for role based authentication.</li>
+</ol>
+
 </div>
   
   
@@ -378,93 +633,6 @@ Wrong English is an often problem while developing any website product as it giv
 
   <div class="entry-content"><div class='post'>
 Check out this SlideShare Presentation: <div style="width:425px" id="__ss_3219240"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/GreggPollack/rails-3-beautiful-code-3219240" title="Rails 3 Beautiful Code">Rails 3 Beautiful Code</a></strong><object id="__sse3219240" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=beautifulcodeinrails3-greggpollack-100218130149-phpapp02&stripped_title=rails-3-beautiful-code-3219240" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse3219240" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=beautifulcodeinrails3-greggpollack-100218130149-phpapp02&stripped_title=rails-3-beautiful-code-3219240" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/GreggPollack">GreggPollack</a>.</div></div></div>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/08/pdf-in-rails-using-prawn-library/">PDF in Rails Using Prawn Library</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-08-01T16:45:00+05:30" pubdate data-updated="true">Aug 1<span>st</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-Building PDF Document in ruby &amp; rails application using prawn Library<br /><b>Brief</b><br />Before getting started with this tutorial, I would like to thanks <b>Greg and <br />Prawn team</b> for their awesome work towards ruby and rails community. <br />Installing prawn (core, layout, format, security) <br /><pre class=ruby>gem install prawn</pre>or <br />Add following line in rails environment file inside initializer block. <pre class=ruby>config.gem 'prawn'</pre>Optionally you can specify version to be used and then run task <pre class=ruby>rake gems:install</pre>Generating pdf using rails console <pre class=ruby>./script/console pdf = Prawn::Document.new </pre>It creates new pdf document object. Here you can additionally pass options parameters such as - <pre class=ruby>Prawn::Document.new(:page_size   =&gt; [11.32, 8.49], :page_layout =&gt; :portrait) Prawn::Document.new(A0) Here A0 is page size. Prawn::Document.new(:page_layout =&gt; :portrait,                      :left_margin =&gt; 10.mm,    # different                      :right_margin =&gt; 1.cm,    # units                      :top_margin =&gt; 0.1.dm,    # work                      :bottom_margin =&gt; 0.01.m, # well                      :page_size =&gt; 'A4')  pdf.text("Prawn Rocks") =&gt; 12  pdf.render_file('prawn.pdf') =&gt; #<file:prawn.pdf (closed)=""></file:prawn.pdf></pre>Here is output file generated [<a href="http://github.com/sandipransing/prawn-example/raw/master/sample/prawn.pdf">click</a>] <br />Now let&#8217;s go through other goodness of prawn. <pre class=ruby>pdf  = Prawn::Document.new('A3') do </pre><br /><ol><li>FONTS [<a href="http://github.com/sandipransing/prawn-example/raw/master/sample/font.pdf">click</a>]</li><pre class=ruby># Specify font to be used or specify path to font file. font "times.ttf" font("/times.ttf") </pre><li>TEXT [<a href="http://github.com/sandipransing/prawn-example/raw/master/sample/font.pdf">click</a>]</li><pre class=ruby>text 'Sandip Ransing', :size =&gt; 41, :position =&gt; :center, :style =&gt; :bold </pre><li>STROKE LINE [<a href="http://github.com/sandipransing/prawn-example/raw/master/sample/stroke.pdf">click</a>]</li><pre class=ruby>stroke do       rectangle [300,300], 100, 200  end </pre><li>IMAGE [<a href="http://github.com/sandipransing/prawn-example/raw/master/sample/image.pdf">click</a>]</li>Display Local file system Image <pre class=ruby>image 'sandip.png', :height =&gt; 50, :position =&gt; :center, :border =&gt; 2 </pre>Scale Image <pre class=ruby>image 'sandip.png', :scale =&gt; 0.5, :position =&gt; :left </pre>Display Remote image from Internet inside pdf <pre class=ruby>require "open-uri"  image open('http://t2.gstatic.com/images?q=tbn:kTG6gAKrnou2gM:http://www.facebook.com/profile/pic.php?uid=AAAAAQAQrLXvTWfyY2ANjttV8D1c0QAAAAnDHPFJe0pPFR84iIzXPKro&amp;t=1") end </pre><li>LINE BREAKS</li><pre class=ruby>movedown(20) </pre><li>TABLE/GRID [<a href="http://github.com/sandipransing/prawn-example/raw/master/sample/table.pdf">click</a>]</li><pre class=ruby>data = [     ["Name", {:text =&gt; 'Sandip Ransing', :font_style =&gt; :bold, :colspan =&gt; 4 }],     ["Address", {:text =&gt; 'SHIVAJINAGAR, PUNE 411005', :colspan =&gt; 4 }],     ["Landmark",{:text =&gt; 'NEAR FC COLLEGE', :colspan =&gt; 4 }],     ["Mobile","9860648108", {:text =&gt; "", :colspan =&gt; 3 }],     ["Education", {:text =&gt; "Bachelor in Computer Engineering", :colspan =&gt; 4 }],       ["Vehicle", 'Hero Honda',"Reg. No.", {:text =&gt; "MH 12 EN 921", :colspan =&gt; 3 }],       ["Additional", "GDCA", "class", 'First', ""],       [{:text =&gt; "Areas of Speciality", :font_style =&gt; :bold}, {:text =&gt; "Ruby, Rails, Radiant, Asterisk, Adhearsion, Geokit, Prawn, ....,...", :font_style =&gt; :bold, :colspan =&gt; 4}],       [{:text =&gt; "Website", :colspan =&gt; 2},{:text =&gt; "www.funonrails.com", :colspan =&gt; 3}],       [{:text =&gt; "Company", :colspan =&gt; 2},{:text =&gt; "Josh Software", :colspan =&gt; 3}]   ] table data,      :border_style =&gt; :grid, #:underline_header     :font_size  =&gt; 10,      :horizontal_padding =&gt; 6,     :vertical_padding   =&gt; 3,     :border_width =&gt; 0.7,      :column_widths =&gt; { 0 =&gt; 130, 1 =&gt; 100, 2 =&gt; 100, 3 =&gt; 100, 4 =&gt; 80 },      :position =&gt; :left,     :align =&gt; { 0 =&gt; :left, 1 =&gt; :right, 2 =&gt; :left, 3 =&gt; :right, 4 =&gt; :right } </pre><li>LINKS [<a href="http://github.com/sandipransing/prawn-example/raw/master/sample/link.pdf">click</a>]</li><pre class=ruby>link_annotation([200, 200, 500, 40],:Border =&gt; [0,0,1], :A =&gt; { :Type =&gt; :Action, :S =&gt; :URI, :URI =&gt; Prawn::LiteralString.new("http://twitter.com/sandipransing") } ) link_annotation(([0, 100, 100, 150]), :Border =&gt; [0,0,1], :Dest =&gt; s"http://funonrails.com") </pre><li>PDF Security [<a href="http://github.com/sandipransing/prawn-example/raw/master/sample/secure.pdf">click</a>]</li><pre class=ruby>encrypt_document :user_password =&gt; 'hello', :owner_password =&gt; 'railer',     :permissions =&gt; { :print_document =&gt; false } </pre><li>Prawn Inline Formatting</li>Prawn-format supports inline text formatting that gives user enough flexibility to use html tags. <pre class=ruby>require 'prawn/format' text 'This is <b>Strong </b> text', :inline_format =&gt; true text 'This is <b>bold</b> text \n It should be on newline.', :inline_format =&gt; true </pre></ol>SAVE PDF File <pre class=ruby>end pdf.render_file 'my.pdf' </pre> !!! NOTE: As of time now &#8216;prawn-format&#8217; is incompatible with latest prawn gem, It is compatible with prawn version  &lt;= 0.6 s</div>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/05/specify-rails-version-to-use-while/">Specify Rails Version to New Rails App</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-05-07T18:40:00+05:30" pubdate data-updated="true">May 7<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-On my development machine, I have rails versions installed ranging from rails 1.2.3 to 2.3<br />How do i create new rails app that will use rails 2.1.0.<br /> <b>Create new app with rails version 2.1.0 </b><br/><pre class="ruby" name="code"><br />  rails _2.1.0_ simple_blog<br /></pre><br/> <b>Specify database to use while creating new rails app </b><br/><pre class="ruby" name="code"><br />  rails _2.1.0_ simple_blog -d mysql<br /></pre></div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>sitemap « Fun On Rails</div>
-<div class='content'>
-[&#8230;] Specify rails version to use while creating rails project « Fun On Rails [&#8230;]</div>
-</div>
-<div class='comment'>
-<div class='author'>sandipransing</div>
-<div class='content'>
-specify database while creating rails application<br><br>rails  demo -d <br><br><br>rails _2.1.0_ my_rails_app -d mysql</div>
-</div>
-</div>
 </div>
   
   

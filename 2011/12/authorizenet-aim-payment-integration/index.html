@@ -9,7 +9,8 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Authorize Net (AIM) method enables internet merchants to accept online payments via credit card.Below post will show you how to integrate authorize &hellip;">
+  <meta name="description" content="Authorize Net (AIM) method enables internet merchants to accept online payments via credit card.
+Below post will show you how to integrate authorize &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -91,8 +92,216 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-Authorize Net (AIM) method enables internet merchants to accept online payments via credit card.<br/>Below post will show you how to integrate authorize net payment gateway inside rails app to accept online payments using activemerchant library.<br/> <pre class=ruby>  # Gemfile   gem 'activemerchant', :require => 'active_merchant' </pre><br/>Register for authorize net sandbox account <a href='https://developer.authorize.net/testaccount/'>click here</a><br/><br/><b>Payment gateway credentials</b><br/><pre class=ruby># config/authorize_net.yml development: &development     mode: test     login: 9gdLh6T     key: 67fu45xw6VP92LX1  production:    <<: *development  test:    <<: *development </pre><br/><b>Payment & creditcard form </b><br/><pre class=ruby># app/views/payments/new = form_for @payment, :url => payments_url do |f|   = f.text_field :amount   = fields_for :creditcard, @creditcard do |cc|     = cc.text_field :name     = cc.text_field :number     = cc.select :month, Date::ABBR_MONTHNAMES.compact.each_with_index.collect{|m, i| [m, i+1]}, {:prompt => 'Select'}     = cc.select :year, Array.new(15){|i| Date.current.year+i}, {:prompt => 'Select'}     = cc.text_field :verification_value   = f.submit 'Pay' </pre><br/><b>Payments Controller </b><br/><pre class=ruby># app/controllers/payments_controller.rb  class PaymentsController < ApplicationController    def new     @payment = Payment.new     @creditcard = ActiveMerchant::Billing::CreditCard.new   end    def create     @payment = Payment.new(params[:payment])     @creditcard = ActiveMerchant::Billing::CreditCard.new(params[:creditcard])     @payment.valid_card = @creditcard.valid?     if @payment.valid?        @payment = @payment.process_payment(@creditcard)       if @payment.success?         @payment.save         flash[:notice] = I18n.t('payment.success')         redirect_to payments_url and return       else         flash[:error] = I18n.t('payment.failed')       end     end     render :action => :new   end end </pre><br/><b>Generate & Migrate Payment Model</b><br/><pre class=ruby>  rails g model payment status:string amount:float transaction_number:string   rake db:migrate </pre><br/><b>Payment Model</b><br/><pre class=ruby># app/models/payment.rb  class Payment < ActiveRecord::Base    PROCESSING, FAILED, SUCCESS = 1, 2, 3    validates :valid_card, :inclusion => {:in => [true], :message => 'Invalid Credit Card'}   validates :amount, :presence => true, :numericality => { :greater_than => 0 }    def process_payment(creditcard)     ActiveMerchant::Billing::Base.mode = auth['mode'].to_sym     self.status = PROCESSING     response = gateway.purchase(amount * 100, creditcard)      if response.success?       self.transaction_number = response.subscription_id       self.status = SUCCESS     else       self.status = FAILED     end     return self   rescue Exception => e     self.status = FAILED     return self   end    def success?     self.status == SUCCESS   end    private   def gateway     ActiveMerchant::Billing::AuthorizeNetGateway.new(       :login    => auth['login'],       :password => auth['key'])   end    def auth     @@auth ||= YAML.load_file("#{Rails.root}/config/authorize_net.yml")[Rails.env]   end end </pre></div>
+<div class="entry-content"><p>Authorize Net (AIM) method enables internet merchants to accept online payments via credit card.
+Below post will show you how to integrate authorize net payment gateway inside rails app to accept online payments using activemerchant library.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># Gemfile
+</span><span class='line'>gem 'activemerchant', :require =&gt; 'active_merchant'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Register for authorize net sandbox account click <a href="https://developer.authorize.net/testaccount/">here</a></p>
+
+<p>Payment gateway credentials</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># config/authorize_net.yml
+</span><span class='line'>development: &development
+</span><span class='line'>    mode: test
+</span><span class='line'>    login: 9gdLh6T
+</span><span class='line'>    key: 67fu45xw6VP92LX1
+</span><span class='line'>
+</span><span class='line'>production:
+</span><span class='line'>   &lt;&lt;: *development
+</span><span class='line'>
+</span><span class='line'>test:
+</span><span class='line'>   &lt;&lt;: *development</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Payment &amp; creditcard form</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='haml'><span class='line'># app/views/payments/new
+</span><span class='line'><span class="p">=</span> <span class="n">form_for</span> <span class="vi">@payment</span><span class="p">,</span> <span class="ss">:url</span> <span class="o">=&gt;</span> <span class="n">payments_url</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
+</span><span class='line'>  <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:amount</span>
+</span><span class='line'>  <span class="p">=</span> <span class="n">fields_for</span> <span class="ss">:creditcard</span><span class="p">,</span> <span class="vi">@creditcard</span> <span class="k">do</span> <span class="o">|</span><span class="n">cc</span><span class="o">|</span>
+</span><span class='line'>    <span class="p">=</span> <span class="n">cc</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:name</span>
+</span><span class='line'>    <span class="p">=</span> <span class="n">cc</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:number</span>
+</span><span class='line'>    <span class="p">=</span> <span class="n">cc</span><span class="o">.</span><span class="n">select</span> <span class="ss">:month</span><span class="p">,</span> <span class="ss">Date</span><span class="p">:</span><span class="ss">:ABBR_MONTHNAMES</span><span class="o">.</span><span class="n">compact</span><span class="o">.</span><span class="n">each_with_index</span><span class="o">.</span><span class="n">collect</span><span class="p">{</span><span class="o">|</span><span class="n">m</span><span class="p">,</span> <span class="n">i</span><span class="o">|</span> <span class="o">[</span><span class="n">m</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">},</span> <span class="p">{</span><span class="ss">:prompt</span> <span class="o">=&gt;</span> <span class="s1">&#39;Select&#39;</span><span class="p">}</span>
+</span><span class='line'>    <span class="p">=</span> <span class="n">cc</span><span class="o">.</span><span class="n">select</span> <span class="ss">:year</span><span class="p">,</span> <span class="nb">Array</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="mi">15</span><span class="p">){</span><span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="no">Date</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">year</span><span class="o">+</span><span class="n">i</span><span class="p">},</span> <span class="p">{</span><span class="ss">:prompt</span> <span class="o">=&gt;</span> <span class="s1">&#39;Select&#39;</span><span class="p">}</span>
+</span><span class='line'>    <span class="p">=</span> <span class="n">cc</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:verification_value</span>
+</span><span class='line'>  <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">submit</span> <span class="s1">&#39;Pay&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Payments Controller</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/controllers/payments_controller.rb </span>
+</span><span class='line'><span class="k">class</span> <span class="nc">PaymentsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">new</span>
+</span><span class='line'>    <span class="vi">@payment</span> <span class="o">=</span> <span class="no">Payment</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'>    <span class="vi">@creditcard</span> <span class="o">=</span> <span class="ss">ActiveMerchant</span><span class="p">:</span><span class="ss">:Billing</span><span class="o">::</span><span class="no">CreditCard</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">create</span>
+</span><span class='line'>    <span class="vi">@payment</span> <span class="o">=</span> <span class="no">Payment</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:payment</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@creditcard</span> <span class="o">=</span> <span class="ss">ActiveMerchant</span><span class="p">:</span><span class="ss">:Billing</span><span class="o">::</span><span class="no">CreditCard</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:creditcard</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@payment</span><span class="o">.</span><span class="n">valid_card</span> <span class="o">=</span> <span class="vi">@creditcard</span><span class="o">.</span><span class="n">valid?</span>
+</span><span class='line'>    <span class="k">if</span> <span class="vi">@payment</span><span class="o">.</span><span class="n">valid?</span>
+</span><span class='line'>      <span class="vi">@payment</span> <span class="o">=</span> <span class="vi">@payment</span><span class="o">.</span><span class="n">process_payment</span><span class="p">(</span><span class="vi">@creditcard</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">if</span> <span class="vi">@payment</span><span class="o">.</span><span class="n">success?</span>
+</span><span class='line'>        <span class="vi">@payment</span><span class="o">.</span><span class="n">save</span>
+</span><span class='line'>        <span class="n">flash</span><span class="o">[</span><span class="ss">:notice</span><span class="o">]</span> <span class="o">=</span> <span class="no">I18n</span><span class="o">.</span><span class="n">t</span><span class="p">(</span><span class="s1">&#39;payment.success&#39;</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">redirect_to</span> <span class="n">payments_url</span> <span class="ow">and</span> <span class="k">return</span>
+</span><span class='line'>      <span class="k">else</span>
+</span><span class='line'>        <span class="n">flash</span><span class="o">[</span><span class="ss">:error</span><span class="o">]</span> <span class="o">=</span> <span class="no">I18n</span><span class="o">.</span><span class="n">t</span><span class="p">(</span><span class="s1">&#39;payment.failed&#39;</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>    <span class="n">render</span> <span class="ss">:action</span> <span class="o">=&gt;</span> <span class="ss">:new</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Generate &amp; Migrate Payment Model</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rails</span> <span class="n">g</span> <span class="n">model</span> <span class="n">payment</span> <span class="ss">status</span><span class="p">:</span><span class="n">string</span> <span class="ss">amount</span><span class="p">:</span><span class="n">float</span> <span class="n">transaction_number</span><span class="ss">:string</span>
+</span><span class='line'><span class="n">rake</span> <span class="ss">db</span><span class="p">:</span><span class="n">migrate</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Payment Model</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/models/payment.rb </span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Payment</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="no">PROCESSING</span><span class="p">,</span> <span class="no">FAILED</span><span class="p">,</span> <span class="no">SUCCESS</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">validates</span> <span class="ss">:valid_card</span><span class="p">,</span> <span class="ss">:inclusion</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:in</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="kp">true</span><span class="o">]</span><span class="p">,</span> <span class="ss">:message</span> <span class="o">=&gt;</span> <span class="s1">&#39;Invalid Credit Card&#39;</span><span class="p">}</span>
+</span><span class='line'>  <span class="n">validates</span> <span class="ss">:amount</span><span class="p">,</span> <span class="ss">:presence</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">:numericality</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:greater_than</span> <span class="o">=&gt;</span> <span class="mi">0</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">process_payment</span><span class="p">(</span><span class="n">creditcard</span><span class="p">)</span>
+</span><span class='line'>    <span class="ss">ActiveMerchant</span><span class="p">:</span><span class="ss">:Billing</span><span class="o">::</span><span class="no">Base</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">auth</span><span class="o">[</span><span class="s1">&#39;mode&#39;</span><span class="o">].</span><span class="n">to_sym</span>
+</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="no">PROCESSING</span>
+</span><span class='line'>    <span class="n">response</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">purchase</span><span class="p">(</span><span class="n">amount</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="n">creditcard</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">success?</span>
+</span><span class='line'>      <span class="nb">self</span><span class="o">.</span><span class="n">transaction_number</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">subscription_id</span>
+</span><span class='line'>      <span class="nb">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="no">SUCCESS</span>
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>      <span class="nb">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="no">FAILED</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nb">self</span>
+</span><span class='line'>  <span class="k">rescue</span> <span class="no">Exception</span> <span class="o">=&gt;</span> <span class="n">e</span>
+</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="no">FAILED</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nb">self</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">success?</span>
+</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="no">SUCCESS</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">private</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">gateway</span>
+</span><span class='line'>    <span class="ss">ActiveMerchant</span><span class="p">:</span><span class="ss">:Billing</span><span class="o">::</span><span class="no">AuthorizeNetGateway</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
+</span><span class='line'>      <span class="ss">:login</span>    <span class="o">=&gt;</span> <span class="n">auth</span><span class="o">[</span><span class="s1">&#39;login&#39;</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>      <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="n">auth</span><span class="o">[</span><span class="s1">&#39;key&#39;</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">auth</span>
+</span><span class='line'>    <span class="vc">@@auth</span> <span class="o">||=</span> <span class="no">YAML</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="no">Rails</span><span class="o">.</span><span class="n">root</span><span class="si">}</span><span class="s2">/config/authorize_net.yml&quot;</span><span class="p">)</span><span class="o">[</span><span class="no">Rails</span><span class="o">.</span><span class="n">env</span><span class="o">]</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 

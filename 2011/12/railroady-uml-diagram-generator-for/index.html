@@ -9,7 +9,12 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="railroady is UML class diagram generator for rails. First you need to install `graphviz` pkg in order to have `dot` , `neato` commands &hellip;">
+  <meta name="description" content="railroady is UML class diagram generator for rails.
+First you need to install graphviz pkg in order to have dot , neato commands available 1
+2
+3
+4
+# &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -91,8 +96,132 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-railroady is UML class diagram generator for rails.<br/> First you need to install `graphviz` pkg in order to have `dot` , `neato` commands available<br/><pre class=ruby>group :development, :test do   gem railroady end </pre><br/>Run below command to generate MVC diagrams<br/><pre class=ruby>bundle install  rake diagram:all </pre><br/>Individual diagram generation<br/><b>Model Diagram</b><pre class=ruby>railroady -M | dot -Tpng > models.png </pre><b>Controller Diagram</b><pre class=ruby>railroady -C | dot -Tpng > controllers.png </pre><b>AASM Diagram</b><pre class=ruby>railroady -A | dot -Tpng > aasm.png </pre> <b>Commands</b><br/><pre class=ruby>-M, --models                     Generate models diagram -C, --controllers                Generate controllers diagram -A, --aasm                       Generate "acts as state machine" diagram </pre><br/><b>Options</b><br/><pre class=ruby># Common options -b, --brief                      Generate compact diagram                                    (no attributes nor methods) -s, --specify file1[,fileN]      Specify given files only for the diagram                                    (can take a glob pattern) -e, --exclude file1[,fileN]      Exclude given files                                    (can take a glob pattern) -i, --inheritance                Include inheritance relations -l, --label                      Add a label with diagram information                                    (type, date, migration, version) -o, --output FILE                Write diagram to file FILE -v, --verbose                    Enable verbose output                                    (produce messages to STDOUT) </pre><br/><b>Models diagram options:</b><br/><pre class=ruby>-a, --all                        Include all models                                    (not only ActiveRecord::Base derived)     --all-columns                Show all columns                                     (not just content columns)     --hide-magic                 Hide magic field names     --hide-types                 Hide attributes type -j, --join                       Concentrate edges -m, --modules                    Include modules -p, --plugins-models             Include plugins models -t, --transitive                 Include transitive associations                                  (through inheritance) </pre><br/><b>Controllers diagram options:</b><pre class=ruby>--hide-public                Hide public methods --hide-protected             Hide protected methods --hide-private               Hide private methods </pre><br/><b>Other Options</b><pre class=ruby>-h, --help                       Show this message     --version                    Show version and copyright </pre></div>
+<div class="entry-content"><p>railroady is UML class diagram generator for rails.
+First you need to install <code>graphviz</code> pkg in order to have <code>dot</code> , <code>neato</code> commands available</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># Gemfile
+</span><span class='line'>group :development, :test do
+</span><span class='line'>  gem railroady
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Run below command to generate MVC diagrams</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>bundle install
+</span><span class='line'>rake diagram:all</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Individual diagram generation</p>
+
+<p><strong>1.  Model Diagram</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>railroady -M | dot -Tpng &gt; models.png</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>2.  Controller Diagram</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>railroady -C | dot -Tpng &gt; controllers.png</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>3.  AASM Diagram</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>railroady -A | dot -Tpng &gt; aasm.png</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Commands</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>-M, --models                     Generate models diagram
+</span><span class='line'>-C, --controllers                Generate controllers diagram
+</span><span class='line'>-A, --aasm                       Generate "acts as state machine" diagram</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Other options which can be passed along-with commands &ndash;</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># Common options
+</span><span class='line'>-b, --brief                      Generate compact diagram
+</span><span class='line'>                                   (no attributes nor methods)
+</span><span class='line'>-s, --specify file1[,fileN]      Specify given files only for the diagram
+</span><span class='line'>                                   (can take a glob pattern)
+</span><span class='line'>-e, --exclude file1[,fileN]      Exclude given files
+</span><span class='line'>                                   (can take a glob pattern)
+</span><span class='line'>-i, --inheritance                Include inheritance relations
+</span><span class='line'>-l, --label                      Add a label with diagram information
+</span><span class='line'>                                   (type, date, migration, version)
+</span><span class='line'>-o, --output FILE                Write diagram to file FILE
+</span><span class='line'>-v, --verbose                    Enable verbose output
+</span><span class='line'>                                   (produce messages to STDOUT)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Models diagram options:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>-a, --all                        Include all models
+</span><span class='line'>                                   (not only ActiveRecord::Base derived)
+</span><span class='line'>    --all-columns                Show all columns 
+</span><span class='line'>                                   (not just content columns)
+</span><span class='line'>    --hide-magic                 Hide magic field names
+</span><span class='line'>    --hide-types                 Hide attributes type
+</span><span class='line'>-j, --join                       Concentrate edges
+</span><span class='line'>-m, --modules                    Include modules
+</span><span class='line'>-p, --plugins-models             Include plugins models
+</span><span class='line'>-t, --transitive                 Include transitive associations
+</span><span class='line'>                                 (through inheritance)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Controllers diagram options:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>--hide-public                Hide public methods
+</span><span class='line'>--hide-protected             Hide protected methods
+</span><span class='line'>--hide-private               Hide private methods</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Other Options</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>-h, --help                       Show this message
+</span><span class='line'>    --version                    Show version and copyright</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 

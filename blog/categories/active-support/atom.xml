@@ -4,7 +4,7 @@
   <title><![CDATA[Category: active-support | Fun On Rails]]></title>
   <link href="http://sandipransing.github.io/blog/categories/active-support/atom.xml" rel="self"/>
   <link href="http://sandipransing.github.io/"/>
-  <updated>2014-02-09T23:18:57+05:30</updated>
+  <updated>2014-02-10T04:31:35+05:30</updated>
   <id>http://sandipransing.github.io/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -18,9 +18,55 @@
     <link href="http://sandipransing.github.io/2011/12/bugging-around-active-supports/"/>
     <updated>2011-12-28T19:14:00+05:30</updated>
     <id>http://sandipransing.github.io/2011/12/bugging-around-active-supports</id>
-    <content type="html"><![CDATA[<div class='post'>
-We all know Active Support library constantly keeps adding new extensions to ruby core library and hence rails framework.<br/> Do you know now inside ruby class we can have class_attribute placeholder. <br/> <pre class=ruby>class A   class_attribute :counter, :access_time end  A.counter = 12 A.counter #=> 12 A.new.counter #=> 12 </pre><br/><b>Inheritance </b><pre class=ruby>class B < A end  B.counter #=> 12 B.access_time #=> nil B.access_time = Time.now B.access_time #=> Wed Dec 28 18:55:06 +0530 2011 B.new.access_time #=> Wed Dec 28 18:55:06 +0530 2011 A.access_time = nil </pre><br/>Restricting instance from writing class_attributes <br/><pre class=ruby>class V   class_attribute :counter, :instance_writer => false end  V.new.counter = 12 NoMethodError: undefined method `counter=' for #<V:0x7f8f9d66fee8></pre><br/>Other ways <br/><pre class=ruby>a_class = Class.new{class_atrribute :counter}  a_class.counter = 13 a_class.counter #=> 13 a_class.new.counter #=> 13  p = Class.new { class_attribute :help, :instance_writer => false } p.new.help = 'Got a second!' NoMethodError: undefined method `help=' for #<#<Class:0x7f8f9d5c2fb8>:0x7f8f9d5b1038>p.help = 'Got a second!' p.help #=> "Got a second!" </pre></div>
+    <content type="html"><![CDATA[<p>We all know Active Support library constantly keeps adding new extensions to ruby core library and hence rails framework.
+Do you know now inside ruby class we can have class_attribute placeholder.</p>
 
+<p>```ruby
+class A
+  class_attribute :counter, :access_time
+end</p>
+
+<p>A.counter = 12
+A.counter #=> 12
+A.new.counter #=> 12
+```</p>
+
+<p>Inheritance
+```ruby
+class B &lt; A
+end</p>
+
+<p>B.counter #=> 12
+B.access_time #=> nil
+B.access_time = Time.now
+B.access_time #=> Wed Dec 28 18:55:06 +0530 2011
+B.new.access_time #=> Wed Dec 28 18:55:06 +0530 2011
+A.access_time = nil
+```</p>
+
+<p>Restricting instance from writing class_attributes
+```ruby
+class V
+  class_attribute :counter, :instance_writer => false
+end</p>
+
+<p>V.new.counter = 12
+NoMethodError: undefined method `counter=&lsquo; for #&lt;#&lt;Class:0x7f8f9d5c2fb8>:0x7f8f9d5b1038>
+<code>
+Other ways
+</code>ruby
+a_class = Class.new{class_atrribute :counter}</p>
+
+<p>a_class.counter = 13
+a_class.counter #=> 13
+a_class.new.counter #=> 13</p>
+
+<p>p = Class.new { class_attribute :help, :instance_writer => false }
+p.new.help = &lsquo;Got a second!&rsquo;
+NoMethodError: undefined method `help=&lsquo; for #&lt;#:0x7f8f9d5b1038>
+p.help = 'Got a second!&rsquo;
+p.help #=> &ldquo;Got a second!&rdquo;
+```</p>
 ]]></content>
   </entry>
   

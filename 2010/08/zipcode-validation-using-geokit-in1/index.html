@@ -5,13 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Migrating from svn to git - Fun On Rails</title>
+  <title>Zipcode validation using geokit in rails - Fun On Rails</title>
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Migrating from svn to git 1. Install git-svn 1
-sudo apt-get install git-svn 2. Clone svn repositoy 1
-git svn clone -s svn://server/project_myt/trunk &hellip;">
+  <meta name="description" content="1.Install geokit gem gem install geokit
+OR # Add following line inside rails initialize block Rails::Initializer.run do |config| config.gem 'geokit &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +19,7 @@ git svn clone -s svn://server/project_myt/trunk &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sandipransing.github.io/2011/08/migrating-from-svn-to-git">
+  <link rel="canonical" href="http://sandipransing.github.io/2010/08/zipcode-validation-using-geokit-in1">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Fun On Rails" type="application/atom+xml">
@@ -70,7 +69,7 @@ git svn clone -s svn://server/project_myt/trunk &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Migrating From Svn to Git</h1>
+      <h1 class="entry-title">Zipcode Validation Using Geokit in Rails</h1>
     
     
       <p class="meta">
@@ -86,65 +85,21 @@ git svn clone -s svn://server/project_myt/trunk &hellip;">
   
 
 
-<time datetime="2011-08-17T19:44:00+05:30" pubdate data-updated="true">Aug 17<span>th</span>, 2011</time>
+<time datetime="2010-08-21T04:58:00+05:30" pubdate data-updated="true">Aug 21<span>st</span>, 2010</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>Migrating from svn to git</p>
-
-<p><strong>1. Install git-svn</strong></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install git-svn</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>2. Clone svn repositoy</strong></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git svn clone -s svn://server/project_myt/trunk proj</span></code></pre></td></tr></table></div></figure>
-
-
-<p>To add svn users and git users mapping
-Create author-file</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># authorsfile 
-</span><span class='line'>sandip = sandipransing 
-</span><span class='line'>amit = amitk 
-</span><span class='line'>root = sandipransing </span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git svn --author-file=authorfile clone -s svn://server/project_myt/trunk proj</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>3. Add git repository ur</strong></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd proj
-</span><span class='line'>git remote add git@github.com:USERNAME/project.git</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>4. Push repository to git</strong></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git push origin master</span></code></pre></td></tr></table></div></figure>
-
-
-<p>To do svn pull for latest changes</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git svn rebase</span></code></pre></td></tr></table></div></figure>
-
+<div class="entry-content"><div class='post'>
+<b>1.Install geokit gem</b><br/>
+<pre class=ruby>
+gem install geokit</pre>
+OR  
+<pre class=ruby>
+# Add following line inside rails initialize block 
+Rails::Initializer.run do |config|  config.gem 'geokit' end </pre><br/>And then run command<br/><pre class=ruby>rake gems:install</pre> <b>2. Consider User model with zipcode as attribute field</b><br/><pre class=ruby>include Geokit::Geocoders    class User < ActiveRecord::Base      set_table_name :users      validate_presence_of :zipcode      validate :request_zipcode_validation_using_geokit, :if => :zipcode            private      def request_zipcode_validation_using_geokit       # Method request google api for location       # if location found then zipcode is valid otherwise       # add validation error on zipcode field       # as it method contacts with google api and takes time       # to return result, poll request only when zipcode gets       # changed       poll = true # default true for new objects       if self.id ## this means already existing user and zipcode is valid last time        # Hack to find where zipcode got modified or not         # old_user = User.find self.id        poll = false if old_user.zipcode == self.zipcode       end              # Actual requesting api to return location associated with zipcode       if poll        loc = MultiGeocoder.geocode(self.zip_code)       end       # Add Validation Error if location is not found       errors.add(:zip_code, "Unable to geocode your location from zipcode entered.") unless loc.success      end </pre> <br/>Please note that same method can also be used to validate state, city and country.<br/> Again we can use combination of fields to validate each other. <br/>Like -<br/><b>1. Based on country entered, state validation</b><br/><b>2. Based on state, city validation</b><br/><b>3. Based on city, zipcode validation</b><br/>or<br/><b>4. Based on zipcode and country, state and city validation</b><br/><br/>Here is another method to validate state and city based on zipcode and country.<br/>Lets take example of &#8216;US&#8217;<br/><pre class=ruby> def request_state_and_city_validation_based_on_zipcode       poll = true # default true for new objects       if self.id ## this means already existing user and all attributes were valid last time        # Hack to find any one of location attribute got modified        # old_user = User.find self.id        loc_attrs = %w{zipcode state city} # keep in mind country US is default assumed        if loc_attrs.all? {|attr| self.attribute_for_inspect(attr) == old_user.attribute_for_inspect(attr)}          self.poll = false        end       end              # Actual requesting api to return location associated with zipcode       if poll        loc = MultiGeocoder.geocode("#{self.zip_code}, US")       end       # Add Validation Error if location is not found       unless loc.success         errors.add(:zip_code, "Unable to geocode your location from zipcode entered.")       else       # Validate state and city fields in compare to loc object returned by geocode         errors.add(:state, "State doesn't matches with zipcode entered") if self.state != loc.state         errors.add(:city, "City doesn't matches with zipcode entered") if self.city != loc.city       end      end </pre><br/><b>Note*** </b><br/>If you are subscriber of blog and not displaying post correctly. I request you to visit post on blog itself. Somehow style is not getting correctly in email. I will try to fix this problem asap.<br/><br/> <b>Upcoming Posts</b><br/>1. Geokit finders: Find locations in/within/beyond particular radius from specified location using acts_as_mappable plugin<br/>2. Customizing authlogic for multiple sessions i.e. using different models for role based authentication.<br/></div>
 </div>
 
 
@@ -167,12 +122,12 @@ Create author-file</p>
   
 
 
-<time datetime="2011-08-17T19:44:00+05:30" pubdate data-updated="true">Aug 17<span>th</span>, 2011</time>
+<time datetime="2010-08-21T04:58:00+05:30" pubdate data-updated="true">Aug 21<span>st</span>, 2010</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/git/'>git</a>, <a class='category' href='/blog/categories/svn/'>svn</a>
+    <a class='category' href='/blog/categories/api/'>api</a>, <a class='category' href='/blog/categories/geokit/'>geokit</a>, <a class='category' href='/blog/categories/rails/'>rails</a>
   
 </span>
 
@@ -181,7 +136,7 @@ Create author-file</p>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2011/08/migrating-from-svn-to-git/" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2011/08/migrating-from-svn-to-git/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2010/08/zipcode-validation-using-geokit-in1/" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2010/08/zipcode-validation-using-geokit-in1/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -192,10 +147,10 @@ Create author-file</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2011/07/how-to-get-started-with-tata-photon-on/" title="Previous Post: How to get started with tata photon on ubuntu machine">&laquo; How to get started with tata photon on ubuntu machine</a>
+        <a class="basic-alignment left" href="/2010/08/zipcode-validation-using-geokit-in/" title="Previous Post: Zipcode validation using geokit in rails">&laquo; Zipcode validation using geokit in rails</a>
       
       
-        <a class="basic-alignment right" href="/2011/09/print-particular-div-inside-html-page/" title="Next Post: Print particular DIV inside HTML Page">Print particular DIV inside HTML Page &raquo;</a>
+        <a class="basic-alignment right" href="/2010/09/rails-3-beautiful-code/" title="Next Post: Rails 3 Beautiful Code">Rails 3 Beautiful Code &raquo;</a>
       
     </p>
   </footer>

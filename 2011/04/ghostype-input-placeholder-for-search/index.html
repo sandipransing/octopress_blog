@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Ghostype input Placeholder for search text fields using jQuery - Fun On Rails</title>
+  <title>Ghost-Type input Placeholder for search text fields using jQuery - Fun On Rails</title>
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Placeholder DemoGhostpe Demo jQuery placeholder plugin can be used to display default text inside input text fields. HTML5 introduced type search &hellip;">
+  <meta name="description" content="Placeholder Demo: Click on input box and placeholder text will disappear. Ghost-type Demo: After page load observe inside input box to enter &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,7 +68,7 @@
   
   <header>
     
-      <h1 class="entry-title">Ghostype Input Placeholder for Search Text Fields Using jQuery</h1>
+      <h1 class="entry-title">Ghost-Type Input Placeholder for Search Text Fields Using jQuery</h1>
     
     
       <p class="meta">
@@ -91,8 +91,64 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-<b>Placeholder Demo</b><br/><input type="search" placeholder="Enter search text here" class="query"><br/><b>Ghostpe Demo</b><br/><script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script> <input type="search" placeholder="Enter search text here" id="home-search" class="query"><script type="text/javascript">    $(document).ready(function(){       var search = "#home-search";       var chars = $(search).attr('placeholder').split('');       $.each(chars, function(i, v){         setTimeout(function() {           $(search).val((chars.slice(0, i+1).join('')));         }, 100*i);       });     }); </script><br/>jQuery placeholder plugin can be used to display default text inside input text fields. HTML5 introduced type search fields with placeholder attribute support.<br /><pre class=ruby> &lt;input class="query" id="home-search" placeholder="Enter search text here" type="search" /&gt;</pre><br /> It should display default text &#8220;Enter search text here&#8221; inside text-field and when user tries to type something it disappears.<br />In order to achieve text marquee like effect to default text value with jQery use following jQuery code. It will type text character by character from left to right.<br />Same effect can be achieved by creating gif image of typing and placing it as background-image to text field with certain drawbacks like changing default text on the fly.<br />Place below code inside javascript tag in your html file<br /><b> jQuery Code </b><pre class=ruby>      $(document).ready(function(){         var search = "#home-search";         var chars = $(search).attr('placeholder').split('');         $.each(chars, function(i, v){           setTimeout(function() {             $(search).val((chars.slice(0, i+1).join('')));           }, 100*i);         });       }); </pre><br/>Got easy ??</div>
+<div class="entry-content"><p>Placeholder Demo:
+<input type=text placeholder='Enter search text here'/>
+Click on input box and placeholder text will disappear.</p>
+
+<p>Ghost-type Demo:
+<input id='home-search' class="query" placeholder='Enter search text here' type="search"/>
+After page load observe inside input box to enter placeholder text char by char.</p>
+
+<p>jQuery placeholder plugin can be used to display default text inside input text fields. HTML5 introduced type search fields with placeholder attribute support.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;input class="query" id="home-search" placeholder="Enter search text here" type="search" /&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It should display default text &ldquo;Enter search text here&rdquo; inside text-field and when user tries to type something it disappears.
+In order to achieve text marquee like effect to default text value with jQery use following jQuery code. It will type text character by character from left to right.</p>
+
+<p>Same effect can be achieved by creating gif image of typing and placing it as background-image to text field with certain drawbacks like changing default text on the fly.</p>
+
+<p>Place below code inside javascript tag in your html file</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="err">#</span><span class="nx">jQuery</span> <span class="nx">Code</span>
+</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">search</span> <span class="o">=</span> <span class="s2">&quot;#home-search&quot;</span><span class="p">;</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">chars</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">search</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;placeholder&#39;</span><span class="p">).</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">chars</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">v</span><span class="p">){</span>
+</span><span class='line'>    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="nx">search</span><span class="p">).</span><span class="nx">val</span><span class="p">((</span><span class="nx">chars</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)));</span>
+</span><span class='line'>    <span class="p">},</span> <span class="mi">100</span><span class="o">*</span><span class="nx">i</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<script type='text/javascript'>
+$(document).ready(function(){
+  var search = "#home-search";
+  var chars = $(search).attr('placeholder').split('');
+  $.each(chars, function(i, v){
+    setTimeout(function() {
+      $(search).val((chars.slice(0, i+1).join('')));
+    }, 1000*i);
+  });
+});
+</script>
+
+
+<p>Got easy ??</p>
 </div>
 
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: pagination | Fun On Rails]]></title>
   <link href="http://sandipransing.github.io/blog/categories/pagination/atom.xml" rel="self"/>
   <link href="http://sandipransing.github.io/"/>
-  <updated>2014-02-09T23:18:57+05:30</updated>
+  <updated>2014-02-10T04:31:35+05:30</updated>
   <id>http://sandipransing.github.io/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -18,9 +18,47 @@
     <link href="http://sandipransing.github.io/2011/12/simplified-active-record-extensions/"/>
     <updated>2011-12-28T14:21:00+05:30</updated>
     <id>http://sandipransing.github.io/2011/12/simplified-active-record-extensions</id>
-    <content type="html"><![CDATA[<div class='post'>
-Below extensions to active record base simplifies its usage while coding.<br/><pre class=ruby># config/initializers/core_extensions.rb  class ActiveRecord::Base    def self.pagination(options)     paginate :per_page => options[:per_page] || per_page, :page => options[:page]   end    def self.options_for_select(opts={})     opts[:name] ||= :name     opts[:attr] ||= :id     opts[:prompt] ||= 'Please Select'     all.collect{|c| [c.send(opts[:name].to_sym), c.send(opts[:attr].to_sym)]}.insert(0, [opts[:prompt], nil])   end end </pre>Usage<br/><pre class=ruby>class Student< ActiveRecord::Base  #attributes #=> name, age end  ##  Student.pagination({:page => 10}) Student.pagination({:per_page => 2, :page => 2}) Student.options_for_select Student.options_for_select({:prompt => 'Please select'}) Student.options_for_select({:name => :age}) </pre></div>
+    <content type="html"><![CDATA[<p>Below extensions to active record base simplifies its usage while coding.</p>
 
+<p>```ruby</p>
+
+<h1>config/initializers/core_extensions.rb</h1>
+
+<p>class ActiveRecord::Base</p>
+
+<p>  def self.pagination(options)</p>
+
+<pre><code>paginate :per_page =&gt; options[:per_page] || per_page, :page =&gt; options[:page]
+</code></pre>
+
+<p>  end</p>
+
+<p>  def self.options_for_select(opts={})</p>
+
+<pre><code>opts[:name] ||= :name
+opts[:attr] ||= :id
+opts[:prompt] ||= 'Please Select'
+all.collect{|c| [c.send(opts[:name].to_sym), c.send(opts[:attr].to_sym)]}.insert(0, [opts[:prompt], nil])
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<p>Usage
+```ruby
+class Student&lt; ActiveRecord::Base
+ #attributes #=> name, age
+end</p>
+
+<h2></h2>
+
+<p>Student.pagination({:page => 10})
+Student.pagination({:per_page => 2, :page => 2})
+Student.options_for_select
+Student.options_for_select({:prompt => &lsquo;Please select&rsquo;})
+Student.options_for_select({:name => :age})
+```</p>
 ]]></content>
   </entry>
   

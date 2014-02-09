@@ -9,7 +9,10 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="active_admin is the good way to provide rails administrative interface.It provides front-end db administration and its customizable too :) # Gemfile &hellip;">
+  <meta name="description" content="Active Admin is the good way to provide rails administrative interface. It provides front-end db administration and its customizable too :) 1
+2
+3
+4 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -91,8 +94,113 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-active_admin is the good way to provide rails administrative interface.<br/>It provides front-end db administration and its customizable too :)<br/> <pre class=ruby># Gemfile   gem 'activeadmin'   gem 'sass-rails'   gem "meta_search",    '>= 1.1.0.pre' </pre><br/>Bundle install, generate config & migrate db <br/><pre class=ruby>bundle install rails g active_admin:install rake db:migrate </pre> Config <br/><pre class=ruby># config/initializers/active_admin.rb  ActiveAdmin.setup do |config|   config.site_title = "Web Site :: Admin Panel"   config.site_title_link = "/"   config.default_namespace = :siteadmin   config.authentication_method = :authenticate_admin_user!   config.current_user_method = :current_admin_user   config.logout_link_method = :delete end </pre><br/>Registering new resource <br/><pre class=ruby>rails generate active_admin:resource category </pre>Customization<br/><pre class=ruby># app/admin/categories.rb  ActiveAdmin.register Category do   scope :published    form do |f|     f.inputs do       f.input :name, :label => 'Name'       f.input :for_type, :label => "Category Type"     end     f.buttons   end end </pre>Adding Dashboard<br/><pre class=ruby>ActiveAdmin::Dashboards.build do   section "Recent Categories" do     table_for Category.published.recent.limit(2) do       column :name do |c|         link_to c.name, [:admin, c]       end       column :created_at     end     strong { link_to "View All Categories", admin_categories_path }   end end </pre></div>
+<div class="entry-content"><blockquote><p>Active Admin is the good way to provide rails administrative interface. It provides front-end db administration and its customizable too :)</p></blockquote>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># Gemfile
+</span><span class='line'>gem 'activeadmin'
+</span><span class='line'>gem 'sass-rails'
+</span><span class='line'>gem "meta_search",    '&gt;= 1.1.0.pre'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Bundle install, generate config &amp; migrate db</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>bundle install
+</span><span class='line'>rails g active_admin:install
+</span><span class='line'>rake db:migrate</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Config</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># config/initializers/active_admin.rb </span>
+</span><span class='line'><span class="no">ActiveAdmin</span><span class="o">.</span><span class="n">setup</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">site_title</span> <span class="o">=</span> <span class="s2">&quot;Web Site :: Admin Panel&quot;</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">site_title_link</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">default_namespace</span> <span class="o">=</span> <span class="ss">:siteadmin</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">authentication_method</span> <span class="o">=</span> <span class="ss">:authenticate_admin_user!</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">current_user_method</span> <span class="o">=</span> <span class="ss">:current_admin_user</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">logout_link_method</span> <span class="o">=</span> <span class="ss">:delete</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Registering new resource</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rails</span> <span class="n">generate</span> <span class="n">active_admin</span><span class="ss">:resource</span> <span class="n">category</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Customization</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/admin/categories.rb </span>
+</span><span class='line'><span class="no">ActiveAdmin</span><span class="o">.</span><span class="n">register</span> <span class="no">Category</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">scope</span> <span class="ss">:published</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">form</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">f</span><span class="o">.</span><span class="n">inputs</span> <span class="k">do</span>
+</span><span class='line'>      <span class="n">f</span><span class="o">.</span><span class="n">input</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:label</span> <span class="o">=&gt;</span> <span class="s1">&#39;Name&#39;</span>
+</span><span class='line'>      <span class="n">f</span><span class="o">.</span><span class="n">input</span> <span class="ss">:for_type</span><span class="p">,</span> <span class="ss">:label</span> <span class="o">=&gt;</span> <span class="s2">&quot;Category Type&quot;</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>    <span class="n">f</span><span class="o">.</span><span class="n">buttons</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Adding Dashboard</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="ss">ActiveAdmin</span><span class="p">:</span><span class="ss">:Dashboards</span><span class="o">.</span><span class="n">build</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">section</span> <span class="s2">&quot;Recent Categories&quot;</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">table_for</span> <span class="no">Category</span><span class="o">.</span><span class="n">published</span><span class="o">.</span><span class="n">recent</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">do</span>
+</span><span class='line'>      <span class="n">column</span> <span class="ss">:name</span> <span class="k">do</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span>
+</span><span class='line'>        <span class="n">link_to</span> <span class="n">c</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="o">[</span><span class="ss">:admin</span><span class="p">,</span> <span class="n">c</span><span class="o">]</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>      <span class="n">column</span> <span class="ss">:created_at</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>    <span class="n">strong</span> <span class="p">{</span> <span class="n">link_to</span> <span class="s2">&quot;View All Categories&quot;</span><span class="p">,</span> <span class="n">admin_categories_path</span> <span class="p">}</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 

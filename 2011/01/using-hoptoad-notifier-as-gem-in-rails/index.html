@@ -9,7 +9,14 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="# in config/environment.rb config.gem 'hoptoad_notifier' # from your Rails root: $ rake gems:install $ rake gems:unpack GEM=hoptoad_notifier $ &hellip;">
+  <meta name="description" content="1. Add GEM to environment file 1
+2
+# in config/environment.rb
+config.gem 'hoptoad_notifier' 2. Install gems 1
+2
+3
+# from your Rails root:
+rake gems: &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -91,8 +98,29 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-<pre class=ruby># in config/environment.rb config.gem 'hoptoad_notifier'  # from your Rails root: $ rake gems:install $ rake gems:unpack GEM=hoptoad_notifier $ script/generate hoptoad --api-key your_key_here </pre></div>
+<div class="entry-content"><p><strong>1.  Add GEM to environment file</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># in config/environment.rb
+</span><span class='line'>config.gem 'hoptoad_notifier'</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>2. Install gems</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># from your Rails root:
+</span><span class='line'>rake gems:install
+</span><span class='line'>rake gems:unpack GEM=hoptoad_notifier</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>3. Generate hoptoad install using key</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ruby script/generate hoptoad --api-key your_key_here</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 

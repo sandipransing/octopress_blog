@@ -4,7 +4,7 @@
   <title><![CDATA[Category: general | Fun On Rails]]></title>
   <link href="http://sandipransing.github.io/blog/categories/general/atom.xml" rel="self"/>
   <link href="http://sandipransing.github.io/"/>
-  <updated>2014-02-09T23:18:57+05:30</updated>
+  <updated>2014-02-10T04:31:35+05:30</updated>
   <id>http://sandipransing.github.io/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -18,9 +18,19 @@
     <link href="http://sandipransing.github.io/2011/09/print-particular-div-inside-html-page/"/>
     <updated>2011-09-12T13:26:00+05:30</updated>
     <id>http://sandipransing.github.io/2011/09/print-particular-div-inside-html-page</id>
-    <content type="html"><![CDATA[<div class='post'>
-<div dir="ltr" style="text-align: left;" trbidi="on"><div class="gmail_quote">Hiding Whole page content and displaying only particular div using css<br /><br /></div><pre class=ruby>&lt;style media="print" type="text/css"&gt;<br />&nbsp; @media print<br />&nbsp; {<br />&nbsp;&nbsp;&nbsp; body * { visibility: hidden; }<br />&nbsp;&nbsp;&nbsp; #PrintDiv * { visibility: visible; }<br />&nbsp;&nbsp;&nbsp; #PrintDiv { position: absolute; top: 40px; left: 30px; }<br />&nbsp; }<br />&lt;/style&gt; </pre></div></div>
+    <content type="html"><![CDATA[<p>Hiding Whole page content and displaying only particular div using css</p>
 
+<p>```css
+@media print
+  {</p>
+
+<pre><code>body * { visibility: hidden; }
+#PrintDiv * { visibility: visible; }
+#PrintDiv { position: absolute; top: 40px; left: 30px; }
+</code></pre>
+
+<p>  }
+```</p>
 ]]></content>
   </entry>
   

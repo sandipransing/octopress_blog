@@ -91,8 +91,41 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-In order to get tata photon working on ubuntu machine you need to install following packages <br/>1. usb-modeswitch-data 2. usb-modeswitch <br/>Either you can download them from ubuntu site and install locally or install using apt manager <br/>Download links<br/><pre class=ruby>http://packages.debian.org/squeeze/usb-modeswitch-data http://packages.debian.org/squeeze/usb-modeswitch </pre><br/><b>apt installation</b><br/><pre class=ruby>sudo apt-get install usb-modeswitch-data usb-modeswitch usb-modeswitch </pre><br/>After successful installation,<br/>1. Connect photon usb card<br/>2. Execute following commands one after another. <pre class=ruby>sudo usb_modeswitch -c /etc/usb_modeswitch.d/12d1\:1446 wvdial </pre><br/>&#8230;and you should get connected via photon!</div>
+<div class="entry-content"><p>In order to get tata photon working on ubuntu machine you need to install following packages</p>
+
+<p><strong>1. usb-modeswitch-data 2. usb-modeswitch</strong></p>
+
+<p>Either you can download them from ubuntu site and install locally or install using apt manager</p>
+
+<p>Download links</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>http://packages.debian.org/squeeze/usb-modeswitch-data
+</span><span class='line'>http://packages.debian.org/squeeze/usb-modeswitch</span></code></pre></td></tr></table></div></figure>
+
+
+<p>apt installation</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install usb-modeswitch-data usb-modeswitch usb-modeswitch</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After successful installation,</p>
+
+<ol>
+<li>Connect photon usb card</li>
+<li>Execute following commands one after another</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo usb_modeswitch -c /etc/usb_modeswitch.d/12d1\:1446
+</span><span class='line'>wvdial</span></code></pre></td></tr></table></div></figure>
+
+
+<p>..and you should get connected via photon!</p>
 </div>
 
 

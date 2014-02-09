@@ -4,7 +4,7 @@
   <title><![CDATA[Category: rails-uri | Fun On Rails]]></title>
   <link href="http://sandipransing.github.io/blog/categories/rails-uri/atom.xml" rel="self"/>
   <link href="http://sandipransing.github.io/"/>
-  <updated>2014-02-09T23:18:57+05:30</updated>
+  <updated>2014-02-10T04:31:35+05:30</updated>
   <id>http://sandipransing.github.io/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -18,9 +18,76 @@
     <link href="http://sandipransing.github.io/2012/01/understanding-rails-uri/"/>
     <updated>2012-01-14T02:18:00+05:30</updated>
     <id>http://sandipransing.github.io/2012/01/understanding-rails-uri</id>
-    <content type="html"><![CDATA[<div class='post'>
-rails-uri module provide us with url manipulation methods<br/> <b>Parse string url</b><pre class=ruby>url = URI.parse('http://funonrails.com/search/label/rails3') url.host #=> "http://funonrails.com" url.port #=> 80 </pre><br/><b>URL with Basic Authentication </b><br/><pre class=ruby>url = URI.parse('http://sandip:2121@funonrails.com/search/label/rails3') url.user #=> "sandip" url.password #=> "2121" </pre><br/><b>Extracting urls form string paragraph</b><br/><pre class=ruby>URI.extract('http://funonrails.com is rails blog authored by http://sandipransing.github.com contact mailto://sandip@funonrails.com') #=> ["http://funonrails.com", "http://sandipransing.github.com", "mailto://sandip@funonrails.com"] </pre> <b>Split & Join URI</b><br/><pre class=ruby>URI.split('http://sandip:2121@funonrails.com/search/label/rails3') #=> ["http", "sandip:2121", "funonrails.com", nil, nil, "/search/label/rails3", nil, nil, nil]  <=> [Scheme, Userinfo, Host, Port, Registry, Path, Opaque, Query, Fragment]    URI.join('http://funonrails.com','search/label/rails3') #=> #<URI::HTTP:0x7fbf9202efc8 URL:http://funonrails.com/search/label/rails3></pre><br/><b>Escape & Unescape alias encode/decode URI</b><br/><pre class=ruby>URI.escape('http://funonrails.com/search/?label=\\rails\3') URI.encode('http://funonrails.com/search/?label=\\rails\3') #=> "http://funonrails.com/search/?label=%5Crails%5C3"  URI.unescape("http://funonrails.com/search/?label=%5Crails%5C3") URI.decode("http://funonrails.com/search/?label=%5Crails%5C3") #=> "http://funonrails.com/search/?label=\\rails\\3" </pre><br/><b>Match urls using regular expressions </b><br/><pre class=ruby>"http://funonrails.com/search/label/rails3".sub(URI.regexp(['search'])) do |*matchs|   p $& end #=> "http://funonrails.com/search/label/rails3" </pre><br/><b>Getting requested url inside rails</b><br/><pre class=ruby>request.request_uri request.env['REQUEST_URI'] </pre><br/><b>Getting previous page url inside rails</b><br/><pre class=ruby>request.referrer </pre></div>
+    <content type="html"><![CDATA[<p>rails-uri module provides us with url manipulation methods</p>
 
+<p>Parse string url
+<code>ruby
+url = URI.parse('http://funonrails.com/search/label/rails3')
+url.host #=&gt; "http://funonrails.com"
+url.port #=&gt; 80
+</code>
+URL with Basic Authentication
+<code>ruby
+url = URI.parse('http://sandip:2121@funonrails.com/search/label/rails3')
+url.user #=&gt; "sandip"
+url.password #=&gt; "2121"
+</code></p>
+
+<p>Extracting urls form string paragraph
+```ruby
+URI.extract(&lsquo;<a href="http://funonrails.com">http://funonrails.com</a> is rails blog authored by <a href="http://sandipransing.github.com">http://sandipransing.github.com</a> contact <a href="&#x6d;&#97;&#105;&#x6c;&#x74;&#x6f;&#x3a;&#47;&#x2f;&#115;&#97;&#110;&#x64;&#x69;&#x70;&#64;&#x66;&#117;&#x6e;&#111;&#x6e;&#x72;&#x61;&#x69;&#108;&#x73;&#x2e;&#x63;&#x6f;&#x6d;">&#47;&#47;&#x73;&#97;&#x6e;&#100;&#x69;&#112;&#64;&#x66;&#117;&#110;&#x6f;&#x6e;&#114;&#97;&#x69;&#x6c;&#115;&#46;&#99;&#x6f;&#x6d;</a>&rsquo;)</p>
+
+<h1>=> [&ldquo;<a href="http://funonrails.com">http://funonrails.com</a>&rdquo;, &ldquo;<a href="http://sandipransing.github.com">http://sandipransing.github.com</a>&rdquo;, &ldquo;<a href="&#x6d;&#97;&#105;&#108;&#116;&#x6f;&#x3a;&#x2f;&#x2f;&#115;&#97;&#110;&#x64;&#105;&#x70;&#64;&#102;&#117;&#110;&#x6f;&#x6e;&#114;&#x61;&#x69;&#x6c;&#115;&#x2e;&#99;&#111;&#109;">&#x2f;&#47;&#x73;&#x61;&#110;&#x64;&#x69;&#112;&#64;&#102;&#117;&#110;&#111;&#x6e;&#114;&#97;&#x69;&#108;&#115;&#46;&#x63;&#111;&#109;</a>&rdquo;]</h1>
+
+<p>```</p>
+
+<p>Split &amp; Join URI
+```ruby
+URI.split(&lsquo;<a href="http://sandip:2121@funonrails.com/search/label/rails3">http://sandip:2121@funonrails.com/search/label/rails3</a>&rsquo;)</p>
+
+<h1>=> [&ldquo;http&rdquo;, &ldquo;sandip:2121&rdquo;, &ldquo;funonrails.com&rdquo;, nil, nil, &ldquo;/search/label/rails3&rdquo;, nil, nil, nil]</h1>
+
+<p>&lt;=> [Scheme, Userinfo, Host, Port, Registry, Path, Opaque, Query, Fragment]</p>
+
+<p>URI.join(&lsquo;<a href="http://funonrails.com">http://funonrails.com</a>&rsquo;,&lsquo;search/label/rails3&rsquo;)</p>
+
+<h1>=> #&lt;URI::<a href="HTTP:0x7fbf9202efc8">HTTP:0x7fbf9202efc8</a> URL:<a href="http://funonrails.com/search/label/rails3">http://funonrails.com/search/label/rails3</a>></h1>
+
+<p><code>
+Escape &amp; Unescape alias encode/decode URI
+</code>ruby
+URI.escape(&lsquo;<a href="http://funonrails.com/search/?label=\rails\3">http://funonrails.com/search/?label=\rails\3</a>&rsquo;)
+URI.encode(&lsquo;<a href="http://funonrails.com/search/?label=\rails\3">http://funonrails.com/search/?label=\rails\3</a>&rsquo;)</p>
+
+<h1>=> &ldquo;<a href="http://funonrails.com/search/?label=%5Crails%5C3">http://funonrails.com/search/?label=%5Crails%5C3</a>&rdquo;</h1>
+
+<p>URI.unescape(&ldquo;<a href="http://funonrails.com/search/?label=%5Crails%5C3">http://funonrails.com/search/?label=%5Crails%5C3</a>&rdquo;)
+URI.decode(&ldquo;<a href="http://funonrails.com/search/?label=%5Crails%5C3">http://funonrails.com/search/?label=%5Crails%5C3</a>&rdquo;)</p>
+
+<h1>=> &ldquo;<a href="http://funonrails.com/search/?label=\rails\3">http://funonrails.com/search/?label=\rails\3</a>&rdquo;</h1>
+
+<p>```</p>
+
+<p>Match urls using regular expressions
+```
+&ldquo;<a href="http://funonrails.com/search/label/rails3">http://funonrails.com/search/label/rails3</a>&rdquo;.sub(URI.regexp([&lsquo;search&rsquo;])) do |*matchs|
+  p $&amp;
+end</p>
+
+<h1>=> &ldquo;<a href="http://funonrails.com/search/label/rails3">http://funonrails.com/search/label/rails3</a>&rdquo;</h1>
+
+<p>```</p>
+
+<p>Getting requested url inside rails
+<code>ruby
+request.request_uri
+request.env['REQUEST_URI']
+</code></p>
+
+<p>Getting previous page url inside rails
+<code>
+request.referrer
+</code></p>
 ]]></content>
   </entry>
   

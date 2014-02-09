@@ -9,7 +9,24 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Upload image via paperclip via passing URL instead of file upload # Consider Print instance with image as file attachment class Print e logger.info &hellip;">
+  <meta name="description" content="Upload image via paperclip via passing URL instead of file upload 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+# Consider Print instance with image as &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -91,8 +108,55 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-Upload image via paperclip via passing URL instead of file upload <br/>  <pre class=ruby># Consider Print instance with image as file attachment class Print < ActiveRecord::Base   has_attached_file :image   def upload_image(url)     begin       io = open(URI.escape(url))       if io         def io.original_filename; base_uri.path.split('/').last; end         io.original_filename.blank? ? nil : io         p.image = io       end       p.save(false)     rescue Exception => e       logger.info "EXCEPTION# #{e.message}"     end   end end  </pre> Text code from console<br/><pre class=ruby>p = Print.new url = "http://ocdevel.com/sites/ocdevel.com/files/images/rails.png" p.upload_image(url) </pre></div>
+<div class="entry-content"><p>Upload image via paperclip via passing URL instead of file upload</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Consider Print instance with image as file attachment</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Print</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">has_attached_file</span> <span class="ss">:image</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">upload_image</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">begin</span>
+</span><span class='line'>      <span class="n">io</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="no">URI</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+</span><span class='line'>      <span class="k">if</span> <span class="n">io</span>
+</span><span class='line'>        <span class="k">def</span> <span class="nc">io</span><span class="o">.</span><span class="nf">original_filename</span><span class="p">;</span> <span class="n">base_uri</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="p">;</span> <span class="k">end</span>
+</span><span class='line'>        <span class="n">io</span><span class="o">.</span><span class="n">original_filename</span><span class="o">.</span><span class="n">blank?</span> <span class="p">?</span> <span class="kp">nil</span> <span class="p">:</span> <span class="n">io</span>
+</span><span class='line'>        <span class="nb">p</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">io</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>      <span class="nb">p</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="kp">false</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">rescue</span> <span class="no">Exception</span> <span class="o">=&gt;</span> <span class="n">e</span>
+</span><span class='line'>      <span class="n">logger</span><span class="o">.</span><span class="n">info</span> <span class="s2">&quot;EXCEPTION# </span><span class="si">#{</span><span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Text code from console</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">p</span> <span class="o">=</span> <span class="no">Print</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;http://ocdevel.com/sites/ocdevel.com/files/images/rails.png&quot;</span>
+</span><span class='line'><span class="nb">p</span><span class="o">.</span><span class="n">upload_image</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 

@@ -9,7 +9,16 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Install RVM first bash rvm list known # MRI Rubies [ruby-]1.8.6-head [ruby-]1.8.7[-p352] [ruby-]1.9.3-head ruby-head # JRuby jruby-1.2.0 jruby-head &hellip;">
+  <meta name="description" content="Install RVM first 1
+bash &lt; &lt;(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvminstaller) rvm list known 1
+2
+3
+4
+5
+6
+7
+8
+9 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,8 +103,127 @@
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-<b> Install RVM first </b><br/> <pre class=ruby>  bash < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvminstaller) </pre> <b> rvm list known</b> <pre class=ruby>  # MRI Rubies   [ruby-]1.8.6-head   [ruby-]1.8.7[-p352]   [ruby-]1.9.3-head   ruby-head    # JRuby   jruby-1.2.0   jruby-head    # Rubinius   rbx-1.0.1   rbx-2.0.0pre    # Ruby Enterprise Edition   ree-1.8.6   ree-1.8.7-head </pre> <b>Install ruby 1.9.3</b><br/> <pre class=ruby>  rvm install 1.9.3-head   rvm gemset create rails311   rvm use 1.9.3-head@rails311 --default      gem install rails -v3.1.1 --no-rdoc --no-ri      gem install heroku   gem install rb-readline </pre> <b>Create new rails project </b><br/> <pre class=ruby>  rails new cdc -m http://railswizard.org/b22092a4358bbebb3a46.rb -J -T </pre> <b>Heroku Deployment Done </b><br/> <pre class=ruby>  http://railsblank.heroku.com/ (production) </pre> <b> Local System nginx-passenger setup</b><br/> <pre class=ruby>  gem install passenger   rvmsudo passenger-install-nginx-module </pre> If you find pcre download error then make sure you libpcre-dev pkg installed on your system otherwise install it and re-run<br/><pre class=ruby>  sudo apt-get install libpcre3-dev </pre> <b>Nginx Configuration</b><br/> <pre class=ruby>http {   passenger_root /home/sandip/.rvm/gems/ruby-1.9.3-head@rails311/gems/passenger-3.0.9;   passenger_ruby /home/sandip/.rvm/wrappers/ruby-1.9.3-head@rails311/ruby;      server {     listen 80;     server_name railsblank.local;     root /home/sandip/railsblank/public;     rails_env development;     passenger_enabled on; } </pre> <b>git source code </b><br/><pre class=ruby>  git clone git://github.com/sandipransing/rails_blank.git </pre></div>
+  <div class="entry-content"><p>Install RVM first</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>bash &lt; &lt;(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvminstaller)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>rvm list known</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># MRI Rubies
+</span><span class='line'>[ruby-]1.8.6-head
+</span><span class='line'>[ruby-]1.8.7[-p352]
+</span><span class='line'>[ruby-]1.9.3-head
+</span><span class='line'>ruby-head
+</span><span class='line'>
+</span><span class='line'># JRuby
+</span><span class='line'>jruby-1.2.0
+</span><span class='line'>jruby-head
+</span><span class='line'>
+</span><span class='line'># Rubinius
+</span><span class='line'>rbx-1.0.1
+</span><span class='line'>rbx-2.0.0pre
+</span><span class='line'>
+</span><span class='line'># Ruby Enterprise Edition
+</span><span class='line'>ree-1.8.6
+</span><span class='line'>ree-1.8.7-head</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Install ruby 1.9.3</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rvm install 1.9.3-head
+</span><span class='line'>rvm gemset create rails311
+</span><span class='line'>rvm use 1.9.3-head@rails311 --default
+</span><span class='line'>  
+</span><span class='line'>gem install rails -v3.1.1 --no-rdoc --no-ri
+</span><span class='line'>  
+</span><span class='line'>gem install heroku
+</span><span class='line'>gem install rb-readline</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Create new rails project</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rails new cdc -m http://railswizard.org/b22092a4358bbebb3a46.rb -J -T</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Above command will create rails app, bundle install, and Heroku Deployment</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>http://railsblank.heroku.com/ (production)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Local System nginx-passenger setup</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install passenger
+</span><span class='line'>rvmsudo passenger-install-nginx-module</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you find pcre download error then make sure you libpcre-dev pkg installed on your system otherwise install it and re-run</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install libpcre3-dev</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Nginx Configuration</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>http {
+</span><span class='line'>  passenger_root /home/sandip/.rvm/gems/ruby-1.9.3-head@rails311/gems/passenger-3.0.9;
+</span><span class='line'>  passenger_ruby /home/sandip/.rvm/wrappers/ruby-1.9.3-head@rails311/ruby;
+</span><span class='line'>  
+</span><span class='line'>  server {
+</span><span class='line'>    listen 80;
+</span><span class='line'>    server_name railsblank.local;
+</span><span class='line'>    root /home/sandip/railsblank/public;
+</span><span class='line'>    rails_env development;
+</span><span class='line'>    passenger_enabled on;
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>git source code can be found here</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git://github.com/sandipransing/rails_blank.git</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   
@@ -131,8 +259,105 @@
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-Stepwise guide to configure paperclip default options, setting up aws-s3 storage in rails <br/> Inside Gemfile<br/><pre class=ruby>gem 'aws-s3',               :require => 'aws/s3' gem 'paperclip' </pre><br/><pre class=ruby>bundle install </pre> Generate Print model to hold image <br/><pre class=ruby> rails g model print image_file_name:string image_content_type:string image_file_size:string </pre><br/><pre class=ruby>rake db:migrate </pre> Add s3 credentials to YML file<br/><pre class=ruby># config/s3.yml  access_key_id: DASDFG7KACNxIJdJXHPQ secret_access_key: BnDrTnzCTX+R707wYEP/aCEqAsDFG7sgW </pre>Add default paperclip attachment options to initializer<br/><pre class=ruby># Make sure to add host url inside config/environments # HOSTNAME = 'http://lordganesha.com'  Paperclip::Attachment.default_options.merge!(   :storage => 's3',   :s3_credentials => YAML.load_file("#{Rails.root}/config/s3.yml"),   :path => ":class/:attachment/#{Rails.env}/:id/:style/:basename.:extension",     :default_url => "http://#{HOSTNAME}/images/paperclip/:class/:attachment/default.jpg",   :bucket => 'ganesha' ) </pre>Add image attachment code to print model<br/><pre class=ruby># app/models/print.rb class Print < ActiveRecord::Base   has_attached_file :image,     :styles => {:medium => ["400x400#", :jpg],                  :thumb => ["100x100#", :jpg],                  :slider => ["300x300#", :jpg]}   #validates_attachment_presence :image   validates_attachment_size :image, :less_than => 1.megabytes, :message => 'file size maximum 1 MB allowed'   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png', 'image/gif', 'image/bmp', 'image/pjpeg', 'image/x-png'] end </pre> Inside views<br/><pre class=ruby>  # inside new.html.haml    = form_for @print do     f.file_field :image </pre></div>
+  <div class="entry-content"><p>Stepwise guide to configure paperclip default options, setting up aws-s3 storage in rails
+Inside Gemfile</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem 'aws-s3',               :require =&gt; 'aws/s3'
+</span><span class='line'>gem 'paperclip'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Bundle</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>bundle install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Generate Print model to hold image</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rails g model print image_file_name:string image_content_type:string image_file_size:string</span></code></pre></td></tr></table></div></figure>
+
+
+<p>DB Migration</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake db:migrate</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Add s3 credentials to YML file</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># config/s3.yml 
+</span><span class='line'>access_key_id: DASDFG7KACNxIJdJXHPQ
+</span><span class='line'>secret_access_key: BnDrTnzCTX+R707wYEP/aCEqAsDFG7sgW</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Add default paperclip attachment options to initializer</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Make sure to add host url inside config/environments</span>
+</span><span class='line'><span class="c1"># HOSTNAME = &#39;http://lordganesha.com&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="ss">Paperclip</span><span class="p">:</span><span class="ss">:Attachment</span><span class="o">.</span><span class="n">default_options</span><span class="o">.</span><span class="n">merge!</span><span class="p">(</span>
+</span><span class='line'>  <span class="ss">:storage</span> <span class="o">=&gt;</span> <span class="s1">&#39;s3&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="ss">:s3_credentials</span> <span class="o">=&gt;</span> <span class="no">YAML</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="no">Rails</span><span class="o">.</span><span class="n">root</span><span class="si">}</span><span class="s2">/config/s3.yml&quot;</span><span class="p">),</span>
+</span><span class='line'>  <span class="ss">:path</span> <span class="o">=&gt;</span> <span class="s2">&quot;:class/:attachment/</span><span class="si">#{</span><span class="no">Rails</span><span class="o">.</span><span class="n">env</span><span class="si">}</span><span class="s2">/:id/:style/:basename.:extension&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:default_url</span> <span class="o">=&gt;</span> <span class="s2">&quot;http://</span><span class="si">#{</span><span class="no">HOSTNAME</span><span class="si">}</span><span class="s2">/images/paperclip/:class/:attachment/default.jpg&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="ss">:bucket</span> <span class="o">=&gt;</span> <span class="s1">&#39;ganesha&#39;</span>
+</span><span class='line'><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Add image attachment code to print model</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/models/print.rb</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Print</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">has_attached_file</span> <span class="ss">:image</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:styles</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:medium</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="s2">&quot;400x400#&quot;</span><span class="p">,</span> <span class="ss">:jpg</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>                <span class="ss">:thumb</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="s2">&quot;100x100#&quot;</span><span class="p">,</span> <span class="ss">:jpg</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>                <span class="ss">:slider</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="s2">&quot;300x300#&quot;</span><span class="p">,</span> <span class="ss">:jpg</span><span class="o">]</span><span class="p">}</span>
+</span><span class='line'>  <span class="c1">#validates_attachment_presence :image</span>
+</span><span class='line'>  <span class="n">validates_attachment_size</span> <span class="ss">:image</span><span class="p">,</span> <span class="ss">:less_than</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="o">.</span><span class="n">megabytes</span><span class="p">,</span> <span class="ss">:message</span> <span class="o">=&gt;</span> <span class="s1">&#39;file size maximum 1 MB allowed&#39;</span>
+</span><span class='line'>  <span class="n">validates_attachment_content_type</span> <span class="ss">:image</span><span class="p">,</span> <span class="ss">:content_type</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="s1">&#39;image/jpeg&#39;</span><span class="p">,</span> <span class="s1">&#39;image/png&#39;</span><span class="p">,</span> <span class="s1">&#39;image/gif&#39;</span><span class="p">,</span> <span class="s1">&#39;image/bmp&#39;</span><span class="p">,</span> <span class="s1">&#39;image/pjpeg&#39;</span><span class="p">,</span> <span class="s1">&#39;image/x-png&#39;</span><span class="o">]</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Inside views</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='haml'><span class='line'># inside new.html.haml
+</span><span class='line'><span class="p">=</span> <span class="n">form_for</span> <span class="vi">@print</span> <span class="k">do</span>
+</span><span class='line'>  <span class="p">=</span><span class="n">f</span><span class="o">.</span><span class="n">file_field</span> <span class="ss">:image</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
 </div>
   
   
@@ -168,8 +393,55 @@ Stepwise guide to configure paperclip default options, setting up aws-s3 storage
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-Upload image via paperclip via passing URL instead of file upload <br/>  <pre class=ruby># Consider Print instance with image as file attachment class Print < ActiveRecord::Base   has_attached_file :image   def upload_image(url)     begin       io = open(URI.escape(url))       if io         def io.original_filename; base_uri.path.split('/').last; end         io.original_filename.blank? ? nil : io         p.image = io       end       p.save(false)     rescue Exception => e       logger.info "EXCEPTION# #{e.message}"     end   end end  </pre> Text code from console<br/><pre class=ruby>p = Print.new url = "http://ocdevel.com/sites/ocdevel.com/files/images/rails.png" p.upload_image(url) </pre></div>
+  <div class="entry-content"><p>Upload image via paperclip via passing URL instead of file upload</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Consider Print instance with image as file attachment</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Print</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">has_attached_file</span> <span class="ss">:image</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">upload_image</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">begin</span>
+</span><span class='line'>      <span class="n">io</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="no">URI</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+</span><span class='line'>      <span class="k">if</span> <span class="n">io</span>
+</span><span class='line'>        <span class="k">def</span> <span class="nc">io</span><span class="o">.</span><span class="nf">original_filename</span><span class="p">;</span> <span class="n">base_uri</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="p">;</span> <span class="k">end</span>
+</span><span class='line'>        <span class="n">io</span><span class="o">.</span><span class="n">original_filename</span><span class="o">.</span><span class="n">blank?</span> <span class="p">?</span> <span class="kp">nil</span> <span class="p">:</span> <span class="n">io</span>
+</span><span class='line'>        <span class="nb">p</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">io</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>      <span class="nb">p</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="kp">false</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">rescue</span> <span class="no">Exception</span> <span class="o">=&gt;</span> <span class="n">e</span>
+</span><span class='line'>      <span class="n">logger</span><span class="o">.</span><span class="n">info</span> <span class="s2">&quot;EXCEPTION# </span><span class="si">#{</span><span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Text code from console</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">p</span> <span class="o">=</span> <span class="no">Print</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;http://ocdevel.com/sites/ocdevel.com/files/images/rails.png&quot;</span>
+</span><span class='line'><span class="nb">p</span><span class="o">.</span><span class="n">upload_image</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   
@@ -205,8 +477,58 @@ Upload image via paperclip via passing URL instead of file upload <br/>  <pre cl
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-While developing rails application we often come across situation where you wanted different rails models connecting different tables of different databases. <br/>Example: We are having ndnc model holding ndnc records associated with database ndnc. <br/>Lets create ConnectionBase model that will connect to other databse &#8216;ndnc&#8217; and that will be extended from ActiveRecordBase and put that inside library files <br/><pre class=ruby>vi lib/connection_base.rb   class ConnectionBase < ActiveRecord::Base    establish_connection(     :adapter => "postgresql",     :username=> "sandip",     :password => "2121",     :database => "ndnc" ) end </pre><br/><br/>Wherever you wanted to connect to other database i.e. ndnc  you can extend that particular model with ConnectionBase <br/><pre class=ruby>class Ndnc < ConnectionBase # connects to ndnc table of ndnc database end </pre><br/>Please make sure library files are loaded while server startup<br/><pre class=ruby># vi config/application.rb config.autoload_paths += %W(#{config.root}/lib) </pre><br/>Done !<br/>In cases where you want only one particular model connecting other database table, you can put connection setting itself in that model.<br/></div>
+  <div class="entry-content"><blockquote><p>While developing rails application we often come across situation where you wanted different rails models connecting different tables of different databases.</p></blockquote>
+
+<p>Example: We are having ndnc model holding ndnc records associated with database ndnc.
+Lets create ConnectionBase model that will connect to other databse &lsquo;ndnc&rsquo; and that will be extended from ActiveRecordBase and put that inside library files</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># lib/connection_base.rb </span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">ConnectionBase</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">establish_connection</span><span class="p">(</span>
+</span><span class='line'>    <span class="ss">:adapter</span> <span class="o">=&gt;</span> <span class="s2">&quot;postgresql&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:username</span><span class="o">=&gt;</span> <span class="s2">&quot;sandip&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="s2">&quot;2121&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:database</span> <span class="o">=&gt;</span> <span class="s2">&quot;ndnc&quot;</span>
+</span><span class='line'><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Wherever you wanted to connect to other database i.e. ndnc you can extend that particular model with ConnectionBase</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Ndnc</span> <span class="o">&lt;</span> <span class="no">ConnectionBase</span>
+</span><span class='line'><span class="c1"># connects to ndnc table of ndnc database</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Please make sure library files are loaded while server startup</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># vi config/application.rb</span>
+</span><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">autoload_paths</span> <span class="o">+=</span> <span class="sx">%W(</span><span class="si">#{</span><span class="n">config</span><span class="o">.</span><span class="n">root</span><span class="si">}</span><span class="sx">/lib)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Done !
+In cases where you want only one particular model connecting other database table, you can put connection setting itself in that model.</p>
 </div>
   
   
@@ -242,8 +564,22 @@ While developing rails application we often come across situation where you want
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-<div dir="ltr" style="text-align: left;" trbidi="on"><div class="gmail_quote">Hiding Whole page content and displaying only particular div using css<br /><br /></div><pre class=ruby>&lt;style media="print" type="text/css"&gt;<br />&nbsp; @media print<br />&nbsp; {<br />&nbsp;&nbsp;&nbsp; body * { visibility: hidden; }<br />&nbsp;&nbsp;&nbsp; #PrintDiv * { visibility: visible; }<br />&nbsp;&nbsp;&nbsp; #PrintDiv { position: absolute; top: 40px; left: 30px; }<br />&nbsp; }<br />&lt;/style&gt; </pre></div></div>
+  <div class="entry-content"><p>Hiding Whole page content and displaying only particular div using css</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="k">@media</span> <span class="nt">print</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="nt">body</span> <span class="o">*</span> <span class="p">{</span> <span class="k">visibility</span><span class="o">:</span> <span class="k">hidden</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>    <span class="nf">#PrintDiv</span> <span class="o">*</span> <span class="p">{</span> <span class="k">visibility</span><span class="o">:</span> <span class="k">visible</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>    <span class="nf">#PrintDiv</span> <span class="p">{</span> <span class="k">position</span><span class="o">:</span> <span class="k">absolute</span><span class="p">;</span> <span class="k">top</span><span class="o">:</span> <span class="m">40px</span><span class="p">;</span> <span class="k">left</span><span class="o">:</span> <span class="m">30px</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   
@@ -279,8 +615,58 @@ While developing rails application we often come across situation where you want
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-<b>Migrating from svn to git </b><br/> <b>1. Install git-svn</b><br/><pre class=ruby>sudo apt-get install git-svn </pre> <b>2. Clone svn repositoy </b><pre class=ruby>git svn clone -s svn://server/project_myt/trunk proj </pre> <b>To add svn users and git users mapping</b><br/><b>Create author-file</b><br/><pre class=ruby>#vi authorsfile  sandip = sandipransing <sandip@funonrails.com>amit = amitk <amit@gmail.com>root = sandipransing <sandip@funonrails.com></pre><br/><pre class=ruby>git svn --author-file=authorfile clone -s svn://server/project_myt/trunk proj </pre><b>3. Add git repository url</b><br/><pre class=ruby>cd proj git remote add git@github.com:USERNAME/project.git </pre><b>4. Push repository to git</b><br/><pre class=ruby>git push origin master </pre> <b>To do svn pull for latest changes</b><br/><pre class=ruby>git svn rebase </pre></div>
+  <div class="entry-content"><p>Migrating from svn to git</p>
+
+<p><strong>1. Install git-svn</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install git-svn</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>2. Clone svn repositoy</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git svn clone -s svn://server/project_myt/trunk proj</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To add svn users and git users mapping
+Create author-file</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># authorsfile 
+</span><span class='line'>sandip = sandipransing 
+</span><span class='line'>amit = amitk 
+</span><span class='line'>root = sandipransing </span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git svn --author-file=authorfile clone -s svn://server/project_myt/trunk proj</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>3. Add git repository ur</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd proj
+</span><span class='line'>git remote add git@github.com:USERNAME/project.git</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>4. Push repository to git</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git push origin master</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To do svn pull for latest changes</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git svn rebase</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   
@@ -316,8 +702,41 @@ While developing rails application we often come across situation where you want
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-In order to get tata photon working on ubuntu machine you need to install following packages <br/>1. usb-modeswitch-data 2. usb-modeswitch <br/>Either you can download them from ubuntu site and install locally or install using apt manager <br/>Download links<br/><pre class=ruby>http://packages.debian.org/squeeze/usb-modeswitch-data http://packages.debian.org/squeeze/usb-modeswitch </pre><br/><b>apt installation</b><br/><pre class=ruby>sudo apt-get install usb-modeswitch-data usb-modeswitch usb-modeswitch </pre><br/>After successful installation,<br/>1. Connect photon usb card<br/>2. Execute following commands one after another. <pre class=ruby>sudo usb_modeswitch -c /etc/usb_modeswitch.d/12d1\:1446 wvdial </pre><br/>&#8230;and you should get connected via photon!</div>
+  <div class="entry-content"><p>In order to get tata photon working on ubuntu machine you need to install following packages</p>
+
+<p><strong>1. usb-modeswitch-data 2. usb-modeswitch</strong></p>
+
+<p>Either you can download them from ubuntu site and install locally or install using apt manager</p>
+
+<p>Download links</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>http://packages.debian.org/squeeze/usb-modeswitch-data
+</span><span class='line'>http://packages.debian.org/squeeze/usb-modeswitch</span></code></pre></td></tr></table></div></figure>
+
+
+<p>apt installation</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install usb-modeswitch-data usb-modeswitch usb-modeswitch</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After successful installation,</p>
+
+<ol>
+<li>Connect photon usb card</li>
+<li>Execute following commands one after another</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo usb_modeswitch -c /etc/usb_modeswitch.d/12d1\:1446
+</span><span class='line'>wvdial</span></code></pre></td></tr></table></div></figure>
+
+
+<p>..and you should get connected via photon!</p>
 </div>
   
   
@@ -353,8 +772,165 @@ In order to get tata photon working on ubuntu machine you need to install follow
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-<b>Create new rails project</b><br /><pre class=ruby>  rails new demo -d mysql </pre> <b>Add active_scaffold gem to bundler</b><br /> <pre class=ruby>  gem "active_scaffold_vho" </pre>Run bundle install command <br /><pre class=ruby>  bundle install </pre> Setup active scaffold to use jQuery <br /><pre class=ruby>  rails g active_scaffold_setup jquery       create  public/javascripts/rails_jquery.js       create  public/javascripts/jquery-ui-timepicker-addon.js       create  config/initializers/active_scaffold.rb       insert  app/views/layouts/application.html.erb       insert  config/locales/en.yml       gsub  app/views/layouts/application.html.erb </pre> Generate active scaffold for resource city &amp; zone<br /><pre class=ruby>  rails g active_scaffold City name:string       invoke  active_record       create    db/migrate/20110408123206_create_cities.rb       create    app/models/city.rb       invoke    test_unit       create      test/unit/city_test.rb       create      test/fixtures/cities.yml       route  resources :cities do as_routes end       invoke  active_scaffold_controller       create    app/controllers/cities_controller.rb       create    app/helpers/cities_helper.rb       invoke    test_unit       create    test/functional/cities_controller_test.rb       create    app/views/cities </pre> <pre class=ruby>rails g active_scaffold Zone name:string city:references             invoke  active_record       create    db/migrate/20110408123531_create_zones.rb       create    app/models/zone.rb       invoke    test_unit       create      test/unit/zone_test.rb       create      test/fixtures/zones.yml        route  resources :zones do as_routes end       invoke  active_scaffold_controller       create    app/controllers/zones_controller.rb       create    app/helpers/zones_helper.rb       invoke    test_unit       create      test/functional/zones_controller_test.rb       create    app/views/zones </pre><b>Add Associations</b><br /><pre class=ruby> class City &lt; ActiveRecord::Base  end   class Zone &lt; ActiveRecord::Base    belongs_to :city  end   class City &lt; ActiveRecord::Base    has_many :zones  end </pre> <b> Migrate database </b><br /><pre class=ruby>  rake db:create   rake db:migrate   ==  CreateCities: migrating ===================================   -- create_table(:cities)    -&gt; 0.1411s   ==  CreateCities: migrated (0.1413s) ==========================    ==  CreateZones: migrating ====================================   -- create_table(:zones)    -&gt; 0.1507s   ==  CreateZones: migrated (0.1510s) =========================== </pre>Start Server <br /><pre class=ruby>rails s </pre> Visit Browser URL: http://localhost:3000/cities<br /><br /><b>Snap</b><br/> <img src="http://4.bp.blogspot.com/-CJgSXg5EJyE/TZ8EDHwCwaI/AAAAAAAABPs/81dNxWDwYm0/s1600/active_scaffold.png" alt="http://4.bp.blogspot.com/-CJgSXg5EJyE/TZ8EDHwCwaI/AAAAAAAABPs/81dNxWDwYm0/s1600/active_scaffold.png" style="cursor: -moz-zoom-out"></div>
+  <div class="entry-content"><p>Create new rails project</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rails new demo -d mysql</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Add active_scaffold gem to bundler</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem "active_scaffold_vho"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Run bundle install command</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>bundle install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Setup active scaffold to use jQuery</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rails g active_scaffold_setup jquery
+</span><span class='line'>      create  public/javascripts/rails_jquery.js
+</span><span class='line'>      create  public/javascripts/jquery-ui-timepicker-addon.js
+</span><span class='line'>      create  config/initializers/active_scaffold.rb
+</span><span class='line'>      insert  app/views/layouts/application.html.erb
+</span><span class='line'>      insert  config/locales/en.yml
+</span><span class='line'>      gsub  app/views/layouts/application.html.erb</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Generate active scaffold for resource city &amp; zone</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rails g active_scaffold City name:string
+</span><span class='line'>      invoke  active_record
+</span><span class='line'>      create    db/migrate/20110408123206_create_cities.rb
+</span><span class='line'>      create    app/models/city.rb
+</span><span class='line'>      invoke    test_unit
+</span><span class='line'>      create      test/unit/city_test.rb
+</span><span class='line'>      create      test/fixtures/cities.yml
+</span><span class='line'>      route  resources :cities do as_routes end
+</span><span class='line'>      invoke  active_scaffold_controller
+</span><span class='line'>      create    app/controllers/cities_controller.rb
+</span><span class='line'>      create    app/helpers/cities_helper.rb
+</span><span class='line'>      invoke    test_unit
+</span><span class='line'>      create    test/functional/cities_controller_test.rb
+</span><span class='line'>      create    app/views/cities</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rails g active_scaffold Zone name:string city:references      
+</span><span class='line'>      invoke  active_record
+</span><span class='line'>      create    db/migrate/20110408123531_create_zones.rb
+</span><span class='line'>      create    app/models/zone.rb
+</span><span class='line'>      invoke    test_unit
+</span><span class='line'>      create      test/unit/zone_test.rb
+</span><span class='line'>      create      test/fixtures/zones.yml
+</span><span class='line'>       route  resources :zones do as_routes end
+</span><span class='line'>      invoke  active_scaffold_controller
+</span><span class='line'>      create    app/controllers/zones_controller.rb
+</span><span class='line'>      create    app/helpers/zones_helper.rb
+</span><span class='line'>      invoke    test_unit
+</span><span class='line'>      create      test/functional/zones_controller_test.rb
+</span><span class='line'>      create    app/views/zones</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Add Associations</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class City &lt; ActiveRecord::Base
+</span><span class='line'> end
+</span><span class='line'>
+</span><span class='line'> class Zone &lt; ActiveRecord::Base
+</span><span class='line'>   belongs_to :city
+</span><span class='line'> end
+</span><span class='line'>
+</span><span class='line'> class City &lt; ActiveRecord::Base
+</span><span class='line'>   has_many :zones
+</span><span class='line'> end</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Migrate database</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake db:create
+</span><span class='line'>
+</span><span class='line'>rake db:migrate
+</span><span class='line'>  ==  CreateCities: migrating ===================================
+</span><span class='line'>  -- create_table(:cities)
+</span><span class='line'>   -&gt; 0.1411s
+</span><span class='line'>  ==  CreateCities: migrated (0.1413s) ==========================
+</span><span class='line'>
+</span><span class='line'>  ==  CreateZones: migrating ====================================
+</span><span class='line'>  -- create_table(:zones)
+</span><span class='line'>   -&gt; 0.1507s
+</span><span class='line'>  ==  CreateZones: migrated (0.1510s) ===========================</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Start Server</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rails s</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Visit Browser URL: <a href="http://localhost:3000/cities">http://localhost:3000/cities</a></p>
+
+<p><img class="left" src="http://4.bp.blogspot.com/-CJgSXg5EJyE/TZ8EDHwCwaI/AAAAAAAABPs/81dNxWDwYm0/s1600/active_scaffold.png"></p>
 </div>
   
   
@@ -367,7 +943,7 @@ In order to get tata photon working on ubuntu machine you need to install follow
       
   <header>
     
-      <h1 class="entry-title"><a href="/2011/04/ghostype-input-placeholder-for-search/">Ghostype Input Placeholder for Search Text Fields Using jQuery</a></h1>
+      <h1 class="entry-title"><a href="/2011/04/ghostype-input-placeholder-for-search/">Ghost-Type Input Placeholder for Search Text Fields Using jQuery</a></h1>
     
     
       <p class="meta">
@@ -390,8 +966,64 @@ In order to get tata photon working on ubuntu machine you need to install follow
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-<b>Placeholder Demo</b><br/><input type="search" placeholder="Enter search text here" class="query"><br/><b>Ghostpe Demo</b><br/><script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script> <input type="search" placeholder="Enter search text here" id="home-search" class="query"><script type="text/javascript">    $(document).ready(function(){       var search = "#home-search";       var chars = $(search).attr('placeholder').split('');       $.each(chars, function(i, v){         setTimeout(function() {           $(search).val((chars.slice(0, i+1).join('')));         }, 100*i);       });     }); </script><br/>jQuery placeholder plugin can be used to display default text inside input text fields. HTML5 introduced type search fields with placeholder attribute support.<br /><pre class=ruby> &lt;input class="query" id="home-search" placeholder="Enter search text here" type="search" /&gt;</pre><br /> It should display default text &#8220;Enter search text here&#8221; inside text-field and when user tries to type something it disappears.<br />In order to achieve text marquee like effect to default text value with jQery use following jQuery code. It will type text character by character from left to right.<br />Same effect can be achieved by creating gif image of typing and placing it as background-image to text field with certain drawbacks like changing default text on the fly.<br />Place below code inside javascript tag in your html file<br /><b> jQuery Code </b><pre class=ruby>      $(document).ready(function(){         var search = "#home-search";         var chars = $(search).attr('placeholder').split('');         $.each(chars, function(i, v){           setTimeout(function() {             $(search).val((chars.slice(0, i+1).join('')));           }, 100*i);         });       }); </pre><br/>Got easy ??</div>
+  <div class="entry-content"><p>Placeholder Demo:
+<input type=text placeholder='Enter search text here'/>
+Click on input box and placeholder text will disappear.</p>
+
+<p>Ghost-type Demo:
+<input id='home-search' class="query" placeholder='Enter search text here' type="search"/>
+After page load observe inside input box to enter placeholder text char by char.</p>
+
+<p>jQuery placeholder plugin can be used to display default text inside input text fields. HTML5 introduced type search fields with placeholder attribute support.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;input class="query" id="home-search" placeholder="Enter search text here" type="search" /&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It should display default text &ldquo;Enter search text here&rdquo; inside text-field and when user tries to type something it disappears.
+In order to achieve text marquee like effect to default text value with jQery use following jQuery code. It will type text character by character from left to right.</p>
+
+<p>Same effect can be achieved by creating gif image of typing and placing it as background-image to text field with certain drawbacks like changing default text on the fly.</p>
+
+<p>Place below code inside javascript tag in your html file</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="err">#</span><span class="nx">jQuery</span> <span class="nx">Code</span>
+</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">search</span> <span class="o">=</span> <span class="s2">&quot;#home-search&quot;</span><span class="p">;</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">chars</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">search</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;placeholder&#39;</span><span class="p">).</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">chars</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">v</span><span class="p">){</span>
+</span><span class='line'>    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="nx">search</span><span class="p">).</span><span class="nx">val</span><span class="p">((</span><span class="nx">chars</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)));</span>
+</span><span class='line'>    <span class="p">},</span> <span class="mi">100</span><span class="o">*</span><span class="nx">i</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<script type='text/javascript'>
+$(document).ready(function(){
+  var search = "#home-search";
+  var chars = $(search).attr('placeholder').split('');
+  $.each(chars, function(i, v){
+    setTimeout(function() {
+      $(search).val((chars.slice(0, i+1).join('')));
+    }, 1000*i);
+  });
+});
+</script>
+
+
+<p>Got easy ??</p>
 </div>
   
   
@@ -427,8 +1059,25 @@ In order to get tata photon working on ubuntu machine you need to install follow
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-Edit nginx configuration and look for html block.<br/>Inside html block add following line.<br/><pre class=ruby>http {     include conf/mime.types;     default_type application/octet-stream;     client_max_body_size 10m;     .... } </pre><br/>In above configuration &#8220;application/octet-stream&#8221; supports any kind of file upload.</div>
+  <div class="entry-content"><p>Edit nginx configuration and look for html block.</p>
+
+<p>Inside html block add following line.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>http {
+</span><span class='line'>    include conf/mime.types;
+</span><span class='line'>    default_type application/octet-stream;
+</span><span class='line'>    client_max_body_size 10m;
+</span><span class='line'>    ....
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In above configuration &ldquo;application/octet-stream&rdquo; supports any kind of file upload.</p>
 </div>
   
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: wordpress | Fun On Rails]]></title>
   <link href="http://sandipransing.github.io/blog/categories/wordpress/atom.xml" rel="self"/>
   <link href="http://sandipransing.github.io/"/>
-  <updated>2014-02-09T23:18:57+05:30</updated>
+  <updated>2014-02-10T04:31:35+05:30</updated>
   <id>http://sandipransing.github.io/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -18,9 +18,39 @@
     <link href="http://sandipransing.github.io/2010/03/wordpress-blog-software-installation/"/>
     <updated>2010-03-12T01:55:00+05:30</updated>
     <id>http://sandipransing.github.io/2010/03/wordpress-blog-software-installation</id>
-    <content type="html"><![CDATA[<div class='post'>
-<a href="http://wordpress.org/">WordPress</a>&nbsp;is a&nbsp;open source&nbsp;software developed by and for community with ongoing development on it.<br /><blockquote>Easy installation, customizable, with lots of available plugins, themes and SEO friendly are the strengths of it!</blockquote><blockquote>Software is mainly serves the purpose of blogging, hosting static websites.</blockquote>People with knowledge of php, javascipt and little knowledge of mysql db&nbsp;can customize it however they want.<br /><br /><b>Minimum server requirements</b><br /><ol><li>PHP 4.3 or greater</li><li>MySQL 4.1.2 or greater</li><li>apache/ngnix ( or any web server supporting php &amp; mysql )</li></ol><br /><div><b>For detailed information on installation </b><a href="http://codex.wordpress.org/Installing_WordPress#Famous 5-Minute Install"><b>click</b></a></div><div><div><br /></div><div>Now you will need to decide where on your web site you'd like your blog to appear:</div><div><blockquote><b>In the root directory of your web site. (For example, http://yoursite.com/)</b></blockquote></div><div><blockquote><b>In a subdirectory of your web site. (For example, http://yoursite.com/blog/</b></blockquote><blockquote><b><span class="Apple-style-span" style="font-weight: normal;">This can be done by adding new route at nginx configuration file or deploying wordpress</span></b></blockquote></div></div><div><blockquote>software inside blog directory of main website.</blockquote><br /></div><div>There are millions of satisfied users using&nbsp;word-press blog.</div><div><b>To create and start blogging with free wordpress.com blog </b><a href="http://en.wordpress.com/signup/"><b>click</b></a></div><div><br /></div><div><span class="Apple-style-span" style="font-family: 'Lucida Grande', Verdana, 'Bitstream Vera Sans', Arial, sans-serif; font-size: small;"><span class="Apple-style-span" style="font-size: 12px; line-height: 22px;"></span></span><br /><span class="Apple-style-span" style="font-family: 'Lucida Grande', Verdana, 'Bitstream Vera Sans', Arial, sans-serif; font-size: small;"><span class="Apple-style-span" style="font-size: 12px; line-height: 22px;"><div><span class="Apple-style-span" style="font-family: Times, 'Times New Roman', serif;"><span class="Apple-style-span" style="font-size: medium;"><a href="http://codex.wordpress.org/WordPressMU">WordPress MU</a>&nbsp;multiblog software provides a way to create thousands of wordpress blogs</span></span></div><div><span class="Apple-style-span" style="font-family: Times, 'Times New Roman', serif;"><span class="Apple-style-span" style="font-size: medium;">just like wordpress.com site does.</span></span></div><div><span class="Apple-style-span" style="font-family: Times, 'Times New Roman', serif;"><span class="Apple-style-span" style="font-size: medium;"><br /></span></span></div><div><span class="Apple-style-span" style="font-family: 'Times New Roman'; font-size: medium; line-height: normal;">Download and&nbsp;detailed information on installation&nbsp;<a href="http://codex.wordpress.org/Installing_WPMU">click</a></span></div></span></span></div><div><br /></div></div>
+    <content type="html"><![CDATA[<p><a href="http://wordpress.org/">WordPress</a> &nbsp;is a&nbsp;open source&nbsp;software developed by and for community with ongoing development on it. Easy installation, customizable, with lots of available plugins, themes and SEO friendly are the strengths of it!</p>
 
+<blockquote><p>Software is mainly serves the purpose of blogging, hosting static websites.
+People with knowledge of php, javascipt and little knowledge of mysql db&nbsp;can customize it however they want.</p></blockquote>
+
+<ol>
+<li>Minimum server requirements</li>
+<li>PHP 4.3 or greater</li>
+<li>MySQL 4.1.2 or greater</li>
+<li>Apache/NGINX (or any web server supporting php &amp; mysql )</li>
+</ol>
+
+
+<p><strong>For detailed information on installation click <a href="http://codex.wordpress.org/Installing_WordPress#Famous%205-Minute%20Install">here</a></strong></p>
+
+<p>Now you will need to decide where on your web site you&rsquo;d like your blog to appear:</p>
+
+<ol>
+<li>In the root directory of your web site. (For example, <a href="http://yoursite.com/">http://yoursite.com/</a>)</li>
+<li>In a subdirectory of your web site. (For example, <a href="http://yoursite.com/blog/">http://yoursite.com/blog/</a></li>
+</ol>
+
+
+<blockquote><p>This can be done by adding new route at nginx configuration file or deploying wordpress software inside blog directory of main website.</p></blockquote>
+
+<p>There are millions of satisfied users using&nbsp;word-press blog.</p>
+
+<p><strong>To create and start blogging with free wordpress.com blog click <a href="http://en.wordpress.com/signup/">here</a></strong></p>
+
+<p><a href="http://codex.wordpress.org/WordPressMU">WordPress MU</a> multiblog software provides a way to create thousands of wordpress blogs
+just like wordpress.com site does.</p>
+
+<p>Download and&nbsp;detailed information on installation click <a href="http://codex.wordpress.org/Installing_WPMU">here</a></p>
 ]]></content>
   </entry>
   

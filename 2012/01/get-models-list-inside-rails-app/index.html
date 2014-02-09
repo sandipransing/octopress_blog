@@ -9,7 +9,8 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="How to get collection of models inside your application. Certainly there are many ways to do it.Lets have a look at different ways starting from &hellip;">
+  <meta name="description" content="How to get collection of models inside your application. Certainly there are many ways to do it.
+Lets have a look at different ways starting from &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -91,8 +92,113 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-How to get collection of models inside your application. Certainly there are many ways to do it.<br/>Lets have a look at different ways starting from worst - <br/><b> Get table names inside database and then iterating over to get model name</b><pre class=ruby>@models = ActiveRecord::Base.connection.tables.collect{|t| t.underscore.singularize.camelize}  #=> ["AdhearsionAudit", "AudioLog", "AuditDetail","TinyPrint", "TinyVideo", "UnknownCall", "UserAudit", "User"] </pre><br/><b>Select those with associated class</b><br/><pre class=ruby>@models.delete_if{|m| m.constantize rescue true} </pre><br/><b>Load models dir</b><br/><pre class=ruby>@models = Dir['app/models/*.rb'].map {|f| File.basename(f, '.*').camelize.constantize.name } </pre><b>Select ActiveRecord::Base extended class only</b><pre class=ruby>@models.reject!{|m| m.constantize.superclass != ActiveRecord::Base } </pre><b>Get Active Record subclasses</b><br/><pre class=ruby># make sure relevant models are loaded otherwise # require them prior # Dir.glob(RAILS_ROOT + '/app/models/*.rb').each { |file| require file } class A < ActiveRecord::Base end class B < A end ActiveRecord::Base.send(:subclasses).collect(&:name) #=> [...., A] </pre><b>How to get Inherited models too</b> <br/><pre class=ruby>class A < ActiveRecord::Base end class B < A end ActiveRecord::Base.descendants.collect(&:name) #=> [...., A, B] </pre> Below is more elegant solution provide by <a href="http://stackoverflow.com/users/268/vincent-robert">Vincent-robert</a> over stack overflow which recursively looks for subsequent descendent&#8217;s of class and gives you list from all over application<br/><pre class=ruby>class Class   def extend?(klass)     not superclass.nil? and ( superclass == klass or superclass.extend? klass )   end end  def models    Module.constants.select do |constant_name|     constant = eval constant_name     if not constant.nil? and constant.is_a? Class and constant.extend? ActiveRecord::Base     constant     end   end end </pre></div>
+<div class="entry-content"><p>How to get collection of models inside your application. Certainly there are many ways to do it.
+Lets have a look at different ways starting from worst &ndash;</p>
+
+<p>Get table names inside database and then iterating over to get model name</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@models</span> <span class="o">=</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">tables</span><span class="o">.</span><span class="n">collect</span><span class="p">{</span><span class="o">|</span><span class="n">t</span><span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">underscore</span><span class="o">.</span><span class="n">singularize</span><span class="o">.</span><span class="n">camelize</span><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#=&gt; [&quot;AdhearsionAudit&quot;, &quot;AudioLog&quot;, &quot;AuditDetail&quot;,&quot;TinyPrint&quot;, &quot;TinyVideo&quot;, &quot;UnknownCall&quot;, &quot;UserAudit&quot;, &quot;User&quot;]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Select those with associated class</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@models</span><span class="o">.</span><span class="n">delete_if</span><span class="p">{</span><span class="o">|</span><span class="n">m</span><span class="o">|</span> <span class="n">m</span><span class="o">.</span><span class="n">constantize</span> <span class="k">rescue</span> <span class="kp">true</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Load models dir</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@models</span> <span class="o">=</span> <span class="no">Dir</span><span class="o">[</span><span class="s1">&#39;app/models/*.rb&#39;</span><span class="o">].</span><span class="n">map</span> <span class="p">{</span><span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s1">&#39;.*&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">camelize</span><span class="o">.</span><span class="n">constantize</span><span class="o">.</span><span class="n">name</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Select ActiveRecord::Base extended class only</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@models</span><span class="o">.</span><span class="n">reject!</span><span class="p">{</span><span class="o">|</span><span class="n">m</span><span class="o">|</span> <span class="n">m</span><span class="o">.</span><span class="n">constantize</span><span class="o">.</span><span class="n">superclass</span> <span class="o">!=</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Get Active Record subclasses</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># make sure relevant models are loaded otherwise</span>
+</span><span class='line'><span class="c1"># require them prior</span>
+</span><span class='line'><span class="c1"># Dir.glob(RAILS_ROOT + &#39;/app/models/*.rb&#39;).each { |file| require file }</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">A</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">B</span> <span class="o">&lt;</span> <span class="n">A</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="ss">:subclasses</span><span class="p">)</span><span class="o">.</span><span class="n">collect</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:name</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; [...., A]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>How to get Inherited models too</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">A</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">B</span> <span class="o">&lt;</span> <span class="n">A</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span><span class="o">.</span><span class="n">descendants</span><span class="o">.</span><span class="n">collect</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:name</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; [...., A, B]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Below is more elegant solution provide by <a href="http://stackoverflow.com/users/268/vincent-robert">Vincent-robert</a> over stack overflow which recursively looks for subsequent descendent&rsquo;s of class and gives you list from all over application</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Class</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">extend?</span><span class="p">(</span><span class="n">klass</span><span class="p">)</span>
+</span><span class='line'>    <span class="ow">not</span> <span class="n">superclass</span><span class="o">.</span><span class="n">nil?</span> <span class="ow">and</span> <span class="p">(</span> <span class="n">superclass</span> <span class="o">==</span> <span class="n">klass</span> <span class="ow">or</span> <span class="n">superclass</span><span class="o">.</span><span class="n">extend?</span> <span class="n">klass</span> <span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">models</span>
+</span><span class='line'>  <span class="no">Module</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">select</span> <span class="k">do</span> <span class="o">|</span><span class="n">constant_name</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">constant</span> <span class="o">=</span> <span class="nb">eval</span> <span class="n">constant_name</span>
+</span><span class='line'>    <span class="k">if</span> <span class="ow">not</span> <span class="n">constant</span><span class="o">.</span><span class="n">nil?</span> <span class="ow">and</span> <span class="n">constant</span><span class="o">.</span><span class="n">is_a?</span> <span class="no">Class</span> <span class="ow">and</span> <span class="n">constant</span><span class="o">.</span><span class="n">extend?</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>    <span class="n">constant</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 
@@ -140,7 +246,7 @@ How to get collection of models inside your application. Certainly there are man
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/01/stripe-gateway-payment-integration-with/" title="Previous Post: stripe gateway payment integration with rails">&laquo; stripe gateway payment integration with rails</a>
+        <a class="basic-alignment left" href="/2012/01/stripe-gateway-payment-integration-with/" title="Previous Post: stripe payment gateway integration with rails">&laquo; stripe payment gateway integration with rails</a>
       
       
         <a class="basic-alignment right" href="/2012/01/twitter-bootstrap-form-builder-for/" title="Next Post: twitter-bootstrap form builder for rails">twitter-bootstrap form builder for rails &raquo;</a>

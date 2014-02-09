@@ -9,7 +9,8 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="If your application is currently on any version of Rails 2.1.x, The following changes needs to be done for upgrading your application to Rails 2.3. &hellip;">
+  <meta name="description" content="If your application is currently on any version of Rails 2.1.x,
+Then following changes needs to be done for upgrading your application to Rails 2.3. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -91,8 +92,74 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-If your application is currently on any version of Rails 2.1.x, The following changes needs to be done for upgrading your application to Rails 2.3.11<br /><br />1. First install Rails version 2.3.11<br /><pre class=ruby><br />gem install rails -v2.3.11<br /></pre><br /><br />2. Freeze app ruby gems<br /><pre class=ruby><br />rake rails:freeze:gems<br /></pre><br />Hopefully it should work for you but it gave me following error <br /><pre class=ruby><br />undefined method `manage_gems' for Gem:Module <br /></pre><br /><br />3. Create sample rails 2.3.11 app<br /><pre class=ruby><br />rails _2.3.11_ testsapp<br /></pre><br /><br />Now, Copy all missing &#8220;config/initializers/*&#8221; files from new &#8220;testapp to the application that to be upgraded.<br /><pre class=ruby><br />cp testapp/config/initializers/* config/initializers<br /></pre><br /><br />4. Change Rails version inside <i>environment.rb</i> to <i>Rails 2.3.11</i><br /><pre class=ruby> <br /># Specifies gem version of Rails to use when vendor/rails is not present <br />RAILS_GEM_VERSION = '2.3.11'<br /></pre><br /><br />5. Rename <i>app/controllers/application.rb</i> file to <i>app/controllers/application_controller.rb</i><br /><br /><b>OR</b><br /><br /><pre class=ruby><br />rails:update:application_controller<br /></pre><br /><br />6. Start rails server and fix the issues one by one.<br /><pre class=ruby><br />ruby script/server<br /></pre></div>
+<div class="entry-content"><p>If your application is currently on any version of Rails 2.1.x,
+Then following changes needs to be done for upgrading your application to Rails <code>2.3.11</code></p>
+
+<ol>
+<li>First install Rails version <code>2.3.11</code></li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install rails -v2.3.11</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Freeze app ruby gems</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake rails:freeze:gems</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Hopefully it should work for you but it gave me following error</p>
+
+<blockquote><p>undefined method `manage_gems&#8217; for Gem:Module
+3. Create sample rails 2.3.11 app</p></blockquote>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rails _2.3.11_ testsapp</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now, Copy all missing &ldquo;config/initializers/*&rdquo; files from new &ldquo;testapp to the application that to be upgraded.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cp testapp/config/initializers/* config/initializers</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Change Rails version inside <em>environment.rb</em> to <em>Rails 2.3.11</em></li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Specifies gem version of Rails to use when vendor/rails is not present</span>
+</span><span class='line'><span class="no">RAILS_GEM_VERSION</span> <span class="o">=</span> <span class="s1">&#39;2.3.11&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Rename <i>app/controllers/application.rb</i> file to <i>app/controllers/application_controller.rb</i>
+<strong>OR</strong></li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="ss">rails</span><span class="p">:</span><span class="ss">update</span><span class="p">:</span><span class="n">application_controller</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Start rails server and fix the issues one by one.</li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">ruby</span> <span class="n">script</span><span class="o">/</span><span class="n">server</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 

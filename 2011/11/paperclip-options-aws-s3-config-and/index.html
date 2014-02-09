@@ -9,7 +9,10 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Stepwise guide to configure paperclip default options, setting up aws-s3 storage in rails Inside Gemfilegem 'aws-s3', :require => 'aws/s3' gem ' &hellip;">
+  <meta name="description" content="Stepwise guide to configure paperclip default options, setting up aws-s3 storage in rails
+Inside Gemfile 1
+2
+gem 'aws-s3', :require =&gt; 'aws/s3' &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -91,8 +94,105 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-Stepwise guide to configure paperclip default options, setting up aws-s3 storage in rails <br/> Inside Gemfile<br/><pre class=ruby>gem 'aws-s3',               :require => 'aws/s3' gem 'paperclip' </pre><br/><pre class=ruby>bundle install </pre> Generate Print model to hold image <br/><pre class=ruby> rails g model print image_file_name:string image_content_type:string image_file_size:string </pre><br/><pre class=ruby>rake db:migrate </pre> Add s3 credentials to YML file<br/><pre class=ruby># config/s3.yml  access_key_id: DASDFG7KACNxIJdJXHPQ secret_access_key: BnDrTnzCTX+R707wYEP/aCEqAsDFG7sgW </pre>Add default paperclip attachment options to initializer<br/><pre class=ruby># Make sure to add host url inside config/environments # HOSTNAME = 'http://lordganesha.com'  Paperclip::Attachment.default_options.merge!(   :storage => 's3',   :s3_credentials => YAML.load_file("#{Rails.root}/config/s3.yml"),   :path => ":class/:attachment/#{Rails.env}/:id/:style/:basename.:extension",     :default_url => "http://#{HOSTNAME}/images/paperclip/:class/:attachment/default.jpg",   :bucket => 'ganesha' ) </pre>Add image attachment code to print model<br/><pre class=ruby># app/models/print.rb class Print < ActiveRecord::Base   has_attached_file :image,     :styles => {:medium => ["400x400#", :jpg],                  :thumb => ["100x100#", :jpg],                  :slider => ["300x300#", :jpg]}   #validates_attachment_presence :image   validates_attachment_size :image, :less_than => 1.megabytes, :message => 'file size maximum 1 MB allowed'   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png', 'image/gif', 'image/bmp', 'image/pjpeg', 'image/x-png'] end </pre> Inside views<br/><pre class=ruby>  # inside new.html.haml    = form_for @print do     f.file_field :image </pre></div>
+<div class="entry-content"><p>Stepwise guide to configure paperclip default options, setting up aws-s3 storage in rails
+Inside Gemfile</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem 'aws-s3',               :require =&gt; 'aws/s3'
+</span><span class='line'>gem 'paperclip'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Bundle</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>bundle install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Generate Print model to hold image</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rails g model print image_file_name:string image_content_type:string image_file_size:string</span></code></pre></td></tr></table></div></figure>
+
+
+<p>DB Migration</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake db:migrate</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Add s3 credentials to YML file</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># config/s3.yml 
+</span><span class='line'>access_key_id: DASDFG7KACNxIJdJXHPQ
+</span><span class='line'>secret_access_key: BnDrTnzCTX+R707wYEP/aCEqAsDFG7sgW</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Add default paperclip attachment options to initializer</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Make sure to add host url inside config/environments</span>
+</span><span class='line'><span class="c1"># HOSTNAME = &#39;http://lordganesha.com&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="ss">Paperclip</span><span class="p">:</span><span class="ss">:Attachment</span><span class="o">.</span><span class="n">default_options</span><span class="o">.</span><span class="n">merge!</span><span class="p">(</span>
+</span><span class='line'>  <span class="ss">:storage</span> <span class="o">=&gt;</span> <span class="s1">&#39;s3&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="ss">:s3_credentials</span> <span class="o">=&gt;</span> <span class="no">YAML</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="no">Rails</span><span class="o">.</span><span class="n">root</span><span class="si">}</span><span class="s2">/config/s3.yml&quot;</span><span class="p">),</span>
+</span><span class='line'>  <span class="ss">:path</span> <span class="o">=&gt;</span> <span class="s2">&quot;:class/:attachment/</span><span class="si">#{</span><span class="no">Rails</span><span class="o">.</span><span class="n">env</span><span class="si">}</span><span class="s2">/:id/:style/:basename.:extension&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:default_url</span> <span class="o">=&gt;</span> <span class="s2">&quot;http://</span><span class="si">#{</span><span class="no">HOSTNAME</span><span class="si">}</span><span class="s2">/images/paperclip/:class/:attachment/default.jpg&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="ss">:bucket</span> <span class="o">=&gt;</span> <span class="s1">&#39;ganesha&#39;</span>
+</span><span class='line'><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Add image attachment code to print model</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/models/print.rb</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Print</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">has_attached_file</span> <span class="ss">:image</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:styles</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:medium</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="s2">&quot;400x400#&quot;</span><span class="p">,</span> <span class="ss">:jpg</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>                <span class="ss">:thumb</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="s2">&quot;100x100#&quot;</span><span class="p">,</span> <span class="ss">:jpg</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>                <span class="ss">:slider</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="s2">&quot;300x300#&quot;</span><span class="p">,</span> <span class="ss">:jpg</span><span class="o">]</span><span class="p">}</span>
+</span><span class='line'>  <span class="c1">#validates_attachment_presence :image</span>
+</span><span class='line'>  <span class="n">validates_attachment_size</span> <span class="ss">:image</span><span class="p">,</span> <span class="ss">:less_than</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="o">.</span><span class="n">megabytes</span><span class="p">,</span> <span class="ss">:message</span> <span class="o">=&gt;</span> <span class="s1">&#39;file size maximum 1 MB allowed&#39;</span>
+</span><span class='line'>  <span class="n">validates_attachment_content_type</span> <span class="ss">:image</span><span class="p">,</span> <span class="ss">:content_type</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="s1">&#39;image/jpeg&#39;</span><span class="p">,</span> <span class="s1">&#39;image/png&#39;</span><span class="p">,</span> <span class="s1">&#39;image/gif&#39;</span><span class="p">,</span> <span class="s1">&#39;image/bmp&#39;</span><span class="p">,</span> <span class="s1">&#39;image/pjpeg&#39;</span><span class="p">,</span> <span class="s1">&#39;image/x-png&#39;</span><span class="o">]</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Inside views</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='haml'><span class='line'># inside new.html.haml
+</span><span class='line'><span class="p">=</span> <span class="n">form_for</span> <span class="vi">@print</span> <span class="k">do</span>
+</span><span class='line'>  <span class="p">=</span><span class="n">f</span><span class="o">.</span><span class="n">file_field</span> <span class="ss">:image</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
 </div>
 
 

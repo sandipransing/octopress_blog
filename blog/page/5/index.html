@@ -219,6 +219,168 @@ rails has built in <i>number_to_currency</i> helper which takes options like uni
       
   <header>
     
+      <h1 class="entry-title"><a href="/2011/03/monitor-delayedjob-in-rails/">Monitor Delayed Job in Rails</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-01T01:22:00+05:30" pubdate data-updated="true">Mar 1<span>st</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Delayed Job &amp; Monit configuration</p>
+
+<p>We were struggling through how to monit delayed_job from past few months because monit doesn&rsquo;t work seamlessly with delayed_job start/stop commands and finally we got able to monit delayed_job.</p>
+
+<p>Here is our old configuration that wasn&rsquo;t working anyhow-</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>check process delayed_job with pidfile /home/sandip/shared/pids/delayed_job.pid
+</span><span class='line'>    stop program = "/bin/bash -c 'cd /home/sandip/current && RAILS_ENV=production script/delayed_job stop'"
+</span><span class='line'>    start program = "/bin/bash -c 'cd /home/sandip/current && RAILS_ENV=production script/delayed_job start'"
+</span><span class='line'>    if totalmem &gt; 100.0 MB for 3 cycles then restart
+</span><span class='line'>    if cpu usage &gt; 95% for 3 cycles then restart</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After doing google &amp; looking at stackoverflow, we found different solutions to work with but none of them found useful to me. :(</p>
+
+<p>After reading google group someone (not remembering exactly) directed to write a init script for delayed_job server and that perfectly worked for me and my headache of self moniting delayed_job ended up ;)</p>
+
+<p>Here is delayed_job init script</p>
+
+<h1>/etc/init.d/delayed_job</h1>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#! /bin/sh
+</span><span class='line'>set_path="cd /home/sandip/current"
+</span><span class='line'>
+</span><span class='line'>case "$1" in
+</span><span class='line'>    start)
+</span><span class='line'>    echo -n "Starting delayed_job: "
+</span><span class='line'>    su - root -c "$set_path; RAILS_ENV=production script/delayed_job start" &gt;&gt; /var/log/delayed_job.log 2&gt;&1
+</span><span class='line'>    echo "done."
+</span><span class='line'>    ;;
+</span><span class='line'>    stop)
+</span><span class='line'>    echo -n "Stopping delayed_job: "
+</span><span class='line'>    su - root -c "$set_path; RAILS_ENV=production script/delayed_job stop" &gt;&gt; /var/log/delayed_job.log 2&gt;&1
+</span><span class='line'>    echo "done."
+</span><span class='line'>    ;;
+</span><span class='line'>    *)
+</span><span class='line'>    echo "Usage: $N {start|stop}" &gt;&2
+</span><span class='line'>    exit 1
+</span><span class='line'>    ;;
+</span><span class='line'>esac
+</span><span class='line'>
+</span><span class='line'>exit 0</span></code></pre></td></tr></table></div></figure>
+
+
+<p>finally here is the working monit delayed_job configuration</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>check process delayed_job with pidfile /home/sandip/shared/pids/delayed_job.pid
+</span><span class='line'>    stop program = "/etc/init.d/delayed_job stop"
+</span><span class='line'>    start program = "/etc/init.d/delayed_job start"
+</span><span class='line'>    if totalmem &gt; 100.0 MB for 3 cycles then restart
+</span><span class='line'>    if cpu usage &gt; 95% for 3 cycles then restart</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Thinking Sphinx monit configuration</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>check process sphinx with pidfile /home/sandip/shared/pids/searchd.pid
+</span><span class='line'>    stop program = "/bin/bash -c 'cd /home/sandip/current && /usr/bin/rake RAILS_ENV=production ts:stop'"
+</span><span class='line'>    start program = "/bin/bash -c 'cd /home/sandip/current && /usr/bin/rake RAILS_ENV=production ts:start'"
+</span><span class='line'>    if totalmem &gt; 85.0 MB for 3 cycles then restart
+</span><span class='line'>    if cpu usage &gt; 95% for 3 cycles then restart</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Adhearsion (ahn) monit confiuration</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>check process ahn with pidfile /home/josh/shared/pids/ahnctl.pid
+</span><span class='line'>    stop program = "/bin/bash -c 'cd /home/sandip/current && /usr/bin/ahnctl stop adhearsion'"
+</span><span class='line'>    start program = "/bin/bash -c 'cd /home/sandip/current && /usr/bin/ahnctl start adhearsion'"
+</span><span class='line'>    if totalmem &gt; 100.0 MB for 3 cycles then restart
+</span><span class='line'>    if cpu usage &gt; 95% for 3 cycles then restart</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Nginx monit configuration</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>check process nginx with pidfile /opt/nginx/logs/nginx.pid
+</span><span class='line'>    start program = "/opt/nginx/sbin/nginx"
+</span><span class='line'>    stop  program = "/opt/nginx/sbin/nginx -s stop"
+</span><span class='line'>    if cpu is greater than 70% for 3 cycles then alert
+</span><span class='line'>    if cpu &gt; 80% for 5 cycles then restart
+</span><span class='line'>    if 10 restarts within 10 cycles then timeout</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2011/03/getting-started-with-rails-3-postgres/">Getting Started With Rails 3 & Postgres Database</a></h1>
     
     
@@ -242,8 +404,166 @@ rails has built in <i>number_to_currency</i> helper which takes options like uni
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-<b>Rails 3 Installation</b><br/><pre class=ruby>sudo gem install rails -v3.0.4 </pre> <b>postgres as db installation</b><>br/ <pre class=ruby>$ sudo apt-get install postgresql </pre><br/> <b>Rails 3 App with postgres as database</b><br/><pre class=ruby>$ rails new pg -d postgres </pre><b>bundle installation</b><br/>It will install dependency gems & postgres adapter for db connection<br/><pre class=ruby>bundle install </pre><br/>Here by default &#8216;postgres&#8217; database user gets created while installation but i recommend to  create new db user with name same as of system user owning project directory permissions. <br/>User owning file permission can be found using<br/><pre class=ruby>ls -l pg drwxr-xr-x 7 sandip sandip 4096 2011-02-23 15:38 app drwxr-xr-x 5 sandip sandip 4096 2011-02-23 18:14 config -rw-r--r-- 1 sandip sandip  152 2011-02-23 15:38 config.ru ... </pre> Default &#8216;postgres&#8217; database user gets created while installation<br/> <pre class=ruby>## Snap of database.yml development:   adapter: postgresql   encoding: unicode   database: pg_development   username: sandip   pool: 5 </pre> <b> Create new database user</b><br/><pre class=ruby>pg $ sudo su postgres pg $ createuser sandip Shall the new role be a superuser? (y/n) y pg $ exit exit </pre><br/><b> Create a first development database:</b><br/><pre class=ruby>pg $ psql template1 Welcome to psql 8.4.6, the PostgreSQL interactive terminal. ...  template1=# \l         List of databases    Name    |  Owner   | Encoding  -----------+----------+----------  postgres  | postgres | UTF8  template0 | postgres | UTF8  template1 | postgres | UTF8 (3 rows)  template1=# CREATE DATABASE pg_development; CREATE DATABASE template1=# \l             List of databases        Name        |  Owner   | Encoding  -------------------+----------+----------  postgres          | postgres | UTF8  pg_development | sandip   | UTF8  template0         | postgres | UTF8  template1         | postgres | UTF8 (4 rows)  template1=# \q </pre><br/> <b> Start rails server</b><br/><pre class=ruby>pg $ rails s </pre> <b>Getting hands on postgres terminal</b><br/><b>1. Login onto terminal</b><br/><pre class=ruby>psql -U DB_USERNAME -d DB_NAME -W DB_PASSWORD </pre><b>2. List databases</b><br/><pre class=ruby>\l </pre><b>3. Display tables</b><br/><pre class=ruby>\dt </pre><b>4. Exit from terminal</b><br/><pre class=ruby>\q </pre></div>
+  <div class="entry-content"><p>Rails 3 Installation</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo gem install rails -v3.0.4</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Postgres as <code>DB</code> installation</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install postgresql</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Rails 3 App with postgres as database</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rails new pg -d postgres</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Bundle installation
+It will install dependency gems &amp; postgres adapter for db connection</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>bundle install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here by default <code>postgres</code> database user gets created while installation but i recommend to create new db user with name same as of system user owning project directory permissions.</p>
+
+<p>User owning file permission can be found using</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ls -l pg
+</span><span class='line'>drwxr-xr-x 7 sandip sandip 4096 2011-02-23 15:38 app
+</span><span class='line'>drwxr-xr-x 5 sandip sandip 4096 2011-02-23 18:14 config
+</span><span class='line'>-rw-r--r-- 1 sandip sandip  152 2011-02-23 15:38 config.ru
+</span><span class='line'>...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Default &lsquo;postgres&rsquo; database user gets created while installation</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>## Snap of database.yml
+</span><span class='line'>development:
+</span><span class='line'>  adapter: postgresql
+</span><span class='line'>  encoding: unicode
+</span><span class='line'>  database: pg_development
+</span><span class='line'>  username: sandip
+</span><span class='line'>  pool: 5</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Create new database user</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>pg $ sudo su postgres
+</span><span class='line'>pg $ createuser sandip
+</span><span class='line'>Shall the new role be a superuser? (y/n) y
+</span><span class='line'>pg $ exit
+</span><span class='line'>exit</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Create a first development database:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>pg $ psql template1
+</span><span class='line'>Welcome to psql 8.4.6, the PostgreSQL interactive terminal.
+</span><span class='line'>...
+</span><span class='line'>
+</span><span class='line'>template1=# \l
+</span><span class='line'>        List of databases
+</span><span class='line'>   Name    |  Owner   | Encoding 
+</span><span class='line'>-----------+----------+----------
+</span><span class='line'> postgres  | postgres | UTF8
+</span><span class='line'> template0 | postgres | UTF8
+</span><span class='line'> template1 | postgres | UTF8
+</span><span class='line'>(3 rows)
+</span><span class='line'>
+</span><span class='line'>template1=# CREATE DATABASE pg_development;
+</span><span class='line'>CREATE DATABASE
+</span><span class='line'>template1=# \l
+</span><span class='line'>            List of databases
+</span><span class='line'>       Name        |  Owner   | Encoding 
+</span><span class='line'>-------------------+----------+----------
+</span><span class='line'> postgres          | postgres | UTF8
+</span><span class='line'> pg_development | sandip   | UTF8
+</span><span class='line'> template0         | postgres | UTF8
+</span><span class='line'> template1         | postgres | UTF8
+</span><span class='line'>(4 rows)
+</span><span class='line'>
+</span><span class='line'>template1=# \q</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Start rails server</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>pg $ rails s</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Getting hands on postgres terminal</h3>
+
+<p><strong>1.  Login onto terminal</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>psql -U DB_USERNAME -d DB_NAME -W DB_PASSWORD</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>2.  List databases</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>\l</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>3.  Display tables</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>\dt</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>4.  Exit from terminal</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>\q</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   
@@ -316,8 +636,29 @@ While working on remote machine we often get headache of entering password for s
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-<pre class=ruby># in config/environment.rb config.gem 'hoptoad_notifier'  # from your Rails root: $ rake gems:install $ rake gems:unpack GEM=hoptoad_notifier $ script/generate hoptoad --api-key your_key_here </pre></div>
+  <div class="entry-content"><p><strong>1.  Add GEM to environment file</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># in config/environment.rb
+</span><span class='line'>config.gem 'hoptoad_notifier'</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>2. Install gems</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># from your Rails root:
+</span><span class='line'>rake gems:install
+</span><span class='line'>rake gems:unpack GEM=hoptoad_notifier</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>3. Generate hoptoad install using key</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ruby script/generate hoptoad --api-key your_key_here</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   
@@ -392,43 +733,6 @@ While working on remote machine we often get headache of entering password for s
 
   <div class="entry-content"><div class='post'>
 <b>Testing restful &amp; polymorphic resource routes on rails console</b><br />Open rails console<br /><pre class=ruby>rails c # In rails 3 OR ruby script/console </pre><br />app object of URL <pre class=ruby>&gt;&gt; app<br />=&gt; #&lt;ActionController::Integration::Session:0xc164fac @result=nil, @status=nil, @accept="text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5", @path=nil, @request_count=0, @application=#&lt;ActionController::Dispatcher:0xc1644f8 @output=#&lt;IO:0x85e34ec&gt;&gt;, @remote_addr="127.0.0.1", @host="www.example.com", @controller=nil, @https=false, @request=nil, @headers=nil, @cookies={}, @status_message=nil, @named_routes_configured=true, @response=nil&gt;<br /></pre>Root URL<br/><pre class=ruby>&gt;&gt; app.root_url<br />=&gt; "http://www.example.com/"<br /></pre>Plural paths <pre class=ruby><br />&gt;&gt; app.calls_path<br />=&gt; "/calls"<br /></pre>Singular routes <pre class=ruby><br />&gt;&gt; app.audio_call_path<br />ActionController::RoutingError: audio_call_url failed&nbsp; <br /> &gt;&gt; app.audio_call_path(1)<br />=&gt; "/calls/1/audio"<br /><br />&gt;&gt; app.audio_call_path(13)<br />=&gt; "/calls/13/audio"<br /><br />&gt;&gt; app.audio_call_path(13, :name =&gt; 'san')<br />=&gt; "/calls/13/audio?name=san"<br /></pre><b>Polymorphic URLS</b><br/><pre class=ruby>&nbsp;app.polymorphic_path(Call.first, :action =&gt; 'audio')<br />=&gt; "/calls/253/audio"<br /><br />&gt;&gt; app.polymorphic_path(Call.new)<br />=&gt; "/calls"<br /></pre><br /></div>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/01/getting-started-with-mysql-on-amazon/">Getting Started With MySQL on Amazon Web Services</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-01-15T18:30:00+05:30" pubdate data-updated="true">Jan 15<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<div style="width:425px" id="__ss_1327730"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/ronaldbradford/getting-started-with-mysql-in-amazon-web-services" title="Getting started with MySQL on Amazon Web Services">Getting started with MySQL on Amazon Web Services</a></strong><object id="__sse1327730" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=usingamazonwebservices-090422111735-phpapp01&stripped_title=getting-started-with-mysql-in-amazon-web-services&userName=ronaldbradford" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse1327730" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=usingamazonwebservices-090422111735-phpapp01&stripped_title=getting-started-with-mysql-in-amazon-web-services&userName=ronaldbradford" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/ronaldbradford">Ronald Bradford</a>.</div></div></div>
 </div>
   
   

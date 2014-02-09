@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>stripe gateway payment integration with rails - Fun On Rails</title>
+  <title>stripe payment gateway integration with rails - Fun On Rails</title>
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Stripe is simple website payment solution and its very easy to easy setupIt currently supports only in US and seems to be very popular compared to &hellip;">
+  <meta name="description" content="Stripe is simple website payment solution and its very easy to easy setup.
+It currently supports only in US and seems to be very popular compared to &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,7 +69,7 @@
   
   <header>
     
-      <h1 class="entry-title">Stripe Gateway Payment Integration With Rails</h1>
+      <h1 class="entry-title">Stripe Payment Gateway Integration With Rails</h1>
     
     
       <p class="meta">
@@ -91,8 +92,327 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-Stripe is simple website payment solution and its very easy to easy setup<br/>It currently supports only in US and seems to be very popular compared to other payment gateways because of its api & pricing<br/><br/>Stripe API provides -<br/>1. charge (regular payments)<br/>2. subscription (recurring payments)<br/>3. managing customers (via stripe_customer_token)<br/> <br/><b>What you need to do ?</b><br/>Create a stripe account by providing email address and password. There after go to the <a href="https://manage.stripe.com/account">manage account page</a> to obtain stripe public & api keys.<br/> <b>Rails Integration</b><br/><pre class=ruby># Gemfile   gem stripe </pre><br/><pre class=ruby># config/initializers/stripe.rb  Stripe.api_key = "rGaNWsIG3Gy6zvXB8wv4rEcizJp6XjF5" STRIPE_PUBLIC_KEY = "vk_BcSyS2qPWdT5SdrwkQg0vTSyhZgqN" </pre><br/><pre class=ruby># app/views/layouts/application.html.haml  = javascript_include_tag 'https://js.stripe.com/v1/' = tag :meta, :name => 'stripe-key', :content => STRIPE_PUBLIC_KEY </pre><br/><b>Payment Form</b><br/><pre class=ruby># app/views/payments/new.html.haml   #stripe_error   %noscript JavaScript is not enabled and is required for this form. First enable it in your web browser settings.  = form_for @payment ||= Payment.new, :html => {:id => :payForm} do |p|   = p.hidden_field :stripe_card_token   .field     = p.text_field :amount   .credit_card_form     %h3.title       Enter Credit Card     - if @payment.stripe_card_token.present?       Credit card has been provided.     - else       .field         = label_tag :card_number, "Credit Card Number"         = text_field_tag :card_number, nil, name: nil       .field         = label_tag :card_code, "Security Code (CVV)"         = text_field_tag :card_code, nil, name: nil       .field         = label_tag :card_month, "Expiry Date"         = select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}         = select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"}   </pre><br/><b>Javascript Code</b><br/><pre class=ruby> # app/views/payments/new.js   var payment; jQuery(function() {    Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'));   return payment.setupForm(); });  payment = {    setupForm: function() {      $('.head').click(function() {       $(this).css('disabled', true);        if($('#payment_stripe_card_token').val()){         $('#payForm').submit();       }       else{         payment.processCard();       }     });   },    processCard: function() {      var card;     card = {       number: $('#card_number').val(),       cvc: $('#card_code').val(),       expMonth: $('#card_month').val(),       expYear: $('#card_year').val()     };     return Stripe.createToken(card, payment.handleStripeResponse);   },   handleStripeResponse: function(status, response) {     if (status === 200) {       $('#payment_stripe_card_token').val(response.id)       $('#stripe_error').remove();       $('#payForm').submit();     } else {       $('#stripe_error').addClass('error').text(response.error.message);       $('.head').css('disabled', false);     }   } };  </pre><br/><b>Generate & Migrate Payment Model</b><br/><pre class=ruby>  rails g model payment status:string amount:float email:string transaction_number:string   rake db:migrate </pre><br/><b>Payment Model</b><br/><pre class=ruby># app/models/payment.rb  class Payment < ActiveRecord::Base   PROCESSING, FAILED, SUCCESS = 1, 2, 3      attr_accessible :stripe_card_token      validates :amount, :stripe_card_token, :presence => true, :numericality => { :greater_than => 0 }    def purchase     self.status = PROCESSING          customer = Stripe::Customer.create(description:email, card: stripe_card_token)     # OPTIONAL: save customer token for further reference     stripe_customer_token = customer.id          # Charge     charge = Stripe::Charge.create(      :amount => amount * 100, # $15.00 this time      :currency => "usd",      :customer => stripe_customer_token     )      if charge.paid       self.transaction_num = charge.id       self.status = SUCCESS     else       self.status = FAILED     end     return self   rescue Exception => e     errors.add :base, "There was a problem with your credit card."     self.status = FAILED     return self   end end </pre><br/><b>Payments Controller</b><br/><pre class=ruby># app/controllers/payments_controller.rb   class PaymentsController < ApplicationController   def create     @payment = Payment.new(params[:payment])      if @payment.valid? && @payment.purchase       flash[:notice] = 'Thanks for Purchase!'       redirect_to root_url     else       render :action => :new     end   end end </pre></div>
+<div class="entry-content"><p>Stripe is simple website payment solution and its very easy to easy setup.
+It currently supports only in US and seems to be very popular compared to other payment gateways because of its api &amp; pricing</p>
+
+<p>Stripe API provides &ndash;</p>
+
+<ol>
+<li>charge (regular payments)</li>
+<li>subscription (recurring payments)</li>
+<li>managing customers (via stripe_customer_token)</li>
+</ol>
+
+
+<p><strong>What you need to do ?</strong></p>
+
+<p>Create a stripe account by providing email address and password. There after go to the <a href="https://manage.stripe.com/account">manage account page</a> to obtain stripe public &amp; api keys.
+Rails Integration</p>
+
+<p>Rails Integration</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># Gemfile
+</span><span class='line'>gem stripe</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Add api key and public key</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># config/initializers/stripe.rb</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Stripe</span><span class="o">.</span><span class="n">api_key</span> <span class="o">=</span> <span class="s2">&quot;rGaNWsIG3Gy6zvXB8wv4rEcizJp6XjF5&quot;</span>
+</span><span class='line'><span class="no">STRIPE_PUBLIC_KEY</span> <span class="o">=</span> <span class="s2">&quot;vk_BcSyS2qPWdT5SdrwkQg0vTSyhZgqN&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>View</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='haml'><span class='line'># app/views/layouts/application.html.haml
+</span><span class='line'>
+</span><span class='line'><span class="p">=</span> <span class="n">javascript_include_tag</span> <span class="s1">&#39;https://js.stripe.com/v1/&#39;</span>
+</span><span class='line'><span class="p">=</span> <span class="n">tag</span> <span class="ss">:meta</span><span class="p">,</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s1">&#39;stripe-key&#39;</span><span class="p">,</span> <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="no">STRIPE_PUBLIC_KEY</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Payment Form</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='haml'><span class='line'># app/views/payments/new.html.haml
+</span><span class='line'>
+</span><span class='line'><span class="nf">#stripe_error</span>
+</span><span class='line'>  <span class="nt">%noscript</span> JavaScript is not enabled and is required for this form. First enable it in your web browser settings.
+</span><span class='line'>
+</span><span class='line'><span class="p">=</span> <span class="n">form_for</span> <span class="vi">@payment</span> <span class="o">||=</span> <span class="no">Payment</span><span class="o">.</span><span class="n">new</span><span class="p">,</span> <span class="ss">:html</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:id</span> <span class="o">=&gt;</span> <span class="ss">:payForm</span><span class="p">}</span> <span class="k">do</span> <span class="o">|</span><span class="nb">p</span><span class="o">|</span>
+</span><span class='line'>  <span class="p">=</span> <span class="nb">p</span><span class="o">.</span><span class="n">hidden_field</span> <span class="ss">:stripe_card_token</span>
+</span><span class='line'>  <span class="nc">.field</span>
+</span><span class='line'>    <span class="p">=</span> <span class="nb">p</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:amount</span>
+</span><span class='line'>  <span class="nc">.credit_card_form</span>
+</span><span class='line'>    <span class="nt">%h3</span><span class="nc">.title</span>
+</span><span class='line'>      Enter Credit Card
+</span><span class='line'>    <span class="p">-</span> <span class="k">if</span> <span class="vi">@payment</span><span class="o">.</span><span class="n">stripe_card_token</span><span class="o">.</span><span class="n">present?</span>
+</span><span class='line'>      Credit card has been provided.
+</span><span class='line'>    <span class="p">-</span> <span class="k">else</span>
+</span><span class='line'>      <span class="nc">.field</span>
+</span><span class='line'>        <span class="p">=</span> <span class="n">label_tag</span> <span class="ss">:card_number</span><span class="p">,</span> <span class="s2">&quot;Credit Card Number&quot;</span>
+</span><span class='line'>        <span class="p">=</span> <span class="n">text_field_tag</span> <span class="ss">:card_number</span><span class="p">,</span> <span class="kp">nil</span><span class="p">,</span> <span class="nb">name</span><span class="p">:</span> <span class="kp">nil</span>
+</span><span class='line'>      <span class="nc">.field</span>
+</span><span class='line'>        <span class="p">=</span> <span class="n">label_tag</span> <span class="ss">:card_code</span><span class="p">,</span> <span class="s2">&quot;Security Code (CVV)&quot;</span>
+</span><span class='line'>        <span class="p">=</span> <span class="n">text_field_tag</span> <span class="ss">:card_code</span><span class="p">,</span> <span class="kp">nil</span><span class="p">,</span> <span class="nb">name</span><span class="p">:</span> <span class="kp">nil</span>
+</span><span class='line'>      <span class="nc">.field</span>
+</span><span class='line'>        <span class="p">=</span> <span class="n">label_tag</span> <span class="ss">:card_month</span><span class="p">,</span> <span class="s2">&quot;Expiry Date&quot;</span>
+</span><span class='line'>        <span class="p">=</span> <span class="n">select_month</span> <span class="kp">nil</span><span class="p">,</span> <span class="p">{</span><span class="n">add_month_numbers</span><span class="p">:</span> <span class="kp">true</span><span class="p">},</span> <span class="p">{</span><span class="nb">name</span><span class="p">:</span> <span class="kp">nil</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="s2">&quot;card_month&quot;</span><span class="p">}</span>
+</span><span class='line'>        <span class="p">=</span> <span class="n">select_year</span> <span class="kp">nil</span><span class="p">,</span> <span class="p">{</span><span class="n">start_year</span><span class="p">:</span> <span class="no">Date</span><span class="o">.</span><span class="n">today</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">end_year</span><span class="p">:</span> <span class="no">Date</span><span class="o">.</span><span class="n">today</span><span class="o">.</span><span class="n">year</span><span class="o">+</span><span class="mi">15</span><span class="p">},</span> <span class="p">{</span><span class="nb">name</span><span class="p">:</span> <span class="kp">nil</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="s2">&quot;card_year&quot;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Javascript Code</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="err">#</span> <span class="nx">app</span><span class="o">/</span><span class="nx">views</span><span class="o">/</span><span class="nx">payments</span><span class="o">/</span><span class="k">new</span><span class="p">.</span><span class="nx">js</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">payment</span><span class="p">;</span>
+</span><span class='line'><span class="nx">jQuery</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">Stripe</span><span class="p">.</span><span class="nx">setPublishableKey</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;meta[name=&quot;stripe-key&quot;]&#39;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">));</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">payment</span><span class="p">.</span><span class="nx">setupForm</span><span class="p">();</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">payment</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">setupForm</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.head&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s1">&#39;disabled&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">if</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#payment_stripe_card_token&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">()){</span>
+</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#payForm&#39;</span><span class="p">).</span><span class="nx">submit</span><span class="p">();</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="k">else</span><span class="p">{</span>
+</span><span class='line'>        <span class="nx">payment</span><span class="p">.</span><span class="nx">processCard</span><span class="p">();</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>  <span class="p">},</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">processCard</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">card</span><span class="p">;</span>
+</span><span class='line'>    <span class="nx">card</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">number</span><span class="o">:</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#card_number&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">(),</span>
+</span><span class='line'>      <span class="nx">cvc</span><span class="o">:</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#card_code&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">(),</span>
+</span><span class='line'>      <span class="nx">expMonth</span><span class="o">:</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#card_month&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">(),</span>
+</span><span class='line'>      <span class="nx">expYear</span><span class="o">:</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#card_year&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">Stripe</span><span class="p">.</span><span class="nx">createToken</span><span class="p">(</span><span class="nx">card</span><span class="p">,</span> <span class="nx">payment</span><span class="p">.</span><span class="nx">handleStripeResponse</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">},</span>
+</span><span class='line'>  <span class="nx">handleStripeResponse</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">status</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">status</span> <span class="o">===</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#payment_stripe_card_token&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span>
+</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#stripe_error&#39;</span><span class="p">).</span><span class="nx">remove</span><span class="p">();</span>
+</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#payForm&#39;</span><span class="p">).</span><span class="nx">submit</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#stripe_error&#39;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.head&#39;</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s1">&#39;disabled&#39;</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Generate &amp; Migrate Payment Model</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">rails</span> <span class="nx">g</span> <span class="nx">model</span> <span class="nx">payment</span> <span class="nx">status</span><span class="o">:</span><span class="nx">string</span> <span class="nx">amount</span><span class="o">:</span><span class="kr">float</span> <span class="nx">email</span><span class="o">:</span><span class="nx">string</span> <span class="nx">transaction_number</span><span class="o">:</span><span class="nx">string</span>
+</span><span class='line'><span class="nx">rake</span> <span class="nx">db</span><span class="o">:</span><span class="nx">migrate</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Payment Model</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/models/payment.rb </span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Payment</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="no">PROCESSING</span><span class="p">,</span> <span class="no">FAILED</span><span class="p">,</span> <span class="no">SUCCESS</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">attr_accessible</span> <span class="ss">:stripe_card_token</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">validates</span> <span class="ss">:amount</span><span class="p">,</span> <span class="ss">:stripe_card_token</span><span class="p">,</span> <span class="ss">:presence</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">:numericality</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:greater_than</span> <span class="o">=&gt;</span> <span class="mi">0</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">purchase</span>
+</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="no">PROCESSING</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">customer</span> <span class="o">=</span> <span class="ss">Stripe</span><span class="p">:</span><span class="ss">:Customer</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">description</span><span class="p">:</span><span class="n">email</span><span class="p">,</span> <span class="ss">card</span><span class="p">:</span> <span class="n">stripe_card_token</span><span class="p">)</span>
+</span><span class='line'>    <span class="c1"># OPTIONAL: save customer token for further reference</span>
+</span><span class='line'>    <span class="n">stripe_customer_token</span> <span class="o">=</span> <span class="n">customer</span><span class="o">.</span><span class="n">id</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1"># Charge</span>
+</span><span class='line'>    <span class="n">charge</span> <span class="o">=</span> <span class="ss">Stripe</span><span class="p">:</span><span class="ss">:Charge</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+</span><span class='line'>     <span class="ss">:amount</span> <span class="o">=&gt;</span> <span class="n">amount</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="c1"># $15.00 this time</span>
+</span><span class='line'>     <span class="ss">:currency</span> <span class="o">=&gt;</span> <span class="s2">&quot;usd&quot;</span><span class="p">,</span>
+</span><span class='line'>     <span class="ss">:customer</span> <span class="o">=&gt;</span> <span class="n">stripe_customer_token</span>
+</span><span class='line'>    <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">if</span> <span class="n">charge</span><span class="o">.</span><span class="n">paid</span>
+</span><span class='line'>      <span class="nb">self</span><span class="o">.</span><span class="n">transaction_num</span> <span class="o">=</span> <span class="n">charge</span><span class="o">.</span><span class="n">id</span>
+</span><span class='line'>      <span class="nb">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="no">SUCCESS</span>
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>      <span class="nb">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="no">FAILED</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nb">self</span>
+</span><span class='line'>  <span class="k">rescue</span> <span class="no">Exception</span> <span class="o">=&gt;</span> <span class="n">e</span>
+</span><span class='line'>    <span class="n">errors</span><span class="o">.</span><span class="n">add</span> <span class="ss">:base</span><span class="p">,</span> <span class="s2">&quot;There was a problem with your credit card.&quot;</span>
+</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="no">FAILED</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nb">self</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Payments Controller</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/controllers/payments_controller.rb </span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">PaymentsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">create</span>
+</span><span class='line'>    <span class="vi">@payment</span> <span class="o">=</span> <span class="no">Payment</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:payment</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">if</span> <span class="vi">@payment</span><span class="o">.</span><span class="n">valid?</span> <span class="o">&amp;&amp;</span> <span class="vi">@payment</span><span class="o">.</span><span class="n">purchase</span>
+</span><span class='line'>      <span class="n">flash</span><span class="o">[</span><span class="ss">:notice</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;Thanks for Purchase!&#39;</span>
+</span><span class='line'>      <span class="n">redirect_to</span> <span class="n">root_url</span>
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>      <span class="n">render</span> <span class="ss">:action</span> <span class="o">=&gt;</span> <span class="ss">:new</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 

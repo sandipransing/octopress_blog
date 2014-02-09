@@ -4,7 +4,7 @@
   <title><![CDATA[Category: sass | Fun On Rails]]></title>
   <link href="http://sandipransing.github.io/blog/categories/sass/atom.xml" rel="self"/>
   <link href="http://sandipransing.github.io/"/>
-  <updated>2014-02-09T23:18:57+05:30</updated>
+  <updated>2014-02-10T04:31:35+05:30</updated>
   <id>http://sandipransing.github.io/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -18,9 +18,82 @@
     <link href="http://sandipransing.github.io/2011/12/active-admin-sass-and-rails-3/"/>
     <updated>2011-12-28T14:58:00+05:30</updated>
     <id>http://sandipransing.github.io/2011/12/active-admin-sass-and-rails-3</id>
-    <content type="html"><![CDATA[<div class='post'>
-active_admin is the good way to provide rails administrative interface.<br/>It provides front-end db administration and its customizable too :)<br/> <pre class=ruby># Gemfile   gem 'activeadmin'   gem 'sass-rails'   gem "meta_search",    '>= 1.1.0.pre' </pre><br/>Bundle install, generate config & migrate db <br/><pre class=ruby>bundle install rails g active_admin:install rake db:migrate </pre> Config <br/><pre class=ruby># config/initializers/active_admin.rb  ActiveAdmin.setup do |config|   config.site_title = "Web Site :: Admin Panel"   config.site_title_link = "/"   config.default_namespace = :siteadmin   config.authentication_method = :authenticate_admin_user!   config.current_user_method = :current_admin_user   config.logout_link_method = :delete end </pre><br/>Registering new resource <br/><pre class=ruby>rails generate active_admin:resource category </pre>Customization<br/><pre class=ruby># app/admin/categories.rb  ActiveAdmin.register Category do   scope :published    form do |f|     f.inputs do       f.input :name, :label => 'Name'       f.input :for_type, :label => "Category Type"     end     f.buttons   end end </pre>Adding Dashboard<br/><pre class=ruby>ActiveAdmin::Dashboards.build do   section "Recent Categories" do     table_for Category.published.recent.limit(2) do       column :name do |c|         link_to c.name, [:admin, c]       end       column :created_at     end     strong { link_to "View All Categories", admin_categories_path }   end end </pre></div>
+    <content type="html"><![CDATA[<blockquote><p>Active Admin is the good way to provide rails administrative interface. It provides front-end db administration and its customizable too :)</p></blockquote>
 
+<p>```</p>
+
+<h1>Gemfile</h1>
+
+<p>gem &lsquo;activeadmin&rsquo;
+gem &lsquo;sass-rails&rsquo;
+gem &ldquo;meta_search&rdquo;,    &lsquo;>= 1.1.0.pre&rsquo;
+```</p>
+
+<p>Bundle install, generate config &amp; migrate db
+<code>
+bundle install
+rails g active_admin:install
+rake db:migrate
+</code></p>
+
+<p>Config
+```ruby</p>
+
+<h1>config/initializers/active_admin.rb</h1>
+
+<p>ActiveAdmin.setup do |config|
+  config.site_title = &ldquo;Web Site :: Admin Panel&rdquo;
+  config.site_title_link = &ldquo;/&rdquo;
+  config.default_namespace = :siteadmin
+  config.authentication_method = :authenticate_admin_user!
+  config.current_user_method = :current_admin_user
+  config.logout_link_method = :delete
+end
+```</p>
+
+<p>Registering new resource
+<code>
+rails generate active_admin:resource category
+</code></p>
+
+<p>Customization
+```ruby</p>
+
+<h1>app/admin/categories.rb</h1>
+
+<p>ActiveAdmin.register Category do
+  scope :published</p>
+
+<p>  form do |f|</p>
+
+<pre><code>f.inputs do
+  f.input :name, :label =&gt; 'Name'
+  f.input :for_type, :label =&gt; "Category Type"
+end
+f.buttons
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<p>Adding Dashboard
+```
+ActiveAdmin::Dashboards.build do
+  section &ldquo;Recent Categories&rdquo; do</p>
+
+<pre><code>table_for Category.published.recent.limit(2) do
+  column :name do |c|
+    link_to c.name, [:admin, c]
+  end
+  column :created_at
+end
+strong { link_to "View All Categories", admin_categories_path }
+</code></pre>
+
+<p>  end
+end
+```</p>
 ]]></content>
   </entry>
   
@@ -29,9 +102,81 @@ active_admin is the good way to provide rails administrative interface.<br/>It p
     <link href="http://sandipransing.github.io/2011/12/twitter-bootstrap-paginate-and-rails-3/"/>
     <updated>2011-12-28T14:06:00+05:30</updated>
     <id>http://sandipransing.github.io/2011/12/twitter-bootstrap-paginate-and-rails-3</id>
-    <content type="html"><![CDATA[<div class='post'>
-Twitter bootstrap is css toolkit for rapid front-end UI development.<br/>To get will-paginate working with bootstrap css we need to override default pagination link renderer.<br/> Using Bootstrap-sass for rails 3 <br/><pre class=ruby># Gemfile  gem 'sass-rails'  gem 'bootstrap-sass' </pre><br/><pre class=ruby># app/assets/stylesheets/application.css.sass  // Place all the styles related to the home controller here. // They will automatically be included in application.css. // You can use Sass (SCSS) here: http://sass-lang.com/ //= require bootstrap </pre> Add WillPaginate LinkRenderer to intitializer<br/><pre class=ruby># config/initializers/will_paginate.rb  module WillPaginate   module ActiveRecord     module RelationMethods       alias_method :per, :per_page       alias_method :num_pages, :total_pages       alias_method :total_count, :count     end   end    module ActionView     def will_paginate(collection = nil, options = {})       options[:inner_window] ||= 0       options[:outer_window] ||= 0       options[:class] ||= 'pagination pull-left'        options[:renderer] ||= BootstrapLinkRenderer       super.try :html_safe     end      class BootstrapLinkRenderer < LinkRenderer       protected        def html_container(html)         tag :div, tag(:ul, html), container_attributes       end        def page_number(page)         tag :li, link(page, page, :rel => rel_value(page)), :class => ('active' if page == current_page)       end        def previous_or_next_page(page, text, classname)         tag :li, link(text, page || 'javascript:void(0)'), :class => [classname[0..3], classname, ('disabled' unless page)].join(' ')       end        def gap         tag :li, link(super, 'javascript:void(0)'), :class => 'disabled'       end      end   end end </pre></div>
+    <content type="html"><![CDATA[<p>Twitter bootstrap is css toolkit for rapid front-end UI development.
+To get will-paginate working with bootstrap css we need to override default pagination link renderer.</p>
 
+<p>Using Bootstrap-sass for rails 3
+```</p>
+
+<h1>Gemfile</h1>
+
+<p>gem &lsquo;sass-rails&rsquo;
+gem &lsquo;bootstrap-sass&rsquo;
+```</p>
+
+<p>```sass</p>
+
+<h1>app/assets/stylesheets/application.css.sass</h1>
+
+<p>// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: <a href="http://sass-lang.com/">http://sass-lang.com/</a>
+//= require bootstrap
+```</p>
+
+<p>Add WillPaginate LinkRenderer to intitializer
+```ruby</p>
+
+<h1>config/initializers/will_paginate.rb</h1>
+
+<p>module WillPaginate
+  module ActiveRecord</p>
+
+<pre><code>module RelationMethods
+  alias_method :per, :per_page
+  alias_method :num_pages, :total_pages
+  alias_method :total_count, :count
+end
+</code></pre>
+
+<p>  end</p>
+
+<p>  module ActionView</p>
+
+<pre><code>def will_paginate(collection = nil, options = {})
+  options[:inner_window] ||= 0
+  options[:outer_window] ||= 0
+  options[:class] ||= 'pagination pull-left'
+
+  options[:renderer] ||= BootstrapLinkRenderer
+  super.try :html_safe
+end
+
+class BootstrapLinkRenderer &lt; LinkRenderer
+  protected
+
+  def html_container(html)
+    tag :div, tag(:ul, html), container_attributes
+  end
+
+  def page_number(page)
+    tag :li, link(page, page, :rel =&gt; rel_value(page)), :class =&gt; ('active' if page == current_page)
+  end
+
+  def previous_or_next_page(page, text, classname)
+    tag :li, link(text, page || 'javascript:void(0)'), :class =&gt; [classname[0..3], classname, ('disabled' unless page)].join(' ')
+  end
+
+  def gap
+    tag :li, link(super, 'javascript:void(0)'), :class =&gt; 'disabled'
+  end
+
+end
+</code></pre>
+
+<p>  end
+end
+```</p>
 ]]></content>
   </entry>
   

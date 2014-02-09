@@ -9,7 +9,21 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Below extensions to active record base simplifies its usage while coding.# config/initializers/core_extensions.rb class ActiveRecord::Base def self. &hellip;">
+  <meta name="description" content="Below extensions to active record base simplifies its usage while coding. 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+# config/initializers/core_extensions.rb &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -91,8 +105,63 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-Below extensions to active record base simplifies its usage while coding.<br/><pre class=ruby># config/initializers/core_extensions.rb  class ActiveRecord::Base    def self.pagination(options)     paginate :per_page => options[:per_page] || per_page, :page => options[:page]   end    def self.options_for_select(opts={})     opts[:name] ||= :name     opts[:attr] ||= :id     opts[:prompt] ||= 'Please Select'     all.collect{|c| [c.send(opts[:name].to_sym), c.send(opts[:attr].to_sym)]}.insert(0, [opts[:prompt], nil])   end end </pre>Usage<br/><pre class=ruby>class Student< ActiveRecord::Base  #attributes #=> name, age end  ##  Student.pagination({:page => 10}) Student.pagination({:per_page => 2, :page => 2}) Student.options_for_select Student.options_for_select({:prompt => 'Please select'}) Student.options_for_select({:name => :age}) </pre></div>
+<div class="entry-content"><p>Below extensions to active record base simplifies its usage while coding.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># config/initializers/core_extensions.rb </span>
+</span><span class='line'><span class="k">class</span> <span class="nc">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">pagination</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">paginate</span> <span class="ss">:per_page</span> <span class="o">=&gt;</span> <span class="n">options</span><span class="o">[</span><span class="ss">:per_page</span><span class="o">]</span> <span class="o">||</span> <span class="n">per_page</span><span class="p">,</span> <span class="ss">:page</span> <span class="o">=&gt;</span> <span class="n">options</span><span class="o">[</span><span class="ss">:page</span><span class="o">]</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">options_for_select</span><span class="p">(</span><span class="n">opts</span><span class="o">=</span><span class="p">{})</span>
+</span><span class='line'>    <span class="n">opts</span><span class="o">[</span><span class="ss">:name</span><span class="o">]</span> <span class="o">||=</span> <span class="ss">:name</span>
+</span><span class='line'>    <span class="n">opts</span><span class="o">[</span><span class="ss">:attr</span><span class="o">]</span> <span class="o">||=</span> <span class="ss">:id</span>
+</span><span class='line'>    <span class="n">opts</span><span class="o">[</span><span class="ss">:prompt</span><span class="o">]</span> <span class="o">||=</span> <span class="s1">&#39;Please Select&#39;</span>
+</span><span class='line'>    <span class="n">all</span><span class="o">.</span><span class="n">collect</span><span class="p">{</span><span class="o">|</span><span class="n">c</span><span class="o">|</span> <span class="o">[</span><span class="n">c</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">opts</span><span class="o">[</span><span class="ss">:name</span><span class="o">].</span><span class="n">to_sym</span><span class="p">),</span> <span class="n">c</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">opts</span><span class="o">[</span><span class="ss">:attr</span><span class="o">].</span><span class="n">to_sym</span><span class="p">)</span><span class="o">]</span><span class="p">}</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">[</span><span class="n">opts</span><span class="o">[</span><span class="ss">:prompt</span><span class="o">]</span><span class="p">,</span> <span class="kp">nil</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Usage</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Student</span><span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'> <span class="c1">#attributes #=&gt; name, age</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">## </span>
+</span><span class='line'><span class="no">Student</span><span class="o">.</span><span class="n">pagination</span><span class="p">({</span><span class="ss">:page</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">})</span>
+</span><span class='line'><span class="no">Student</span><span class="o">.</span><span class="n">pagination</span><span class="p">({</span><span class="ss">:per_page</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span> <span class="ss">:page</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">})</span>
+</span><span class='line'><span class="no">Student</span><span class="o">.</span><span class="n">options_for_select</span>
+</span><span class='line'><span class="no">Student</span><span class="o">.</span><span class="n">options_for_select</span><span class="p">({</span><span class="ss">:prompt</span> <span class="o">=&gt;</span> <span class="s1">&#39;Please select&#39;</span><span class="p">})</span>
+</span><span class='line'><span class="no">Student</span><span class="o">.</span><span class="n">options_for_select</span><span class="p">({</span><span class="ss">:name</span> <span class="o">=&gt;</span> <span class="ss">:age</span><span class="p">})</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 

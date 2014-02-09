@@ -490,8 +490,23 @@ If you want more help then see <a href="http://octopress.org/docs/deploying/gith
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-<div dir="ltr" style="text-align: left;" trbidi="on">We all know that rails models associations gets defined while class definitions are loaded and once defined can&#8217;t be changed. But still you can make use of block parameter to conditions to have dynamic query conditions inside associations.<br /><br />Below line explains <b>how to</b> define dynamic associations -<br /><br /><pre class=ruby>has_one :code_sequence, :class_name =&gt; 'Sequence', :conditions =&gt; 'kind = "#{self.kind}"'</pre><br /><br />Please make a note that below code won&#8217;t be working - <br /><pre class=ruby>has_one :code_sequence, :class_name =&gt; 'Sequence', :conditions =&gt; proc { |c| ['kind = ?', c.kind] }</pre></div></div>
+  <div class="entry-content"><p>We all know that rails models associations gets defined while class definitions are loaded and once defined can&rsquo;t be changed.</p>
+
+<p>But still you can make use of <code>block parameter</code> to conditions to have <code>dynamic query conditions</code> inside associations.</p>
+
+<p>Below line explains <strong>how to</strong> define dynamic associations &ndash;</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">has_one</span> <span class="ss">:code_sequence</span><span class="p">,</span> <span class="ss">:class_name</span> <span class="o">=&gt;</span> <span class="s1">&#39;Sequence&#39;</span><span class="p">,</span> <span class="ss">:conditions</span> <span class="o">=&gt;</span> <span class="s1">&#39;kind = &quot;#{self.kind}&quot;&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Please make a note that below code won&rsquo;t be working &ndash;</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">has_one</span> <span class="ss">:code_sequence</span><span class="p">,</span> <span class="ss">:class_name</span> <span class="o">=&gt;</span> <span class="s1">&#39;Sequence&#39;</span><span class="p">,</span> <span class="ss">:conditions</span> <span class="o">=&gt;</span> <span class="nb">proc</span> <span class="p">{</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span> <span class="o">[</span><span class="s1">&#39;kind = ?&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">kind</span><span class="o">]</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   
@@ -527,8 +542,74 @@ If you want more help then see <a href="http://octopress.org/docs/deploying/gith
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-If your application is currently on any version of Rails 2.1.x, The following changes needs to be done for upgrading your application to Rails 2.3.11<br /><br />1. First install Rails version 2.3.11<br /><pre class=ruby><br />gem install rails -v2.3.11<br /></pre><br /><br />2. Freeze app ruby gems<br /><pre class=ruby><br />rake rails:freeze:gems<br /></pre><br />Hopefully it should work for you but it gave me following error <br /><pre class=ruby><br />undefined method `manage_gems' for Gem:Module <br /></pre><br /><br />3. Create sample rails 2.3.11 app<br /><pre class=ruby><br />rails _2.3.11_ testsapp<br /></pre><br /><br />Now, Copy all missing &#8220;config/initializers/*&#8221; files from new &#8220;testapp to the application that to be upgraded.<br /><pre class=ruby><br />cp testapp/config/initializers/* config/initializers<br /></pre><br /><br />4. Change Rails version inside <i>environment.rb</i> to <i>Rails 2.3.11</i><br /><pre class=ruby> <br /># Specifies gem version of Rails to use when vendor/rails is not present <br />RAILS_GEM_VERSION = '2.3.11'<br /></pre><br /><br />5. Rename <i>app/controllers/application.rb</i> file to <i>app/controllers/application_controller.rb</i><br /><br /><b>OR</b><br /><br /><pre class=ruby><br />rails:update:application_controller<br /></pre><br /><br />6. Start rails server and fix the issues one by one.<br /><pre class=ruby><br />ruby script/server<br /></pre></div>
+  <div class="entry-content"><p>If your application is currently on any version of Rails 2.1.x,
+Then following changes needs to be done for upgrading your application to Rails <code>2.3.11</code></p>
+
+<ol>
+<li>First install Rails version <code>2.3.11</code></li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install rails -v2.3.11</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Freeze app ruby gems</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake rails:freeze:gems</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Hopefully it should work for you but it gave me following error</p>
+
+<blockquote><p>undefined method `manage_gems&#8217; for Gem:Module
+3. Create sample rails 2.3.11 app</p></blockquote>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rails _2.3.11_ testsapp</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now, Copy all missing &ldquo;config/initializers/*&rdquo; files from new &ldquo;testapp to the application that to be upgraded.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cp testapp/config/initializers/* config/initializers</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Change Rails version inside <em>environment.rb</em> to <em>Rails 2.3.11</em></li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Specifies gem version of Rails to use when vendor/rails is not present</span>
+</span><span class='line'><span class="no">RAILS_GEM_VERSION</span> <span class="o">=</span> <span class="s1">&#39;2.3.11&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Rename <i>app/controllers/application.rb</i> file to <i>app/controllers/application_controller.rb</i>
+<strong>OR</strong></li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="ss">rails</span><span class="p">:</span><span class="ss">update</span><span class="p">:</span><span class="n">application_controller</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Start rails server and fix the issues one by one.</li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">ruby</span> <span class="n">script</span><span class="o">/</span><span class="n">server</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   
@@ -564,8 +645,158 @@ If your application is currently on any version of Rails 2.1.x, The following ch
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-Basically Enumerable mixin gives collection classes a variety of traverse, search, sort methods.<br/> <b>understanding ruby blocks i.e. proc </b><br/>blocks are statements of code written in ruby. one can take them as similar to c language macro&#8217;s<br/> <b>Different ways to define blocks</b><br/><pre class=ruby>a = proc do   puts "hello" end a.call #=> hello  b = lambda do |u|   puts "hello #{u}" end b.call('sandip')#=> hello sandip  c = proc {|user| puts user } c.call('sandip') #=> sandip </pre> <b>Passing block to enumerator </b><br/>Lets assume we have collection array of strings and we want to print it<br/> <pre class=ruby> a = ['hi', 'sandip', 'how', 'you', 'doing', '?'] => ["hi", "sandip", "how", "you", "doing", "?"]  a.each {|w| puts w }  q = proc {|w| puts w } => #<Proc:0x00007f9d2be13140@(irb):89> a.each(&q) #=>hi sandip how you doing ?  a.map{|r| q.call(r)} #=>hi sandip how you doing ? </pre>  <b>Understanding symbol#to_proc </b><br/>Symbol has method to_proc which converts symbol to block where symbol is taken as method to be executed on first argument of proc<br/><b>How to_proc got implemented inside Symbol class</b><pre class=ruby>class Symbol   def to_proc     Proc.new { |*args| args.shift.__send__(self, *args) }   end end </pre>Lets have some examples <br/><pre class=ruby>v = :even?.to_proc # equivalent to proc {|a| a.even?} #=> #<Proc:0x00007f9d2bddcb90@(irb):97> q = [1, 2, 3, 5, 67]  q.map(&v) => [false, true, false, false, false] </pre> <b>Is there any shortcut?</b><br/>Yes, there is shortcut to have block passed to enumerators on the fly using ampersand followed by colon (i.e. symbol)<br/> <pre class=ruby>q = [1, 2, 3, 5, 67]  q.map(&:even?) <=> q.map(&:even?.to_proc)  q.map(&:even?.to_proc) #=> [false, true, false, false, false]  q.map(&:even?) #=> [false, true, false, false, false] </pre> <b>Some handy examples </b><br/><pre class=ruby>[1, 2, 3, 5, 67].inject(&:+) #=> 78 [1, 2, 3, 5, 67].inject(:+) #=> 78 [1, 2, 3, 5, 67].any?(&:even?) #=> true [1, 2, 3, 5, 67].detect(&:even?) #=> 2 ['ruby', 'on', 'rails'].map(&:upcase) #=> ["RUBY", "ON", "RAILS"] </pre></div>
+  <div class="entry-content"><p>Basically Enumerable mixin gives collection classes a variety of traverse, search, sort methods.</p>
+
+<p><strong>Understanding ruby blocks</strong></p>
+
+<blockquote><p>Blocks are statements of code written in ruby. one can take them as similar to c language macro&rsquo;s</p></blockquote>
+
+<p><strong>Different ways to define blocks</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">proc</span> <span class="k">do</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;hello&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">call</span> <span class="c1">#=&gt; hello</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">b</span> <span class="o">=</span> <span class="nb">lambda</span> <span class="k">do</span> <span class="o">|</span><span class="n">u</span><span class="o">|</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;hello </span><span class="si">#{</span><span class="n">u</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="n">b</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;sandip&#39;</span><span class="p">)</span><span class="c1">#=&gt; hello sandip</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">c</span> <span class="o">=</span> <span class="nb">proc</span> <span class="p">{</span><span class="o">|</span><span class="n">user</span><span class="o">|</span> <span class="nb">puts</span> <span class="n">user</span> <span class="p">}</span>
+</span><span class='line'><span class="n">c</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;sandip&#39;</span><span class="p">)</span> <span class="c1">#=&gt; sandip</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Passing block to enumerator</strong></p>
+
+<p>Lets assume we have collection array of strings and we want to print it</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="o">[</span><span class="s1">&#39;hi&#39;</span><span class="p">,</span> <span class="s1">&#39;sandip&#39;</span><span class="p">,</span> <span class="s1">&#39;how&#39;</span><span class="p">,</span> <span class="s1">&#39;you&#39;</span><span class="p">,</span> <span class="s1">&#39;doing&#39;</span><span class="p">,</span> <span class="s1">&#39;?&#39;</span><span class="o">]</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="o">[</span><span class="s2">&quot;hi&quot;</span><span class="p">,</span> <span class="s2">&quot;sandip&quot;</span><span class="p">,</span> <span class="s2">&quot;how&quot;</span><span class="p">,</span> <span class="s2">&quot;you&quot;</span><span class="p">,</span> <span class="s2">&quot;doing&quot;</span><span class="p">,</span> <span class="s2">&quot;?&quot;</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span><span class="o">|</span><span class="n">w</span><span class="o">|</span> <span class="nb">puts</span> <span class="n">w</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">q</span> <span class="o">=</span> <span class="nb">proc</span> <span class="p">{</span><span class="o">|</span><span class="n">w</span><span class="o">|</span> <span class="nb">puts</span> <span class="n">w</span> <span class="p">}</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="c1">#&lt;Proc:0x00007f9d2be13140@(irb):89&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">each</span><span class="p">(</span><span class="o">&amp;</span><span class="n">q</span><span class="p">)</span> <span class="c1">#=&gt;</span>
+</span><span class='line'><span class="n">hi</span>
+</span><span class='line'><span class="n">sandip</span>
+</span><span class='line'><span class="n">how</span>
+</span><span class='line'><span class="n">you</span>
+</span><span class='line'><span class="n">doing</span>
+</span><span class='line'><span class="p">?</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">map</span><span class="p">{</span><span class="o">|</span><span class="n">r</span><span class="o">|</span> <span class="n">q</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">r</span><span class="p">)}</span> <span class="c1">#=&gt;</span>
+</span><span class='line'><span class="n">hi</span>
+</span><span class='line'><span class="n">sandip</span>
+</span><span class='line'><span class="n">how</span>
+</span><span class='line'><span class="n">you</span>
+</span><span class='line'><span class="n">doing</span>
+</span><span class='line'><span class="p">?</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Understanding symbol#to_proc</strong></p>
+
+<blockquote><p>Symbol has method <code>to_proc</code> which converts symbol to block where symbol is taken as method to be executed on first argument of proc</p></blockquote>
+
+<p><strong> How to_proc got implemented inside Symbol class</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Symbol</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">to_proc</span>
+</span><span class='line'>    <span class="no">Proc</span><span class="o">.</span><span class="n">new</span> <span class="p">{</span> <span class="o">|*</span><span class="n">args</span><span class="o">|</span> <span class="n">args</span><span class="o">.</span><span class="n">shift</span><span class="o">.</span><span class="n">__send__</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="p">}</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Lets have some examples:</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">v</span> <span class="o">=</span> <span class="ss">:even?</span><span class="o">.</span><span class="n">to_proc</span> <span class="c1"># equivalent to proc {|a| a.even?} </span>
+</span><span class='line'><span class="c1">#=&gt; #&lt;Proc:0x00007f9d2bddcb90@(irb):97&gt; </span>
+</span><span class='line'><span class="n">q</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">67</span><span class="o">]</span>
+</span><span class='line'><span class="n">q</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="n">v</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="kp">false</span><span class="p">,</span> <span class="kp">true</span><span class="p">,</span> <span class="kp">false</span><span class="p">,</span> <span class="kp">false</span><span class="p">,</span> <span class="kp">false</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> <strong>Is there any shortcut?</strong>
+Yes, there is shortcut to have block passed to enumerators on the fly using ampersand followed by colon (i.e. symbol)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">q</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">67</span><span class="o">]</span>
+</span><span class='line'><span class="n">q</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:even?</span><span class="p">)</span> <span class="o">&lt;=&gt;</span> <span class="n">q</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:even?</span><span class="o">.</span><span class="n">to_proc</span><span class="p">)</span>
+</span><span class='line'><span class="n">q</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:even?</span><span class="o">.</span><span class="n">to_proc</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; [false, true, false, false, false]  </span>
+</span><span class='line'><span class="n">q</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:even?</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; [false, true, false, false, false]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Some handy examples</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">67</span><span class="o">].</span><span class="n">inject</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:+</span><span class="p">)</span> <span class="c1">#=&gt; 78 </span>
+</span><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">67</span><span class="o">].</span><span class="n">inject</span><span class="p">(</span><span class="ss">:+</span><span class="p">)</span> <span class="c1">#=&gt; 78 </span>
+</span><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">67</span><span class="o">].</span><span class="n">any?</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:even?</span><span class="p">)</span> <span class="c1">#=&gt; true </span>
+</span><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">67</span><span class="o">].</span><span class="n">detect</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:even?</span><span class="p">)</span> <span class="c1">#=&gt; 2 </span>
+</span><span class='line'><span class="o">[</span><span class="s1">&#39;ruby&#39;</span><span class="p">,</span> <span class="s1">&#39;on&#39;</span><span class="p">,</span> <span class="s1">&#39;rails&#39;</span><span class="o">].</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:upcase</span><span class="p">)</span> <span class="c1">#=&gt; [&quot;RUBY&quot;, &quot;ON&quot;, &quot;RAILS&quot;]</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   
@@ -638,8 +869,50 @@ Rails routes can be customized as your own routes with parameters but first you 
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-`puts` converts ruby object into string by invoking to_s method on object. The default to_s prints the object&#8217;s class and an encoding of the object id. In order to print human readable form of object use inspect<br/> <pre class=ruby>locs = Location.find_by_sql('select * from locations')   Location Load (0.5ms)  select * from locations </pre><b>Puts Object internally invokes to_s method on object to print</b><pre class=ruby>locs.each do |l|   # it calls to_s method on object   puts l end  #&lt;Location:0x000000055bb328&gt; #&lt;Location:0x000000055bb058&gt; </pre><br/><b>puts object followed by subsequent invoke of inspect method outputs readable object</b><pre class=ruby>locs.each do |l|   puts l.inspect # prints actual object end  #&lt;Location id: 15, name: &quot;Annettaside3&quot;, street: &quot;71838 Ritchie Cape&quot;, city: &quot;East Destanystad&quot;, state: &quot;Utah&quot;, zip: &quot;58054&quot;, phone: 123456, other_phone: 987654, staff_strength: 40, is_active: true, created_at: &quot;2012-01-25 11:17:26&quot;, updated_at: &quot;2012-01-25 11:17:26&quot;, country_name: &quot;Korea&quot;&gt; #&lt;Location id: 16, name: &quot;Sporerbury4&quot;, street: &quot;73057 Jerad Shoal&quot;, city: &quot;South Kyliefurt&quot;, state: &quot;Delaware&quot;, zip: &quot;46553-3376&quot;, phone: 123456, other_phone: 987654, staff_strength: 40, is_active: true, created_at: &quot;2012-01-25 11:24:48&quot;, updated_at: &quot;2012-01-25 11:24:48&quot;, country_name: &quot;Australia&quot;&gt; </pre></div>
+  <div class="entry-content"><p><code>puts</code> converts ruby object into string by invoking to_s method on object. The default to_s prints the object&rsquo;s class and an encoding of the object id. In order to print human readable form of object use inspect</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">locs</span> <span class="o">=</span> <span class="no">Location</span><span class="o">.</span><span class="n">find_by_sql</span><span class="p">(</span><span class="s1">&#39;select * from locations&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="no">Location</span> <span class="no">Load</span> <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span><span class="n">ms</span><span class="p">)</span>  <span class="nb">select</span> <span class="o">*</span> <span class="n">from</span> <span class="n">locations</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Puts Object internally invokes to_s method on object to print</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">locs</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">l</span><span class="o">|</span>
+</span><span class='line'>  <span class="c1"># it calls to_s method on object</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="n">l</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#&lt;Location:0x000000055bb328&gt;</span>
+</span><span class='line'><span class="c1">#&lt;Location:0x000000055bb058&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>puts object followed by subsequent invoke of inspect method outputs readable object</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">locs</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">l</span><span class="o">|</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="n">l</span><span class="o">.</span><span class="n">inspect</span> <span class="c1"># prints actual object</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#&lt;Location id: 15, name: &quot;Annettaside3&quot;, street: &quot;71838 Ritchie Cape&quot;, city: &quot;East Destanystad&quot;, state: &quot;Utah&quot;, zip: &quot;58054&quot;, phone: 123456, other_phone: 987654, staff_strength: 40, is_active: true, created_at: &quot;2012-01-25 11:17:26&quot;, updated_at: &quot;2012-01-25 11:17:26&quot;, country_name: &quot;Korea&quot;&gt;</span>
+</span><span class='line'><span class="c1">#&lt;Location id: 16, name: &quot;Sporerbury4&quot;, street: &quot;73057 Jerad Shoal&quot;, city: &quot;South Kyliefurt&quot;, state: &quot;Delaware&quot;, zip: &quot;46553-3376&quot;, phone: 123456, other_phone: 987654, staff_strength: 40, is_active: true, created_at: &quot;2012-01-25 11:24:48&quot;, updated_at: &quot;2012-01-25 11:24:48&quot;, country_name: &quot;Australia&quot;&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   
@@ -675,8 +948,203 @@ Rails routes can be customized as your own routes with parameters but first you 
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-CSV (comma separated values) files are frequently used to import/export data. <br/>In rails 3, FasterCSV comes as default and below is the way to upload csv files inside rails applications. The code below will also show you how to generate csv in memory, parse on csv data, skip header, iterate over records, save records inside db, export upload error file and many more. <br/>First, View to upload file <br/><pre class=ruby>= form_tag upload_url, :multipart => true do   %label{:for => "file"} File to Upload   = file_field_tag "file"   = submit_tag </pre>Assume upload_url maps to import action of customers controller <br/>Controller code <br/><pre class=ruby>class CustomersController < ApplicationController     [...]    def import     if request.post? && params[:file].present?       infile = params[:file].read       n, errs = 0, []        CSV.parse(infile) do |row|         n += 1         # SKIP: header i.e. first row OR blank row         next if n == 1 or row.join.blank?         # build_from_csv method will map customer attributes &          # build new customer record         customer = Customer.build_from_csv(row)         # Save upon valid          # otherwise collect error records to export         if customer.valid?           customer.save         else           errs << row         end       end       # Export Error file for later upload upon correction       if errs.any?         errFile ="errors_#{Date.today.strftime('%d%b%y')}.csv"         errs.insert(0, Customer.csv_header)         errCSV = CSV.generate do |csv|           errs.each {|row| csv << row}         end         send_data errCSV,           :type => 'text/csv; charset=iso-8859-1; header=present',           :disposition => "attachment; filename=#{errFile}.csv"       else         flash[:notice] = I18n.t('customer.import.success')         redirect_to import_url #GET       end     end   end   [...] end </pre>Customer model <br/><pre class=ruby>class Customer < ActiveRecord::Base   scope :active, where(:active => true)   scope :latest, order('created_at desc')      def self.csv_header     "First Name,Last Name,Email,Phone,Mobile, Address, FAX, City".split(',')   end      def self.build_from_csv(row)     # find existing customer from email or create new     cust = find_or_initialize_by_email(row[2])     cust.attributes ={:first_name => row[0],       :last_name => row[1],       :email => row[3],       :phone => row[4],       :mobile => row[5],       :address => row[6],       :fax => row[7],       :city => row[8]}     return cust   end      def to_csv     [first_name, last_name, email, phone, mobile, address, fax, city]   end end </pre><br/>Export customer records in CSV format<br/>Below code loads customer records from database then generate csv_data inside memory and  exports data to browser using send_data method.<br/>Note: As we are not writing on file system hence code can easily work heroku. <pre class=ruby>  def export     # CRITERIA : to select customer records     #=> Customer.active.latest.limit(100)     custs = Customer.limit(10)     filename ="customers_#{Date.today.strftime('%d%b%y')}"     csv_data = FasterCSV.generate do |csv|       csv << Customer.csv_header       custs.each do |c|          csv << c.to_csv       end      end      send_data csv_data,       :type => 'text/csv; charset=iso-8859-1; header=present',       :disposition => "attachment; filename=#{filename}.csv"   end  </pre></div>
+  <div class="entry-content"><p>CSV (comma separated values) files are frequently used to import/export data.</p>
+
+<p>In rails 3, <code>FasterCSV</code> comes as default and below is the way to upload csv files inside rails applications. The code below will also show you how to generate csv in memory, parse on csv data, skip header, iterate over records, save records inside db, export upload error file and many more.</p>
+
+<p>First, View to upload file</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='haml'><span class='line'><span class="p">=</span> <span class="n">form_tag</span> <span class="n">upload_url</span><span class="p">,</span> <span class="ss">:multipart</span> <span class="o">=&gt;</span> <span class="kp">true</span> <span class="k">do</span>
+</span><span class='line'>  <span class="nt">%label</span><span class="p">{</span><span class="ss">:for</span> <span class="o">=&gt;</span> <span class="s2">&quot;file&quot;</span><span class="p">}</span> File to Upload
+</span><span class='line'>  <span class="p">=</span> <span class="n">file_field_tag</span> <span class="s2">&quot;file&quot;</span>
+</span><span class='line'>  <span class="p">=</span> <span class="n">submit_tag</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Assume upload_url maps to import action of customers controller
+Controller code</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">CustomersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+</span><span class='line'>  <span class="o">[.</span><span class="n">.</span><span class="o">.]</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">import</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">post?</span> <span class="o">&amp;&amp;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:file</span><span class="o">].</span><span class="n">present?</span>
+</span><span class='line'>      <span class="n">infile</span> <span class="o">=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:file</span><span class="o">].</span><span class="n">read</span>
+</span><span class='line'>      <span class="n">n</span><span class="p">,</span> <span class="n">errs</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="o">[]</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="no">CSV</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">infile</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">row</span><span class="o">|</span>
+</span><span class='line'>        <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span class='line'>        <span class="c1"># SKIP: header i.e. first row OR blank row</span>
+</span><span class='line'>        <span class="k">next</span> <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">row</span><span class="o">.</span><span class="n">join</span><span class="o">.</span><span class="n">blank?</span>
+</span><span class='line'>        <span class="c1"># build_from_csv method will map customer attributes &amp; </span>
+</span><span class='line'>        <span class="c1"># build new customer record</span>
+</span><span class='line'>        <span class="n">customer</span> <span class="o">=</span> <span class="no">Customer</span><span class="o">.</span><span class="n">build_from_csv</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+</span><span class='line'>        <span class="c1"># Save upon valid </span>
+</span><span class='line'>        <span class="c1"># otherwise collect error records to export</span>
+</span><span class='line'>        <span class="k">if</span> <span class="n">customer</span><span class="o">.</span><span class="n">valid?</span>
+</span><span class='line'>          <span class="n">customer</span><span class="o">.</span><span class="n">save</span>
+</span><span class='line'>        <span class="k">else</span>
+</span><span class='line'>          <span class="n">errs</span> <span class="o">&lt;&lt;</span> <span class="n">row</span>
+</span><span class='line'>        <span class="k">end</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>      <span class="c1"># Export Error file for later upload upon correction</span>
+</span><span class='line'>      <span class="k">if</span> <span class="n">errs</span><span class="o">.</span><span class="n">any?</span>
+</span><span class='line'>        <span class="n">errFile</span> <span class="o">=</span><span class="s2">&quot;errors_</span><span class="si">#{</span><span class="no">Date</span><span class="o">.</span><span class="n">today</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%d%b%y&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">.csv&quot;</span>
+</span><span class='line'>        <span class="n">errs</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="no">Customer</span><span class="o">.</span><span class="n">csv_header</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">errCSV</span> <span class="o">=</span> <span class="no">CSV</span><span class="o">.</span><span class="n">generate</span> <span class="k">do</span> <span class="o">|</span><span class="n">csv</span><span class="o">|</span>
+</span><span class='line'>          <span class="n">errs</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span><span class="o">|</span><span class="n">row</span><span class="o">|</span> <span class="n">csv</span> <span class="o">&lt;&lt;</span> <span class="n">row</span><span class="p">}</span>
+</span><span class='line'>        <span class="k">end</span>
+</span><span class='line'>        <span class="n">send_data</span> <span class="n">errCSV</span><span class="p">,</span>
+</span><span class='line'>          <span class="ss">:type</span> <span class="o">=&gt;</span> <span class="s1">&#39;text/csv; charset=iso-8859-1; header=present&#39;</span><span class="p">,</span>
+</span><span class='line'>          <span class="ss">:disposition</span> <span class="o">=&gt;</span> <span class="s2">&quot;attachment; filename=</span><span class="si">#{</span><span class="n">errFile</span><span class="si">}</span><span class="s2">.csv&quot;</span>
+</span><span class='line'>      <span class="k">else</span>
+</span><span class='line'>        <span class="n">flash</span><span class="o">[</span><span class="ss">:notice</span><span class="o">]</span> <span class="o">=</span> <span class="no">I18n</span><span class="o">.</span><span class="n">t</span><span class="p">(</span><span class="s1">&#39;customer.import.success&#39;</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">redirect_to</span> <span class="n">import_url</span> <span class="c1">#GET</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  <span class="o">[.</span><span class="n">.</span><span class="o">.]</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Customer model</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Customer</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">scope</span> <span class="ss">:active</span><span class="p">,</span> <span class="n">where</span><span class="p">(</span><span class="ss">:active</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">scope</span> <span class="ss">:latest</span><span class="p">,</span> <span class="n">order</span><span class="p">(</span><span class="s1">&#39;created_at desc&#39;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">csv_header</span>
+</span><span class='line'>    <span class="s2">&quot;First Name,Last Name,Email,Phone,Mobile, Address, FAX, City&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">build_from_csv</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+</span><span class='line'>    <span class="c1"># find existing customer from email or create new</span>
+</span><span class='line'>    <span class="n">cust</span> <span class="o">=</span> <span class="n">find_or_initialize_by_email</span><span class="p">(</span><span class="n">row</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">cust</span><span class="o">.</span><span class="n">attributes</span> <span class="o">=</span><span class="p">{</span><span class="ss">:first_name</span> <span class="o">=&gt;</span> <span class="n">row</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>      <span class="ss">:last_name</span> <span class="o">=&gt;</span> <span class="n">row</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>      <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="n">row</span><span class="o">[</span><span class="mi">3</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>      <span class="ss">:phone</span> <span class="o">=&gt;</span> <span class="n">row</span><span class="o">[</span><span class="mi">4</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>      <span class="ss">:mobile</span> <span class="o">=&gt;</span> <span class="n">row</span><span class="o">[</span><span class="mi">5</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>      <span class="ss">:address</span> <span class="o">=&gt;</span> <span class="n">row</span><span class="o">[</span><span class="mi">6</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>      <span class="ss">:fax</span> <span class="o">=&gt;</span> <span class="n">row</span><span class="o">[</span><span class="mi">7</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>      <span class="ss">:city</span> <span class="o">=&gt;</span> <span class="n">row</span><span class="o">[</span><span class="mi">8</span><span class="o">]</span><span class="p">}</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">cust</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">to_csv</span>
+</span><span class='line'>    <span class="o">[</span><span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">phone</span><span class="p">,</span> <span class="n">mobile</span><span class="p">,</span> <span class="n">address</span><span class="p">,</span> <span class="n">fax</span><span class="p">,</span> <span class="n">city</span><span class="o">]</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Export customer records in CSV format
+Below code loads customer records from database then generate csv_data inside memory and exports data to browser using send_data method.</p>
+
+<p>Note: As we are not writing on file system hence code can easily work heroku.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">export</span>
+</span><span class='line'>  <span class="c1"># CRITERIA : to select customer records</span>
+</span><span class='line'>  <span class="c1">#=&gt; Customer.active.latest.limit(100)</span>
+</span><span class='line'>  <span class="n">custs</span> <span class="o">=</span> <span class="no">Customer</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">filename</span> <span class="o">=</span><span class="s2">&quot;customers_</span><span class="si">#{</span><span class="no">Date</span><span class="o">.</span><span class="n">today</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%d%b%y&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'>  <span class="n">csv_data</span> <span class="o">=</span> <span class="no">FasterCSV</span><span class="o">.</span><span class="n">generate</span> <span class="k">do</span> <span class="o">|</span><span class="n">csv</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">csv</span> <span class="o">&lt;&lt;</span> <span class="no">Customer</span><span class="o">.</span><span class="n">csv_header</span>
+</span><span class='line'>    <span class="n">custs</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span>
+</span><span class='line'>      <span class="n">csv</span> <span class="o">&lt;&lt;</span> <span class="n">c</span><span class="o">.</span><span class="n">to_csv</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  <span class="n">send_data</span> <span class="n">csv_data</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:type</span> <span class="o">=&gt;</span> <span class="s1">&#39;text/csv; charset=iso-8859-1; header=present&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:disposition</span> <span class="o">=&gt;</span> <span class="s2">&quot;attachment; filename=</span><span class="si">#{</span><span class="n">filename</span><span class="si">}</span><span class="s2">.csv&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   
@@ -712,8 +1180,117 @@ CSV (comma separated values) files are frequently used to import/export data. <b
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-Previous post explains on <a href="http://www.funonrails.com/2012/01/mongoid-array-field-and-rails-form.html">mongoid document array field and rails form implementation</a><br/>Below example shows rails form integration of array field of embedded mongoid document <br/>consider scenario, student embeds one family who has many assets<br/><pre class=ruby>class Student   include Mongoid::Document    field :name   field :phone      embeds_one  :family    validates_associated :family   accepts_nested_attributes_for :family end </pre><br/><pre class=ruby>class Family   include Mongoid::Document   ASSETS = ['flat', 'car', 'business', 'bunglow', 'cash']      field :members, type: Integer   field :assets, type: Array   field :religon    embedded_in :student end </pre>Brief controller code </br/>  <pre class=ruby>class StudentsController < ApplicationController  def new    @student = Student.new    @student.family ||= @student.build_family  end   def create    @student = Student.new(params[:student])    @student.family.assets.reject!(&:blank?)    if @student.save      [...]    else      render :action => :new    end  end end </pre>view form will look like- <br/><pre class=ruby>= form_for(@student) do |s|   = s.text_field :name   = s.text_field :phone   - s.fields_for :family do |f|     = f.text_field :members     = f.text_field :religion     - Family::ASSETS.each do |asset|       /Here f.object_name #=> student[family]       = f.check_box :assets, :name => "#{f.object_name}[assets][]", asset </pre></div>
+  <div class="entry-content"><p>Previous post explains on <a href="http://www.funonrails.com/2012/01/mongoid-array-field-and-rails-form.html">mongoid document array field and rails form implementation</a>
+Below example shows rails form integration of array field of embedded mongoid document
+consider scenario, student embeds one family who has many assets</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Student</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="ss">Mongoid</span><span class="p">:</span><span class="ss">:Document</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">field</span> <span class="ss">:name</span>
+</span><span class='line'>  <span class="n">field</span> <span class="ss">:phone</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">embeds_one</span>  <span class="ss">:family</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">validates_associated</span> <span class="ss">:family</span>
+</span><span class='line'>  <span class="n">accepts_nested_attributes_for</span> <span class="ss">:family</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Family</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="ss">Mongoid</span><span class="p">:</span><span class="ss">:Document</span>
+</span><span class='line'>  <span class="no">ASSETS</span> <span class="o">=</span> <span class="o">[</span><span class="s1">&#39;flat&#39;</span><span class="p">,</span> <span class="s1">&#39;car&#39;</span><span class="p">,</span> <span class="s1">&#39;business&#39;</span><span class="p">,</span> <span class="s1">&#39;bunglow&#39;</span><span class="p">,</span> <span class="s1">&#39;cash&#39;</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">field</span> <span class="ss">:members</span><span class="p">,</span> <span class="ss">type</span><span class="p">:</span> <span class="nb">Integer</span>
+</span><span class='line'>  <span class="n">field</span> <span class="ss">:assets</span><span class="p">,</span> <span class="ss">type</span><span class="p">:</span> <span class="nb">Array</span>
+</span><span class='line'>  <span class="n">field</span> <span class="ss">:religon</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">embedded_in</span> <span class="ss">:student</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Brief controller code</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">StudentsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+</span><span class='line'> <span class="k">def</span> <span class="nf">new</span>
+</span><span class='line'>   <span class="vi">@student</span> <span class="o">=</span> <span class="no">Student</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'>   <span class="vi">@student</span><span class="o">.</span><span class="n">family</span> <span class="o">||=</span> <span class="vi">@student</span><span class="o">.</span><span class="n">build_family</span>
+</span><span class='line'> <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'> <span class="k">def</span> <span class="nf">create</span>
+</span><span class='line'>   <span class="vi">@student</span> <span class="o">=</span> <span class="no">Student</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:student</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>   <span class="vi">@student</span><span class="o">.</span><span class="n">family</span><span class="o">.</span><span class="n">assets</span><span class="o">.</span><span class="n">reject!</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:blank?</span><span class="p">)</span>
+</span><span class='line'>   <span class="k">if</span> <span class="vi">@student</span><span class="o">.</span><span class="n">save</span>
+</span><span class='line'>     <span class="o">[.</span><span class="n">.</span><span class="o">.]</span>
+</span><span class='line'>   <span class="k">else</span>
+</span><span class='line'>     <span class="n">render</span> <span class="ss">:action</span> <span class="o">=&gt;</span> <span class="ss">:new</span>
+</span><span class='line'>   <span class="k">end</span>
+</span><span class='line'> <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>view form will look like-</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='haml'><span class='line'><span class="p">=</span> <span class="n">form_for</span><span class="p">(</span><span class="vi">@student</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">s</span><span class="o">|</span>
+</span><span class='line'>  <span class="p">=</span> <span class="n">s</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:name</span>
+</span><span class='line'>  <span class="p">=</span> <span class="n">s</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:phone</span>
+</span><span class='line'>  <span class="p">-</span> <span class="n">s</span><span class="o">.</span><span class="n">fields_for</span> <span class="ss">:family</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
+</span><span class='line'>    <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:members</span>
+</span><span class='line'>    <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:religion</span>
+</span><span class='line'>    <span class="p">-</span> <span class="ss">Family</span><span class="p">:</span><span class="ss">:ASSETS</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">asset</span><span class="o">|</span>
+</span><span class='line'>      <span class="c">/Here f.object_name #=&gt; student[family]</span>
+</span><span class='line'>      <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">check_box</span> <span class="ss">:assets</span><span class="p">,</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">f</span><span class="o">.</span><span class="n">object_name</span><span class="si">}</span><span class="s2">[assets][]&quot;</span><span class="p">,</span> <span class="n">asset</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   

@@ -9,7 +9,8 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="We all know Active Support library constantly keeps adding new extensions to ruby core library and hence rails framework. Do you know now inside &hellip;">
+  <meta name="description" content="We all know Active Support library constantly keeps adding new extensions to ruby core library and hence rails framework.
+Do you know now inside ruby &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -91,8 +92,92 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-We all know Active Support library constantly keeps adding new extensions to ruby core library and hence rails framework.<br/> Do you know now inside ruby class we can have class_attribute placeholder. <br/> <pre class=ruby>class A   class_attribute :counter, :access_time end  A.counter = 12 A.counter #=> 12 A.new.counter #=> 12 </pre><br/><b>Inheritance </b><pre class=ruby>class B < A end  B.counter #=> 12 B.access_time #=> nil B.access_time = Time.now B.access_time #=> Wed Dec 28 18:55:06 +0530 2011 B.new.access_time #=> Wed Dec 28 18:55:06 +0530 2011 A.access_time = nil </pre><br/>Restricting instance from writing class_attributes <br/><pre class=ruby>class V   class_attribute :counter, :instance_writer => false end  V.new.counter = 12 NoMethodError: undefined method `counter=' for #<V:0x7f8f9d66fee8></pre><br/>Other ways <br/><pre class=ruby>a_class = Class.new{class_atrribute :counter}  a_class.counter = 13 a_class.counter #=> 13 a_class.new.counter #=> 13  p = Class.new { class_attribute :help, :instance_writer => false } p.new.help = 'Got a second!' NoMethodError: undefined method `help=' for #<#<Class:0x7f8f9d5c2fb8>:0x7f8f9d5b1038>p.help = 'Got a second!' p.help #=> "Got a second!" </pre></div>
+<div class="entry-content"><p>We all know Active Support library constantly keeps adding new extensions to ruby core library and hence rails framework.
+Do you know now inside ruby class we can have class_attribute placeholder.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">A</span>
+</span><span class='line'>  <span class="n">class_attribute</span> <span class="ss">:counter</span><span class="p">,</span> <span class="ss">:access_time</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">A</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">12</span>
+</span><span class='line'><span class="n">A</span><span class="o">.</span><span class="n">counter</span> <span class="c1">#=&gt; 12</span>
+</span><span class='line'><span class="n">A</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">counter</span> <span class="c1">#=&gt; 12</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Inheritance</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">B</span> <span class="o">&lt;</span> <span class="n">A</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">B</span><span class="o">.</span><span class="n">counter</span> <span class="c1">#=&gt; 12</span>
+</span><span class='line'><span class="n">B</span><span class="o">.</span><span class="n">access_time</span> <span class="c1">#=&gt; nil</span>
+</span><span class='line'><span class="n">B</span><span class="o">.</span><span class="n">access_time</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">now</span>
+</span><span class='line'><span class="n">B</span><span class="o">.</span><span class="n">access_time</span> <span class="c1">#=&gt; Wed Dec 28 18:55:06 +0530 2011</span>
+</span><span class='line'><span class="n">B</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">access_time</span> <span class="c1">#=&gt; Wed Dec 28 18:55:06 +0530 2011</span>
+</span><span class='line'><span class="n">A</span><span class="o">.</span><span class="n">access_time</span> <span class="o">=</span> <span class="kp">nil</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Restricting instance from writing class_attributes</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">V</span>
+</span><span class='line'>  <span class="n">class_attribute</span> <span class="ss">:counter</span><span class="p">,</span> <span class="ss">:instance_writer</span> <span class="o">=&gt;</span> <span class="kp">false</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">V</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">12</span>
+</span><span class='line'><span class="ss">NoMethodError</span><span class="p">:</span> <span class="n">undefined</span> <span class="nb">method</span> <span class="sb">`counter=&#39; for #&lt;#&lt;Class:0x7f8f9d5c2fb8&gt;:0x7f8f9d5b1038&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Other ways</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a_class</span> <span class="o">=</span> <span class="no">Class</span><span class="o">.</span><span class="n">new</span><span class="p">{</span><span class="n">class_atrribute</span> <span class="ss">:counter</span><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">a_class</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">13</span>
+</span><span class='line'><span class="n">a_class</span><span class="o">.</span><span class="n">counter</span> <span class="c1">#=&gt; 13</span>
+</span><span class='line'><span class="n">a_class</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">counter</span> <span class="c1">#=&gt; 13</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">p</span> <span class="o">=</span> <span class="no">Class</span><span class="o">.</span><span class="n">new</span> <span class="p">{</span> <span class="n">class_attribute</span> <span class="ss">:help</span><span class="p">,</span> <span class="ss">:instance_writer</span> <span class="o">=&gt;</span> <span class="kp">false</span> <span class="p">}</span>
+</span><span class='line'><span class="nb">p</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">help</span> <span class="o">=</span> <span class="s1">&#39;Got a second!&#39;</span>
+</span><span class='line'><span class="ss">NoMethodError</span><span class="p">:</span> <span class="n">undefined</span> <span class="nb">method</span> <span class="sb">`help=&#39; for #&lt;#:0x7f8f9d5b1038&gt;</span>
+</span><span class='line'><span class="sb">p.help = &#39;Got a second!&#39;</span>
+</span><span class='line'><span class="sb">p.help #=&gt; &quot;Got a second!&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 

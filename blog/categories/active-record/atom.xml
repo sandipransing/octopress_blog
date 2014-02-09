@@ -4,7 +4,7 @@
   <title><![CDATA[Category: active record | Fun On Rails]]></title>
   <link href="http://sandipransing.github.io/blog/categories/active-record/atom.xml" rel="self"/>
   <link href="http://sandipransing.github.io/"/>
-  <updated>2014-02-09T23:18:57+05:30</updated>
+  <updated>2014-02-10T04:31:35+05:30</updated>
   <id>http://sandipransing.github.io/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -18,9 +18,86 @@
     <link href="http://sandipransing.github.io/2012/01/get-models-list-inside-rails-app/"/>
     <updated>2012-01-17T05:16:00+05:30</updated>
     <id>http://sandipransing.github.io/2012/01/get-models-list-inside-rails-app</id>
-    <content type="html"><![CDATA[<div class='post'>
-How to get collection of models inside your application. Certainly there are many ways to do it.<br/>Lets have a look at different ways starting from worst - <br/><b> Get table names inside database and then iterating over to get model name</b><pre class=ruby>@models = ActiveRecord::Base.connection.tables.collect{|t| t.underscore.singularize.camelize}  #=> ["AdhearsionAudit", "AudioLog", "AuditDetail","TinyPrint", "TinyVideo", "UnknownCall", "UserAudit", "User"] </pre><br/><b>Select those with associated class</b><br/><pre class=ruby>@models.delete_if{|m| m.constantize rescue true} </pre><br/><b>Load models dir</b><br/><pre class=ruby>@models = Dir['app/models/*.rb'].map {|f| File.basename(f, '.*').camelize.constantize.name } </pre><b>Select ActiveRecord::Base extended class only</b><pre class=ruby>@models.reject!{|m| m.constantize.superclass != ActiveRecord::Base } </pre><b>Get Active Record subclasses</b><br/><pre class=ruby># make sure relevant models are loaded otherwise # require them prior # Dir.glob(RAILS_ROOT + '/app/models/*.rb').each { |file| require file } class A < ActiveRecord::Base end class B < A end ActiveRecord::Base.send(:subclasses).collect(&:name) #=> [...., A] </pre><b>How to get Inherited models too</b> <br/><pre class=ruby>class A < ActiveRecord::Base end class B < A end ActiveRecord::Base.descendants.collect(&:name) #=> [...., A, B] </pre> Below is more elegant solution provide by <a href="http://stackoverflow.com/users/268/vincent-robert">Vincent-robert</a> over stack overflow which recursively looks for subsequent descendent's of class and gives you list from all over application<br/><pre class=ruby>class Class   def extend?(klass)     not superclass.nil? and ( superclass == klass or superclass.extend? klass )   end end  def models    Module.constants.select do |constant_name|     constant = eval constant_name     if not constant.nil? and constant.is_a? Class and constant.extend? ActiveRecord::Base     constant     end   end end </pre></div>
+    <content type="html"><![CDATA[<p>How to get collection of models inside your application. Certainly there are many ways to do it.
+Lets have a look at different ways starting from worst &ndash;</p>
 
+<p>Get table names inside database and then iterating over to get model name
+```ruby
+@models = ActiveRecord::Base.connection.tables.collect{|t| t.underscore.singularize.camelize}</p>
+
+<h1>=> [&ldquo;AdhearsionAudit&rdquo;, &ldquo;AudioLog&rdquo;, &ldquo;AuditDetail&rdquo;,&ldquo;TinyPrint&rdquo;, &ldquo;TinyVideo&rdquo;, &ldquo;UnknownCall&rdquo;, &ldquo;UserAudit&rdquo;, &ldquo;User&rdquo;]</h1>
+
+<p>```</p>
+
+<p>Select those with associated class
+<code>ruby
+@models.delete_if{|m| m.constantize rescue true}
+</code></p>
+
+<p>Load models dir
+<code>ruby
+@models = Dir['app/models/*.rb'].map {|f| File.basename(f, '.*').camelize.constantize.name }
+</code></p>
+
+<p>Select ActiveRecord::Base extended class only
+<code>ruby
+@models.reject!{|m| m.constantize.superclass != ActiveRecord::Base }
+</code></p>
+
+<p>Get Active Record subclasses
+```ruby</p>
+
+<h1>make sure relevant models are loaded otherwise</h1>
+
+<h1>require them prior</h1>
+
+<h1>Dir.glob(RAILS_ROOT + &lsquo;/app/models/*.rb&rsquo;).each { |file| require file }</h1>
+
+<p>class A &lt; ActiveRecord::Base
+end
+class B &lt; A
+end
+ActiveRecord::Base.send(:subclasses).collect(&amp;:name)</p>
+
+<h1>=> [&hellip;., A]</h1>
+
+<p>```</p>
+
+<p>How to get Inherited models too
+```ruby
+class A &lt; ActiveRecord::Base
+end
+class B &lt; A
+end
+ActiveRecord::Base.descendants.collect(&amp;:name)</p>
+
+<h1>=> [&hellip;., A, B]</h1>
+
+<p>```</p>
+
+<p>Below is more elegant solution provide by <a href="http://stackoverflow.com/users/268/vincent-robert">Vincent-robert</a> over stack overflow which recursively looks for subsequent descendent&rsquo;s of class and gives you list from all over application
+```ruby
+class Class
+  def extend?(klass)</p>
+
+<pre><code>not superclass.nil? and ( superclass == klass or superclass.extend? klass )
+</code></pre>
+
+<p>  end
+end</p>
+
+<p>def models
+  Module.constants.select do |constant_name|</p>
+
+<pre><code>constant = eval constant_name
+if not constant.nil? and constant.is_a? Class and constant.extend? ActiveRecord::Base
+constant
+end
+</code></pre>
+
+<p>  end
+end
+```</p>
 ]]></content>
   </entry>
   
@@ -29,9 +106,47 @@ How to get collection of models inside your application. Certainly there are man
     <link href="http://sandipransing.github.io/2011/12/simplified-active-record-extensions/"/>
     <updated>2011-12-28T14:21:00+05:30</updated>
     <id>http://sandipransing.github.io/2011/12/simplified-active-record-extensions</id>
-    <content type="html"><![CDATA[<div class='post'>
-Below extensions to active record base simplifies its usage while coding.<br/><pre class=ruby># config/initializers/core_extensions.rb  class ActiveRecord::Base    def self.pagination(options)     paginate :per_page => options[:per_page] || per_page, :page => options[:page]   end    def self.options_for_select(opts={})     opts[:name] ||= :name     opts[:attr] ||= :id     opts[:prompt] ||= 'Please Select'     all.collect{|c| [c.send(opts[:name].to_sym), c.send(opts[:attr].to_sym)]}.insert(0, [opts[:prompt], nil])   end end </pre>Usage<br/><pre class=ruby>class Student< ActiveRecord::Base  #attributes #=> name, age end  ##  Student.pagination({:page => 10}) Student.pagination({:per_page => 2, :page => 2}) Student.options_for_select Student.options_for_select({:prompt => 'Please select'}) Student.options_for_select({:name => :age}) </pre></div>
+    <content type="html"><![CDATA[<p>Below extensions to active record base simplifies its usage while coding.</p>
 
+<p>```ruby</p>
+
+<h1>config/initializers/core_extensions.rb</h1>
+
+<p>class ActiveRecord::Base</p>
+
+<p>  def self.pagination(options)</p>
+
+<pre><code>paginate :per_page =&gt; options[:per_page] || per_page, :page =&gt; options[:page]
+</code></pre>
+
+<p>  end</p>
+
+<p>  def self.options_for_select(opts={})</p>
+
+<pre><code>opts[:name] ||= :name
+opts[:attr] ||= :id
+opts[:prompt] ||= 'Please Select'
+all.collect{|c| [c.send(opts[:name].to_sym), c.send(opts[:attr].to_sym)]}.insert(0, [opts[:prompt], nil])
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<p>Usage
+```ruby
+class Student&lt; ActiveRecord::Base
+ #attributes #=> name, age
+end</p>
+
+<h2></h2>
+
+<p>Student.pagination({:page => 10})
+Student.pagination({:per_page => 2, :page => 2})
+Student.options_for_select
+Student.options_for_select({:prompt => &lsquo;Please select&rsquo;})
+Student.options_for_select({:name => :age})
+```</p>
 ]]></content>
   </entry>
   
@@ -40,9 +155,72 @@ Below extensions to active record base simplifies its usage while coding.<br/><p
     <link href="http://sandipransing.github.io/2011/12/best-practices-to-use-named-scopes/"/>
     <updated>2011-12-22T18:50:00+05:30</updated>
     <id>http://sandipransing.github.io/2011/12/best-practices-to-use-named-scopes</id>
-    <content type="html"><![CDATA[<div class='post'>
-Scopes are partial query conditions to database queries. scopes are always prefixed to class finders. There are several ways to use scopes inside rails models.  <pre class=ruby># 1. Scope defined below gets loaded while class definition loads scope :active, where(:active => true) scope :archived, where(:archived => true, :post_type => :general) # 2.Dynamic scopes needs to be always defined inside lambda  scope :not_expired, lambda { where('expiry_date <= ?', Date.today) } # 3.Combining scopes scope :visible, published.not_expired </pre><br/><pre class=ruby># 4. Passing parameters to scopes # avoid below scope :created_by_user, lambda {|user|   where('user_id = ?', user) } # use this scope :created_by_user, lambda {|user|   where(:user_id => user) } </pre><br/><pre class=ruby># 5. passing multiple parameters # avoid below scope :made_between, lambda{|from, to|   where('created_date >= ? and created_date <= ?', from, to) } # use this scope :made_between, lambda{|from, to|   where('created_date >= :from and created_date <= :to', :from => from, :to => to) } </pre><br/><pre class=ruby># 6. associations inside scope (joins and includes) # below will perform eager loading effective when rendering posts with comments scope :with_user_comments, lambda{|user|   includes(:comments).where('comments.user_id = ?', user) }  # faster # also can be done as post.comments.where(:user_id => user) scope :with_user_comments, lambda{|user|   joins(:comments).where('comments.user_id = ?', user) } </pre><br/>So, at last would suggest making use of symbols when there are multiple parameters to scopes and make maximum use of scopes rather than having where conditions everywhere :)</div>
+    <content type="html"><![CDATA[<blockquote><p>Scopes are partial query conditions to database queries. scopes are always prefixed to class finders. There are several ways to use scopes inside rails models.</p></blockquote>
 
+<p><strong>1.  Scope defined below gets loaded while class definition loads</strong>
+<code>ruby
+scope :active, where(:active =&gt; true)
+scope :archived, where(:archived =&gt; true, :post_type =&gt; :general)
+</code>
+<strong>2.  Dynamic scopes needs to be always defined inside lambda</strong>
+<code>ruby
+scope :not_expired, lambda { where('expiry_date &lt;= ?', Date.today) }
+</code>
+<strong>3.  Combining scopes</strong>
+<code>ruby
+scope :visible, published.not_expired
+</code>
+<strong>4.  Passing parameters to scopes</strong>
+```ruby</p>
+
+<h1>avoid below</h1>
+
+<p>scope :created_by_user, lambda {|user|
+  where(&lsquo;user_id = ?&rsquo;, user)
+}</p>
+
+<h1>use this</h1>
+
+<p>scope :created_by_user, lambda {|user|
+  where(:user_id => user)
+}
+```</p>
+
+<p><strong>5.  passing multiple parameters</strong>
+```ruby</p>
+
+<h1>avoid below</h1>
+
+<p>scope :made_between, lambda{|from, to|
+  where(&lsquo;created_date >= ? and created_date &lt;= ?&rsquo;, from, to)
+}</p>
+
+<h1>use this</h1>
+
+<p>scope :made_between, lambda{|from, to|
+  where(&lsquo;created_date >= :from and created_date &lt;= :to&rsquo;, :from => from, :to => to)
+}
+```</p>
+
+<p><strong>6.  associations inside scope (joins and includes)</strong>
+```ruby</p>
+
+<h1>below will perform eager loading effective when rendering posts with comments</h1>
+
+<p>scope :with_user_comments, lambda{|user|
+  includes(:comments).where(&lsquo;comments.user_id = ?&rsquo;, user)
+}</p>
+
+<h1>faster</h1>
+
+<h1>also can be done as post.comments.where(:user_id => user)</h1>
+
+<p>scope :with_user_comments, lambda{|user|
+  joins(:comments).where(&lsquo;comments.user_id = ?&rsquo;, user)
+}
+```</p>
+
+<p>So, at last would suggest making use of symbols when there are multiple parameters to scopes and make maximum use of scopes rather than having where conditions everywhere :)</p>
 ]]></content>
   </entry>
   
@@ -51,9 +229,48 @@ Scopes are partial query conditions to database queries. scopes are always prefi
     <link href="http://sandipransing.github.io/2011/10/connecting-to-multiple-databases-in/"/>
     <updated>2011-10-05T13:13:00+05:30</updated>
     <id>http://sandipransing.github.io/2011/10/connecting-to-multiple-databases-in</id>
-    <content type="html"><![CDATA[<div class='post'>
-While developing rails application we often come across situation where you wanted different rails models connecting different tables of different databases. <br/>Example: We are having ndnc model holding ndnc records associated with database ndnc. <br/>Lets create ConnectionBase model that will connect to other databse 'ndnc' and that will be extended from ActiveRecordBase and put that inside library files <br/><pre class=ruby>vi lib/connection_base.rb   class ConnectionBase < ActiveRecord::Base    establish_connection(     :adapter => "postgresql",     :username=> "sandip",     :password => "2121",     :database => "ndnc" ) end </pre><br/><br/>Wherever you wanted to connect to other database i.e. ndnc  you can extend that particular model with ConnectionBase <br/><pre class=ruby>class Ndnc < ConnectionBase # connects to ndnc table of ndnc database end </pre><br/>Please make sure library files are loaded while server startup<br/><pre class=ruby># vi config/application.rb config.autoload_paths += %W(#{config.root}/lib) </pre><br/>Done !<br/>In cases where you want only one particular model connecting other database table, you can put connection setting itself in that model.<br/></div>
+    <content type="html"><![CDATA[<blockquote><p>While developing rails application we often come across situation where you wanted different rails models connecting different tables of different databases.</p></blockquote>
 
+<p>Example: We are having ndnc model holding ndnc records associated with database ndnc.
+Lets create ConnectionBase model that will connect to other databse &lsquo;ndnc&rsquo; and that will be extended from ActiveRecordBase and put that inside library files</p>
+
+<p>```ruby</p>
+
+<h1>lib/connection_base.rb</h1>
+
+<p>class ConnectionBase &lt; ActiveRecord::Base</p>
+
+<p>  establish_connection(</p>
+
+<pre><code>:adapter =&gt; "postgresql",
+:username=&gt; "sandip",
+:password =&gt; "2121",
+:database =&gt; "ndnc"
+</code></pre>
+
+<p>)
+end
+```</p>
+
+<p>Wherever you wanted to connect to other database i.e. ndnc you can extend that particular model with ConnectionBase</p>
+
+<p>```ruby
+class Ndnc &lt; ConnectionBase</p>
+
+<h1>connects to ndnc table of ndnc database</h1>
+
+<p>end
+```</p>
+
+<p>Please make sure library files are loaded while server startup
+```ruby</p>
+
+<h1>vi config/application.rb</h1>
+
+<p>config.autoload_paths += %W(#{config.root}/lib)
+```
+Done !
+In cases where you want only one particular model connecting other database table, you can put connection setting itself in that model.</p>
 ]]></content>
   </entry>
   

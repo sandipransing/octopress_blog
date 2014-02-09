@@ -4,7 +4,7 @@
   <title><![CDATA[Category: meta-programming | Fun On Rails]]></title>
   <link href="http://sandipransing.github.io/blog/categories/meta-programming/atom.xml" rel="self"/>
   <link href="http://sandipransing.github.io/"/>
-  <updated>2014-02-09T23:18:57+05:30</updated>
+  <updated>2014-02-10T04:31:35+05:30</updated>
   <id>http://sandipransing.github.io/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -18,9 +18,105 @@
     <link href="http://sandipransing.github.io/2011/12/dynamic-methods-inside-ruby-classes/"/>
     <updated>2011-12-22T17:54:00+05:30</updated>
     <id>http://sandipransing.github.io/2011/12/dynamic-methods-inside-ruby-classes</id>
-    <content type="html"><![CDATA[<div class='post'>
-Ruby language is dynamic and robust. We can define methods inside ruby classes at runtime. <br/> <pre class=ruby># bash class A   define_method :a do     puts "hello"   end      define_method :greeting do |message|     puts message   end end  A.new.a #=> hello A.new.greeting 'Ram ram' #=> Ram ram </pre><br/> Can you imagine using dynamic methods below 24 lines of code is optimized to just 8 lines <br/>To know more on below code <a href="http://www.funonrails.com/2011/12/multiple-resources-registrations-with.html">read</a><pre class=ruby># Earlier code class ApplicationController < ActionController::Base   protect_from_forgery   helper_method :current_staff, :current_employee, current_admin    def authenticate_staff!(opts={})     current_staff || not_authorized   end    def current_staff     current_user if current_user.is_a? Staff   end    def authenticate_employee!(opts={})     current_employee || not_authorized   end    def current_employee     current_user if current_user.is_a? Employee   end      def authenticate_admin!(opts={})     current_admin || not_authorized   end    def current_admin     current_user if current_user.is_a? Admin   end end </pre><br/><pre class=ruby># New Version using dynamic methods   %w(Staff Employee Admin).each do |k|     define_method "current_#{k.underscore}" do       current_user if current_user.is_a?(k.constantize)     end          define_method "authenticate_#{k.underscore}!" do |opts={}|       send("current_#{k.underscore}") || not_authorized     end   end </pre></div>
+    <content type="html"><![CDATA[<p>Ruby language is dynamic and robust. We can define methods inside ruby classes at runtime.</p>
 
+<p>```ruby
+class A
+  define_method :a do</p>
+
+<pre><code>puts "hello"
+</code></pre>
+
+<p>  end</p>
+
+<p>  define_method :greeting do |message|</p>
+
+<pre><code>puts message
+</code></pre>
+
+<p>  end
+end</p>
+
+<p>A.new.a #=> hello
+A.new.greeting &lsquo;Ram ram&rsquo; #=> Ram ram
+```</p>
+
+<p>Can you imagine using dynamic methods below 24 lines of code is optimized to just 8 lines
+To know more on below code <a href="http://www.funonrails.com/2011/12/multiple-resources-registrations-with">read</a></p>
+
+<h3>Before code</h3>
+
+<p>```ruby
+class ApplicationController &lt; ActionController::Base
+  protect_from_forgery
+  helper_method :current_staff, :current_employee, current_admin</p>
+
+<p>  def authenticate_staff!(opts={})</p>
+
+<pre><code>current_staff || not_authorized
+</code></pre>
+
+<p>  end</p>
+
+<p>  def current_staff</p>
+
+<pre><code>current_user if current_user.is_a? Staff
+</code></pre>
+
+<p>  end</p>
+
+<p>  def authenticate_employee!(opts={})</p>
+
+<pre><code>current_employee || not_authorized
+</code></pre>
+
+<p>  end</p>
+
+<p>  def current_employee</p>
+
+<pre><code>current_user if current_user.is_a? Employee
+</code></pre>
+
+<p>  end</p>
+
+<p>  def authenticate_admin!(opts={})</p>
+
+<pre><code>current_admin || not_authorized
+</code></pre>
+
+<p>  end</p>
+
+<p>  def current_admin</p>
+
+<pre><code>current_user if current_user.is_a? Admin
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<h3>After code</h3>
+
+<p>```ruby</p>
+
+<h1>New Version using dynamic methods</h1>
+
+<p>%w(Staff Employee Admin).each do |k|
+  define_method &ldquo;current_#{k.underscore}&rdquo; do</p>
+
+<pre><code>current_user if current_user.is_a?(k.constantize)
+</code></pre>
+
+<p>  end</p>
+
+<p>  define_method &ldquo;authenticate_#{k.underscore}!&rdquo; do |opts={}|</p>
+
+<pre><code>send("current_#{k.underscore}") || not_authorized
+</code></pre>
+
+<p>  end
+end
+```</p>
 ]]></content>
   </entry>
   

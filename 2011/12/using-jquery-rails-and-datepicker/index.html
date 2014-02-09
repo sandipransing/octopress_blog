@@ -91,8 +91,101 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-jQuery datepicker plugin is used to display inline calendar popup that eases user input experience while entering date/time fields. Calendar can be easily binded to any html DOM element. To Apply different styles download css from <a href="http://jqueryui.com/demos/datepicker">here</a> <pre class=ruby># Gemfile  gem "jquery-rails" </pre><br/><pre class=ruby># console  bundle install </pre><br/><pre class=ruby># app/assets/javascripts/application.js.coffee  //= require jquery //= require jquery_ujs //= require jquery-ui </pre><br/> <pre class=ruby># app/views/layouts/application.html.haml  = stylesheet_link_tag "application"  = stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css"  = javascript_include_tag "application" </pre> <br/>Before using timepicker download jquery-ui-timepicker js <br/><pre class=ruby>wget http://trentrichardson.com/examples/timepicker/js/jquery-ui-timepicker-addon.js app/assets/javascripts/ </pre>Add timepcker js to application.js.coffee<br/><pre class=ruby>//= require jquery-ui-timepicker-addon </pre><br/><pre class=ruby>## inside views # app/views/users/_form.html.haml = form_for @user ||= User.new do |f|   = f.text_field :birth_date, :id => 'birthDate'   = f.text_field :birth_time, :id => 'birthTime'   = f.text_field :exam_on, :id => 'examOn' :javascript   $(document).ready(function() {     $("#birthDate").datepicker();     $("#birthTime").timepicker();     $("#examOn").datetimepicker();     $('#ui-datepicker-div').removeClass('ui-helper-hidden-accessible') </pre><br/><pre class=ruby># customizations $('#birth_date').datepicker({ dateFormat: 'dd-mm-yy' }); $('#birth_date').datepicker({ disabled: true }); $("#examOn").datetimepicker({ ampm: true }); $("#examOn").datetimepicker({ timeFormat: 'h:m', separator: ' @ ' }); </pre></div>
+<div class="entry-content"><p>jQuery datepicker plugin is used to display inline calendar popup that eases user input experience while entering date/time fields. Calendar can be easily binded to any html DOM element. To Apply different styles download css from <a href="http://jqueryui.com/demos/datepicker">here</a></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># Gemfile
+</span><span class='line'>gem "jquery-rails"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Install Bundle</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>bundle install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Add inside <code>application.js.coffee</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="c1"># app/assets/javascripts/application.js.coffee </span>
+</span><span class='line'><span class="o">//=</span> <span class="nx">require</span> <span class="nx">jquery</span>
+</span><span class='line'><span class="o">//=</span> <span class="nx">require</span> <span class="nx">jquery_ujs</span>
+</span><span class='line'><span class="o">//=</span> <span class="nx">require</span> <span class="nx">jquery</span><span class="o">-</span><span class="nx">ui</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Access in layout</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='haml'><span class='line'># app/views/layouts/application.html.haml
+</span><span class='line'><span class="p">=</span> <span class="n">stylesheet_link_tag</span> <span class="s2">&quot;application&quot;</span>
+</span><span class='line'><span class="p">=</span> <span class="n">stylesheet_link_tag</span> <span class="s2">&quot;http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css&quot;</span>
+</span><span class='line'><span class="p">=</span> <span class="n">javascript_include_tag</span> <span class="s2">&quot;application&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Before using timepicker download jquery-ui-timepicker js</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='haml'><span class='line'>wget http://trentrichardson.com/examples/timepicker/js/jquery-ui-timepicker-addon.js app/assets/javascripts/
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Add timepcker js to <code>application.js.coffee</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="o">//=</span> <span class="nx">require</span> <span class="nx">jquery</span><span class="o">-</span><span class="nx">ui</span><span class="o">-</span><span class="nx">timepicker</span><span class="o">-</span><span class="nx">addon</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>View form</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='haml'><span class='line'>## inside views
+</span><span class='line'># app/views/users/_form.html.haml
+</span><span class='line'><span class="p">=</span> <span class="n">form_for</span> <span class="vi">@user</span> <span class="o">||=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
+</span><span class='line'>  <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:birth_date</span><span class="p">,</span> <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="s1">&#39;birthDate&#39;</span>
+</span><span class='line'>  <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:birth_time</span><span class="p">,</span> <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="s1">&#39;birthTime&#39;</span>
+</span><span class='line'>  <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:exam_on</span><span class="p">,</span> <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="s1">&#39;examOn&#39;</span>
+</span><span class='line'><span class="nd">:javascript</span>
+</span><span class='line'>  <span class="nd">$(document).ready(function() {</span>
+</span><span class='line'>    <span class="nd">$(&quot;#birthDate&quot;).datepicker();</span>
+</span><span class='line'>    <span class="nd">$(&quot;#birthTime&quot;).timepicker();</span>
+</span><span class='line'>    <span class="nd">$(&quot;#examOn&quot;).datetimepicker();</span>
+</span><span class='line'>    <span class="nd">$(&#39;#ui-datepicker-div&#39;).removeClass(&#39;ui-helper-hidden-accessible&#39;)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Customizations</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#birth_date&#39;</span><span class="p">).</span><span class="nx">datepicker</span><span class="p">({</span> <span class="nx">dateFormat</span><span class="o">:</span> <span class="s1">&#39;dd-mm-yy&#39;</span> <span class="p">});</span>
+</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#birth_date&#39;</span><span class="p">).</span><span class="nx">datepicker</span><span class="p">({</span> <span class="nx">disabled</span><span class="o">:</span> <span class="kc">true</span> <span class="p">});</span>
+</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#examOn&quot;</span><span class="p">).</span><span class="nx">datetimepicker</span><span class="p">({</span> <span class="nx">ampm</span><span class="o">:</span> <span class="kc">true</span> <span class="p">});</span>
+</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#examOn&quot;</span><span class="p">).</span><span class="nx">datetimepicker</span><span class="p">({</span> <span class="nx">timeFormat</span><span class="o">:</span> <span class="s1">&#39;h:m&#39;</span><span class="p">,</span> <span class="nx">separator</span><span class="o">:</span> <span class="s1">&#39; @ &#39;</span> <span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 

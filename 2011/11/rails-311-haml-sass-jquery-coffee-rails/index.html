@@ -9,7 +9,16 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Install RVM first bash rvm list known # MRI Rubies [ruby-]1.8.6-head [ruby-]1.8.7[-p352] [ruby-]1.9.3-head ruby-head # JRuby jruby-1.2.0 jruby-head &hellip;">
+  <meta name="description" content="Install RVM first 1
+bash &lt; &lt;(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvminstaller) rvm list known 1
+2
+3
+4
+5
+6
+7
+8
+9 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -91,8 +100,127 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-<b> Install RVM first </b><br/> <pre class=ruby>  bash < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvminstaller) </pre> <b> rvm list known</b> <pre class=ruby>  # MRI Rubies   [ruby-]1.8.6-head   [ruby-]1.8.7[-p352]   [ruby-]1.9.3-head   ruby-head    # JRuby   jruby-1.2.0   jruby-head    # Rubinius   rbx-1.0.1   rbx-2.0.0pre    # Ruby Enterprise Edition   ree-1.8.6   ree-1.8.7-head </pre> <b>Install ruby 1.9.3</b><br/> <pre class=ruby>  rvm install 1.9.3-head   rvm gemset create rails311   rvm use 1.9.3-head@rails311 --default      gem install rails -v3.1.1 --no-rdoc --no-ri      gem install heroku   gem install rb-readline </pre> <b>Create new rails project </b><br/> <pre class=ruby>  rails new cdc -m http://railswizard.org/b22092a4358bbebb3a46.rb -J -T </pre> <b>Heroku Deployment Done </b><br/> <pre class=ruby>  http://railsblank.heroku.com/ (production) </pre> <b> Local System nginx-passenger setup</b><br/> <pre class=ruby>  gem install passenger   rvmsudo passenger-install-nginx-module </pre> If you find pcre download error then make sure you libpcre-dev pkg installed on your system otherwise install it and re-run<br/><pre class=ruby>  sudo apt-get install libpcre3-dev </pre> <b>Nginx Configuration</b><br/> <pre class=ruby>http {   passenger_root /home/sandip/.rvm/gems/ruby-1.9.3-head@rails311/gems/passenger-3.0.9;   passenger_ruby /home/sandip/.rvm/wrappers/ruby-1.9.3-head@rails311/ruby;      server {     listen 80;     server_name railsblank.local;     root /home/sandip/railsblank/public;     rails_env development;     passenger_enabled on; } </pre> <b>git source code </b><br/><pre class=ruby>  git clone git://github.com/sandipransing/rails_blank.git </pre></div>
+<div class="entry-content"><p>Install RVM first</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>bash &lt; &lt;(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvminstaller)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>rvm list known</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># MRI Rubies
+</span><span class='line'>[ruby-]1.8.6-head
+</span><span class='line'>[ruby-]1.8.7[-p352]
+</span><span class='line'>[ruby-]1.9.3-head
+</span><span class='line'>ruby-head
+</span><span class='line'>
+</span><span class='line'># JRuby
+</span><span class='line'>jruby-1.2.0
+</span><span class='line'>jruby-head
+</span><span class='line'>
+</span><span class='line'># Rubinius
+</span><span class='line'>rbx-1.0.1
+</span><span class='line'>rbx-2.0.0pre
+</span><span class='line'>
+</span><span class='line'># Ruby Enterprise Edition
+</span><span class='line'>ree-1.8.6
+</span><span class='line'>ree-1.8.7-head</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Install ruby 1.9.3</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rvm install 1.9.3-head
+</span><span class='line'>rvm gemset create rails311
+</span><span class='line'>rvm use 1.9.3-head@rails311 --default
+</span><span class='line'>  
+</span><span class='line'>gem install rails -v3.1.1 --no-rdoc --no-ri
+</span><span class='line'>  
+</span><span class='line'>gem install heroku
+</span><span class='line'>gem install rb-readline</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Create new rails project</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rails new cdc -m http://railswizard.org/b22092a4358bbebb3a46.rb -J -T</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Above command will create rails app, bundle install, and Heroku Deployment</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>http://railsblank.heroku.com/ (production)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Local System nginx-passenger setup</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install passenger
+</span><span class='line'>rvmsudo passenger-install-nginx-module</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you find pcre download error then make sure you libpcre-dev pkg installed on your system otherwise install it and re-run</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install libpcre3-dev</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Nginx Configuration</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>http {
+</span><span class='line'>  passenger_root /home/sandip/.rvm/gems/ruby-1.9.3-head@rails311/gems/passenger-3.0.9;
+</span><span class='line'>  passenger_ruby /home/sandip/.rvm/wrappers/ruby-1.9.3-head@rails311/ruby;
+</span><span class='line'>  
+</span><span class='line'>  server {
+</span><span class='line'>    listen 80;
+</span><span class='line'>    server_name railsblank.local;
+</span><span class='line'>    root /home/sandip/railsblank/public;
+</span><span class='line'>    rails_env development;
+</span><span class='line'>    passenger_enabled on;
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>git source code can be found here</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git://github.com/sandipransing/rails_blank.git</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 

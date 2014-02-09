@@ -9,7 +9,7 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Basically Enumerable mixin gives collection classes a variety of traverse, search, sort methods. understanding ruby blocks i.e. proc blocks are &hellip;">
+  <meta name="description" content="Basically Enumerable mixin gives collection classes a variety of traverse, search, sort methods. Understanding ruby blocks Blocks are statements of &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -91,8 +91,158 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-Basically Enumerable mixin gives collection classes a variety of traverse, search, sort methods.<br/> <b>understanding ruby blocks i.e. proc </b><br/>blocks are statements of code written in ruby. one can take them as similar to c language macro&#8217;s<br/> <b>Different ways to define blocks</b><br/><pre class=ruby>a = proc do   puts "hello" end a.call #=> hello  b = lambda do |u|   puts "hello #{u}" end b.call('sandip')#=> hello sandip  c = proc {|user| puts user } c.call('sandip') #=> sandip </pre> <b>Passing block to enumerator </b><br/>Lets assume we have collection array of strings and we want to print it<br/> <pre class=ruby> a = ['hi', 'sandip', 'how', 'you', 'doing', '?'] => ["hi", "sandip", "how", "you", "doing", "?"]  a.each {|w| puts w }  q = proc {|w| puts w } => #<Proc:0x00007f9d2be13140@(irb):89> a.each(&q) #=>hi sandip how you doing ?  a.map{|r| q.call(r)} #=>hi sandip how you doing ? </pre>  <b>Understanding symbol#to_proc </b><br/>Symbol has method to_proc which converts symbol to block where symbol is taken as method to be executed on first argument of proc<br/><b>How to_proc got implemented inside Symbol class</b><pre class=ruby>class Symbol   def to_proc     Proc.new { |*args| args.shift.__send__(self, *args) }   end end </pre>Lets have some examples <br/><pre class=ruby>v = :even?.to_proc # equivalent to proc {|a| a.even?} #=> #<Proc:0x00007f9d2bddcb90@(irb):97> q = [1, 2, 3, 5, 67]  q.map(&v) => [false, true, false, false, false] </pre> <b>Is there any shortcut?</b><br/>Yes, there is shortcut to have block passed to enumerators on the fly using ampersand followed by colon (i.e. symbol)<br/> <pre class=ruby>q = [1, 2, 3, 5, 67]  q.map(&:even?) <=> q.map(&:even?.to_proc)  q.map(&:even?.to_proc) #=> [false, true, false, false, false]  q.map(&:even?) #=> [false, true, false, false, false] </pre> <b>Some handy examples </b><br/><pre class=ruby>[1, 2, 3, 5, 67].inject(&:+) #=> 78 [1, 2, 3, 5, 67].inject(:+) #=> 78 [1, 2, 3, 5, 67].any?(&:even?) #=> true [1, 2, 3, 5, 67].detect(&:even?) #=> 2 ['ruby', 'on', 'rails'].map(&:upcase) #=> ["RUBY", "ON", "RAILS"] </pre></div>
+<div class="entry-content"><p>Basically Enumerable mixin gives collection classes a variety of traverse, search, sort methods.</p>
+
+<p><strong>Understanding ruby blocks</strong></p>
+
+<blockquote><p>Blocks are statements of code written in ruby. one can take them as similar to c language macro&rsquo;s</p></blockquote>
+
+<p><strong>Different ways to define blocks</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">proc</span> <span class="k">do</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;hello&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">call</span> <span class="c1">#=&gt; hello</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">b</span> <span class="o">=</span> <span class="nb">lambda</span> <span class="k">do</span> <span class="o">|</span><span class="n">u</span><span class="o">|</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;hello </span><span class="si">#{</span><span class="n">u</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="n">b</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;sandip&#39;</span><span class="p">)</span><span class="c1">#=&gt; hello sandip</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">c</span> <span class="o">=</span> <span class="nb">proc</span> <span class="p">{</span><span class="o">|</span><span class="n">user</span><span class="o">|</span> <span class="nb">puts</span> <span class="n">user</span> <span class="p">}</span>
+</span><span class='line'><span class="n">c</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;sandip&#39;</span><span class="p">)</span> <span class="c1">#=&gt; sandip</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Passing block to enumerator</strong></p>
+
+<p>Lets assume we have collection array of strings and we want to print it</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="o">[</span><span class="s1">&#39;hi&#39;</span><span class="p">,</span> <span class="s1">&#39;sandip&#39;</span><span class="p">,</span> <span class="s1">&#39;how&#39;</span><span class="p">,</span> <span class="s1">&#39;you&#39;</span><span class="p">,</span> <span class="s1">&#39;doing&#39;</span><span class="p">,</span> <span class="s1">&#39;?&#39;</span><span class="o">]</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="o">[</span><span class="s2">&quot;hi&quot;</span><span class="p">,</span> <span class="s2">&quot;sandip&quot;</span><span class="p">,</span> <span class="s2">&quot;how&quot;</span><span class="p">,</span> <span class="s2">&quot;you&quot;</span><span class="p">,</span> <span class="s2">&quot;doing&quot;</span><span class="p">,</span> <span class="s2">&quot;?&quot;</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span><span class="o">|</span><span class="n">w</span><span class="o">|</span> <span class="nb">puts</span> <span class="n">w</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">q</span> <span class="o">=</span> <span class="nb">proc</span> <span class="p">{</span><span class="o">|</span><span class="n">w</span><span class="o">|</span> <span class="nb">puts</span> <span class="n">w</span> <span class="p">}</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="c1">#&lt;Proc:0x00007f9d2be13140@(irb):89&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">each</span><span class="p">(</span><span class="o">&amp;</span><span class="n">q</span><span class="p">)</span> <span class="c1">#=&gt;</span>
+</span><span class='line'><span class="n">hi</span>
+</span><span class='line'><span class="n">sandip</span>
+</span><span class='line'><span class="n">how</span>
+</span><span class='line'><span class="n">you</span>
+</span><span class='line'><span class="n">doing</span>
+</span><span class='line'><span class="p">?</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">map</span><span class="p">{</span><span class="o">|</span><span class="n">r</span><span class="o">|</span> <span class="n">q</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">r</span><span class="p">)}</span> <span class="c1">#=&gt;</span>
+</span><span class='line'><span class="n">hi</span>
+</span><span class='line'><span class="n">sandip</span>
+</span><span class='line'><span class="n">how</span>
+</span><span class='line'><span class="n">you</span>
+</span><span class='line'><span class="n">doing</span>
+</span><span class='line'><span class="p">?</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Understanding symbol#to_proc</strong></p>
+
+<blockquote><p>Symbol has method <code>to_proc</code> which converts symbol to block where symbol is taken as method to be executed on first argument of proc</p></blockquote>
+
+<p><strong> How to_proc got implemented inside Symbol class</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Symbol</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">to_proc</span>
+</span><span class='line'>    <span class="no">Proc</span><span class="o">.</span><span class="n">new</span> <span class="p">{</span> <span class="o">|*</span><span class="n">args</span><span class="o">|</span> <span class="n">args</span><span class="o">.</span><span class="n">shift</span><span class="o">.</span><span class="n">__send__</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="p">}</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Lets have some examples:</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">v</span> <span class="o">=</span> <span class="ss">:even?</span><span class="o">.</span><span class="n">to_proc</span> <span class="c1"># equivalent to proc {|a| a.even?} </span>
+</span><span class='line'><span class="c1">#=&gt; #&lt;Proc:0x00007f9d2bddcb90@(irb):97&gt; </span>
+</span><span class='line'><span class="n">q</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">67</span><span class="o">]</span>
+</span><span class='line'><span class="n">q</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="n">v</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="kp">false</span><span class="p">,</span> <span class="kp">true</span><span class="p">,</span> <span class="kp">false</span><span class="p">,</span> <span class="kp">false</span><span class="p">,</span> <span class="kp">false</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> <strong>Is there any shortcut?</strong>
+Yes, there is shortcut to have block passed to enumerators on the fly using ampersand followed by colon (i.e. symbol)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">q</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">67</span><span class="o">]</span>
+</span><span class='line'><span class="n">q</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:even?</span><span class="p">)</span> <span class="o">&lt;=&gt;</span> <span class="n">q</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:even?</span><span class="o">.</span><span class="n">to_proc</span><span class="p">)</span>
+</span><span class='line'><span class="n">q</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:even?</span><span class="o">.</span><span class="n">to_proc</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; [false, true, false, false, false]  </span>
+</span><span class='line'><span class="n">q</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:even?</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; [false, true, false, false, false]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Some handy examples</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">67</span><span class="o">].</span><span class="n">inject</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:+</span><span class="p">)</span> <span class="c1">#=&gt; 78 </span>
+</span><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">67</span><span class="o">].</span><span class="n">inject</span><span class="p">(</span><span class="ss">:+</span><span class="p">)</span> <span class="c1">#=&gt; 78 </span>
+</span><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">67</span><span class="o">].</span><span class="n">any?</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:even?</span><span class="p">)</span> <span class="c1">#=&gt; true </span>
+</span><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">67</span><span class="o">].</span><span class="n">detect</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:even?</span><span class="p">)</span> <span class="c1">#=&gt; 2 </span>
+</span><span class='line'><span class="o">[</span><span class="s1">&#39;ruby&#39;</span><span class="p">,</span> <span class="s1">&#39;on&#39;</span><span class="p">,</span> <span class="s1">&#39;rails&#39;</span><span class="o">].</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:upcase</span><span class="p">)</span> <span class="c1">#=&gt; [&quot;RUBY&quot;, &quot;ON&quot;, &quot;RAILS&quot;]</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 

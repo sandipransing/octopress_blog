@@ -4,7 +4,7 @@
   <title><![CDATA[Category: datepicker | Fun On Rails]]></title>
   <link href="http://sandipransing.github.io/blog/categories/datepicker/atom.xml" rel="self"/>
   <link href="http://sandipransing.github.io/"/>
-  <updated>2014-02-09T23:18:57+05:30</updated>
+  <updated>2014-02-10T04:31:35+05:30</updated>
   <id>http://sandipransing.github.io/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -18,9 +18,79 @@
     <link href="http://sandipransing.github.io/2011/12/using-jquery-rails-and-datepicker/"/>
     <updated>2011-12-22T03:52:00+05:30</updated>
     <id>http://sandipransing.github.io/2011/12/using-jquery-rails-and-datepicker</id>
-    <content type="html"><![CDATA[<div class='post'>
-jQuery datepicker plugin is used to display inline calendar popup that eases user input experience while entering date/time fields. Calendar can be easily binded to any html DOM element. To Apply different styles download css from <a href="http://jqueryui.com/demos/datepicker">here</a> <pre class=ruby># Gemfile  gem "jquery-rails" </pre><br/><pre class=ruby># console  bundle install </pre><br/><pre class=ruby># app/assets/javascripts/application.js.coffee  //= require jquery //= require jquery_ujs //= require jquery-ui </pre><br/> <pre class=ruby># app/views/layouts/application.html.haml  = stylesheet_link_tag "application"  = stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css"  = javascript_include_tag "application" </pre> <br/>Before using timepicker download jquery-ui-timepicker js <br/><pre class=ruby>wget http://trentrichardson.com/examples/timepicker/js/jquery-ui-timepicker-addon.js app/assets/javascripts/ </pre>Add timepcker js to application.js.coffee<br/><pre class=ruby>//= require jquery-ui-timepicker-addon </pre><br/><pre class=ruby>## inside views # app/views/users/_form.html.haml = form_for @user ||= User.new do |f|   = f.text_field :birth_date, :id => 'birthDate'   = f.text_field :birth_time, :id => 'birthTime'   = f.text_field :exam_on, :id => 'examOn' :javascript   $(document).ready(function() {     $("#birthDate").datepicker();     $("#birthTime").timepicker();     $("#examOn").datetimepicker();     $('#ui-datepicker-div').removeClass('ui-helper-hidden-accessible') </pre><br/><pre class=ruby># customizations $('#birth_date').datepicker({ dateFormat: 'dd-mm-yy' }); $('#birth_date').datepicker({ disabled: true }); $("#examOn").datetimepicker({ ampm: true }); $("#examOn").datetimepicker({ timeFormat: 'h:m', separator: ' @ ' }); </pre></div>
+    <content type="html"><![CDATA[<p>jQuery datepicker plugin is used to display inline calendar popup that eases user input experience while entering date/time fields. Calendar can be easily binded to any html DOM element. To Apply different styles download css from <a href="http://jqueryui.com/demos/datepicker">here</a></p>
 
+<p>```</p>
+
+<h1>Gemfile</h1>
+
+<p>gem &ldquo;jquery-rails&rdquo;
+```</p>
+
+<p>Install Bundle
+<code>
+bundle install
+</code></p>
+
+<p>Add inside <code>application.js.coffee</code>
+```coffeescript</p>
+
+<h1>app/assets/javascripts/application.js.coffee</h1>
+
+<p>//= require jquery
+//= require jquery_ujs
+//= require jquery-ui
+```</p>
+
+<p>Access in layout
+```haml</p>
+
+<h1>app/views/layouts/application.html.haml</h1>
+
+<p>= stylesheet_link_tag &ldquo;application&rdquo;
+= stylesheet_link_tag &ldquo;<a href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css">http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css</a>&rdquo;
+= javascript_include_tag &ldquo;application&rdquo;
+```</p>
+
+<p>Before using timepicker download jquery-ui-timepicker js
+<code>
+wget http://trentrichardson.com/examples/timepicker/js/jquery-ui-timepicker-addon.js app/assets/javascripts/
+</code></p>
+
+<p>Add timepcker js to <code>application.js.coffee</code>
+<code>coffeescript
+//= require jquery-ui-timepicker-addon
+</code></p>
+
+<p>View form
+```haml</p>
+
+<h2>inside views</h2>
+
+<h1>app/views/users/_form.html.haml</h1>
+
+<p>= form_for @user ||= User.new do |f|
+  = f.text_field :birth_date, :id => &lsquo;birthDate&rsquo;
+  = f.text_field :birth_time, :id => &lsquo;birthTime&rsquo;
+  = f.text_field :exam_on, :id => &lsquo;examOn&rsquo;
+:javascript
+  $(document).ready(function() {</p>
+
+<pre><code>$("#birthDate").datepicker();
+$("#birthTime").timepicker();
+$("#examOn").datetimepicker();
+$('#ui-datepicker-div').removeClass('ui-helper-hidden-accessible')
+</code></pre>
+
+<p>```</p>
+
+<p>Customizations
+<code>javascript
+$('#birth_date').datepicker({ dateFormat: 'dd-mm-yy' });
+$('#birth_date').datepicker({ disabled: true });
+$("#examOn").datetimepicker({ ampm: true });
+$("#examOn").datetimepicker({ timeFormat: 'h:m', separator: ' @ ' });
+</code></p>
 ]]></content>
   </entry>
   

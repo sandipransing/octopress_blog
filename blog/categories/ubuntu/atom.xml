@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ubuntu | Fun On Rails]]></title>
   <link href="http://sandipransing.github.io/blog/categories/ubuntu/atom.xml" rel="self"/>
   <link href="http://sandipransing.github.io/"/>
-  <updated>2014-02-09T23:18:57+05:30</updated>
+  <updated>2014-02-10T04:31:35+05:30</updated>
   <id>http://sandipransing.github.io/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -18,9 +18,37 @@
     <link href="http://sandipransing.github.io/2011/07/how-to-get-started-with-tata-photon-on/"/>
     <updated>2011-07-05T14:06:00+05:30</updated>
     <id>http://sandipransing.github.io/2011/07/how-to-get-started-with-tata-photon-on</id>
-    <content type="html"><![CDATA[<div class='post'>
-In order to get tata photon working on ubuntu machine you need to install following packages <br/>1. usb-modeswitch-data 2. usb-modeswitch <br/>Either you can download them from ubuntu site and install locally or install using apt manager <br/>Download links<br/><pre class=ruby>http://packages.debian.org/squeeze/usb-modeswitch-data http://packages.debian.org/squeeze/usb-modeswitch </pre><br/><b>apt installation</b><br/><pre class=ruby>sudo apt-get install usb-modeswitch-data usb-modeswitch usb-modeswitch </pre><br/>After successful installation,<br/>1. Connect photon usb card<br/>2. Execute following commands one after another. <pre class=ruby>sudo usb_modeswitch -c /etc/usb_modeswitch.d/12d1\:1446 wvdial </pre><br/>...and you should get connected via photon!</div>
+    <content type="html"><![CDATA[<p>In order to get tata photon working on ubuntu machine you need to install following packages</p>
 
+<p><strong>1. usb-modeswitch-data 2. usb-modeswitch</strong></p>
+
+<p>Either you can download them from ubuntu site and install locally or install using apt manager</p>
+
+<p>Download links
+<code>
+http://packages.debian.org/squeeze/usb-modeswitch-data
+http://packages.debian.org/squeeze/usb-modeswitch
+</code></p>
+
+<p>apt installation
+<code>
+sudo apt-get install usb-modeswitch-data usb-modeswitch usb-modeswitch
+</code></p>
+
+<p>After successful installation,</p>
+
+<ol>
+<li>Connect photon usb card</li>
+<li>Execute following commands one after another</li>
+</ol>
+
+
+<p><code>
+sudo usb_modeswitch -c /etc/usb_modeswitch.d/12d1\:1446
+wvdial
+</code></p>
+
+<p>..and you should get connected via photon!</p>
 ]]></content>
   </entry>
   

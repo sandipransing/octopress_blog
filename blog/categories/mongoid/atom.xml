@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mongoid | Fun On Rails]]></title>
   <link href="http://sandipransing.github.io/blog/categories/mongoid/atom.xml" rel="self"/>
   <link href="http://sandipransing.github.io/"/>
-  <updated>2014-02-09T23:18:57+05:30</updated>
+  <updated>2014-02-10T04:31:35+05:30</updated>
   <id>http://sandipransing.github.io/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -18,9 +18,74 @@
     <link href="http://sandipransing.github.io/2012/01/mongoid-embededin-and-array-field/"/>
     <updated>2012-01-20T01:12:00+05:30</updated>
     <id>http://sandipransing.github.io/2012/01/mongoid-embededin-and-array-field</id>
-    <content type="html"><![CDATA[<div class='post'>
-Previous post explains on <a href="http://www.funonrails.com/2012/01/mongoid-array-field-and-rails-form.html">mongoid document array field and rails form implementation</a><br/>Below example shows rails form integration of array field of embedded mongoid document <br/>consider scenario, student embeds one family who has many assets<br/><pre class=ruby>class Student   include Mongoid::Document    field :name   field :phone      embeds_one  :family    validates_associated :family   accepts_nested_attributes_for :family end </pre><br/><pre class=ruby>class Family   include Mongoid::Document   ASSETS = ['flat', 'car', 'business', 'bunglow', 'cash']      field :members, type: Integer   field :assets, type: Array   field :religon    embedded_in :student end </pre>Brief controller code </br/>  <pre class=ruby>class StudentsController < ApplicationController  def new    @student = Student.new    @student.family ||= @student.build_family  end   def create    @student = Student.new(params[:student])    @student.family.assets.reject!(&:blank?)    if @student.save      [...]    else      render :action => :new    end  end end </pre>view form will look like- <br/><pre class=ruby>= form_for(@student) do |s|   = s.text_field :name   = s.text_field :phone   - s.fields_for :family do |f|     = f.text_field :members     = f.text_field :religion     - Family::ASSETS.each do |asset|       /Here f.object_name #=> student[family]       = f.check_box :assets, :name => "#{f.object_name}[assets][]", asset </pre></div>
+    <content type="html"><![CDATA[<p>Previous post explains on <a href="http://www.funonrails.com/2012/01/mongoid-array-field-and-rails-form.html">mongoid document array field and rails form implementation</a>
+Below example shows rails form integration of array field of embedded mongoid document
+consider scenario, student embeds one family who has many assets
+```ruby
+class Student
+  include Mongoid::Document</p>
 
+<p>  field :name
+  field :phone</p>
+
+<p>  embeds_one  :family</p>
+
+<p>  validates_associated :family
+  accepts_nested_attributes_for :family
+end
+<code>
+</code>ruby
+class Family
+  include Mongoid::Document
+  ASSETS = [&lsquo;flat&rsquo;, &lsquo;car&rsquo;, &lsquo;business&rsquo;, &lsquo;bunglow&rsquo;, &lsquo;cash&rsquo;]</p>
+
+<p>  field :members, type: Integer
+  field :assets, type: Array
+  field :religon</p>
+
+<p>  embedded_in :student
+end
+<code>
+Brief controller code
+</code>ruby
+class StudentsController &lt; ApplicationController
+ def new
+   @student = Student.new
+   @student.family ||= @student.build_family
+ end</p>
+
+<p> def create
+   @student = Student.new(params[:student])
+   @student.family.assets.reject!(&amp;:blank?)
+   if @student.save</p>
+
+<pre><code> [...]
+</code></pre>
+
+<p>   else</p>
+
+<pre><code> render :action =&gt; :new
+</code></pre>
+
+<p>   end
+ end
+end
+<code>
+view form will look like-
+</code>haml
+= form_for(@student) do |s|
+  = s.text_field :name
+  = s.text_field :phone
+  &ndash; s.fields_for :family do |f|</p>
+
+<pre><code>= f.text_field :members
+= f.text_field :religion
+- Family::ASSETS.each do |asset|
+  /Here f.object_name #=&gt; student[family]
+  = f.check_box :assets, :name =&gt; "#{f.object_name}[assets][]", asset
+</code></pre>
+
+<p>```</p>
 ]]></content>
   </entry>
   
@@ -29,9 +94,65 @@ Previous post explains on <a href="http://www.funonrails.com/2012/01/mongoid-arr
     <link href="http://sandipransing.github.io/2012/01/mongoid-array-field-and-rails-form/"/>
     <updated>2012-01-19T23:59:00+05:30</updated>
     <id>http://sandipransing.github.io/2012/01/mongoid-array-field-and-rails-form</id>
-    <content type="html"><![CDATA[<div class='post'>
-mongoid document supports array as field. array field in mongoid document is a ruby array but its quite complex to manage array field in rails forms.<br/>After lot of google and reading comments from stack-overflow at last i felt helpless. Finally after doing research on rails form helper object(form_for, fields_for) am pleased to get it working as expected :)<br/>In below example, product can have multiple categories<br/><pre class=ruby>class Product   CATEGORIES = %w(Apparel Media Software Sports Agri Education)   include Mongoid::Document   field :name, :type => String   field :categories, :type => Array end </pre>Here is form code <br/><pre class=ruby>= form_for(@product) do |f|   = f.text_field :name   - Product::CATEGORIES.each do |category|     = f.check_box :categories, :name => "product[categories][]", category </pre><br/>Here is products controller code <br/><pre class=ruby>class ProductsController < ApplicationController   before_filter :load_product, :only => [:new, :create]      [...]      # We don't need new action to be defined      def create     @product.attributes = params[:product]     # Here we need to reject blank categories     @product.categories.reject!(&:blank?)     if @product.save       flash[:notice] = I18n.t('product.create.success')       redirect_to(:action => :index)     else       render :action => :new     end   end      [...]      private   def load_product     @product = Product.new   end end </pre></div>
+    <content type="html"><![CDATA[<p>Mongoid document supports array as field. array field in mongoid document is a ruby array but its quite complex to manage array field in rails forms.</p>
 
+<p>After lot of google and reading comments from stack-overflow at last i felt helpless. Finally after doing research on rails form helper object(form_for, fields_for) am pleased to get it working as expected :)</p>
+
+<p>In below example, product can have multiple categories
+<code>ruby
+class Product
+  CATEGORIES = %w(Apparel Media Software Sports Agri Education)
+  include Mongoid::Document
+  field :name, :type =&gt; String
+  field :categories, :type =&gt; Array
+end
+</code>
+Here is form code
+```haml
+= form_for(@product) do |f|
+  = f.text_field :name
+  &ndash; Product::CATEGORIES.each do |category|</p>
+
+<pre><code>= f.check_box :categories, :name =&gt; "product[categories][]", category
+</code></pre>
+
+<p>```</p>
+
+<p>Here is products controller code
+```ruby
+class ProductsController &lt; ApplicationController
+  before_filter :load_product, :only => [:new, :create]</p>
+
+<p>  [&hellip;]</p>
+
+<p>  # We don&rsquo;t need new action to be defined</p>
+
+<p>  def create</p>
+
+<pre><code>@product.attributes = params[:product]
+# Here we need to reject blank categories
+@product.categories.reject!(&amp;:blank?)
+if @product.save
+  flash[:notice] = I18n.t('product.create.success')
+  redirect_to(:action =&gt; :index)
+else
+  render :action =&gt; :new
+end
+</code></pre>
+
+<p>  end</p>
+
+<p>  [&hellip;]</p>
+
+<p>  private
+  def load_product</p>
+
+<pre><code>@product = Product.new
+</code></pre>
+
+<p>  end
+end
+```</p>
 ]]></content>
   </entry>
   

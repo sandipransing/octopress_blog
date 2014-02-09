@@ -4,7 +4,7 @@
   <title><![CDATA[Category: nginx | Fun On Rails]]></title>
   <link href="http://sandipransing.github.io/blog/categories/nginx/atom.xml" rel="self"/>
   <link href="http://sandipransing.github.io/"/>
-  <updated>2014-02-09T23:18:57+05:30</updated>
+  <updated>2014-02-10T04:31:35+05:30</updated>
   <id>http://sandipransing.github.io/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -18,9 +18,92 @@
     <link href="http://sandipransing.github.io/2011/11/rails-311-haml-sass-jquery-coffee-rails/"/>
     <updated>2011-11-22T00:07:00+05:30</updated>
     <id>http://sandipransing.github.io/2011/11/rails-311-haml-sass-jquery-coffee-rails</id>
-    <content type="html"><![CDATA[<div class='post'>
-<b> Install RVM first </b><br/> <pre class=ruby>  bash < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvminstaller) </pre> <b> rvm list known</b> <pre class=ruby>  # MRI Rubies   [ruby-]1.8.6-head   [ruby-]1.8.7[-p352]   [ruby-]1.9.3-head   ruby-head    # JRuby   jruby-1.2.0   jruby-head    # Rubinius   rbx-1.0.1   rbx-2.0.0pre    # Ruby Enterprise Edition   ree-1.8.6   ree-1.8.7-head </pre> <b>Install ruby 1.9.3</b><br/> <pre class=ruby>  rvm install 1.9.3-head   rvm gemset create rails311   rvm use 1.9.3-head@rails311 --default      gem install rails -v3.1.1 --no-rdoc --no-ri      gem install heroku   gem install rb-readline </pre> <b>Create new rails project </b><br/> <pre class=ruby>  rails new cdc -m http://railswizard.org/b22092a4358bbebb3a46.rb -J -T </pre> <b>Heroku Deployment Done </b><br/> <pre class=ruby>  http://railsblank.heroku.com/ (production) </pre> <b> Local System nginx-passenger setup</b><br/> <pre class=ruby>  gem install passenger   rvmsudo passenger-install-nginx-module </pre> If you find pcre download error then make sure you libpcre-dev pkg installed on your system otherwise install it and re-run<br/><pre class=ruby>  sudo apt-get install libpcre3-dev </pre> <b>Nginx Configuration</b><br/> <pre class=ruby>http {   passenger_root /home/sandip/.rvm/gems/ruby-1.9.3-head@rails311/gems/passenger-3.0.9;   passenger_ruby /home/sandip/.rvm/wrappers/ruby-1.9.3-head@rails311/ruby;      server {     listen 80;     server_name railsblank.local;     root /home/sandip/railsblank/public;     rails_env development;     passenger_enabled on; } </pre> <b>git source code </b><br/><pre class=ruby>  git clone git://github.com/sandipransing/rails_blank.git </pre></div>
+    <content type="html"><![CDATA[<p>Install RVM first</p>
 
+<p><code>
+bash &lt; &lt;(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvminstaller)
+</code></p>
+
+<p>rvm list known
+```</p>
+
+<h1>MRI Rubies</h1>
+
+<p>[ruby-]1.8.6-head
+[ruby-]1.8.7[-p352]
+[ruby-]1.9.3-head
+ruby-head</p>
+
+<h1>JRuby</h1>
+
+<p>jruby-1.2.0
+jruby-head</p>
+
+<h1>Rubinius</h1>
+
+<p>rbx-1.0.1
+rbx-2.0.0pre</p>
+
+<h1>Ruby Enterprise Edition</h1>
+
+<p>ree-1.8.6
+ree-1.8.7-head
+```</p>
+
+<p>Install ruby 1.9.3
+```
+rvm install 1.9.3-head
+rvm gemset create rails311
+rvm use 1.9.3-head@rails311 &mdash;default</p>
+
+<p>gem install rails -v3.1.1 &mdash;no-rdoc &mdash;no-ri</p>
+
+<p>gem install heroku
+gem install rb-readline
+```</p>
+
+<p>Create new rails project
+<code>
+rails new cdc -m http://railswizard.org/b22092a4358bbebb3a46.rb -J -T
+</code></p>
+
+<p>Above command will create rails app, bundle install, and Heroku Deployment
+<code>
+http://railsblank.heroku.com/ (production)
+</code></p>
+
+<p>Local System nginx-passenger setup
+<code>
+gem install passenger
+rvmsudo passenger-install-nginx-module
+</code>
+If you find pcre download error then make sure you libpcre-dev pkg installed on your system otherwise install it and re-run
+<code>
+sudo apt-get install libpcre3-dev
+</code></p>
+
+<p>Nginx Configuration
+```
+http {
+  passenger_root /home/sandip/.rvm/gems/ruby-1.9.3-head@rails311/gems/passenger-3.0.9;
+  passenger_ruby /home/sandip/.rvm/wrappers/ruby-1.9.3-head@rails311/ruby;</p>
+
+<p>  server {</p>
+
+<pre><code>listen 80;
+server_name railsblank.local;
+root /home/sandip/railsblank/public;
+rails_env development;
+passenger_enabled on;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>git source code can be found here
+<code>
+git clone git://github.com/sandipransing/rails_blank.git
+</code></p>
 ]]></content>
   </entry>
   
@@ -29,9 +112,23 @@
     <link href="http://sandipransing.github.io/2011/03/setting-up-nginx-maximum-upload-size/"/>
     <updated>2011-03-31T15:56:00+05:30</updated>
     <id>http://sandipransing.github.io/2011/03/setting-up-nginx-maximum-upload-size</id>
-    <content type="html"><![CDATA[<div class='post'>
-Edit nginx configuration and look for html block.<br/>Inside html block add following line.<br/><pre class=ruby>http {     include conf/mime.types;     default_type application/octet-stream;     client_max_body_size 10m;     .... } </pre><br/>In above configuration "application/octet-stream" supports any kind of file upload.</div>
+    <content type="html"><![CDATA[<p>Edit nginx configuration and look for html block.</p>
 
+<p>Inside html block add following line.</p>
+
+<p>```
+http {</p>
+
+<pre><code>include conf/mime.types;
+default_type application/octet-stream;
+client_max_body_size 10m;
+....
+</code></pre>
+
+<p>}
+```</p>
+
+<p>In above configuration &ldquo;application/octet-stream&rdquo; supports any kind of file upload.</p>
 ]]></content>
   </entry>
   

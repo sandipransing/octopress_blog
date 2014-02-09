@@ -91,8 +91,58 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-While developing rails application we often come across situation where you wanted different rails models connecting different tables of different databases. <br/>Example: We are having ndnc model holding ndnc records associated with database ndnc. <br/>Lets create ConnectionBase model that will connect to other databse &#8216;ndnc&#8217; and that will be extended from ActiveRecordBase and put that inside library files <br/><pre class=ruby>vi lib/connection_base.rb   class ConnectionBase < ActiveRecord::Base    establish_connection(     :adapter => "postgresql",     :username=> "sandip",     :password => "2121",     :database => "ndnc" ) end </pre><br/><br/>Wherever you wanted to connect to other database i.e. ndnc  you can extend that particular model with ConnectionBase <br/><pre class=ruby>class Ndnc < ConnectionBase # connects to ndnc table of ndnc database end </pre><br/>Please make sure library files are loaded while server startup<br/><pre class=ruby># vi config/application.rb config.autoload_paths += %W(#{config.root}/lib) </pre><br/>Done !<br/>In cases where you want only one particular model connecting other database table, you can put connection setting itself in that model.<br/></div>
+<div class="entry-content"><blockquote><p>While developing rails application we often come across situation where you wanted different rails models connecting different tables of different databases.</p></blockquote>
+
+<p>Example: We are having ndnc model holding ndnc records associated with database ndnc.
+Lets create ConnectionBase model that will connect to other databse &lsquo;ndnc&rsquo; and that will be extended from ActiveRecordBase and put that inside library files</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># lib/connection_base.rb </span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">ConnectionBase</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">establish_connection</span><span class="p">(</span>
+</span><span class='line'>    <span class="ss">:adapter</span> <span class="o">=&gt;</span> <span class="s2">&quot;postgresql&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:username</span><span class="o">=&gt;</span> <span class="s2">&quot;sandip&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="s2">&quot;2121&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:database</span> <span class="o">=&gt;</span> <span class="s2">&quot;ndnc&quot;</span>
+</span><span class='line'><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Wherever you wanted to connect to other database i.e. ndnc you can extend that particular model with ConnectionBase</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Ndnc</span> <span class="o">&lt;</span> <span class="no">ConnectionBase</span>
+</span><span class='line'><span class="c1"># connects to ndnc table of ndnc database</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Please make sure library files are loaded while server startup</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># vi config/application.rb</span>
+</span><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">autoload_paths</span> <span class="o">+=</span> <span class="sx">%W(</span><span class="si">#{</span><span class="n">config</span><span class="o">.</span><span class="n">root</span><span class="si">}</span><span class="sx">/lib)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Done !
+In cases where you want only one particular model connecting other database table, you can put connection setting itself in that model.</p>
 </div>
 
 

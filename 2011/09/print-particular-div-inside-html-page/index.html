@@ -9,7 +9,13 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Hiding Whole page content and displaying only particular div using css&lt;style media="print" type="text/css"&gt;&nbsp; @media print&nbsp; {&nbsp;& &hellip;">
+  <meta name="description" content="Hiding Whole page content and displaying only particular div using css 1
+2
+3
+4
+5
+6
+@media print { body * { visibility: hidden; } #PrintDiv * { &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -91,8 +97,22 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-<div dir="ltr" style="text-align: left;" trbidi="on"><div class="gmail_quote">Hiding Whole page content and displaying only particular div using css<br /><br /></div><pre class=ruby>&lt;style media="print" type="text/css"&gt;<br />&nbsp; @media print<br />&nbsp; {<br />&nbsp;&nbsp;&nbsp; body * { visibility: hidden; }<br />&nbsp;&nbsp;&nbsp; #PrintDiv * { visibility: visible; }<br />&nbsp;&nbsp;&nbsp; #PrintDiv { position: absolute; top: 40px; left: 30px; }<br />&nbsp; }<br />&lt;/style&gt; </pre></div></div>
+<div class="entry-content"><p>Hiding Whole page content and displaying only particular div using css</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="k">@media</span> <span class="nt">print</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="nt">body</span> <span class="o">*</span> <span class="p">{</span> <span class="k">visibility</span><span class="o">:</span> <span class="k">hidden</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>    <span class="nf">#PrintDiv</span> <span class="o">*</span> <span class="p">{</span> <span class="k">visibility</span><span class="o">:</span> <span class="k">visible</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>    <span class="nf">#PrintDiv</span> <span class="p">{</span> <span class="k">position</span><span class="o">:</span> <span class="k">absolute</span><span class="p">;</span> <span class="k">top</span><span class="o">:</span> <span class="m">40px</span><span class="p">;</span> <span class="k">left</span><span class="o">:</span> <span class="m">30px</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 
