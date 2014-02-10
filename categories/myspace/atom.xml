@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: myspace | Fun On Rails]]></title>
+  <link href="funonrails.com/categories/myspace/atom.xml" rel="self"/>
+  <link href="funonrails.com/"/>
+  <updated>2014-02-11T02:36:41+05:30</updated>
+  <id>funonrails.com/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[10 steps to get start with MySpace Ruby SDK]]></title>
+    <link href="funonrails.com/2009/10/10-steps-to-get-start-with-myspace-ruby/"/>
+    <updated>2009-10-27T21:33:00+05:30</updated>
+    <id>funonrails.com/2009/10/10-steps-to-get-start-with-myspace-ruby</id>
+    <content type="html"><![CDATA[<div class='post'>
+Follow 10 simple steps in order to use myspace sdk api<br/><br/>1. Remove all your previous gems installed<br/>+ gem uninstall myspace<br/><br/>2. Checkout sample source code<br/><br/>svn checkout http://myspaceid-ruby-sdk.googlecode.com/svn/trunk/ myspacesdk<br/><br/>3. cd myspacesdk/samples/rails/sample<br/>4. Modify config/database.yml accordingly<br/><blockquote><br/><div>development:<br/>adapter: mysql<br/>database: sample_development<br/>password: abcd<br/>pool: 5<br/>timeout: 5000</div></blockquote><br/>5. Download http://myspaceid-ruby-sdk.googlecode.com/files/myspaceid-sdk-0.1.11.gem<br/>6. gem install --local ~/Desktop/myspaceid-sdk-0.1.11.gem i.e.PATH_TO_GEM<br/>7. Above command supposed to give you following error otherwise skip to step 10<br/><blockquote><br/><div>ERROR:  Error installing /home/sandip/Desktop/myspaceid-sdk-0.1.11.gem:<br/>myspaceid-sdk requires ruby-openid (&gt;= 0, runtime)</div></blockquote><br/>8. gem install ruby-openid go to step 6<br/>9. ruby script/server<br/>10. Browse http://localhost:3000/</div>
+
+]]></content>
+  </entry>
+  
+</feed>

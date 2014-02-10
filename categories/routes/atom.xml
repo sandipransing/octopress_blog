@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: routes | Fun On Rails]]></title>
+  <link href="funonrails.com/categories/routes/atom.xml" rel="self"/>
+  <link href="funonrails.com/"/>
+  <updated>2014-02-11T02:36:41+05:30</updated>
+  <id>funonrails.com/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[dynamic & bounded parameters and named routes]]></title>
+    <link href="funonrails.com/2012/01/dynamic-bounded-parameters-and-named/"/>
+    <updated>2012-01-31T02:43:00+05:30</updated>
+    <id>funonrails.com/2012/01/dynamic-bounded-parameters-and-named</id>
+    <content type="html"><![CDATA[<div class='post'>
+Rails routes can be customized as your own routes with parameters but first you should understand how routes behaves. <br/> <b>Adding dynamic parameters to routes </b> <br/>Here exact parameters are matched to route and presence of each parameter is mandatory in order to construct urls. blank parameter will raise RoutingError exception. <br/>Exact matched named route declared as -  <pre class=ruby>  match ':a/:b/:c', :to => 'home#index', :as => :q </pre> now go to the rails console - <pre class=ruby> ruby-1.9.3-head :005 > app.q_url(:a, :b, :c)   => "http://www.example.com/a/b/c"        ruby-1.9.3-head :006 > app.q_url(:a, :b, '')   ActionController::RoutingError: No route matches {:controller=>"home", :a=>:a, :b=>:b, :c=>""} </pre><b>Bound parameters to named routes</b><br/>If you are too sure that certain parameter can be blank then you can define it as optional parameter inside route -  <br/><pre class=ruby> match ':a/:b(/:c)', :to => 'home#index', :as => :q </pre><b>rails console</b><pre class=ruby> ruby-1.9.3-head :010 > app.q_url(:a, :b, '')   => "http://www.example.com/a/b?c="   ruby-1.9.3-head :011 > app.q_url(:a, :b)   => "http://www.example.com/a/b" </pre></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Testing restful & polymorphic resource routes on rails console]]></title>
+    <link href="funonrails.com/2011/01/testing-restful-polymorphic-resource/"/>
+    <updated>2011-01-19T15:05:00+05:30</updated>
+    <id>funonrails.com/2011/01/testing-restful-polymorphic-resource</id>
+    <content type="html"><![CDATA[<p>Testing restful &amp; polymorphic resource routes on rails console</p>
+
+<h2>Open rails console</h2>
+
+<p>```ruby
+rails c # In rails 3</p>
+
+<h1>OR</h1>
+
+<p>ruby script/console
+```</p>
+
+<h2>Getting app object</h2>
+
+<p>```</p>
+
+<blockquote><blockquote><p>app</p></blockquote></blockquote>
+
+<p>=> #&lt;ActionController::Integration::Session:0xc164fac @result=nil, @status=nil, @accept=&ldquo;text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,<em>/</em>;q=0.5&rdquo;, @path=nil, @request_count=0, @application=#&lt;ActionController::Dispatcher:0xc1644f8 @output=#&lt;IO:0x85e34ec>>, @remote_addr=&ldquo;127.0.0.1&rdquo;, @host=&ldquo;www.example.com&rdquo;, @controller=nil, @https=false, @request=nil, @headers=nil, @cookies={}, @status_message=nil, @named_routes_configured=true, @response=nil>
+```</p>
+
+<h2>Root URL</h2>
+
+<p>```</p>
+
+<blockquote><blockquote><p>app.root_url
+=> &ldquo;<a href="http://www.example.com/">http://www.example.com/</a>&rdquo;
+```</p></blockquote></blockquote>
+
+<h2>Plural paths</h2>
+
+<p>```</p>
+
+<blockquote><blockquote><p>app.calls_path
+=> &ldquo;/calls&rdquo;</p></blockquote></blockquote>
+
+<p>```</p>
+
+<h2>Singular routes</h2>
+
+<p>```</p>
+
+<blockquote><blockquote><p>app.audio_call_path
+ActionController::RoutingError: audio_call_url failed</p>
+
+<p>app.audio_call_path(1)
+=> &ldquo;/calls/1/audio&rdquo;</p>
+
+<p>app.audio_call_path(13)
+=> &ldquo;/calls/13/audio&rdquo;</p>
+
+<p>app.audio_call_path(13, :name => &lsquo;san&rsquo;)
+=> &ldquo;/calls/13/audio?name=san&rdquo;
+```</p></blockquote></blockquote>
+
+<h2>Polymorphic URLS</h2>
+
+<p>```
+app.polymorphic_path(Call.first, :action => &lsquo;audio&rsquo;)
+=> &ldquo;/calls/253/audio&rdquo;</p>
+
+<blockquote><blockquote><p>app.polymorphic_path(Call.new)
+=> &ldquo;/calls&rdquo;</p></blockquote></blockquote>
+
+<p>```</p>
+]]></content>
+  </entry>
+  
+</feed>

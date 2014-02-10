@@ -1,0 +1,1233 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="Mongoid document supports array as field. array field in mongoid document is a ruby array but its quite complex to manage array field in rails forms &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="funonrails.com/page/3">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="http://feeds.feedburner.com/funonrails" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+
+  
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="http://feeds.feedburner.com/funonrails" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="sandip@funonrails.com" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:funonrails.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/contact">Contact</a></li>
+  <li><a href="/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/01/mongoid-array-field-and-rails-form/">Mongoid Array Field and Rails Form</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-19T23:59:00+05:30" pubdate data-updated="true">Jan 19<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Mongoid document supports array as field. array field in mongoid document is a ruby array but its quite complex to manage array field in rails forms.</p>
+
+<p>After lot of google and reading comments from stack-overflow at last i felt helpless. Finally after doing research on rails form helper object(form_for, fields_for) am pleased to get it working as expected :)</p>
+
+<p>In below example, product can have multiple categories</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Product</span>
+</span><span class='line'>  <span class="no">CATEGORIES</span> <span class="o">=</span> <span class="sx">%w(Apparel Media Software Sports Agri Education)</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="ss">Mongoid</span><span class="p">:</span><span class="ss">:Document</span>
+</span><span class='line'>  <span class="n">field</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:type</span> <span class="o">=&gt;</span> <span class="nb">String</span>
+</span><span class='line'>  <span class="n">field</span> <span class="ss">:categories</span><span class="p">,</span> <span class="ss">:type</span> <span class="o">=&gt;</span> <span class="nb">Array</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here is form code</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='haml'><span class='line'><span class="p">=</span> <span class="n">form_for</span><span class="p">(</span><span class="vi">@product</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
+</span><span class='line'>  <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:name</span>
+</span><span class='line'>  <span class="p">-</span> <span class="ss">Product</span><span class="p">:</span><span class="ss">:CATEGORIES</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">category</span><span class="o">|</span>
+</span><span class='line'>    <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">check_box</span> <span class="ss">:categories</span><span class="p">,</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&quot;product[categories][]&quot;</span><span class="p">,</span> <span class="n">category</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here is products controller code</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">ProductsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+</span><span class='line'>  <span class="n">before_filter</span> <span class="ss">:load_product</span><span class="p">,</span> <span class="ss">:only</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="ss">:new</span><span class="p">,</span> <span class="ss">:create</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="o">[.</span><span class="n">.</span><span class="o">.]</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># We don&#39;t need new action to be defined</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">create</span>
+</span><span class='line'>    <span class="vi">@product</span><span class="o">.</span><span class="n">attributes</span> <span class="o">=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:product</span><span class="o">]</span>
+</span><span class='line'>    <span class="c1"># Here we need to reject blank categories</span>
+</span><span class='line'>    <span class="vi">@product</span><span class="o">.</span><span class="n">categories</span><span class="o">.</span><span class="n">reject!</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:blank?</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">if</span> <span class="vi">@product</span><span class="o">.</span><span class="n">save</span>
+</span><span class='line'>      <span class="n">flash</span><span class="o">[</span><span class="ss">:notice</span><span class="o">]</span> <span class="o">=</span> <span class="no">I18n</span><span class="o">.</span><span class="n">t</span><span class="p">(</span><span class="s1">&#39;product.create.success&#39;</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">redirect_to</span><span class="p">(</span><span class="ss">:action</span> <span class="o">=&gt;</span> <span class="ss">:index</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>      <span class="n">render</span> <span class="ss">:action</span> <span class="o">=&gt;</span> <span class="ss">:new</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="o">[.</span><span class="n">.</span><span class="o">.]</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">private</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">load_product</span>
+</span><span class='line'>    <span class="vi">@product</span> <span class="o">=</span> <span class="no">Product</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/01/twitter-bootstrap-form-builder-for/">Twitter-bootstrap Form Builder for Rails</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-17T05:39:00+05:30" pubdate data-updated="true">Jan 17<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="twitter.github.com/bootstrap/">twitter-bootstrap</a> is pluggable css suit provided by twitter.
+To know more about how to get started on it click <a href="http://www.funonrails.com/2011/11/rails-311-haml-sass-jquery-coffee-rails">here</a>.</p>
+
+<p>Below post will help you out in getting started bootstrap css with rails app. One need to add below files to helpers directory.
+MainForm can be used as base version of form builder and can be overriden for its subsequent use inside other custom form builders.
+1. Main Form</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/helpers/main_form.rb </span>
+</span><span class='line'><span class="k">class</span> <span class="nc">MainForm</span> <span class="o">&lt;</span> <span class="ss">ActionView</span><span class="p">:</span><span class="ss">:Helpers</span><span class="o">::</span><span class="no">FormBuilder</span> <span class="c1"># NestedForm::Builder</span>
+</span><span class='line'>  <span class="no">CSS</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="ss">:label</span> <span class="o">=&gt;</span> <span class="s1">&#39;label-control&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:hint</span> <span class="o">=&gt;</span> <span class="s1">&#39;hint&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:hint_ptr</span> <span class="o">=&gt;</span> <span class="s1">&#39;hint-pointer&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:error</span> <span class="o">=&gt;</span> <span class="s1">&#39;help-inline&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:field_error</span> <span class="o">=&gt;</span> <span class="s1">&#39;error&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:main_class</span> <span class="o">=&gt;</span> <span class="s1">&#39;clearfix&#39;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="no">FIELDS</span> <span class="o">=</span> <span class="sx">%w(radio_button check_box text_field text_area password_field select file_field collection_select email_field date_select)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">main_class</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="kp">nil</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">return</span> <span class="no">CSS</span><span class="o">[</span><span class="ss">:main_class</span><span class="o">]</span> <span class="k">unless</span> <span class="n">error</span>
+</span><span class='line'>    <span class="o">[</span><span class="no">CSS</span><span class="o">[</span><span class="ss">:main_class</span><span class="o">]</span><span class="p">,</span> <span class="no">CSS</span><span class="o">[</span><span class="ss">:field_error</span><span class="o">]].</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">required</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">object</span><span class="o">.</span><span class="n">class</span><span class="o">.</span><span class="n">validators_on</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:class</span><span class="p">)</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="ss">ActiveModel</span><span class="p">:</span><span class="ss">:Validations</span><span class="o">::</span><span class="no">PresenceValidator</span><span class="p">)</span> <span class="k">rescue</span> <span class="kp">nil</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">cancel</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="p">{})</span>
+</span><span class='line'>    <span class="n">link</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="ss">:return</span><span class="p">,</span> <span class="s2">&quot;/&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@template</span><span class="o">.</span><span class="n">content_tag</span><span class="p">(</span><span class="ss">:a</span><span class="p">,</span> <span class="s2">&quot;Cancel&quot;</span><span class="p">,</span> <span class="ss">:href</span> <span class="o">=&gt;</span> <span class="n">link</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s2">&quot;btn_form button np_cancel_btn </span><span class="si">#{</span><span class="n">options</span><span class="o">[</span><span class="ss">:class</span><span class="o">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">submit</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s2">&quot;Save&quot;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">{})</span>
+</span><span class='line'>    <span class="n">options</span><span class="o">[</span><span class="ss">:class</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;send_form_btn </span><span class="si">#{</span><span class="n">options</span><span class="o">[</span><span class="ss">:class</span><span class="o">]</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'>    <span class="k">super</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">label_class</span>
+</span><span class='line'>    <span class="p">{</span><span class="ss">:class</span> <span class="o">=&gt;</span> <span class="no">CSS</span><span class="o">[</span><span class="ss">:label</span><span class="o">]</span><span class="p">}</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">label_tag</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span>
+</span><span class='line'>    <span class="c1"># Incase its a mandatory field, the &#39;*&#39; is added to the field.</span>
+</span><span class='line'>    <span class="n">txt</span> <span class="o">=</span> <span class="n">arg</span><span class="o">[</span><span class="ss">:label</span><span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="n">arg</span><span class="o">[</span><span class="ss">:label</span><span class="o">].</span><span class="n">to_s</span> <span class="o">||</span> <span class="n">attribute</span><span class="o">.</span><span class="n">to_s</span><span class="o">.</span><span class="n">titleize</span>
+</span><span class='line'>    <span class="n">txt</span><span class="o">&lt;&lt;</span> <span class="s1">&#39;*&#39;</span> <span class="k">if</span><span class="p">(</span><span class="n">arg</span><span class="o">[</span><span class="ss">:required</span><span class="o">]</span> <span class="o">||</span> <span class="n">required</span><span class="p">(</span><span class="n">attribute</span><span class="p">))</span> <span class="o">&amp;&amp;</span> <span class="n">arg</span><span class="o">[</span><span class="ss">:required</span><span class="o">]</span> <span class="o">!=</span> <span class="kp">false</span>
+</span><span class='line'>    <span class="n">label</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">txt</span><span class="p">,</span> <span class="n">label_class</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">error_tag</span><span class="p">(</span><span class="n">method_name</span><span class="p">,</span> <span class="n">attribute</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">errs</span> <span class="o">=</span> <span class="n">field_error</span><span class="p">(</span><span class="n">method_name</span><span class="p">,</span> <span class="n">attribute</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@template</span><span class="o">.</span><span class="n">content_tag</span><span class="p">(</span><span class="ss">:span</span><span class="p">,</span> <span class="n">errs</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="no">CSS</span><span class="o">[</span><span class="ss">:error</span><span class="o">]</span><span class="p">)</span> <span class="k">if</span> <span class="n">errs</span><span class="o">.</span><span class="n">present?</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">field_error</span><span class="p">(</span><span class="n">method_name</span><span class="p">,</span> <span class="n">attribute</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">return</span> <span class="k">if</span> <span class="vi">@object</span> <span class="o">&amp;&amp;</span> <span class="vi">@object</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">blank?</span>
+</span><span class='line'>    <span class="k">return</span> <span class="vi">@object</span><span class="o">.</span><span class="n">errors</span><span class="o">[</span><span class="n">attribute</span><span class="o">]</span> <span class="k">if</span> <span class="n">method_name</span> <span class="o">!=</span> <span class="s1">&#39;file_field&#39;</span>
+</span><span class='line'>    <span class="vi">@object</span><span class="o">.</span><span class="n">errors</span><span class="o">[</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">attribute</span><span class="o">.</span><span class="n">to_s</span><span class="si">}</span><span class="s2">_file_name&quot;</span><span class="o">]</span> <span class="o">|</span> <span class="vi">@object</span><span class="o">.</span><span class="n">errors</span><span class="o">[</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">attribute</span><span class="o">.</span><span class="n">to_s</span><span class="si">}</span><span class="s2">_file_size&quot;</span><span class="o">]</span> <span class="o">|</span> <span class="vi">@object</span><span class="o">.</span><span class="n">errors</span><span class="o">[</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">attribute</span><span class="o">.</span><span class="n">to_s</span><span class="si">}</span><span class="s2">_content_type&quot;</span><span class="o">]</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">hint_tag</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">hintPtr</span> <span class="o">=</span> <span class="vi">@template</span><span class="o">.</span><span class="n">content_tag</span><span class="p">(</span><span class="ss">:span</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="no">CSS</span><span class="o">[</span><span class="ss">:hint_ptr</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">hintT</span> <span class="o">=</span> <span class="vi">@template</span><span class="o">.</span><span class="n">content_tag</span><span class="p">(</span><span class="ss">:span</span><span class="p">,</span> <span class="n">txt</span> <span class="o">+</span> <span class="n">hintPtr</span><span class="p">,</span> <span class="p">{</span><span class="ss">:class</span> <span class="o">=&gt;</span> <span class="no">CSS</span><span class="o">[</span><span class="ss">:hint</span><span class="o">]</span><span class="p">},</span> <span class="kp">false</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">spinner_tag</span>
+</span><span class='line'>    <span class="vi">@template</span><span class="o">.</span><span class="n">image_tag</span><span class="p">(</span><span class="s1">&#39;spinner.gif&#39;</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="ss">:spinner</span><span class="p">,</span><span class="ss">:id</span> <span class="o">=&gt;</span> <span class="ss">:spinner</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ZeroForm is custom form builder which is inherited from main_form and its going to be actually used inside forms. Feel free to make custom form related changes inside this</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/helpers/zero_form.rb</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">ZeroForm</span> <span class="o">&lt;</span> <span class="no">MainForm</span>
+</span><span class='line'>  <span class="c1"># Overridden label_class here as we dont need class to be applied</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">label_class</span>
+</span><span class='line'>    <span class="p">{}</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">create_tagged_field</span><span class="p">(</span><span class="n">method_name</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">define_method</span><span class="p">(</span><span class="n">method_name</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">attribute</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="o">|</span>
+</span><span class='line'>      <span class="n">arg</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">last</span> <span class="o">&amp;&amp;</span> <span class="n">args</span><span class="o">.</span><span class="n">last</span><span class="o">.</span><span class="n">is_a?</span><span class="p">(</span><span class="no">Hash</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">args</span><span class="o">.</span><span class="n">last</span> <span class="o">||</span> <span class="p">{}</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1"># Bypass form-builder and do your own custom stuff!</span>
+</span><span class='line'>      <span class="k">return</span> <span class="k">super</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="k">if</span> <span class="n">arg</span><span class="o">[</span><span class="ss">:skip</span><span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="n">args</span><span class="o">.</span><span class="n">last</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="ss">:skip</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">errT</span> <span class="o">=</span> <span class="n">error_tag</span><span class="p">(</span><span class="n">method_name</span><span class="p">,</span> <span class="n">attribute</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">labelT</span> <span class="o">=</span> <span class="n">label_tag</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">mainT</span> <span class="o">=</span> <span class="k">super</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">baseT</span> <span class="o">=</span> <span class="vi">@template</span><span class="o">.</span><span class="n">content_tag</span><span class="p">(</span><span class="ss">:div</span><span class="p">,</span> <span class="n">mainT</span> <span class="o">+</span> <span class="n">errT</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">hintT</span> <span class="o">=</span> <span class="n">hint_tag</span><span class="p">(</span><span class="n">arg</span><span class="o">[</span><span class="ss">:hint</span><span class="o">]</span><span class="p">)</span> <span class="k">if</span> <span class="n">arg</span><span class="o">[</span><span class="ss">:hint</span><span class="o">]</span>
+</span><span class='line'>      <span class="n">spinnerT</span> <span class="o">=</span> <span class="n">spinner_tag</span> <span class="k">if</span> <span class="n">arg</span><span class="o">[</span><span class="ss">:spinner</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">allT</span> <span class="o">=</span> <span class="n">labelT</span> <span class="o">+</span> <span class="n">baseT</span> <span class="o">+</span> <span class="n">spinnerT</span> <span class="o">+</span> <span class="n">hintT</span>
+</span><span class='line'>      <span class="vi">@template</span><span class="o">.</span><span class="n">content_tag</span><span class="p">(</span><span class="ss">:div</span><span class="p">,</span> <span class="n">allT</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="n">main_class</span><span class="p">(</span><span class="n">errT</span><span class="p">))</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="no">FIELDS</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="nb">name</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">create_tagged_field</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In order to use Nested Forms you need to extend MainForm with NestedForm Builder</p>
+
+<p><strong>Integrate NestedForm with FormBuilder</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">MainForm</span> <span class="o">&lt;</span> <span class="ss">NestedForm</span><span class="p">:</span><span class="ss">:Builder</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>View Form</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='haml'><span class='line'><span class="p">=</span> <span class="n">form_for</span> <span class="vi">@address</span> <span class="o">||=</span> <span class="no">Address</span><span class="o">.</span><span class="n">new</span><span class="p">,</span> <span class="ss">:builder</span> <span class="o">=&gt;</span> <span class="no">ZeroForm</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
+</span><span class='line'>  <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:street_address</span>
+</span><span class='line'>  <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_area</span> <span class="ss">:detail_address</span><span class="p">,</span> <span class="ss">:rows</span> <span class="o">=&gt;</span> <span class="mi">2</span>
+</span><span class='line'>  <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:city</span>
+</span><span class='line'>  <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">select</span> <span class="ss">:state</span><span class="p">,</span> <span class="sx">%w(US IN AUS UK UKRAINE)</span>
+</span><span class='line'>  <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">submit</span> <span class="s1">&#39;Save &amp; Continue&#39;</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s1">&#39;btn primary&#39;</span>
+</span><span class='line'>  <span class="p">=</span> <span class="n">link_to</span> <span class="s1">&#39;Skip »&#39;</span><span class="p">,</span> <span class="s1">&#39;#&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/01/get-models-list-inside-rails-app/">Get Models List Inside Rails App</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-17T05:16:00+05:30" pubdate data-updated="true">Jan 17<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>How to get collection of models inside your application. Certainly there are many ways to do it.
+Lets have a look at different ways starting from worst &ndash;</p>
+
+<p>Get table names inside database and then iterating over to get model name</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@models</span> <span class="o">=</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">tables</span><span class="o">.</span><span class="n">collect</span><span class="p">{</span><span class="o">|</span><span class="n">t</span><span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">underscore</span><span class="o">.</span><span class="n">singularize</span><span class="o">.</span><span class="n">camelize</span><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#=&gt; [&quot;AdhearsionAudit&quot;, &quot;AudioLog&quot;, &quot;AuditDetail&quot;,&quot;TinyPrint&quot;, &quot;TinyVideo&quot;, &quot;UnknownCall&quot;, &quot;UserAudit&quot;, &quot;User&quot;]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Select those with associated class</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@models</span><span class="o">.</span><span class="n">delete_if</span><span class="p">{</span><span class="o">|</span><span class="n">m</span><span class="o">|</span> <span class="n">m</span><span class="o">.</span><span class="n">constantize</span> <span class="k">rescue</span> <span class="kp">true</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Load models dir</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@models</span> <span class="o">=</span> <span class="no">Dir</span><span class="o">[</span><span class="s1">&#39;app/models/*.rb&#39;</span><span class="o">].</span><span class="n">map</span> <span class="p">{</span><span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s1">&#39;.*&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">camelize</span><span class="o">.</span><span class="n">constantize</span><span class="o">.</span><span class="n">name</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Select ActiveRecord::Base extended class only</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@models</span><span class="o">.</span><span class="n">reject!</span><span class="p">{</span><span class="o">|</span><span class="n">m</span><span class="o">|</span> <span class="n">m</span><span class="o">.</span><span class="n">constantize</span><span class="o">.</span><span class="n">superclass</span> <span class="o">!=</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Get Active Record subclasses</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># make sure relevant models are loaded otherwise</span>
+</span><span class='line'><span class="c1"># require them prior</span>
+</span><span class='line'><span class="c1"># Dir.glob(RAILS_ROOT + &#39;/app/models/*.rb&#39;).each { |file| require file }</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">A</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">B</span> <span class="o">&lt;</span> <span class="n">A</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="ss">:subclasses</span><span class="p">)</span><span class="o">.</span><span class="n">collect</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:name</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; [...., A]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>How to get Inherited models too</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">A</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">B</span> <span class="o">&lt;</span> <span class="n">A</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span><span class="o">.</span><span class="n">descendants</span><span class="o">.</span><span class="n">collect</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:name</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; [...., A, B]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Below is more elegant solution provide by <a href="http://stackoverflow.com/users/268/vincent-robert">Vincent-robert</a> over stack overflow which recursively looks for subsequent descendent&rsquo;s of class and gives you list from all over application</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Class</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">extend?</span><span class="p">(</span><span class="n">klass</span><span class="p">)</span>
+</span><span class='line'>    <span class="ow">not</span> <span class="n">superclass</span><span class="o">.</span><span class="n">nil?</span> <span class="ow">and</span> <span class="p">(</span> <span class="n">superclass</span> <span class="o">==</span> <span class="n">klass</span> <span class="ow">or</span> <span class="n">superclass</span><span class="o">.</span><span class="n">extend?</span> <span class="n">klass</span> <span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">models</span>
+</span><span class='line'>  <span class="no">Module</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">select</span> <span class="k">do</span> <span class="o">|</span><span class="n">constant_name</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">constant</span> <span class="o">=</span> <span class="nb">eval</span> <span class="n">constant_name</span>
+</span><span class='line'>    <span class="k">if</span> <span class="ow">not</span> <span class="n">constant</span><span class="o">.</span><span class="n">nil?</span> <span class="ow">and</span> <span class="n">constant</span><span class="o">.</span><span class="n">is_a?</span> <span class="no">Class</span> <span class="ow">and</span> <span class="n">constant</span><span class="o">.</span><span class="n">extend?</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>    <span class="n">constant</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/01/stripe-gateway-payment-integration-with/">Stripe Payment Gateway Integration With Rails</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-15T00:53:00+05:30" pubdate data-updated="true">Jan 15<span>th</span>, 2012</time>
+        
+         | <a href="/2012/01/stripe-gateway-payment-integration-with/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Stripe is simple website payment solution and its very easy to easy setup.
+It currently supports only in US and seems to be very popular compared to other payment gateways because of its api &amp; pricing</p>
+
+<p>Stripe API provides &ndash;</p>
+
+<ol>
+<li>charge (regular payments)</li>
+<li>subscription (recurring payments)</li>
+<li>managing customers (via stripe_customer_token)</li>
+</ol>
+
+
+<p><strong>What you need to do ?</strong></p>
+
+<p>Create a stripe account by providing email address and password. There after go to the <a href="https://manage.stripe.com/account">manage account page</a> to obtain stripe public &amp; api keys.
+Rails Integration</p>
+
+<p>Rails Integration</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># Gemfile
+</span><span class='line'>gem stripe</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Add api key and public key</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># config/initializers/stripe.rb</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Stripe</span><span class="o">.</span><span class="n">api_key</span> <span class="o">=</span> <span class="s2">&quot;rGaNWsIG3Gy6zvXB8wv4rEcizJp6XjF5&quot;</span>
+</span><span class='line'><span class="no">STRIPE_PUBLIC_KEY</span> <span class="o">=</span> <span class="s2">&quot;vk_BcSyS2qPWdT5SdrwkQg0vTSyhZgqN&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>View</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='haml'><span class='line'># app/views/layouts/application.html.haml
+</span><span class='line'>
+</span><span class='line'><span class="p">=</span> <span class="n">javascript_include_tag</span> <span class="s1">&#39;https://js.stripe.com/v1/&#39;</span>
+</span><span class='line'><span class="p">=</span> <span class="n">tag</span> <span class="ss">:meta</span><span class="p">,</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s1">&#39;stripe-key&#39;</span><span class="p">,</span> <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="no">STRIPE_PUBLIC_KEY</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Payment Form</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='haml'><span class='line'># app/views/payments/new.html.haml
+</span><span class='line'>
+</span><span class='line'><span class="nf">#stripe_error</span>
+</span><span class='line'>  <span class="nt">%noscript</span> JavaScript is not enabled and is required for this form. First enable it in your web browser settings.
+</span><span class='line'>
+</span><span class='line'><span class="p">=</span> <span class="n">form_for</span> <span class="vi">@payment</span> <span class="o">||=</span> <span class="no">Payment</span><span class="o">.</span><span class="n">new</span><span class="p">,</span> <span class="ss">:html</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:id</span> <span class="o">=&gt;</span> <span class="ss">:payForm</span><span class="p">}</span> <span class="k">do</span> <span class="o">|</span><span class="nb">p</span><span class="o">|</span>
+</span><span class='line'>  <span class="p">=</span> <span class="nb">p</span><span class="o">.</span><span class="n">hidden_field</span> <span class="ss">:stripe_card_token</span>
+</span><span class='line'>  <span class="nc">.field</span>
+</span><span class='line'>    <span class="p">=</span> <span class="nb">p</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:amount</span>
+</span><span class='line'>  <span class="nc">.credit_card_form</span>
+</span><span class='line'>    <span class="nt">%h3</span><span class="nc">.title</span>
+</span><span class='line'>      Enter Credit Card
+</span><span class='line'>    <span class="p">-</span> <span class="k">if</span> <span class="vi">@payment</span><span class="o">.</span><span class="n">stripe_card_token</span><span class="o">.</span><span class="n">present?</span>
+</span><span class='line'>      Credit card has been provided.
+</span><span class='line'>    <span class="p">-</span> <span class="k">else</span>
+</span><span class='line'>      <span class="nc">.field</span>
+</span><span class='line'>        <span class="p">=</span> <span class="n">label_tag</span> <span class="ss">:card_number</span><span class="p">,</span> <span class="s2">&quot;Credit Card Number&quot;</span>
+</span><span class='line'>        <span class="p">=</span> <span class="n">text_field_tag</span> <span class="ss">:card_number</span><span class="p">,</span> <span class="kp">nil</span><span class="p">,</span> <span class="nb">name</span><span class="p">:</span> <span class="kp">nil</span>
+</span><span class='line'>      <span class="nc">.field</span>
+</span><span class='line'>        <span class="p">=</span> <span class="n">label_tag</span> <span class="ss">:card_code</span><span class="p">,</span> <span class="s2">&quot;Security Code (CVV)&quot;</span>
+</span><span class='line'>        <span class="p">=</span> <span class="n">text_field_tag</span> <span class="ss">:card_code</span><span class="p">,</span> <span class="kp">nil</span><span class="p">,</span> <span class="nb">name</span><span class="p">:</span> <span class="kp">nil</span>
+</span><span class='line'>      <span class="nc">.field</span>
+</span><span class='line'>        <span class="p">=</span> <span class="n">label_tag</span> <span class="ss">:card_month</span><span class="p">,</span> <span class="s2">&quot;Expiry Date&quot;</span>
+</span><span class='line'>        <span class="p">=</span> <span class="n">select_month</span> <span class="kp">nil</span><span class="p">,</span> <span class="p">{</span><span class="n">add_month_numbers</span><span class="p">:</span> <span class="kp">true</span><span class="p">},</span> <span class="p">{</span><span class="nb">name</span><span class="p">:</span> <span class="kp">nil</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="s2">&quot;card_month&quot;</span><span class="p">}</span>
+</span><span class='line'>        <span class="p">=</span> <span class="n">select_year</span> <span class="kp">nil</span><span class="p">,</span> <span class="p">{</span><span class="n">start_year</span><span class="p">:</span> <span class="no">Date</span><span class="o">.</span><span class="n">today</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">end_year</span><span class="p">:</span> <span class="no">Date</span><span class="o">.</span><span class="n">today</span><span class="o">.</span><span class="n">year</span><span class="o">+</span><span class="mi">15</span><span class="p">},</span> <span class="p">{</span><span class="nb">name</span><span class="p">:</span> <span class="kp">nil</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="s2">&quot;card_year&quot;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Javascript Code</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="err">#</span> <span class="nx">app</span><span class="o">/</span><span class="nx">views</span><span class="o">/</span><span class="nx">payments</span><span class="o">/</span><span class="k">new</span><span class="p">.</span><span class="nx">js</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">payment</span><span class="p">;</span>
+</span><span class='line'><span class="nx">jQuery</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">Stripe</span><span class="p">.</span><span class="nx">setPublishableKey</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;meta[name=&quot;stripe-key&quot;]&#39;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">));</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">payment</span><span class="p">.</span><span class="nx">setupForm</span><span class="p">();</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">payment</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">setupForm</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.head&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s1">&#39;disabled&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">if</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#payment_stripe_card_token&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">()){</span>
+</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#payForm&#39;</span><span class="p">).</span><span class="nx">submit</span><span class="p">();</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="k">else</span><span class="p">{</span>
+</span><span class='line'>        <span class="nx">payment</span><span class="p">.</span><span class="nx">processCard</span><span class="p">();</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>  <span class="p">},</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">processCard</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">card</span><span class="p">;</span>
+</span><span class='line'>    <span class="nx">card</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">number</span><span class="o">:</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#card_number&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">(),</span>
+</span><span class='line'>      <span class="nx">cvc</span><span class="o">:</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#card_code&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">(),</span>
+</span><span class='line'>      <span class="nx">expMonth</span><span class="o">:</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#card_month&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">(),</span>
+</span><span class='line'>      <span class="nx">expYear</span><span class="o">:</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#card_year&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">Stripe</span><span class="p">.</span><span class="nx">createToken</span><span class="p">(</span><span class="nx">card</span><span class="p">,</span> <span class="nx">payment</span><span class="p">.</span><span class="nx">handleStripeResponse</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">},</span>
+</span><span class='line'>  <span class="nx">handleStripeResponse</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">status</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">status</span> <span class="o">===</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#payment_stripe_card_token&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span>
+</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#stripe_error&#39;</span><span class="p">).</span><span class="nx">remove</span><span class="p">();</span>
+</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#payForm&#39;</span><span class="p">).</span><span class="nx">submit</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#stripe_error&#39;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.head&#39;</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s1">&#39;disabled&#39;</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Generate &amp; Migrate Payment Model</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">rails</span> <span class="nx">g</span> <span class="nx">model</span> <span class="nx">payment</span> <span class="nx">status</span><span class="o">:</span><span class="nx">string</span> <span class="nx">amount</span><span class="o">:</span><span class="kr">float</span> <span class="nx">email</span><span class="o">:</span><span class="nx">string</span> <span class="nx">transaction_number</span><span class="o">:</span><span class="nx">string</span>
+</span><span class='line'><span class="nx">rake</span> <span class="nx">db</span><span class="o">:</span><span class="nx">migrate</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Payment Model</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/models/payment.rb </span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Payment</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="no">PROCESSING</span><span class="p">,</span> <span class="no">FAILED</span><span class="p">,</span> <span class="no">SUCCESS</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">attr_accessible</span> <span class="ss">:stripe_card_token</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">validates</span> <span class="ss">:amount</span><span class="p">,</span> <span class="ss">:stripe_card_token</span><span class="p">,</span> <span class="ss">:presence</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">:numericality</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:greater_than</span> <span class="o">=&gt;</span> <span class="mi">0</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">purchase</span>
+</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="no">PROCESSING</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">customer</span> <span class="o">=</span> <span class="ss">Stripe</span><span class="p">:</span><span class="ss">:Customer</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">description</span><span class="p">:</span><span class="n">email</span><span class="p">,</span> <span class="ss">card</span><span class="p">:</span> <span class="n">stripe_card_token</span><span class="p">)</span>
+</span><span class='line'>    <span class="c1"># OPTIONAL: save customer token for further reference</span>
+</span><span class='line'>    <span class="n">stripe_customer_token</span> <span class="o">=</span> <span class="n">customer</span><span class="o">.</span><span class="n">id</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1"># Charge</span>
+</span><span class='line'>    <span class="n">charge</span> <span class="o">=</span> <span class="ss">Stripe</span><span class="p">:</span><span class="ss">:Charge</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+</span><span class='line'>     <span class="ss">:amount</span> <span class="o">=&gt;</span> <span class="n">amount</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="c1"># $15.00 this time</span>
+</span><span class='line'>     <span class="ss">:currency</span> <span class="o">=&gt;</span> <span class="s2">&quot;usd&quot;</span><span class="p">,</span>
+</span><span class='line'>     <span class="ss">:customer</span> <span class="o">=&gt;</span> <span class="n">stripe_customer_token</span>
+</span><span class='line'>    <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">if</span> <span class="n">charge</span><span class="o">.</span><span class="n">paid</span>
+</span><span class='line'>      <span class="nb">self</span><span class="o">.</span><span class="n">transaction_num</span> <span class="o">=</span> <span class="n">charge</span><span class="o">.</span><span class="n">id</span>
+</span><span class='line'>      <span class="nb">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="no">SUCCESS</span>
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>      <span class="nb">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="no">FAILED</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nb">self</span>
+</span><span class='line'>  <span class="k">rescue</span> <span class="no">Exception</span> <span class="o">=&gt;</span> <span class="n">e</span>
+</span><span class='line'>    <span class="n">errors</span><span class="o">.</span><span class="n">add</span> <span class="ss">:base</span><span class="p">,</span> <span class="s2">&quot;There was a problem with your credit card.&quot;</span>
+</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="no">FAILED</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nb">self</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Payments Controller</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/controllers/payments_controller.rb </span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">PaymentsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">create</span>
+</span><span class='line'>    <span class="vi">@payment</span> <span class="o">=</span> <span class="no">Payment</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:payment</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">if</span> <span class="vi">@payment</span><span class="o">.</span><span class="n">valid?</span> <span class="o">&amp;&amp;</span> <span class="vi">@payment</span><span class="o">.</span><span class="n">purchase</span>
+</span><span class='line'>      <span class="n">flash</span><span class="o">[</span><span class="ss">:notice</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;Thanks for Purchase!&#39;</span>
+</span><span class='line'>      <span class="n">redirect_to</span> <span class="n">root_url</span>
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>      <span class="n">render</span> <span class="ss">:action</span> <span class="o">=&gt;</span> <span class="ss">:new</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/01/understanding-rails-uri/">Understanding Rails Uri</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-14T02:18:00+05:30" pubdate data-updated="true">Jan 14<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>rails-uri module provides us with url manipulation methods</p>
+
+<p>Parse string url</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;http://funonrails.com/search/label/rails3&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">url</span><span class="o">.</span><span class="n">host</span> <span class="c1">#=&gt; &quot;http://funonrails.com&quot;</span>
+</span><span class='line'><span class="n">url</span><span class="o">.</span><span class="n">port</span> <span class="c1">#=&gt; 80</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>URL with Basic Authentication</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;http://sandip:2121@funonrails.com/search/label/rails3&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">url</span><span class="o">.</span><span class="n">user</span> <span class="c1">#=&gt; &quot;sandip&quot;</span>
+</span><span class='line'><span class="n">url</span><span class="o">.</span><span class="n">password</span> <span class="c1">#=&gt; &quot;2121&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Extracting urls form string paragraph</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">URI</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="s1">&#39;http://funonrails.com is rails blog authored by http://sandipransing.github.com contact mailto://sandip@funonrails.com&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; [&quot;http://funonrails.com&quot;, &quot;http://sandipransing.github.com&quot;, &quot;mailto://sandip@funonrails.com&quot;]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Split &amp; Join URI</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">URI</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;http://sandip:2121@funonrails.com/search/label/rails3&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; [&quot;http&quot;, &quot;sandip:2121&quot;, &quot;funonrails.com&quot;, nil, nil, &quot;/search/label/rails3&quot;, nil, nil, nil]</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;=&gt;</span> <span class="o">[</span><span class="no">Scheme</span><span class="p">,</span> <span class="no">Userinfo</span><span class="p">,</span> <span class="no">Host</span><span class="p">,</span> <span class="no">Port</span><span class="p">,</span> <span class="no">Registry</span><span class="p">,</span> <span class="no">Path</span><span class="p">,</span> <span class="no">Opaque</span><span class="p">,</span> <span class="no">Query</span><span class="p">,</span> <span class="no">Fragment</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">URI</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;http://funonrails.com&#39;</span><span class="p">,</span><span class="s1">&#39;search/label/rails3&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; #&lt;URI::HTTP:0x7fbf9202efc8 URL:http://funonrails.com/search/label/rails3&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Escape &amp; Unescape alias encode/decode URI</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">URI</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="s1">&#39;http://funonrails.com/search/?label=\\rails\3&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="no">URI</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;http://funonrails.com/search/?label=\\rails\3&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; &quot;http://funonrails.com/search/?label=%5Crails%5C3&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">URI</span><span class="o">.</span><span class="n">unescape</span><span class="p">(</span><span class="s2">&quot;http://funonrails.com/search/?label=%5Crails%5C3&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="no">URI</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;http://funonrails.com/search/?label=%5Crails%5C3&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; &quot;http://funonrails.com/search/?label=\\rails\\3&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Match urls using regular expressions</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;http://funonrails.com/search/label/rails3&quot;</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="no">URI</span><span class="o">.</span><span class="n">regexp</span><span class="p">(</span><span class="o">[</span><span class="s1">&#39;search&#39;</span><span class="o">]</span><span class="p">))</span> <span class="k">do</span> <span class="o">|*</span><span class="n">matchs</span><span class="o">|</span>
+</span><span class='line'>  <span class="nb">p</span> <span class="vg">$&amp;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="c1">#=&gt; &quot;http://funonrails.com/search/label/rails3&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Getting requested url inside rails</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">request</span><span class="o">.</span><span class="n">request_uri</span>
+</span><span class='line'><span class="n">request</span><span class="o">.</span><span class="n">env</span><span class="o">[</span><span class="s1">&#39;REQUEST_URI&#39;</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Getting previous page url inside rails</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">request</span><span class="o">.</span><span class="n">referrer</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/page/4/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/page/2/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/sandipransing">@sandipransing</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'sandipransing',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'funonrails';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

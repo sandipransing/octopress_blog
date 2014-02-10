@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: devise | Fun On Rails]]></title>
+  <link href="funonrails.com/categories/devise/atom.xml" rel="self"/>
+  <link href="funonrails.com/"/>
+  <updated>2014-02-11T02:36:41+05:30</updated>
+  <id>funonrails.com/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Multiple resources, registrations with devise, STI and single sign sign on]]></title>
+    <link href="funonrails.com/2011/12/multiple-resources-registrations-with/"/>
+    <updated>2011-12-22T02:51:00+05:30</updated>
+    <id>funonrails.com/2011/12/multiple-resources-registrations-with</id>
+    <content type="html"><![CDATA[<blockquote><p>Devise handles authentication, authorization part inside rails application quite easily and its customizable too. One can always customize default devise configurations.</p></blockquote>
+
+<p>This Post will show how to manage multiple resources (like admin, staff, employees, guests etc.) through devise and STI with individual registrations process but login section will be the same for all.</p>
+
+<p>```</p>
+
+<h1>Gemfile</h1>
+
+<p>gem &lsquo;devise&rsquo;
+<code>
+Bundle install, generate devise files, devise user, and migrate devise database
+</code>
+bundle install
+rails g devise_install
+rails g devise User
+rake db:migrate
+rake routes
+<code>
+User Model
+</code>ruby
+class User &lt; ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :lockable, :timeoutable, :confirmable and :activatable
+  devise :database_authenticatable, :registerable,</p>
+
+<pre><code>     :recoverable, :rememberable, :trackable, :validatable
+</code></pre>
+
+<p>  # Setup accessible (or protected) attributes for your model
+  attr_accessible :email, :password, :password_confirmation
+end
+```</p>
+
+<h3>Single Table Inheritance</h3>
+
+<p>Create <code>Admin</code>, <code>Staff</code>, <code>Employee</code>, and <code>Guest</code> models inherited from <code>User</code> model
+```ruby</p>
+
+<h1>Admin</h1>
+
+<p>class Admin &lt; User
+end</p>
+
+<h1>Staff</h1>
+
+<p>class Staff &lt; User
+end</p>
+
+<h1>Employee</h1>
+
+<p>class Employee &lt; User
+end</p>
+
+<h1>Guest</h1>
+
+<p>class Guest &lt; User
+end
+```</p>
+
+<p>Add routes for admin, staff, employee, and guest users
+```ruby</p>
+
+<h1>routes</h1>
+
+<p>devise_for :users, :skip => :registrations
+devise_for :admins, :skip => :sessions
+devise_for :staffs, :skip => :sessions
+devise_for :employees, :skip => :sessions
+devise_for :guests, :skip => :sessions
+```</p>
+
+<p>Customizing deafult <code>routes</code> and <code>views</code></p>
+
+<p>```ruby</p>
+
+<h1>config/routes.rb</h1>
+
+<h1>customizing default login/logout routes, views, actions</h1>
+
+<p>devise_for :users, :controller => {:sessions  => &lsquo;sessions&rsquo;}, :skip => [:sessions, :registrations] do</p>
+
+<pre><code>delete '/logout', :to =&gt; 'sessions#destroy', :as =&gt; :destroy_user_session
+get '/login', :to =&gt; 'sessions#new', :as =&gt; :new_user_session
+post '/login', :to =&gt; 'sessions#create', :as =&gt; :user_session
+</code></pre>
+
+<p>end</p>
+
+<h1>app/controllers/sessions_controller</h1>
+
+<p>class SessionsController &lt; Devise::SessionsController
+end
+```</p>
+
+<p><strong>Overriding default after sign in path</strong>
+```ruby</p>
+
+<h1>app/controller/application_controller.rb</h1>
+
+<p>class ApplicationController &lt; ActionController::Base
+  protect_from_forgery
+  helper_method :account_url</p>
+
+<p> def account_url</p>
+
+<pre><code>return new_user_session_url unless user_signed_in?
+case current_user.class.name
+when 'Customer'
+  edit_customer_registration_url
+when 'Admin'
+  edit_home_page_section_url
+else
+  root_url
+end if user_signed_in?
+</code></pre>
+
+<p>  end
+end</p>
+
+<h1>app/controllers/sessions_controller.rb</h1>
+
+<p>class SessionsController &lt; Devise::SessionsController</p>
+
+<p>  def after_sign_in_path_for(resource)</p>
+
+<pre><code>stored_location_for(resource) || account_url
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<p><strong>Changing default login field email to username</strong>
+```ruby</p>
+
+<h1>config/initializers/devise.rb</h1>
+
+<p>config.authentication_keys = [ :username ]</p>
+
+<h1>app/models/user.rb</h1>
+
+<p>validates :username, :presence => true,
+  :uniqueness => {:allow_blank => true},
+  :format => {:with => /^\w+[\w\s:?&lsquo;]+$/i, :allow_blank => true}</p>
+
+<p>def email_required?
+  false
+end
+```
+Adding devise authentication and authorization helper methods for above resources. more information on this can be read <a href="http://www.funonrails.com/2011/12/dynamic-methods-inside-ruby-classes">here</a></p>
+]]></content>
+  </entry>
+  
+</feed>

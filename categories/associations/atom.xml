@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: associations | Fun On Rails]]></title>
+  <link href="funonrails.com/categories/associations/atom.xml" rel="self"/>
+  <link href="funonrails.com/"/>
+  <updated>2014-02-11T02:36:41+05:30</updated>
+  <id>funonrails.com/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[has_many => through association for rails polymorphic model]]></title>
+    <link href="funonrails.com/2010/02/hasmany-through-association-for-rails/"/>
+    <updated>2010-02-15T21:54:00+05:30</updated>
+    <id>funonrails.com/2010/02/hasmany-through-association-for-rails</id>
+    <content type="html"><![CDATA[<div class='post'>
+Example of polymorphic association using has_many, through, source. <br/> Here post is polymorphic resource which belongs to the author [can be student, teacher]<br/><pre class=ruby># app/models/student.rb class Student < ActiveRecord::Base    has_many :posts, :as => author end  # app/models/teacher.rb class Teacher < ActiveRecord::Base    has_many :posts, :as => author end  # app/models/post.rb class Post < ActiveRecord::Base    belongs to :author, :polymorphic => true end </pre><br/>Has_many through association on polymorphic models <br/><pre class=ruby># app/models/student.rb class Student < ActiveRecord::Base    belongs_to :division   has_many :posts, :as => author end  # app/models/division.rb class Division < ActiveRecord::Base    has_many :students   has_many :student_posts, :through => :students, :source => :posts end </pre><b> Examples </b><br/><pre class=ruby>ruby script/console div = Division.first div.student_posts </pre></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to get all associated models of rails model]]></title>
+    <link href="funonrails.com/2009/11/how-to-get-all-associted-models-of/"/>
+    <updated>2009-11-26T20:40:00+05:30</updated>
+    <id>funonrails.com/2009/11/how-to-get-all-associted-models-of</id>
+    <content type="html"><![CDATA[<div class='post'>
+<div style="text-align: left;">I have Site Model and i wanted to find all associated models of Site model which are having  belongs_to relationship.  After doing lot headache, here is the solution i found<br /></div><b><br /></b><br /><b>has_many models of Site Model</b> <br /><pre class="ruby" name="code"> Site.reflect_on_all_associations.map{|mac| mac.class_name if mac.macro==:has_many}.compact<br />=&gt; ["Layout", "User", "SubmenuLink", "Snippet", "Asset"]<br /><br /></pre><b>belongs_to model of Site Model</b> <br /><pre class="ruby" name="code">Site.reflect_on_all_associations.map{|mac| mac.class_name if mac.macro==:belongs_to}.compact<br />=&gt; ["User", "Page", "User"]<br /><br /></pre><b>To get all associations</b><br /><pre class="ruby" name="code">Site.reflect_on_all_associations.map{|mac| mac.class_name}.compact<br />=&gt; ["Layout", "User", "Page", "User", "SubmenuLink", "User", "Snippet", "Asset"]<br /><br /></pre>Hari, U rocks !<br /></div>
+
+]]></content>
+  </entry>
+  
+</feed>

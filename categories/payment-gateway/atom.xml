@@ -1,0 +1,817 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: payment gateway | Fun On Rails]]></title>
+  <link href="funonrails.com/categories/payment-gateway/atom.xml" rel="self"/>
+  <link href="funonrails.com/"/>
+  <updated>2014-02-11T02:36:41+05:30</updated>
+  <id>funonrails.com/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[stripe payment gateway integration with rails]]></title>
+    <link href="funonrails.com/2012/01/stripe-gateway-payment-integration-with/"/>
+    <updated>2012-01-15T00:53:00+05:30</updated>
+    <id>funonrails.com/2012/01/stripe-gateway-payment-integration-with</id>
+    <content type="html"><![CDATA[<p>Stripe is simple website payment solution and its very easy to easy setup.
+It currently supports only in US and seems to be very popular compared to other payment gateways because of its api &amp; pricing</p>
+
+<p>Stripe API provides &ndash;</p>
+
+<ol>
+<li>charge (regular payments)</li>
+<li>subscription (recurring payments)</li>
+<li>managing customers (via stripe_customer_token)</li>
+</ol>
+
+
+<p><strong>What you need to do ?</strong></p>
+
+<p>Create a stripe account by providing email address and password. There after go to the <a href="https://manage.stripe.com/account">manage account page</a> to obtain stripe public &amp; api keys.
+Rails Integration</p>
+
+<p>Rails Integration
+```</p>
+
+<h1>Gemfile</h1>
+
+<p>gem stripe
+```</p>
+
+<p>Add api key and public key
+```ruby</p>
+
+<h1>config/initializers/stripe.rb</h1>
+
+<p>Stripe.api_key = &ldquo;rGaNWsIG3Gy6zvXB8wv4rEcizJp6XjF5&rdquo;
+STRIPE_PUBLIC_KEY = &ldquo;vk_BcSyS2qPWdT5SdrwkQg0vTSyhZgqN&rdquo;
+<code>
+View
+</code>haml</p>
+
+<h1>app/views/layouts/application.html.haml</h1>
+
+<p>= javascript_include_tag &lsquo;<a href="https://js.stripe.com/v1/">https://js.stripe.com/v1/</a>&rsquo;
+= tag :meta, :name => &lsquo;stripe-key&rsquo;, :content => STRIPE_PUBLIC_KEY
+<code>
+Payment Form
+</code>haml</p>
+
+<h1>app/views/payments/new.html.haml</h1>
+
+<h1>stripe_error</h1>
+
+<p>  %noscript JavaScript is not enabled and is required for this form. First enable it in your web browser settings.</p>
+
+<p>= form_for @payment ||= Payment.new, :html => {:id => :payForm} do |p|
+  = p.hidden_field :stripe_card_token
+  .field</p>
+
+<pre><code>= p.text_field :amount
+</code></pre>
+
+<p>  .credit_card_form</p>
+
+<pre><code>%h3.title
+  Enter Credit Card
+- if @payment.stripe_card_token.present?
+  Credit card has been provided.
+- else
+  .field
+    = label_tag :card_number, "Credit Card Number"
+    = text_field_tag :card_number, nil, name: nil
+  .field
+    = label_tag :card_code, "Security Code (CVV)"
+    = text_field_tag :card_code, nil, name: nil
+  .field
+    = label_tag :card_month, "Expiry Date"
+    = select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}
+    = select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"}
+</code></pre>
+
+<p>```</p>
+
+<p>Javascript Code
+```javascript</p>
+
+<h1>app/views/payments/new.js</h1>
+
+<p>var payment;
+jQuery(function() {</p>
+
+<p>  Stripe.setPublishableKey($(&lsquo;meta[name=&ldquo;stripe-key&rdquo;]&rsquo;).attr(&lsquo;content&rsquo;));
+  return payment.setupForm();
+});</p>
+
+<p>payment = {</p>
+
+<p>  setupForm: function() {</p>
+
+<pre><code>$('.head').click(function() {
+  $(this).css('disabled', true);
+
+  if($('#payment_stripe_card_token').val()){
+    $('#payForm').submit();
+  }
+  else{
+    payment.processCard();
+  }
+});
+</code></pre>
+
+<p>  },</p>
+
+<p>  processCard: function() {</p>
+
+<pre><code>var card;
+card = {
+  number: $('#card_number').val(),
+  cvc: $('#card_code').val(),
+  expMonth: $('#card_month').val(),
+  expYear: $('#card_year').val()
+};
+return Stripe.createToken(card, payment.handleStripeResponse);
+</code></pre>
+
+<p>  },
+  handleStripeResponse: function(status, response) {</p>
+
+<pre><code>if (status === 200) {
+  $('#payment_stripe_card_token').val(response.id)
+  $('#stripe_error').remove();
+  $('#payForm').submit();
+} else {
+  $('#stripe_error').addClass('error').text(response.error.message);
+  $('.head').css('disabled', false);
+}
+</code></pre>
+
+<p>  }
+};
+```</p>
+
+<p>Generate &amp; Migrate Payment Model
+<code>
+rails g model payment status:string amount:float email:string transaction_number:string
+rake db:migrate
+</code></p>
+
+<p>Payment Model
+```ruby</p>
+
+<h1>app/models/payment.rb</h1>
+
+<p>class Payment &lt; ActiveRecord::Base
+  PROCESSING, FAILED, SUCCESS = 1, 2, 3</p>
+
+<p>  attr_accessible :stripe_card_token</p>
+
+<p>  validates :amount, :stripe_card_token, :presence => true, :numericality => { :greater_than => 0 }</p>
+
+<p>  def purchase</p>
+
+<pre><code>self.status = PROCESSING
+
+customer = Stripe::Customer.create(description:email, card: stripe_card_token)
+# OPTIONAL: save customer token for further reference
+stripe_customer_token = customer.id
+
+# Charge
+charge = Stripe::Charge.create(
+ :amount =&gt; amount * 100, # $15.00 this time
+ :currency =&gt; "usd",
+ :customer =&gt; stripe_customer_token
+)
+
+if charge.paid
+  self.transaction_num = charge.id
+  self.status = SUCCESS
+else
+  self.status = FAILED
+end
+return self
+</code></pre>
+
+<p>  rescue Exception => e</p>
+
+<pre><code>errors.add :base, "There was a problem with your credit card."
+self.status = FAILED
+return self
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<p>Payments Controller
+```ruby</p>
+
+<h1>app/controllers/payments_controller.rb</h1>
+
+<p>class PaymentsController &lt; ApplicationController
+  def create</p>
+
+<pre><code>@payment = Payment.new(params[:payment])
+
+if @payment.valid? &amp;&amp; @payment.purchase
+  flash[:notice] = 'Thanks for Purchase!'
+  redirect_to root_url
+else
+  render :action =&gt; :new
+end
+</code></pre>
+
+<p>  end
+end
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Paypal payments integration with rails]]></title>
+    <link href="funonrails.com/2011/12/paypal-payments-integration-with-rails/"/>
+    <updated>2011-12-30T18:00:00+05:30</updated>
+    <id>funonrails.com/2011/12/paypal-payments-integration-with-rails</id>
+    <content type="html"><![CDATA[<p>Paypal standard website payment service allows online payment transactions for websites.
+Before implementing payments inside rails app needs to have following things in place &ndash;</p>
+
+<ol>
+<li><a href="http://developer.paypal.com/">Register Paypal sandbox account</a></li>
+<li>Paypal Merchant account api credentials i.e. login, password, signature, application_id</li>
+<li>Paypal Buyer account creds to test payments</li>
+</ol>
+
+
+<p>Bundle Install
+```</p>
+
+<h1>Gemfile</h1>
+
+<p>gem &lsquo;activemerchant
+<code>
+Gateway config
+</code></p>
+
+<h1>config/gateway.yml</h1>
+
+<p>development: &amp;development   <br/>
+  mode: test   <br/>
+  login: rana_1317365002_biz_api1.gmail.com   <br/>
+  password: &lsquo;1311235050&rsquo;   <br/>
+  signature: ACxcVrB3mFChvPIe8aDWQlLhAPN46oPBQCj7rJWPza6CDZmBURg.   <br/>
+  application_id: APP-76y884485P519543T</p>
+
+<p>production:  <br/>
+  &lt;&lt;: *development</p>
+
+<p>test:
+  &lt;&lt;: *development
+<code>
+New Payment Form
+</code>haml
+= form_for @payment ||= Payment.new, :url => pay_bill_url, :html => {:id => :payForm} do |p|  <br/>
+  = p.text_field :amount <br/>
+  = p.submit &lsquo;Pay&rsquo;
+```</p>
+
+<p>Generate &amp; Migrate Payment Model
+<code>
+rails g model payment status:string amount:float transaction_number:string   
+rake db:migrate
+</code></p>
+
+<p>Payment Model
+```ruby</p>
+
+<h1>app/models/payment.rb</h1>
+
+<p>class Payment &lt; ActiveRecord::Base</p>
+
+<p>  PROCESSING, FAILED, SUCCESS = 1, 2, 3</p>
+
+<p>  validates :amount, :presence => true, :numericality => { :greater_than => 0 }  <br/>
+  def self.conf</p>
+
+<pre><code>@@gateway_conf ||= YAML.load_file(Rails.root.join('config/gateway.yml').to_s)[Rails.env]   
+</code></pre>
+
+<p>  end</p>
+
+<p>  ## Paypal  <br/>
+  def setup_purchase(options)</p>
+
+<pre><code>gateway.setup_purchase(amount * 100, options)   
+</code></pre>
+
+<p>  end</p>
+
+<p>  def redirect_url_for(token)</p>
+
+<pre><code>gateway.redirect_url_for(token)   
+</code></pre>
+
+<p>  end</p>
+
+<p>  def purchase(options={})</p>
+
+<pre><code>self.status = PROCESSING  
+#:ip       =&gt; request.remote_ip,
+#:payer_id =&gt; params[:payer_id],
+#:token    =&gt; params[:token]
+response = gateway.purchase(amt, options)      
+if response.success?       
+  self.transaction_num = response.params['transaction_id']       
+  self.status = SUCCESS     
+else       
+  self.status = FAILED     
+end     
+return self   
+</code></pre>
+
+<p>  rescue Exception => e</p>
+
+<pre><code>self.status = FAILED     
+return self   
+</code></pre>
+
+<p>  end</p>
+
+<p>  private <br/>
+  def gateway</p>
+
+<pre><code>ActiveMerchant::Billing::Base.mode = auth['mode'].to_sym 
+ActiveMerchant::Billing::PaypalExpressGateway.new(
+  :login =&gt; auth['login'], :password =&gt; auth['password'],
+  :signature =&gt; auth['signature']) 
+</code></pre>
+
+<p>  end</p>
+
+<p>  def auth</p>
+
+<pre><code>self.class.conf 
+</code></pre>
+
+<p>  end
+end
+<code>
+Billing routes
+</code>ruby</p>
+
+<h2>Callback URL</h2>
+
+<p>match &lsquo;/billing/paypal/:id/confirm&rsquo;, :to => &lsquo;billing#paypal&rsquo;, :as => :confirm_paypal</p>
+
+<h2>Create payment</h2>
+
+<p>match &lsquo;/billing&rsquo;, :to => &lsquo;billing#create&rsquo;, :as => :pay_bill</p>
+
+<h2>Request URL</h2>
+
+<p>match &lsquo;/billing/paypal/:id&rsquo;, :to => &lsquo;billing#checkout&rsquo;, :as => :billing <br/>
+match &lsquo;/billing/thank_you/:id&rsquo;, :to => &lsquo;billing#checkout&rsquo;, :as => :billing_thank_you
+```</p>
+
+<p>Billing Controller
+```ruby</p>
+
+<h1>app/controllers/billing_controller.rb</h1>
+
+<p>class BillingController &lt; ApplicationController
+  before_filter :get_payment, :only => [:checkout, :paypal, :thank_you]</p>
+
+<p>  def create</p>
+
+<pre><code>@payment = Payment.new params[:payment]     
+if @payment.save       
+  ## Paypal Checkout page       
+  redirect_to billing_url    
+else     
+  render :action =&gt; :new    
+end 
+</code></pre>
+
+<p>  end</p>
+
+<p>  # ASSUMPTION   # payment is valid i.e. amount is entered <br/>
+  def checkout</p>
+
+<pre><code>response = @payment.setup_purchase(:return_url =&gt; confirm_paypal_url(@payment), :cancel_return_url =&gt; root_url)     
+redirect_to @payment.redirect_url_for(response.token)   
+</code></pre>
+
+<p>  end</p>
+
+<p>  ## CALL BACK <br/>
+  def paypal</p>
+
+<pre><code>@payment = @payment.purchase(:token =&gt; params[:token], :payer_id =&gt; params[:PayerID], :ip =&gt; request.remote_ip)    
+@payment.save    
+redirect_to thank_you_billing_url(@order)  
+</code></pre>
+
+<p>  end</p>
+
+<p>  private <br/>
+  def get_payment</p>
+
+<pre><code>@payment = Payment.find_by_id(params[:id])     
+@payment &amp;&amp; @payment.valid? || invalid_url   
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<p>Views
+```haml</p>
+
+<h1>app/views/billing/thank_you.html.haml</h1>
+
+<ul>
+<li>if @payment.success? <br/>
+%p The transaction is successfully completed</li>
+<li>else <br/>
+%p The transaction failed
+```</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Authorize Net (SIM) payment integration with rails]]></title>
+    <link href="funonrails.com/2011/12/authorize-net-sim-payment-integration/"/>
+    <updated>2011-12-30T16:16:00+05:30</updated>
+    <id>funonrails.com/2011/12/authorize-net-sim-payment-integration</id>
+    <content type="html"><![CDATA[<p>Authorize Net SIM gateway transaction skips merchant side creditcard details form and directs transaction to be take place on gateway server.
+```</p>
+
+<h1>Gemfile</h1>
+
+<p>gem &lsquo;authorize-net&rsquo;
+```
+Register for authorize net sandbox account click <a href="https://developer.authorize.net/testaccount/">here</a></p>
+
+<p>Payment gateway credentials
+```</p>
+
+<h1>config/gateway.yml</h1>
+
+<p>development: &amp;development</p>
+
+<pre><code>mode: test
+login: 9gdLh6T
+key: 67fu45xw6VP92LX1
+</code></pre>
+
+<p>production:
+   &lt;&lt;: *development</p>
+
+<p>test:
+   &lt;&lt;: *development
+```</p>
+
+<p>Generate &amp; Migrate Payment Model
+<code>ruby
+rails g model payment status:string amount:float transaction_number:string
+rake db:migrate
+</code></p>
+
+<p>SIM gateway methods extracted and added to payment model
+```ruby</p>
+
+<h1>app/models/payment.rb</h1>
+
+<p>class Payment &lt; ActiveRecord::Base</p>
+
+<p>  PROCESSING, FAILED, SUCCESS = 1, 2, 3</p>
+
+<p>  validates :amount, :presence => true, :numericality => { :greater_than => 0 }</p>
+
+<p>  def self.conf</p>
+
+<pre><code>@@gateway_conf ||= YAML.load_file(Rails.root.join('config/gateway.yml').to_s)[Rails.env]
+</code></pre>
+
+<p>  end</p>
+
+<p>  def success?</p>
+
+<pre><code>self.status == SUCCESS
+</code></pre>
+
+<p>  end</p>
+
+<p>  ## Authorize :: SIM
+  def setup_transaction(options ={})</p>
+
+<pre><code>options.merge!(:link_method =&gt; AuthorizeNet::SIM::HostedReceiptPage::LinkMethod::POST)
+t = AuthorizeNet::SIM::Transaction.new(
+  auth['login'], auth['key'], amount,
+  :hosted_payment_form =&gt; true,
+  :test =&gt; auth['mode']
+)
+t.set_hosted_payment_receipt(AuthorizeNet::SIM::HostedReceiptPage.new(options))
+return t
+</code></pre>
+
+<p>  end</p>
+
+<p>  def auth</p>
+
+<pre><code>self.class.conf
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<p>Payment routes
+```ruby</p>
+
+<h2>Callback URL</h2>
+
+<p>match &lsquo;/billing/:id/confirm&rsquo;, :to => &lsquo;billing#authorize&rsquo;, :as => :confirm_billing</p>
+
+<h2>Request URL</h2>
+
+<p>match &lsquo;/billing/:id&rsquo;, :to => &lsquo;billing#checkout&rsquo;, :as => :billing
+match &lsquo;/billing/:id/thank_you&rsquo;, :to => &lsquo;billing#thank_you&rsquo;, :as => :thank_you_billing
+```</p>
+
+<p>Billing controller
+```ruby</p>
+
+<h1>app/controllers/billing_controller.rb</h1>
+
+<p>class BillingController &lt; ApplicationController
+  helper :authorize_net</p>
+
+<p>  before_filter :get_order, :only => [:checkout, :authorize, :thank_you]</p>
+
+<p>  def checkout</p>
+
+<pre><code># ASSUMPTION order is valid means amount is entered
+@transaction = @order.setup_transaction(
+  {:link_text =&gt; 'Continue',
+    :link_url =&gt; confirm_billing_url(@order)})
+</code></pre>
+
+<p>  end</p>
+
+<p>  ## CALL BACK
+  def authorize</p>
+
+<pre><code>resp = AuthorizeNet::SIM::Response.new(params)
+if resp.approved?
+  @order.status = Payment::SUCCESS
+  @order.transaction_num = resp.transaction_id
+else
+  @order.status = Payment::FAILED 
+end
+@order.save(:validate =&gt; false)
+redirect_to thank_you_billing_url(@order)
+</code></pre>
+
+<p>  end</p>
+
+<p>  private
+  def auth</p>
+
+<pre><code>Payment.conf
+</code></pre>
+
+<p>  end</p>
+
+<p>  def get_order</p>
+
+<pre><code>@order = Payment.find_by_id(params[:id])
+@order &amp;&amp; @order.valid? || invalid_url
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<p>View Forms
+```haml</p>
+
+<h1>app/views/billing/checkout.html.haml</h1>
+
+<p>= form_for :sim_transaction, :url => AuthorizeNet::SIM::Transaction::Gateway::TEST, :html => {:id => :authForm} do |f|
+  = sim_fields(@transaction)
+:javascript
+  $(document).ready(function(){</p>
+
+<pre><code>$('#authForm').submit();
+</code></pre>
+
+<p>  })
+<code>
+</code>haml</p>
+
+<h1>app/views/billing/thank_you.html.haml</h1>
+
+<ul>
+<li>if @order.success?
+%p The transaction is successfully completed</li>
+<li>else
+%p The transaction failed
+```</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Authorize Net Payment Gateway integration with rails]]></title>
+    <link href="funonrails.com/2011/12/authorize-net-payment-gateway/"/>
+    <updated>2011-12-29T00:36:00+05:30</updated>
+    <id>funonrails.com/2011/12/authorize-net-payment-gateway</id>
+    <content type="html"><![CDATA[<p>Authorize Net Payment gateway provides api access to enable online payments
+Gateway provides different api options to integrate &ndash;</p>
+
+<ol>
+<li><p>Direct Post Method
+In this method gateway handles all steps required in payment transaction flow securely and clean manner. To know more on this click <a href="https://developer.authorize.net/api/dpm">here</a>.</p></li>
+<li><p>Server Integration Method (SIM)
+Here, Payment form and creditcard detail form resides on gateway site and all the steps in transaction carried out at gateway server</p></li>
+<li><p>Advance Integration Method (AIM)
+Provides full control of all the transaction steps at merchant server. Payment form resides on merchant side. merchnat server sends authorization and payment capture requests to gateway server where actual transaction takes place and response is sent back to merchant server to notify transaction status. To know detail integration on this click <a href="http://www.funonrails.com/2011/12/authorizenet-aim-payment-integration.html">here</a>.</p></li>
+</ol>
+
+
+<p><strong>Prerequisites before getting started with integration</strong></p>
+
+<p><a href="https://developer.authorize.net/testaccount">Sign up for a test account</a> to obtain an API Login ID and Transaction Key. These keys will authenticate requests to the payment gateway.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Authorize Net (AIM) payment integration with rails]]></title>
+    <link href="funonrails.com/2011/12/authorizenet-aim-payment-integration/"/>
+    <updated>2011-12-28T17:15:00+05:30</updated>
+    <id>funonrails.com/2011/12/authorizenet-aim-payment-integration</id>
+    <content type="html"><![CDATA[<p>Authorize Net (AIM) method enables internet merchants to accept online payments via credit card.
+Below post will show you how to integrate authorize net payment gateway inside rails app to accept online payments using activemerchant library.</p>
+
+<p>```</p>
+
+<h1>Gemfile</h1>
+
+<p>gem &lsquo;activemerchant&rsquo;, :require => &lsquo;active_merchant&rsquo;
+```</p>
+
+<p>Register for authorize net sandbox account click <a href="https://developer.authorize.net/testaccount/">here</a></p>
+
+<p>Payment gateway credentials
+```</p>
+
+<h1>config/authorize_net.yml</h1>
+
+<p>development: &amp;development</p>
+
+<pre><code>mode: test
+login: 9gdLh6T
+key: 67fu45xw6VP92LX1
+</code></pre>
+
+<p>production:
+   &lt;&lt;: *development</p>
+
+<p>test:
+   &lt;&lt;: *development
+```</p>
+
+<p>Payment &amp; creditcard form
+```haml</p>
+
+<h1>app/views/payments/new</h1>
+
+<p>= form_for @payment, :url => payments_url do |f|
+  = f.text_field :amount
+  = fields_for :creditcard, @creditcard do |cc|</p>
+
+<pre><code>= cc.text_field :name
+= cc.text_field :number
+= cc.select :month, Date::ABBR_MONTHNAMES.compact.each_with_index.collect{|m, i| [m, i+1]}, {:prompt =&gt; 'Select'}
+= cc.select :year, Array.new(15){|i| Date.current.year+i}, {:prompt =&gt; 'Select'}
+= cc.text_field :verification_value
+</code></pre>
+
+<p>  = f.submit &lsquo;Pay&rsquo;
+```</p>
+
+<p>Payments Controller
+```ruby</p>
+
+<h1>app/controllers/payments_controller.rb</h1>
+
+<p>class PaymentsController &lt; ApplicationController</p>
+
+<p>  def new</p>
+
+<pre><code>@payment = Payment.new
+@creditcard = ActiveMerchant::Billing::CreditCard.new
+</code></pre>
+
+<p>  end</p>
+
+<p>  def create</p>
+
+<pre><code>@payment = Payment.new(params[:payment])
+@creditcard = ActiveMerchant::Billing::CreditCard.new(params[:creditcard])
+@payment.valid_card = @creditcard.valid?
+if @payment.valid? 
+  @payment = @payment.process_payment(@creditcard)
+  if @payment.success?
+    @payment.save
+    flash[:notice] = I18n.t('payment.success')
+    redirect_to payments_url and return
+  else
+    flash[:error] = I18n.t('payment.failed')
+  end
+end
+render :action =&gt; :new
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<p>Generate &amp; Migrate Payment Model
+<code>ruby
+rails g model payment status:string amount:float transaction_number:string
+rake db:migrate
+</code></p>
+
+<p>Payment Model
+```ruby</p>
+
+<h1>app/models/payment.rb</h1>
+
+<p>class Payment &lt; ActiveRecord::Base</p>
+
+<p>  PROCESSING, FAILED, SUCCESS = 1, 2, 3</p>
+
+<p>  validates :valid_card, :inclusion => {:in => [true], :message => &lsquo;Invalid Credit Card&rsquo;}
+  validates :amount, :presence => true, :numericality => { :greater_than => 0 }</p>
+
+<p>  def process_payment(creditcard)</p>
+
+<pre><code>ActiveMerchant::Billing::Base.mode = auth['mode'].to_sym
+self.status = PROCESSING
+response = gateway.purchase(amount * 100, creditcard)
+
+if response.success?
+  self.transaction_number = response.subscription_id
+  self.status = SUCCESS
+else
+  self.status = FAILED
+end
+return self
+</code></pre>
+
+<p>  rescue Exception => e</p>
+
+<pre><code>self.status = FAILED
+return self
+</code></pre>
+
+<p>  end</p>
+
+<p>  def success?</p>
+
+<pre><code>self.status == SUCCESS
+</code></pre>
+
+<p>  end</p>
+
+<p>  private
+  def gateway</p>
+
+<pre><code>ActiveMerchant::Billing::AuthorizeNetGateway.new(
+  :login    =&gt; auth['login'],
+  :password =&gt; auth['key'])
+</code></pre>
+
+<p>  end</p>
+
+<p>  def auth</p>
+
+<pre><code>@@auth ||= YAML.load_file("#{Rails.root}/config/authorize_net.yml")[Rails.env]
+</code></pre>
+
+<p>  end
+end
+```</p>
+]]></content>
+  </entry>
+  
+</feed>

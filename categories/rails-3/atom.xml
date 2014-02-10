@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: rails 3 | Fun On Rails]]></title>
+  <link href="funonrails.com/categories/rails-3/atom.xml" rel="self"/>
+  <link href="funonrails.com/"/>
+  <updated>2014-02-11T02:36:41+05:30</updated>
+  <id>funonrails.com/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[dynamic & bounded parameters and named routes]]></title>
+    <link href="funonrails.com/2012/01/dynamic-bounded-parameters-and-named/"/>
+    <updated>2012-01-31T02:43:00+05:30</updated>
+    <id>funonrails.com/2012/01/dynamic-bounded-parameters-and-named</id>
+    <content type="html"><![CDATA[<div class='post'>
+Rails routes can be customized as your own routes with parameters but first you should understand how routes behaves. <br/> <b>Adding dynamic parameters to routes </b> <br/>Here exact parameters are matched to route and presence of each parameter is mandatory in order to construct urls. blank parameter will raise RoutingError exception. <br/>Exact matched named route declared as -  <pre class=ruby>  match ':a/:b/:c', :to => 'home#index', :as => :q </pre> now go to the rails console - <pre class=ruby> ruby-1.9.3-head :005 > app.q_url(:a, :b, :c)   => "http://www.example.com/a/b/c"        ruby-1.9.3-head :006 > app.q_url(:a, :b, '')   ActionController::RoutingError: No route matches {:controller=>"home", :a=>:a, :b=>:b, :c=>""} </pre><b>Bound parameters to named routes</b><br/>If you are too sure that certain parameter can be blank then you can define it as optional parameter inside route -  <br/><pre class=ruby> match ':a/:b(/:c)', :to => 'home#index', :as => :q </pre><b>rails console</b><pre class=ruby> ruby-1.9.3-head :010 > app.q_url(:a, :b, '')   => "http://www.example.com/a/b?c="   ruby-1.9.3-head :011 > app.q_url(:a, :b)   => "http://www.example.com/a/b" </pre></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[csv file import / export in rails 3]]></title>
+    <link href="funonrails.com/2012/01/csv-file-importexport-in-rails-3/"/>
+    <updated>2012-01-27T14:28:00+05:30</updated>
+    <id>funonrails.com/2012/01/csv-file-importexport-in-rails-3</id>
+    <content type="html"><![CDATA[<p>CSV (comma separated values) files are frequently used to import/export data.</p>
+
+<p>In rails 3, <code>FasterCSV</code> comes as default and below is the way to upload csv files inside rails applications. The code below will also show you how to generate csv in memory, parse on csv data, skip header, iterate over records, save records inside db, export upload error file and many more.</p>
+
+<p>First, View to upload file</p>
+
+<p><code>haml
+= form_tag upload_url, :multipart =&gt; true do
+  %label{:for =&gt; "file"} File to Upload
+  = file_field_tag "file"
+  = submit_tag
+</code>
+Assume upload_url maps to import action of customers controller
+Controller code</p>
+
+<p>```ruby
+class CustomersController &lt; ApplicationController<br/>
+  [&hellip;]
+  def import</p>
+
+<pre><code>if request.post? &amp;&amp; params[:file].present?
+  infile = params[:file].read
+  n, errs = 0, []
+
+  CSV.parse(infile) do |row|
+    n += 1
+    # SKIP: header i.e. first row OR blank row
+    next if n == 1 or row.join.blank?
+    # build_from_csv method will map customer attributes &amp; 
+    # build new customer record
+    customer = Customer.build_from_csv(row)
+    # Save upon valid 
+    # otherwise collect error records to export
+    if customer.valid?
+      customer.save
+    else
+      errs &lt;&lt; row
+    end
+  end
+  # Export Error file for later upload upon correction
+  if errs.any?
+    errFile ="errors_#{Date.today.strftime('%d%b%y')}.csv"
+    errs.insert(0, Customer.csv_header)
+    errCSV = CSV.generate do |csv|
+      errs.each {|row| csv &lt;&lt; row}
+    end
+    send_data errCSV,
+      :type =&gt; 'text/csv; charset=iso-8859-1; header=present',
+      :disposition =&gt; "attachment; filename=#{errFile}.csv"
+  else
+    flash[:notice] = I18n.t('customer.import.success')
+    redirect_to import_url #GET
+  end
+end
+</code></pre>
+
+<p>  end
+  [&hellip;]
+end
+```
+Customer model</p>
+
+<p>```ruby
+class Customer &lt; ActiveRecord::Base
+  scope :active, where(:active => true)
+  scope :latest, order(&lsquo;created_at desc&rsquo;)</p>
+
+<p>  def self.csv_header</p>
+
+<pre><code>"First Name,Last Name,Email,Phone,Mobile, Address, FAX, City".split(',')
+</code></pre>
+
+<p>  end</p>
+
+<p>  def self.build_from_csv(row)</p>
+
+<pre><code># find existing customer from email or create new
+cust = find_or_initialize_by_email(row[2])
+cust.attributes ={:first_name =&gt; row[0],
+  :last_name =&gt; row[1],
+  :email =&gt; row[3],
+  :phone =&gt; row[4],
+  :mobile =&gt; row[5],
+  :address =&gt; row[6],
+  :fax =&gt; row[7],
+  :city =&gt; row[8]}
+return cust
+</code></pre>
+
+<p>  end</p>
+
+<p>  def to_csv</p>
+
+<pre><code>[first_name, last_name, email, phone, mobile, address, fax, city]
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<p>Export customer records in CSV format
+Below code loads customer records from database then generate csv_data inside memory and exports data to browser using send_data method.</p>
+
+<p>Note: As we are not writing on file system hence code can easily work heroku.
+```ruby
+def export
+  # CRITERIA : to select customer records
+  #=> Customer.active.latest.limit(100)
+  custs = Customer.limit(10)
+  filename =&ldquo;customers_#{Date.today.strftime(&lsquo;%d%b%y&rsquo;)}&rdquo;
+  csv_data = FasterCSV.generate do |csv|</p>
+
+<pre><code>csv &lt;&lt; Customer.csv_header
+custs.each do |c| 
+  csv &lt;&lt; c.to_csv
+end 
+</code></pre>
+
+<p>  end
+  send_data csv_data,</p>
+
+<pre><code>:type =&gt; 'text/csv; charset=iso-8859-1; header=present',
+:disposition =&gt; "attachment; filename=#{filename}.csv"
+</code></pre>
+
+<p>end
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[mongoid array field and rails form]]></title>
+    <link href="funonrails.com/2012/01/mongoid-array-field-and-rails-form/"/>
+    <updated>2012-01-19T23:59:00+05:30</updated>
+    <id>funonrails.com/2012/01/mongoid-array-field-and-rails-form</id>
+    <content type="html"><![CDATA[<p>Mongoid document supports array as field. array field in mongoid document is a ruby array but its quite complex to manage array field in rails forms.</p>
+
+<p>After lot of google and reading comments from stack-overflow at last i felt helpless. Finally after doing research on rails form helper object(form_for, fields_for) am pleased to get it working as expected :)</p>
+
+<p>In below example, product can have multiple categories
+<code>ruby
+class Product
+  CATEGORIES = %w(Apparel Media Software Sports Agri Education)
+  include Mongoid::Document
+  field :name, :type =&gt; String
+  field :categories, :type =&gt; Array
+end
+</code>
+Here is form code
+```haml
+= form_for(@product) do |f|
+  = f.text_field :name
+  &ndash; Product::CATEGORIES.each do |category|</p>
+
+<pre><code>= f.check_box :categories, :name =&gt; "product[categories][]", category
+</code></pre>
+
+<p>```</p>
+
+<p>Here is products controller code
+```ruby
+class ProductsController &lt; ApplicationController
+  before_filter :load_product, :only => [:new, :create]</p>
+
+<p>  [&hellip;]</p>
+
+<p>  # We don&rsquo;t need new action to be defined</p>
+
+<p>  def create</p>
+
+<pre><code>@product.attributes = params[:product]
+# Here we need to reject blank categories
+@product.categories.reject!(&amp;:blank?)
+if @product.save
+  flash[:notice] = I18n.t('product.create.success')
+  redirect_to(:action =&gt; :index)
+else
+  render :action =&gt; :new
+end
+</code></pre>
+
+<p>  end</p>
+
+<p>  [&hellip;]</p>
+
+<p>  private
+  def load_product</p>
+
+<pre><code>@product = Product.new
+</code></pre>
+
+<p>  end
+end
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[twitter-bootstrap form builder for rails]]></title>
+    <link href="funonrails.com/2012/01/twitter-bootstrap-form-builder-for/"/>
+    <updated>2012-01-17T05:39:00+05:30</updated>
+    <id>funonrails.com/2012/01/twitter-bootstrap-form-builder-for</id>
+    <content type="html"><![CDATA[<p><a href="twitter.github.com/bootstrap/">twitter-bootstrap</a> is pluggable css suit provided by twitter.
+To know more about how to get started on it click <a href="http://www.funonrails.com/2011/11/rails-311-haml-sass-jquery-coffee-rails">here</a>.</p>
+
+<p>Below post will help you out in getting started bootstrap css with rails app. One need to add below files to helpers directory.
+MainForm can be used as base version of form builder and can be overriden for its subsequent use inside other custom form builders.
+1. Main Form
+```ruby</p>
+
+<h1>app/helpers/main_form.rb</h1>
+
+<p>class MainForm &lt; ActionView::Helpers::FormBuilder # NestedForm::Builder
+  CSS = {</p>
+
+<pre><code>:label =&gt; 'label-control',
+:hint =&gt; 'hint',
+:hint_ptr =&gt; 'hint-pointer',
+:error =&gt; 'help-inline',
+:field_error =&gt; 'error',
+:main_class =&gt; 'clearfix'
+</code></pre>
+
+<p>  }</p>
+
+<p>  FIELDS = %w(radio_button check_box text_field text_area password_field select file_field collection_select email_field date_select)</p>
+
+<p>  def main_class(error=nil)</p>
+
+<pre><code>return CSS[:main_class] unless error
+[CSS[:main_class], CSS[:field_error]].join(' ')
+</code></pre>
+
+<p>  end</p>
+
+<p>  def required(name)</p>
+
+<pre><code>object.class.validators_on(name).map(&amp;:class).include?(ActiveModel::Validations::PresenceValidator) rescue nil
+</code></pre>
+
+<p>  end</p>
+
+<p>  def cancel(options={})</p>
+
+<pre><code>link = options.fetch(:return, "/")
+@template.content_tag(:a, "Cancel", :href =&gt; link, :class =&gt; "btn_form button np_cancel_btn #{options[:class]}")
+</code></pre>
+
+<p>  end</p>
+
+<p>  def submit(value=&ldquo;Save&rdquo;, options={})</p>
+
+<pre><code>options[:class] = "send_form_btn #{options[:class]}"
+super
+</code></pre>
+
+<p>  end</p>
+
+<p>  def label_class</p>
+
+<pre><code>{:class =&gt; CSS[:label]}
+</code></pre>
+
+<p>  end</p>
+
+<p>  def label_tag(attribute, arg)</p>
+
+<pre><code># Incase its a mandatory field, the '*' is added to the field.
+txt = arg[:label] &amp;&amp; arg[:label].to_s || attribute.to_s.titleize
+txt&lt;&lt; '*' if(arg[:required] || required(attribute)) &amp;&amp; arg[:required] != false
+label(attribute, txt, label_class)
+</code></pre>
+
+<p>  end</p>
+
+<p>  def error_tag(method_name, attribute)</p>
+
+<pre><code>errs = field_error(method_name, attribute)
+@template.content_tag(:span, errs.first, :class =&gt; CSS[:error]) if errs.present?
+</code></pre>
+
+<p>  end</p>
+
+<p>  def field_error(method_name, attribute)</p>
+
+<pre><code>return if @object &amp;&amp; @object.errors.blank?
+return @object.errors[attribute] if method_name != 'file_field'
+@object.errors["#{attribute.to_s}_file_name"] | @object.errors["#{attribute.to_s}_file_size"] | @object.errors["#{attribute.to_s}_content_type"]
+</code></pre>
+
+<p>  end</p>
+
+<p>  def hint_tag(txt)</p>
+
+<pre><code>hintPtr = @template.content_tag(:span, '', :class =&gt; CSS[:hint_ptr])
+hintT = @template.content_tag(:span, txt + hintPtr, {:class =&gt; CSS[:hint]}, false) 
+</code></pre>
+
+<p>  end</p>
+
+<p>  def spinner_tag</p>
+
+<pre><code>@template.image_tag('spinner.gif', :class =&gt; :spinner,:id =&gt; :spinner) 
+</code></pre>
+
+<p>  end
+end<br/>
+```</p>
+
+<p>ZeroForm is custom form builder which is inherited from main_form and its going to be actually used inside forms. Feel free to make custom form related changes inside this</p>
+
+<p>```ruby</p>
+
+<h1>app/helpers/zero_form.rb</h1>
+
+<p>class ZeroForm &lt; MainForm
+  # Overridden label_class here as we dont need class to be applied
+  def label_class</p>
+
+<pre><code>{}
+</code></pre>
+
+<p>  end</p>
+
+<p>  def self.create_tagged_field(method_name)</p>
+
+<pre><code>define_method(method_name) do |attribute, *args|
+  arg = args.last &amp;&amp; args.last.is_a?(Hash) &amp;&amp; args.last || {}
+
+  # Bypass form-builder and do your own custom stuff!
+  return super(attribute, *args) if arg[:skip] &amp;&amp; args.last.delete(:skip)
+
+  errT = error_tag(method_name, attribute)
+  labelT = label_tag(attribute, arg)
+
+  mainT = super(attribute, *args)
+  baseT = @template.content_tag(:div, mainT + errT)
+
+  hintT = hint_tag(arg[:hint]) if arg[:hint]
+  spinnerT = spinner_tag if arg[:spinner]
+
+  allT = labelT + baseT + spinnerT + hintT
+  @template.content_tag(:div, allT, :class =&gt; main_class(errT))
+end
+</code></pre>
+
+<p>  end</p>
+
+<p>  FIELDS.each do |name|</p>
+
+<pre><code>create_tagged_field(name)
+</code></pre>
+
+<p>  end
+end
+```
+In order to use Nested Forms you need to extend MainForm with NestedForm Builder</p>
+
+<p><strong>Integrate NestedForm with FormBuilder</strong></p>
+
+<p><code>ruby
+class MainForm &lt; NestedForm::Builder
+end
+</code>
+<strong>View Form</strong>
+<code>haml
+= form_for @address ||= Address.new, :builder =&gt; ZeroForm do |f|
+  = f.text_field :street_address
+  = f.text_area :detail_address, :rows =&gt; 2
+  = f.text_field :city
+  = f.select :state, %w(US IN AUS UK UKRAINE)
+  = f.submit 'Save &amp; Continue', :class =&gt; 'btn primary'
+  = link_to 'Skip »', '#'
+</code></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Get models list inside rails app]]></title>
+    <link href="funonrails.com/2012/01/get-models-list-inside-rails-app/"/>
+    <updated>2012-01-17T05:16:00+05:30</updated>
+    <id>funonrails.com/2012/01/get-models-list-inside-rails-app</id>
+    <content type="html"><![CDATA[<p>How to get collection of models inside your application. Certainly there are many ways to do it.
+Lets have a look at different ways starting from worst &ndash;</p>
+
+<p>Get table names inside database and then iterating over to get model name
+```ruby
+@models = ActiveRecord::Base.connection.tables.collect{|t| t.underscore.singularize.camelize}</p>
+
+<h1>=> [&ldquo;AdhearsionAudit&rdquo;, &ldquo;AudioLog&rdquo;, &ldquo;AuditDetail&rdquo;,&ldquo;TinyPrint&rdquo;, &ldquo;TinyVideo&rdquo;, &ldquo;UnknownCall&rdquo;, &ldquo;UserAudit&rdquo;, &ldquo;User&rdquo;]</h1>
+
+<p>```</p>
+
+<p>Select those with associated class
+<code>ruby
+@models.delete_if{|m| m.constantize rescue true}
+</code></p>
+
+<p>Load models dir
+<code>ruby
+@models = Dir['app/models/*.rb'].map {|f| File.basename(f, '.*').camelize.constantize.name }
+</code></p>
+
+<p>Select ActiveRecord::Base extended class only
+<code>ruby
+@models.reject!{|m| m.constantize.superclass != ActiveRecord::Base }
+</code></p>
+
+<p>Get Active Record subclasses
+```ruby</p>
+
+<h1>make sure relevant models are loaded otherwise</h1>
+
+<h1>require them prior</h1>
+
+<h1>Dir.glob(RAILS_ROOT + &lsquo;/app/models/*.rb&rsquo;).each { |file| require file }</h1>
+
+<p>class A &lt; ActiveRecord::Base
+end
+class B &lt; A
+end
+ActiveRecord::Base.send(:subclasses).collect(&amp;:name)</p>
+
+<h1>=> [&hellip;., A]</h1>
+
+<p>```</p>
+
+<p>How to get Inherited models too
+```ruby
+class A &lt; ActiveRecord::Base
+end
+class B &lt; A
+end
+ActiveRecord::Base.descendants.collect(&amp;:name)</p>
+
+<h1>=> [&hellip;., A, B]</h1>
+
+<p>```</p>
+
+<p>Below is more elegant solution provide by <a href="http://stackoverflow.com/users/268/vincent-robert">Vincent-robert</a> over stack overflow which recursively looks for subsequent descendent&rsquo;s of class and gives you list from all over application
+```ruby
+class Class
+  def extend?(klass)</p>
+
+<pre><code>not superclass.nil? and ( superclass == klass or superclass.extend? klass )
+</code></pre>
+
+<p>  end
+end</p>
+
+<p>def models
+  Module.constants.select do |constant_name|</p>
+
+<pre><code>constant = eval constant_name
+if not constant.nil? and constant.is_a? Class and constant.extend? ActiveRecord::Base
+constant
+end
+</code></pre>
+
+<p>  end
+end
+```</p>
+]]></content>
+  </entry>
+  
+</feed>

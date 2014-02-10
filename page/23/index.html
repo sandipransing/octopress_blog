@@ -1,0 +1,411 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="Movementsb previous wordw next worde end of word0/^ begining of line$ end of lineG end of file1G/gg begining of file/pattern search next?pattern &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="funonrails.com/page/23">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="http://feeds.feedburner.com/funonrails" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+
+  
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="http://feeds.feedburner.com/funonrails" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="sandip@funonrails.com" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:funonrails.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/contact">Contact</a></li>
+  <li><a href="/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/get-hand-over-vi-vim-editor/">Get Hand Over VI / VIM Editor</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-18T01:20:00+05:30" pubdate data-updated="true">Nov 18<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<span style="font-family: Arial; font-size: small;"><span style="background-color: white; font-size: 13px;"> </span></span><br /><span style="font-family: Arial; font-size: small;"><span style="background-color: white; font-size: 13px;"><pre><b><span style="color: #351c75;">Movements</span></b></pre><pre>b   previous word<br />w   next word<br />e        end of word<br />0/^      begining of line<br />$        end of line<br />G        end of file<br />1G/gg    begining of file<br />/pattern  search next<br />?pattern  search previous<br />n         repeat    search forword ( i.e next occurence )<br />N         repeat    search backword<br />:line     goto line specified<br /><br />  *****Modes****<br />  i   insert mode<br />  r   replace mode<br />  s   delete character under cursor and eneter insert mode<br /><br />  *****Delete******<br />  x    delete character under cursor<br />  dd   delete current line<br />  line dd delete number of lines specified<br /><br />  ****copy********<br />  yy        copy current line<br />  pp        print copied contents<br />  line yy   copy number of lines specified<br /><br />  *******visual******<br /><br />  v     enter visual mode<br />  aw    highlight word<br />  as    highlight sentence<br />  ap    highlight paragraph<br />  ab    highlight block<br /><br />  ******undo/redo******<br />  u       undo<br />  cntrl+r redo<br /><br />  ******autocomplete****<br />  cntrl+x   enter completion mode<br />  cntrl+p   display autocomplete options<br /><br />  ******uppercase/lowercase*****<br />  guu   lowercase line<br />  gUU   uppercase line<br /><br />  *******Regx replace****<br /><br />  range s/foo/bar/arg - replace foo with bar in ‘range’ with<br /><br />  Values of 'range':<br />  %               whole file<br />  number          that particular line<br />  none            apply to current line only<br /><br />  values of 'arg':<br />  none  apply to first occurrence<br />  g     global (all occurrences)<br /><br />Select/Macros<br />  qchar      start recording macro storing it in register ‘char’<br />  q          end recording<br />  @char      replay the macro stored in ‘char’<br />  :1,10 norm! @char run the macro stored in ‘char’ over the 1-10 line range<br /></pre></span></span><br /></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Sandip Ransing</div>
+<div class='content'>
+Remove blank lines in vim<br /><br />:g/^ *$/d</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/yaml-file-configuration-in-ruby-rails/">YAML File Configuration in Ruby & Rails</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-17T15:01:00+05:30" pubdate data-updated="true">Nov 17<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div style="text-align: left;">While coding in ruby and rails, we often requires variables to be initialized that can be used across application.  There are many ways to define configuration variables <br /></div><br />1. Initialize variables inside environment file  <br /><pre class="ruby" name="code">  # This agencies can be used across application<br />  AGENCIES = ['TIMES NEWS NETWORK', 'AGENCIES', 'AFP', 'PTI']<br /><br />  # Configuration for html nodes<br /><br />  Article_title_tag = "h1.heading"<br />  Date_auth_agency_tag = "span[@class='byline']"<br />  Location_content_tag = "div[@class='Normal']"<br /></pre>2. Inside config/initializers/config.rb. Just make config.rb inside initializers and add variables to it.  <br /><pre class="ruby" name="code">  #config/initializers/config.rb<br />  # This agencies can be used across application<br />  AGENCIES = ['TIMES NEWS NETWORK', 'AGENCIES', 'AFP', 'PTI']<br /><br />  # Configuration for html nodes<br />  Article_title_tag = "h1.heading"<br />  Date_auth_agency_tag = "span[@class='byline']"<br />  Location_content_tag = "div[@class='Normal']"<br /></pre>3. But most efficient way to organize variables is YML file. <br /><pre class="ruby" name="code"># config/config.yml<br />the_times_of_india:<br />  article_title_tag: h1.heading<br />  date_auth_agency_tag: span[@class='byline']<br />  loc_content_tag: div[@class='Normal']<br /></pre>Accessing YML files  <br /><pre class="ruby" name="code"> # config/initializers/load_config.rb<br />APP_CONFIG = YAML.load_file("#{RAILS_ROOT}/config/config.yml")<br />=&gt; true<br />&gt;&gt; APP_CONFIG<br />=&gt; {"the_times_of_india"=&gt;{"article_title_tag"=&gt;"h1.heading", "loc_content_tag"=&gt;"div[@class='Normal']", "date_auth_agency_tag"=&gt;"span[@class='byline']"}}<br />&gt;&gt; APP_CONFIG[:the_times_of_india]<br />=&gt; nil<br />&gt;&gt; APP_CONFIG['the_times_of_india']<br />=&gt; {"article_title_tag"=&gt;"h1.heading", "loc_content_tag"=&gt;"div[@class='Normal']", "date_auth_agency_tag"=&gt;"span[@class='byline']"}<br />&gt;&gt; APP_CONFIG['the_times_of_india']['article_title_tag']<br />=&gt; "h1.heading"<br /></pre></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/pidgin-install-and-update-pidgin/">Pidgin Install and Update Pidgin Messenger on Ubuntu Interpid</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-15T12:57:00+05:30" pubdate data-updated="true">Nov 15<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div><b>Fresh pidgin Installation</b><br /></div><div><pre class="ruby" name="code"> sudo apt-get update<br /> sudo apt-get install pidgin<br /></pre></div><span style="font-family: Arial; font-size: small;"><span style="background-color: white; font-size: 13px;">Earlier versions of pidgin has problem in connecting yahoo messenger which is solved in newer versions.</span></span><br /><span style="font-family: Arial; font-size: small;"><span style="background-color: white; font-size: 13px;">In order to update old version of pidgin, simply follow instructions written below and you are done.</span></span><br /><span style="font-family: Arial; font-size: small;"><span style="background-color: white; font-size: 13px;">New version provides video and voice chat, also buddy icon improvements are added.</span></span><br /><br /><div><b>Add GPG key</b></div> <pre class="ruby" name="code"> sudo apt-get update<br /> sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys A1F196A8<br /></pre><b>Goto System &gt; Administration &gt; Software Sources and select Third-Party  Software tab and click ADD. And Simply Copy-Paste the following Repo </b><br /><pre class="ruby" name="code">deb http://ppa.launchpad.net/pidgin-developers/ppa/ubuntu intrepid main <br />deb-src http://ppa.launchpad.net/pidgin-developers/ppa/ubuntu intrepid main<br /></pre></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/how-to-remove-extra-spaces-in-ruby/">How to Remove Extra Spaces in Ruby Strings</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-13T14:15:00+05:30" pubdate data-updated="true">Nov 13<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div style="text-align: left;">In ruby, one can write multiple codes to remove multiple blank spaces inside strings (sentenses)  <br /></div><pre class="ruby" name="code"> <br />"Write &nbsp; &nbsp; &nbsp;your &nbsp; &nbsp; &nbsp; string &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;here &nbsp; ".squeeze.strip<br />"This &nbsp; &nbsp; is my &nbsp; &nbsp; &nbsp;input &nbsp;string &nbsp; &nbsp; ".gsub(/ +/, ' ')<br />"Write &nbsp; &nbsp; &nbsp;your &nbsp; &nbsp; &nbsp; string &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;here &nbsp; ".split(' &nbsp;').join(' ')<br /></pre></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/manual-active-record-db-connection-in/">Manual Active Record Db Connection in Ruby Using Mysql Adapter</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-12T20:27:00+05:30" pubdate data-updated="true">Nov 12<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+Below is ruby code to establish manual database connection. <br/><pre class=ruby>require 'active_record' ActiveRecord::Base.establish_connection(     :adapter  => "mysql",     :host     => "localhost",     :username => "root",     :password => "abcd",     :database => "funonrails"   ) </pre><br/>Snippet of database.yml file <br/><pre class=ruby>common: &common   adapter: mysql   database: students_dev   username: root   password:   host: localhost  students_development:   <<: *common   database: students_dev  students_production:   <<: *common   database: students </pre><br/>Load database configurations from yml file<br/><pre class=ruby>dbconfig = YAML::load(File.open('database.yml'))  ActiveRecord::Base.establish_connection( dbconfig[:students_development] ) </pre><br/><b>Active Record Model & DB connection </b><br/><pre class=ruby>class Student < ActiveRecord::Base   establish_connection "students_production"   set_table_name "student"   set_primary_key "stud_number" end </pre></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Sandip Ransing</div>
+<div class='content'>
+This is because YAML libray is not installed or not in path.<br /><br />Add library to your code before that ensure it exists.<br /><br />require &quot;yaml&quot;<br /><br />dbconfig = YAML::load(File.open(&#39;database.yml&#39;))<br />ActiveRecord::Base.establish_connection( dbconfig )</div>
+</div>
+<div class='comment'>
+<div class='author'>Anonymous</div>
+<div class='content'>
+getting for the code above uninitialized constant YAML (NameError)<br /><br />what should i do?help me out</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/page/24/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/page/22/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/sandipransing">@sandipransing</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'sandipransing',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'funonrails';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

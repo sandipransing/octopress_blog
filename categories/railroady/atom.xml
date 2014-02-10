@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: railroady | Fun On Rails]]></title>
+  <link href="funonrails.com/categories/railroady/atom.xml" rel="self"/>
+  <link href="funonrails.com/"/>
+  <updated>2014-02-11T02:36:41+05:30</updated>
+  <id>funonrails.com/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[railroady UML diagram generator for rails]]></title>
+    <link href="funonrails.com/2011/12/railroady-uml-diagram-generator-for/"/>
+    <updated>2011-12-28T23:42:00+05:30</updated>
+    <id>funonrails.com/2011/12/railroady-uml-diagram-generator-for</id>
+    <content type="html"><![CDATA[<p>railroady is UML class diagram generator for rails.
+First you need to install <code>graphviz</code> pkg in order to have <code>dot</code> , <code>neato</code> commands available</p>
+
+<p>```</p>
+
+<h1>Gemfile</h1>
+
+<p>group :development, :test do
+  gem railroady
+end
+```</p>
+
+<p>Run below command to generate MVC diagrams
+<code>
+bundle install
+rake diagram:all
+</code></p>
+
+<p>Individual diagram generation</p>
+
+<p><strong>1.  Model Diagram</strong>
+<code>
+railroady -M | dot -Tpng &gt; models.png
+</code></p>
+
+<p><strong>2.  Controller Diagram</strong>
+<code>
+railroady -C | dot -Tpng &gt; controllers.png
+</code></p>
+
+<p><strong>3.  AASM Diagram</strong>
+<code>
+railroady -A | dot -Tpng &gt; aasm.png
+</code></p>
+
+<p>Commands
+<code>
+-M, --models                     Generate models diagram
+-C, --controllers                Generate controllers diagram
+-A, --aasm                       Generate "acts as state machine" diagram
+</code></p>
+
+<p>Other options which can be passed along-with commands &ndash;
+```</p>
+
+<h1>Common options</h1>
+
+<p>-b, &mdash;brief                      Generate compact diagram</p>
+
+<pre><code>                               (no attributes nor methods)
+</code></pre>
+
+<p>-s, &mdash;specify file1[,fileN]      Specify given files only for the diagram</p>
+
+<pre><code>                               (can take a glob pattern)
+</code></pre>
+
+<p>-e, &mdash;exclude file1[,fileN]      Exclude given files</p>
+
+<pre><code>                               (can take a glob pattern)
+</code></pre>
+
+<p>-i, &mdash;inheritance                Include inheritance relations
+-l, &mdash;label                      Add a label with diagram information</p>
+
+<pre><code>                               (type, date, migration, version)
+</code></pre>
+
+<p>-o, &mdash;output FILE                Write diagram to file FILE
+-v, &mdash;verbose                    Enable verbose output</p>
+
+<pre><code>                               (produce messages to STDOUT)
+</code></pre>
+
+<p><code>
+Models diagram options:
+</code></p>
+
+<p>-a, &mdash;all                        Include all models</p>
+
+<pre><code>                               (not only ActiveRecord::Base derived)
+--all-columns                Show all columns 
+                               (not just content columns)
+--hide-magic                 Hide magic field names
+--hide-types                 Hide attributes type
+</code></pre>
+
+<p>-j, &mdash;join                       Concentrate edges
+-m, &mdash;modules                    Include modules
+-p, &mdash;plugins-models             Include plugins models
+-t, &mdash;transitive                 Include transitive associations</p>
+
+<pre><code>                             (through inheritance)
+</code></pre>
+
+<p>```</p>
+
+<p>Controllers diagram options:
+<code>
+--hide-public                Hide public methods
+--hide-protected             Hide protected methods
+--hide-private               Hide private methods
+</code>
+Other Options
+```
+-h, &mdash;help                       Show this message</p>
+
+<pre><code>--version                    Show version and copyright
+</code></pre>
+
+<p>```</p>
+]]></content>
+  </entry>
+  
+</feed>

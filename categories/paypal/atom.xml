@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: paypal | Fun On Rails]]></title>
+  <link href="funonrails.com/categories/paypal/atom.xml" rel="self"/>
+  <link href="funonrails.com/"/>
+  <updated>2014-02-11T02:36:41+05:30</updated>
+  <id>funonrails.com/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Paypal payments integration with rails]]></title>
+    <link href="funonrails.com/2011/12/paypal-payments-integration-with-rails/"/>
+    <updated>2011-12-30T18:00:00+05:30</updated>
+    <id>funonrails.com/2011/12/paypal-payments-integration-with-rails</id>
+    <content type="html"><![CDATA[<p>Paypal standard website payment service allows online payment transactions for websites.
+Before implementing payments inside rails app needs to have following things in place &ndash;</p>
+
+<ol>
+<li><a href="http://developer.paypal.com/">Register Paypal sandbox account</a></li>
+<li>Paypal Merchant account api credentials i.e. login, password, signature, application_id</li>
+<li>Paypal Buyer account creds to test payments</li>
+</ol>
+
+
+<p>Bundle Install
+```</p>
+
+<h1>Gemfile</h1>
+
+<p>gem &lsquo;activemerchant
+<code>
+Gateway config
+</code></p>
+
+<h1>config/gateway.yml</h1>
+
+<p>development: &amp;development   <br/>
+  mode: test   <br/>
+  login: rana_1317365002_biz_api1.gmail.com   <br/>
+  password: &lsquo;1311235050&rsquo;   <br/>
+  signature: ACxcVrB3mFChvPIe8aDWQlLhAPN46oPBQCj7rJWPza6CDZmBURg.   <br/>
+  application_id: APP-76y884485P519543T</p>
+
+<p>production:  <br/>
+  &lt;&lt;: *development</p>
+
+<p>test:
+  &lt;&lt;: *development
+<code>
+New Payment Form
+</code>haml
+= form_for @payment ||= Payment.new, :url => pay_bill_url, :html => {:id => :payForm} do |p|  <br/>
+  = p.text_field :amount <br/>
+  = p.submit &lsquo;Pay&rsquo;
+```</p>
+
+<p>Generate &amp; Migrate Payment Model
+<code>
+rails g model payment status:string amount:float transaction_number:string   
+rake db:migrate
+</code></p>
+
+<p>Payment Model
+```ruby</p>
+
+<h1>app/models/payment.rb</h1>
+
+<p>class Payment &lt; ActiveRecord::Base</p>
+
+<p>  PROCESSING, FAILED, SUCCESS = 1, 2, 3</p>
+
+<p>  validates :amount, :presence => true, :numericality => { :greater_than => 0 }  <br/>
+  def self.conf</p>
+
+<pre><code>@@gateway_conf ||= YAML.load_file(Rails.root.join('config/gateway.yml').to_s)[Rails.env]   
+</code></pre>
+
+<p>  end</p>
+
+<p>  ## Paypal  <br/>
+  def setup_purchase(options)</p>
+
+<pre><code>gateway.setup_purchase(amount * 100, options)   
+</code></pre>
+
+<p>  end</p>
+
+<p>  def redirect_url_for(token)</p>
+
+<pre><code>gateway.redirect_url_for(token)   
+</code></pre>
+
+<p>  end</p>
+
+<p>  def purchase(options={})</p>
+
+<pre><code>self.status = PROCESSING  
+#:ip       =&gt; request.remote_ip,
+#:payer_id =&gt; params[:payer_id],
+#:token    =&gt; params[:token]
+response = gateway.purchase(amt, options)      
+if response.success?       
+  self.transaction_num = response.params['transaction_id']       
+  self.status = SUCCESS     
+else       
+  self.status = FAILED     
+end     
+return self   
+</code></pre>
+
+<p>  rescue Exception => e</p>
+
+<pre><code>self.status = FAILED     
+return self   
+</code></pre>
+
+<p>  end</p>
+
+<p>  private <br/>
+  def gateway</p>
+
+<pre><code>ActiveMerchant::Billing::Base.mode = auth['mode'].to_sym 
+ActiveMerchant::Billing::PaypalExpressGateway.new(
+  :login =&gt; auth['login'], :password =&gt; auth['password'],
+  :signature =&gt; auth['signature']) 
+</code></pre>
+
+<p>  end</p>
+
+<p>  def auth</p>
+
+<pre><code>self.class.conf 
+</code></pre>
+
+<p>  end
+end
+<code>
+Billing routes
+</code>ruby</p>
+
+<h2>Callback URL</h2>
+
+<p>match &lsquo;/billing/paypal/:id/confirm&rsquo;, :to => &lsquo;billing#paypal&rsquo;, :as => :confirm_paypal</p>
+
+<h2>Create payment</h2>
+
+<p>match &lsquo;/billing&rsquo;, :to => &lsquo;billing#create&rsquo;, :as => :pay_bill</p>
+
+<h2>Request URL</h2>
+
+<p>match &lsquo;/billing/paypal/:id&rsquo;, :to => &lsquo;billing#checkout&rsquo;, :as => :billing <br/>
+match &lsquo;/billing/thank_you/:id&rsquo;, :to => &lsquo;billing#checkout&rsquo;, :as => :billing_thank_you
+```</p>
+
+<p>Billing Controller
+```ruby</p>
+
+<h1>app/controllers/billing_controller.rb</h1>
+
+<p>class BillingController &lt; ApplicationController
+  before_filter :get_payment, :only => [:checkout, :paypal, :thank_you]</p>
+
+<p>  def create</p>
+
+<pre><code>@payment = Payment.new params[:payment]     
+if @payment.save       
+  ## Paypal Checkout page       
+  redirect_to billing_url    
+else     
+  render :action =&gt; :new    
+end 
+</code></pre>
+
+<p>  end</p>
+
+<p>  # ASSUMPTION   # payment is valid i.e. amount is entered <br/>
+  def checkout</p>
+
+<pre><code>response = @payment.setup_purchase(:return_url =&gt; confirm_paypal_url(@payment), :cancel_return_url =&gt; root_url)     
+redirect_to @payment.redirect_url_for(response.token)   
+</code></pre>
+
+<p>  end</p>
+
+<p>  ## CALL BACK <br/>
+  def paypal</p>
+
+<pre><code>@payment = @payment.purchase(:token =&gt; params[:token], :payer_id =&gt; params[:PayerID], :ip =&gt; request.remote_ip)    
+@payment.save    
+redirect_to thank_you_billing_url(@order)  
+</code></pre>
+
+<p>  end</p>
+
+<p>  private <br/>
+  def get_payment</p>
+
+<pre><code>@payment = Payment.find_by_id(params[:id])     
+@payment &amp;&amp; @payment.valid? || invalid_url   
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<p>Views
+```haml</p>
+
+<h1>app/views/billing/thank_you.html.haml</h1>
+
+<ul>
+<li>if @payment.success? <br/>
+%p The transaction is successfully completed</li>
+<li>else <br/>
+%p The transaction failed
+```</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

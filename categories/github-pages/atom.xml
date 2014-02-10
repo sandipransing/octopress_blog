@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: github-pages | Fun On Rails]]></title>
+  <link href="funonrails.com/categories/github-pages/atom.xml" rel="self"/>
+  <link href="funonrails.com/"/>
+  <updated>2014-02-11T02:36:41+05:30</updated>
+  <id>funonrails.com/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Getting started: Octopress powered and Github hosted blog]]></title>
+    <link href="funonrails.com/2014/02/octopress-powered-and-github-hosted-blog/"/>
+    <updated>2014-02-07T19:20:07+05:30</updated>
+    <id>funonrails.com/2014/02/octopress-powered-and-github-hosted-blog</id>
+    <content type="html"><![CDATA[<p>There are various blogging sites like <code>blogspot</code>, <code>wordpress</code>, <code>posterous</code>, and many more.
+Each has their own pros and cons and none of the engine gives us full power of ehhance our blogging experience.
+Anyone who has atleast some technical knowledge can start with octopress powered blog. This gives us the power of freedom of doing anything.
+So, Lets first understand about octopress framework and its features.</p>
+
+<h2>Octopress</h2>
+
+<blockquote><p>Octopress is a framework designed by Brandon Mathis for Jekyll, the blog aware static site generator. If you wanted to know more then it can be found <a href="http://octopress.org/2011/07/23/octopress-20-surfaces/">here</a></p></blockquote>
+
+<h2>Octopress Setup</h2>
+
+<ol>
+<li>Before starting make sure you have <code>git</code> installed. If not then &ndash;
+<code>
+sudo apt-get install git
+</code></li>
+<li>Install <code>ruby</code> 1.9.3 or higher</li>
+</ol>
+
+
+<p>Make git clone of octopress source code
+<code>
+git clone git://github.com/imathis/octopress.git octopress
+cd octopress
+bundle install
+</code></p>
+
+<h2>Installing Octopress theme</h2>
+
+<p>Install the default Octopress theme using
+<code>
+rake install
+</code></p>
+
+<p>In order to install custom themes,
+Please <a href="http://opthemes.com/">browse through themes</a> and make a selection for your blog.
+Once choice is made, you need to do <code>git clone</code> of theme source and install it.</p>
+
+<p><code>
+cd octopress
+git clone https://github.com/kAworu/octostrap3 .themes/octostrap3
+rake 'install[octostrap3]'
+</code></p>
+
+<p>To genrate infrastrcture for your blog i.e. <code>layouts</code>, <code>js</code> and <code>css</code>
+<code>
+rake generate
+</code>
+Edit <code>_config.yml</code> to configure blog <code>title</code>, <code>header</code>, <code>metadata</code>, <code>plugins</code> and <code>3rd Party Settings</code>.
+more on configurations can be found <a href="http://octopress.org/docs/configuring/">here</a>.</p>
+
+<p>We are almost done, and now ready to create our first blog post &ndash;
+<code>
+rake new_post["My first octopress post"]
+mkdir -p source/_posts
+Creating new post: source/_posts/2014-02-09-my-first-octopress-post.markdown
+</code>
+Now you can open a post inside editor and change as you wanted. More on writing markdown can be found <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet#wiki-html">here</a> and <a href="http://daringfireball.net/projects/markdown/syntax">here too</a></p>
+
+<p>Well, now its time to view how our blog looks like &ndash;
+<code>
+cd octopress
+rake watch
+rake preview
+</code>
+Visit browser <code>http://localhost:4000</code> and you should be seeing blog running there.</p>
+
+<h2>Deployment</h2>
+
+<p>There are ways to deploy this blog. You can either deploy this blog on <code>heroku</code> or on <code>github</code> using github pages.</p>
+
+<h3>Heroku</h3>
+
+<p>More on Heroku deployment can be found <a href="http://def.reyssi.net/blog/2012/01/14/get-blogging-with-octopress-on-heroku/">here</a></p>
+
+<h3>With Github Project pages</h3>
+
+<p>Github deployment is simple. First you need to create a github repository called <code>username.github.io</code>
+<code>
+rake setup_github_pages
+git remote add origin git@github.com:username/username.github.io.git
+rake generate
+rake deploy
+</code></p>
+
+<p>Visit <code>http://username.github.io</code> to see your blog hosted on github.
+Also, do not forget to commit and push your source code on github.
+<code>
+git add .
+git commit -m 'octopress first blog'
+git push origin source
+</code></p>
+
+<h2>Adding custom domain</h2>
+
+<p>First create a <code>CNAME</code> file and add naked domain name to it.
+<code>
+echo 'funonrails.com' &gt;&gt; source/CNAME
+</code>
+Then goto your domain provider website and point your <code>domain</code> i.e A record to github ip address <code>204.232.175.78</code>.</p>
+
+<h3>Subdomain</h3>
+
+<p>If you want to point subdomain to github blog then &ndash;
+<code>
+echo 'blog.sandipransing.in' &gt;&gt; source/CNAME
+</code>
+then goto your domain provider website and create a CNAME record for your <code>subdomain</code> i.e. <code>blog</code> pointing to <code>yourname.github.io.</code>
+If you want more help then see <a href="http://octopress.org/docs/deploying/github/">here</a> and also <a href="http://help.github.com/pages/#custom_domains">here</a></p>
+]]></content>
+  </entry>
+  
+</feed>

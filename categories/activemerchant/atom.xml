@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: activemerchant | Fun On Rails]]></title>
+  <link href="funonrails.com/categories/activemerchant/atom.xml" rel="self"/>
+  <link href="funonrails.com/"/>
+  <updated>2014-02-11T02:36:41+05:30</updated>
+  <id>funonrails.com/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Authorize Net (AIM) payment integration with rails]]></title>
+    <link href="funonrails.com/2011/12/authorizenet-aim-payment-integration/"/>
+    <updated>2011-12-28T17:15:00+05:30</updated>
+    <id>funonrails.com/2011/12/authorizenet-aim-payment-integration</id>
+    <content type="html"><![CDATA[<p>Authorize Net (AIM) method enables internet merchants to accept online payments via credit card.
+Below post will show you how to integrate authorize net payment gateway inside rails app to accept online payments using activemerchant library.</p>
+
+<p>```</p>
+
+<h1>Gemfile</h1>
+
+<p>gem &lsquo;activemerchant&rsquo;, :require => &lsquo;active_merchant&rsquo;
+```</p>
+
+<p>Register for authorize net sandbox account click <a href="https://developer.authorize.net/testaccount/">here</a></p>
+
+<p>Payment gateway credentials
+```</p>
+
+<h1>config/authorize_net.yml</h1>
+
+<p>development: &amp;development</p>
+
+<pre><code>mode: test
+login: 9gdLh6T
+key: 67fu45xw6VP92LX1
+</code></pre>
+
+<p>production:
+   &lt;&lt;: *development</p>
+
+<p>test:
+   &lt;&lt;: *development
+```</p>
+
+<p>Payment &amp; creditcard form
+```haml</p>
+
+<h1>app/views/payments/new</h1>
+
+<p>= form_for @payment, :url => payments_url do |f|
+  = f.text_field :amount
+  = fields_for :creditcard, @creditcard do |cc|</p>
+
+<pre><code>= cc.text_field :name
+= cc.text_field :number
+= cc.select :month, Date::ABBR_MONTHNAMES.compact.each_with_index.collect{|m, i| [m, i+1]}, {:prompt =&gt; 'Select'}
+= cc.select :year, Array.new(15){|i| Date.current.year+i}, {:prompt =&gt; 'Select'}
+= cc.text_field :verification_value
+</code></pre>
+
+<p>  = f.submit &lsquo;Pay&rsquo;
+```</p>
+
+<p>Payments Controller
+```ruby</p>
+
+<h1>app/controllers/payments_controller.rb</h1>
+
+<p>class PaymentsController &lt; ApplicationController</p>
+
+<p>  def new</p>
+
+<pre><code>@payment = Payment.new
+@creditcard = ActiveMerchant::Billing::CreditCard.new
+</code></pre>
+
+<p>  end</p>
+
+<p>  def create</p>
+
+<pre><code>@payment = Payment.new(params[:payment])
+@creditcard = ActiveMerchant::Billing::CreditCard.new(params[:creditcard])
+@payment.valid_card = @creditcard.valid?
+if @payment.valid? 
+  @payment = @payment.process_payment(@creditcard)
+  if @payment.success?
+    @payment.save
+    flash[:notice] = I18n.t('payment.success')
+    redirect_to payments_url and return
+  else
+    flash[:error] = I18n.t('payment.failed')
+  end
+end
+render :action =&gt; :new
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<p>Generate &amp; Migrate Payment Model
+<code>ruby
+rails g model payment status:string amount:float transaction_number:string
+rake db:migrate
+</code></p>
+
+<p>Payment Model
+```ruby</p>
+
+<h1>app/models/payment.rb</h1>
+
+<p>class Payment &lt; ActiveRecord::Base</p>
+
+<p>  PROCESSING, FAILED, SUCCESS = 1, 2, 3</p>
+
+<p>  validates :valid_card, :inclusion => {:in => [true], :message => &lsquo;Invalid Credit Card&rsquo;}
+  validates :amount, :presence => true, :numericality => { :greater_than => 0 }</p>
+
+<p>  def process_payment(creditcard)</p>
+
+<pre><code>ActiveMerchant::Billing::Base.mode = auth['mode'].to_sym
+self.status = PROCESSING
+response = gateway.purchase(amount * 100, creditcard)
+
+if response.success?
+  self.transaction_number = response.subscription_id
+  self.status = SUCCESS
+else
+  self.status = FAILED
+end
+return self
+</code></pre>
+
+<p>  rescue Exception => e</p>
+
+<pre><code>self.status = FAILED
+return self
+</code></pre>
+
+<p>  end</p>
+
+<p>  def success?</p>
+
+<pre><code>self.status == SUCCESS
+</code></pre>
+
+<p>  end</p>
+
+<p>  private
+  def gateway</p>
+
+<pre><code>ActiveMerchant::Billing::AuthorizeNetGateway.new(
+  :login    =&gt; auth['login'],
+  :password =&gt; auth['key'])
+</code></pre>
+
+<p>  end</p>
+
+<p>  def auth</p>
+
+<pre><code>@@auth ||= YAML.load_file("#{Rails.root}/config/authorize_net.yml")[Rails.env]
+</code></pre>
+
+<p>  end
+end
+```</p>
+]]></content>
+  </entry>
+  
+</feed>

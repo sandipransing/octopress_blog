@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Fun On Rails]]></title>
-  <link href="http://sandipransing.github.io/atom.xml" rel="self"/>
-  <link href="http://sandipransing.github.io/"/>
-  <updated>2014-02-11T02:27:18+05:30</updated>
-  <id>http://sandipransing.github.io/</id>
+  <link href="funonrails.com/atom.xml" rel="self"/>
+  <link href="funonrails.com/"/>
+  <updated>2014-02-11T02:36:41+05:30</updated>
+  <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
     <email><![CDATA[sandip@funonrails.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Migrating from blogger to octopress]]></title>
-    <link href="http://sandipransing.github.io/2014/02/migrating-from-blogger-to-octopress/"/>
+    <link href="funonrails.com/2014/02/migrating-from-blogger-to-octopress/"/>
     <updated>2014-02-09T19:00:56+05:30</updated>
-    <id>http://sandipransing.github.io/2014/02/migrating-from-blogger-to-octopress</id>
+    <id>funonrails.com/2014/02/migrating-from-blogger-to-octopress</id>
     <content type="html"><![CDATA[<p>After 3 or more years, happily doing blogging at <code>blogger.com</code>, finally i decided to move my blog from <em>blogger</em> to <em>octopress</em>.
 From last 2-3 days, was evaluating with <a href="http://octopress.org">octopress</a>, its way of writing posts,
 customizations, themes, and plugins and found it very quick &amp; easy to use.</p>
@@ -29,7 +29,7 @@ customizations, themes, and plugins and found it very quick &amp; easy to use.</
 <p>First, you need to export your posts from blogger.
 Goto <code>blogger admin area</code> and then go to <code>settings &gt;&gt; other &gt;&gt; Export Blog</code> and click on it. Please wait sometime and popup will comeup allowing you to download blog in <code>xml</code> format.</p>
 
-<p><img src="http://sandipransing.github.io/images/export-blog.png" /></p>
+<p><img src="funonrails.com/images/export-blog.png" /></p>
 
 <p>If you still finding some problem with exporting then see <a href="http://www.freetech4teachers.com/2013/01/how-to-export-your-blogger-and.html">here</a></p>
 
@@ -63,9 +63,9 @@ After successful run, this will be creating static markdown octopress formatted 
   
   <entry>
     <title type="html"><![CDATA[Writing Octopress blog posts using markdown]]></title>
-    <link href="http://sandipransing.github.io/2014/02/writing-octopress-blog-posts-using-markdown/"/>
+    <link href="funonrails.com/2014/02/writing-octopress-blog-posts-using-markdown/"/>
     <updated>2014-02-07T19:20:07+05:30</updated>
-    <id>http://sandipransing.github.io/2014/02/writing-octopress-blog-posts-using-markdown</id>
+    <id>funonrails.com/2014/02/writing-octopress-blog-posts-using-markdown</id>
     <content type="html"><![CDATA[<p><strong>Hello Octopress!</strong>
 This an example post for more information see:</p>
 
@@ -175,9 +175,9 @@ almost exactly like the default, right pullquotes, but a little different.
   
   <entry>
     <title type="html"><![CDATA[Getting started: Octopress powered and Github hosted blog]]></title>
-    <link href="http://sandipransing.github.io/2014/02/octopress-powered-and-github-hosted-blog/"/>
+    <link href="funonrails.com/2014/02/octopress-powered-and-github-hosted-blog/"/>
     <updated>2014-02-07T19:20:07+05:30</updated>
-    <id>http://sandipransing.github.io/2014/02/octopress-powered-and-github-hosted-blog</id>
+    <id>funonrails.com/2014/02/octopress-powered-and-github-hosted-blog</id>
     <content type="html"><![CDATA[<p>There are various blogging sites like <code>blogspot</code>, <code>wordpress</code>, <code>posterous</code>, and many more.
 Each has their own pros and cons and none of the engine gives us full power of ehhance our blogging experience.
 Anyone who has atleast some technical knowledge can start with octopress powered blog. This gives us the power of freedom of doing anything.
@@ -324,9 +324,9 @@ If you want more help then see <a href="http://octopress.org/docs/deploying/gith
   
   <entry>
     <title type="html"><![CDATA[Dynamic conditions to rails associations]]></title>
-    <link href="http://sandipransing.github.io/2012/10/dynamic-conditions-to-rails-associations/"/>
+    <link href="funonrails.com/2012/10/dynamic-conditions-to-rails-associations/"/>
     <updated>2012-10-25T16:12:00+05:30</updated>
-    <id>http://sandipransing.github.io/2012/10/dynamic-conditions-to-rails-associations</id>
+    <id>funonrails.com/2012/10/dynamic-conditions-to-rails-associations</id>
     <content type="html"><![CDATA[<p>We all know that rails models associations gets defined while class definitions are loaded and once defined can&rsquo;t be changed.</p>
 
 <p>But still you can make use of <code>block parameter</code> to conditions to have <code>dynamic query conditions</code> inside associations.</p>
@@ -349,9 +349,9 @@ If you want more help then see <a href="http://octopress.org/docs/deploying/gith
   
   <entry>
     <title type="html"><![CDATA[Upgrading from Rails 2.1.x to Rails 2.3.11]]></title>
-    <link href="http://sandipransing.github.io/2012/04/upgrading-from-rails-21x-to-rails-2311/"/>
+    <link href="funonrails.com/2012/04/upgrading-from-rails-21x-to-rails-2311/"/>
     <updated>2012-04-04T22:13:00+05:30</updated>
-    <id>http://sandipransing.github.io/2012/04/upgrading-from-rails-21x-to-rails-2311</id>
+    <id>funonrails.com/2012/04/upgrading-from-rails-21x-to-rails-2311</id>
     <content type="html"><![CDATA[<p>If your application is currently on any version of Rails 2.1.x,
 Then following changes needs to be done for upgrading your application to Rails <code>2.3.11</code></p>
 
@@ -425,9 +425,9 @@ Then following changes needs to be done for upgrading your application to Rails 
   
   <entry>
     <title type="html"><![CDATA[ruby enumerable & to_proc (ampersond & symbol shortcut)]]></title>
-    <link href="http://sandipransing.github.io/2012/02/ruby-enumerable-toproc-ampersond-colon/"/>
+    <link href="funonrails.com/2012/02/ruby-enumerable-toproc-ampersond-colon/"/>
     <updated>2012-02-23T02:09:00+05:30</updated>
-    <id>http://sandipransing.github.io/2012/02/ruby-enumerable-toproc-ampersond-colon</id>
+    <id>funonrails.com/2012/02/ruby-enumerable-toproc-ampersond-colon</id>
     <content type="html"><![CDATA[<p>Basically Enumerable mixin gives collection classes a variety of traverse, search, sort methods.</p>
 
 <p><strong>Understanding ruby blocks</strong></p>
@@ -585,9 +585,9 @@ Yes, there is shortcut to have block passed to enumerators on the fly using ampe
   
   <entry>
     <title type="html"><![CDATA[dynamic & bounded parameters and named routes]]></title>
-    <link href="http://sandipransing.github.io/2012/01/dynamic-bounded-parameters-and-named/"/>
+    <link href="funonrails.com/2012/01/dynamic-bounded-parameters-and-named/"/>
     <updated>2012-01-31T02:43:00+05:30</updated>
-    <id>http://sandipransing.github.io/2012/01/dynamic-bounded-parameters-and-named</id>
+    <id>funonrails.com/2012/01/dynamic-bounded-parameters-and-named</id>
     <content type="html"><![CDATA[<div class='post'>
 Rails routes can be customized as your own routes with parameters but first you should understand how routes behaves. <br/> <b>Adding dynamic parameters to routes </b> <br/>Here exact parameters are matched to route and presence of each parameter is mandatory in order to construct urls. blank parameter will raise RoutingError exception. <br/>Exact matched named route declared as -  <pre class=ruby>  match ':a/:b/:c', :to => 'home#index', :as => :q </pre> now go to the rails console - <pre class=ruby> ruby-1.9.3-head :005 > app.q_url(:a, :b, :c)   => "http://www.example.com/a/b/c"        ruby-1.9.3-head :006 > app.q_url(:a, :b, '')   ActionController::RoutingError: No route matches {:controller=>"home", :a=>:a, :b=>:b, :c=>""} </pre><b>Bound parameters to named routes</b><br/>If you are too sure that certain parameter can be blank then you can define it as optional parameter inside route -  <br/><pre class=ruby> match ':a/:b(/:c)', :to => 'home#index', :as => :q </pre><b>rails console</b><pre class=ruby> ruby-1.9.3-head :010 > app.q_url(:a, :b, '')   => "http://www.example.com/a/b?c="   ruby-1.9.3-head :011 > app.q_url(:a, :b)   => "http://www.example.com/a/b" </pre></div>
 
@@ -596,9 +596,9 @@ Rails routes can be customized as your own routes with parameters but first you 
   
   <entry>
     <title type="html"><![CDATA[puts, to_s and inspect on ruby object]]></title>
-    <link href="http://sandipransing.github.io/2012/01/puts-tos-and-inspect-on-ruby-object/"/>
+    <link href="funonrails.com/2012/01/puts-tos-and-inspect-on-ruby-object/"/>
     <updated>2012-01-31T01:07:00+05:30</updated>
-    <id>http://sandipransing.github.io/2012/01/puts-tos-and-inspect-on-ruby-object</id>
+    <id>funonrails.com/2012/01/puts-tos-and-inspect-on-ruby-object</id>
     <content type="html"><![CDATA[<p><code>puts</code> converts ruby object into string by invoking to_s method on object. The default to_s prints the object&rsquo;s class and an encoding of the object id. In order to print human readable form of object use inspect</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -648,9 +648,9 @@ Rails routes can be customized as your own routes with parameters but first you 
   
   <entry>
     <title type="html"><![CDATA[csv file import / export in rails 3]]></title>
-    <link href="http://sandipransing.github.io/2012/01/csv-file-importexport-in-rails-3/"/>
+    <link href="funonrails.com/2012/01/csv-file-importexport-in-rails-3/"/>
     <updated>2012-01-27T14:28:00+05:30</updated>
-    <id>http://sandipransing.github.io/2012/01/csv-file-importexport-in-rails-3</id>
+    <id>funonrails.com/2012/01/csv-file-importexport-in-rails-3</id>
     <content type="html"><![CDATA[<p>CSV (comma separated values) files are frequently used to import/export data.</p>
 
 <p>In rails 3, <code>FasterCSV</code> comes as default and below is the way to upload csv files inside rails applications. The code below will also show you how to generate csv in memory, parse on csv data, skip header, iterate over records, save records inside db, export upload error file and many more.</p>
@@ -853,9 +853,9 @@ Below code loads customer records from database then generate csv_data inside me
   
   <entry>
     <title type="html"><![CDATA[Mongoid embeded_in and Array field management]]></title>
-    <link href="http://sandipransing.github.io/2012/01/mongoid-embededin-and-array-field/"/>
+    <link href="funonrails.com/2012/01/mongoid-embededin-and-array-field/"/>
     <updated>2012-01-20T01:12:00+05:30</updated>
-    <id>http://sandipransing.github.io/2012/01/mongoid-embededin-and-array-field</id>
+    <id>funonrails.com/2012/01/mongoid-embededin-and-array-field</id>
     <content type="html"><![CDATA[<p>Previous post explains on <a href="http://www.funonrails.com/2012/01/mongoid-array-field-and-rails-form.html">mongoid document array field and rails form implementation</a>
 Below example shows rails form integration of array field of embedded mongoid document
 consider scenario, student embeds one family who has many assets</p>
@@ -972,9 +972,9 @@ consider scenario, student embeds one family who has many assets</p>
   
   <entry>
     <title type="html"><![CDATA[mongoid array field and rails form]]></title>
-    <link href="http://sandipransing.github.io/2012/01/mongoid-array-field-and-rails-form/"/>
+    <link href="funonrails.com/2012/01/mongoid-array-field-and-rails-form/"/>
     <updated>2012-01-19T23:59:00+05:30</updated>
-    <id>http://sandipransing.github.io/2012/01/mongoid-array-field-and-rails-form</id>
+    <id>funonrails.com/2012/01/mongoid-array-field-and-rails-form</id>
     <content type="html"><![CDATA[<p>Mongoid document supports array as field. array field in mongoid document is a ruby array but its quite complex to manage array field in rails forms.</p>
 
 <p>After lot of google and reading comments from stack-overflow at last i felt helpless. Finally after doing research on rails form helper object(form_for, fields_for) am pleased to get it working as expected :)</p>
@@ -1070,9 +1070,9 @@ consider scenario, student embeds one family who has many assets</p>
   
   <entry>
     <title type="html"><![CDATA[twitter-bootstrap form builder for rails]]></title>
-    <link href="http://sandipransing.github.io/2012/01/twitter-bootstrap-form-builder-for/"/>
+    <link href="funonrails.com/2012/01/twitter-bootstrap-form-builder-for/"/>
     <updated>2012-01-17T05:39:00+05:30</updated>
-    <id>http://sandipransing.github.io/2012/01/twitter-bootstrap-form-builder-for</id>
+    <id>funonrails.com/2012/01/twitter-bootstrap-form-builder-for</id>
     <content type="html"><![CDATA[<p><a href="twitter.github.com/bootstrap/">twitter-bootstrap</a> is pluggable css suit provided by twitter.
 To know more about how to get started on it click <a href="http://www.funonrails.com/2011/11/rails-311-haml-sass-jquery-coffee-rails">here</a>.</p>
 
@@ -1312,9 +1312,9 @@ MainForm can be used as base version of form builder and can be overriden for it
   
   <entry>
     <title type="html"><![CDATA[Get models list inside rails app]]></title>
-    <link href="http://sandipransing.github.io/2012/01/get-models-list-inside-rails-app/"/>
+    <link href="funonrails.com/2012/01/get-models-list-inside-rails-app/"/>
     <updated>2012-01-17T05:16:00+05:30</updated>
-    <id>http://sandipransing.github.io/2012/01/get-models-list-inside-rails-app</id>
+    <id>funonrails.com/2012/01/get-models-list-inside-rails-app</id>
     <content type="html"><![CDATA[<p>How to get collection of models inside your application. Certainly there are many ways to do it.
 Lets have a look at different ways starting from worst &ndash;</p>
 
@@ -1427,9 +1427,9 @@ Lets have a look at different ways starting from worst &ndash;</p>
   
   <entry>
     <title type="html"><![CDATA[stripe payment gateway integration with rails]]></title>
-    <link href="http://sandipransing.github.io/2012/01/stripe-gateway-payment-integration-with/"/>
+    <link href="funonrails.com/2012/01/stripe-gateway-payment-integration-with/"/>
     <updated>2012-01-15T00:53:00+05:30</updated>
-    <id>http://sandipransing.github.io/2012/01/stripe-gateway-payment-integration-with</id>
+    <id>funonrails.com/2012/01/stripe-gateway-payment-integration-with</id>
     <content type="html"><![CDATA[<p>Stripe is simple website payment solution and its very easy to easy setup.
 It currently supports only in US and seems to be very popular compared to other payment gateways because of its api &amp; pricing</p>
 
@@ -1756,9 +1756,9 @@ Rails Integration</p>
   
   <entry>
     <title type="html"><![CDATA[understanding rails uri]]></title>
-    <link href="http://sandipransing.github.io/2012/01/understanding-rails-uri/"/>
+    <link href="funonrails.com/2012/01/understanding-rails-uri/"/>
     <updated>2012-01-14T02:18:00+05:30</updated>
-    <id>http://sandipransing.github.io/2012/01/understanding-rails-uri</id>
+    <id>funonrails.com/2012/01/understanding-rails-uri</id>
     <content type="html"><![CDATA[<p>rails-uri module provides us with url manipulation methods</p>
 
 <p>Parse string url</p>
@@ -1863,9 +1863,9 @@ Rails Integration</p>
   
   <entry>
     <title type="html"><![CDATA[Paypal payments integration with rails]]></title>
-    <link href="http://sandipransing.github.io/2011/12/paypal-payments-integration-with-rails/"/>
+    <link href="funonrails.com/2011/12/paypal-payments-integration-with-rails/"/>
     <updated>2011-12-30T18:00:00+05:30</updated>
-    <id>http://sandipransing.github.io/2011/12/paypal-payments-integration-with-rails</id>
+    <id>funonrails.com/2011/12/paypal-payments-integration-with-rails</id>
     <content type="html"><![CDATA[<p>Paypal standard website payment service allows online payment transactions for websites.
 Before implementing payments inside rails app needs to have following things in place &ndash;</p>
 
@@ -2149,9 +2149,9 @@ Billing routes</p>
   
   <entry>
     <title type="html"><![CDATA[Authorize Net (SIM) payment integration with rails]]></title>
-    <link href="http://sandipransing.github.io/2011/12/authorize-net-sim-payment-integration/"/>
+    <link href="funonrails.com/2011/12/authorize-net-sim-payment-integration/"/>
     <updated>2011-12-30T16:16:00+05:30</updated>
-    <id>http://sandipransing.github.io/2011/12/authorize-net-sim-payment-integration</id>
+    <id>funonrails.com/2011/12/authorize-net-sim-payment-integration</id>
     <content type="html"><![CDATA[<p>Authorize Net SIM gateway transaction skips merchant side creditcard details form and directs transaction to be take place on gateway server.</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -2394,9 +2394,9 @@ Billing routes</p>
   
   <entry>
     <title type="html"><![CDATA[Customizing rails default form builder]]></title>
-    <link href="http://sandipransing.github.io/2011/12/using-formbuilder-in-rails/"/>
+    <link href="funonrails.com/2011/12/using-formbuilder-in-rails/"/>
     <updated>2011-12-29T01:29:00+05:30</updated>
-    <id>http://sandipransing.github.io/2011/12/using-formbuilder-in-rails</id>
+    <id>funonrails.com/2011/12/using-formbuilder-in-rails</id>
     <content type="html"><![CDATA[<p>Customizing default rails form builder to adopt for labels, input fields, errors, hints, etc. in order to build forms just in minutes</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -2508,9 +2508,9 @@ Billing routes</p>
   
   <entry>
     <title type="html"><![CDATA[Authorize Net Payment Gateway integration with rails]]></title>
-    <link href="http://sandipransing.github.io/2011/12/authorize-net-payment-gateway/"/>
+    <link href="funonrails.com/2011/12/authorize-net-payment-gateway/"/>
     <updated>2011-12-29T00:36:00+05:30</updated>
-    <id>http://sandipransing.github.io/2011/12/authorize-net-payment-gateway</id>
+    <id>funonrails.com/2011/12/authorize-net-payment-gateway</id>
     <content type="html"><![CDATA[<p>Authorize Net Payment gateway provides api access to enable online payments
 Gateway provides different api options to integrate &ndash;</p>
 
@@ -2532,9 +2532,9 @@ Provides full control of all the transaction steps at merchant server. Payment f
   
   <entry>
     <title type="html"><![CDATA[railroady UML diagram generator for rails]]></title>
-    <link href="http://sandipransing.github.io/2011/12/railroady-uml-diagram-generator-for/"/>
+    <link href="funonrails.com/2011/12/railroady-uml-diagram-generator-for/"/>
     <updated>2011-12-28T23:42:00+05:30</updated>
-    <id>http://sandipransing.github.io/2011/12/railroady-uml-diagram-generator-for</id>
+    <id>funonrails.com/2011/12/railroady-uml-diagram-generator-for</id>
     <content type="html"><![CDATA[<p>railroady is UML class diagram generator for rails.
 First you need to install <code>graphviz</code> pkg in order to have <code>dot</code> , <code>neato</code> commands available</p>
 

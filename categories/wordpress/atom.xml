@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: wordpress | Fun On Rails]]></title>
+  <link href="funonrails.com/categories/wordpress/atom.xml" rel="self"/>
+  <link href="funonrails.com/"/>
+  <updated>2014-02-11T02:36:41+05:30</updated>
+  <id>funonrails.com/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[WordPress blog software installation]]></title>
+    <link href="funonrails.com/2010/03/wordpress-blog-software-installation/"/>
+    <updated>2010-03-12T01:55:00+05:30</updated>
+    <id>funonrails.com/2010/03/wordpress-blog-software-installation</id>
+    <content type="html"><![CDATA[<p><a href="http://wordpress.org/">WordPress</a> &nbsp;is a&nbsp;open source&nbsp;software developed by and for community with ongoing development on it. Easy installation, customizable, with lots of available plugins, themes and SEO friendly are the strengths of it!</p>
+
+<blockquote><p>Software is mainly serves the purpose of blogging, hosting static websites.
+People with knowledge of php, javascipt and little knowledge of mysql db&nbsp;can customize it however they want.</p></blockquote>
+
+<ol>
+<li>Minimum server requirements</li>
+<li>PHP 4.3 or greater</li>
+<li>MySQL 4.1.2 or greater</li>
+<li>Apache/NGINX (or any web server supporting php &amp; mysql )</li>
+</ol>
+
+
+<p><strong>For detailed information on installation click <a href="http://codex.wordpress.org/Installing_WordPress#Famous%205-Minute%20Install">here</a></strong></p>
+
+<p>Now you will need to decide where on your web site you&rsquo;d like your blog to appear:</p>
+
+<ol>
+<li>In the root directory of your web site. (For example, <a href="http://yoursite.com/">http://yoursite.com/</a>)</li>
+<li>In a subdirectory of your web site. (For example, <a href="http://yoursite.com/blog/">http://yoursite.com/blog/</a></li>
+</ol>
+
+
+<blockquote><p>This can be done by adding new route at nginx configuration file or deploying wordpress software inside blog directory of main website.</p></blockquote>
+
+<p>There are millions of satisfied users using&nbsp;word-press blog.</p>
+
+<p><strong>To create and start blogging with free wordpress.com blog click <a href="http://en.wordpress.com/signup/">here</a></strong></p>
+
+<p><a href="http://codex.wordpress.org/WordPressMU">WordPress MU</a> multiblog software provides a way to create thousands of wordpress blogs
+just like wordpress.com site does.</p>
+
+<p>Download and&nbsp;detailed information on installation click <a href="http://codex.wordpress.org/Installing_WPMU">here</a></p>
+]]></content>
+  </entry>
+  
+</feed>

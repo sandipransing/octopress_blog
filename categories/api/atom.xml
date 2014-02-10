@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: api | Fun On Rails]]></title>
+  <link href="funonrails.com/categories/api/atom.xml" rel="self"/>
+  <link href="funonrails.com/"/>
+  <updated>2014-02-11T02:36:41+05:30</updated>
+  <id>funonrails.com/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Zipcode validation using geokit in rails]]></title>
+    <link href="funonrails.com/2010/08/zipcode-validation-using-geokit-in/"/>
+    <updated>2010-08-21T04:58:00+05:30</updated>
+    <id>funonrails.com/2010/08/zipcode-validation-using-geokit-in</id>
+    <content type="html"><![CDATA[<ol>
+<li><strong>Install geokit gem</strong>
+<code>
+gem install geokit
+</code>
+OR<br/>
+```ruby
+
+<h1>Add following line inside rails initialize block</h1>
+
+<p>Rails::Initializer.run do |config|
+config.gem &lsquo;geokit&rsquo;
+end
+<code>
+And then run command
+</code>
+rake gems:install
+```</p></li>
+<li><strong>Consider User model with zipcode as attribute field</strong>
+```ruby
+include Geokit::Geocoders
+class User &lt; ActiveRecord::Base
+set_table_name :users
+validate_presence_of :zipcode
+validate :request_zipcode_validation_using_geokit, :if => :zipcode</li>
+</ol>
+
+
+<p>  private
+  def request_zipcode_validation_using_geokit</p>
+
+<pre><code># Method request google api for location
+# if location found then zipcode is valid otherwise
+# add validation error on zipcode field
+# as it method contacts with google api and takes time
+# to return result, poll request only when zipcode gets
+# changed
+poll = true # default true for new objects
+if self.id ## this means already existing user and zipcode is valid last time
+  # Hack to find where zipcode got modified or not 
+  # old_user = User.find self.id
+  poll = false if old_user.zipcode == self.zipcode
+end
+
+# Actual requesting api to return location associated with zipcode
+if poll
+  loc = MultiGeocoder.geocode(self.zip_code)
+end
+# Add Validation Error if location is not found
+errors.add(:zip_code, "Unable to geocode your location from zipcode entered.") unless loc.success
+</code></pre>
+
+<p>  end
+end
+```
+<strong>Please note that same method can also be used to validate state, city and country.
+Again we can use combination of fields to validate each other.
+Like &ndash;</strong></p>
+
+<ol>
+<li><strong>Based on country entered, state validation</strong></li>
+<li><strong>Based on state, city validation</strong></li>
+<li><strong>Based on city, zipcode validation</strong>
+or</li>
+<li><strong>Based on zipcode and country, state and city validation</strong></li>
+</ol>
+
+
+<p>Here is another method to validate state and city based on zipcode and country.
+Lets take example of &lsquo;US&rsquo;
+```ruby
+def request_state_and_city_validation_based_on_zipcode
+  poll = true # default true for new objects
+  if self.id ## this means already existing user and all attributes were valid last time</p>
+
+<pre><code># Hack to find any one of location attribute got modified
+# old_user = User.find self.id
+loc_attrs = %w{zipcode state city} # keep in mind country US is default assumed
+if loc_attrs.all? {|attr| self.attribute_for_inspect(attr) == old_user.attribute_for_inspect(attr)}
+  self.poll = false
+end
+</code></pre>
+
+<p>  end</p>
+
+<p>  # Actual requesting api to return location associated with zipcode
+  if poll</p>
+
+<pre><code>loc = MultiGeocoder.geocode("#{self.zip_code}, US")
+</code></pre>
+
+<p>  end
+  # Add Validation Error if location is not found
+  unless loc.success</p>
+
+<pre><code>errors.add(:zip_code, "Unable to geocode your location from zipcode entered.")
+</code></pre>
+
+<p>  else</p>
+
+<pre><code># Validate state and city fields in compare to loc object returned by geocode
+errors.add(:state, "State doesn't matches with zipcode entered") if self.state != loc.state
+errors.add(:city, "City doesn't matches with zipcode entered") if self.city != loc.city
+</code></pre>
+
+<p>  end
+end
+```
+<strong>Note</strong> **
+If you are subscriber of blog and not displaying post correctly. I request you to visit post on blog itself. Somehow style is not getting correctly in email. I will try to fix this problem asap.</p>
+
+<p><strong>Upcoming Posts</strong></p>
+
+<ol>
+<li>Geokit finders: Find locations in/within/beyond particular radius from specified location using acts_as_mappable plugin</li>
+<li>Customizing authlogic for multiple sessions i.e. using different models for role based authentication.</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Download Rails API to work offline]]></title>
+    <link href="funonrails.com/2010/03/download-rails-api-to-work-offline/"/>
+    <updated>2010-03-23T19:08:00+05:30</updated>
+    <id>funonrails.com/2010/03/download-rails-api-to-work-offline</id>
+    <content type="html"><![CDATA[<div class='post'>
+Command to <a href="http://github.com/sandipransing/rails_api">download/copy</a> rails api to work locally(offline) mode. <pre class='ruby'><br />wget -mk www.api.rubyonrails.org<br /></pre>For more information <a href="http://github.com/sandipransing/rails_api">click</a></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Hpricot scraping in ruby]]></title>
+    <link href="funonrails.com/2009/12/hpricot-scraping-in-ruby/"/>
+    <updated>2009-12-02T18:24:00+05:30</updated>
+    <id>funonrails.com/2009/12/hpricot-scraping-in-ruby</id>
+    <content type="html"><![CDATA[<div class='post'>
+<div style="text-align: left;">Include gems/library required before getting started <br /></div><pre class="ruby" name="code">require 'hpricot'<br />require 'net/http'<br />require 'rio'<br /></pre><pre class="ruby" name="code"># Pass website url to be scraped<br />url = "www.funonrails.com"<br /><br /># Define filename to store file locally<br />file = "temp.html"<br /># Save page locally<br />rio(url) &lt; rio (file)<br /></pre><pre class="ruby" name="code"># Open page through hpricot<br />doc = Hpricot(open(file))<br /><br />Apply hpricot library to get right contents<br /><br />doc.at("div.pageTitle")<br />doc/"div.pageTitle"<br />doc.search("div.entry")<br />doc//"div.pageTitle"<br /></pre>Hpricot API Reference click here<br /></div>
+
+
+<h2>Comments</h2>
+
+
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Sandip Ransing</div>
+<div class='content'>
+Try hpricot library online http://hpricot.com</div>
+</div>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[10 steps to get start with MySpace Ruby SDK]]></title>
+    <link href="funonrails.com/2009/10/10-steps-to-get-start-with-myspace-ruby/"/>
+    <updated>2009-10-27T21:33:00+05:30</updated>
+    <id>funonrails.com/2009/10/10-steps-to-get-start-with-myspace-ruby</id>
+    <content type="html"><![CDATA[<div class='post'>
+Follow 10 simple steps in order to use myspace sdk api<br/><br/>1. Remove all your previous gems installed<br/>+ gem uninstall myspace<br/><br/>2. Checkout sample source code<br/><br/>svn checkout http://myspaceid-ruby-sdk.googlecode.com/svn/trunk/ myspacesdk<br/><br/>3. cd myspacesdk/samples/rails/sample<br/>4. Modify config/database.yml accordingly<br/><blockquote><br/><div>development:<br/>adapter: mysql<br/>database: sample_development<br/>password: abcd<br/>pool: 5<br/>timeout: 5000</div></blockquote><br/>5. Download http://myspaceid-ruby-sdk.googlecode.com/files/myspaceid-sdk-0.1.11.gem<br/>6. gem install --local ~/Desktop/myspaceid-sdk-0.1.11.gem i.e.PATH_TO_GEM<br/>7. Above command supposed to give you following error otherwise skip to step 10<br/><blockquote><br/><div>ERROR:  Error installing /home/sandip/Desktop/myspaceid-sdk-0.1.11.gem:<br/>myspaceid-sdk requires ruby-openid (&gt;= 0, runtime)</div></blockquote><br/>8. gem install ruby-openid go to step 6<br/>9. ruby script/server<br/>10. Browse http://localhost:3000/</div>
+
+]]></content>
+  </entry>
+  
+</feed>

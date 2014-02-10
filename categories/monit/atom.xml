@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: monit | Fun On Rails]]></title>
+  <link href="funonrails.com/categories/monit/atom.xml" rel="self"/>
+  <link href="funonrails.com/"/>
+  <updated>2014-02-11T02:36:41+05:30</updated>
+  <id>funonrails.com/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Monitor Delayed Job in rails]]></title>
+    <link href="funonrails.com/2011/03/monitor-delayedjob-in-rails/"/>
+    <updated>2011-03-01T01:22:00+05:30</updated>
+    <id>funonrails.com/2011/03/monitor-delayedjob-in-rails</id>
+    <content type="html"><![CDATA[<p>Delayed Job &amp; Monit configuration</p>
+
+<p>We were struggling through how to monit delayed_job from past few months because monit doesn&rsquo;t work seamlessly with delayed_job start/stop commands and finally we got able to monit delayed_job.</p>
+
+<p>Here is our old configuration that wasn&rsquo;t working anyhow-</p>
+
+<p>```
+check process delayed_job with pidfile /home/sandip/shared/pids/delayed_job.pid</p>
+
+<pre><code>stop program = "/bin/bash -c 'cd /home/sandip/current &amp;&amp; RAILS_ENV=production script/delayed_job stop'"
+start program = "/bin/bash -c 'cd /home/sandip/current &amp;&amp; RAILS_ENV=production script/delayed_job start'"
+if totalmem &gt; 100.0 MB for 3 cycles then restart
+if cpu usage &gt; 95% for 3 cycles then restart
+</code></pre>
+
+<p>```
+After doing google &amp; looking at stackoverflow, we found different solutions to work with but none of them found useful to me. :(</p>
+
+<p>After reading google group someone (not remembering exactly) directed to write a init script for delayed_job server and that perfectly worked for me and my headache of self moniting delayed_job ended up ;)</p>
+
+<p>Here is delayed_job init script</p>
+
+<h1>/etc/init.d/delayed_job</h1>
+
+<p>```</p>
+
+<h1>! /bin/sh</h1>
+
+<p>set_path=&ldquo;cd /home/sandip/current&rdquo;</p>
+
+<p>case &ldquo;$1&rdquo; in</p>
+
+<pre><code>start)
+echo -n "Starting delayed_job: "
+su - root -c "$set_path; RAILS_ENV=production script/delayed_job start" &gt;&gt; /var/log/delayed_job.log 2&gt;&amp;1
+echo "done."
+;;
+stop)
+echo -n "Stopping delayed_job: "
+su - root -c "$set_path; RAILS_ENV=production script/delayed_job stop" &gt;&gt; /var/log/delayed_job.log 2&gt;&amp;1
+echo "done."
+;;
+*)
+echo "Usage: $N {start|stop}" &gt;&amp;2
+exit 1
+;;
+</code></pre>
+
+<p>esac</p>
+
+<p>exit 0
+```</p>
+
+<p>finally here is the working monit delayed_job configuration
+```
+check process delayed_job with pidfile /home/sandip/shared/pids/delayed_job.pid</p>
+
+<pre><code>stop program = "/etc/init.d/delayed_job stop"
+start program = "/etc/init.d/delayed_job start"
+if totalmem &gt; 100.0 MB for 3 cycles then restart
+if cpu usage &gt; 95% for 3 cycles then restart
+</code></pre>
+
+<p>```</p>
+
+<p>Thinking Sphinx monit configuration
+```
+check process sphinx with pidfile /home/sandip/shared/pids/searchd.pid</p>
+
+<pre><code>stop program = "/bin/bash -c 'cd /home/sandip/current &amp;&amp; /usr/bin/rake RAILS_ENV=production ts:stop'"
+start program = "/bin/bash -c 'cd /home/sandip/current &amp;&amp; /usr/bin/rake RAILS_ENV=production ts:start'"
+if totalmem &gt; 85.0 MB for 3 cycles then restart
+if cpu usage &gt; 95% for 3 cycles then restart
+</code></pre>
+
+<p>```</p>
+
+<p>Adhearsion (ahn) monit confiuration
+```
+check process ahn with pidfile /home/josh/shared/pids/ahnctl.pid</p>
+
+<pre><code>stop program = "/bin/bash -c 'cd /home/sandip/current &amp;&amp; /usr/bin/ahnctl stop adhearsion'"
+start program = "/bin/bash -c 'cd /home/sandip/current &amp;&amp; /usr/bin/ahnctl start adhearsion'"
+if totalmem &gt; 100.0 MB for 3 cycles then restart
+if cpu usage &gt; 95% for 3 cycles then restart
+</code></pre>
+
+<p>```</p>
+
+<p>Nginx monit configuration
+```
+check process nginx with pidfile /opt/nginx/logs/nginx.pid</p>
+
+<pre><code>start program = "/opt/nginx/sbin/nginx"
+stop  program = "/opt/nginx/sbin/nginx -s stop"
+if cpu is greater than 70% for 3 cycles then alert
+if cpu &gt; 80% for 5 cycles then restart
+if 10 restarts within 10 cycles then timeout
+</code></pre>
+
+<p>```</p>
+]]></content>
+  </entry>
+  
+</feed>

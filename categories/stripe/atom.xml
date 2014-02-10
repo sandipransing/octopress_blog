@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: stripe | Fun On Rails]]></title>
+  <link href="funonrails.com/categories/stripe/atom.xml" rel="self"/>
+  <link href="funonrails.com/"/>
+  <updated>2014-02-11T02:36:41+05:30</updated>
+  <id>funonrails.com/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[stripe payment gateway integration with rails]]></title>
+    <link href="funonrails.com/2012/01/stripe-gateway-payment-integration-with/"/>
+    <updated>2012-01-15T00:53:00+05:30</updated>
+    <id>funonrails.com/2012/01/stripe-gateway-payment-integration-with</id>
+    <content type="html"><![CDATA[<p>Stripe is simple website payment solution and its very easy to easy setup.
+It currently supports only in US and seems to be very popular compared to other payment gateways because of its api &amp; pricing</p>
+
+<p>Stripe API provides &ndash;</p>
+
+<ol>
+<li>charge (regular payments)</li>
+<li>subscription (recurring payments)</li>
+<li>managing customers (via stripe_customer_token)</li>
+</ol>
+
+
+<p><strong>What you need to do ?</strong></p>
+
+<p>Create a stripe account by providing email address and password. There after go to the <a href="https://manage.stripe.com/account">manage account page</a> to obtain stripe public &amp; api keys.
+Rails Integration</p>
+
+<p>Rails Integration
+```</p>
+
+<h1>Gemfile</h1>
+
+<p>gem stripe
+```</p>
+
+<p>Add api key and public key
+```ruby</p>
+
+<h1>config/initializers/stripe.rb</h1>
+
+<p>Stripe.api_key = &ldquo;rGaNWsIG3Gy6zvXB8wv4rEcizJp6XjF5&rdquo;
+STRIPE_PUBLIC_KEY = &ldquo;vk_BcSyS2qPWdT5SdrwkQg0vTSyhZgqN&rdquo;
+<code>
+View
+</code>haml</p>
+
+<h1>app/views/layouts/application.html.haml</h1>
+
+<p>= javascript_include_tag &lsquo;<a href="https://js.stripe.com/v1/">https://js.stripe.com/v1/</a>&rsquo;
+= tag :meta, :name => &lsquo;stripe-key&rsquo;, :content => STRIPE_PUBLIC_KEY
+<code>
+Payment Form
+</code>haml</p>
+
+<h1>app/views/payments/new.html.haml</h1>
+
+<h1>stripe_error</h1>
+
+<p>  %noscript JavaScript is not enabled and is required for this form. First enable it in your web browser settings.</p>
+
+<p>= form_for @payment ||= Payment.new, :html => {:id => :payForm} do |p|
+  = p.hidden_field :stripe_card_token
+  .field</p>
+
+<pre><code>= p.text_field :amount
+</code></pre>
+
+<p>  .credit_card_form</p>
+
+<pre><code>%h3.title
+  Enter Credit Card
+- if @payment.stripe_card_token.present?
+  Credit card has been provided.
+- else
+  .field
+    = label_tag :card_number, "Credit Card Number"
+    = text_field_tag :card_number, nil, name: nil
+  .field
+    = label_tag :card_code, "Security Code (CVV)"
+    = text_field_tag :card_code, nil, name: nil
+  .field
+    = label_tag :card_month, "Expiry Date"
+    = select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}
+    = select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"}
+</code></pre>
+
+<p>```</p>
+
+<p>Javascript Code
+```javascript</p>
+
+<h1>app/views/payments/new.js</h1>
+
+<p>var payment;
+jQuery(function() {</p>
+
+<p>  Stripe.setPublishableKey($(&lsquo;meta[name=&ldquo;stripe-key&rdquo;]&rsquo;).attr(&lsquo;content&rsquo;));
+  return payment.setupForm();
+});</p>
+
+<p>payment = {</p>
+
+<p>  setupForm: function() {</p>
+
+<pre><code>$('.head').click(function() {
+  $(this).css('disabled', true);
+
+  if($('#payment_stripe_card_token').val()){
+    $('#payForm').submit();
+  }
+  else{
+    payment.processCard();
+  }
+});
+</code></pre>
+
+<p>  },</p>
+
+<p>  processCard: function() {</p>
+
+<pre><code>var card;
+card = {
+  number: $('#card_number').val(),
+  cvc: $('#card_code').val(),
+  expMonth: $('#card_month').val(),
+  expYear: $('#card_year').val()
+};
+return Stripe.createToken(card, payment.handleStripeResponse);
+</code></pre>
+
+<p>  },
+  handleStripeResponse: function(status, response) {</p>
+
+<pre><code>if (status === 200) {
+  $('#payment_stripe_card_token').val(response.id)
+  $('#stripe_error').remove();
+  $('#payForm').submit();
+} else {
+  $('#stripe_error').addClass('error').text(response.error.message);
+  $('.head').css('disabled', false);
+}
+</code></pre>
+
+<p>  }
+};
+```</p>
+
+<p>Generate &amp; Migrate Payment Model
+<code>
+rails g model payment status:string amount:float email:string transaction_number:string
+rake db:migrate
+</code></p>
+
+<p>Payment Model
+```ruby</p>
+
+<h1>app/models/payment.rb</h1>
+
+<p>class Payment &lt; ActiveRecord::Base
+  PROCESSING, FAILED, SUCCESS = 1, 2, 3</p>
+
+<p>  attr_accessible :stripe_card_token</p>
+
+<p>  validates :amount, :stripe_card_token, :presence => true, :numericality => { :greater_than => 0 }</p>
+
+<p>  def purchase</p>
+
+<pre><code>self.status = PROCESSING
+
+customer = Stripe::Customer.create(description:email, card: stripe_card_token)
+# OPTIONAL: save customer token for further reference
+stripe_customer_token = customer.id
+
+# Charge
+charge = Stripe::Charge.create(
+ :amount =&gt; amount * 100, # $15.00 this time
+ :currency =&gt; "usd",
+ :customer =&gt; stripe_customer_token
+)
+
+if charge.paid
+  self.transaction_num = charge.id
+  self.status = SUCCESS
+else
+  self.status = FAILED
+end
+return self
+</code></pre>
+
+<p>  rescue Exception => e</p>
+
+<pre><code>errors.add :base, "There was a problem with your credit card."
+self.status = FAILED
+return self
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<p>Payments Controller
+```ruby</p>
+
+<h1>app/controllers/payments_controller.rb</h1>
+
+<p>class PaymentsController &lt; ApplicationController
+  def create</p>
+
+<pre><code>@payment = Payment.new(params[:payment])
+
+if @payment.valid? &amp;&amp; @payment.purchase
+  flash[:notice] = 'Thanks for Purchase!'
+  redirect_to root_url
+else
+  render :action =&gt; :new
+end
+</code></pre>
+
+<p>  end
+end
+```</p>
+]]></content>
+  </entry>
+  
+</feed>

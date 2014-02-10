@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ruby | Fun On Rails]]></title>
+  <link href="funonrails.com/categories/ruby/atom.xml" rel="self"/>
+  <link href="funonrails.com/"/>
+  <updated>2014-02-11T02:36:41+05:30</updated>
+  <id>funonrails.com/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[ruby enumerable & to_proc (ampersond & symbol shortcut)]]></title>
+    <link href="funonrails.com/2012/02/ruby-enumerable-toproc-ampersond-colon/"/>
+    <updated>2012-02-23T02:09:00+05:30</updated>
+    <id>funonrails.com/2012/02/ruby-enumerable-toproc-ampersond-colon</id>
+    <content type="html"><![CDATA[<p>Basically Enumerable mixin gives collection classes a variety of traverse, search, sort methods.</p>
+
+<p><strong>Understanding ruby blocks</strong></p>
+
+<blockquote><p>Blocks are statements of code written in ruby. one can take them as similar to c language macro&rsquo;s</p></blockquote>
+
+<p><strong>Different ways to define blocks</strong>
+```ruby
+a = proc do
+  puts &ldquo;hello&rdquo;
+end
+a.call #=> hello</p>
+
+<p>b = lambda do |u|
+  puts &ldquo;hello #{u}&rdquo;
+end
+b.call(&lsquo;sandip&rsquo;)#=> hello sandip</p>
+
+<p>c = proc {|user| puts user }
+c.call(&lsquo;sandip&rsquo;) #=> sandip
+```
+<strong>Passing block to enumerator</strong></p>
+
+<p>Lets assume we have collection array of strings and we want to print it
+```ruby
+a = [&lsquo;hi&rsquo;, &lsquo;sandip&rsquo;, &lsquo;how&rsquo;, &lsquo;you&rsquo;, &lsquo;doing&rsquo;, &lsquo;?&rsquo;]
+=> [&ldquo;hi&rdquo;, &ldquo;sandip&rdquo;, &ldquo;how&rdquo;, &ldquo;you&rdquo;, &ldquo;doing&rdquo;, &ldquo;?&rdquo;]</p>
+
+<p>a.each {|w| puts w }</p>
+
+<p>q = proc {|w| puts w }
+=> #&lt;Proc:0x00007f9d2be13140@(irb):89></p>
+
+<p>a.each(&amp;q) #=>
+hi
+sandip
+how
+you
+doing
+?</p>
+
+<p>a.map{|r| q.call&reg;} #=>
+hi
+sandip
+how
+you
+doing
+?
+```</p>
+
+<p><strong>Understanding symbol#to_proc</strong></p>
+
+<blockquote><p>Symbol has method <code>to_proc</code> which converts symbol to block where symbol is taken as method to be executed on first argument of proc</p></blockquote>
+
+<p><strong> How to_proc got implemented inside Symbol class</strong>
+```ruby
+class Symbol
+  def to_proc</p>
+
+<pre><code>Proc.new { |*args| args.shift.__send__(self, *args) }
+</code></pre>
+
+<p>  end
+end
+<code>
+**Lets have some examples:**
+</code>ruby
+v = :even?.to_proc # equivalent to proc {|a| a.even?}</p>
+
+<h1>=> #&lt;Proc:0x00007f9d2bddcb90@(irb):97></h1>
+
+<p>q = [1, 2, 3, 5, 67]<br/>
+q.map(&amp;v) => [false, true, false, false, false]
+<code>
+ **Is there any shortcut?**
+Yes, there is shortcut to have block passed to enumerators on the fly using ampersand followed by colon (i.e. symbol)
+</code>ruby
+q = [1, 2, 3, 5, 67]<br/>
+q.map(&amp;:even?) &lt;=> q.map(&amp;:even?.to_proc)<br/>
+q.map(&amp;:even?.to_proc)</p>
+
+<h1>=> [false, true, false, false, false]</h1>
+
+<p>q.map(&amp;:even?)</p>
+
+<h1>=> [false, true, false, false, false]</h1>
+
+<p><code>
+**Some handy examples**
+</code>ruby
+[1, 2, 3, 5, 67].inject(&amp;:+) #=> 78
+[1, 2, 3, 5, 67].inject(:+) #=> 78
+[1, 2, 3, 5, 67].any?(&amp;:even?) #=> true
+[1, 2, 3, 5, 67].detect(&amp;:even?) #=> 2
+[&lsquo;ruby&rsquo;, &lsquo;on&rsquo;, &lsquo;rails&rsquo;].map(&amp;:upcase) #=> [&ldquo;RUBY&rdquo;, &ldquo;ON&rdquo;, &ldquo;RAILS&rdquo;]
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[puts, to_s and inspect on ruby object]]></title>
+    <link href="funonrails.com/2012/01/puts-tos-and-inspect-on-ruby-object/"/>
+    <updated>2012-01-31T01:07:00+05:30</updated>
+    <id>funonrails.com/2012/01/puts-tos-and-inspect-on-ruby-object</id>
+    <content type="html"><![CDATA[<p><code>puts</code> converts ruby object into string by invoking to_s method on object. The default to_s prints the object&rsquo;s class and an encoding of the object id. In order to print human readable form of object use inspect
+<code>ruby
+locs = Location.find_by_sql('select * from locations')
+Location Load (0.5ms)  select * from locations
+</code>
+Puts Object internally invokes to_s method on object to print
+```ruby
+locs.each do |l|
+  # it calls to_s method on object
+  puts l
+end</p>
+
+<h1>&lt;Location:0x000000055bb328></h1>
+
+<h1>&lt;Location:0x000000055bb058></h1>
+
+<p>```</p>
+
+<p>puts object followed by subsequent invoke of inspect method outputs readable object
+```ruby
+locs.each do |l|
+  puts l.inspect # prints actual object
+end</p>
+
+<h1><Location id: 15, name: "Annettaside3", street: "71838 Ritchie Cape", city: "East Destanystad", state: "Utah", zip: "58054", phone: 123456, other_phone: 987654, staff_strength: 40, is_active: true, created_at: "2012-01-25 11:17:26", updated_at: "2012-01-25 11:17:26", country_name: "Korea"></h1>
+
+<h1><Location id: 16, name: "Sporerbury4", street: "73057 Jerad Shoal", city: "South Kyliefurt", state: "Delaware", zip: "46553-3376", phone: 123456, other_phone: 987654, staff_strength: 40, is_active: true, created_at: "2012-01-25 11:24:48", updated_at: "2012-01-25 11:24:48", country_name: "Australia"></h1>
+
+<p>```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Bugging around Active Support's Class.class_attribute extension]]></title>
+    <link href="funonrails.com/2011/12/bugging-around-active-supports/"/>
+    <updated>2011-12-28T19:14:00+05:30</updated>
+    <id>funonrails.com/2011/12/bugging-around-active-supports</id>
+    <content type="html"><![CDATA[<p>We all know Active Support library constantly keeps adding new extensions to ruby core library and hence rails framework.
+Do you know now inside ruby class we can have class_attribute placeholder.</p>
+
+<p>```ruby
+class A
+  class_attribute :counter, :access_time
+end</p>
+
+<p>A.counter = 12
+A.counter #=> 12
+A.new.counter #=> 12
+```</p>
+
+<p>Inheritance
+```ruby
+class B &lt; A
+end</p>
+
+<p>B.counter #=> 12
+B.access_time #=> nil
+B.access_time = Time.now
+B.access_time #=> Wed Dec 28 18:55:06 +0530 2011
+B.new.access_time #=> Wed Dec 28 18:55:06 +0530 2011
+A.access_time = nil
+```</p>
+
+<p>Restricting instance from writing class_attributes
+```ruby
+class V
+  class_attribute :counter, :instance_writer => false
+end</p>
+
+<p>V.new.counter = 12
+NoMethodError: undefined method `counter=&lsquo; for #&lt;#&lt;Class:0x7f8f9d5c2fb8>:0x7f8f9d5b1038>
+<code>
+Other ways
+</code>ruby
+a_class = Class.new{class_atrribute :counter}</p>
+
+<p>a_class.counter = 13
+a_class.counter #=> 13
+a_class.new.counter #=> 13</p>
+
+<p>p = Class.new { class_attribute :help, :instance_writer => false }
+p.new.help = &lsquo;Got a second!&rsquo;
+NoMethodError: undefined method `help=&lsquo; for #&lt;#:0x7f8f9d5b1038>
+p.help = 'Got a second!&rsquo;
+p.help #=> &ldquo;Got a second!&rdquo;
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Dynamic methods inside ruby classes]]></title>
+    <link href="funonrails.com/2011/12/dynamic-methods-inside-ruby-classes/"/>
+    <updated>2011-12-22T17:54:00+05:30</updated>
+    <id>funonrails.com/2011/12/dynamic-methods-inside-ruby-classes</id>
+    <content type="html"><![CDATA[<p>Ruby language is dynamic and robust. We can define methods inside ruby classes at runtime.</p>
+
+<p>```ruby
+class A
+  define_method :a do</p>
+
+<pre><code>puts "hello"
+</code></pre>
+
+<p>  end</p>
+
+<p>  define_method :greeting do |message|</p>
+
+<pre><code>puts message
+</code></pre>
+
+<p>  end
+end</p>
+
+<p>A.new.a #=> hello
+A.new.greeting &lsquo;Ram ram&rsquo; #=> Ram ram
+```</p>
+
+<p>Can you imagine using dynamic methods below 24 lines of code is optimized to just 8 lines
+To know more on below code <a href="http://www.funonrails.com/2011/12/multiple-resources-registrations-with">read</a></p>
+
+<h3>Before code</h3>
+
+<p>```ruby
+class ApplicationController &lt; ActionController::Base
+  protect_from_forgery
+  helper_method :current_staff, :current_employee, current_admin</p>
+
+<p>  def authenticate_staff!(opts={})</p>
+
+<pre><code>current_staff || not_authorized
+</code></pre>
+
+<p>  end</p>
+
+<p>  def current_staff</p>
+
+<pre><code>current_user if current_user.is_a? Staff
+</code></pre>
+
+<p>  end</p>
+
+<p>  def authenticate_employee!(opts={})</p>
+
+<pre><code>current_employee || not_authorized
+</code></pre>
+
+<p>  end</p>
+
+<p>  def current_employee</p>
+
+<pre><code>current_user if current_user.is_a? Employee
+</code></pre>
+
+<p>  end</p>
+
+<p>  def authenticate_admin!(opts={})</p>
+
+<pre><code>current_admin || not_authorized
+</code></pre>
+
+<p>  end</p>
+
+<p>  def current_admin</p>
+
+<pre><code>current_user if current_user.is_a? Admin
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<h3>After code</h3>
+
+<p>```ruby</p>
+
+<h1>New Version using dynamic methods</h1>
+
+<p>%w(Staff Employee Admin).each do |k|
+  define_method &ldquo;current_#{k.underscore}&rdquo; do</p>
+
+<pre><code>current_user if current_user.is_a?(k.constantize)
+</code></pre>
+
+<p>  end</p>
+
+<p>  define_method &ldquo;authenticate_#{k.underscore}!&rdquo; do |opts={}|</p>
+
+<pre><code>send("current_#{k.underscore}") || not_authorized
+</code></pre>
+
+<p>  end
+end
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Active Record Inheritance in Rails (ARI)]]></title>
+    <link href="funonrails.com/2010/12/active-record-inheritance-in-rails-ari/"/>
+    <updated>2010-12-09T01:28:00+05:30</updated>
+    <id>funonrails.com/2010/12/active-record-inheritance-in-rails-ari</id>
+    <content type="html"><![CDATA[<p><a href="http://www.scribd.com/doc/44922200/Active-Record-Inheritance-ARI" style="display: block; font: 14px Helvetica,Arial,Sans-serif; margin: 12px auto 6px; text-decoration: underline;" title="View Active Record Inheritance (ARI) on Scribd">Active Record Inheritance (ARI)</a> <object data="http://d1.scribdassets.com/ScribdViewer.swf" height="600" id="doc_427046804884780" name="doc_427046804884780" style="outline: medium none;" type="application/x-shockwave-flash" width="100%">  <param name="movie" value="http://d1.scribdassets.com/ScribdViewer.swf">  <param name="wmode" value="opaque">   <param name="bgcolor" value="#ffffff">   <param name="allowFullScreen" value="true">   <param name="allowScriptAccess" value="always">   <param name="FlashVars" value="document_id=44922200&access_key=key-2ix0qbm381eltbaykpu7&page=1&viewMode=list">   <embed id="doc_427046804884780" name="doc_427046804884780" src="http://d1.scribdassets.com/ScribdViewer.swf?document_id=44922200&access_key=key-2ix0qbm381eltbaykpu7&page=1&viewMode=list" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" height="600" width="100%" wmode="opaque" bgcolor="#ffffff"></embed>  </object></p>
+]]></content>
+  </entry>
+  
+</feed>

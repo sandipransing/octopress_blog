@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: active-scaffold | Fun On Rails]]></title>
+  <link href="funonrails.com/categories/active-scaffold/atom.xml" rel="self"/>
+  <link href="funonrails.com/"/>
+  <updated>2014-02-11T02:36:41+05:30</updated>
+  <id>funonrails.com/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Setup Active Scaffold with rails 3 using jQuery]]></title>
+    <link href="funonrails.com/2011/04/setup-active-scaffold-with-rails-3/"/>
+    <updated>2011-04-08T18:27:00+05:30</updated>
+    <id>funonrails.com/2011/04/setup-active-scaffold-with-rails-3</id>
+    <content type="html"><![CDATA[<p>Create new rails project
+<code>
+rails new demo -d mysql
+</code></p>
+
+<p>Add active_scaffold gem to bundler
+<code>
+gem "active_scaffold_vho"
+</code></p>
+
+<p>Run bundle install command
+<code>
+bundle install
+</code></p>
+
+<p>Setup active scaffold to use jQuery
+```
+rails g active_scaffold_setup jquery</p>
+
+<pre><code>  create  public/javascripts/rails_jquery.js
+  create  public/javascripts/jquery-ui-timepicker-addon.js
+  create  config/initializers/active_scaffold.rb
+  insert  app/views/layouts/application.html.erb
+  insert  config/locales/en.yml
+  gsub  app/views/layouts/application.html.erb
+</code></pre>
+
+<p>```</p>
+
+<p>Generate active scaffold for resource city &amp; zone
+```
+rails g active_scaffold City name:string</p>
+
+<pre><code>  invoke  active_record
+  create    db/migrate/20110408123206_create_cities.rb
+  create    app/models/city.rb
+  invoke    test_unit
+  create      test/unit/city_test.rb
+  create      test/fixtures/cities.yml
+  route  resources :cities do as_routes end
+  invoke  active_scaffold_controller
+  create    app/controllers/cities_controller.rb
+  create    app/helpers/cities_helper.rb
+  invoke    test_unit
+  create    test/functional/cities_controller_test.rb
+  create    app/views/cities
+</code></pre>
+
+<p><code>
+</code>
+rails g active_scaffold Zone name:string city:references</p>
+
+<pre><code>  invoke  active_record
+  create    db/migrate/20110408123531_create_zones.rb
+  create    app/models/zone.rb
+  invoke    test_unit
+  create      test/unit/zone_test.rb
+  create      test/fixtures/zones.yml
+   route  resources :zones do as_routes end
+  invoke  active_scaffold_controller
+  create    app/controllers/zones_controller.rb
+  create    app/helpers/zones_helper.rb
+  invoke    test_unit
+  create      test/functional/zones_controller_test.rb
+  create    app/views/zones
+</code></pre>
+
+<p>```</p>
+
+<p>Add Associations
+```
+class City &lt; ActiveRecord::Base
+ end</p>
+
+<p> class Zone &lt; ActiveRecord::Base
+   belongs_to :city
+ end</p>
+
+<p> class City &lt; ActiveRecord::Base
+   has_many :zones
+ end
+```</p>
+
+<p>Migrate database
+```
+rake db:create</p>
+
+<p>rake db:migrate
+  ==  CreateCities: migrating ===================================
+  &mdash; create_table(:cities)
+   &ndash;> 0.1411s
+  ==  CreateCities: migrated (0.1413s) ==========================</p>
+
+<p>  ==  CreateZones: migrating ====================================
+  &mdash; create_table(:zones)
+   &ndash;> 0.1507s
+  ==  CreateZones: migrated (0.1510s) ===========================
+```</p>
+
+<p>Start Server
+<code>
+rails s
+</code></p>
+
+<p>Visit Browser URL: <a href="http://localhost:3000/cities">http://localhost:3000/cities</a></p>
+
+<p><img class="left <a" src="href="http://4.bp.blogspot.com/-CJgSXg5EJyE/TZ8EDHwCwaI/AAAAAAAABPs/81dNxWDwYm0/s1600/active_scaffold.png">http://4.bp.blogspot.com/-CJgSXg5EJyE/TZ8EDHwCwaI/AAAAAAAABPs/81dNxWDwYm0/s1600/active_scaffold.png</a>"></p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: enumerable | Fun On Rails]]></title>
+  <link href="funonrails.com/categories/enumerable/atom.xml" rel="self"/>
+  <link href="funonrails.com/"/>
+  <updated>2014-02-11T02:36:41+05:30</updated>
+  <id>funonrails.com/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[ruby enumerable & to_proc (ampersond & symbol shortcut)]]></title>
+    <link href="funonrails.com/2012/02/ruby-enumerable-toproc-ampersond-colon/"/>
+    <updated>2012-02-23T02:09:00+05:30</updated>
+    <id>funonrails.com/2012/02/ruby-enumerable-toproc-ampersond-colon</id>
+    <content type="html"><![CDATA[<p>Basically Enumerable mixin gives collection classes a variety of traverse, search, sort methods.</p>
+
+<p><strong>Understanding ruby blocks</strong></p>
+
+<blockquote><p>Blocks are statements of code written in ruby. one can take them as similar to c language macro&rsquo;s</p></blockquote>
+
+<p><strong>Different ways to define blocks</strong>
+```ruby
+a = proc do
+  puts &ldquo;hello&rdquo;
+end
+a.call #=> hello</p>
+
+<p>b = lambda do |u|
+  puts &ldquo;hello #{u}&rdquo;
+end
+b.call(&lsquo;sandip&rsquo;)#=> hello sandip</p>
+
+<p>c = proc {|user| puts user }
+c.call(&lsquo;sandip&rsquo;) #=> sandip
+```
+<strong>Passing block to enumerator</strong></p>
+
+<p>Lets assume we have collection array of strings and we want to print it
+```ruby
+a = [&lsquo;hi&rsquo;, &lsquo;sandip&rsquo;, &lsquo;how&rsquo;, &lsquo;you&rsquo;, &lsquo;doing&rsquo;, &lsquo;?&rsquo;]
+=> [&ldquo;hi&rdquo;, &ldquo;sandip&rdquo;, &ldquo;how&rdquo;, &ldquo;you&rdquo;, &ldquo;doing&rdquo;, &ldquo;?&rdquo;]</p>
+
+<p>a.each {|w| puts w }</p>
+
+<p>q = proc {|w| puts w }
+=> #&lt;Proc:0x00007f9d2be13140@(irb):89></p>
+
+<p>a.each(&amp;q) #=>
+hi
+sandip
+how
+you
+doing
+?</p>
+
+<p>a.map{|r| q.call&reg;} #=>
+hi
+sandip
+how
+you
+doing
+?
+```</p>
+
+<p><strong>Understanding symbol#to_proc</strong></p>
+
+<blockquote><p>Symbol has method <code>to_proc</code> which converts symbol to block where symbol is taken as method to be executed on first argument of proc</p></blockquote>
+
+<p><strong> How to_proc got implemented inside Symbol class</strong>
+```ruby
+class Symbol
+  def to_proc</p>
+
+<pre><code>Proc.new { |*args| args.shift.__send__(self, *args) }
+</code></pre>
+
+<p>  end
+end
+<code>
+**Lets have some examples:**
+</code>ruby
+v = :even?.to_proc # equivalent to proc {|a| a.even?}</p>
+
+<h1>=> #&lt;Proc:0x00007f9d2bddcb90@(irb):97></h1>
+
+<p>q = [1, 2, 3, 5, 67]<br/>
+q.map(&amp;v) => [false, true, false, false, false]
+<code>
+ **Is there any shortcut?**
+Yes, there is shortcut to have block passed to enumerators on the fly using ampersand followed by colon (i.e. symbol)
+</code>ruby
+q = [1, 2, 3, 5, 67]<br/>
+q.map(&amp;:even?) &lt;=> q.map(&amp;:even?.to_proc)<br/>
+q.map(&amp;:even?.to_proc)</p>
+
+<h1>=> [false, true, false, false, false]</h1>
+
+<p>q.map(&amp;:even?)</p>
+
+<h1>=> [false, true, false, false, false]</h1>
+
+<p><code>
+**Some handy examples**
+</code>ruby
+[1, 2, 3, 5, 67].inject(&amp;:+) #=> 78
+[1, 2, 3, 5, 67].inject(:+) #=> 78
+[1, 2, 3, 5, 67].any?(&amp;:even?) #=> true
+[1, 2, 3, 5, 67].detect(&amp;:even?) #=> 2
+[&lsquo;ruby&rsquo;, &lsquo;on&rsquo;, &lsquo;rails&rsquo;].map(&amp;:upcase) #=> [&ldquo;RUBY&rdquo;, &ldquo;ON&rdquo;, &ldquo;RAILS&rdquo;]
+```</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: linux | Fun On Rails]]></title>
+  <link href="funonrails.com/categories/linux/atom.xml" rel="self"/>
+  <link href="funonrails.com/"/>
+  <updated>2014-02-11T02:36:41+05:30</updated>
+  <id>funonrails.com/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Auto login remote server by copying ssh public key to authorized keys]]></title>
+    <link href="funonrails.com/2011/02/auto-login-remote-server-by-copying-ssh/"/>
+    <updated>2011-02-03T16:21:00+05:30</updated>
+    <id>funonrails.com/2011/02/auto-login-remote-server-by-copying-ssh</id>
+    <content type="html"><![CDATA[<p>While working on remote machine we often get headache of entering password for ssh login, scp files from one server to another server. Adding public key as authorized_keys on remote server solves this problem.</p>
+
+<h2>Copying from my system to remote server</h2>
+
+<p><code>
+cat ~/.ssh/id_rsa.pub | ssh sandip@server 'cat &gt;&gt; ~/.ssh/authorized_keys'
+</code></p>
+
+<h2>Copying from remote server to my system</h2>
+
+<p><code>
+ssh server 'cat ~/.ssh/id_rsa.pub' | cat &gt;&gt; ~/.ssh/id_rsa_client.pub
+</code></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Installing and running cronjob (crontab basics)]]></title>
+    <link href="funonrails.com/2011/01/installing-and-running-cronjob-crontab/"/>
+    <updated>2011-01-20T13:50:00+05:30</updated>
+    <id>funonrails.com/2011/01/installing-and-running-cronjob-crontab</id>
+    <content type="html"><![CDATA[<p>Basic handy commands while working with crontabs</p>
+
+<h2>Editing cron file</h2>
+
+<p><code>
+crontab -e
+</code></p>
+
+<h2>Displaying cron file</h2>
+
+<p><code>
+crontab -l
+</code></p>
+
+<h2>Removing cron file</h2>
+
+<p><code>
+crontab -r
+</code></p>
+
+<h2>Cron syntax</h2>
+
+<blockquote><p>cron command basically takes 6 input parameters of which each input can take multiple arguments for that one can make use of comma or pipe separator</p></blockquote>
+
+<p>```</p>
+
+<h1>min hour dom mon dow   command</h1>
+
+<ul>
+<li><ul>
+<li><ul>
+<li><ul>
+<li><ul>
+<li>(command)
+```</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<p>Here * means for every. Above command will get executed for every minute</p>
+
+<h2>Detail syntax</h2>
+
+<p>```
+*     *     *   *    *        command to be executed</p>
+
+<hr />
+
+<p>|     |     |   |    |
+|     |     |   |    +&mdash;&mdash;&ndash; day of week (0 &ndash; 6) (Sunday=0)
+|     |     |   +&mdash;&mdash;&mdash;&ndash; month (1 &ndash; 12)
+|     |     +&mdash;&mdash;&mdash;&mdash;&ndash; day of month (1 &ndash; 31)
+|     +&mdash;&mdash;&mdash;&mdash;&mdash; hour (0 &ndash; 23)
++&mdash;&mdash;&mdash;&ndash; min (0 &ndash; 59)
+```</p>
+
+<h2>Example commands</h2>
+
+<p>```</p>
+
+<h1>Generate progressive report for every active user at 11:45 p.m.</h1>
+
+<p>45 23 * * * (cd /home/sandip/current/; rake ace:daily_progressive_report RAILS_ENV=production)</p>
+
+<h1>Take database backup every night</h1>
+
+<p>59 2 * * * (cd /home/sandip/current/; rake db:backup RAILS_ENV=production)</p>
+
+<h1>Initialize grouping on database every sunday</h1>
+
+<p>29 3 * * 0 (cd /home/sandip/current/; rake ace:initializeCarGrouping RAILS_ENV=production)</p>
+
+<h1>Generate daily stats on 4:30 AM &amp; 12:30 PM and 4:30 PM</h1>
+
+<p>30 4,12,16 * * * (cd /home/sandip/current/; rake ace:daily_call_statistics RAILS_ENV=production)</p>
+
+<h1>Rotate sphinx indexes updated evry hour if missed out somehow</h1>
+
+<p>0 * * * * (cd /user/local/bin/; indexer &mdash;rotate &mdash;config /home/sandip/current/config/production.sphinx.conf)
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Programming ruby Linux basics]]></title>
+    <link href="funonrails.com/2010/03/remove-svn-files-inside-directory-rm-rf/"/>
+    <updated>2010-03-02T12:29:00+05:30</updated>
+    <id>funonrails.com/2010/03/remove-svn-files-inside-directory-rm-rf</id>
+    <content type="html"><![CDATA[<div class='post'>
+<b>Remove svn files inside directory</b><br /><b><span class="Apple-style-span" style="font-weight: normal;">rm -rf `find . -type d -name .svn</span></b><br /><b><br /></b><br /><b>Set path in linux</b><br /><b><span class="Apple-style-span" style="font-weight: normal;">export PATH=$PATH:/usr/ruby/bin</span></b><br />Here <b>/usr/ruby/bin</b> is the path to ruby extecuatble.  <br /><br /><b>grep and print process pid</b><br /><b><span class="Apple-style-span" style="font-weight: normal;">ps -ef | grep search_string | grep -v grep | awk '{print &nbsp;$2 }'</span></b><br /><b><br /></b><br /><b>Kill process</b><br /><b><span class="Apple-style-span" style="font-weight: normal;">kill -9 process_id_here</span></b><br /><b><span class="Apple-style-span" style="font-weight: normal;">ps -ef | grep search_string | grep -v grep | awk '{print &nbsp;$2 }' | xargs kill -9</span></b><br /><b><br /></b><br /><b>Store pid of process in a variable for further process</b><br /><b><span class="Apple-style-span" style="font-weight: normal;">tokill=`ps -ef|grep ruby|grep -v grep|awk '{print $2}'`;kill -9 $tokill;</span></b><br /><b><span class="Apple-style-span"><br /></span></b><br /><b><span class="Apple-style-span">Mirror a website</span></b><br />Command to clone/copy a website for offline/local browsing.<br />wget -mk www.funonrails.com<br /><br />Above command downloads all website pages in depth level with stylesheets, images and javascripts.</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Find processor (cpu) information on linux]]></title>
+    <link href="funonrails.com/2009/10/find-processor-cpu-information-on-linux/"/>
+    <updated>2009-10-26T23:49:00+05:30</updated>
+    <id>funonrails.com/2009/10/find-processor-cpu-information-on-linux</id>
+    <content type="html"><![CDATA[<div class='post'>
+Here is the command<br/><br/><blockquote>cat /proc/cpuinfo</blockquote><br/><br/>Example use on my ubuntu machine, It shows me.<br/><br/><br/><br/><blockquote><pre class=ruby>cat /proc/cpuinfo<br/>processor : 0<br/>vendor_id : GenuineIntel<br/>cpu family : 6<br/>model  : 15<br/>model name : Intel(R) Pentium(R) Dual  CPU  T2330  @ 1.60GHz<br/>stepping : 13<br/>cpu MHz  : 800.000<br/>cache size : 1024 KB<br/>physical id : 0<br/>siblings : 2<br/>core id  : 0<br/>cpu cores : 2<br/>apicid  : 0<br/>initial apicid : 0<br/>fdiv_bug : no<br/>hlt_bug  : no<br/>f00f_bug : no<br/>coma_bug : no<br/>fpu  : yes<br/>fpu_exception : yes<br/>cpuid level : 10<br/>wp  : yes<br/>flags  : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe nx lm constant_tsc arch_perfmon pebs bts pni monitor ds_cpl est tm2 ssse3 cx16 xtpr lahf_lm<br/>bogomips : 3191.95<br/>clflush size : 64<br/>power management:<br/><br/>processor : 1<br/>vendor_id : GenuineIntel<br/>cpu family : 6<br/>model  : 15<br/>model name : Intel(R) Pentium(R) Dual  CPU  T2330  @ 1.60GHz<br/>stepping : 13<br/>cpu MHz  : 800.000<br/>cache size : 1024 KB<br/>physical id : 0<br/>siblings : 2<br/>core id  : 1<br/>cpu cores : 2<br/>apicid  : 1<br/>initial apicid : 1<br/>fdiv_bug : no<br/>hlt_bug  : no<br/>f00f_bug : no<br/>coma_bug : no<br/>fpu  : yes<br/>fpu_exception : yes<br/>cpuid level : 10<br/>wp  : yes<br/>flags  : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe nx lm constant_tsc arch_perfmon pebs bts pni monitor ds_cpl est tm2 ssse3 cx16 xtpr lahf_lm<br/>bogomips : 3192.03<br/>clflush size : 64<br/>power management:</pre><br/></blockquote></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to find OS X version on linux machine]]></title>
+    <link href="funonrails.com/2009/10/how-to-find-os-x-version-on-linux/"/>
+    <updated>2009-10-26T23:35:00+05:30</updated>
+    <id>funonrails.com/2009/10/how-to-find-os-x-version-on-linux</id>
+    <content type="html"><![CDATA[<div class='post'>
+Here is the command which will give you OS name with version along with other detail information.<br/><br/><blockquote><pre class=ruby>cat /etc/*release*</pre></blockquote><br/><br/>Example: On my ubutnu machine, It shows me.<br/><br/><br/><blockquote><br/><pre class=ruby>cat /etc/*release*<br/>DISTRIB_ID=Ubuntu<br/>DISTRIB_RELEASE=8.10<br/>DISTRIB_CODENAME=intrepid<br/>DISTRIB_DESCRIPTION="Ubuntu 8.10"</pre></blockquote></div>
+
+]]></content>
+  </entry>
+  
+</feed>

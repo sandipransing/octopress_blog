@@ -1,0 +1,426 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="There are almost 4 to 5 simple steps you need to followed beforegetting multiple sites working using radiant cms1. Setup radiant cms first Install &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="funonrails.com/page/14">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="http://feeds.feedburner.com/funonrails" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+
+  
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="http://feeds.feedburner.com/funonrails" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="sandip@funonrails.com" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:funonrails.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/contact">Contact</a></li>
+  <li><a href="/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/08/multiple-sites-hosting-using-radiant/">Multiple Sites Hosting Using Radiant Cms</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-08-07T20:49:00+05:30" pubdate data-updated="true">Aug 7<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+There are almost 4 to 5 simple steps you need to followed before<br />getting multiple sites working using radiant cms<br />1. Setup radiant cms <br />first Install radiant gem<br /><pre class="ruby" name="code">sudo gem install radiant</pre><br />set &#8216;radiant&#8217; under path<br /><pre class="ruby" name="code">export PATH=$PATH:/var/lib/gems/1.8/gems/radiant-0.8.0/bin</pre><br />Now, we have done with radiant installation.<br />Let&#8217;s create new project..<br /><pre class="ruby" name="code">$ radiant multisite -d mysql</pre><br /><pre class="ruby" name="code">$ cd multisite/</pre><br />Edit database.yml<br /><pre class="ruby" name="code">$ vi config/database.yml<br />development:<br />  adapter: mysql<br />  database: multisite_development<br />  username: root<br />  password: abcd<br />  host: localhost</pre><br />Migrations<br /><pre class="ruby" name="code">rake db:create</pre><br />Run the database bootstrap rake task:<br /><pre class="ruby" name="code">rake db:bootstrap<br />This task will destroy any data in the database. Are you sure you want</pre><pre class="ruby" name="code">to continue? [yn] yes<br />...<br />Create the admin user (press enter for defaults).<br />Name (Administrator): admin<br />Username (admin): admin<br />Password (radiant): <br />....<br />Select a database template:<br />1. Empty<br />2. Roasters (a coffee-themed blog or brochure)<br />3. Simple Blog<br />4. Styled Blog<br />[1-4]: 2<br />....</pre><br />Now we are ready to start<br /><pre class="ruby" name="code">script/server</pre><br />Open following URL in browser.<br /><pre class="ruby" name="code">http://localhost:3000</pre><br />You should see site homepage.&nbsp;To manage site goto admin panel.<br /><pre class="ruby" name="code"></pre><pre class="ruby" name="code">http://localhost:3000/admin</pre><br />Now Lets start with multiple sites management<br />1) Clone multi_site extension into vendor/extensions of your project.<br /><pre class="ruby" name="code">  cd vendor/extensions/<br />  git clone git://github.com/zapnap/radiant-multi-site-extension.git multi_site</pre><br />2) Run the extension migrations.<br /><pre class="ruby" name="code">  rake db:migrate:extensions</pre><br />3) Run the extension update task.<br /><pre class="ruby" name="code">  rake radiant:extensions:multi_site:update</pre><br />4) Restart your server<br />And we are done with multisite installation,&nbsp;Open following URL in browser.<br /><br />http://localhost:3000/admin/sites<br /><br />Add multiple sites as you wanted<br /><pre class="ruby" name="code"> Name        Domain pattern     Base domain name<br /><br />================================================<br /><br /> site 1      sandip             sandip<br /><br /> site 2      gautam             gautam<br /><br /> </pre>Don&#8217;t forget to make dns entries in /etc/hosts.<br />vi /etc/hosts<br /><pre class="ruby" name="code"> <br />127.0.0.1 localhost<br />...<br />127.0.0.1 sandip<br />127.0.0.1 gautam<br /></pre>One more, by deault pages created for new sites added are not published.<br />Please be sure to make them published and modify contents to identify them<br /><br />Now you can view different sites.<br /><b>     http://sandip:3000<br />   http://gautam:3000<br /> </b><br /><br />Thats, All<br />Cheers !<br />$@ndip</div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Vic</div>
+<div class='content'>
+Super Simple!  Great!</div>
+</div>
+<div class='comment'>
+<div class='author'>gautamrege</div>
+<div class='content'>
+Great work!</div>
+</div>
+<div class='comment'>
+<div class='author'>sandipransing</div>
+<div class='content'>
+@jim, Thanks for your suggestion.<br>I will make those changes.</div>
+</div>
+<div class='comment'>
+<div class='author'>Jim Gay</div>
+<div class='content'>
+you can skip a few steps by doing &quot;script/extension install multi_site&quot;</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/08/spell-check-in-ruby-and-rails-using/">Spell Check in Ruby and Rails Using BOSSMan</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-08-04T02:26:00+05:30" pubdate data-updated="true">Aug 4<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+Wrong English is an often problem while developing any website product as it gives bad view to website user and thus does direct impact on product.  <b>BOSSMan</b> is a ruby gem that interacts with <b>yahoo web service</b> and provides a simplest way to overcome such errors.<br /><b>Installation:</b><br /><pre class=ruby>gem sources -a http://gems.github.com gem install jpignata-bossman </pre><b>Apply and get Application ID from yahoo developer network</b><pre class=ruby><b>URl</b> https://developer.apps.yahoo.com/</pre>Make sure to note it for reference<br /><b>Usage in ruby app</b><br /><pre class=ruby>require 'rubygems' require 'bossman' include BOSSMan  BOSSMan.application_id = "Your Application ID here" </pre><br /><b>Spelling Suggestions</b><br /><pre class=ruby>text = BOSSMan::Search.spelling("gooogle") =&gt; #<bossman::resultset:0xa993b44 ,="" @count="1" @deephits="1" @response="{&quot;ysearchresponse&quot;=" @responsecode="200" @start="0" @suggestion="google" @totalhits="1">{"resultset_spell"=&gt;[{"suggestion"=&gt;"google"}], "responsecode"=&gt;"200", "deephits"=&gt;"1", "start"=&gt;"0", "count"=&gt;"1", "totalhits"=&gt;"1"}}&gt;  text.suggestion  =&gt; "google" </bossman::resultset:0xa993b44></pre><br /><b>More sophisticated way of use -</b><br />1. Create a YML file containing list of kewords <br />2. Load YML file <br />3. Iterate YML hash to find out spell suggestions<br /><b>Example: spelling.yml</b><br /><pre class=ruby>  1 keywords:   2   gooogle:   3   Barack Oabama:   4   Indian:   5   Latuur: </pre><br /><pre class=ruby>keywords = YAML.load_file('spelling.yml')['keywords'].keys    puts "Correction suggested"   keywords.each do |keyword|     text = BOSSMan::Search.spelling(keyword)     if defined? text.suggestion       puts "#{keyword} =&gt; #{text.suggestion}"     end   end </pre><br /><b>Output</b><br /><pre class=ruby>Correction suggested gooogle =&gt; google Barack Oabama =&gt; Barack Obama Latuur =&gt; Latour </pre><br />Analyze suggestions manually and make neccesary corrections..</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/08/rails-3-beautiful-code/">Rails 3 Beautiful Code</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-08-02T14:57:00+05:30" pubdate data-updated="true">Aug 2<span>nd</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+Check out this SlideShare Presentation: <div style="width:425px" id="__ss_3219240"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/GreggPollack/rails-3-beautiful-code-3219240" title="Rails 3 Beautiful Code">Rails 3 Beautiful Code</a></strong><object id="__sse3219240" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=beautifulcodeinrails3-greggpollack-100218130149-phpapp02&stripped_title=rails-3-beautiful-code-3219240" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse3219240" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=beautifulcodeinrails3-greggpollack-100218130149-phpapp02&stripped_title=rails-3-beautiful-code-3219240" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/GreggPollack">GreggPollack</a>.</div></div></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/08/pdf-in-rails-using-prawn-library/">PDF in Rails Using Prawn Library</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-08-01T16:45:00+05:30" pubdate data-updated="true">Aug 1<span>st</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+Building PDF Document in ruby &amp; rails application using prawn Library<br /><b>Brief</b><br />Before getting started with this tutorial, I would like to thanks <b>Greg and <br />Prawn team</b> for their awesome work towards ruby and rails community. <br />Installing prawn (core, layout, format, security) <br /><pre class=ruby>gem install prawn</pre>or <br />Add following line in rails environment file inside initializer block. <pre class=ruby>config.gem 'prawn'</pre>Optionally you can specify version to be used and then run task <pre class=ruby>rake gems:install</pre>Generating pdf using rails console <pre class=ruby>./script/console pdf = Prawn::Document.new </pre>It creates new pdf document object. Here you can additionally pass options parameters such as - <pre class=ruby>Prawn::Document.new(:page_size   =&gt; [11.32, 8.49], :page_layout =&gt; :portrait) Prawn::Document.new(A0) Here A0 is page size. Prawn::Document.new(:page_layout =&gt; :portrait,                      :left_margin =&gt; 10.mm,    # different                      :right_margin =&gt; 1.cm,    # units                      :top_margin =&gt; 0.1.dm,    # work                      :bottom_margin =&gt; 0.01.m, # well                      :page_size =&gt; 'A4')  pdf.text("Prawn Rocks") =&gt; 12  pdf.render_file('prawn.pdf') =&gt; #<file:prawn.pdf (closed)=""></file:prawn.pdf></pre>Here is output file generated [<a href="http://github.com/sandipransing/prawn-example/raw/master/sample/prawn.pdf">click</a>] <br />Now let&#8217;s go through other goodness of prawn. <pre class=ruby>pdf  = Prawn::Document.new('A3') do </pre><br /><ol><li>FONTS [<a href="http://github.com/sandipransing/prawn-example/raw/master/sample/font.pdf">click</a>]</li><pre class=ruby># Specify font to be used or specify path to font file. font "times.ttf" font("/times.ttf") </pre><li>TEXT [<a href="http://github.com/sandipransing/prawn-example/raw/master/sample/font.pdf">click</a>]</li><pre class=ruby>text 'Sandip Ransing', :size =&gt; 41, :position =&gt; :center, :style =&gt; :bold </pre><li>STROKE LINE [<a href="http://github.com/sandipransing/prawn-example/raw/master/sample/stroke.pdf">click</a>]</li><pre class=ruby>stroke do       rectangle [300,300], 100, 200  end </pre><li>IMAGE [<a href="http://github.com/sandipransing/prawn-example/raw/master/sample/image.pdf">click</a>]</li>Display Local file system Image <pre class=ruby>image 'sandip.png', :height =&gt; 50, :position =&gt; :center, :border =&gt; 2 </pre>Scale Image <pre class=ruby>image 'sandip.png', :scale =&gt; 0.5, :position =&gt; :left </pre>Display Remote image from Internet inside pdf <pre class=ruby>require "open-uri"  image open('http://t2.gstatic.com/images?q=tbn:kTG6gAKrnou2gM:http://www.facebook.com/profile/pic.php?uid=AAAAAQAQrLXvTWfyY2ANjttV8D1c0QAAAAnDHPFJe0pPFR84iIzXPKro&amp;t=1") end </pre><li>LINE BREAKS</li><pre class=ruby>movedown(20) </pre><li>TABLE/GRID [<a href="http://github.com/sandipransing/prawn-example/raw/master/sample/table.pdf">click</a>]</li><pre class=ruby>data = [     ["Name", {:text =&gt; 'Sandip Ransing', :font_style =&gt; :bold, :colspan =&gt; 4 }],     ["Address", {:text =&gt; 'SHIVAJINAGAR, PUNE 411005', :colspan =&gt; 4 }],     ["Landmark",{:text =&gt; 'NEAR FC COLLEGE', :colspan =&gt; 4 }],     ["Mobile","9860648108", {:text =&gt; "", :colspan =&gt; 3 }],     ["Education", {:text =&gt; "Bachelor in Computer Engineering", :colspan =&gt; 4 }],       ["Vehicle", 'Hero Honda',"Reg. No.", {:text =&gt; "MH 12 EN 921", :colspan =&gt; 3 }],       ["Additional", "GDCA", "class", 'First', ""],       [{:text =&gt; "Areas of Speciality", :font_style =&gt; :bold}, {:text =&gt; "Ruby, Rails, Radiant, Asterisk, Adhearsion, Geokit, Prawn, ....,...", :font_style =&gt; :bold, :colspan =&gt; 4}],       [{:text =&gt; "Website", :colspan =&gt; 2},{:text =&gt; "www.funonrails.com", :colspan =&gt; 3}],       [{:text =&gt; "Company", :colspan =&gt; 2},{:text =&gt; "Josh Software", :colspan =&gt; 3}]   ] table data,      :border_style =&gt; :grid, #:underline_header     :font_size  =&gt; 10,      :horizontal_padding =&gt; 6,     :vertical_padding   =&gt; 3,     :border_width =&gt; 0.7,      :column_widths =&gt; { 0 =&gt; 130, 1 =&gt; 100, 2 =&gt; 100, 3 =&gt; 100, 4 =&gt; 80 },      :position =&gt; :left,     :align =&gt; { 0 =&gt; :left, 1 =&gt; :right, 2 =&gt; :left, 3 =&gt; :right, 4 =&gt; :right } </pre><li>LINKS [<a href="http://github.com/sandipransing/prawn-example/raw/master/sample/link.pdf">click</a>]</li><pre class=ruby>link_annotation([200, 200, 500, 40],:Border =&gt; [0,0,1], :A =&gt; { :Type =&gt; :Action, :S =&gt; :URI, :URI =&gt; Prawn::LiteralString.new("http://twitter.com/sandipransing") } ) link_annotation(([0, 100, 100, 150]), :Border =&gt; [0,0,1], :Dest =&gt; s"http://funonrails.com") </pre><li>PDF Security [<a href="http://github.com/sandipransing/prawn-example/raw/master/sample/secure.pdf">click</a>]</li><pre class=ruby>encrypt_document :user_password =&gt; 'hello', :owner_password =&gt; 'railer',     :permissions =&gt; { :print_document =&gt; false } </pre><li>Prawn Inline Formatting</li>Prawn-format supports inline text formatting that gives user enough flexibility to use html tags. <pre class=ruby>require 'prawn/format' text 'This is <b>Strong </b> text', :inline_format =&gt; true text 'This is <b>bold</b> text \n It should be on newline.', :inline_format =&gt; true </pre></ol>SAVE PDF File <pre class=ruby>end pdf.render_file 'my.pdf' </pre> !!! NOTE: As of time now &#8216;prawn-format&#8217; is incompatible with latest prawn gem, It is compatible with prawn version  &lt;= 0.6 s</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/05/specify-rails-version-to-use-while/">Specify Rails Version to New Rails App</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-05-07T18:40:00+05:30" pubdate data-updated="true">May 7<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+On my development machine, I have rails versions installed ranging from rails 1.2.3 to 2.3<br />How do i create new rails app that will use rails 2.1.0.<br /> <b>Create new app with rails version 2.1.0 </b><br/><pre class="ruby" name="code"><br />  rails _2.1.0_ simple_blog<br /></pre><br/> <b>Specify database to use while creating new rails app </b><br/><pre class="ruby" name="code"><br />  rails _2.1.0_ simple_blog -d mysql<br /></pre></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>sitemap « Fun On Rails</div>
+<div class='content'>
+[&#8230;] Specify rails version to use while creating rails project « Fun On Rails [&#8230;]</div>
+</div>
+<div class='comment'>
+<div class='author'>sandipransing</div>
+<div class='content'>
+specify database while creating rails application<br><br>rails  demo -d <br><br><br>rails _2.1.0_ my_rails_app -d mysql</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/page/15/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/page/13/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/upgrading-from-rails-21x-to-rails-2311/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/sandipransing">@sandipransing</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'sandipransing',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'funonrails';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
