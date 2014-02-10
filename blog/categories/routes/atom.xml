@@ -4,7 +4,7 @@
   <title><![CDATA[Category: routes | Fun On Rails]]></title>
   <link href="http://sandipransing.github.io/blog/categories/routes/atom.xml" rel="self"/>
   <link href="http://sandipransing.github.io/"/>
-  <updated>2014-02-10T04:35:27+05:30</updated>
+  <updated>2014-02-10T13:33:11+05:30</updated>
   <id>http://sandipransing.github.io/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -29,9 +29,71 @@ Rails routes can be customized as your own routes with parameters but first you 
     <link href="http://sandipransing.github.io/2011/01/testing-restful-polymorphic-resource/"/>
     <updated>2011-01-19T15:05:00+05:30</updated>
     <id>http://sandipransing.github.io/2011/01/testing-restful-polymorphic-resource</id>
-    <content type="html"><![CDATA[<div class='post'>
-<b>Testing restful &amp; polymorphic resource routes on rails console</b><br />Open rails console<br /><pre class=ruby>rails c # In rails 3 OR ruby script/console </pre><br />app object of URL <pre class=ruby>&gt;&gt; app<br />=&gt; #&lt;ActionController::Integration::Session:0xc164fac @result=nil, @status=nil, @accept="text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5", @path=nil, @request_count=0, @application=#&lt;ActionController::Dispatcher:0xc1644f8 @output=#&lt;IO:0x85e34ec&gt;&gt;, @remote_addr="127.0.0.1", @host="www.example.com", @controller=nil, @https=false, @request=nil, @headers=nil, @cookies={}, @status_message=nil, @named_routes_configured=true, @response=nil&gt;<br /></pre>Root URL<br/><pre class=ruby>&gt;&gt; app.root_url<br />=&gt; "http://www.example.com/"<br /></pre>Plural paths <pre class=ruby><br />&gt;&gt; app.calls_path<br />=&gt; "/calls"<br /></pre>Singular routes <pre class=ruby><br />&gt;&gt; app.audio_call_path<br />ActionController::RoutingError: audio_call_url failed&nbsp; <br /> &gt;&gt; app.audio_call_path(1)<br />=&gt; "/calls/1/audio"<br /><br />&gt;&gt; app.audio_call_path(13)<br />=&gt; "/calls/13/audio"<br /><br />&gt;&gt; app.audio_call_path(13, :name =&gt; 'san')<br />=&gt; "/calls/13/audio?name=san"<br /></pre><b>Polymorphic URLS</b><br/><pre class=ruby>&nbsp;app.polymorphic_path(Call.first, :action =&gt; 'audio')<br />=&gt; "/calls/253/audio"<br /><br />&gt;&gt; app.polymorphic_path(Call.new)<br />=&gt; "/calls"<br /></pre><br /></div>
+    <content type="html"><![CDATA[<p>Testing restful &amp; polymorphic resource routes on rails console</p>
 
+<h2>Open rails console</h2>
+
+<p>```ruby
+rails c # In rails 3</p>
+
+<h1>OR</h1>
+
+<p>ruby script/console
+```</p>
+
+<h2>Getting app object</h2>
+
+<p>```</p>
+
+<blockquote><blockquote><p>app</p></blockquote></blockquote>
+
+<p>=> #&lt;ActionController::Integration::Session:0xc164fac @result=nil, @status=nil, @accept=&ldquo;text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,<em>/</em>;q=0.5&rdquo;, @path=nil, @request_count=0, @application=#&lt;ActionController::Dispatcher:0xc1644f8 @output=#&lt;IO:0x85e34ec>>, @remote_addr=&ldquo;127.0.0.1&rdquo;, @host=&ldquo;www.example.com&rdquo;, @controller=nil, @https=false, @request=nil, @headers=nil, @cookies={}, @status_message=nil, @named_routes_configured=true, @response=nil>
+```</p>
+
+<h2>Root URL</h2>
+
+<p>```</p>
+
+<blockquote><blockquote><p>app.root_url
+=> &ldquo;<a href="http://www.example.com/">http://www.example.com/</a>&rdquo;
+```</p></blockquote></blockquote>
+
+<h2>Plural paths</h2>
+
+<p>```</p>
+
+<blockquote><blockquote><p>app.calls_path
+=> &ldquo;/calls&rdquo;</p></blockquote></blockquote>
+
+<p>```</p>
+
+<h2>Singular routes</h2>
+
+<p>```</p>
+
+<blockquote><blockquote><p>app.audio_call_path
+ActionController::RoutingError: audio_call_url failed</p>
+
+<p>app.audio_call_path(1)
+=> &ldquo;/calls/1/audio&rdquo;</p>
+
+<p>app.audio_call_path(13)
+=> &ldquo;/calls/13/audio&rdquo;</p>
+
+<p>app.audio_call_path(13, :name => &lsquo;san&rsquo;)
+=> &ldquo;/calls/13/audio?name=san&rdquo;
+```</p></blockquote></blockquote>
+
+<h2>Polymorphic URLS</h2>
+
+<p>```
+app.polymorphic_path(Call.first, :action => &lsquo;audio&rsquo;)
+=> &ldquo;/calls/253/audio&rdquo;</p>
+
+<blockquote><blockquote><p>app.polymorphic_path(Call.new)
+=> &ldquo;/calls&rdquo;</p></blockquote></blockquote>
+
+<p>```</p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: core-extensions | Fun On Rails]]></title>
   <link href="http://sandipransing.github.io/blog/categories/core-extensions/atom.xml" rel="self"/>
   <link href="http://sandipransing.github.io/"/>
-  <updated>2014-02-10T04:35:27+05:30</updated>
+  <updated>2014-02-10T13:33:11+05:30</updated>
   <id>http://sandipransing.github.io/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -18,9 +18,33 @@
     <link href="http://sandipransing.github.io/2010/10/overriding-tos-method-for-bigdecimal/"/>
     <updated>2010-10-22T19:31:00+05:30</updated>
     <id>http://sandipransing.github.io/2010/10/overriding-tos-method-for-bigdecimal</id>
-    <content type="html"><![CDATA[<div class='post'>
-requirement was to display decimal numbers which are having scale values present to be displayed in decimal format otherwise display them as integer.<br/><br/><b>Output expected</b><br/>12.23 => 12.23<br/>12.00 => 12<br/><br/><br/>While rendering any object on html page by default "to_s" method gets executed. So, i overwrote "to_s" method of BigDecimal class as below. <br/><br/>Anyone having better solution. Please reply with your solutions. Many thanks!<br/>Put below code in file "config/intializers/core_extensions.rb" <br/><br/><pre class=ruby>  class BigDecimal     alias :old_s :to_s     def to_s       return to_i.to_s if eql? to_i       self.old_s     end   end </pre></div>
+    <content type="html"><![CDATA[<h2>Requirement</h2>
 
+<p>It was requirement to display decimal numbers which are having scale values present to be displayed in decimal format otherwise display them as integer.</p>
+
+<h2>Expectated Output</h2>
+
+<p><code>
+12.23 =&gt; 12.23
+12.00 =&gt; 12
+</code>
+While rendering any object on html page by default <em>to_s</em> method gets executed. So, i overwrote <em>to_s</em> method of BigDecimal class as below.</p>
+
+<p>Anyone having better solution. Please reply with your solutions. Many thanks in advance!
+Put below code in file <em>config/intializers/core_extensions.rb</em></p>
+
+<p>```ruby
+class BigDecimal</p>
+
+<pre><code>alias :old_s :to_s
+def to_s
+  return to_i.to_s if eql? to_i
+  self.old_s
+end
+</code></pre>
+
+<p>  end
+```</p>
 ]]></content>
   </entry>
   

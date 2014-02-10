@@ -9,7 +9,12 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Testing restful &amp; polymorphic resource routes on rails consoleOpen rails consolerails c # In rails 3 OR ruby script/console app object of URL & &hellip;">
+  <meta name="description" content="Testing restful &amp; polymorphic resource routes on rails console Open rails console 1
+2
+3
+rails c # In rails 3
+# OR
+ruby script/console Getting app &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -91,8 +96,99 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-<b>Testing restful &amp; polymorphic resource routes on rails console</b><br />Open rails console<br /><pre class=ruby>rails c # In rails 3 OR ruby script/console </pre><br />app object of URL <pre class=ruby>&gt;&gt; app<br />=&gt; #&lt;ActionController::Integration::Session:0xc164fac @result=nil, @status=nil, @accept="text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5", @path=nil, @request_count=0, @application=#&lt;ActionController::Dispatcher:0xc1644f8 @output=#&lt;IO:0x85e34ec&gt;&gt;, @remote_addr="127.0.0.1", @host="www.example.com", @controller=nil, @https=false, @request=nil, @headers=nil, @cookies={}, @status_message=nil, @named_routes_configured=true, @response=nil&gt;<br /></pre>Root URL<br/><pre class=ruby>&gt;&gt; app.root_url<br />=&gt; "http://www.example.com/"<br /></pre>Plural paths <pre class=ruby><br />&gt;&gt; app.calls_path<br />=&gt; "/calls"<br /></pre>Singular routes <pre class=ruby><br />&gt;&gt; app.audio_call_path<br />ActionController::RoutingError: audio_call_url failed&nbsp; <br /> &gt;&gt; app.audio_call_path(1)<br />=&gt; "/calls/1/audio"<br /><br />&gt;&gt; app.audio_call_path(13)<br />=&gt; "/calls/13/audio"<br /><br />&gt;&gt; app.audio_call_path(13, :name =&gt; 'san')<br />=&gt; "/calls/13/audio?name=san"<br /></pre><b>Polymorphic URLS</b><br/><pre class=ruby>&nbsp;app.polymorphic_path(Call.first, :action =&gt; 'audio')<br />=&gt; "/calls/253/audio"<br /><br />&gt;&gt; app.polymorphic_path(Call.new)<br />=&gt; "/calls"<br /></pre><br /></div>
+<div class="entry-content"><p>Testing restful &amp; polymorphic resource routes on rails console</p>
+
+<h2>Open rails console</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rails</span> <span class="n">c</span> <span class="c1"># In rails 3</span>
+</span><span class='line'><span class="c1"># OR</span>
+</span><span class='line'><span class="n">ruby</span> <span class="n">script</span><span class="o">/</span><span class="n">console</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Getting app object</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">=&gt;</span> <span class="c1">#&lt;ActionController::Integration::Session:0xc164fac @result=nil, @status=nil, @accept=&quot;text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5&quot;, @path=nil, @request_count=0, @application=#&lt;ActionController::Dispatcher:0xc1644f8 @output=#&lt;IO:0x85e34ec&gt;&gt;, @remote_addr=&quot;127.0.0.1&quot;, @host=&quot;www.example.com&quot;, @controller=nil, @https=false, @request=nil, @headers=nil, @cookies={}, @status_message=nil, @named_routes_configured=true, @response=nil&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Root URL</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">root_url</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;http://www.example.com/&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Plural paths</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">calls_path</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;/calls&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Singular routes</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">audio_call_path</span>
+</span><span class='line'><span class="ss">ActionController</span><span class="p">:</span><span class="ss">:RoutingError</span><span class="p">:</span> <span class="n">audio_call_url</span> <span class="n">failed</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">audio_call_path</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;/calls/1/audio&quot;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">audio_call_path</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;/calls/13/audio&quot;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">audio_call_path</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s1">&#39;san&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;/calls/13/audio?name=san&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Polymorphic URLS</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">app</span><span class="o">.</span><span class="n">polymorphic_path</span><span class="p">(</span><span class="no">Call</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="ss">:action</span> <span class="o">=&gt;</span> <span class="s1">&#39;audio&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;/calls/253/audio&quot;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">polymorphic_path</span><span class="p">(</span><span class="no">Call</span><span class="o">.</span><span class="n">new</span><span class="p">)</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;/calls&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 

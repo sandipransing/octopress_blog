@@ -91,8 +91,19 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-While working on remote machine we often get headache of entering password for ssh login, scp files from one server to another server. Adding public key as authorized_keys on remote server solves this problem. <br/> <b>Copying from my system to remote server </b><pre class=ruby>cat ~/.ssh/id_rsa.pub | ssh sandip@server 'cat >> ~/.ssh/authorized_keys' </pre> <b>Copying from remote server to my system </b><br/><pre class=ruby>ssh server 'cat ~/.ssh/id_rsa.pub' | cat >> ~/.ssh/id_rsa_client.pub </pre></div>
+<div class="entry-content"><p>While working on remote machine we often get headache of entering password for ssh login, scp files from one server to another server. Adding public key as authorized_keys on remote server solves this problem.</p>
+
+<h2>Copying from my system to remote server</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cat ~/.ssh/id_rsa.pub | ssh sandip@server 'cat &gt;&gt; ~/.ssh/authorized_keys'</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Copying from remote server to my system</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ssh server 'cat ~/.ssh/id_rsa.pub' | cat &gt;&gt; ~/.ssh/id_rsa_client.pub</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 

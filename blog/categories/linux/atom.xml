@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | Fun On Rails]]></title>
   <link href="http://sandipransing.github.io/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://sandipransing.github.io/"/>
-  <updated>2014-02-10T04:35:27+05:30</updated>
+  <updated>2014-02-10T13:33:11+05:30</updated>
   <id>http://sandipransing.github.io/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -18,9 +18,19 @@
     <link href="http://sandipransing.github.io/2011/02/auto-login-remote-server-by-copying-ssh/"/>
     <updated>2011-02-03T16:21:00+05:30</updated>
     <id>http://sandipransing.github.io/2011/02/auto-login-remote-server-by-copying-ssh</id>
-    <content type="html"><![CDATA[<div class='post'>
-While working on remote machine we often get headache of entering password for ssh login, scp files from one server to another server. Adding public key as authorized_keys on remote server solves this problem. <br/> <b>Copying from my system to remote server </b><pre class=ruby>cat ~/.ssh/id_rsa.pub | ssh sandip@server 'cat >> ~/.ssh/authorized_keys' </pre> <b>Copying from remote server to my system </b><br/><pre class=ruby>ssh server 'cat ~/.ssh/id_rsa.pub' | cat >> ~/.ssh/id_rsa_client.pub </pre></div>
+    <content type="html"><![CDATA[<p>While working on remote machine we often get headache of entering password for ssh login, scp files from one server to another server. Adding public key as authorized_keys on remote server solves this problem.</p>
 
+<h2>Copying from my system to remote server</h2>
+
+<p><code>
+cat ~/.ssh/id_rsa.pub | ssh sandip@server 'cat &gt;&gt; ~/.ssh/authorized_keys'
+</code></p>
+
+<h2>Copying from remote server to my system</h2>
+
+<p><code>
+ssh server 'cat ~/.ssh/id_rsa.pub' | cat &gt;&gt; ~/.ssh/id_rsa_client.pub
+</code></p>
 ]]></content>
   </entry>
   
@@ -29,9 +39,93 @@ While working on remote machine we often get headache of entering password for s
     <link href="http://sandipransing.github.io/2011/01/installing-and-running-cronjob-crontab/"/>
     <updated>2011-01-20T13:50:00+05:30</updated>
     <id>http://sandipransing.github.io/2011/01/installing-and-running-cronjob-crontab</id>
-    <content type="html"><![CDATA[<div class='post'>
-<b>Basic commands to open/Edit crontab file</b> <b>Editing crontab file</b><br/><pre class=ruby>crontab -e</pre> <b>Displaying crontab file</b><br/><pre class=ruby>crontab -l</pre> <b>Remove crontab</b><br/><pre class=ruby>crontab -r</pre> <b>crontab syntax</b>cron command basically takes 6 input parameters of which each input can take multiple arguments for that one can make use of comma or pipe separator<br/> <pre class=ruby># min hour dom mon dow   command *   *   *   *   * (command) </pre>Here * means for every. Above command will get executed for every minute<br/> <b>Detailed syntax</b> <pre class=ruby>*     *     *   *    *        command to be executed -     -     -   -    - |     |     |   |    | |     |     |   |    +----- day of week (0 - 6) (Sunday=0) |     |     |   +------- month (1 - 12) |     |     +--------- day of month (1 - 31) |     +---------- hour (0 - 23) +------- min (0 - 59) </pre> <b>Example commands</b><br/> <pre class=ruby># Generate progressive report for every active user at 11:45 p.m. 45 23 * * * (cd /home/sandip/current/; rake ace:daily_progressive_report RAILS_ENV=production)  # Take database backup every night 59 2 * * * (cd /home/sandip/current/; rake db:backup RAILS_ENV=production)  # Initialize grouping on database every sunday 29 3 * * 0 (cd /home/sandip/current/; rake ace:initializeCarGrouping RAILS_ENV=production)  # Generate daily stats on 4:30 AM & 12:30 PM and 4:30 PM 30 4,12,16 * * * (cd /home/sandip/current/; rake ace:daily_call_statistics RAILS_ENV=production)  # Rotate sphinx indexes updated evry hour if missed out somehow 0 * * * * (cd /user/local/bin/; indexer --rotate --config /home/sandip/current/config/production.sphinx.conf) </pre></div>
+    <content type="html"><![CDATA[<p>Basic handy commands while working with crontabs</p>
 
+<h2>Editing cron file</h2>
+
+<p><code>
+crontab -e
+</code></p>
+
+<h2>Displaying cron file</h2>
+
+<p><code>
+crontab -l
+</code></p>
+
+<h2>Removing cron file</h2>
+
+<p><code>
+crontab -r
+</code></p>
+
+<h2>Cron syntax</h2>
+
+<blockquote><p>cron command basically takes 6 input parameters of which each input can take multiple arguments for that one can make use of comma or pipe separator</p></blockquote>
+
+<p>```</p>
+
+<h1>min hour dom mon dow   command</h1>
+
+<ul>
+<li><ul>
+<li><ul>
+<li><ul>
+<li><ul>
+<li>(command)
+```</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<p>Here * means for every. Above command will get executed for every minute</p>
+
+<h2>Detail syntax</h2>
+
+<p>```
+*     *     *   *    *        command to be executed</p>
+
+<hr />
+
+<p>|     |     |   |    |
+|     |     |   |    +&mdash;&mdash;&ndash; day of week (0 &ndash; 6) (Sunday=0)
+|     |     |   +&mdash;&mdash;&mdash;&ndash; month (1 &ndash; 12)
+|     |     +&mdash;&mdash;&mdash;&mdash;&ndash; day of month (1 &ndash; 31)
+|     +&mdash;&mdash;&mdash;&mdash;&mdash; hour (0 &ndash; 23)
++&mdash;&mdash;&mdash;&ndash; min (0 &ndash; 59)
+```</p>
+
+<h2>Example commands</h2>
+
+<p>```</p>
+
+<h1>Generate progressive report for every active user at 11:45 p.m.</h1>
+
+<p>45 23 * * * (cd /home/sandip/current/; rake ace:daily_progressive_report RAILS_ENV=production)</p>
+
+<h1>Take database backup every night</h1>
+
+<p>59 2 * * * (cd /home/sandip/current/; rake db:backup RAILS_ENV=production)</p>
+
+<h1>Initialize grouping on database every sunday</h1>
+
+<p>29 3 * * 0 (cd /home/sandip/current/; rake ace:initializeCarGrouping RAILS_ENV=production)</p>
+
+<h1>Generate daily stats on 4:30 AM &amp; 12:30 PM and 4:30 PM</h1>
+
+<p>30 4,12,16 * * * (cd /home/sandip/current/; rake ace:daily_call_statistics RAILS_ENV=production)</p>
+
+<h1>Rotate sphinx indexes updated evry hour if missed out somehow</h1>
+
+<p>0 * * * * (cd /user/local/bin/; indexer &mdash;rotate &mdash;config /home/sandip/current/config/production.sphinx.conf)
+```</p>
 ]]></content>
   </entry>
   

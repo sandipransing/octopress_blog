@@ -9,7 +9,7 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="requirement was to display decimal numbers which are having scale values present to be displayed in decimal format otherwise display them as integer &hellip;">
+  <meta name="description" content="Requirement It was requirement to display decimal numbers which are having scale values present to be displayed in decimal format otherwise display &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -91,8 +91,39 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-requirement was to display decimal numbers which are having scale values present to be displayed in decimal format otherwise display them as integer.<br/><br/><b>Output expected</b><br/>12.23 => 12.23<br/>12.00 => 12<br/><br/><br/>While rendering any object on html page by default &#8220;to_s&#8221; method gets executed. So, i overwrote &#8220;to_s&#8221; method of BigDecimal class as below. <br/><br/>Anyone having better solution. Please reply with your solutions. Many thanks!<br/>Put below code in file &#8220;config/intializers/core_extensions.rb&#8221; <br/><br/><pre class=ruby>  class BigDecimal     alias :old_s :to_s     def to_s       return to_i.to_s if eql? to_i       self.old_s     end   end </pre></div>
+<div class="entry-content"><h2>Requirement</h2>
+
+<p>It was requirement to display decimal numbers which are having scale values present to be displayed in decimal format otherwise display them as integer.</p>
+
+<h2>Expectated Output</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>12.23 =&gt; 12.23
+</span><span class='line'>12.00 =&gt; 12</span></code></pre></td></tr></table></div></figure>
+
+
+<p>While rendering any object on html page by default <em>to_s</em> method gets executed. So, i overwrote <em>to_s</em> method of BigDecimal class as below.</p>
+
+<p>Anyone having better solution. Please reply with your solutions. Many thanks in advance!
+Put below code in file <em>config/intializers/core_extensions.rb</em></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">BigDecimal</span>
+</span><span class='line'>    <span class="k">alias</span> <span class="ss">:old_s</span> <span class="ss">:to_s</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">to_s</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">to_i</span><span class="o">.</span><span class="n">to_s</span> <span class="k">if</span> <span class="nb">eql?</span> <span class="n">to_i</span>
+</span><span class='line'>      <span class="nb">self</span><span class="o">.</span><span class="n">old_s</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 

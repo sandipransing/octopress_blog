@@ -91,8 +91,177 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-<div dir="ltr" style="text-align: left;" trbidi="on">While looking for accessing rails template tags to be accessed on rails console in order to examine whatever written needs to be correct, found that - rails template tags can be tested on rails console using <i>helper</i> object<br /><pre class=ruby>module ApplicationHelper   def display_amount(amount)     number_to_currency amount, :precision =&gt; 0   end   end </pre> <b>Helpers on rails console</b><br /><pre class=ruby>rails c &gt;&gt; helper.text_field_tag :name, 'sandip' =&gt; "&lt;input id="name" name="name" type="text" value="sandip" /&gt;" &gt;&gt; helper.link_to 'my blog', 'http://funonrails.com' =&gt; "&lt;a href=''http://funonrails.com&gt;my blog&lt;/a&gt;" &gt;&gt; helper.display_amount(2000) =&gt; "$2,000" </pre> isn&#8217;t cool ? though it&#8217;s not finished yet. we can include helper files on console and access custom helper methods too <br /><pre class=ruby>&gt;&gt; include ActionView::Helpers =&gt; Object &gt;&gt; include ApplicationHelper =&gt; Object &gt;&gt; include ActionView::Helpers::ApplicationHelper^C &gt;&gt; display_amount 2500 =&gt; "$2,500" </pre> Using same way one can make use helpers in rake tasks file. Make sure environment is getting loaded into rake task.<br /><pre class=ruby># lib/tasks/helper_task.rake namespace :helper do  desc 'Access helper methods in rake tasks'  task :test =&gt; :environment do   include ActionView::Helpers   include ApplicationHelper    puts display_amount 2500  #=&gt; "$2,500"  end end </pre> <b>Accessing helpers in Action Mailers</b><br /><pre class=ruby>class Notifier &lt; ActionMailer::Base   add_template_helper(ApplicationHelper)   def greet(user)     subject "Hello #{user.name}"     from          'no-reply@example.com'     recipients    user.email     sent_on       Time.now     @user = user   end  # app/views/notifier/greet.html.erb Hi &lt;%= @user.try(:name)%&gt;, <br /><br />Greetings !!! You have got &lt;%= display_amount(3000) %&gt; </pre><b>Rails routes on rails console</b><br /><pre class=ruby>rails c &gt;&gt; app.root_url =&gt; "http://www.example.com/" &gt;&gt; app.change_password_path =&gt; "/change/password" &gt;&gt; app.change_password_url =&gt; "http://www.example.com/change/password" </pre>Now you may have got requirement to access routes inside rake tasks. Here is the way to do that- <br /><pre class=ruby># lib/tasks/route_test.rake namespace :routes do  desc 'Access helper methods in rake tasks'  task :test =&gt; :environment do   include ActionController::UrlWriter   default_url_options[:host] = "myroutes.check"   puts root_url  #=&gt; "http://myroutes.check"  end end </pre>Optionally you can set value of host parameter from action mailer host configuration using<br /><pre class=ruby>default_url_options[:host] = ActionMailer::Base.default_url_options[:hos] </pre><br />Attention: This is my preferred way to use helpers and routes when needed and there may have other choices to do same. Anyone having better approach please feel free to add your valuable comment. I will definitely incorporate that in further developments.<br />Got Easy, Cheers ;)</div></div>
+<div class="entry-content"><p>While looking for accessing rails template tags to be accessed on rails console in order to examine whatever written needs to be correct, found that &ndash; rails template tags can be tested on rails console using <em>helper</em> object</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">ApplicationHelper</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">display_amount</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">number_to_currency</span> <span class="n">amount</span><span class="p">,</span> <span class="ss">:precision</span> <span class="o">=&gt;</span> <span class="mi">0</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Helpers on rails console</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rails</span> <span class="n">c</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">helper</span><span class="o">.</span><span class="n">text_field_tag</span> <span class="ss">:name</span><span class="p">,</span> <span class="s1">&#39;sandip&#39;</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;&lt;input id=&quot;</span><span class="nb">name</span><span class="s2">&quot; name=&quot;</span><span class="nb">name</span><span class="s2">&quot; type=&quot;</span><span class="n">text</span><span class="s2">&quot; value=&quot;</span><span class="n">sandip</span><span class="s2">&quot; /&gt;&quot;</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">helper</span><span class="o">.</span><span class="n">link_to</span> <span class="s1">&#39;my blog&#39;</span><span class="p">,</span> <span class="s1">&#39;http://funonrails.com&#39;</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;&lt;a href=&#39;&#39;http://funonrails.com&gt;my blog&lt;/a&gt;&quot;</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">helper</span><span class="o">.</span><span class="n">display_amount</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;$2,000&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>isn&rsquo;t it cool ? though it&rsquo;s not finished yet. we can include helper files on console and access custom helper methods too</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="kp">include</span> <span class="ss">ActionView</span><span class="p">:</span><span class="ss">:Helpers</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="no">Object</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="kp">include</span> <span class="no">ApplicationHelper</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="no">Object</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="kp">include</span> <span class="ss">ActionView</span><span class="p">:</span><span class="ss">:Helpers</span><span class="o">::</span><span class="no">ApplicationHelper</span><span class="o">^</span><span class="n">C</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">display_amount</span> <span class="mi">2500</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;$2,500&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Using same way one can make use helpers in rake tasks file. Make sure environment is getting loaded into rake task.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'> <span class="n">lib</span><span class="o">/</span><span class="n">tasks</span><span class="o">/</span><span class="n">helper_task</span><span class="o">.</span><span class="n">rake</span>
+</span><span class='line'><span class="n">namespace</span> <span class="ss">:helper</span> <span class="k">do</span>
+</span><span class='line'> <span class="n">desc</span> <span class="s1">&#39;Access helper methods in rake tasks&#39;</span>
+</span><span class='line'> <span class="n">task</span> <span class="ss">:test</span> <span class="o">=&gt;</span> <span class="ss">:environment</span> <span class="k">do</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="ss">ActionView</span><span class="p">:</span><span class="ss">:Helpers</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="no">ApplicationHelper</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nb">puts</span> <span class="n">display_amount</span> <span class="mi">2500</span>  <span class="c1">#=&gt; &quot;$2,500&quot;</span>
+</span><span class='line'> <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Accessing helpers in Action Mailers</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Notifier</span> <span class="o">&lt;</span> <span class="ss">ActionMailer</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">add_template_helper</span><span class="p">(</span><span class="no">ApplicationHelper</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">subject</span> <span class="s2">&quot;Hello </span><span class="si">#{</span><span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'>    <span class="n">from</span>          <span class="s1">&#39;no-reply@example.com&#39;</span>
+</span><span class='line'>    <span class="n">recipients</span>    <span class="n">user</span><span class="o">.</span><span class="n">email</span>
+</span><span class='line'>    <span class="n">sent_on</span>       <span class="no">Time</span><span class="o">.</span><span class="n">now</span>
+</span><span class='line'>    <span class="vi">@user</span> <span class="o">=</span> <span class="n">user</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'># app/views/notifier/greet.html.erb
+</span><span class='line'>Hi <span class="err">&lt;</span>%= @user.try(:name)%&gt;,
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>Greetings !!!
+</span><span class='line'>You have got <span class="err">&lt;</span>%= display_amount(3000) %&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Rails routes on rails console</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rails</span> <span class="n">c</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">root_url</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;http://www.example.com/&quot;</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">change_password_path</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;/change/password&quot;</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">change_password_url</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;http://www.example.com/change/password&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now you may have got requirement to access routes inside rake tasks. Here is the way to do that &ndash;</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># lib/tasks/route_test.rake</span>
+</span><span class='line'><span class="n">namespace</span> <span class="ss">:routes</span> <span class="k">do</span>
+</span><span class='line'> <span class="n">desc</span> <span class="s1">&#39;Access helper methods in rake tasks&#39;</span>
+</span><span class='line'> <span class="n">task</span> <span class="ss">:test</span> <span class="o">=&gt;</span> <span class="ss">:environment</span> <span class="k">do</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="ss">ActionController</span><span class="p">:</span><span class="ss">:UrlWriter</span>
+</span><span class='line'>  <span class="n">default_url_options</span><span class="o">[</span><span class="ss">:host</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;myroutes.check&quot;</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="n">root_url</span>  <span class="c1">#=&gt; &quot;http://myroutes.check&quot;</span>
+</span><span class='line'> <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Optionally you can set value of host parameter from action mailer host configuration using</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">default_url_options</span><span class="o">[</span><span class="ss">:host</span><span class="o">]</span> <span class="o">=</span> <span class="ss">ActionMailer</span><span class="p">:</span><span class="ss">:Base</span><span class="o">.</span><span class="n">default_url_options</span><span class="o">[</span><span class="ss">:host</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Attention: This is my preferred way to use helpers and routes when needed and there may have other choices to do same. Anyone having better approach please feel free to add your valuable comment. I will definitely incorporate that in further developments.
+Got Easy, Cheers ;)</p>
 </div>
 
 

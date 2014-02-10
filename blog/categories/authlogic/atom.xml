@@ -4,7 +4,7 @@
   <title><![CDATA[Category: authlogic | Fun On Rails]]></title>
   <link href="http://sandipransing.github.io/blog/categories/authlogic/atom.xml" rel="self"/>
   <link href="http://sandipransing.github.io/"/>
-  <updated>2014-02-10T04:35:27+05:30</updated>
+  <updated>2014-02-10T13:33:11+05:30</updated>
   <id>http://sandipransing.github.io/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -18,9 +18,35 @@
     <link href="http://sandipransing.github.io/2010/11/authlogic-custom-conditions-for/"/>
     <updated>2010-11-28T23:23:00+05:30</updated>
     <id>http://sandipransing.github.io/2010/11/authlogic-custom-conditions-for</id>
-    <content type="html"><![CDATA[<div class='post'>
-To Add custom conditions to authlogic finders first of all we need to override authlogic find_by_login method. <br /><br /><pre class=ruby>class UserSession &lt; Authlogic::Session::Base<br />&nbsp; after_validation :check_if_verified<br />&nbsp; find_by_login_method :find_by_login_and_deleted_method<br />end </pre><br /><br />Then we need to define overridden method inside User model <br /><br /><pre class=ruby>class User &lt; ActiveRecord::Base<br />&nbsp; acts_as_authentic<br />&nbsp; def self.find_by_login_and_deleted_method(login)<br />&nbsp;&nbsp;&nbsp; find_by_email_and_deleted(login, false)<br />&nbsp; end<br />end </pre><br /><br />got easy..wooooooo :)</div>
+    <content type="html"><![CDATA[<p>To Add custom conditions to authlogic finders first of all we need to override authlogic find_by_login method.</p>
 
+<p>```ruby
+class UserSession &lt; Authlogic::Session::Base</p>
+
+<p>  after_validation :check_if_verified</p>
+
+<p>  find_by_login_method :find_by_login_and_deleted_method</p>
+
+<p>end
+```</p>
+
+<p>Then we need to define overridden method inside User model</p>
+
+<p>```ruby
+class User &lt; ActiveRecord::Base</p>
+
+<p>  acts_as_authentic</p>
+
+<p>  def self.find_by_login_and_deleted_method(login)</p>
+
+<pre><code>find_by_email_and_deleted(login, false)
+</code></pre>
+
+<p>  end</p>
+
+<p>end
+```
+got easy..wooooooo :)</p>
 ]]></content>
   </entry>
   

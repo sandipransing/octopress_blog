@@ -4,7 +4,7 @@
   <title><![CDATA[Category: twinkle | Fun On Rails]]></title>
   <link href="http://sandipransing.github.io/blog/categories/twinkle/atom.xml" rel="self"/>
   <link href="http://sandipransing.github.io/"/>
-  <updated>2014-02-10T04:35:27+05:30</updated>
+  <updated>2014-02-10T13:33:11+05:30</updated>
   <id>http://sandipransing.github.io/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -18,9 +18,34 @@
     <link href="http://sandipransing.github.io/2010/10/twinkle-ff-setup-click-to-call-using/"/>
     <updated>2010-10-17T00:47:00+05:30</updated>
     <id>http://sandipransing.github.io/2010/10/twinkle-ff-setup-click-to-call-using</id>
-    <content type="html"><![CDATA[<div class='post'>
-On linux machine following settings needs to be done in order to get in browser calling enabled for phone numbers.  <b>Installation setup</b><br />1. Install twinkle setup (Create user profile) and get it working for outgoing and incoming calls<br />2. Install telify add-on (can be un-installed once completed with all settings)<br />3. Copy wrapper script <b>twinkle_tel)</b> click here to <a href="http://github.com/sandipransing/twinkle_tel">download</a>  and copy it to "/usr/bin" on user's machine (make sure it has executable permissions)<br />4. In Firefox go to "preferences/applications"<br />5. Search for "tel" protocol and change value of tel protocol to "/usr/bin/twinkle_tel"<br /><b>Usage/ Pre-requisites</b><br />HTML source code of phone number should like as below<br /><br />1. Dialing source code<br /><pre class=ruby>&lt;a title="phone number" class="telified" nr="9860648108" href="tel:9860648108"&gt;9860648108&lt;/a&gt;</pre><br />2. Call disconnect source code<br /><pre class=ruby>&lt;a title="disconnect call" class="telified" href="tel:disconnect"&gt;Disconnect&lt;/a&gt;</pre><br /><br /><div class="separator" style="clear: both; text-align: center;"><a href="http://2.bp.blogspot.com/_WmOmsgqsanw/TLoAbXTDLfI/AAAAAAAABI0/Tdb4ZPxHPCQ/s1600/clicktocall.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://2.bp.blogspot.com/_WmOmsgqsanw/TLoAbXTDLfI/AAAAAAAABI0/Tdb4ZPxHPCQ/s1600/clicktocall.png" /></a></div></div>
+    <content type="html"><![CDATA[<p>On linux machine following settings needs to be done in order to get in browser calling enabled for phone numbers.</p>
 
+<h2>Installation setup</h2>
+
+<ol>
+<li>Install twinkle setup (Create user profile) and get it working for outgoing and incoming calls</li>
+<li>Install telify add-on (can be un-installed once completed with all settings)</li>
+<li>Copy wrapper script <code>twinkle_tel</code>) click here to <a href="http://github.com/sandipransing/twinkle_tel">download</a> and copy it to <code>/usr/bin</code> on user’s machine (make sure it has executable permissions)</li>
+<li>In Firefox go to <em>preferences/applications</em></li>
+<li>Search for <code>tel</code> protocol and change value of tel protocol to <em>/usr/bin/twinkle_tel</em></li>
+</ol>
+
+
+<h2>Usage/ Pre-requisites</h2>
+
+<p>HTML source code of phone number should look like as below</p>
+
+<p><strong>1. Dialing source code</strong>
+<code>
+&lt;a title="phone number" class="telified" nr="9860648108" href="tel:9860648108"&gt;9860648108&lt;/a&gt;
+</code></p>
+
+<p><strong>2. Call disconnect source code</strong>
+<code>
+&lt;a title="disconnect call" class="telified" href="tel:disconnect"&gt;Disconnect&lt;/a&gt;
+</code></p>
+
+<p><img src="/images/clicktocall.png" /></p>
 ]]></content>
   </entry>
   

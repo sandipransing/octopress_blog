@@ -91,8 +91,88 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-<br />Methods defined in Helper modules can directly accessed in rails views because this is what they are pretended for but we often come across with situations where we wanted to use some helper methods in controllers, views, models and mailers and obvious we don&#8217;t want to repeat same lines of code everywhere which also rail does not permit. forgotten DRY? Oh then how to do achieve same without violating rails principle.<br /><br />Certainly there are ways to do this ..<br /><br /><br />1. Helper methods all the time for views<br /><pre class=ruby>class ApplicationController &lt; ActionController::Base<br />  helper :all# include all helpers, all the time for views<br />end<br /></pre><br />2. Controller methods in views<br /><pre class=ruby>class ApplicationController &lt; ActionController::Base<br />  helper_method :current_store<br />  #now controller_method can be accessed in views<br />end<br /><br />2. Helper methods in controller<br />class ApplicationController &lt; ActionController::Base<br />  include ActionView::Helpers::ApplicationHelper<br />end<br /></pre><br />3. Helper methods in model<br /><pre class=ruby>class Student &lt; ActiveRecord::Base<br />  include ActionView::Helpers::ApplicationHelper<br />end<br /></pre><br />4. Helper methods in mailer<br /><pre class=ruby>class Notifier &lt; ActionMailer::Base<br />  add_template_helper(ApplicationHelper)<br />  #...<br />end<br /></pre></div>
+<div class="entry-content"><p>Methods defined in Helper modules can directly accessed in rails views because this is what they are pretended for but we often come across with situations where we wanted to use some helper methods in controllers, views, models and mailers and obvious we don&rsquo;t want to repeat same lines of code everywhere which also rail does not permit. forgotten DRY? Oh then how to do achieve same without violating rails principle.</p>
+
+<p>Certainly there are ways to do this ..</p>
+
+<h2>1. Helper methods all the time for views</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">ApplicationController</span> <span class="o">&lt;</span> <span class="ss">ActionController</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">helper</span> <span class="ss">:all</span><span class="c1"># include all helpers, all the time for views</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>2. Controller methods in views</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">ApplicationController</span> <span class="o">&lt;</span> <span class="ss">ActionController</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">helper_method</span> <span class="ss">:current_store</span>
+</span><span class='line'>  <span class="c1">#now controller_method can be accessed in views</span>
+</span><span class='line'>  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>3. Helper methods in controller</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">ApplicationController</span> <span class="o">&lt;</span> <span class="ss">ActionController</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">include</span> <span class="ss">ActionView</span><span class="p">:</span><span class="ss">:Helpers</span><span class="o">::</span><span class="no">ApplicationHelper</span>
+</span><span class='line'>  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>4. Helper methods in model</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Student</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">include</span> <span class="ss">ActionView</span><span class="p">:</span><span class="ss">:Helpers</span><span class="o">::</span><span class="no">ApplicationHelper</span>
+</span><span class='line'>  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>5. Helper methods in mailers</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Notifier</span> <span class="o">&lt;</span> <span class="ss">ActionMailer</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">add_template_helper</span><span class="p">(</span><span class="no">ApplicationHelper</span><span class="p">)</span>
+</span><span class='line'>  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 

@@ -9,7 +9,14 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="To Add custom conditions to authlogic finders first of all we need to override authlogic find_by_login method. class UserSession &lt; Authlogic:: &hellip;">
+  <meta name="description" content="To Add custom conditions to authlogic finders first of all we need to override authlogic find_by_login method. 1
+2
+3
+4
+5
+6
+7
+class UserSession &lt; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -91,8 +98,53 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-To Add custom conditions to authlogic finders first of all we need to override authlogic find_by_login method. <br /><br /><pre class=ruby>class UserSession &lt; Authlogic::Session::Base<br />&nbsp; after_validation :check_if_verified<br />&nbsp; find_by_login_method :find_by_login_and_deleted_method<br />end </pre><br /><br />Then we need to define overridden method inside User model <br /><br /><pre class=ruby>class User &lt; ActiveRecord::Base<br />&nbsp; acts_as_authentic<br />&nbsp; def self.find_by_login_and_deleted_method(login)<br />&nbsp;&nbsp;&nbsp; find_by_email_and_deleted(login, false)<br />&nbsp; end<br />end </pre><br /><br />got easy..wooooooo :)</div>
+<div class="entry-content"><p>To Add custom conditions to authlogic finders first of all we need to override authlogic find_by_login method.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">UserSession</span> <span class="o">&lt;</span> <span class="ss">Authlogic</span><span class="p">:</span><span class="ss">:Session</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">after_validation</span> <span class="ss">:check_if_verified</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">find_by_login_method</span> <span class="ss">:find_by_login_and_deleted_method</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then we need to define overridden method inside User model</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">acts_as_authentic</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">find_by_login_and_deleted_method</span><span class="p">(</span><span class="n">login</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">find_by_email_and_deleted</span><span class="p">(</span><span class="n">login</span><span class="p">,</span> <span class="kp">false</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>got easy..wooooooo :)</p>
 </div>
 
 

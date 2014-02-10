@@ -9,7 +9,7 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Remote Login============ssh client is a program for logging into remote machine and execute commands.ssh [-l login_name ] hostname | user@hostname [ &hellip;">
+  <meta name="description" content="Just a single line variable swap in rubyx,y=y,xExample:irb&gt;&gt; x = &#8220;Fun&#8221;=&gt; &#8220;Fun&#8221;irb&gt;&gt; y = &#8220;Rails&#8221;=& &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,43 +65,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/11/linux-commands-for-remote-access/">Linux Commands for Remote Access, Compress, Decompress</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-11-06T18:12:00+05:30" pubdate data-updated="true">Nov 6<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<span style="font-family: arial, sans-serif, 'Arial Unicode MS'; font-size: small;"><span style="border-collapse: collapse; font-size: 13px;"><span style="font-family: 'Times New Roman';"><span style="border-collapse: separate; font-size: medium;"><b> </b></span></span></span></span><br /><span style="font-family: arial, sans-serif, 'Arial Unicode MS'; font-size: small;"><span style="font-family: 'Times New Roman';"><b></b></span></span><br /><span style="font-family: arial, sans-serif, 'Arial Unicode MS'; font-size: small;"><span style="font-family: 'Times New Roman';"><b><pre class="western"><b><span style="font-family: Arial, Helvetica, sans-serif;">Remote Login</span></b><span style="font-family: Arial, Helvetica, sans-serif;"><br />============<br /></span><span class="Apple-style-span" style="font-weight: normal;"><span style="font-family: Arial, Helvetica, sans-serif;">ssh client is a program for logging into remote machine and execute commands.</span></span><span style="font-family: Arial, Helvetica, sans-serif;"><br /><br /></span><b><span style="font-family: Arial, Helvetica, sans-serif;">ssh [-l login_name ] hostname | user@hostname [command ]</span></b><span style="font-family: Arial, Helvetica, sans-serif;"><br /><br /></span><b><span style="font-family: Arial, Helvetica, sans-serif;">other options</span></b><span style="font-family: Arial, Helvetica, sans-serif;"><br /><br /></span><span class="Apple-style-span" style="font-weight: normal;"><span style="font-family: Arial, Helvetica, sans-serif;">ssh [-afgknqstvxACNTX1246 ] [-b bind_address ] [-c cipher_spec ]&nbsp;</span></span></pre><pre class="western"><span class="Apple-style-span" style="font-weight: normal;"><span style="font-family: Arial, Helvetica, sans-serif;">[-e escape_char ] [-i identity_file ] [-l login_name ] [-m mac_spec ]&nbsp;</span></span></pre><pre class="western"><span class="Apple-style-span" style="font-weight: normal;"><span style="font-family: Arial, Helvetica, sans-serif;">[-o option ] [-p port ] [-F configfile ] [-L port host hostport ]&nbsp;</span></span></pre><pre class="western"><span class="Apple-style-span" style="font-weight: normal;"><span style="font-family: Arial, Helvetica, sans-serif;">[-R port host hostport ] [-D port ] hostname | user@hostname [command </span></span><span style="font-family: Arial, Helvetica, sans-serif;">]<br /><br />One can use </span><b><span style="font-family: Arial, Helvetica, sans-serif;">putty</span></b><span style="font-family: Arial, Helvetica, sans-serif;"> for remote login through </span><b><span style="font-family: Arial, Helvetica, sans-serif;">windows</span></b><span style="font-family: Arial, Helvetica, sans-serif;"> machine<br /><br /></span><b><span style="font-family: Arial, Helvetica, sans-serif;">Remote Copy</span></b><span style="font-family: Arial, Helvetica, sans-serif;"><br />============<br /></span><b><span style="font-family: Arial, Helvetica, sans-serif;">scp - </span></b><span class="Apple-style-span" style="font-weight: normal;"><span style="font-family: Arial, Helvetica, sans-serif;">secure copy (remote file copy program) that copies file between computers over network</span></span><span style="font-family: Arial, Helvetica, sans-serif;"><br /><br /></span><b><span style="font-family: Arial, Helvetica, sans-serif;">scp source[ source file path] destination[user@funonrails.com:/home]</span></b><span style="font-family: Arial, Helvetica, sans-serif;"><br /><br /></span><b><span style="font-family: Arial, Helvetica, sans-serif;">Other options</span></b><span style="font-family: Arial, Helvetica, sans-serif;"><br /><br /></span><span class="Apple-style-span" style="font-weight: normal;"><span style="font-family: Arial, Helvetica, sans-serif;">[-F ssh_config ] [-S program ] [-P port ] [-c cipher ] [-i identity_file ]&nbsp;</span></span></pre><pre class="western"><span class="Apple-style-span" style="font-weight: normal;"><span style="font-family: Arial, Helvetica, sans-serif;">[-o ssh_option ] [[user@ ] host1 : file1 ] [... ] [[user@ ] host2 : file2 ]</span></span><span style="font-family: Arial, Helvetica, sans-serif;"><br /><br />One can use </span><b><span style="font-family: Arial, Helvetica, sans-serif;">pscp.exe </span></b><span style="font-family: Arial, Helvetica, sans-serif;">for remote copy from </span><b><span style="font-family: Arial, Helvetica, sans-serif;">windows</span></b><span style="font-family: Arial, Helvetica, sans-serif;"> machine<br /><br /></span><b><span style="font-family: Arial, Helvetica, sans-serif;">Compress</span></b><span style="font-family: Arial, Helvetica, sans-serif;"><br />============<br /></span><b><span style="font-family: Arial, Helvetica, sans-serif;">tar</span></b><span style="font-family: Arial, Helvetica, sans-serif;"> - </span><span class="Apple-style-span" style="font-weight: normal;"><span style="font-family: Arial, Helvetica, sans-serif;">is a package that allows you to compress direcory or file</span></span></pre><pre class="western"><span style="font-family: Arial, Helvetica, sans-serif;"><br /></span><b><span style="font-family: Arial, Helvetica, sans-serif;">tar czfv Test.tar.tgz Test/</span></b><span style="font-family: Arial, Helvetica, sans-serif;"><br /><br /></span><b><span style="font-family: Arial, Helvetica, sans-serif;">Decompress</span></b><span style="font-family: Arial, Helvetica, sans-serif;"><br />============<br /></span><b><span style="font-family: Arial, Helvetica, sans-serif;">gzip</span></b><span style="font-family: Arial, Helvetica, sans-serif;"> - </span><span class="Apple-style-span" style="font-weight: normal;"><span style="font-family: Arial, Helvetica, sans-serif;">is a package that allows to extract compressed file/directories.</span></span><span style="font-family: Arial, Helvetica, sans-serif;"><br /><br /></span><b><span style="font-family: Arial, Helvetica, sans-serif;">gzip -dc target.tar.tgz | tar xf -</span></b><span style="font-family: Arial, Helvetica, sans-serif;"><br /></span></pre></b></span></span><br /><span style="font-size: small;"><span style="font-family: Arial, Helvetica, sans-serif;"><b></b></span></span><br /><span style="font-size: small;"><b><div><div><br /></div></div></b></span><br /></div>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -458,6 +421,43 @@ Hey, I found your blog  while searching on Google. I have a blog on  <a rel="nof
 
   <div class="entry-content"><div class='post'>
 Feedzirra is a feed library that is designed to get and update many feeds as quickly as possible. This includes using libcurl-multi through the <a href="http://github.com/taf2/curb/tree/master">taf2-curb</a> gem for faster http gets, and libxml through <a href="http://github.com/tenderlove/nokogiri/tree/master">nokogiri</a> and <a href="http://github.com/pauldix/sax-machine/tree/master">sax-machine</a> for faster parsing.<br/><pre>sudo apt-get install libcurl3 libxml2 libxml2-dev libxslt1-dev<br/><br/><br/><pre>sudo gem install pauldix-feedzirra<br/></pre><br/></pre></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/10/converting-doswindows-files-to-unix/">Converting Dos(windows) Files to Unix Files</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-10-07T18:27:00+05:30" pubdate data-updated="true">Oct 7<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div><br/><p>While using windows we get ^M characters in files that will get displayed when you open files on unix machines.</p><br/><p>To remove such ^M characters,</p><br/><p>Install dos2unix package using</p><br/><blockquote><p>sudo apt-get install sysutils</p></blockquote><br/><p>Convert individual file</p><br/><blockquote><p>dos2unix file_path</p></blockquote><br/><p>Run following command to convert recursively all the files inside directory.</p><br/><blockquote><br/><pre>find . -type f -exec dos2unix {} \;<br/></pre><br/></blockquote><br/></div><br/><div id="_mcePaste" style="overflow:hidden;position:absolute;left:-10000px;top:7px;width:1px;height:1px;"><br/><pre class="alt2" style="border:1px inset;overflow:auto;width:640px;height:34px;text-align:left;margin:0;padding:6px;">sudo apt-get install sysutils</pre><br/></div></div>
 </div>
   
   

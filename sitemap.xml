@@ -377,10 +377,6 @@
         <lastmod>2014-02-09T23:56:51+05:30</lastmod>
     </url>
     <url>
-        <loc>http://sandipransing.github.io/2010/08/zipcode-validation-using-geokit-in1/</loc>
-        <lastmod>2014-02-09T23:25:06+05:30</lastmod>
-    </url>
-    <url>
         <loc>http://sandipransing.github.io/2010/09/rails-3-beautiful-code/</loc>
         <lastmod>2014-02-09T23:16:00+05:30</lastmod>
     </url>
@@ -394,19 +390,19 @@
     </url>
     <url>
         <loc>http://sandipransing.github.io/2010/10/solution-to-delayedjobdj-gem-server/</loc>
-        <lastmod>2014-02-09T23:16:00+05:30</lastmod>
+        <lastmod>2014-02-10T13:32:52+05:30</lastmod>
     </url>
     <url>
         <loc>http://sandipransing.github.io/2010/10/delayedjobs-dj-fancy-methods/</loc>
-        <lastmod>2014-02-09T23:16:00+05:30</lastmod>
+        <lastmod>2014-02-10T13:10:23+05:30</lastmod>
     </url>
     <url>
         <loc>http://sandipransing.github.io/2010/10/twinkle-ff-setup-click-to-call-using/</loc>
-        <lastmod>2014-02-09T23:16:00+05:30</lastmod>
+        <lastmod>2014-02-10T13:18:26+05:30</lastmod>
     </url>
     <url>
         <loc>http://sandipransing.github.io/2010/10/overriding-tos-method-for-bigdecimal/</loc>
-        <lastmod>2014-02-09T23:16:00+05:30</lastmod>
+        <lastmod>2014-02-10T13:06:52+05:30</lastmod>
     </url>
     <url>
         <loc>http://sandipransing.github.io/2010/11/getting-started-with-heroku/</loc>
@@ -414,31 +410,31 @@
     </url>
     <url>
         <loc>http://sandipransing.github.io/2010/11/authlogic-custom-conditions-for/</loc>
-        <lastmod>2014-02-09T23:16:00+05:30</lastmod>
+        <lastmod>2014-02-10T13:03:49+05:30</lastmod>
     </url>
     <url>
         <loc>http://sandipransing.github.io/2010/12/accessing-helper-modules-in-rails/</loc>
-        <lastmod>2014-02-09T23:16:00+05:30</lastmod>
+        <lastmod>2014-02-10T13:01:16+05:30</lastmod>
     </url>
     <url>
         <loc>http://sandipransing.github.io/2010/12/active-record-inheritance-in-rails-ari/</loc>
-        <lastmod>2014-02-09T23:16:00+05:30</lastmod>
+        <lastmod>2014-02-10T12:55:08+05:30</lastmod>
     </url>
     <url>
         <loc>http://sandipransing.github.io/2010/12/rails-3-dashing-to-finish/</loc>
-        <lastmod>2014-02-09T23:16:00+05:30</lastmod>
+        <lastmod>2014-02-10T12:53:25+05:30</lastmod>
     </url>
     <url>
         <loc>http://sandipransing.github.io/2011/01/getting-started-with-mysql-on-amazon/</loc>
-        <lastmod>2014-02-09T23:16:00+05:30</lastmod>
+        <lastmod>2014-02-10T12:51:01+05:30</lastmod>
     </url>
     <url>
         <loc>http://sandipransing.github.io/2011/01/testing-restful-polymorphic-resource/</loc>
-        <lastmod>2014-02-09T23:16:00+05:30</lastmod>
+        <lastmod>2014-02-10T12:55:51+05:30</lastmod>
     </url>
     <url>
         <loc>http://sandipransing.github.io/2011/01/installing-and-running-cronjob-crontab/</loc>
-        <lastmod>2014-02-09T23:16:00+05:30</lastmod>
+        <lastmod>2014-02-10T12:45:09+05:30</lastmod>
     </url>
     <url>
         <loc>http://sandipransing.github.io/2011/01/using-hoptoad-notifier-as-gem-in-rails/</loc>
@@ -446,7 +442,7 @@
     </url>
     <url>
         <loc>http://sandipransing.github.io/2011/02/auto-login-remote-server-by-copying-ssh/</loc>
-        <lastmod>2014-02-09T23:16:00+05:30</lastmod>
+        <lastmod>2014-02-10T12:38:19+05:30</lastmod>
     </url>
     <url>
         <loc>http://sandipransing.github.io/2011/03/getting-started-with-rails-3-postgres/</loc>
@@ -458,15 +454,15 @@
     </url>
     <url>
         <loc>http://sandipransing.github.io/2011/03/accessing-view-helpers-routes-in-rails/</loc>
-        <lastmod>2014-02-09T23:16:00+05:30</lastmod>
+        <lastmod>2014-02-10T12:36:25+05:30</lastmod>
     </url>
     <url>
         <loc>http://sandipransing.github.io/2011/03/number-to-indian-currency-helper-for/</loc>
-        <lastmod>2014-02-09T23:16:00+05:30</lastmod>
+        <lastmod>2014-02-10T12:30:37+05:30</lastmod>
     </url>
     <url>
         <loc>http://sandipransing.github.io/2011/03/twitter-share-and-facebook-like-button/</loc>
-        <lastmod>2014-02-09T23:16:00+05:30</lastmod>
+        <lastmod>2014-02-10T12:25:07+05:30</lastmod>
     </url>
     <url>
         <loc>http://sandipransing.github.io/2011/03/setting-up-nginx-maximum-upload-size/</loc>
@@ -602,7 +598,7 @@
     </url>
     <url>
         <loc>http://sandipransing.github.io/2012/01/dynamic-bounded-parameters-and-named/</loc>
-        <lastmod>2014-02-09T23:16:00+05:30</lastmod>
+        <lastmod>2014-02-10T12:32:15+05:30</lastmod>
     </url>
     <url>
         <loc>http://sandipransing.github.io/2012/02/ruby-enumerable-toproc-ampersond-colon/</loc>
@@ -636,7 +632,7 @@
     </url>
     <url>
         <loc>http://sandipransing.github.io/</loc>
-        <lastmod>2014-02-10T04:28:07+05:30</lastmod>
+        <lastmod>2014-02-10T13:32:52+05:30</lastmod>
     </url>
     <url>
         <loc>http://sandipransing.github.io/robots.txt</loc>
@@ -644,6 +640,6 @@
     </url>
     <url>
         <loc>http://sandipransing.github.io/blog/archives/</loc>
-        <lastmod>2014-02-10T04:28:07+05:30</lastmod>
+        <lastmod>2014-02-10T13:32:52+05:30</lastmod>
     </url>
 </urlset>

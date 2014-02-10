@@ -9,7 +9,10 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Basic commands to open/Edit crontab file Editing crontab filecrontab -e Displaying crontab filecrontab -l Remove crontabcrontab -r crontab &hellip;">
+  <meta name="description" content="Basic handy commands while working with crontabs Editing cron file 1
+crontab -e Displaying cron file 1
+crontab -l Removing cron file 1
+crontab -r &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -91,8 +94,89 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-<b>Basic commands to open/Edit crontab file</b> <b>Editing crontab file</b><br/><pre class=ruby>crontab -e</pre> <b>Displaying crontab file</b><br/><pre class=ruby>crontab -l</pre> <b>Remove crontab</b><br/><pre class=ruby>crontab -r</pre> <b>crontab syntax</b>cron command basically takes 6 input parameters of which each input can take multiple arguments for that one can make use of comma or pipe separator<br/> <pre class=ruby># min hour dom mon dow   command *   *   *   *   * (command) </pre>Here * means for every. Above command will get executed for every minute<br/> <b>Detailed syntax</b> <pre class=ruby>*     *     *   *    *        command to be executed -     -     -   -    - |     |     |   |    | |     |     |   |    +----- day of week (0 - 6) (Sunday=0) |     |     |   +------- month (1 - 12) |     |     +--------- day of month (1 - 31) |     +---------- hour (0 - 23) +------- min (0 - 59) </pre> <b>Example commands</b><br/> <pre class=ruby># Generate progressive report for every active user at 11:45 p.m. 45 23 * * * (cd /home/sandip/current/; rake ace:daily_progressive_report RAILS_ENV=production)  # Take database backup every night 59 2 * * * (cd /home/sandip/current/; rake db:backup RAILS_ENV=production)  # Initialize grouping on database every sunday 29 3 * * 0 (cd /home/sandip/current/; rake ace:initializeCarGrouping RAILS_ENV=production)  # Generate daily stats on 4:30 AM & 12:30 PM and 4:30 PM 30 4,12,16 * * * (cd /home/sandip/current/; rake ace:daily_call_statistics RAILS_ENV=production)  # Rotate sphinx indexes updated evry hour if missed out somehow 0 * * * * (cd /user/local/bin/; indexer --rotate --config /home/sandip/current/config/production.sphinx.conf) </pre></div>
+<div class="entry-content"><p>Basic handy commands while working with crontabs</p>
+
+<h2>Editing cron file</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>crontab -e</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Displaying cron file</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>crontab -l</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Removing cron file</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>crontab -r</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Cron syntax</h2>
+
+<blockquote><p>cron command basically takes 6 input parameters of which each input can take multiple arguments for that one can make use of comma or pipe separator</p></blockquote>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># min hour dom mon dow   command
+</span><span class='line'>*   *   *   *   * (command)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here * means for every. Above command will get executed for every minute</p>
+
+<h2>Detail syntax</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>*     *     *   *    *        command to be executed
+</span><span class='line'>-     -     -   -    -
+</span><span class='line'>|     |     |   |    |
+</span><span class='line'>|     |     |   |    +----- day of week (0 - 6) (Sunday=0)
+</span><span class='line'>|     |     |   +------- month (1 - 12)
+</span><span class='line'>|     |     +--------- day of month (1 - 31)
+</span><span class='line'>|     +---------- hour (0 - 23)
+</span><span class='line'>+------- min (0 - 59)</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Example commands</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># Generate progressive report for every active user at 11:45 p.m.
+</span><span class='line'>45 23 * * * (cd /home/sandip/current/; rake ace:daily_progressive_report RAILS_ENV=production)
+</span><span class='line'>
+</span><span class='line'># Take database backup every night
+</span><span class='line'>59 2 * * * (cd /home/sandip/current/; rake db:backup RAILS_ENV=production)
+</span><span class='line'>
+</span><span class='line'># Initialize grouping on database every sunday
+</span><span class='line'>29 3 * * 0 (cd /home/sandip/current/; rake ace:initializeCarGrouping RAILS_ENV=production)
+</span><span class='line'>
+</span><span class='line'># Generate daily stats on 4:30 AM & 12:30 PM and 4:30 PM
+</span><span class='line'>30 4,12,16 * * * (cd /home/sandip/current/; rake ace:daily_call_statistics RAILS_ENV=production)
+</span><span class='line'>
+</span><span class='line'># Rotate sphinx indexes updated evry hour if missed out somehow
+</span><span class='line'>0 * * * * (cd /user/local/bin/; indexer --rotate --config /home/sandip/current/config/production.sphinx.conf)</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 
