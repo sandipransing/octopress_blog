@@ -4,7 +4,7 @@
   <title><![CDATA[Category: asterisk | Fun On Rails]]></title>
   <link href="http://sandipransing.github.io/blog/categories/asterisk/atom.xml" rel="self"/>
   <link href="http://sandipransing.github.io/"/>
-  <updated>2014-02-11T02:20:57+05:30</updated>
+  <updated>2014-02-11T02:27:18+05:30</updated>
   <id>http://sandipransing.github.io/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -45,7 +45,7 @@
 &lt;a title="disconnect call" class="telified" href="tel:disconnect"&gt;Disconnect&lt;/a&gt;
 </code></p>
 
-<p><img src="{{ root_url }}/images/clicktocall.png" /></p>
+<p><img src="/images/clicktocall.png" /></p>
 ]]></content>
   </entry>
   
