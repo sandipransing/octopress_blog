@@ -450,7 +450,7 @@
     </url>
     <url>
         <loc>http://sandipransing.github.io/2011/03/setting-up-nginx-maximum-upload-size/</loc>
-        <lastmod>2014-02-10T19:49:37+05:30</lastmod>
+        <lastmod>2014-02-11T01:19:30+05:30</lastmod>
     </url>
     <url>
         <loc>http://sandipransing.github.io/2011/04/ghostype-input-placeholder-for-search/</loc>
@@ -616,7 +616,7 @@
     </url>
     <url>
         <loc>http://sandipransing.github.io/</loc>
-        <lastmod>2014-02-10T19:49:37+05:30</lastmod>
+        <lastmod>2014-02-11T01:19:30+05:30</lastmod>
     </url>
     <url>
         <loc>http://sandipransing.github.io/thank-you/</loc>
@@ -632,11 +632,15 @@
     </url>
     <url>
         <loc>http://sandipransing.github.io/archives/</loc>
-        <lastmod>2014-02-10T19:49:37+05:30</lastmod>
+        <lastmod>2014-02-11T01:19:30+05:30</lastmod>
     </url>
     <url>
         <loc>http://sandipransing.github.io/robots.txt</loc>
         <lastmod>2014-02-09T17:26:19+05:30</lastmod>
+    </url>
+    <url>
+        <loc>http://sandipransing.github.io/404.html</loc>
+        <lastmod>2014-02-11T02:20:56+05:30</lastmod>
     </url>
     <url>
         <loc>http://sandipransing.github.io/contact/</loc>

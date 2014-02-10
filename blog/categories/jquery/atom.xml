@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jQuery | Fun On Rails]]></title>
   <link href="http://sandipransing.github.io/blog/categories/jquery/atom.xml" rel="self"/>
   <link href="http://sandipransing.github.io/"/>
-  <updated>2014-02-10T19:59:07+05:30</updated>
+  <updated>2014-02-11T02:20:57+05:30</updated>
   <id>http://sandipransing.github.io/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -205,7 +205,7 @@ rails s
 
 <p>Visit Browser URL: <a href="http://localhost:3000/cities">http://localhost:3000/cities</a></p>
 
-<p><img class="left <a" src="href="http://4.bp.blogspot.com/-CJgSXg5EJyE/TZ8EDHwCwaI/AAAAAAAABPs/81dNxWDwYm0/s1600/active_scaffold.png">http://4.bp.blogspot.com/-CJgSXg5EJyE/TZ8EDHwCwaI/AAAAAAAABPs/81dNxWDwYm0/s1600/active_scaffold.png</a>"></p>
+<p>{% img left <a href="http://4.bp.blogspot.com/-CJgSXg5EJyE/TZ8EDHwCwaI/AAAAAAAABPs/81dNxWDwYm0/s1600/active_scaffold.png">http://4.bp.blogspot.com/-CJgSXg5EJyE/TZ8EDHwCwaI/AAAAAAAABPs/81dNxWDwYm0/s1600/active_scaffold.png</a> %}</p>
 ]]></content>
   </entry>
   

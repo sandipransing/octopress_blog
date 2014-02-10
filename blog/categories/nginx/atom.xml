@@ -4,7 +4,7 @@
   <title><![CDATA[Category: nginx | Fun On Rails]]></title>
   <link href="http://sandipransing.github.io/blog/categories/nginx/atom.xml" rel="self"/>
   <link href="http://sandipransing.github.io/"/>
-  <updated>2014-02-10T19:59:07+05:30</updated>
+  <updated>2014-02-11T02:20:57+05:30</updated>
   <id>http://sandipransing.github.io/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -112,9 +112,9 @@ git clone git://github.com/sandipransing/rails_blank.git
     <link href="http://sandipransing.github.io/2011/03/setting-up-nginx-maximum-upload-size/"/>
     <updated>2011-03-31T15:56:00+05:30</updated>
     <id>http://sandipransing.github.io/2011/03/setting-up-nginx-maximum-upload-size</id>
-    <content type="html"><![CDATA[<p>Edit nginx configuration and look for html block.</p>
+    <content type="html"><![CDATA[<p>Edit nginx configuration and look for <code>http</code> block inside it.</p>
 
-<p>Inside html block add following line.</p>
+<p>Then inside <code>htttp</code> block add following lines.</p>
 
 <p>```
 http {</p>
@@ -128,7 +128,7 @@ client_max_body_size 10m;
 <p>}
 ```</p>
 
-<p>In above configuration &ldquo;application/octet-stream&rdquo; supports any kind of file upload.</p>
+<p>In above configuration <em>application/octet-stream</em> supports any kind of file upload.</p>
 ]]></content>
   </entry>
   
