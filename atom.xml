@@ -4,7 +4,7 @@
   <title><![CDATA[Fun On Rails]]></title>
   <link href="http://sandipransing.github.io/atom.xml" rel="self"/>
   <link href="http://sandipransing.github.io/"/>
-  <updated>2014-02-10T13:33:11+05:30</updated>
+  <updated>2014-02-10T16:30:05+05:30</updated>
   <id>http://sandipransing.github.io/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -18,12 +18,11 @@
     <link href="http://sandipransing.github.io/2014/02/migrating-from-blogger-to-octopress/"/>
     <updated>2014-02-09T19:00:56+05:30</updated>
     <id>http://sandipransing.github.io/2014/02/migrating-from-blogger-to-octopress</id>
-    <content type="html"><![CDATA[<p>I almost spent 3 or more years blogging at <code>blogger.com</code> and found very happy to use it.
-But as the years went there were many more blogging sites came in and but none of them attracted me.</p>
+    <content type="html"><![CDATA[<p>After 3 or more years, happily doing blogging at <code>blogger.com</code>, finally i decided to move my blog from <em>blogger</em> to <em>octopress</em>.
+From last 2-3 days, was evaluating with <a href="http://octopress.org">octopress</a>, its way of writing posts,
+customizations, themes, and plugins. I found <code>octopress</code> very quick &amp; easy to use.</p>
 
-<p>From last 3 days, was evaluating with <a href="http://octopress.org">octopress</a>, its way of writing posts, customizations and found quick &amp; easy to use. Hence, i made decision of shifting my blog from <code>blogger</code> to <code>octopress</code>. I started doing <code>google</code> search about how this can be done.</p>
-
-<p>Here is step by step guide:</p>
+<p>Below post explains steps involved in migration:</p>
 
 <h2>Export content from blogger</h2>
 

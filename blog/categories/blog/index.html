@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Migrating from blogger to octopress - Fun On Rails</title>
+  <title>Category: blog - Fun On Rails</title>
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="After 3 or more years, happily doing blogging at blogger.com, finally i decided to move my blog from blogger to octopress.
-From last 2-3 days, was &hellip;">
+  <meta name="description" content="Category: blog">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ From last 2-3 days, was &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sandipransing.github.io/2014/02/migrating-from-blogger-to-octopress">
+  <link rel="canonical" href="http://sandipransing.github.ioblog/categories/blog">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Fun On Rails" type="application/atom+xml">
@@ -65,125 +64,35 @@ From last 2-3 days, was &hellip;">
   <div id="main">
     <div id="content">
       <div>
-<article class="hentry" role="article">
+<article role="article">
   
   <header>
-    
-      <h1 class="entry-title">Migrating From Blogger to Octopress</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-09T19:00:56+05:30" pubdate data-updated="true">Feb 9<span>th</span>, 2014</time>
-        
-      </p>
+    <h1 class="entry-title">Category: Blog</h1>
     
   </header>
+  
+  <div id="blog-archives" class="category">
 
 
-<div class="entry-content"><p>After 3 or more years, happily doing blogging at <code>blogger.com</code>, finally i decided to move my blog from <em>blogger</em> to <em>octopress</em>.
-From last 2-3 days, was evaluating with <a href="http://octopress.org">octopress</a>, its way of writing posts,
-customizations, themes, and plugins. I found <code>octopress</code> very quick &amp; easy to use.</p>
 
-<p>Below post explains steps involved in migration:</p>
+  
+  <h2>2014</h2>
 
-<h2>Export content from blogger</h2>
+<article>
+  
+<h1><a href="/2014/02/migrating-from-blogger-to-octopress/">Migrating from blogger to octopress</a></h1>
+<time datetime="2014-02-09T19:00:56+05:30" pubdate><span class='month'>Feb</span> <span class='day'>09</span> <span class='year'>2014</span></time>
 
-<p>First, you need to export your posts from blogger.
-Goto <code>blogger admin area</code> and then go to <code>settings &gt;&gt; other &gt;&gt; Export Blog</code> and click on it. Please wait sometime and popup will comeup allowing you to download blog in <code>xml</code> format.</p>
-
-<p><img src="/images/export-blog.png" /></p>
-
-<p>If you still finding some problem with exporting then see <a href="http://www.freetech4teachers.com/2013/01/how-to-export-your-blogger-and.html">here</a></p>
-
-<h2>Formatting posts for octopress</h2>
-
-<p>Now the big challenge ! We have <code>xml posts</code> downloaded from blogger but octopress posts format is different.
-So, we need to convert xml posts to markdown formatted octopress posts.
-If you do it manually then its not an easy task but don&rsquo;t worry. There is already a ruby code that will do it for you.
-Thanks to <a href="https://gist.github.com/juniorz">Reinaldo de Souza </a> for sharing the script. Download the <code>import.rb</code> script from <a href="https://gist.github.com/baldowl/1578928">here</a></p>
-
-<h2>Run the script against downloaded xml file</h2>
-
-<p>Script requires <code>nokogiri</code>. if you not don&rsquo;t have already then install using <code>gem install nokogiri</code>
-After successful run, this will be creating static markdown octopress formatted posts inside <code>_posts</code> and <code>_drafts</code> directories.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ruby import.rb blog-02-09-2014.xml</span></code></pre></td></tr></table></div></figure>
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/blog/'>blog</a>, <a class='category' href='/blog/categories/octopress/'>octopress,</a></span>
+</footer>
 
 
-<h2>Copy generated posts to octopress blog posts</h2>
+</article>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mv _posts/* blog/_posts/`
-</span><span class='line'>mv _drafts/* blog/_drafts/`</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This finishes migration and run <code>rake preview</code> and you will start seeing your blogger posts.</p>
 </div>
 
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">sandipransing</span></span>
-
-      
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-09T19:00:56+05:30" pubdate data-updated="true">Feb 9<span>th</span>, 2014</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/blog/'>blog</a>, <a class='category' href='/blog/categories/octopress/'>octopress,</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sandipransing.github.io/2014/02/migrating-from-blogger-to-octopress/" data-via="sandipransing" data-counturl="http://sandipransing.github.io/2014/02/migrating-from-blogger-to-octopress/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/2014/02/writing-octopress-blog-posts-using-markdown/" title="Previous Post: Writing Octopress blog posts using markdown">&laquo; Writing Octopress blog posts using markdown</a>
-      
-      
-    </p>
-  </footer>
 </article>
 
 
@@ -264,6 +173,19 @@ After successful run, this will be creating static markdown octopress formatted 
 
 </footer>
   
+
+<script type="text/javascript">
+      var disqus_shortname = 'sandipr';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
 
 
 
