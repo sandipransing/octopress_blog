@@ -5,13 +5,15 @@ date: 2014-02-07 19:20:07 +0530
 comments: false
 categories: octopress github-pages
 ---
-There are various blogging sites like `blogspot`, `wordpress`, `posterious`, and many more. But each has their own limitations.
-Anyone who has some technical background can start with octopress blog. This gives us the power of freedom of doing anything.
+
+There are various blogging sites like `blogspot`, `wordpress`, `posterous`, and many more.
+Each has their own pros and cons and none of the engine gives us full power of ehhance our blogging experience.
+Anyone who has atleast some technical knowledge can start with octopress powered blog. This gives us the power of freedom of doing anything.
 So, Lets first understand about octopress framework and its features.
 
 ## Octopress
 
-> Octopress is a framework designed by Brandon Mathis for Jekyll, the blog aware static site generator. more info can be found [here](http://octopress.org/2011/07/23/octopress-20-surfaces/)
+> Octopress is a framework designed by Brandon Mathis for Jekyll, the blog aware static site generator. If you wanted to know more then it can be found [here](http://octopress.org/2011/07/23/octopress-20-surfaces/)
 
 ## Octopress Setup
 

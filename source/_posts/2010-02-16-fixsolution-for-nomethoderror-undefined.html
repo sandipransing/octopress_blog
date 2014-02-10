@@ -1,0 +1,11 @@
+---
+layout: post
+title: "Fix/Solution for NoMethodError? (undefined method `controller_name' for nil:NilClass)"
+date: 2010-02-16T20:32:00+05:30
+comments: false
+categories:
+ - rails
+---
+
+<div class='post'>
+<span class="Apple-style-span" style="font-family: Verdana, Arial, 'Bitstream Vera Sans', Helvetica, sans-serif; font-size: 13px;"></span><br />This error appears when same action gets called twice. There might be chances to have controller with same name twice inside app as well as plugins<br /><br />In my case the error appeared while migrating from rails 2.1 to 2.3.<br />Application was having application.rb and application_controller.rb<br /><br />Files deleted:<br />trunk/app/controllers/application.rb<br /><br />And that solved problem !<br /></div>

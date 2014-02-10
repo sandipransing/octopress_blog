@@ -1,0 +1,19 @@
+---
+layout: post
+title: "Migrating project from rails 2.1.0 to edge rails 2.3.3"
+date: 2009-09-25T01:25:00+05:30
+comments: false
+categories:
+ - rails
+---
+
+<div class='post'>
+I wanted to migrate my project from rails 2.1.0 to rails 2.3.3<br/>so, i performed following steps, but it shows me memcached-client error.<br/><br/>vi config/environment.rb<br/><br/><pre class=ruby># Specifies gem version of Rails to use when vendor/rails is not present<br/>RAILS_GEM_VERSION = '2.3.3' unless defined? RAILS_GEM_VERSION</pre><br/><br/>ruby script/server<br/><br/>It shows me error<br/><pre class=ruby> `install_memcached': 'memcache-client' client requested but not installed. Try 'sudo gem install memcache-client'. (Interlock::ConfigurationError)</pre><br/><br/>so, i installed memcache-client gem<br/><br/><pre class=ruby>gem install memcache-client</pre><br/><br/>but still i am showing same error, any ideas ??</div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>JimmyBean</div>
+<div class='content'>
+I don&#39;t know If I said it already but ...I&#39;m so glad I found this site...Keep up the good work I read a lot of blogs on a daily basis and for the most part, people lack substance but, I just wanted to make a quick comment to say GREAT blog.  Thanks, :)<br><br>A definite great read..Jim Bean</div>
+</div>
+</div>

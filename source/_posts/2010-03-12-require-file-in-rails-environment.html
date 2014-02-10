@@ -1,0 +1,11 @@
+---
+layout: post
+title: "require file in rails environment"
+date: 2010-03-12T00:39:00+05:30
+comments: false
+categories:
+ - rails
+---
+
+<div class='post'>
+<br />There are different ways to load particular file in rails application environment if the required file exists.<br />1. Using RAILS_ROOT<br /><blockquote>if File.exists?(file=File.join(RAILS_ROOT,'config', 'initializers', 'smtp_gmail.rb'))</blockquote><blockquote>&nbsp;&nbsp;require file</blockquote><blockquote>end</blockquote>2. Using Rails.root &amp;amp; join<br /><blockquote>require Rails.root.join('config', 'initializers', 'smtp_gmail.rb')</blockquote>3. Using Rails.root, join &amp;amp; exists? method.<br /><blockquote>require file if File.exists?(file = Rails.root.join('config', 'initializers','smtp_gmail.rb'))</blockquote>4. Using File and direct path to file<br /><blockquote>require &nbsp;File.join('root','app','config', 'initializers', 'smtp_gmail.rb')</blockquote>Among all above methods of &nbsp;loading file, Using Rails.root, join &amp;amp; exists? method seems to be pretty good to have.<br />Any improvements are most welcome!<br /></div>

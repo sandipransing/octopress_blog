@@ -1,0 +1,20 @@
+---
+layout: post
+title: "jruby rails installation on ubuntu interpid"
+date: 2009-09-29T21:22:00+05:30
+comments: false
+categories:
+ - ruby
+ - installation
+---
+
+<div class='post'>
+# install mysql if you dont have already installed<br/>sudo apt-get install mysql-server mysql-client libhtml-template-perl mailx dbishell libcompress-zlib-perl mysql-doc-5.0 tinyca<br/><br/># install ant and jdk<br/>sudo apt-get install ant sun-java6-jdk<br/><br/># install jruby<br/>mkdir software<br/>cd software<br/>wget http://dist.codehaus.org/jruby/jruby-bin-1.1.5.tar.gz<br/>tar xvfz jruby-bin-1.1.5.tar.gz<br/>ln -s jruby-1.1.5 jruby<br/>export PATH=$PATH:$HOME/software/jruby/bin<br/><br/># install the version of rails wanted by jruby<br/>jruby -S gem install jruby-openssl<br/>jruby -S gem install rails<br/><br/># list your gems<br/>jruby -S gem list<br/><br/># install the gems needed for db<br/>jruby -S gem install activerecord-jdbc-adapter activerecord-jdbcmysql-adapter<br/><br/># generate some code<br/>cd ~/scripts/ruby<br/>jruby -S rails wherehaveyoubeen -d mysql<br/>cd wherehaveyoubeen<br/>jruby script/generate controller states index<br/><br/># configure access to the database server<br/>vi config/database.yml<br/><br/>#development:<br/>#  adapter: jdbcmysql &lt;- very important!<br/>#  encoding: utf8<br/>#  database: test_development<br/>#  username: root<br/>#  password: database<br/>#  socket: /var/run/mysqld/mysqld.sock<br/><br/># generate the db<br/>jruby -S rake db:create:all<br/>jruby -S rake db:migrate<br/><br/><br/># edit your app<br/>sudo apt-get install emacs ruby-elisp irb1.8 emacs22-el<br/>emacs -bg black -fg wheat app/views/states/index.html.erb<br/><br/># uncomment the secret in app/controllers/application.rb<br/>vi app/controllers/application.rb<br/><br/># run your app<br/>jruby script/server</div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Parag</div>
+<div class='content'>
+Very helpful article. Please keep up the great work! :-)</div>
+</div>
+</div>

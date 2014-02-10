@@ -1,0 +1,12 @@
+---
+layout: post
+title: "Fix for ruby 1.8.7 incompatibity"
+date: 2009-05-13T19:22:00+05:30
+comments: false
+categories:
+ - ruby
+ - general
+---
+
+<div class='post'>
+Last week i moved from ruby version 1.8.6 to 1.8.7.<br/>then over a week i found that my 1.2.3 and applications developed in ruby 1.8.6 are not working in ruby 1.8.7.<br/><br/>From lot of search on google, i found that its issue with ruby 1.8.7.<br/><br/>Then, i started searching fix / solution for this incompatibity.<br/>And, Finally i got solution.<br/><br/>We just need to fix file delegate.rb<br/>here is fix<br/><br/><pre class=ruby><strong>Diff of /branches/ruby_1_8_7/lib/delegate.rb</strong></pre><br/><br/><pre class=ruby><pre>--- branches/ruby_1_8_7/lib/delegate.rb 2008/05/31 15:17:53 16732<br/>+++ branches/ruby_1_8_7/lib/delegate.rb 2008/06/02 10:52:07 16756<br/>@@ -163,9 +163,9 @@<br/>   # Checks for a method provided by this the delegate object by fowarding the <br/><br/>   # call through \_\_getobj\_\_.<br/>   # <br/>-  def respond_to?(m)<br/>+  def respond_to?(m, include_private = false)<br/>     return true if super<br/>-    return self.__getobj__.respond_to?(m)<br/>+    return self.__getobj__.respond_to?(m, include_private)<br/><br/>   end<br/><br/>   #<br/>@@ -270,9 +270,9 @@<br/>       end<br/>       @_dc_obj.__send__(m, *args)<br/>     end<br/>-    def respond_to?(m)  # :nodoc:<br/>+    def respond_to?(m, include_private = false)  # :nodoc:<br/>       return true if super<br/><br/>-      return @_dc_obj.respond_to?(m)<br/>+      return @_dc_obj.respond_to?(m, include_private)<br/>     end<br/>     def __getobj__  # :nodoc:<br/>       @_dc_obj</pre></pre><br/>You have to make necessary changes and you are ready to work with ruby 1.8.7.<br/>need not downgrade ruby version :)<br/><br/>for Hash error<br/><br/>Add following line in config/environment.rb<br/><pre class=ruby> unless '1.9'.respond_to?(:force_encoding)<br/>     String.class_eval do<br/>       begin<br/>         remove_method :chars<br/>       rescue NameError<br/>         # OK<br/>       end<br/>     end<br/>   end</pre><br/><br/>Cheers !<br/><br/>Sandip</div>

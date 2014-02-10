@@ -1,0 +1,13 @@
+---
+layout: post
+title: "Spell Check in ruby and rails using BOSSMan"
+date: 2010-08-04T02:26:00+05:30
+comments: false
+categories:
+ - ruby
+ - rails
+ - bossman
+---
+
+<div class='post'>
+Wrong English is an often problem while developing any website product as it gives bad view to website user and thus does direct impact on product.  <b>BOSSMan</b> is a ruby gem that interacts with <b>yahoo web service</b> and provides a simplest way to overcome such errors.<br /><b>Installation:</b><br /><pre class=ruby>gem sources -a http://gems.github.com gem install jpignata-bossman </pre><b>Apply and get Application ID from yahoo developer network</b><pre class=ruby><b>URl</b> https://developer.apps.yahoo.com/</pre>Make sure to note it for reference<br /><b>Usage in ruby app</b><br /><pre class=ruby>require 'rubygems' require 'bossman' include BOSSMan  BOSSMan.application_id = "Your Application ID here" </pre><br /><b>Spelling Suggestions</b><br /><pre class=ruby>text = BOSSMan::Search.spelling("gooogle") =&gt; #<bossman::resultset:0xa993b44 ,="" @count="1" @deephits="1" @response="{&quot;ysearchresponse&quot;=" @responsecode="200" @start="0" @suggestion="google" @totalhits="1">{"resultset_spell"=&gt;[{"suggestion"=&gt;"google"}], "responsecode"=&gt;"200", "deephits"=&gt;"1", "start"=&gt;"0", "count"=&gt;"1", "totalhits"=&gt;"1"}}&gt;  text.suggestion  =&gt; "google" </bossman::resultset:0xa993b44></pre><br /><b>More sophisticated way of use -</b><br />1. Create a YML file containing list of kewords <br />2. Load YML file <br />3. Iterate YML hash to find out spell suggestions<br /><b>Example: spelling.yml</b><br /><pre class=ruby>  1 keywords:   2   gooogle:   3   Barack Oabama:   4   Indian:   5   Latuur: </pre><br /><pre class=ruby>keywords = YAML.load_file('spelling.yml')['keywords'].keys    puts "Correction suggested"   keywords.each do |keyword|     text = BOSSMan::Search.spelling(keyword)     if defined? text.suggestion       puts "#{keyword} =&gt; #{text.suggestion}"     end   end </pre><br /><b>Output</b><br /><pre class=ruby>Correction suggested gooogle =&gt; google Barack Oabama =&gt; Barack Obama Latuur =&gt; Latour </pre><br />Analyze suggestions manually and make neccesary corrections..</div>

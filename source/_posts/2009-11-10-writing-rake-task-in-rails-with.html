@@ -1,0 +1,12 @@
+---
+layout: post
+title: "Writing rake task in rails with namespace, parameters"
+date: 2009-11-10T15:09:00+05:30
+comments: false
+categories:
+ - rails
+ - rake-tasks
+---
+
+<div class='post'>
+<div style="text-align: left;">Rake tasks itself defines that “they are bunch of ruby code that performs some task.” Rake tasks are placed in lib/tasks directory of application and files have .rake extension. There are many lovable tasks defined in rails. read more  Rake tasks are executed from console.  Benefit of writing rake task are Testing of code   Scheduled rake tasks ( backgroundRb and scheduled tasks using cron )   Simplifies code Lets, understand what is code inside rake tasks.<br /></div><div style="text-align: left;"><b><br /></b><br /></div><div style="text-align: left;"><b>Simple greet rake task  </b><br /></div><pre class="ruby" name="code"> <br /># lib/tasks/welcome.rake<br />task :greet do<br />  puts “Hello !!”<br />end<br /><br />## Execute task<br />rake greet<br /></pre><b><br /></b><br /><b>Adding description to rake task  </b><br /><pre class="ruby" name="code"> <br /># lib/tasks/welcome.rake<br />desc “This is new style of greet”<br />task :greet do<br />  puts “Hello !!”<br />end<br /></pre><pre class="ruby" name="code">## Execute task<br />rake greet<br /></pre><br /><b>Adding namespace to rake tasks</b><br /><br />It's nothing but prefix that takes while executing rake task. Benefit of adding namespace is to categories similar rake tasks.  <br /><pre class="ruby" name="code"> <br /># lib/tasks/welcome.rake<br />namespace :introduction do<br />desc “This is one style of introduction”<br />task :greet do<br />  puts “Hello !!”<br />end<br />desc “This is 2nd style of introduction”<br />task :hi do<br />  puts “Hi ”<br />end<br />end<br /></pre><pre class="ruby" name="code">## Execute task<br />rake introduction:greet<br />rake introduction:hi<br /><br /></pre><b>Passing arguments to rake tasks </b><br /><pre class="ruby" name="code"> <br /># lib/tasks/welcome.rake<br /><br />namespace :introduction do<br />desc “This is one style of introduction”<br />task :greet do<br />  puts “Hello !!”<br />end<br /><br />desc “This is 2nd style of introduction”<br />task :hi =&gt; :enviroment do<br />  puts “Hi #{ENV['name']}”<br />end<br />end<br /></pre><pre class="ruby" name="code">## Execute task<br />rake introduction:hi name=Raj<br /></pre><a href="http://www.blogger.com/For%20more%20reference%20http://railsenvy.com/2007/6/11/ruby-on-rails-rake-tutorial#namespaces">read more</a><br /></div>

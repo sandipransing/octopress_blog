@@ -1,0 +1,12 @@
+---
+layout: post
+title: "alias methods in ruby"
+date: 2010-03-31T17:46:00+05:30
+comments: false
+categories:
+ - ruby
+ - meta-programming
+---
+
+<div class='post'>
+<b>Alias method in ruby</b><br />Ruby classes provides a alias_method that can be used to reuse the existing methods.<br />Consider a situation where you need different methods which has same code and ONLY  they have different names.<br /><br />In this case alias_method uses suits best choice instead duplicating same code or writing common method that will get used in all methods, as i did before.  Example, I have methods search, home, index all are doing same functionality.<br/> <b>Old approach</b><pre class=ruby># URL /  def index   list  end  # URL /search def search   list  end   #URL /home  def home   list  end  private  def list  # code here  end  </pre> <b>Correct approach in ruby</b><pre class=ruby>def index   # code here  end  alias_method :home, :index  alias_method :search, :index  </pre><b>Attributes aliasing in ruby</b><br/>Same way one can easily rename existing class attribute names using alias_attribute method.<br/><b>alias_attribute(new_name, old_name)</b><pre class=ruby>alias_attrinute :username, :login </pre><b>More practical use</b><br/>while deprecating attributes, methods in gems, plugins, extensions, libraries always use aliases in order to maintain backward compatibility.<br/> Got easy ??<br/>that's where ruby rocks !</div>

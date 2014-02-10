@@ -1,0 +1,13 @@
+---
+layout: post
+title: "Copy database to another database through command"
+date: 2010-02-16T16:53:00+05:30
+comments: false
+categories:
+ - mysql
+ - general
+ - ubuntu
+---
+
+<div class='post'>
+<b>1. Copy One database to another database on same host </b><br/><pre class=ruby> mysqldump -uroot -p <source_database_name> | mysql -uroot <dest_database_name></pre> <b>2. Copy database to another database on remote host</b><br/><pre class=ruby> mysqldump -uroot -p <source_database> | ssh host2 "mysql -uroot <dest_database>" </pre></div>

@@ -71,6 +71,3 @@ AngularJS is a client-side JavaScript framework.A video tutorial to help you get
   All is well. Way to go !!
 </div>
 ```
-## About Author
-{% img left http://www.gravatar.com/avatar/37e0a0772ffc4ce993cedfb49c6ee6d2.png Sandip Ransing %}
-Sandip is a ruby on rails developer based in pune and also a blogger at funonrails. Opensource contributor and working with Josh software. Follow Sandip on [Twitter](http://twitter.com/sandipransing) for updates. He shares code at [github](http://github.com/sandipransing).
