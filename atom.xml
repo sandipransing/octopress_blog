@@ -4,7 +4,7 @@
   <title><![CDATA[Fun On Rails]]></title>
   <link href="http://sandipransing.github.io/atom.xml" rel="self"/>
   <link href="http://sandipransing.github.io/"/>
-  <updated>2014-02-10T16:30:05+05:30</updated>
+  <updated>2014-02-10T19:27:29+05:30</updated>
   <id>http://sandipransing.github.io/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -20,7 +20,7 @@
     <id>http://sandipransing.github.io/2014/02/migrating-from-blogger-to-octopress</id>
     <content type="html"><![CDATA[<p>After 3 or more years, happily doing blogging at <code>blogger.com</code>, finally i decided to move my blog from <em>blogger</em> to <em>octopress</em>.
 From last 2-3 days, was evaluating with <a href="http://octopress.org">octopress</a>, its way of writing posts,
-customizations, themes, and plugins. I found <code>octopress</code> very quick &amp; easy to use.</p>
+customizations, themes, and plugins and found it very quick &amp; easy to use.</p>
 
 <p>Below post explains steps involved in migration:</p>
 
@@ -170,11 +170,6 @@ almost exactly like the default, right pullquotes, but a little different.
 </span><span class='line'><span class="o">&lt;/</span><span class="nx">div</span><span class="o">&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
-
-<h2>About Author</h2>
-
-<p><img class="left" src="http://www.gravatar.com/avatar/37e0a0772ffc4ce993cedfb49c6ee6d2.png" title="Sandip Ransing" >
-Sandip is a ruby on rails developer based in pune and also a blogger at funonrails. Opensource contributor and working with Josh software. Follow Sandip on <a href="http://twitter.com/sandipransing">Twitter</a> for updates. He shares code at <a href="http://github.com/sandipransing">github</a>.</p>
 ]]></content>
   </entry>
   
@@ -183,13 +178,14 @@ Sandip is a ruby on rails developer based in pune and also a blogger at funonrai
     <link href="http://sandipransing.github.io/2014/02/octopress-powered-and-github-hosted-blog/"/>
     <updated>2014-02-07T19:20:07+05:30</updated>
     <id>http://sandipransing.github.io/2014/02/octopress-powered-and-github-hosted-blog</id>
-    <content type="html"><![CDATA[<p>There are various blogging sites like <code>blogspot</code>, <code>wordpress</code>, <code>posterious</code>, and many more. But each has their own limitations.
-Anyone who has some technical background can start with octopress blog. This gives us the power of freedom of doing anything.
+    <content type="html"><![CDATA[<p>There are various blogging sites like <code>blogspot</code>, <code>wordpress</code>, <code>posterous</code>, and many more.
+Each has their own pros and cons and none of the engine gives us full power of ehhance our blogging experience.
+Anyone who has atleast some technical knowledge can start with octopress powered blog. This gives us the power of freedom of doing anything.
 So, Lets first understand about octopress framework and its features.</p>
 
 <h2>Octopress</h2>
 
-<blockquote><p>Octopress is a framework designed by Brandon Mathis for Jekyll, the blog aware static site generator. more info can be found <a href="http://octopress.org/2011/07/23/octopress-20-surfaces/">here</a></p></blockquote>
+<blockquote><p>Octopress is a framework designed by Brandon Mathis for Jekyll, the blog aware static site generator. If you wanted to know more then it can be found <a href="http://octopress.org/2011/07/23/octopress-20-surfaces/">here</a></p></blockquote>
 
 <h2>Octopress Setup</h2>
 
