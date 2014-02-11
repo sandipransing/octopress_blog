@@ -45,7 +45,7 @@
 &lt;a title="disconnect call" class="telified" href="tel:disconnect"&gt;Disconnect&lt;/a&gt;
 </code></p>
 
-<p><img src="{{ root_url }}/images/clicktocall.png" /></p>
+<p><img src="/images/clicktocall.png" /></p>
 ]]></content>
   </entry>
   
