@@ -9,7 +9,7 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="After 3 or more years, happily doing blogging at blogger.com, finally i decided to move my blog from blogger to octopress.
+  <meta name="description" content="After 3 or more years, happily doing blogging at blogger.com, finally i decided to shift from blogger to octopress.
 From last 2-3 days, was &hellip;">
   
 
@@ -102,12 +102,14 @@ From last 2-3 days, was &hellip;">
 
 <time datetime="2014-02-09T19:00:56+05:30" pubdate data-updated="true">Feb 9<span>th</span>, 2014</time>
         
+         | <a href="/2014/02/migrating-from-blogger-to-octopress/#disqus_thread">Comments</a>
+        
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>After 3 or more years, happily doing blogging at <code>blogger.com</code>, finally i decided to move my blog from <em>blogger</em> to <em>octopress</em>.
+  <div class="entry-content"><p>After 3 or more years, happily doing blogging at <em>blogger.com</em>, finally i decided to <em>shift</em> from <em>blogger</em> to <em>octopress</em>.
 From last 2-3 days, was evaluating with <a href="http://octopress.org">octopress</a>, its way of writing posts,
 customizations, themes, and plugins and found it very quick &amp; easy to use.</p>
 
@@ -332,21 +334,15 @@ So, Lets first understand about octopress framework and its features.</p>
 
 <h2>Octopress Setup</h2>
 
-<ol>
-<li>Before starting make sure you have <code>git</code> installed. If not then &ndash;</li>
-</ol>
-
+<p><strong>1.  Before starting make sure you have <code>git</code> installed.</strong>
+If not then do install using,</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install git</span></code></pre></td></tr></table></div></figure>
 
 
-<ol>
-<li>Install <code>ruby</code> 1.9.3 or higher</li>
-</ol>
-
-
-<p>Make git clone of octopress source code</p>
+<p><strong>2.  Install <code>ruby 1.9.3</code> or higher</strong>
+Make git clone of octopress source code</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -397,7 +393,7 @@ more on configurations can be found <a href="http://octopress.org/docs/configuri
 
 <p>Now you can open a post inside editor and change as you wanted. More on writing markdown can be found <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet#wiki-html">here</a> and <a href="http://daringfireball.net/projects/markdown/syntax">here too</a></p>
 
-<p>Well, now its time to view how our blog looks like &ndash;</p>
+<p>Well ! Now its time to see, how our blog looks like &ndash;</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -407,25 +403,28 @@ more on configurations can be found <a href="http://octopress.org/docs/configuri
 </span><span class='line'>rake preview</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Visit browser <code>http://localhost:4000</code> and you should be seeing blog running there.</p>
+<p>Visit browser <code>http://localhost:4000</code> and you should be seeing blog running there :&ndash;)</p>
 
 <h2>Deployment</h2>
 
-<p>There are ways to deploy this blog. You can either deploy this blog on <code>heroku</code> or on <code>github</code> using github pages.</p>
+<p>There are ways to deploy octopress blog. You can either deploy this blog on <code>heroku</code> or on <code>github</code> using github pages.</p>
 
-<h3>Heroku</h3>
+<p><strong>1. Heroku</strong>:
+As heroku provides free hosting (1 node) you may want to deploy at heroku.
+More on this deployment can be found <a href="http://def.reyssi.net/blog/2012/01/14/get-blogging-with-octopress-on-heroku/">here</a></p>
 
-<p>More on Heroku deployment can be found <a href="http://def.reyssi.net/blog/2012/01/14/get-blogging-with-octopress-on-heroku/">here</a></p>
+<p><strong>2. With Github Project Pages</strong>:
+Github provides free static website hosting using github pages and deployment is also very simple.</p>
 
-<h3>With Github Project pages</h3>
-
-<p>Github deployment is simple. First you need to create a github repository called <code>username.github.io</code></p>
+<p>Note: You should have a github repository called <code>username.github.io</code></p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rake setup_github_pages
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd octopress
+</span><span class='line'>rake setup_github_pages
 </span><span class='line'>git remote add origin git@github.com:username/username.github.io.git
 </span><span class='line'>rake generate
 </span><span class='line'>rake deploy</span></code></pre></td></tr></table></div></figure>
@@ -452,7 +451,7 @@ Also, do not forget to commit and push your source code on github.</p>
 
 <p>Then goto your domain provider website and point your <code>domain</code> i.e A record to github ip address <code>204.232.175.78</code>.</p>
 
-<h3>Subdomain</h3>
+<h2>Adding subdomain</h2>
 
 <p>If you want to point subdomain to github blog then &ndash;</p>
 
@@ -460,8 +459,8 @@ Also, do not forget to commit and push your source code on github.</p>
 </pre></td><td class='code'><pre><code class=''><span class='line'>echo 'blog.sandipransing.in' &gt;&gt; source/CNAME</span></code></pre></td></tr></table></div></figure>
 
 
-<p>then goto your domain provider website and create a CNAME record for your <code>subdomain</code> i.e. <code>blog</code> pointing to <code>yourname.github.io.</code>
-If you want more help then see <a href="http://octopress.org/docs/deploying/github/">here</a> and also <a href="http://help.github.com/pages/#custom_domains">here</a></p>
+<p>then go to your domain provider website and create a CNAME record for your <code>subdomain</code> i.e. <code>blog</code> pointing to <code>yourname.github.io.</code>
+If you want more help on this then please see <a href="http://octopress.org/docs/deploying/github/">here</a> and also <a href="http://help.github.com/pages/#custom_domains">here</a></p>
 </div>
   
   
