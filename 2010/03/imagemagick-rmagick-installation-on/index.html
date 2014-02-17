@@ -9,7 +9,9 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="ImageMagick InstallationUbuntu machine has default apt-get package manager.To install imagemagick following packages needs to be installed.apt-get &hellip;">
+  <meta name="description" content="ImageMagick Installation Ubuntu machine has default apt-get package manager.
+To install imagemagick following packages needs to be installed. 1
+dudo &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -103,8 +105,35 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-<br /><b>ImageMagick Installation</b><br /><br />Ubuntu machine has default apt-get package manager.<br />To install imagemagick following packages needs to be installed.<br /><br /><i>apt-get install <b>imagemagick librmagick-ruby libmagickwand-dev</b></i><br /><br /><b>RMagick gem install</b><br /><br /><i>gem install </i><b><i>rmagick</i></b><br /><br />If you still facing problems with gem installation, Please look that following packages are installed<br />on your system.<br /><br /><i>dpkg -l | grep </i><b><i>libmagickcore-dev graphicsmagick-libmagick-dev-compat</i></b><br /><br />If there are no packages installed then try to install then first.<br /><br /><i>apt-get install </i><b><i>libmagickcore-dev graphicsmagick-libmagick-dev-compat</i></b><br /><br />Try to install rmagick gem again. Now it should be installed without any error.<br /><div><br /></div></div>
+<div class="entry-content"><h4>ImageMagick Installation</h4>
+
+<p>Ubuntu machine has default apt-get package manager.
+To install imagemagick following packages needs to be installed.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>dudo apt-get install imagemagick librmagick-ruby libmagickwand-dev</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>RMagick gem install</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install rmagick</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you still facing problems with gem installation, Please look that following packages are installed
+on your system.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>dpkg -l | grep libmagickcore-dev graphicsmagick-libmagick-dev-compat</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If there are no packages installed then try to install then first.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install libmagickcore-dev graphicsmagick-libmagick-dev-compat</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Try to install rmagick gem again. Now it should be installed without any error.</p>
 </div>
 
 

@@ -9,7 +9,7 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="WordPress &nbsp;is a&nbsp;open source&nbsp;software developed by and for community with ongoing development on it. Easy installation, customizable, &hellip;">
+  <meta name="description" content="There are different ways to load particular file in rails application environment if the required file exists.1. Using RAILS_ROOTif File.exists?( &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,74 +77,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/03/wordpress-blog-software-installation/">WordPress Blog Software Installation</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-03-12T01:55:00+05:30" pubdate data-updated="true">Mar 12<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://wordpress.org/">WordPress</a> &nbsp;is a&nbsp;open source&nbsp;software developed by and for community with ongoing development on it. Easy installation, customizable, with lots of available plugins, themes and SEO friendly are the strengths of it!</p>
-
-<blockquote><p>Software is mainly serves the purpose of blogging, hosting static websites.
-People with knowledge of php, javascipt and little knowledge of mysql db&nbsp;can customize it however they want.</p></blockquote>
-
-<ol>
-<li>Minimum server requirements</li>
-<li>PHP 4.3 or greater</li>
-<li>MySQL 4.1.2 or greater</li>
-<li>Apache/NGINX (or any web server supporting php &amp; mysql )</li>
-</ol>
-
-
-<p><strong>For detailed information on installation click <a href="http://codex.wordpress.org/Installing_WordPress#Famous%205-Minute%20Install">here</a></strong></p>
-
-<p>Now you will need to decide where on your web site you&rsquo;d like your blog to appear:</p>
-
-<ol>
-<li>In the root directory of your web site. (For example, <a href="http://yoursite.com/">http://yoursite.com/</a>)</li>
-<li>In a subdirectory of your web site. (For example, <a href="http://yoursite.com/blog/">http://yoursite.com/blog/</a></li>
-</ol>
-
-
-<blockquote><p>This can be done by adding new route at nginx configuration file or deploying wordpress software inside blog directory of main website.</p></blockquote>
-
-<p>There are millions of satisfied users using&nbsp;word-press blog.</p>
-
-<p><strong>To create and start blogging with free wordpress.com blog click <a href="http://en.wordpress.com/signup/">here</a></strong></p>
-
-<p><a href="http://codex.wordpress.org/WordPressMU">WordPress MU</a> multiblog software provides a way to create thousands of wordpress blogs
-just like wordpress.com site does.</p>
-
-<p>Download and&nbsp;detailed information on installation click <a href="http://codex.wordpress.org/Installing_WPMU">here</a></p>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -294,11 +226,48 @@ The Tortoise svn client on windows is one of my favorite svn client.<br />I am w
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/03/page-cache-control-in-radiant-cms/">Page Cache Control in Radiant Cms</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-03-04T00:43:00+05:30" pubdate data-updated="true">Mar 4<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<span class="Apple-style-span" style="font-family: Arial; font-size: small;"><span class="Apple-style-span" style="font-size: 13px;"><div><b>Radiant Caching</b></div><div><br /></div><div>Radiant cms is very powerful and customizable cms as of now which has&nbsp;inbuilt support for page caching.</div><div>Radiant caching mechanisam is somehow similar&nbsp;to action caching in rails.</div><div><br /></div><div><b>In latest radiant version i.e. &gt; 0.8 Responsecache has been replaced with Radiant::Cache.</b></div><div><br /></div><div>By default radiant cache gets automatically invalidated after every 5&nbsp;</div><div>minutes and that is configurable.</div><div><br /></div><div>The interval is easily configurable by adding following lines inside environment</div><div><br /></div><blockquote>if defined? ResponseCache == &#8216;constant&#8217; &nbsp; &nbsp;</blockquote><blockquote>&nbsp;&nbsp; &nbsp;ResponseCache.defaults[:expire_time] = 4.hours</blockquote><blockquote>else</blockquote><blockquote>&nbsp;&nbsp; &nbsp;SiteController.cache_timeout = 4.hours</blockquote><blockquote>end</blockquote><div>There are situations where automatic cache inavalidation won&#8217;t work</div><div>and we need to clear radiant cache on the fly.</div><div>There are two ways to do that to invalidate radiant cache immediately.</div><div><br /></div><div>1. <b>Navigate to the root of your Radiant project and delete the cache directory.</b></div><div><br /></div><blockquote>cd /home/deploy/radiant_site/tmp</blockquote><blockquote>rm -r cache</blockquote><div><br /></div><div>2.<b> Clearing the page cache from within your code</b></div><div>&nbsp;&nbsp; &nbsp;</div><blockquote>if defined? ResponseCache == &#8216;constant&#8217;</blockquote><blockquote>&nbsp;&nbsp; &nbsp;ResponseCache.instance.clear</blockquote><blockquote>else</blockquote><blockquote>&nbsp;&nbsp; &nbsp;Radiant::Cache.clear</blockquote><blockquote>end</blockquote><div><br /></div><div>While building website using radiant cms, it happens that there are certain pages they are static and not going to change frequently that time configuring cache expiry time to long interval is going to be always beneficial and for pages which conatins dynamic content (displaying logged in user on homepage), we need to disable radiant cache for such pages. this can be done by using page_options extension.</div><div><br /></div><div><b>Installation for radiant version &nbsp;0.7</b></div><div>From your RADIANT_ROOT:</div><div><br /></div><blockquote>$ script/extension install page_options</blockquote><div><br /></div><div><b>Installation for radiant version &nbsp;0.8 and higher</b></div><blockquote>git clone git://github.com/sandipransing/radiant-page_options-extension.git vendor/extensions/page_options</blockquote><div><br /></div><div>Restart server</div><div><br /></div><div><b>Usage</b></div><div><br /></div><div>1. Goto /admin/pages</div><div>2. Edit any page</div><div>3. Click on more link and edit cache settings.</div><div><br /></div><div>For more information <a href="http://github.com/avonderluft/radiant-page_options-extension">visit</a></div><div><br /></div></span></span></div>
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/page/18/">&larr; Older</a>
     
-    <a href="/blog/archives">Blog Archives</a>
+    <a href="/archives">Blog Archives</a>
     
     <a class="next" href="/page/16/">Newer &rarr;</a>
     

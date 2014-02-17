@@ -9,7 +9,7 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="There are almost 4 to 5 simple steps you need to followed beforegetting multiple sites working using radiant cms1. Setup radiant cms first Install &hellip;">
+  <meta name="description" content="This involves 4-5 simple in-order to get multiple sites working using radiant cms. Follow the below steps one by one. Setup radiant cms first Install &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -103,31 +103,175 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-There are almost 4 to 5 simple steps you need to followed before<br />getting multiple sites working using radiant cms<br />1. Setup radiant cms <br />first Install radiant gem<br /><pre class="ruby" name="code">sudo gem install radiant</pre><br />set &#8216;radiant&#8217; under path<br /><pre class="ruby" name="code">export PATH=$PATH:/var/lib/gems/1.8/gems/radiant-0.8.0/bin</pre><br />Now, we have done with radiant installation.<br />Let&#8217;s create new project..<br /><pre class="ruby" name="code">$ radiant multisite -d mysql</pre><br /><pre class="ruby" name="code">$ cd multisite/</pre><br />Edit database.yml<br /><pre class="ruby" name="code">$ vi config/database.yml<br />development:<br />  adapter: mysql<br />  database: multisite_development<br />  username: root<br />  password: abcd<br />  host: localhost</pre><br />Migrations<br /><pre class="ruby" name="code">rake db:create</pre><br />Run the database bootstrap rake task:<br /><pre class="ruby" name="code">rake db:bootstrap<br />This task will destroy any data in the database. Are you sure you want</pre><pre class="ruby" name="code">to continue? [yn] yes<br />...<br />Create the admin user (press enter for defaults).<br />Name (Administrator): admin<br />Username (admin): admin<br />Password (radiant): <br />....<br />Select a database template:<br />1. Empty<br />2. Roasters (a coffee-themed blog or brochure)<br />3. Simple Blog<br />4. Styled Blog<br />[1-4]: 2<br />....</pre><br />Now we are ready to start<br /><pre class="ruby" name="code">script/server</pre><br />Open following URL in browser.<br /><pre class="ruby" name="code">http://localhost:3000</pre><br />You should see site homepage.&nbsp;To manage site goto admin panel.<br /><pre class="ruby" name="code"></pre><pre class="ruby" name="code">http://localhost:3000/admin</pre><br />Now Lets start with multiple sites management<br />1) Clone multi_site extension into vendor/extensions of your project.<br /><pre class="ruby" name="code">  cd vendor/extensions/<br />  git clone git://github.com/zapnap/radiant-multi-site-extension.git multi_site</pre><br />2) Run the extension migrations.<br /><pre class="ruby" name="code">  rake db:migrate:extensions</pre><br />3) Run the extension update task.<br /><pre class="ruby" name="code">  rake radiant:extensions:multi_site:update</pre><br />4) Restart your server<br />And we are done with multisite installation,&nbsp;Open following URL in browser.<br /><br />http://localhost:3000/admin/sites<br /><br />Add multiple sites as you wanted<br /><pre class="ruby" name="code"> Name        Domain pattern     Base domain name<br /><br />================================================<br /><br /> site 1      sandip             sandip<br /><br /> site 2      gautam             gautam<br /><br /> </pre>Don&#8217;t forget to make dns entries in /etc/hosts.<br />vi /etc/hosts<br /><pre class="ruby" name="code"> <br />127.0.0.1 localhost<br />...<br />127.0.0.1 sandip<br />127.0.0.1 gautam<br /></pre>One more, by deault pages created for new sites added are not published.<br />Please be sure to make them published and modify contents to identify them<br /><br />Now you can view different sites.<br /><b>     http://sandip:3000<br />   http://gautam:3000<br /> </b><br /><br />Thats, All<br />Cheers !<br />$@ndip</div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>Vic</div>
-<div class='content'>
-Super Simple!  Great!</div>
-</div>
-<div class='comment'>
-<div class='author'>gautamrege</div>
-<div class='content'>
-Great work!</div>
-</div>
-<div class='comment'>
-<div class='author'>sandipransing</div>
-<div class='content'>
-@jim, Thanks for your suggestion.<br>I will make those changes.</div>
-</div>
-<div class='comment'>
-<div class='author'>Jim Gay</div>
-<div class='content'>
-you can skip a few steps by doing &quot;script/extension install multi_site&quot;</div>
-</div>
-</div>
+<div class="entry-content"><p>This involves 4-5 simple in-order to get multiple sites working using radiant cms. Follow the below steps one by one.</p>
+
+<h4>Setup radiant cms</h4>
+
+<p>first Install radiant gem</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo gem install radiant</span></code></pre></td></tr></table></div></figure>
+
+
+<p>set &lsquo;radiant&rsquo; under path</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>export PATH=$PATH:/var/lib/gems/1.8/gems/radiant-0.8.0/bin</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now, As we are done with radiant installation lets create new project.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ radiant multisite -d mysql</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Edit database config</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd multisite/
+</span><span class='line'>$ vi config/database.yml
+</span><span class='line'>development:
+</span><span class='line'>  adapter: mysql
+</span><span class='line'>  database: multisite_development
+</span><span class='line'>  username: root
+</span><span class='line'>  password: abcd
+</span><span class='line'>  host: localhost</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Migrations</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake db:create</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Run the database bootstrap rake task:</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake db:bootstrap
+</span><span class='line'>This task will destroy any data in the database. Are you sure you want
+</span><span class='line'>to continue? [yn] yes
+</span><span class='line'>...
+</span><span class='line'>Create the admin user (press enter for defaults).
+</span><span class='line'>Name (Administrator): admin
+</span><span class='line'>Username (admin): admin
+</span><span class='line'>Password (radiant): 
+</span><span class='line'>....
+</span><span class='line'>Select a database template:
+</span><span class='line'>1. Empty
+</span><span class='line'>2. Roasters (a coffee-themed blog or brochure)
+</span><span class='line'>3. Simple Blog
+</span><span class='line'>4. Styled Blog
+</span><span class='line'>[1-4]: 2
+</span><span class='line'>....</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Now we are ready to start</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ruby script/server</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Open following URL in browser:</p>
+
+<p><code>http://localhost:3000</code></p>
+
+<p>You should see site homepage. To manage site go to admin panel.
+<code>http://localhost:3000/admin</code></p>
+
+<p>Now Lets start with multiple sites management</p>
+
+<p><strong>1) Clone multi_site extension into <code>vendor/extensions</code> of your project</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  cd vendor/extensions/
+</span><span class='line'>  git clone git://github.com/zapnap/radiant-multi-site-extension.git multi_site</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>2) Run the extension migrations</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  rake db:migrate:extensions</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>3) Run the extension update task</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  rake radiant:extensions:multi_site:update</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>4) Restart your server</strong></p>
+
+<p>This finishes our multisite installation. Open following URL in browser.</p>
+
+<p><code>http://localhost:3000/admin/sites</code></p>
+
+<p>Add multiple sites as you wanted</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> Name        Domain pattern     Base domain name
+</span><span class='line'>
+</span><span class='line'>================================================
+</span><span class='line'>
+</span><span class='line'> site 1      sandip             sandip
+</span><span class='line'>
+</span><span class='line'> site 2      gautam             gautam</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Don&rsquo;t forget to make dns entries in <code>/etc/hosts</code></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># /etc/hosts
+</span><span class='line'> 
+</span><span class='line'>127.0.0.1 localhost
+</span><span class='line'>...
+</span><span class='line'>127.0.0.1 sandip
+</span><span class='line'>127.0.0.1 gautam</span></code></pre></td></tr></table></div></figure>
+
+
+<p>One more, by deault pages created for new sites added are not published.
+Please be sure to make them published and modify contents to identify them</p>
+
+<p>Now you can view different sites:</p>
+
+<ol>
+<li><a href="http://sandip:3000">http://sandip:3000</a></li>
+<li><a href="http://gautam:3000">http://gautam:3000</a></li>
+</ol>
+
 </div>
 
 

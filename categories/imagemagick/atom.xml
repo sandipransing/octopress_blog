@@ -4,7 +4,7 @@
   <title><![CDATA[Category: imagemagick | Fun On Rails]]></title>
   <link href="funonrails.com/categories/imagemagick/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-14T17:13:10+05:30</updated>
+  <updated>2014-02-18T01:40:31+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -59,9 +59,33 @@ p.upload_image(url)
     <link href="funonrails.com/2010/03/imagemagick-rmagick-installation-on/"/>
     <updated>2010-03-23T18:11:00+05:30</updated>
     <id>funonrails.com/2010/03/imagemagick-rmagick-installation-on</id>
-    <content type="html"><![CDATA[<div class='post'>
-<br /><b>ImageMagick Installation</b><br /><br />Ubuntu machine has default apt-get package manager.<br />To install imagemagick following packages needs to be installed.<br /><br /><i>apt-get install <b>imagemagick librmagick-ruby libmagickwand-dev</b></i><br /><br /><b>RMagick gem install</b><br /><br /><i>gem install </i><b><i>rmagick</i></b><br /><br />If you still facing problems with gem installation, Please look that following packages are installed<br />on your system.<br /><br /><i>dpkg -l | grep </i><b><i>libmagickcore-dev graphicsmagick-libmagick-dev-compat</i></b><br /><br />If there are no packages installed then try to install then first.<br /><br /><i>apt-get install </i><b><i>libmagickcore-dev graphicsmagick-libmagick-dev-compat</i></b><br /><br />Try to install rmagick gem again. Now it should be installed without any error.<br /><div><br /></div></div>
+    <content type="html"><![CDATA[<h4>ImageMagick Installation</h4>
 
+<p>Ubuntu machine has default apt-get package manager.
+To install imagemagick following packages needs to be installed.</p>
+
+<p><code>
+dudo apt-get install imagemagick librmagick-ruby libmagickwand-dev
+</code></p>
+
+<h4>RMagick gem install</h4>
+
+<p><code>
+gem install rmagick
+</code>
+If you still facing problems with gem installation, Please look that following packages are installed
+on your system.</p>
+
+<p><code>
+dpkg -l | grep libmagickcore-dev graphicsmagick-libmagick-dev-compat
+</code></p>
+
+<p>If there are no packages installed then try to install then first.
+<code>
+sudo apt-get install libmagickcore-dev graphicsmagick-libmagick-dev-compat
+</code></p>
+
+<p>Try to install rmagick gem again. Now it should be installed without any error.</p>
 ]]></content>
   </entry>
   

@@ -9,7 +9,8 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Array of years using range
+  <meta name="description" content="Array of years using range 1
+2
 ((yr=Date.current.year)-9..yr).to_a
 #=&gt; [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010] Array of years &hellip;">
   
@@ -105,11 +106,59 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-<b>Array of years using range</b><br />
-<pre class=ruby>((yr=Date.current.year)-9..yr).to_a
-#=&gt; [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010] </pre>
-<br /><b>Array of years using lambda</b><br /><pre class=ruby> Array.new(10){|i| Date.current.year-i} #=&gt; [2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001] </pre><br /><b>Array of months</b><br /><pre class=ruby>Date::MONTHNAMES.compact #=> ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"] </pre> <br /><b>Array of abbreviated months</b><br /><pre class=ruby>Date::ABBR_MONTHNAMES.compact #=> ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] </pre>  <br /><b>Array of abbreviated months with index (ps. collect_with_index is core extension method added to array)</b><br /><pre class=ruby>Date::ABBR_MONTHNAMES.compact.collect_with_index{|m, i| [m, i]} #=> [["Jan", 1], ["Feb", 2], ["Mar", 3], ["Apr", 4], ["May", 5], ["Jun", 6], ["Jul", 7], ["Aug", 8], ["Sep", 9], ["Oct", 10], ["Nov", 11], ["Dec", 12]]  OR  Date::ABBR_MONTHNAMES.compact.each_with_index.collect{|m, i| [m, i+1]} #=> [["Jan", 1], ["Feb", 2], ["Mar", 3], ["Apr", 4], ["May", 5], ["Jun", 6], ["Jul", 7], ["Aug", 8], ["Sep", 9], ["Oct", 10], ["Nov", 11], ["Dec", 12]] </pre></div>
+<div class="entry-content"><h4>Array of years using range</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="p">((</span><span class="n">yr</span><span class="o">=</span><span class="no">Date</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">year</span><span class="p">)</span><span class="o">-</span><span class="mi">9</span><span class="o">.</span><span class="n">.yr</span><span class="p">)</span><span class="o">.</span><span class="n">to_a</span>
+</span><span class='line'><span class="c1">#=&gt; [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Array of years using lambda</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">Array</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="mi">10</span><span class="p">){</span><span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="no">Date</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">year</span><span class="o">-</span><span class="n">i</span><span class="p">}</span>
+</span><span class='line'><span class="c1">#=&gt; [2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Array of months</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="ss">Date</span><span class="p">:</span><span class="ss">:MONTHNAMES</span><span class="o">.</span><span class="n">compact</span>
+</span><span class='line'><span class="c1">#=&gt; [&quot;January&quot;, &quot;February&quot;, &quot;March&quot;, &quot;April&quot;, &quot;May&quot;, &quot;June&quot;, &quot;July&quot;, &quot;August&quot;, &quot;September&quot;, &quot;October&quot;, &quot;November&quot;, &quot;December&quot;]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Array of abbreviated months</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="ss">Date</span><span class="p">:</span><span class="ss">:ABBR_MONTHNAMES</span><span class="o">.</span><span class="n">compact</span>
+</span><span class='line'><span class="c1">#=&gt; [&quot;Jan&quot;, &quot;Feb&quot;, &quot;Mar&quot;, &quot;Apr&quot;, &quot;May&quot;, &quot;Jun&quot;, &quot;Jul&quot;, &quot;Aug&quot;, &quot;Sep&quot;, &quot;Oct&quot;, &quot;Nov&quot;, &quot;Dec&quot;]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Array of abbreviated months with index (ps. collect_with_index is core extension method added to array)</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="ss">Date</span><span class="p">:</span><span class="ss">:ABBR_MONTHNAMES</span><span class="o">.</span><span class="n">compact</span><span class="o">.</span><span class="n">collect_with_index</span><span class="p">{</span><span class="o">|</span><span class="n">m</span><span class="p">,</span> <span class="n">i</span><span class="o">|</span> <span class="o">[</span><span class="n">m</span><span class="p">,</span> <span class="n">i</span><span class="o">]</span><span class="p">}</span>
+</span><span class='line'><span class="c1">#=&gt; [[&quot;Jan&quot;, 1], [&quot;Feb&quot;, 2], [&quot;Mar&quot;, 3], [&quot;Apr&quot;, 4], [&quot;May&quot;, 5], [&quot;Jun&quot;, 6], [&quot;Jul&quot;, 7], [&quot;Aug&quot;, 8], [&quot;Sep&quot;, 9], [&quot;Oct&quot;, 10], [&quot;Nov&quot;, 11], [&quot;Dec&quot;, 12]]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>or</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="ss">Date</span><span class="p">:</span><span class="ss">:ABBR_MONTHNAMES</span><span class="o">.</span><span class="n">compact</span><span class="o">.</span><span class="n">each_with_index</span><span class="o">.</span><span class="n">collect</span><span class="p">{</span><span class="o">|</span><span class="n">m</span><span class="p">,</span> <span class="n">i</span><span class="o">|</span> <span class="o">[</span><span class="n">m</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">}</span>
+</span><span class='line'><span class="c1">#=&gt; [[&quot;Jan&quot;, 1], [&quot;Feb&quot;, 2], [&quot;Mar&quot;, 3], [&quot;Apr&quot;, 4], [&quot;May&quot;, 5], [&quot;Jun&quot;, 6], [&quot;Jul&quot;, 7], [&quot;Aug&quot;, 8], [&quot;Sep&quot;, 9], [&quot;Oct&quot;, 10], [&quot;Nov&quot;, 11], [&quot;Dec&quot;, 12]]</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 

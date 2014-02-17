@@ -9,7 +9,7 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Requirement It was requirement to display decimal numbers which are having scale values present to be displayed in decimal format otherwise display &hellip;">
+  <meta name="description" content="On linux machine following settings needs to be done in order to get in browser calling enabled for phone numbers. Installation setup Install twinkle &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,74 +77,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/10/overriding-tos-method-for-bigdecimal/">Overriding To_s Method for BigDecimal Instance</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-10-22T19:31:00+05:30" pubdate data-updated="true">Oct 22<span>nd</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Requirement</h2>
-
-<p>It was requirement to display decimal numbers which are having scale values present to be displayed in decimal format otherwise display them as integer.</p>
-
-<h2>Expectated Output</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>12.23 =&gt; 12.23
-</span><span class='line'>12.00 =&gt; 12</span></code></pre></td></tr></table></div></figure>
-
-
-<p>While rendering any object on html page by default <em>to_s</em> method gets executed. So, i overwrote <em>to_s</em> method of BigDecimal class as below.</p>
-
-<p>Anyone having better solution. Please reply with your solutions. Many thanks in advance!
-Put below code in file <em>config/intializers/core_extensions.rb</em></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">BigDecimal</span>
-</span><span class='line'>    <span class="k">alias</span> <span class="ss">:old_s</span> <span class="ss">:to_s</span>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">to_s</span>
-</span><span class='line'>      <span class="k">return</span> <span class="n">to_i</span><span class="o">.</span><span class="n">to_s</span> <span class="k">if</span> <span class="nb">eql?</span> <span class="n">to_i</span>
-</span><span class='line'>      <span class="nb">self</span><span class="o">.</span><span class="n">old_s</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -426,8 +358,110 @@ Put below code in file <em>config/intializers/core_extensions.rb</em></p>
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-Check out this SlideShare Presentation: <div style="width:425px" id="__ss_2467230"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/jonathanjulian/introduction-to-delayed-job" title="Introduction To Delayed Job">Introduction To Delayed Job</a></strong><object id="__sse2467230" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=introtodelayedjob-091110110012-phpapp01&stripped_title=introduction-to-delayed-job&userName=jonathanjulian" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse2467230" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=introtodelayedjob-091110110012-phpapp01&stripped_title=introduction-to-delayed-job&userName=jonathanjulian" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/jonathanjulian">Jonathan Julian</a>.</div></div></div>
+  <div class="entry-content"><p>Check out this SlideShare Presentation:
+<strong style="display:block;margin:12px 0 4px">
+<a href="http://www.slideshare.net/jonathanjulian/introduction-to-delayed-job" title="Introduction To Delayed Job">Introduction To Delayed Job</a>
+</strong></p>
+
+<object id="__sse2467230" width="825" height="355">
+<param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=introtodelayedjob-091110110012-phpapp01&stripped_title=introduction-to-delayed-job&userName=jonathanjulian" />
+<param name="allowFullScreen" value="true"/>
+<param name="allowScriptAccess" value="always"/>
+<embed name="__sse2467230" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=introtodelayedjob-091110110012-phpapp01&stripped_title=introduction-to-delayed-job&userName=jonathanjulian" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" height="355">
+</embed>
+</object>
+
+
+<div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/jonathanjulian">Jonathan Julian</a>.</div>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/09/best-ways-to-populate-dynamic-array-of/">Best Ways to Populate Dynamic Array of Numbers in Ruby</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-09-29T17:56:00+05:30" pubdate data-updated="true">Sep 29<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h4>Array of years using range</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="p">((</span><span class="n">yr</span><span class="o">=</span><span class="no">Date</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">year</span><span class="p">)</span><span class="o">-</span><span class="mi">9</span><span class="o">.</span><span class="n">.yr</span><span class="p">)</span><span class="o">.</span><span class="n">to_a</span>
+</span><span class='line'><span class="c1">#=&gt; [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Array of years using lambda</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">Array</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="mi">10</span><span class="p">){</span><span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="no">Date</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">year</span><span class="o">-</span><span class="n">i</span><span class="p">}</span>
+</span><span class='line'><span class="c1">#=&gt; [2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Array of months</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="ss">Date</span><span class="p">:</span><span class="ss">:MONTHNAMES</span><span class="o">.</span><span class="n">compact</span>
+</span><span class='line'><span class="c1">#=&gt; [&quot;January&quot;, &quot;February&quot;, &quot;March&quot;, &quot;April&quot;, &quot;May&quot;, &quot;June&quot;, &quot;July&quot;, &quot;August&quot;, &quot;September&quot;, &quot;October&quot;, &quot;November&quot;, &quot;December&quot;]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Array of abbreviated months</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="ss">Date</span><span class="p">:</span><span class="ss">:ABBR_MONTHNAMES</span><span class="o">.</span><span class="n">compact</span>
+</span><span class='line'><span class="c1">#=&gt; [&quot;Jan&quot;, &quot;Feb&quot;, &quot;Mar&quot;, &quot;Apr&quot;, &quot;May&quot;, &quot;Jun&quot;, &quot;Jul&quot;, &quot;Aug&quot;, &quot;Sep&quot;, &quot;Oct&quot;, &quot;Nov&quot;, &quot;Dec&quot;]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Array of abbreviated months with index (ps. collect_with_index is core extension method added to array)</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="ss">Date</span><span class="p">:</span><span class="ss">:ABBR_MONTHNAMES</span><span class="o">.</span><span class="n">compact</span><span class="o">.</span><span class="n">collect_with_index</span><span class="p">{</span><span class="o">|</span><span class="n">m</span><span class="p">,</span> <span class="n">i</span><span class="o">|</span> <span class="o">[</span><span class="n">m</span><span class="p">,</span> <span class="n">i</span><span class="o">]</span><span class="p">}</span>
+</span><span class='line'><span class="c1">#=&gt; [[&quot;Jan&quot;, 1], [&quot;Feb&quot;, 2], [&quot;Mar&quot;, 3], [&quot;Apr&quot;, 4], [&quot;May&quot;, 5], [&quot;Jun&quot;, 6], [&quot;Jul&quot;, 7], [&quot;Aug&quot;, 8], [&quot;Sep&quot;, 9], [&quot;Oct&quot;, 10], [&quot;Nov&quot;, 11], [&quot;Dec&quot;, 12]]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>or</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="ss">Date</span><span class="p">:</span><span class="ss">:ABBR_MONTHNAMES</span><span class="o">.</span><span class="n">compact</span><span class="o">.</span><span class="n">each_with_index</span><span class="o">.</span><span class="n">collect</span><span class="p">{</span><span class="o">|</span><span class="n">m</span><span class="p">,</span> <span class="n">i</span><span class="o">|</span> <span class="o">[</span><span class="n">m</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">}</span>
+</span><span class='line'><span class="c1">#=&gt; [[&quot;Jan&quot;, 1], [&quot;Feb&quot;, 2], [&quot;Mar&quot;, 3], [&quot;Apr&quot;, 4], [&quot;May&quot;, 5], [&quot;Jun&quot;, 6], [&quot;Jul&quot;, 7], [&quot;Aug&quot;, 8], [&quot;Sep&quot;, 9], [&quot;Oct&quot;, 10], [&quot;Nov&quot;, 11], [&quot;Dec&quot;, 12]]</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   
@@ -439,7 +473,7 @@ Check out this SlideShare Presentation: <div style="width:425px" id="__ss_246723
     
       <a class="prev" href="/page/13/">&larr; Older</a>
     
-    <a href="/blog/archives">Blog Archives</a>
+    <a href="/archives">Blog Archives</a>
     
     <a class="next" href="/page/11/">Newer &rarr;</a>
     

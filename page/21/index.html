@@ -9,7 +9,7 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Delayed job variables initialization written on at collectiveidea / delayed_job doesn&#8217;t work. # config/initializers/delayed_job_config.rb &hellip;">
+  <meta name="description" content="It might be the case that earlier wireless was working and then it stopped workingFollow the simple steps here&#8230;.1. Restart networking sudo / &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,43 +77,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/01/delayed-job-changing-job-parameters-in/">Delayed Job Changing Job Parameters in Rails</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-01-13T19:59:00+05:30" pubdate data-updated="true">Jan 13<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-Delayed job variables initialization written on at collectiveidea / delayed_job doesn&#8217;t work.<br/><pre class=ruby> # config/initializers/delayed_job_config.rb  Delayed::Worker.destroy_failed_jobs = false  Delayed::Worker.sleep_delay = 60  Delayed::Worker.max_attempts = 3  Delayed::Worker.max_run_time = 5.minutes </pre><br/>Here is the correct way of doing it as mentioned on tobi / delayed_job <br/><pre class=ruby> # config/initializers/delayed_job_config.rb  Delayed::Job.destroy_failed_jobs = false  silence_warnings do    Delayed::Job.const_set("MAX_ATTEMPTS", 3)    Delayed::Job.const_set("MAX_RUN_TIME", 5.minutes)  end </pre></div>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -271,11 +234,48 @@ Try hpricot library online http://hpricot.com</div>
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/cricket-challenge-flash-game/">Cricket Challenge Flash Game</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-24T18:16:00+05:30" pubdate data-updated="true">Nov 24<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div style="text-align: center;"><b>Advanced cricket flash game</b><br /></div><div style="text-align: center;"><b><br /></b><br /></div><div style="text-align: center;"><b></b><object align="middle" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://www.adobe.com/go/getflashplayer" height="500" width="500"><param name="movie" value="http://img.bollywoodsargam.com/games/files/game_4f2a798477213b30a4802e716e31a9a6.swf" /> <param name="quality" value="high" /> <param name="salign" value="T" /> <embed src="http://img.bollywoodsargam.com/games/files/game_4f2a798477213b30a4802e716e31a9a6.swf" width="500" height="500" align="middle" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash"></embed></object><br /></div><div><div style="text-align: center;"><br /></div></div><div><div style="text-align: center;"><br /></div></div></div>
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/page/22/">&larr; Older</a>
     
-    <a href="/blog/archives">Blog Archives</a>
+    <a href="/archives">Blog Archives</a>
     
     <a class="next" href="/page/20/">Newer &rarr;</a>
     

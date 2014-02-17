@@ -4,7 +4,7 @@
   <title><![CDATA[Category: blogger | Fun On Rails]]></title>
   <link href="funonrails.com/categories/blogger/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-14T17:13:10+05:30</updated>
+  <updated>2014-02-18T01:40:31+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -18,9 +18,7 @@
     <link href="funonrails.com/2014/02/migrating-from-blogger-to-octopress/"/>
     <updated>2014-02-09T19:00:56+05:30</updated>
     <id>funonrails.com/2014/02/migrating-from-blogger-to-octopress</id>
-    <content type="html"><![CDATA[<p>After 3 or more years, happily doing blogging at <em>blogger.com</em>, finally i decided to <em>shift</em> from <em>blogger</em> to <em>octopress</em>.
-From last 2-3 days, was evaluating with <a href="http://octopress.org">octopress</a>, its way of writing posts,
-customizations, themes, and plugins and found it very quick &amp; easy to use.</p>
+    <content type="html"><![CDATA[<p>I am happily writing my blog at <code>blogspot</code> almost three plus years. From last 2-3 days, was evaluating with <a href="http://octopress.org">octopress</a> for its way of writing posts, customizations, themes, and plugins. As a result of evaluation, found <code>octopress</code> blog as very quick &amp; easy to write hence decided to  <em>shift</em> from <em>blogger</em> to <em>octopress</em>.</p>
 
 <p>Below post explains steps involved in migration:</p>
 

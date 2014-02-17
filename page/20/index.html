@@ -9,7 +9,7 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Example of polymorphic association using has_many, through, source. Here post is polymorphic resource which belongs to the author [can be student, &hellip;">
+  <meta name="description" content="#user &nbsp;nobody;user www-data;worker_processes &nbsp;2;#error_log &nbsp;logs/error.log;#error_log &nbsp;logs/error.log &nbsp;notice;#error_log & &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,43 +77,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/02/hasmany-through-association-for-rails/">Has_many => Through Association for Rails Polymorphic Model</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-02-15T21:54:00+05:30" pubdate data-updated="true">Feb 15<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-Example of polymorphic association using has_many, through, source. <br/> Here post is polymorphic resource which belongs to the author [can be student, teacher]<br/><pre class=ruby># app/models/student.rb class Student < ActiveRecord::Base    has_many :posts, :as => author end  # app/models/teacher.rb class Teacher < ActiveRecord::Base    has_many :posts, :as => author end  # app/models/post.rb class Post < ActiveRecord::Base    belongs to :author, :polymorphic => true end </pre><br/>Has_many through association on polymorphic models <br/><pre class=ruby># app/models/student.rb class Student < ActiveRecord::Base    belongs_to :division   has_many :posts, :as => author end  # app/models/division.rb class Division < ActiveRecord::Base    has_many :students   has_many :student_posts, :through => :students, :source => :posts end </pre><b> Examples </b><br/><pre class=ruby>ruby script/console div = Division.first div.student_posts </pre></div>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -263,11 +226,48 @@ Check out this SlideShare Presentation: <div style="width:425px;text-align:left"
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/01/delayed-job-changing-job-parameters-in/">Delayed Job Changing Job Parameters in Rails</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-01-13T19:59:00+05:30" pubdate data-updated="true">Jan 13<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+Delayed job variables initialization written on at collectiveidea / delayed_job doesn&#8217;t work.<br/><pre class=ruby> # config/initializers/delayed_job_config.rb  Delayed::Worker.destroy_failed_jobs = false  Delayed::Worker.sleep_delay = 60  Delayed::Worker.max_attempts = 3  Delayed::Worker.max_run_time = 5.minutes </pre><br/>Here is the correct way of doing it as mentioned on tobi / delayed_job <br/><pre class=ruby> # config/initializers/delayed_job_config.rb  Delayed::Job.destroy_failed_jobs = false  silence_warnings do    Delayed::Job.const_set("MAX_ATTEMPTS", 3)    Delayed::Job.const_set("MAX_RUN_TIME", 5.minutes)  end </pre></div>
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/page/21/">&larr; Older</a>
     
-    <a href="/blog/archives">Blog Archives</a>
+    <a href="/archives">Blog Archives</a>
     
     <a class="next" href="/page/19/">Newer &rarr;</a>
     

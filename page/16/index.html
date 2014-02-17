@@ -9,7 +9,9 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Ruby On Rails Installation on fresh ubuntu machineInstallation steps are applicable to ubuntu versions interpid, karmic koala. Make necessary &hellip;">
+  <meta name="description" content="
+Command to download/copy rails api to work locally(offline) mode. wget -mk www.api.rubyonrails.orgFor more information click
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,43 +85,6 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2010/03/ruby-on-rails-installation-on-fresh/">Ruby on Rails Installation on Fresh Ubuntu Machine</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-03-25T23:36:00+05:30" pubdate data-updated="true">Mar 25<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<h3><b>Ruby On Rails Installation on fresh ubuntu machine</b></h3>Installation steps are applicable to ubuntu versions interpid, karmic koala. Make necessary changes according to package manager provided by other  linux operating systems in order install ruby and rails.<br /><br />Before getting started to installations make sure to build essential packages on fresh ubutnu machine. Ubuntu machine has built in apt-get package manager and that i loves because it is very to use as compared to other OS. <br /><pre class="console">sudo apt-get install build-essential<br /></pre><br />Now there are many versions of ruby available including latest 1.9.2<br />But would like to prefer ruby version 1.8.7 as it is the most stable version as of now. I would like to recommend installtion of Ruby Enterprise Edition (REE) version as it is uses minimal system resources and consumes less memory. <br /><br /><h3><b> Instrunctions to setup normal ruby and rails environment</b></h3><br />1. Install Ruby, Rails, MySQL, irb and neceesary packages using single command <br /><pre class="console">sudo apt-get install ruby ri rdoc mysql-server libmysql-ruby ruby1.8-dev irb1.8 libdbd-mysql-perl libdbi-perl libmysql-ruby1.8 libmysqlclient15off libnet-daemon-perl libplrpc-perl libreadline-ruby1.8 libruby1.8 mysql-client-5.1 mysql-common mysql-server-5.1 rdoc1.8 ri1.8 ruby1.8 irb libopenssl-ruby libopenssl-ruby1.8 libhtml-template-perl mysql-server-core-5.1 libmysqlclient16 libreadline5 psmisc<br /></pre>2. Install ruby gems  <br /><pre class="console">wget http://rubyforge.org/frs/download.php/60718/rubygems-1.3.5.tgz<br />tar xvzf rubygems-1.3.5.tgz<br />cd rubygems-1.3.5<br />sudo ruby setup.rb<br /></pre>3. Create symbolic links to installation paths <br /><pre class="console">sudo ln -s /usr/bin/gem1.8 /usr/local/bin/gem<br />sudo ln -s /usr/bin/ruby1.8 /usr/local/bin/ruby<br />sudo ln -s /usr/bin/rdoc1.8 /usr/local/bin/rdoc<br />sudo ln -s /usr/bin/ri1.8 /usr/local/bin/ri<br />sudo ln -s /usr/bin/irb1.8 /usr/local/bin/irb<br /></pre>4. Setup gemrc in order to avoid rdoc installation and to setup gem sources.<br />Add following lines to ~/.gemrc file <br /><pre class="console">---<br />gem: --no-ri --no-rdoc<br />:benchmark: false<br />:verbose: true<br />:backtrace: false<br />:update_sources: true<br />:sources:<br />- http://gems.rubyforge.org<br />- http://gems.github.com<br />:bulk_threshold: 1000<br /></pre>5. Install rails <br /><pre class="console">sudo gem install rails --no-rdoc --no-ri<br /></pre><h3><b>Ruby Enterprise Edition i.e. REE (ruby 1.8.7) Installation</b></h3><br />This will install ruby, rails, mysql, nginx and passenger<br /><br />1. Download REE setup and install it  <br /><pre class="console">wget http://rubyforge.org/frs/download.php/68719/ruby-enterprise-1.8.7-2010.01.tar.gz /opt/ruby<br /><br />cd /opt<br />./ruby/installer<br /></pre><br />2. Add ruby inside path <br /><pre class="console">vi ~/.bashrc<br /># Add following line at the end of file<br />export PATH=/opt/ruby/bin:$PATH<br /></pre><br />Thanks to @vwadhwani!</div>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
       <h1 class="entry-title"><a href="/2010/03/download-rails-api-to-work-offline/">Download Rails API to Work Offline</a></h1>
     
     
@@ -180,8 +145,35 @@ Command to <a href="http://github.com/sandipransing/rails_api">download/copy</a>
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-<br /><b>ImageMagick Installation</b><br /><br />Ubuntu machine has default apt-get package manager.<br />To install imagemagick following packages needs to be installed.<br /><br /><i>apt-get install <b>imagemagick librmagick-ruby libmagickwand-dev</b></i><br /><br /><b>RMagick gem install</b><br /><br /><i>gem install </i><b><i>rmagick</i></b><br /><br />If you still facing problems with gem installation, Please look that following packages are installed<br />on your system.<br /><br /><i>dpkg -l | grep </i><b><i>libmagickcore-dev graphicsmagick-libmagick-dev-compat</i></b><br /><br />If there are no packages installed then try to install then first.<br /><br /><i>apt-get install </i><b><i>libmagickcore-dev graphicsmagick-libmagick-dev-compat</i></b><br /><br />Try to install rmagick gem again. Now it should be installed without any error.<br /><div><br /></div></div>
+  <div class="entry-content"><h4>ImageMagick Installation</h4>
+
+<p>Ubuntu machine has default apt-get package manager.
+To install imagemagick following packages needs to be installed.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>dudo apt-get install imagemagick librmagick-ruby libmagickwand-dev</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>RMagick gem install</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install rmagick</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you still facing problems with gem installation, Please look that following packages are installed
+on your system.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>dpkg -l | grep libmagickcore-dev graphicsmagick-libmagick-dev-compat</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If there are no packages installed then try to install then first.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install libmagickcore-dev graphicsmagick-libmagick-dev-compat</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Try to install rmagick gem again. Now it should be installed without any error.</p>
 </div>
   
   
@@ -393,11 +385,79 @@ Example:</p>
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/03/wordpress-blog-software-installation/">WordPress Blog Software Installation</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-03-12T01:55:00+05:30" pubdate data-updated="true">Mar 12<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://wordpress.org/">WordPress</a> &nbsp;is a&nbsp;open source&nbsp;software developed by and for community with ongoing development on it. Easy installation, customizable, with lots of available plugins, themes and SEO friendly are the strengths of it!</p>
+
+<blockquote><p>Software is mainly serves the purpose of blogging, hosting static websites.
+People with knowledge of php, javascipt and little knowledge of mysql db&nbsp;can customize it however they want.</p></blockquote>
+
+<ol>
+<li>Minimum server requirements</li>
+<li>PHP 4.3 or greater</li>
+<li>MySQL 4.1.2 or greater</li>
+<li>Apache/NGINX (or any web server supporting php &amp; mysql )</li>
+</ol>
+
+
+<p><strong>For detailed information on installation click <a href="http://codex.wordpress.org/Installing_WordPress#Famous%205-Minute%20Install">here</a></strong></p>
+
+<p>Now you will need to decide where on your web site you&rsquo;d like your blog to appear:</p>
+
+<ol>
+<li>In the root directory of your web site. (For example, <a href="http://yoursite.com/">http://yoursite.com/</a>)</li>
+<li>In a subdirectory of your web site. (For example, <a href="http://yoursite.com/blog/">http://yoursite.com/blog/</a></li>
+</ol>
+
+
+<blockquote><p>This can be done by adding new route at nginx configuration file or deploying wordpress software inside blog directory of main website.</p></blockquote>
+
+<p>There are millions of satisfied users using&nbsp;word-press blog.</p>
+
+<p><strong>To create and start blogging with free wordpress.com blog click <a href="http://en.wordpress.com/signup/">here</a></strong></p>
+
+<p><a href="http://codex.wordpress.org/WordPressMU">WordPress MU</a> multiblog software provides a way to create thousands of wordpress blogs
+just like wordpress.com site does.</p>
+
+<p>Download and&nbsp;detailed information on installation click <a href="http://codex.wordpress.org/Installing_WPMU">here</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/page/17/">&larr; Older</a>
     
-    <a href="/blog/archives">Blog Archives</a>
+    <a href="/archives">Blog Archives</a>
     
     <a class="next" href="/page/15/">Newer &rarr;</a>
     

@@ -9,7 +9,8 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="1. Add following line to rails environment file ActionMailer::Base.delivery_method = :smtp 2. Include your email authenticationCreate a ruby file &hellip;">
+  <meta name="description" content="1. Add following line to rails environment file 1
+ActionMailer::Base.delivery_method = :smtp 2. Include your email authentication Create a ruby file &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -103,8 +104,69 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-<b>1. Add following line to rails environment file </b><br/><pre class=ruby>ActionMailer::Base.delivery_method = :smtp </pre><br/><b>2. Include your email authentication</b><br/>Create a ruby file called smtp_settings under config/initializers directory <pre class=ruby># config/initializers/smtp_settings.rb ActionMailer::Base.smtp_settings = {   :address => "smtp.gmail.com",   :port => 587,   :authentication => :plain,   :enable_starttls_auto => true,   :user_name => "replies@gmail.com",   :password => "_my_gmail_password_" } </pre>noTE** Keep starttls_auto always true<br/> <b>3. Create sample mailer in order to ensure that your settings are correct </b><br/>Create a sample mailer <br/><pre class=ruby>class EmailMailer < ActionMailer::Base  def test_email   from 'xx@gmail.com'   to 'some@xx.com'   subject "This is test email"   message "It should get delivered to recipient inbox"  end end </pre> <b>4. Test your configuration</b><br/><pre class=ruby>EmailMailer.deliver_test_email </pre></div>
+<div class="entry-content"><p><strong>1. Add following line to rails environment file</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="ss">ActionMailer</span><span class="p">:</span><span class="ss">:Base</span><span class="o">.</span><span class="n">delivery_method</span> <span class="o">=</span> <span class="ss">:smtp</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>2. Include your email authentication</strong></p>
+
+<p>Create a ruby file called <code>smtp_settings</code> under <code>config/initializers</code> directory</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># config/initializers/smtp_settings.rb</span>
+</span><span class='line'><span class="ss">ActionMailer</span><span class="p">:</span><span class="ss">:Base</span><span class="o">.</span><span class="n">smtp_settings</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>  <span class="ss">:address</span> <span class="o">=&gt;</span> <span class="s2">&quot;smtp.gmail.com&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="ss">:port</span> <span class="o">=&gt;</span> <span class="mi">587</span><span class="p">,</span>
+</span><span class='line'>  <span class="ss">:authentication</span> <span class="o">=&gt;</span> <span class="ss">:plain</span><span class="p">,</span>
+</span><span class='line'>  <span class="ss">:enable_starttls_auto</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span>
+</span><span class='line'>  <span class="ss">:user_name</span> <span class="o">=&gt;</span> <span class="s2">&quot;replies@gmail.com&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="s2">&quot;_my_gmail_password_&quot;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>note:</strong> Keep <code>starttls_auto</code> always <code>true</code></p>
+
+<p><strong>3. Create sample mailer in order to ensure that your settings are correct</strong></p>
+
+<p>Create a sample mailer</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">EmailMailer</span> <span class="o">&lt;</span> <span class="ss">ActionMailer</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'> <span class="k">def</span> <span class="nf">test_email</span>
+</span><span class='line'>  <span class="n">from</span> <span class="s1">&#39;xx@gmail.com&#39;</span>
+</span><span class='line'>  <span class="n">to</span> <span class="s1">&#39;some@xx.com&#39;</span>
+</span><span class='line'>  <span class="n">subject</span> <span class="s2">&quot;This is test email&quot;</span>
+</span><span class='line'>  <span class="n">message</span> <span class="s2">&quot;It should get delivered to recipient inbox&quot;</span>
+</span><span class='line'> <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>4. Test your configuration</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">EmailMailer</span><span class="o">.</span><span class="n">deliver_test_email</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 

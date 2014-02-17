@@ -9,7 +9,7 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Rake tasks itself defines that “they are bunch of ruby code that performs some task.” Rake tasks are placed in lib/tasks directory of application &hellip;">
+  <meta name="description" content="Understanding and creating radinat extensions To start with, first of all lets know what is radiant and why to use it ? Radiant is a open source &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,43 +77,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/11/writing-rake-task-in-rails-with/">Writing Rake Task in Rails With Namespace, Parameters</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-11-10T15:09:00+05:30" pubdate data-updated="true">Nov 10<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<div style="text-align: left;">Rake tasks itself defines that “they are bunch of ruby code that performs some task.” Rake tasks are placed in lib/tasks directory of application and files have .rake extension. There are many lovable tasks defined in rails. read more  Rake tasks are executed from console.  Benefit of writing rake task are Testing of code   Scheduled rake tasks ( backgroundRb and scheduled tasks using cron )   Simplifies code Lets, understand what is code inside rake tasks.<br /></div><div style="text-align: left;"><b><br /></b><br /></div><div style="text-align: left;"><b>Simple greet rake task  </b><br /></div><pre class="ruby" name="code"> <br /># lib/tasks/welcome.rake<br />task :greet do<br />  puts “Hello !!”<br />end<br /><br />## Execute task<br />rake greet<br /></pre><b><br /></b><br /><b>Adding description to rake task  </b><br /><pre class="ruby" name="code"> <br /># lib/tasks/welcome.rake<br />desc “This is new style of greet”<br />task :greet do<br />  puts “Hello !!”<br />end<br /></pre><pre class="ruby" name="code">## Execute task<br />rake greet<br /></pre><br /><b>Adding namespace to rake tasks</b><br /><br />It&#8217;s nothing but prefix that takes while executing rake task. Benefit of adding namespace is to categories similar rake tasks.  <br /><pre class="ruby" name="code"> <br /># lib/tasks/welcome.rake<br />namespace :introduction do<br />desc “This is one style of introduction”<br />task :greet do<br />  puts “Hello !!”<br />end<br />desc “This is 2nd style of introduction”<br />task :hi do<br />  puts “Hi ”<br />end<br />end<br /></pre><pre class="ruby" name="code">## Execute task<br />rake introduction:greet<br />rake introduction:hi<br /><br /></pre><b>Passing arguments to rake tasks </b><br /><pre class="ruby" name="code"> <br /># lib/tasks/welcome.rake<br /><br />namespace :introduction do<br />desc “This is one style of introduction”<br />task :greet do<br />  puts “Hello !!”<br />end<br /><br />desc “This is 2nd style of introduction”<br />task :hi =&gt; :enviroment do<br />  puts “Hi #{ENV['name']}”<br />end<br />end<br /></pre><pre class="ruby" name="code">## Execute task<br />rake introduction:hi name=Raj<br /></pre><a href="http://www.blogger.com/For%20more%20reference%20http://railsenvy.com/2007/6/11/ruby-on-rails-rake-tutorial#namespaces">read more</a><br /></div>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -271,11 +234,48 @@ Name: Santosh Turamari<br />RoR Experience: 1.5 Yrs<br />Overall: 1.5 Yrs<br />L
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/10/10-steps-to-get-start-with-myspace-ruby/">10 Steps to Get Start With MySpace Ruby SDK</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-10-27T21:33:00+05:30" pubdate data-updated="true">Oct 27<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+Follow 10 simple steps in order to use myspace sdk api<br/><br/>1. Remove all your previous gems installed<br/>+ gem uninstall myspace<br/><br/>2. Checkout sample source code<br/><br/>svn checkout http://myspaceid-ruby-sdk.googlecode.com/svn/trunk/ myspacesdk<br/><br/>3. cd myspacesdk/samples/rails/sample<br/>4. Modify config/database.yml accordingly<br/><blockquote><br/><div>development:<br/>adapter: mysql<br/>database: sample_development<br/>password: abcd<br/>pool: 5<br/>timeout: 5000</div></blockquote><br/>5. Download http://myspaceid-ruby-sdk.googlecode.com/files/myspaceid-sdk-0.1.11.gem<br/>6. gem install &#8211;local ~/Desktop/myspaceid-sdk-0.1.11.gem i.e.PATH_TO_GEM<br/>7. Above command supposed to give you following error otherwise skip to step 10<br/><blockquote><br/><div>ERROR:  Error installing /home/sandip/Desktop/myspaceid-sdk-0.1.11.gem:<br/>myspaceid-sdk requires ruby-openid (&gt;= 0, runtime)</div></blockquote><br/>8. gem install ruby-openid go to step 6<br/>9. ruby script/server<br/>10. Browse http://localhost:3000/</div>
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/page/25/">&larr; Older</a>
     
-    <a href="/blog/archives">Blog Archives</a>
+    <a href="/archives">Blog Archives</a>
     
     <a class="next" href="/page/23/">Newer &rarr;</a>
     

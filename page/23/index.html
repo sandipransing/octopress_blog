@@ -9,7 +9,7 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Movementsb previous wordw next worde end of word0/^ begining of line$ end of lineG end of file1G/gg begining of file/pattern search next?pattern &hellip;">
+  <meta name="description" content="While coding in ruby and rails, we often requires variables to be initialized that can be used across application. There are many ways to define &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,51 +77,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/11/get-hand-over-vi-vim-editor/">Get Hand Over VI / VIM Editor</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-11-18T01:20:00+05:30" pubdate data-updated="true">Nov 18<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<span style="font-family: Arial; font-size: small;"><span style="background-color: white; font-size: 13px;"> </span></span><br /><span style="font-family: Arial; font-size: small;"><span style="background-color: white; font-size: 13px;"><pre><b><span style="color: #351c75;">Movements</span></b></pre><pre>b   previous word<br />w   next word<br />e        end of word<br />0/^      begining of line<br />$        end of line<br />G        end of file<br />1G/gg    begining of file<br />/pattern  search next<br />?pattern  search previous<br />n         repeat    search forword ( i.e next occurence )<br />N         repeat    search backword<br />:line     goto line specified<br /><br />  *****Modes****<br />  i   insert mode<br />  r   replace mode<br />  s   delete character under cursor and eneter insert mode<br /><br />  *****Delete******<br />  x    delete character under cursor<br />  dd   delete current line<br />  line dd delete number of lines specified<br /><br />  ****copy********<br />  yy        copy current line<br />  pp        print copied contents<br />  line yy   copy number of lines specified<br /><br />  *******visual******<br /><br />  v     enter visual mode<br />  aw    highlight word<br />  as    highlight sentence<br />  ap    highlight paragraph<br />  ab    highlight block<br /><br />  ******undo/redo******<br />  u       undo<br />  cntrl+r redo<br /><br />  ******autocomplete****<br />  cntrl+x   enter completion mode<br />  cntrl+p   display autocomplete options<br /><br />  ******uppercase/lowercase*****<br />  guu   lowercase line<br />  gUU   uppercase line<br /><br />  *******Regx replace****<br /><br />  range s/foo/bar/arg - replace foo with bar in ‘range’ with<br /><br />  Values of 'range':<br />  %               whole file<br />  number          that particular line<br />  none            apply to current line only<br /><br />  values of 'arg':<br />  none  apply to first occurrence<br />  g     global (all occurrences)<br /><br />Select/Macros<br />  qchar      start recording macro storing it in register ‘char’<br />  q          end recording<br />  @char      replay the macro stored in ‘char’<br />  :1,10 norm! @char run the macro stored in ‘char’ over the 1-10 line range<br /></pre></span></span><br /></div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>Sandip Ransing</div>
-<div class='content'>
-Remove blank lines in vim<br /><br />:g/^ *$/d</div>
-</div>
-</div>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -284,11 +239,48 @@ getting for the code above uninitialized constant YAML (NameError)<br /><br />wh
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/writing-rake-task-in-rails-with/">Writing Rake Task in Rails With Namespace, Parameters</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-10T15:09:00+05:30" pubdate data-updated="true">Nov 10<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div style="text-align: left;">Rake tasks itself defines that “they are bunch of ruby code that performs some task.” Rake tasks are placed in lib/tasks directory of application and files have .rake extension. There are many lovable tasks defined in rails. read more  Rake tasks are executed from console.  Benefit of writing rake task are Testing of code   Scheduled rake tasks ( backgroundRb and scheduled tasks using cron )   Simplifies code Lets, understand what is code inside rake tasks.<br /></div><div style="text-align: left;"><b><br /></b><br /></div><div style="text-align: left;"><b>Simple greet rake task  </b><br /></div><pre class="ruby" name="code"> <br /># lib/tasks/welcome.rake<br />task :greet do<br />  puts “Hello !!”<br />end<br /><br />## Execute task<br />rake greet<br /></pre><b><br /></b><br /><b>Adding description to rake task  </b><br /><pre class="ruby" name="code"> <br /># lib/tasks/welcome.rake<br />desc “This is new style of greet”<br />task :greet do<br />  puts “Hello !!”<br />end<br /></pre><pre class="ruby" name="code">## Execute task<br />rake greet<br /></pre><br /><b>Adding namespace to rake tasks</b><br /><br />It&#8217;s nothing but prefix that takes while executing rake task. Benefit of adding namespace is to categories similar rake tasks.  <br /><pre class="ruby" name="code"> <br /># lib/tasks/welcome.rake<br />namespace :introduction do<br />desc “This is one style of introduction”<br />task :greet do<br />  puts “Hello !!”<br />end<br />desc “This is 2nd style of introduction”<br />task :hi do<br />  puts “Hi ”<br />end<br />end<br /></pre><pre class="ruby" name="code">## Execute task<br />rake introduction:greet<br />rake introduction:hi<br /><br /></pre><b>Passing arguments to rake tasks </b><br /><pre class="ruby" name="code"> <br /># lib/tasks/welcome.rake<br /><br />namespace :introduction do<br />desc “This is one style of introduction”<br />task :greet do<br />  puts “Hello !!”<br />end<br /><br />desc “This is 2nd style of introduction”<br />task :hi =&gt; :enviroment do<br />  puts “Hi #{ENV['name']}”<br />end<br />end<br /></pre><pre class="ruby" name="code">## Execute task<br />rake introduction:hi name=Raj<br /></pre><a href="http://www.blogger.com/For%20more%20reference%20http://railsenvy.com/2007/6/11/ruby-on-rails-rake-tutorial#namespaces">read more</a><br /></div>
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/page/24/">&larr; Older</a>
     
-    <a href="/blog/archives">Blog Archives</a>
+    <a href="/archives">Blog Archives</a>
     
     <a class="next" href="/page/22/">Newer &rarr;</a>
     

@@ -103,8 +103,105 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-Wrong English is an often problem while developing any website product as it gives bad view to website user and thus does direct impact on product.  <b>BOSSMan</b> is a ruby gem that interacts with <b>yahoo web service</b> and provides a simplest way to overcome such errors.<br /><b>Installation:</b><br /><pre class=ruby>gem sources -a http://gems.github.com gem install jpignata-bossman </pre><b>Apply and get Application ID from yahoo developer network</b><pre class=ruby><b>URl</b> https://developer.apps.yahoo.com/</pre>Make sure to note it for reference<br /><b>Usage in ruby app</b><br /><pre class=ruby>require 'rubygems' require 'bossman' include BOSSMan  BOSSMan.application_id = "Your Application ID here" </pre><br /><b>Spelling Suggestions</b><br /><pre class=ruby>text = BOSSMan::Search.spelling("gooogle") =&gt; #<bossman::resultset:0xa993b44 ,="" @count="1" @deephits="1" @response="{&quot;ysearchresponse&quot;=" @responsecode="200" @start="0" @suggestion="google" @totalhits="1">{"resultset_spell"=&gt;[{"suggestion"=&gt;"google"}], "responsecode"=&gt;"200", "deephits"=&gt;"1", "start"=&gt;"0", "count"=&gt;"1", "totalhits"=&gt;"1"}}&gt;  text.suggestion  =&gt; "google" </bossman::resultset:0xa993b44></pre><br /><b>More sophisticated way of use -</b><br />1. Create a YML file containing list of kewords <br />2. Load YML file <br />3. Iterate YML hash to find out spell suggestions<br /><b>Example: spelling.yml</b><br /><pre class=ruby>  1 keywords:   2   gooogle:   3   Barack Oabama:   4   Indian:   5   Latuur: </pre><br /><pre class=ruby>keywords = YAML.load_file('spelling.yml')['keywords'].keys    puts "Correction suggested"   keywords.each do |keyword|     text = BOSSMan::Search.spelling(keyword)     if defined? text.suggestion       puts "#{keyword} =&gt; #{text.suggestion}"     end   end </pre><br /><b>Output</b><br /><pre class=ruby>Correction suggested gooogle =&gt; google Barack Oabama =&gt; Barack Obama Latuur =&gt; Latour </pre><br />Analyze suggestions manually and make neccesary corrections..</div>
+<div class="entry-content"><p>Wrong English is an often problem while developing any website product as it gives bad view to website user and thus does direct impact on product. <strong>BOSSMan</strong> is a ruby gem that interacts with <strong>yahoo web service</strong> and provides a simplest way to overcome such errors.</p>
+
+<h4>Installation:</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem sources -a http://gems.github.com
+</span><span class='line'>gem install jpignata-bossman</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Apply and get Application ID from yahoo developer network</p>
+
+<p><code>URl https://developer.apps.yahoo.com/</code></p>
+
+<p>Make sure to note it for reference</p>
+
+<p>Usage in ruby app</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>require 'rubygems'
+</span><span class='line'>require 'bossman'
+</span><span class='line'>include BOSSMan
+</span><span class='line'>
+</span><span class='line'>BOSSMan.application_id = "Your Application ID here"</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Spelling Suggestions</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>text = BOSSMan::Search.spelling("gooogle")
+</span><span class='line'>=&gt; #{"resultset_spell"=&gt;[{"suggestion"=&gt;"google"}], "responsecode"=&gt;"200", "deephits"=&gt;"1", "start"=&gt;"0", "count"=&gt;"1", "totalhits"=&gt;"1"}}&gt;
+</span><span class='line'>
+</span><span class='line'>text.suggestion 
+</span><span class='line'>=&gt; "google"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>More sophisticated way of use &ndash;</p>
+
+<ol>
+<li>Create a YML file containing list of kewords</li>
+<li>Load YML file</li>
+<li>Iterate YML hash to find out spell suggestions
+<strong>Example: spelling.yml</strong></li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  1 keywords:
+</span><span class='line'>  2   gooogle:
+</span><span class='line'>  3   Barack Oabama:
+</span><span class='line'>  4   Indian:
+</span><span class='line'>  5   Latuur:</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>keywords = YAML.load_file('spelling.yml')['keywords'].keys
+</span><span class='line'>
+</span><span class='line'>  puts "Correction suggested"
+</span><span class='line'>  keywords.each do |keyword|
+</span><span class='line'>    text = BOSSMan::Search.spelling(keyword)
+</span><span class='line'>    if defined? text.suggestion
+</span><span class='line'>      puts "#{keyword} =&gt; #{text.suggestion}"
+</span><span class='line'>    end
+</span><span class='line'>  end</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Output</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Correction suggested
+</span><span class='line'>gooogle =&gt; google
+</span><span class='line'>Barack Oabama =&gt; Barack Obama
+</span><span class='line'>Latuur =&gt; Latour</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Analyze suggestions manually and make neccesary corrections..</p>
 </div>
 
 

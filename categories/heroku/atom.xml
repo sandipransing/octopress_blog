@@ -4,7 +4,7 @@
   <title><![CDATA[Category: heroku | Fun On Rails]]></title>
   <link href="funonrails.com/categories/heroku/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-14T17:13:10+05:30</updated>
+  <updated>2014-02-18T01:40:31+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -145,17 +145,6 @@ passenger_enabled on;
 <code>
 git clone git://github.com/sandipransing/rails_blank.git
 </code></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Getting started with heroku]]></title>
-    <link href="funonrails.com/2010/11/getting-started-with-heroku/"/>
-    <updated>2010-11-18T12:31:00+05:30</updated>
-    <id>funonrails.com/2010/11/getting-started-with-heroku</id>
-    <content type="html"><![CDATA[<div class='post'>
-<a href="http://nodeknockout.posterous.com/countdown-to-knockout-post-8-deploying-to-her">Heroku basics</a> <br /><br /><object data="http://nodeknockout.posterous.com/countdown-to-knockout-post-8-deploying-to-her" width="550" height='700'> </object></div>
-
 ]]></content>
   </entry>
   

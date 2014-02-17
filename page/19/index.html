@@ -9,7 +9,7 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="This error appears when same action gets called twice. There might be chances to have controller with same name twice inside app as well as &hellip;">
+  <meta name="description" content="1. Ruby http://tryruby.org2. Hpricot http://hpricot.com3. Regular expressions http://rubular.com4. Exceptions http://hoptoadapp.com/5. Application& &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,43 +77,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/02/fixsolution-for-nomethoderror-undefined/">Fix/Solution for NoMethodError? (Undefined Method `controller_name&#8217; for nil:NilClass)</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-02-16T20:32:00+05:30" pubdate data-updated="true">Feb 16<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<span class="Apple-style-span" style="font-family: Verdana, Arial, 'Bitstream Vera Sans', Helvetica, sans-serif; font-size: 13px;"></span><br />This error appears when same action gets called twice. There might be chances to have controller with same name twice inside app as well as plugins<br /><br />In my case the error appeared while migrating from rails 2.1 to 2.3.<br />Application was having application.rb and application_controller.rb<br /><br />Files deleted:<br />trunk/app/controllers/application.rb<br /><br />And that solved problem !<br /></div>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -263,11 +226,48 @@ Eval method in ruby executes string/expression passed as parameter. <br/> <b>Exa
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/02/hasmany-through-association-for-rails/">Has_many => Through Association for Rails Polymorphic Model</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-02-15T21:54:00+05:30" pubdate data-updated="true">Feb 15<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+Example of polymorphic association using has_many, through, source. <br/> Here post is polymorphic resource which belongs to the author [can be student, teacher]<br/><pre class=ruby># app/models/student.rb class Student < ActiveRecord::Base    has_many :posts, :as => author end  # app/models/teacher.rb class Teacher < ActiveRecord::Base    has_many :posts, :as => author end  # app/models/post.rb class Post < ActiveRecord::Base    belongs to :author, :polymorphic => true end </pre><br/>Has_many through association on polymorphic models <br/><pre class=ruby># app/models/student.rb class Student < ActiveRecord::Base    belongs_to :division   has_many :posts, :as => author end  # app/models/division.rb class Division < ActiveRecord::Base    has_many :students   has_many :student_posts, :through => :students, :source => :posts end </pre><b> Examples </b><br/><pre class=ruby>ruby script/console div = Division.first div.student_posts </pre></div>
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/page/20/">&larr; Older</a>
     
-    <a href="/blog/archives">Blog Archives</a>
+    <a href="/archives">Blog Archives</a>
     
     <a class="next" href="/page/18/">Newer &rarr;</a>
     
