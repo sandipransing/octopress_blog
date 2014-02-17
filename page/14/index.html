@@ -124,30 +124,32 @@
 
 <p>Usage in ruby app</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>require 'rubygems'
-</span><span class='line'>require 'bossman'
-</span><span class='line'>include BOSSMan
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;rubygems&#39;</span>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;bossman&#39;</span>
+</span><span class='line'><span class="kp">include</span> <span class="no">BOSSMan</span>
 </span><span class='line'>
-</span><span class='line'>BOSSMan.application_id = "Your Application ID here"</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'><span class="no">BOSSMan</span><span class="o">.</span><span class="n">application_id</span> <span class="o">=</span> <span class="s2">&quot;Your Application ID here&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h4>Spelling Suggestions</h4>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>text = BOSSMan::Search.spelling("gooogle")
-</span><span class='line'>=&gt; #{"resultset_spell"=&gt;[{"suggestion"=&gt;"google"}], "responsecode"=&gt;"200", "deephits"=&gt;"1", "start"=&gt;"0", "count"=&gt;"1", "totalhits"=&gt;"1"}}&gt;
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">text</span> <span class="o">=</span> <span class="ss">BOSSMan</span><span class="p">:</span><span class="ss">:Search</span><span class="o">.</span><span class="n">spelling</span><span class="p">(</span><span class="s2">&quot;gooogle&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="c1">#{&quot;resultset_spell&quot;=&gt;[{&quot;suggestion&quot;=&gt;&quot;google&quot;}], &quot;responsecode&quot;=&gt;&quot;200&quot;, &quot;deephits&quot;=&gt;&quot;1&quot;, &quot;start&quot;=&gt;&quot;0&quot;, &quot;count&quot;=&gt;&quot;1&quot;, &quot;totalhits&quot;=&gt;&quot;1&quot;}}&gt;</span>
 </span><span class='line'>
-</span><span class='line'>text.suggestion 
-</span><span class='line'>=&gt; "google"</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'><span class="n">text</span><span class="o">.</span><span class="n">suggestion</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;google&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>More sophisticated way of use &ndash;</p>
@@ -160,19 +162,20 @@
 </ol>
 
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>  1 keywords:
-</span><span class='line'>  2   gooogle:
-</span><span class='line'>  3   Barack Oabama:
-</span><span class='line'>  4   Indian:
-</span><span class='line'>  5   Latuur:</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="mi">1</span> <span class="ss">keywords</span><span class="p">:</span>
+</span><span class='line'>  <span class="mi">2</span>   <span class="ss">gooogle</span><span class="p">:</span>
+</span><span class='line'>  <span class="mi">3</span>   <span class="no">Barack</span> <span class="ss">Oabama</span><span class="p">:</span>
+</span><span class='line'>  <span class="mi">4</span>   <span class="ss">Indian</span><span class="p">:</span>
+</span><span class='line'>  <span class="mi">5</span>   <span class="ss">Latuur</span><span class="p">:</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -181,27 +184,29 @@
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>keywords = YAML.load_file('spelling.yml')['keywords'].keys
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">keywords</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span><span class="s1">&#39;spelling.yml&#39;</span><span class="p">)</span><span class="o">[</span><span class="s1">&#39;keywords&#39;</span><span class="o">].</span><span class="n">keys</span>
 </span><span class='line'>
-</span><span class='line'>  puts "Correction suggested"
-</span><span class='line'>  keywords.each do |keyword|
-</span><span class='line'>    text = BOSSMan::Search.spelling(keyword)
-</span><span class='line'>    if defined? text.suggestion
-</span><span class='line'>      puts "#{keyword} =&gt; #{text.suggestion}"
-</span><span class='line'>    end
-</span><span class='line'>  end</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;Correction suggested&quot;</span>
+</span><span class='line'>  <span class="n">keywords</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">keyword</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">text</span> <span class="o">=</span> <span class="ss">BOSSMan</span><span class="p">:</span><span class="ss">:Search</span><span class="o">.</span><span class="n">spelling</span><span class="p">(</span><span class="n">keyword</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">defined?</span> <span class="n">text</span><span class="o">.</span><span class="n">suggestion</span>
+</span><span class='line'>      <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">keyword</span><span class="si">}</span><span class="s2"> =&gt; </span><span class="si">#{</span><span class="n">text</span><span class="o">.</span><span class="n">suggestion</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h4>Output</h4>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Correction suggested
-</span><span class='line'>gooogle =&gt; google
-</span><span class='line'>Barack Oabama =&gt; Barack Obama
-</span><span class='line'>Latuur =&gt; Latour</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Correction</span> <span class="n">suggested</span>
+</span><span class='line'><span class="n">gooogle</span> <span class="o">=&gt;</span> <span class="n">google</span>
+</span><span class='line'><span class="no">Barack</span> <span class="no">Oabama</span> <span class="o">=&gt;</span> <span class="no">Barack</span> <span class="no">Obama</span>
+</span><span class='line'><span class="no">Latuur</span> <span class="o">=&gt;</span> <span class="no">Latour</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Analyze suggestions manually and make neccesary corrections..</p>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: bossman | Fun On Rails]]></title>
   <link href="funonrails.com/categories/bossman/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-18T01:40:31+05:30</updated>
+  <updated>2014-02-18T01:42:48+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -33,7 +33,7 @@ Apply and get Application ID from yahoo developer network</p>
 <p>Make sure to note it for reference</p>
 
 <p>Usage in ruby app
-```
+```ruby
 require &lsquo;rubygems&rsquo;
 require &lsquo;bossman&rsquo;
 include BOSSMan</p>
@@ -43,7 +43,7 @@ include BOSSMan</p>
 
 <h4>Spelling Suggestions</h4>
 
-<p>```
+<p>```ruby
 text = BOSSMan::Search.spelling(&ldquo;gooogle&rdquo;)
 => #{&ldquo;resultset_spell&rdquo;=>[{&ldquo;suggestion&rdquo;=>&ldquo;google&rdquo;}], &ldquo;responsecode&rdquo;=>&ldquo;200&rdquo;, &ldquo;deephits&rdquo;=>&ldquo;1&rdquo;, &ldquo;start&rdquo;=>&ldquo;0&rdquo;, &ldquo;count&rdquo;=>&ldquo;1&rdquo;, &ldquo;totalhits&rdquo;=>&ldquo;1&rdquo;}}></p>
 
@@ -65,7 +65,7 @@ text = BOSSMan::Search.spelling(&ldquo;gooogle&rdquo;)
 4   Indian:
 5   Latuur:
 </code>
-```
+```ruby
 keywords = YAML.load_file(&lsquo;spelling.yml&rsquo;)[&lsquo;keywords&rsquo;].keys</li>
 </ol>
 
