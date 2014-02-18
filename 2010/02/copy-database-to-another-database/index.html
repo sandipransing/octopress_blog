@@ -9,7 +9,8 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="1. Copy One database to another database on same host mysqldump -uroot -p | mysql -uroot 2. Copy database to another database on remote host &hellip;">
+  <meta name="description" content="1. Copy One database to another database on same host 1
+mysqldump -uroot -p | mysql -uroot 2. Copy database to another database on remote host 1 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -103,8 +104,17 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-<b>1. Copy One database to another database on same host </b><br/><pre class=ruby> mysqldump -uroot -p <source_database_name> | mysql -uroot <dest_database_name></pre> <b>2. Copy database to another database on remote host</b><br/><pre class=ruby> mysqldump -uroot -p <source_database> | ssh host2 "mysql -uroot <dest_database>" </pre></div>
+<div class="entry-content"><h2>1. Copy One database to another database on same host</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mysqldump -uroot -p  | mysql -uroot</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>2. Copy database to another database on remote host</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mysqldump -uroot -p  | ssh host2 "mysql -uroot"</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 
@@ -132,7 +142,7 @@
 
 <span class="categories">
   
-    <a class='category' href='/categories/general/'>general</a>, <a class='category' href='/categories/mysql/'>mysql</a>, <a class='category' href='/categories/ubuntu/'>ubuntu</a>
+    <a class='category' href='/categories/mysql/'>mysql</a>, <a class='category' href='/categories/ubuntu/'>ubuntu</a>
   
 </span>
 

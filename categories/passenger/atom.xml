@@ -4,7 +4,7 @@
   <title><![CDATA[Category: passenger | Fun On Rails]]></title>
   <link href="funonrails.com/categories/passenger/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-18T19:37:56+05:30</updated>
+  <updated>2014-02-19T01:29:46+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -144,9 +144,90 @@ sudo service thin start|stop|restart
     <link href="funonrails.com/2010/02/nginx-passenger-configuration-for-rails/"/>
     <updated>2010-02-15T21:43:00+05:30</updated>
     <id>funonrails.com/2010/02/nginx-passenger-configuration-for-rails</id>
-    <content type="html"><![CDATA[<div class='post'>
-<br />#user &nbsp;nobody;<br />user www-data;<br />worker_processes &nbsp;2;<br /><br />#error_log &nbsp;logs/error.log;<br />#error_log &nbsp;logs/error.log &nbsp;notice;<br />#error_log &nbsp;logs/error.log &nbsp;info;<br /><br />#pid &nbsp; &nbsp; &nbsp; &nbsp;logs/nginx.pid;<br /><br />events {<br />&nbsp;&nbsp; &nbsp;worker_connections &nbsp;1024;<br />}<br /><br />http {<br />&nbsp;&nbsp; &nbsp;passenger_root /var/lib/gems/1.8/gems/passenger-2.2.8;<br />&nbsp;&nbsp; &nbsp;passenger_ruby /usr/bin/ruby1.8;<br />&nbsp;&nbsp; &nbsp;passenger_max_pool_size 3;<br /><br />&nbsp;&nbsp; &nbsp;include &nbsp; &nbsp; &nbsp; mime.types;<br /><div><div>default_type &nbsp;application/octet-stream;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp;#log_format &nbsp;main &nbsp;'$remote_addr - $remote_user [$time_local] "$request" '</div><div>&nbsp;&nbsp; &nbsp;# &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'$status $body_bytes_sent "$http_referer" '</div><div>&nbsp;&nbsp; &nbsp;# &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'"$http_user_agent" "$http_x_forwarded_for"';</div><div><br /></div><div>&nbsp;&nbsp; &nbsp;#access_log &nbsp;logs/access.log &nbsp;main;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp;sendfile &nbsp; &nbsp; &nbsp; &nbsp;on;</div><div>&nbsp;&nbsp; &nbsp;#tcp_nopush &nbsp; &nbsp; on;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp;#keepalive_timeout &nbsp;0;</div><div>&nbsp;&nbsp; &nbsp;keepalive_timeout &nbsp;65;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp;#gzip &nbsp;on;</div><div><div>&nbsp;server {</div><div>&nbsp;&nbsp; &nbsp; listen 80;</div><div>&nbsp;&nbsp; &nbsp; server_name localhost;</div><div>&nbsp;&nbsp; &nbsp; root /home/josh/current/public; &nbsp; # &lt;--- be sure to point to 'public'!</div><div>&nbsp;&nbsp; &nbsp; passenger_enabled on;</div><div>&nbsp;&nbsp; &nbsp; passenger_use_global_queue on;</div><div>&nbsp;&nbsp; }</div><div><br /></div><div>&nbsp;&nbsp; &nbsp;server {</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;listen &nbsp; &nbsp; &nbsp; 80;</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;server_name &nbsp;localhost;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;#charset koi8-r;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;#access_log &nbsp;logs/host.access.log &nbsp;main;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;location / {</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;root &nbsp; html;</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;index &nbsp;index.html index.htm;</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;}</div><div><div>&nbsp;&nbsp; &nbsp; #error_page &nbsp;404 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/404.html;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;# redirect server error pages to the static page /50x.html</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;#</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;error_page &nbsp; 500 502 503 504 &nbsp;/50x.html;</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;location = /50x.html {</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;root &nbsp; html;</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;}</div><div><div>&nbsp;&nbsp; }</div><div>}</div></div></div></div></div></div>
+    <content type="html"><![CDATA[<p>```</p>
 
+<h1>user  nobody;</h1>
+
+<p>user www-data;
+worker_processes  2;</p>
+
+<h1>error_log  logs/error.log;</h1>
+
+<h1>error_log  logs/error.log  notice;</h1>
+
+<h1>error_log  logs/error.log  info;</h1>
+
+<h1>pid        logs/nginx.pid;</h1>
+
+<p>events {</p>
+
+<pre><code>worker_connections  1024;
+</code></pre>
+
+<p>}</p>
+
+<p>http {</p>
+
+<pre><code>passenger_root /var/lib/gems/1.8/gems/passenger-2.2.8;
+passenger_ruby /usr/bin/ruby1.8;
+passenger_max_pool_size 3;
+
+include       mime.types;
+</code></pre>
+
+<p>default_type  application/octet-stream;</p>
+
+<pre><code>#log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+#                  '$status $body_bytes_sent "$http_referer" '
+#                  '"$http_user_agent" "$http_x_forwarded_for"';
+
+#access_log  logs/access.log  main;
+
+sendfile        on;
+#tcp_nopush     on;
+
+#keepalive_timeout  0;
+keepalive_timeout  65;
+
+#gzip  on;
+</code></pre>
+
+<p> server {</p>
+
+<pre><code> listen 80;
+ server_name localhost;
+
+ root /home/josh/current/public;   # &lt;--- be sure to point to 'public'!
+ passenger_enabled on;
+ passenger_use_global_queue on;
+</code></pre>
+
+<p>   }</p>
+
+<pre><code>server {
+    listen       80;
+    server_name  localhost;
+
+    #charset koi8-r;
+    #access_log  logs/host.access.log  main;
+
+    location / {
+        root   html;
+        index  index.html index.htm;
+    }
+ #error_page  404              /404.html;
+
+    # redirect server error pages to the static page /50x.html
+    #
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   html;
+    }
+</code></pre>
+
+<p>   }
+}
+```</p>
 ]]></content>
   </entry>
   

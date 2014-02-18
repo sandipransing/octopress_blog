@@ -4,7 +4,7 @@
   <title><![CDATA[Category: meta-programming | Fun On Rails]]></title>
   <link href="funonrails.com/categories/meta-programming/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-18T19:37:56+05:30</updated>
+  <updated>2014-02-19T01:29:46+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -194,9 +194,64 @@ alias_attrinute :username, :login
     <link href="funonrails.com/2010/02/dynamic-creation-of-variables-in-ruby/"/>
     <updated>2010-02-16T16:12:00+05:30</updated>
     <id>funonrails.com/2010/02/dynamic-creation-of-variables-in-ruby</id>
-    <content type="html"><![CDATA[<div class='post'>
-<div style="text-align: left;">1. To create local variables in ruby dynamically.</div><div style="text-align: left;">Use eval method in ruby</div><br /><div style="text-align: left;">ree-1.8.7-2010.01 &gt; eval("local=4")</div><div style="text-align: left;">&nbsp;=&gt; 4&nbsp;</div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; p local</div><div style="text-align: left;">4</div><div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; eval("local_#{1}=4")</div><div style="text-align: left;">&nbsp;=&gt; 4&nbsp;</div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; puts local_1</div><div style="text-align: left;">4</div><div style="text-align: left;"><br /></div><div style="text-align: left;">2. To create &amp; get instance variables dynamically in ruby.</div><div style="text-align: left;">instance_varaiable_set &amp;&nbsp;instance_varaiable_get methods are provided and no need to do it using eval.</div><div style="text-align: left;"><br /></div><div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; (0..3).each do |i|</div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; &nbsp; &nbsp; instance_variable_set("@instance_#{i}", i*i+1)</div><div style="text-align: left;">ree-1.8.7-2010.01 ?&gt; &nbsp;end</div><div style="text-align: left;">&nbsp;=&gt; 0..3&nbsp;</div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; @instance_0</div><div style="text-align: left;">&nbsp;=&gt; 1&nbsp;</div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; @instance_2</div><div style="text-align: left;">&nbsp;=&gt; 5&nbsp;</div><div style="text-align: left;"><br /></div><div style="text-align: left;">3. Dynamic constant variable creation in ruby</div><div style="text-align: left;"><br /></div><div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; class Example</div><div style="text-align: left;">ree-1.8.7-2010.01 ?&gt; &nbsp;end</div><div style="text-align: left;">&nbsp;=&gt; nil&nbsp;</div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; Example.const_set('A',200)</div><div style="text-align: left;">&nbsp;=&gt; 200&nbsp;</div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; Example::A</div><div style="text-align: left;">&nbsp;=&gt; 200&nbsp;</div><div style="text-align: left;"><br /></div></div></div></div></div>
+    <content type="html"><![CDATA[<h2>1. To create local variables in ruby dynamically</h2>
 
+<p>Using eval method in ruby
+```ruby
+eval(&ldquo;local=4&rdquo;)</p>
+
+<h1>=> 4</h1>
+
+<p>p local</p>
+
+<h1>=> 4</h1>
+
+<p>eval(&ldquo;local_#{1}=4&rdquo;)</p>
+
+<h1>=> 4</h1>
+
+<p>puts local_1</p>
+
+<h1>=> 4</h1>
+
+<p>```</p>
+
+<h2>2. To create &amp; get instance variables dynamically in ruby</h2>
+
+<p><code>instance_varaiable_set</code> &amp; <code>instance_varaiable_get</code> methods are provided and no need to do it using eval</p>
+
+<p>```ruby
+(0..3).each do |i|
+  instance_variable_set(&ldquo;@instance_#{i}&rdquo;, i*i+1)
+end</p>
+
+<h1>=> 0..3</h1>
+
+<p>@instance_0</p>
+
+<h1>=> 1</h1>
+
+<p>@instance_2</p>
+
+<h1>=> 5</h1>
+
+<p>```</p>
+
+<h2>3. Dynamic constant variable creation in ruby</h2>
+
+<p>```ruby
+class Example
+end</p>
+
+<p>Example.const_set(&lsquo;A&rsquo;,200)</p>
+
+<h1>=> 200</h1>
+
+<p>Example::A</p>
+
+<h1>=> 200</h1>
+
+<p>```</p>
 ]]></content>
   </entry>
   
@@ -205,9 +260,24 @@ alias_attrinute :username, :login
     <link href="funonrails.com/2010/02/eval-method-in-ruby/"/>
     <updated>2010-02-16T15:34:00+05:30</updated>
     <id>funonrails.com/2010/02/eval-method-in-ruby</id>
-    <content type="html"><![CDATA[<div class='post'>
-Eval method in ruby executes string/expression passed as parameter. <br/> <b>Example:</b><br/><pre class=ruby>irb > eval("5+3")  => 8   irb > eval("a=5")  => 5   irb > eval("b||=a")  => 5   </pre><br/>Its part of ruby meta-programming and not recommended approach unless there is no any alternative to do.</div>
+    <content type="html"><![CDATA[<p>Eval method in ruby executes string/expression passed as parameter.</p>
 
+<p>Example:
+```ruby
+eval(&ldquo;5+3&rdquo;)</p>
+
+<h1>=> 8</h1>
+
+<p>eval(&ldquo;a=5&rdquo;)</p>
+
+<h1>=> 5</h1>
+
+<p>eval(&ldquo;b||=a&rdquo;)</p>
+
+<h1>=> 5</h1>
+
+<p>```
+Its part of ruby meta-programming and not recommended approach unless there is no any alternative to do.</p>
 ]]></content>
   </entry>
   

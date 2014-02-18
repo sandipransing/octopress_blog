@@ -9,7 +9,21 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Include gems/library required before getting started require 'hpricot'require 'net/http'require 'rio'# Pass website url to be scrapedurl = "www. &hellip;">
+  <meta name="description" content="Include gems/library required before getting started 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+require &#39;hpricot&#39;
+require &#39;net/http&#39;
+require &#39;rio &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -103,16 +117,49 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-<div style="text-align: left;">Include gems/library required before getting started <br /></div><pre class="ruby" name="code">require 'hpricot'<br />require 'net/http'<br />require 'rio'<br /></pre><pre class="ruby" name="code"># Pass website url to be scraped<br />url = "www.funonrails.com"<br /><br /># Define filename to store file locally<br />file = "temp.html"<br /># Save page locally<br />rio(url) &lt; rio (file)<br /></pre><pre class="ruby" name="code"># Open page through hpricot<br />doc = Hpricot(open(file))<br /><br />Apply hpricot library to get right contents<br /><br />doc.at("div.pageTitle")<br />doc/"div.pageTitle"<br />doc.search("div.entry")<br />doc//"div.pageTitle"<br /></pre>Hpricot API Reference click here<br /></div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>Sandip Ransing</div>
-<div class='content'>
-Try hpricot library online http://hpricot.com</div>
-</div>
-</div>
+<div class="entry-content"><p>Include gems/library required before getting started</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;hpricot&#39;</span>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;net/http&#39;</span>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;rio&#39;</span>
+</span><span class='line'><span class="c1"># Pass website url to be scraped</span>
+</span><span class='line'><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;www.funonrails.com&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Define filename to store file locally</span>
+</span><span class='line'><span class="n">file</span> <span class="o">=</span> <span class="s2">&quot;temp.html&quot;</span>
+</span><span class='line'><span class="c1"># Save page locally</span>
+</span><span class='line'><span class="n">rio</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">rio</span> <span class="p">(</span><span class="n">file</span><span class="p">)</span>
+</span><span class='line'><span class="c1"># Open page through hpricot</span>
+</span><span class='line'><span class="n">doc</span> <span class="o">=</span> <span class="no">Hpricot</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Apply hpricot library to get right contents</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">doc</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="s2">&quot;div.pageTitle&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="n">doc</span><span class="o">/</span><span class="s2">&quot;div.pageTitle&quot;</span>
+</span><span class='line'><span class="n">doc</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;div.entry&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="n">doc</span><span class="o">//</span><span class="s2">&quot;div.pageTitle&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Hpricot API Reference click <a href="http://rdoc.info/github/hpricot/hpricot/Hpricot/Doc">here</a></p>
 </div>
 
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: optparser | Fun On Rails]]></title>
   <link href="funonrails.com/categories/optparser/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-18T19:37:56+05:30</updated>
+  <updated>2014-02-19T01:29:46+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -18,9 +18,60 @@
     <link href="funonrails.com/2009/11/passing-commandline-parameter-arguments/"/>
     <updated>2009-11-27T19:13:00+05:30</updated>
     <id>funonrails.com/2009/11/passing-commandline-parameter-arguments</id>
-    <content type="html"><![CDATA[<div class='post'>
-<div style="text-align: left;">Ruby file accepts from command prompt in the form of array. <br /></div><b>Passing parameters </b><br /><pre class="ruby" name="code">ruby input.rb TOI DH TimesNew<br /></pre><b>Accessing parameters  </b><br /><pre class="ruby" name="code"> # input.rb<br /> p ARGV<br /> # =&gt; ["TOI", "DH", "TimesNew"]<br /> p ARGV[0]<br /> # =&gt; "TOI"<br /> p ARGV[1]<br /> # =&gt; "DH"<br /></pre><b>Optparser</b> : parses commandline options in more effective way using OptParser class. and we can access options as hashed parameters.<br /><br /><b>Passing parameters  </b><br /><pre class="ruby" name="code">ruby input.rb -P"The Times of India" --category"article"<br /></pre><b>Accessing parameters  </b><br /><pre class="ruby" name="code"> <br /> # input.rb<br /> require 'optparser'<br /> <br /> options = ARGV.getopts("P:", 'category')<br /><br /> p options<br /> # =&gt; { 'P' =&gt; 'The Times of India', :category =&gt; 'article' }<br /><br /> p options['P']<br /> # =&gt; "The Times of India"<br /></pre></div>
+    <content type="html"><![CDATA[<p>Ruby file accepts from command prompt in the form of array</p>
 
+<h2>Passing parameters</h2>
+
+<p><code>
+ruby input.rb TOI DH TimesNew
+</code></p>
+
+<h2>Accessing parameters</h2>
+
+<p>```ruby</p>
+
+<h1>input.rb</h1>
+
+<p>p ARGV</p>
+
+<h1>=> [&ldquo;TOI&rdquo;, &ldquo;DH&rdquo;, &ldquo;TimesNew&rdquo;]</h1>
+
+<p>p ARGV[0]</p>
+
+<h1>=> &ldquo;TOI&rdquo;</h1>
+
+<p>p ARGV[1]</p>
+
+<h1>=> &ldquo;DH&rdquo;</h1>
+
+<p>```
+Optparser : parses commandline options in more effective way using OptParser class. and we can access options as hashed parameters.</p>
+
+<h2>Passing parameters</h2>
+
+<p><code>
+ruby input.rb -P"The Times of India" --category"article"
+</code></p>
+
+<h2>Accessing parameters</h2>
+
+<p>```ruby</p>
+
+<h1>vi input.rb</h1>
+
+<p>require &lsquo;optparser&rsquo;</p>
+
+<p>options = ARGV.getopts(&ldquo;P:&rdquo;, &lsquo;category&rsquo;)</p>
+
+<p>p options</p>
+
+<h1>=> { &lsquo;P&rsquo; => &lsquo;The Times of India&rsquo;, :category => &lsquo;article&rsquo; }</h1>
+
+<p>p options[&lsquo;P&rsquo;]</p>
+
+<h1>=> &ldquo;The Times of India&rdquo;</h1>
+
+<p>```</p>
 ]]></content>
   </entry>
   

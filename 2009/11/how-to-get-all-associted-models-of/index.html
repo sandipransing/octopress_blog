@@ -9,7 +9,8 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="I have Site Model and i wanted to find all associated models of Site model which are having belongs_to relationship. After doing lot headache, here &hellip;">
+  <meta name="description" content="I have Site Model and i wanted to find all associated models of Site model which are having belongs_to relationship.
+After doing lot headache, here &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -103,8 +104,34 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-<div style="text-align: left;">I have Site Model and i wanted to find all associated models of Site model which are having  belongs_to relationship.  After doing lot headache, here is the solution i found<br /></div><b><br /></b><br /><b>has_many models of Site Model</b> <br /><pre class="ruby" name="code"> Site.reflect_on_all_associations.map{|mac| mac.class_name if mac.macro==:has_many}.compact<br />=&gt; ["Layout", "User", "SubmenuLink", "Snippet", "Asset"]<br /><br /></pre><b>belongs_to model of Site Model</b> <br /><pre class="ruby" name="code">Site.reflect_on_all_associations.map{|mac| mac.class_name if mac.macro==:belongs_to}.compact<br />=&gt; ["User", "Page", "User"]<br /><br /></pre><b>To get all associations</b><br /><pre class="ruby" name="code">Site.reflect_on_all_associations.map{|mac| mac.class_name}.compact<br />=&gt; ["Layout", "User", "Page", "User", "SubmenuLink", "User", "Snippet", "Asset"]<br /><br /></pre>Hari, U rocks !<br /></div>
+<div class="entry-content"><p>I have Site Model and i wanted to find all associated models of Site model which are having belongs_to relationship.
+After doing lot headache, here is the solution i found</p>
+
+<h2>has_many models of Site Model</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> Site.reflect_on_all_associations.map{|mac| mac.class_name if mac.macro==:has_many}.compact
+</span><span class='line'>=&gt; ["Layout", "User", "SubmenuLink", "Snippet", "Asset"]</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>belongs_to model of Site Model</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Site.reflect_on_all_associations.map{|mac| mac.class_name if mac.macro==:belongs_to}.compact
+</span><span class='line'>=&gt; ["User", "Page", "User"]</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>To get all associations</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Site.reflect_on_all_associations.map{|mac| mac.class_name}.compact
+</span><span class='line'>=&gt; ["Layout", "User", "Page", "User", "SubmenuLink", "User", "Snippet", "Asset"]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Hari, U rocks !</p>
 </div>
 
 
@@ -132,7 +159,7 @@
 
 <span class="categories">
   
-    <a class='category' href='/categories/active-record/'>active record</a>, <a class='category' href='/categories/associations/'>associations</a>, <a class='category' href='/categories/rails/'>rails</a>
+    <a class='category' href='/categories/active-record/'>active record</a>, <a class='category' href='/categories/associations/'>associations</a>
   
 </span>
 

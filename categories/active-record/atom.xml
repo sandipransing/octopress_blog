@@ -4,7 +4,7 @@
   <title><![CDATA[Category: active record | Fun On Rails]]></title>
   <link href="funonrails.com/categories/active-record/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-18T19:37:56+05:30</updated>
+  <updated>2014-02-19T01:29:46+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -279,9 +279,23 @@ In cases where you want only one particular model connecting other database tabl
     <link href="funonrails.com/2010/02/activerecordreadonlyrecord-while/"/>
     <updated>2010-02-15T21:34:00+05:30</updated>
     <id>funonrails.com/2010/02/activerecordreadonlyrecord-while</id>
-    <content type="html"><![CDATA[<div class='post'>
-<b>ActiveRecord find with join options retrieves object as readonly</b><br/><pre class=ruby>station = Station.find( :first, :joins => :call, :conditions => ["customer_id = ? and date(insurance_expiry_date) = ?", customer.id, insurance_expiry_date ] ) </pre><br/> Readonly object cannot modified and hence below line raises "ActiveRecord::ReadOnlyRecord" error. <br/><pre class=ruby>station.update_attributes({ :customer_id => 12 }) </pre><br/>If you have to write on read only object then you can pass following option to find query<br/><pre class=ruby>:readonly => false </pre><br/>Now below find is permitted to do write on fetched object records. <br/><pre class=ruby>station = Station.find( :first, :joins => :call, :conditions => ["customer_id = ? and date(insurance_expiry_date) = ?", customer.id, insurance_expiry_date ], :readonly => false ) </pre></div>
+    <content type="html"><![CDATA[<h4>ActiveRecord find with join options retrieves object as readonly</h4>
 
+<p><code>
+station = Station.find( :first, :joins =&gt; :call, :conditions =&gt; ["customer_id = ? and date(insurance_expiry_date) = ?", customer.id, insurance_expiry_date ] )
+</code>
+Readonly object cannot modified and hence below line raises &ldquo;ActiveRecord::ReadOnlyRecord&rdquo; error.
+<code>
+station.update_attributes({ :customer_id =&gt; 12 })
+</code>
+If you have to write on read only object then you can pass following option to find query
+<code>
+:readonly =&gt; false
+</code>
+Now below find is permitted to do write on fetched object records.
+<code>
+station = Station.find( :first, :joins =&gt; :call, :conditions =&gt; ["customer_id = ? and date(insurance_expiry_date) = ?", customer.id, insurance_expiry_date ], :readonly =&gt; false )
+</code></p>
 ]]></content>
   </entry>
   

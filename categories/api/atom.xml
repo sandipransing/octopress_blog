@@ -4,7 +4,7 @@
   <title><![CDATA[Category: api | Fun On Rails]]></title>
   <link href="funonrails.com/categories/api/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-18T19:37:56+05:30</updated>
+  <updated>2014-02-19T01:29:46+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -144,21 +144,36 @@ If you are subscriber of blog and not displaying post correctly. I request you t
     <link href="funonrails.com/2009/12/hpricot-scraping-in-ruby/"/>
     <updated>2009-12-02T18:24:00+05:30</updated>
     <id>funonrails.com/2009/12/hpricot-scraping-in-ruby</id>
-    <content type="html"><![CDATA[<div class='post'>
-<div style="text-align: left;">Include gems/library required before getting started <br /></div><pre class="ruby" name="code">require 'hpricot'<br />require 'net/http'<br />require 'rio'<br /></pre><pre class="ruby" name="code"># Pass website url to be scraped<br />url = "www.funonrails.com"<br /><br /># Define filename to store file locally<br />file = "temp.html"<br /># Save page locally<br />rio(url) &lt; rio (file)<br /></pre><pre class="ruby" name="code"># Open page through hpricot<br />doc = Hpricot(open(file))<br /><br />Apply hpricot library to get right contents<br /><br />doc.at("div.pageTitle")<br />doc/"div.pageTitle"<br />doc.search("div.entry")<br />doc//"div.pageTitle"<br /></pre>Hpricot API Reference click here<br /></div>
+    <content type="html"><![CDATA[<p>Include gems/library required before getting started
+```ruby
+require &lsquo;hpricot&rsquo;
+require &lsquo;net/http&rsquo;
+require &lsquo;rio&rsquo;</p>
 
+<h1>Pass website url to be scraped</h1>
 
-<h2>Comments</h2>
+<p>url = &ldquo;www.funonrails.com&rdquo;</p>
 
+<h1>Define filename to store file locally</h1>
 
-<div class='comments'>
-<div class='comment'>
-<div class='author'>Sandip Ransing</div>
-<div class='content'>
-Try hpricot library online http://hpricot.com</div>
-</div>
-</div>
+<p>file = &ldquo;temp.html&rdquo;</p>
 
+<h1>Save page locally</h1>
+
+<p>rio(url) &lt; rio (file)</p>
+
+<h1>Open page through hpricot</h1>
+
+<p>doc = Hpricot(open(file))
+<code>
+Apply hpricot library to get right contents
+</code>ruby
+doc.at(&ldquo;div.pageTitle&rdquo;)
+doc/&ldquo;div.pageTitle&rdquo;
+doc.search(&ldquo;div.entry&rdquo;)
+doc//&ldquo;div.pageTitle&rdquo;
+```
+Hpricot API Reference click <a href="http://rdoc.info/github/hpricot/hpricot/Hpricot/Doc">here</a></p>
 ]]></content>
   </entry>
   

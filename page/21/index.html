@@ -9,7 +9,21 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Include gems/library required before getting started require 'hpricot'require 'net/http'require 'rio'# Pass website url to be scrapedurl = "www. &hellip;">
+  <meta name="description" content="Include gems/library required before getting started 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+require &#39;hpricot&#39;
+require &#39;net/http&#39;
+require &#39;rio &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -106,16 +120,49 @@
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-<div style="text-align: left;">Include gems/library required before getting started <br /></div><pre class="ruby" name="code">require 'hpricot'<br />require 'net/http'<br />require 'rio'<br /></pre><pre class="ruby" name="code"># Pass website url to be scraped<br />url = "www.funonrails.com"<br /><br /># Define filename to store file locally<br />file = "temp.html"<br /># Save page locally<br />rio(url) &lt; rio (file)<br /></pre><pre class="ruby" name="code"># Open page through hpricot<br />doc = Hpricot(open(file))<br /><br />Apply hpricot library to get right contents<br /><br />doc.at("div.pageTitle")<br />doc/"div.pageTitle"<br />doc.search("div.entry")<br />doc//"div.pageTitle"<br /></pre>Hpricot API Reference click here<br /></div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>Sandip Ransing</div>
-<div class='content'>
-Try hpricot library online http://hpricot.com</div>
-</div>
-</div>
+  <div class="entry-content"><p>Include gems/library required before getting started</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;hpricot&#39;</span>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;net/http&#39;</span>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;rio&#39;</span>
+</span><span class='line'><span class="c1"># Pass website url to be scraped</span>
+</span><span class='line'><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;www.funonrails.com&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Define filename to store file locally</span>
+</span><span class='line'><span class="n">file</span> <span class="o">=</span> <span class="s2">&quot;temp.html&quot;</span>
+</span><span class='line'><span class="c1"># Save page locally</span>
+</span><span class='line'><span class="n">rio</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">rio</span> <span class="p">(</span><span class="n">file</span><span class="p">)</span>
+</span><span class='line'><span class="c1"># Open page through hpricot</span>
+</span><span class='line'><span class="n">doc</span> <span class="o">=</span> <span class="no">Hpricot</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Apply hpricot library to get right contents</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">doc</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="s2">&quot;div.pageTitle&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="n">doc</span><span class="o">/</span><span class="s2">&quot;div.pageTitle&quot;</span>
+</span><span class='line'><span class="n">doc</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;div.entry&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="n">doc</span><span class="o">//</span><span class="s2">&quot;div.pageTitle&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Hpricot API Reference click <a href="http://rdoc.info/github/hpricot/hpricot/Hpricot/Doc">here</a></p>
 </div>
   
   
@@ -151,8 +198,63 @@ Try hpricot library online http://hpricot.com</div>
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-<div style="text-align: left;">Ruby file accepts from command prompt in the form of array. <br /></div><b>Passing parameters </b><br /><pre class="ruby" name="code">ruby input.rb TOI DH TimesNew<br /></pre><b>Accessing parameters  </b><br /><pre class="ruby" name="code"> # input.rb<br /> p ARGV<br /> # =&gt; ["TOI", "DH", "TimesNew"]<br /> p ARGV[0]<br /> # =&gt; "TOI"<br /> p ARGV[1]<br /> # =&gt; "DH"<br /></pre><b>Optparser</b> : parses commandline options in more effective way using OptParser class. and we can access options as hashed parameters.<br /><br /><b>Passing parameters  </b><br /><pre class="ruby" name="code">ruby input.rb -P"The Times of India" --category"article"<br /></pre><b>Accessing parameters  </b><br /><pre class="ruby" name="code"> <br /> # input.rb<br /> require 'optparser'<br /> <br /> options = ARGV.getopts("P:", 'category')<br /><br /> p options<br /> # =&gt; { 'P' =&gt; 'The Times of India', :category =&gt; 'article' }<br /><br /> p options['P']<br /> # =&gt; "The Times of India"<br /></pre></div>
+  <div class="entry-content"><p>Ruby file accepts from command prompt in the form of array</p>
+
+<h2>Passing parameters</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ruby input.rb TOI DH TimesNew</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Accessing parameters</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># input.rb
+</span><span class='line'>p ARGV
+</span><span class='line'># =&gt; ["TOI", "DH", "TimesNew"]
+</span><span class='line'>p ARGV[0]
+</span><span class='line'># =&gt; "TOI"
+</span><span class='line'>p ARGV[1]
+</span><span class='line'># =&gt; "DH"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Optparser : parses commandline options in more effective way using OptParser class. and we can access options as hashed parameters.</p>
+
+<h2>Passing parameters</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ruby input.rb -P"The Times of India" --category"article"</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Accessing parameters</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># vi input.rb
+</span><span class='line'>require 'optparser'
+</span><span class='line'> 
+</span><span class='line'>options = ARGV.getopts("P:", 'category')
+</span><span class='line'>
+</span><span class='line'>p options
+</span><span class='line'># =&gt; { 'P' =&gt; 'The Times of India', :category =&gt; 'article' }
+</span><span class='line'>
+</span><span class='line'>p options['P']
+</span><span class='line'># =&gt; "The Times of India"</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   
@@ -188,8 +290,34 @@ Try hpricot library online http://hpricot.com</div>
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-<div style="text-align: left;">I have Site Model and i wanted to find all associated models of Site model which are having  belongs_to relationship.  After doing lot headache, here is the solution i found<br /></div><b><br /></b><br /><b>has_many models of Site Model</b> <br /><pre class="ruby" name="code"> Site.reflect_on_all_associations.map{|mac| mac.class_name if mac.macro==:has_many}.compact<br />=&gt; ["Layout", "User", "SubmenuLink", "Snippet", "Asset"]<br /><br /></pre><b>belongs_to model of Site Model</b> <br /><pre class="ruby" name="code">Site.reflect_on_all_associations.map{|mac| mac.class_name if mac.macro==:belongs_to}.compact<br />=&gt; ["User", "Page", "User"]<br /><br /></pre><b>To get all associations</b><br /><pre class="ruby" name="code">Site.reflect_on_all_associations.map{|mac| mac.class_name}.compact<br />=&gt; ["Layout", "User", "Page", "User", "SubmenuLink", "User", "Snippet", "Asset"]<br /><br /></pre>Hari, U rocks !<br /></div>
+  <div class="entry-content"><p>I have Site Model and i wanted to find all associated models of Site model which are having belongs_to relationship.
+After doing lot headache, here is the solution i found</p>
+
+<h2>has_many models of Site Model</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> Site.reflect_on_all_associations.map{|mac| mac.class_name if mac.macro==:has_many}.compact
+</span><span class='line'>=&gt; ["Layout", "User", "SubmenuLink", "Snippet", "Asset"]</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>belongs_to model of Site Model</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Site.reflect_on_all_associations.map{|mac| mac.class_name if mac.macro==:belongs_to}.compact
+</span><span class='line'>=&gt; ["User", "Page", "User"]</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>To get all associations</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Site.reflect_on_all_associations.map{|mac| mac.class_name}.compact
+</span><span class='line'>=&gt; ["Layout", "User", "Page", "User", "SubmenuLink", "User", "Snippet", "Asset"]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Hari, U rocks !</p>
 </div>
   
   

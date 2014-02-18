@@ -9,7 +9,18 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="1. To create local variables in ruby dynamically.Use eval method in rubyree-1.8.7-2010.01 &gt; eval(&#8220;local=4&#8221;)&nbsp;=&gt; 4&nbsp;ree-1.8 &hellip;">
+  <meta name="description" content="1. To create local variables in ruby dynamically Using eval method in ruby 1
+2
+3
+4
+5
+6
+7
+8
+eval(&quot;local=4&quot;)
+#=&gt; 4 p local
+#=&gt; 4
+eval(& &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -103,8 +114,74 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-<div style="text-align: left;">1. To create local variables in ruby dynamically.</div><div style="text-align: left;">Use eval method in ruby</div><br /><div style="text-align: left;">ree-1.8.7-2010.01 &gt; eval(&#8220;local=4&#8221;)</div><div style="text-align: left;">&nbsp;=&gt; 4&nbsp;</div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; p local</div><div style="text-align: left;">4</div><div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; eval(&#8220;local_#{1}=4&#8221;)</div><div style="text-align: left;">&nbsp;=&gt; 4&nbsp;</div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; puts local_1</div><div style="text-align: left;">4</div><div style="text-align: left;"><br /></div><div style="text-align: left;">2. To create &amp; get instance variables dynamically in ruby.</div><div style="text-align: left;">instance_varaiable_set &amp;&nbsp;instance_varaiable_get methods are provided and no need to do it using eval.</div><div style="text-align: left;"><br /></div><div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; (0..3).each do |i|</div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; &nbsp; &nbsp; instance_variable_set(&#8220;@instance_#{i}&#8221;, i*i+1)</div><div style="text-align: left;">ree-1.8.7-2010.01 ?&gt; &nbsp;end</div><div style="text-align: left;">&nbsp;=&gt; 0..3&nbsp;</div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; @instance_0</div><div style="text-align: left;">&nbsp;=&gt; 1&nbsp;</div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; @instance_2</div><div style="text-align: left;">&nbsp;=&gt; 5&nbsp;</div><div style="text-align: left;"><br /></div><div style="text-align: left;">3. Dynamic constant variable creation in ruby</div><div style="text-align: left;"><br /></div><div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; class Example</div><div style="text-align: left;">ree-1.8.7-2010.01 ?&gt; &nbsp;end</div><div style="text-align: left;">&nbsp;=&gt; nil&nbsp;</div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; Example.const_set(&#8216;A&#8217;,200)</div><div style="text-align: left;">&nbsp;=&gt; 200&nbsp;</div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; Example::A</div><div style="text-align: left;">&nbsp;=&gt; 200&nbsp;</div><div style="text-align: left;"><br /></div></div></div></div></div>
+<div class="entry-content"><h2>1. To create local variables in ruby dynamically</h2>
+
+<p>Using eval method in ruby</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">eval</span><span class="p">(</span><span class="s2">&quot;local=4&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; 4 </span>
+</span><span class='line'><span class="nb">p</span> <span class="n">local</span>
+</span><span class='line'><span class="c1">#=&gt; 4</span>
+</span><span class='line'><span class="nb">eval</span><span class="p">(</span><span class="s2">&quot;local_</span><span class="si">#{</span><span class="mi">1</span><span class="si">}</span><span class="s2">=4&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; 4 </span>
+</span><span class='line'><span class="nb">puts</span> <span class="n">local_1</span>
+</span><span class='line'><span class="c1">#=&gt; 4</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>2. To create &amp; get instance variables dynamically in ruby</h2>
+
+<p><code>instance_varaiable_set</code> &amp; <code>instance_varaiable_get</code> methods are provided and no need to do it using eval</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="n">.</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
+</span><span class='line'>  <span class="nb">instance_variable_set</span><span class="p">(</span><span class="s2">&quot;@instance_</span><span class="si">#{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="o">*</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="c1">#=&gt; 0..3 </span>
+</span><span class='line'><span class="vi">@instance_0</span>
+</span><span class='line'><span class="c1">#=&gt; 1 </span>
+</span><span class='line'><span class="vi">@instance_2</span>
+</span><span class='line'><span class="c1">#=&gt; 5 </span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>3. Dynamic constant variable creation in ruby</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Example</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Example</span><span class="o">.</span><span class="n">const_set</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; 200 </span>
+</span><span class='line'>
+</span><span class='line'><span class="ss">Example</span><span class="p">:</span><span class="ss">:A</span>
+</span><span class='line'><span class="c1">#=&gt; 200</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
 </div>
 
 

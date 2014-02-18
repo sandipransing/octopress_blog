@@ -9,7 +9,8 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="ActiveRecord find with join options retrieves object as readonlystation = Station.find( :first, :joins => :call, :conditions => ["customer_id = ? &hellip;">
+  <meta name="description" content="ActiveRecord find with join options retrieves object as readonly 1
+station = Station.find( :first, :joins =&gt; :call, :conditions =&gt; [" &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -106,8 +107,29 @@
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-<b>ActiveRecord find with join options retrieves object as readonly</b><br/><pre class=ruby>station = Station.find( :first, :joins => :call, :conditions => ["customer_id = ? and date(insurance_expiry_date) = ?", customer.id, insurance_expiry_date ] ) </pre><br/> Readonly object cannot modified and hence below line raises &#8220;ActiveRecord::ReadOnlyRecord&#8221; error. <br/><pre class=ruby>station.update_attributes({ :customer_id => 12 }) </pre><br/>If you have to write on read only object then you can pass following option to find query<br/><pre class=ruby>:readonly => false </pre><br/>Now below find is permitted to do write on fetched object records. <br/><pre class=ruby>station = Station.find( :first, :joins => :call, :conditions => ["customer_id = ? and date(insurance_expiry_date) = ?", customer.id, insurance_expiry_date ], :readonly => false ) </pre></div>
+  <div class="entry-content"><h4>ActiveRecord find with join options retrieves object as readonly</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>station = Station.find( :first, :joins =&gt; :call, :conditions =&gt; ["customer_id = ? and date(insurance_expiry_date) = ?", customer.id, insurance_expiry_date ] )</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Readonly object cannot modified and hence below line raises &ldquo;ActiveRecord::ReadOnlyRecord&rdquo; error.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>station.update_attributes({ :customer_id =&gt; 12 })</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you have to write on read only object then you can pass following option to find query</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>:readonly =&gt; false</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now below find is permitted to do write on fetched object records.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>station = Station.find( :first, :joins =&gt; :call, :conditions =&gt; ["customer_id = ? and date(insurance_expiry_date) = ?", customer.id, insurance_expiry_date ], :readonly =&gt; false )</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   
@@ -143,8 +165,11 @@
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-<div style="text-align: left;"><b>Change Mysql password  </b><span class="Apple-style-span" style="color: #111111; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 14px; line-height: 22px;"></span></div><div style="text-align: left;"><br /></div><span class="Apple-style-span" style="color: #111111; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 14px; line-height: 22px;"></span><br /><span class="Apple-style-span" style="color: #111111; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 14px; line-height: 22px;"><pre style="background-attachment: initial; background-clip: initial; background-color: #eeeeee; background-image: initial; background-origin: initial; background-position: initial initial; background-repeat: initial initial; border-bottom-color: rgb(221, 221, 221); border-bottom-style: none; border-bottom-width: 1px; border-color: initial; border-left-color: rgb(221, 221, 221); border-left-style: none; border-left-width: 1px; border-right-color: rgb(221, 221, 221); border-right-style: none; border-right-width: 1px; border-top-color: rgb(221, 221, 221); border-top-style: none; border-top-width: 1px; border-width: initial; clear: both; font-family: Consolas, 'Andale Mono', Courier, 'Courier New'; font-size: 0.929em; line-height: 1.385em; margin-bottom: 1.692em; margin-left: 0px; margin-right: 0px; margin-top: 0px; overflow-x: auto; overflow-y: auto; padding-bottom: 0.615em; padding-left: 0.846em; padding-right: 0.846em; padding-top: 0.615em;"> mysqladmin -u root -p'oldpassword' password newpass</pre></span></div>
+  <div class="entry-content"><h2>Changing Mysql password</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mysqladmin -u root -p'oldpassword' password newpass</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   
@@ -180,8 +205,7 @@
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-Check out this SlideShare Presentation: <div style="width:425px;text-align:left" id="__ss_881934"><a style="font:14px Helvetica,Arial,Sans-serif;display:block;margin:12px 0 3px 0;text-decoration:underline;" href="http://www.slideshare.net/justingrammens/rumvoip" title="Adhearsion and Telegraph Framework Presentation">Adhearsion and Telegraph Framework Presentation</a><object style="margin:0px" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=rumvoip-123073798056-phpapp01&stripped_title=rumvoip" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=rumvoip-123073798056-phpapp01&stripped_title=rumvoip" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="font-size:11px;font-family:tahoma,arial;height:26px;padding-top:2px;">View more <a style="text-decoration:underline;" href="http://www.slideshare.net/">presentations</a> from <a style="text-decoration:underline;" href="http://www.slideshare.net/justingrammens">Justin Grammens</a>.</div></div></div>
+  <div class="entry-content"><p>Check out this SlideShare Presentation: <div style="width:825px;text-align:left" id="__ss_881934"><a style="font:14px Helvetica,Arial,Sans-serif;display:block;margin:12px 0 3px 0;text-decoration:underline;" href="http://www.slideshare.net/justingrammens/rumvoip" title="Adhearsion and Telegraph Framework Presentation">Adhearsion and Telegraph Framework Presentation</a><object style="margin:0px" width="825" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=rumvoip-123073798056-phpapp01&stripped_title=rumvoip" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=rumvoip-123073798056-phpapp01&stripped_title=rumvoip" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="825" height="355"></embed></object><div style="font-size:11px;font-family:tahoma,arial;height:26px;padding-top:2px;">View more <a style="text-decoration:underline;" href="http://www.slideshare.net/">presentations</a> from <a style="text-decoration:underline;" href="http://www.slideshare.net/justingrammens">Justin Grammens</a>.</div></div></p>
 </div>
   
   
@@ -217,8 +241,37 @@ Check out this SlideShare Presentation: <div style="width:425px;text-align:left"
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-Delayed job variables initialization written on at collectiveidea / delayed_job doesn&#8217;t work.<br/><pre class=ruby> # config/initializers/delayed_job_config.rb  Delayed::Worker.destroy_failed_jobs = false  Delayed::Worker.sleep_delay = 60  Delayed::Worker.max_attempts = 3  Delayed::Worker.max_run_time = 5.minutes </pre><br/>Here is the correct way of doing it as mentioned on tobi / delayed_job <br/><pre class=ruby> # config/initializers/delayed_job_config.rb  Delayed::Job.destroy_failed_jobs = false  silence_warnings do    Delayed::Job.const_set("MAX_ATTEMPTS", 3)    Delayed::Job.const_set("MAX_RUN_TIME", 5.minutes)  end </pre></div>
+  <div class="entry-content"><p>Delayed job variables initialization written on at collectiveidea / delayed_job doesn&rsquo;t work.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># config/initializers/delayed_job_config.rb</span>
+</span><span class='line'><span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Worker</span><span class="o">.</span><span class="n">destroy_failed_jobs</span> <span class="o">=</span> <span class="kp">false</span>
+</span><span class='line'><span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Worker</span><span class="o">.</span><span class="n">sleep_delay</span> <span class="o">=</span> <span class="mi">60</span>
+</span><span class='line'><span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Worker</span><span class="o">.</span><span class="n">max_attempts</span> <span class="o">=</span> <span class="mi">3</span>
+</span><span class='line'><span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Worker</span><span class="o">.</span><span class="n">max_run_time</span> <span class="o">=</span> <span class="mi">5</span><span class="o">.</span><span class="n">minutes</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here is the correct way of doing it as mentioned on tobi / delayed_job</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># config/initializers/delayed_job_config.rb</span>
+</span><span class='line'><span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Job</span><span class="o">.</span><span class="n">destroy_failed_jobs</span> <span class="o">=</span> <span class="kp">false</span>
+</span><span class='line'><span class="n">silence_warnings</span> <span class="k">do</span>
+</span><span class='line'>  <span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Job</span><span class="o">.</span><span class="n">const_set</span><span class="p">(</span><span class="s2">&quot;MAX_ATTEMPTS&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</span><span class='line'>  <span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Job</span><span class="o">.</span><span class="n">const_set</span><span class="p">(</span><span class="s2">&quot;MAX_RUN_TIME&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="o">.</span><span class="n">minutes</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   
@@ -254,8 +307,24 @@ Delayed job variables initialization written on at collectiveidea / delayed_job 
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-<div style="text-align: left;">It might be the case that earlier wireless was working and then it stopped working<br />Follow the simple steps here&#8230;.<br /></div>1. Restart networking <br /><pre class="ruby" name="code">sudo /etc/init.d/networking restart<br /></pre>2. Disable the &#8221;<b>Support for Atheros 802.11 wireless LAN cards</b>&#8221; on system/administration/Hardware Drivers, and reboot your box.<br />3. Restart  <br /><pre class="ruby" name="code">sudo reboot<br /></pre><br />That&#8217;s it, Cheers!  Still having problem follow the instructions <a href="http://www.funonrails.com/2009/10/getting-wireless-working-on-ubuntu.html">here</a><br /></div>
+  <div class="entry-content"><p>It might be the case that earlier wireless was working and then it stopped working</p>
+
+<p>Follow the simple steps here&hellip;.</p>
+
+<p><strong>1. Restart networking</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo /etc/init.d/networking restart</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>2. Disable the <em>&ldquo;Support for Atheros 802.11 wireless LAN cards&rdquo;</em> on <code>system/administration/Hardware Drivers</code>, and reboot your box</strong>
+<strong>3. Restart</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo reboot</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&rsquo;s it, Cheers! Still having problem follow the instructions <a href="http://www.funonrails.com/2009/10/getting-wireless-working-on-ubuntu.html">here</a></p>
 </div>
   
   

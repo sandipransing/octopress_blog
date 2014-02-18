@@ -4,7 +4,7 @@
   <title><![CDATA[Category: general | Fun On Rails]]></title>
   <link href="funonrails.com/categories/general/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-18T19:37:56+05:30</updated>
+  <updated>2014-02-19T01:29:46+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -92,23 +92,23 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Copy database to another database through command]]></title>
-    <link href="funonrails.com/2010/02/copy-database-to-another-database/"/>
-    <updated>2010-02-16T16:53:00+05:30</updated>
-    <id>funonrails.com/2010/02/copy-database-to-another-database</id>
-    <content type="html"><![CDATA[<div class='post'>
-<b>1. Copy One database to another database on same host </b><br/><pre class=ruby> mysqldump -uroot -p <source_database_name> | mysql -uroot <dest_database_name></pre> <b>2. Copy database to another database on remote host</b><br/><pre class=ruby> mysqldump -uroot -p <source_database> | ssh host2 "mysql -uroot <dest_database>" </pre></div>
-
-]]></content>
-  </entry>
-  
-  <entry>
     <title type="html"><![CDATA[Flash games]]></title>
     <link href="funonrails.com/2009/11/3rd-worm-game/"/>
     <updated>2009-11-24T17:59:00+05:30</updated>
     <id>funonrails.com/2009/11/3rd-worm-game</id>
     <content type="html"><![CDATA[<div class='post'>
 <div style="text-align: left;"><b>3rd worm game</b>----------------------  <embed align="center" allowscriptaccess="never" height="400" pluginspage="http://www.macromedia.com/go/getflashplayer" quality="high" src="http://www.layoutshack.net/games/puzzle/1.swf" width="600"></embed><br /></div><div style="text-align: center;"><a href="http://www.layoutshack.net/games/puzzle/" target="_blank">Flash Puzzle Games</a><br /></div><div style="text-align: left;">&nbsp; <b>Racing Game</b>----------------------<br /></div><div style="text-align: center;">&nbsp;  <embed align="center" allowscriptaccess="never" height="400" pluginspage="http://www.macromedia.com/go/getflashplayer" quality="high" src="http://www.layoutshack.net/games/racing/2.swf" width="600"></embed><br /></div><div style="text-align: center;"><a href="http://www.layoutshack.net/games/racing/" target="_blank">Flash Racing Games</a><br /></div></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Gravity Master Game Challenge]]></title>
+    <link href="funonrails.com/2009/11/gravity-master-game/"/>
+    <updated>2009-11-24T17:50:00+05:30</updated>
+    <id>funonrails.com/2009/11/gravity-master-game</id>
+    <content type="html"><![CDATA[<div class='post'>
+<div style="text-align: left;">Collect all rotating circles with the black ball. You can move the ball by drawing shapes with mouse and using physics. The ways of completing a level is only limited by your imagination and line limit. Complete 15 levels to unlock level editor. I recommend to lower your mouse sesitivity. P.S. This is the first game I ever made <br /></div><embed height="600" menu="false" pluginspage="http://www.macromedia.com/go/getflashplayer" quality="high" src="http://games.mochiads.com/c/g/gravity-master/Gravity Master.swf" type="application/x-shockwave-flash" width="600"></embed><br /></div>
 
 ]]></content>
   </entry>

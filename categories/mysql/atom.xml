@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mysql | Fun On Rails]]></title>
   <link href="funonrails.com/categories/mysql/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-18T19:37:56+05:30</updated>
+  <updated>2014-02-19T01:29:46+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -45,9 +45,17 @@ from <a href="http://www.slideshare.net/ronaldbradford">Ronald Bradford</a>.
     <link href="funonrails.com/2010/02/copy-database-to-another-database/"/>
     <updated>2010-02-16T16:53:00+05:30</updated>
     <id>funonrails.com/2010/02/copy-database-to-another-database</id>
-    <content type="html"><![CDATA[<div class='post'>
-<b>1. Copy One database to another database on same host </b><br/><pre class=ruby> mysqldump -uroot -p <source_database_name> | mysql -uroot <dest_database_name></pre> <b>2. Copy database to another database on remote host</b><br/><pre class=ruby> mysqldump -uroot -p <source_database> | ssh host2 "mysql -uroot <dest_database>" </pre></div>
+    <content type="html"><![CDATA[<h2>1. Copy One database to another database on same host</h2>
 
+<p><code>
+mysqldump -uroot -p  | mysql -uroot
+</code></p>
+
+<h2>2. Copy database to another database on remote host</h2>
+
+<p><code>
+mysqldump -uroot -p  | ssh host2 "mysql -uroot"
+</code></p>
 ]]></content>
   </entry>
   
@@ -56,9 +64,11 @@ from <a href="http://www.slideshare.net/ronaldbradford">Ronald Bradford</a>.
     <link href="funonrails.com/2010/02/mysql-cheatsheet/"/>
     <updated>2010-02-04T17:29:00+05:30</updated>
     <id>funonrails.com/2010/02/mysql-cheatsheet</id>
-    <content type="html"><![CDATA[<div class='post'>
-<div style="text-align: left;"><b>Change Mysql password  </b><span class="Apple-style-span" style="color: #111111; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 14px; line-height: 22px;"></span></div><div style="text-align: left;"><br /></div><span class="Apple-style-span" style="color: #111111; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 14px; line-height: 22px;"></span><br /><span class="Apple-style-span" style="color: #111111; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 14px; line-height: 22px;"><pre style="background-attachment: initial; background-clip: initial; background-color: #eeeeee; background-image: initial; background-origin: initial; background-position: initial initial; background-repeat: initial initial; border-bottom-color: rgb(221, 221, 221); border-bottom-style: none; border-bottom-width: 1px; border-color: initial; border-left-color: rgb(221, 221, 221); border-left-style: none; border-left-width: 1px; border-right-color: rgb(221, 221, 221); border-right-style: none; border-right-width: 1px; border-top-color: rgb(221, 221, 221); border-top-style: none; border-top-width: 1px; border-width: initial; clear: both; font-family: Consolas, 'Andale Mono', Courier, 'Courier New'; font-size: 0.929em; line-height: 1.385em; margin-bottom: 1.692em; margin-left: 0px; margin-right: 0px; margin-top: 0px; overflow-x: auto; overflow-y: auto; padding-bottom: 0.615em; padding-left: 0.846em; padding-right: 0.846em; padding-top: 0.615em;"> mysqladmin -u root -p'oldpassword' password newpass</pre></span></div>
+    <content type="html"><![CDATA[<h2>Changing Mysql password</h2>
 
+<p><code>
+mysqladmin -u root -p'oldpassword' password newpass
+</code></p>
 ]]></content>
   </entry>
   

@@ -9,7 +9,8 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="1. Copy One database to another database on same host mysqldump -uroot -p | mysql -uroot 2. Copy database to another database on remote host &hellip;">
+  <meta name="description" content="1. Copy One database to another database on same host 1
+mysqldump -uroot -p | mysql -uroot 2. Copy database to another database on remote host 1 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -106,8 +107,17 @@
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-<b>1. Copy One database to another database on same host </b><br/><pre class=ruby> mysqldump -uroot -p <source_database_name> | mysql -uroot <dest_database_name></pre> <b>2. Copy database to another database on remote host</b><br/><pre class=ruby> mysqldump -uroot -p <source_database> | ssh host2 "mysql -uroot <dest_database>" </pre></div>
+  <div class="entry-content"><h2>1. Copy One database to another database on same host</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mysqldump -uroot -p  | mysql -uroot</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>2. Copy database to another database on remote host</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mysqldump -uroot -p  | ssh host2 "mysql -uroot"</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   
@@ -143,8 +153,74 @@
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-<div style="text-align: left;">1. To create local variables in ruby dynamically.</div><div style="text-align: left;">Use eval method in ruby</div><br /><div style="text-align: left;">ree-1.8.7-2010.01 &gt; eval(&#8220;local=4&#8221;)</div><div style="text-align: left;">&nbsp;=&gt; 4&nbsp;</div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; p local</div><div style="text-align: left;">4</div><div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; eval(&#8220;local_#{1}=4&#8221;)</div><div style="text-align: left;">&nbsp;=&gt; 4&nbsp;</div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; puts local_1</div><div style="text-align: left;">4</div><div style="text-align: left;"><br /></div><div style="text-align: left;">2. To create &amp; get instance variables dynamically in ruby.</div><div style="text-align: left;">instance_varaiable_set &amp;&nbsp;instance_varaiable_get methods are provided and no need to do it using eval.</div><div style="text-align: left;"><br /></div><div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; (0..3).each do |i|</div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; &nbsp; &nbsp; instance_variable_set(&#8220;@instance_#{i}&#8221;, i*i+1)</div><div style="text-align: left;">ree-1.8.7-2010.01 ?&gt; &nbsp;end</div><div style="text-align: left;">&nbsp;=&gt; 0..3&nbsp;</div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; @instance_0</div><div style="text-align: left;">&nbsp;=&gt; 1&nbsp;</div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; @instance_2</div><div style="text-align: left;">&nbsp;=&gt; 5&nbsp;</div><div style="text-align: left;"><br /></div><div style="text-align: left;">3. Dynamic constant variable creation in ruby</div><div style="text-align: left;"><br /></div><div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; class Example</div><div style="text-align: left;">ree-1.8.7-2010.01 ?&gt; &nbsp;end</div><div style="text-align: left;">&nbsp;=&gt; nil&nbsp;</div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; Example.const_set(&#8216;A&#8217;,200)</div><div style="text-align: left;">&nbsp;=&gt; 200&nbsp;</div><div style="text-align: left;">ree-1.8.7-2010.01 &gt; Example::A</div><div style="text-align: left;">&nbsp;=&gt; 200&nbsp;</div><div style="text-align: left;"><br /></div></div></div></div></div>
+  <div class="entry-content"><h2>1. To create local variables in ruby dynamically</h2>
+
+<p>Using eval method in ruby</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">eval</span><span class="p">(</span><span class="s2">&quot;local=4&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; 4 </span>
+</span><span class='line'><span class="nb">p</span> <span class="n">local</span>
+</span><span class='line'><span class="c1">#=&gt; 4</span>
+</span><span class='line'><span class="nb">eval</span><span class="p">(</span><span class="s2">&quot;local_</span><span class="si">#{</span><span class="mi">1</span><span class="si">}</span><span class="s2">=4&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; 4 </span>
+</span><span class='line'><span class="nb">puts</span> <span class="n">local_1</span>
+</span><span class='line'><span class="c1">#=&gt; 4</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>2. To create &amp; get instance variables dynamically in ruby</h2>
+
+<p><code>instance_varaiable_set</code> &amp; <code>instance_varaiable_get</code> methods are provided and no need to do it using eval</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="n">.</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
+</span><span class='line'>  <span class="nb">instance_variable_set</span><span class="p">(</span><span class="s2">&quot;@instance_</span><span class="si">#{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="o">*</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="c1">#=&gt; 0..3 </span>
+</span><span class='line'><span class="vi">@instance_0</span>
+</span><span class='line'><span class="c1">#=&gt; 1 </span>
+</span><span class='line'><span class="vi">@instance_2</span>
+</span><span class='line'><span class="c1">#=&gt; 5 </span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>3. Dynamic constant variable creation in ruby</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Example</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Example</span><span class="o">.</span><span class="n">const_set</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; 200 </span>
+</span><span class='line'>
+</span><span class='line'><span class="ss">Example</span><span class="p">:</span><span class="ss">:A</span>
+</span><span class='line'><span class="c1">#=&gt; 200</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
 </div>
   
   
@@ -180,8 +256,26 @@
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-Eval method in ruby executes string/expression passed as parameter. <br/> <b>Example:</b><br/><pre class=ruby>irb > eval("5+3")  => 8   irb > eval("a=5")  => 5   irb > eval("b||=a")  => 5   </pre><br/>Its part of ruby meta-programming and not recommended approach unless there is no any alternative to do.</div>
+  <div class="entry-content"><p>Eval method in ruby executes string/expression passed as parameter.</p>
+
+<p>Example:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">eval</span><span class="p">(</span><span class="s2">&quot;5+3&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; 8   </span>
+</span><span class='line'><span class="nb">eval</span><span class="p">(</span><span class="s2">&quot;a=5&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; 5   </span>
+</span><span class='line'><span class="nb">eval</span><span class="p">(</span><span class="s2">&quot;b||=a&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; 5   </span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Its part of ruby meta-programming and not recommended approach unless there is no any alternative to do.</p>
 </div>
   
   
@@ -217,8 +311,88 @@ Eval method in ruby executes string/expression passed as parameter. <br/> <b>Exa
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-Example of polymorphic association using has_many, through, source. <br/> Here post is polymorphic resource which belongs to the author [can be student, teacher]<br/><pre class=ruby># app/models/student.rb class Student < ActiveRecord::Base    has_many :posts, :as => author end  # app/models/teacher.rb class Teacher < ActiveRecord::Base    has_many :posts, :as => author end  # app/models/post.rb class Post < ActiveRecord::Base    belongs to :author, :polymorphic => true end </pre><br/>Has_many through association on polymorphic models <br/><pre class=ruby># app/models/student.rb class Student < ActiveRecord::Base    belongs_to :division   has_many :posts, :as => author end  # app/models/division.rb class Division < ActiveRecord::Base    has_many :students   has_many :student_posts, :through => :students, :source => :posts end </pre><b> Examples </b><br/><pre class=ruby>ruby script/console div = Division.first div.student_posts </pre></div>
+  <div class="entry-content"><p>Example of polymorphic association using has_many, through, source</p>
+
+<p>Here post is polymorphic resource which belongs to the author [can be student, teacher]</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/models/student.rb</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Student</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:posts</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="n">author</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># app/models/teacher.rb</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Teacher</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:posts</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="n">author</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># app/models/post.rb</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">belongs</span> <span class="n">to</span> <span class="ss">:author</span><span class="p">,</span> <span class="ss">:polymorphic</span> <span class="o">=&gt;</span> <span class="kp">true</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Has_many through association on polymorphic models</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/models/student.rb</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Student</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">beloyngs_to</span> <span class="ss">:division</span>
+</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:posts</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="n">author</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># app/models/division.rb</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Division</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:students</span>
+</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:student_posts</span><span class="p">,</span> <span class="ss">:through</span> <span class="o">=&gt;</span> <span class="ss">:students</span><span class="p">,</span> <span class="ss">:source</span> <span class="o">=&gt;</span> <span class="ss">:posts</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Examples</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">ruby</span> <span class="n">script</span><span class="o">/</span><span class="n">console</span>
+</span><span class='line'><span class="n">div</span> <span class="o">=</span> <span class="no">Division</span><span class="o">.</span><span class="n">first</span>
+</span><span class='line'><span class="n">div</span><span class="o">.</span><span class="n">student_posts</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   
@@ -254,8 +428,137 @@ Example of polymorphic association using has_many, through, source. <br/> Here p
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-<br />#user &nbsp;nobody;<br />user www-data;<br />worker_processes &nbsp;2;<br /><br />#error_log &nbsp;logs/error.log;<br />#error_log &nbsp;logs/error.log &nbsp;notice;<br />#error_log &nbsp;logs/error.log &nbsp;info;<br /><br />#pid &nbsp; &nbsp; &nbsp; &nbsp;logs/nginx.pid;<br /><br />events {<br />&nbsp;&nbsp; &nbsp;worker_connections &nbsp;1024;<br />}<br /><br />http {<br />&nbsp;&nbsp; &nbsp;passenger_root /var/lib/gems/1.8/gems/passenger-2.2.8;<br />&nbsp;&nbsp; &nbsp;passenger_ruby /usr/bin/ruby1.8;<br />&nbsp;&nbsp; &nbsp;passenger_max_pool_size 3;<br /><br />&nbsp;&nbsp; &nbsp;include &nbsp; &nbsp; &nbsp; mime.types;<br /><div><div>default_type &nbsp;application/octet-stream;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp;#log_format &nbsp;main &nbsp;&#8217;$remote_addr - $remote_user [$time_local] &#8220;$request&#8221; &#8217;</div><div>&nbsp;&nbsp; &nbsp;# &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&#8217;$status $body_bytes_sent &#8220;$http_referer&#8221; &#8217;</div><div>&nbsp;&nbsp; &nbsp;# &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&#8217;&#8221;$http_user_agent&#8221; &#8220;$http_x_forwarded_for&#8221;&#8217;;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp;#access_log &nbsp;logs/access.log &nbsp;main;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp;sendfile &nbsp; &nbsp; &nbsp; &nbsp;on;</div><div>&nbsp;&nbsp; &nbsp;#tcp_nopush &nbsp; &nbsp; on;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp;#keepalive_timeout &nbsp;0;</div><div>&nbsp;&nbsp; &nbsp;keepalive_timeout &nbsp;65;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp;#gzip &nbsp;on;</div><div><div>&nbsp;server {</div><div>&nbsp;&nbsp; &nbsp; listen 80;</div><div>&nbsp;&nbsp; &nbsp; server_name localhost;</div><div>&nbsp;&nbsp; &nbsp; root /home/josh/current/public; &nbsp; # &lt;&#8212; be sure to point to &#8216;public&#8217;!</div><div>&nbsp;&nbsp; &nbsp; passenger_enabled on;</div><div>&nbsp;&nbsp; &nbsp; passenger_use_global_queue on;</div><div>&nbsp;&nbsp; }</div><div><br /></div><div>&nbsp;&nbsp; &nbsp;server {</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;listen &nbsp; &nbsp; &nbsp; 80;</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;server_name &nbsp;localhost;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;#charset koi8-r;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;#access_log &nbsp;logs/host.access.log &nbsp;main;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;location / {</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;root &nbsp; html;</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;index &nbsp;index.html index.htm;</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;}</div><div><div>&nbsp;&nbsp; &nbsp; #error_page &nbsp;404 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/404.html;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;# redirect server error pages to the static page /50x.html</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;#</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;error_page &nbsp; 500 502 503 504 &nbsp;/50x.html;</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;location = /50x.html {</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;root &nbsp; html;</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;}</div><div><div>&nbsp;&nbsp; }</div><div>}</div></div></div></div></div></div>
+  <div class="entry-content"><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#user  nobody;
+</span><span class='line'>user www-data;
+</span><span class='line'>worker_processes  2;
+</span><span class='line'>
+</span><span class='line'>#error_log  logs/error.log;
+</span><span class='line'>#error_log  logs/error.log  notice;
+</span><span class='line'>#error_log  logs/error.log  info;
+</span><span class='line'>
+</span><span class='line'>#pid        logs/nginx.pid;
+</span><span class='line'>
+</span><span class='line'>events {
+</span><span class='line'>    worker_connections  1024;
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>http {
+</span><span class='line'>    passenger_root /var/lib/gems/1.8/gems/passenger-2.2.8;
+</span><span class='line'>    passenger_ruby /usr/bin/ruby1.8;
+</span><span class='line'>    passenger_max_pool_size 3;
+</span><span class='line'>
+</span><span class='line'>    include       mime.types;
+</span><span class='line'>default_type  application/octet-stream;
+</span><span class='line'>
+</span><span class='line'>    #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+</span><span class='line'>    #                  '$status $body_bytes_sent "$http_referer" '
+</span><span class='line'>    #                  '"$http_user_agent" "$http_x_forwarded_for"';
+</span><span class='line'>
+</span><span class='line'>    #access_log  logs/access.log  main;
+</span><span class='line'>
+</span><span class='line'>    sendfile        on;
+</span><span class='line'>    #tcp_nopush     on;
+</span><span class='line'>
+</span><span class='line'>    #keepalive_timeout  0;
+</span><span class='line'>    keepalive_timeout  65;
+</span><span class='line'>
+</span><span class='line'>    #gzip  on;
+</span><span class='line'> server {
+</span><span class='line'>     listen 80;
+</span><span class='line'>     server_name localhost;
+</span><span class='line'>
+</span><span class='line'>     root /home/josh/current/public;   # &lt;--- be sure to point to 'public'!
+</span><span class='line'>     passenger_enabled on;
+</span><span class='line'>     passenger_use_global_queue on;
+</span><span class='line'>   }
+</span><span class='line'>
+</span><span class='line'>    server {
+</span><span class='line'>        listen       80;
+</span><span class='line'>        server_name  localhost;
+</span><span class='line'>
+</span><span class='line'>        #charset koi8-r;
+</span><span class='line'>        #access_log  logs/host.access.log  main;
+</span><span class='line'>        
+</span><span class='line'>        location / {
+</span><span class='line'>            root   html;
+</span><span class='line'>            index  index.html index.htm;
+</span><span class='line'>        }
+</span><span class='line'>     #error_page  404              /404.html;
+</span><span class='line'>
+</span><span class='line'>        # redirect server error pages to the static page /50x.html
+</span><span class='line'>        #
+</span><span class='line'>        error_page   500 502 503 504  /50x.html;
+</span><span class='line'>        location = /50x.html {
+</span><span class='line'>            root   html;
+</span><span class='line'>        }
+</span><span class='line'>   }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   

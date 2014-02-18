@@ -9,7 +9,12 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Delayed job variables initialization written on at collectiveidea / delayed_job doesn&#8217;t work. # config/initializers/delayed_job_config.rb &hellip;">
+  <meta name="description" content="Delayed job variables initialization written on at collectiveidea / delayed_job doesn&rsquo;t work. 1
+2
+3
+4
+5
+# config/initializers/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -103,8 +108,37 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-Delayed job variables initialization written on at collectiveidea / delayed_job doesn&#8217;t work.<br/><pre class=ruby> # config/initializers/delayed_job_config.rb  Delayed::Worker.destroy_failed_jobs = false  Delayed::Worker.sleep_delay = 60  Delayed::Worker.max_attempts = 3  Delayed::Worker.max_run_time = 5.minutes </pre><br/>Here is the correct way of doing it as mentioned on tobi / delayed_job <br/><pre class=ruby> # config/initializers/delayed_job_config.rb  Delayed::Job.destroy_failed_jobs = false  silence_warnings do    Delayed::Job.const_set("MAX_ATTEMPTS", 3)    Delayed::Job.const_set("MAX_RUN_TIME", 5.minutes)  end </pre></div>
+<div class="entry-content"><p>Delayed job variables initialization written on at collectiveidea / delayed_job doesn&rsquo;t work.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># config/initializers/delayed_job_config.rb</span>
+</span><span class='line'><span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Worker</span><span class="o">.</span><span class="n">destroy_failed_jobs</span> <span class="o">=</span> <span class="kp">false</span>
+</span><span class='line'><span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Worker</span><span class="o">.</span><span class="n">sleep_delay</span> <span class="o">=</span> <span class="mi">60</span>
+</span><span class='line'><span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Worker</span><span class="o">.</span><span class="n">max_attempts</span> <span class="o">=</span> <span class="mi">3</span>
+</span><span class='line'><span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Worker</span><span class="o">.</span><span class="n">max_run_time</span> <span class="o">=</span> <span class="mi">5</span><span class="o">.</span><span class="n">minutes</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here is the correct way of doing it as mentioned on tobi / delayed_job</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># config/initializers/delayed_job_config.rb</span>
+</span><span class='line'><span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Job</span><span class="o">.</span><span class="n">destroy_failed_jobs</span> <span class="o">=</span> <span class="kp">false</span>
+</span><span class='line'><span class="n">silence_warnings</span> <span class="k">do</span>
+</span><span class='line'>  <span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Job</span><span class="o">.</span><span class="n">const_set</span><span class="p">(</span><span class="s2">&quot;MAX_ATTEMPTS&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</span><span class='line'>  <span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Job</span><span class="o">.</span><span class="n">const_set</span><span class="p">(</span><span class="s2">&quot;MAX_RUN_TIME&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="o">.</span><span class="n">minutes</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: wireless | Fun On Rails]]></title>
   <link href="funonrails.com/categories/wireless/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-18T19:37:56+05:30</updated>
+  <updated>2014-02-19T01:29:46+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -18,9 +18,20 @@
     <link href="funonrails.com/2009/12/getting-wired-and-wireless-working-on/"/>
     <updated>2009-12-14T15:39:00+05:30</updated>
     <id>funonrails.com/2009/12/getting-wired-and-wireless-working-on</id>
-    <content type="html"><![CDATA[<div class='post'>
-<div style="text-align: left;">It might be the case that earlier wireless was working and then it stopped working<br />Follow the simple steps here....<br /></div>1. Restart networking <br /><pre class="ruby" name="code">sudo /etc/init.d/networking restart<br /></pre>2. Disable the "<b>Support for Atheros 802.11 wireless LAN cards</b>" on system/administration/Hardware Drivers, and reboot your box.<br />3. Restart  <br /><pre class="ruby" name="code">sudo reboot<br /></pre><br />That's it, Cheers!  Still having problem follow the instructions <a href="http://www.funonrails.com/2009/10/getting-wireless-working-on-ubuntu.html">here</a><br /></div>
+    <content type="html"><![CDATA[<p>It might be the case that earlier wireless was working and then it stopped working</p>
 
+<p>Follow the simple steps here&hellip;.</p>
+
+<p><strong>1. Restart networking</strong>
+<code>
+sudo /etc/init.d/networking restart
+</code>
+<strong>2. Disable the <em>&ldquo;Support for Atheros 802.11 wireless LAN cards&rdquo;</em> on <code>system/administration/Hardware Drivers</code>, and reboot your box</strong>
+<strong>3. Restart</strong>
+<code>
+sudo reboot
+</code>
+That&rsquo;s it, Cheers! Still having problem follow the instructions <a href="http://www.funonrails.com/2009/10/getting-wireless-working-on-ubuntu.html">here</a></p>
 ]]></content>
   </entry>
   

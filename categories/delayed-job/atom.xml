@@ -4,7 +4,7 @@
   <title><![CDATA[Category: delayed-job | Fun On Rails]]></title>
   <link href="funonrails.com/categories/delayed-job/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-18T19:37:56+05:30</updated>
+  <updated>2014-02-19T01:29:46+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -231,9 +231,27 @@ RAILS_ENV=production script/delayed_job status
     <link href="funonrails.com/2010/01/delayed-job-changing-job-parameters-in/"/>
     <updated>2010-01-13T19:59:00+05:30</updated>
     <id>funonrails.com/2010/01/delayed-job-changing-job-parameters-in</id>
-    <content type="html"><![CDATA[<div class='post'>
-Delayed job variables initialization written on at collectiveidea / delayed_job doesn't work.<br/><pre class=ruby> # config/initializers/delayed_job_config.rb  Delayed::Worker.destroy_failed_jobs = false  Delayed::Worker.sleep_delay = 60  Delayed::Worker.max_attempts = 3  Delayed::Worker.max_run_time = 5.minutes </pre><br/>Here is the correct way of doing it as mentioned on tobi / delayed_job <br/><pre class=ruby> # config/initializers/delayed_job_config.rb  Delayed::Job.destroy_failed_jobs = false  silence_warnings do    Delayed::Job.const_set("MAX_ATTEMPTS", 3)    Delayed::Job.const_set("MAX_RUN_TIME", 5.minutes)  end </pre></div>
+    <content type="html"><![CDATA[<p>Delayed job variables initialization written on at collectiveidea / delayed_job doesn&rsquo;t work.
+```ruby</p>
 
+<h1>config/initializers/delayed_job_config.rb</h1>
+
+<p>Delayed::Worker.destroy_failed_jobs = false
+Delayed::Worker.sleep_delay = 60
+Delayed::Worker.max_attempts = 3
+Delayed::Worker.max_run_time = 5.minutes
+<code>
+Here is the correct way of doing it as mentioned on tobi / delayed_job
+</code>ruby</p>
+
+<h1>config/initializers/delayed_job_config.rb</h1>
+
+<p>Delayed::Job.destroy_failed_jobs = false
+silence_warnings do
+  Delayed::Job.const_set(&ldquo;MAX_ATTEMPTS&rdquo;, 3)
+  Delayed::Job.const_set(&ldquo;MAX_RUN_TIME&rdquo;, 5.minutes)
+end
+```</p>
 ]]></content>
   </entry>
   

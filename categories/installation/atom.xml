@@ -4,7 +4,7 @@
   <title><![CDATA[Category: installation | Fun On Rails]]></title>
   <link href="funonrails.com/categories/installation/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-18T19:37:56+05:30</updated>
+  <updated>2014-02-19T01:29:46+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -184,23 +184,23 @@ just like wordpress.com site does.</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Getting wired and wireless working on ubuntu 9.0.4]]></title>
-    <link href="funonrails.com/2009/12/getting-wired-and-wireless-working-on/"/>
-    <updated>2009-12-14T15:39:00+05:30</updated>
-    <id>funonrails.com/2009/12/getting-wired-and-wireless-working-on</id>
-    <content type="html"><![CDATA[<div class='post'>
-<div style="text-align: left;">It might be the case that earlier wireless was working and then it stopped working<br />Follow the simple steps here....<br /></div>1. Restart networking <br /><pre class="ruby" name="code">sudo /etc/init.d/networking restart<br /></pre>2. Disable the "<b>Support for Atheros 802.11 wireless LAN cards</b>" on system/administration/Hardware Drivers, and reboot your box.<br />3. Restart  <br /><pre class="ruby" name="code">sudo reboot<br /></pre><br />That's it, Cheers!  Still having problem follow the instructions <a href="http://www.funonrails.com/2009/10/getting-wireless-working-on-ubuntu.html">here</a><br /></div>
-
-]]></content>
-  </entry>
-  
-  <entry>
     <title type="html"><![CDATA[pidgin install and update pidgin messenger on ubuntu interpid]]></title>
     <link href="funonrails.com/2009/11/pidgin-install-and-update-pidgin/"/>
     <updated>2009-11-15T12:57:00+05:30</updated>
     <id>funonrails.com/2009/11/pidgin-install-and-update-pidgin</id>
     <content type="html"><![CDATA[<div class='post'>
 <div><b>Fresh pidgin Installation</b><br /></div><div><pre class="ruby" name="code"> sudo apt-get update<br /> sudo apt-get install pidgin<br /></pre></div><span style="font-family: Arial; font-size: small;"><span style="background-color: white; font-size: 13px;">Earlier versions of pidgin has problem in connecting yahoo messenger which is solved in newer versions.</span></span><br /><span style="font-family: Arial; font-size: small;"><span style="background-color: white; font-size: 13px;">In order to update old version of pidgin, simply follow instructions written below and you are done.</span></span><br /><span style="font-family: Arial; font-size: small;"><span style="background-color: white; font-size: 13px;">New version provides video and voice chat, also buddy icon improvements are added.</span></span><br /><br /><div><b>Add GPG key</b></div> <pre class="ruby" name="code"> sudo apt-get update<br /> sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys A1F196A8<br /></pre><b>Goto System &gt; Administration &gt; Software Sources and select Third-Party  Software tab and click ADD. And Simply Copy-Paste the following Repo </b><br /><pre class="ruby" name="code">deb http://ppa.launchpad.net/pidgin-developers/ppa/ubuntu intrepid main <br />deb-src http://ppa.launchpad.net/pidgin-developers/ppa/ubuntu intrepid main<br /></pre></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Feedzirra installtion on ubuntu interpid]]></title>
+    <link href="funonrails.com/2009/10/feedzirra-installtion-on-ubuntu/"/>
+    <updated>2009-10-12T20:36:00+05:30</updated>
+    <id>funonrails.com/2009/10/feedzirra-installtion-on-ubuntu</id>
+    <content type="html"><![CDATA[<div class='post'>
+Feedzirra is a feed library that is designed to get and update many feeds as quickly as possible. This includes using libcurl-multi through the <a href="http://github.com/taf2/curb/tree/master">taf2-curb</a> gem for faster http gets, and libxml through <a href="http://github.com/tenderlove/nokogiri/tree/master">nokogiri</a> and <a href="http://github.com/pauldix/sax-machine/tree/master">sax-machine</a> for faster parsing.<br/><pre>sudo apt-get install libcurl3 libxml2 libxml2-dev libxslt1-dev<br/><br/><br/><pre>sudo gem install pauldix-feedzirra<br/></pre><br/></pre></div>
 
 ]]></content>
   </entry>

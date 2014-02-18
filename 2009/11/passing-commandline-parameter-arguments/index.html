@@ -9,7 +9,15 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Ruby file accepts from command prompt in the form of array. Passing parameters ruby input.rb TOI DH TimesNewAccessing parameters # input.rb p ARGV &hellip;">
+  <meta name="description" content="Ruby file accepts from command prompt in the form of array Passing parameters 1
+ruby input.rb TOI DH TimesNew Accessing parameters 1
+2
+3
+4
+5
+6
+7
+# &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -103,8 +111,63 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-<div style="text-align: left;">Ruby file accepts from command prompt in the form of array. <br /></div><b>Passing parameters </b><br /><pre class="ruby" name="code">ruby input.rb TOI DH TimesNew<br /></pre><b>Accessing parameters  </b><br /><pre class="ruby" name="code"> # input.rb<br /> p ARGV<br /> # =&gt; ["TOI", "DH", "TimesNew"]<br /> p ARGV[0]<br /> # =&gt; "TOI"<br /> p ARGV[1]<br /> # =&gt; "DH"<br /></pre><b>Optparser</b> : parses commandline options in more effective way using OptParser class. and we can access options as hashed parameters.<br /><br /><b>Passing parameters  </b><br /><pre class="ruby" name="code">ruby input.rb -P"The Times of India" --category"article"<br /></pre><b>Accessing parameters  </b><br /><pre class="ruby" name="code"> <br /> # input.rb<br /> require 'optparser'<br /> <br /> options = ARGV.getopts("P:", 'category')<br /><br /> p options<br /> # =&gt; { 'P' =&gt; 'The Times of India', :category =&gt; 'article' }<br /><br /> p options['P']<br /> # =&gt; "The Times of India"<br /></pre></div>
+<div class="entry-content"><p>Ruby file accepts from command prompt in the form of array</p>
+
+<h2>Passing parameters</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ruby input.rb TOI DH TimesNew</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Accessing parameters</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># input.rb
+</span><span class='line'>p ARGV
+</span><span class='line'># =&gt; ["TOI", "DH", "TimesNew"]
+</span><span class='line'>p ARGV[0]
+</span><span class='line'># =&gt; "TOI"
+</span><span class='line'>p ARGV[1]
+</span><span class='line'># =&gt; "DH"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Optparser : parses commandline options in more effective way using OptParser class. and we can access options as hashed parameters.</p>
+
+<h2>Passing parameters</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ruby input.rb -P"The Times of India" --category"article"</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Accessing parameters</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># vi input.rb
+</span><span class='line'>require 'optparser'
+</span><span class='line'> 
+</span><span class='line'>options = ARGV.getopts("P:", 'category')
+</span><span class='line'>
+</span><span class='line'>p options
+</span><span class='line'># =&gt; { 'P' =&gt; 'The Times of India', :category =&gt; 'article' }
+</span><span class='line'>
+</span><span class='line'>p options['P']
+</span><span class='line'># =&gt; "The Times of India"</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 
