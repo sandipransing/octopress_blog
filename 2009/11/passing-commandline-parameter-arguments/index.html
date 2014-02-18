@@ -121,33 +121,35 @@ ruby input.rb TOI DH TimesNew Accessing parameters 1
 
 <h2>Accessing parameters</h2>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># input.rb
-</span><span class='line'>p ARGV
-</span><span class='line'># =&gt; ["TOI", "DH", "TimesNew"]
-</span><span class='line'>p ARGV[0]
-</span><span class='line'># =&gt; "TOI"
-</span><span class='line'>p ARGV[1]
-</span><span class='line'># =&gt; "DH"</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># input.rb</span>
+</span><span class='line'><span class="nb">p</span> <span class="no">ARGV</span>
+</span><span class='line'><span class="c1"># =&gt; [&quot;TOI&quot;, &quot;DH&quot;, &quot;TimesNew&quot;]</span>
+</span><span class='line'><span class="nb">p</span> <span class="no">ARGV</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span>
+</span><span class='line'><span class="c1"># =&gt; &quot;TOI&quot;</span>
+</span><span class='line'><span class="nb">p</span> <span class="no">ARGV</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span>
+</span><span class='line'><span class="c1"># =&gt; &quot;DH&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Optparser : parses commandline options in more effective way using OptParser class. and we can access options as hashed parameters.</p>
 
 <h2>Passing parameters</h2>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ruby input.rb -P"The Times of India" --category"article"</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">ruby</span> <span class="n">input</span><span class="o">.</span><span class="n">rb</span> <span class="o">-</span><span class="n">P</span><span class="s2">&quot;The Times of India&quot;</span> <span class="o">--</span><span class="n">category</span><span class="s2">&quot;article&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>Accessing parameters</h2>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -157,16 +159,17 @@ ruby input.rb TOI DH TimesNew Accessing parameters 1
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># vi input.rb
-</span><span class='line'>require 'optparser'
-</span><span class='line'> 
-</span><span class='line'>options = ARGV.getopts("P:", 'category')
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># vi input.rb</span>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;optparser&#39;</span>
 </span><span class='line'>
-</span><span class='line'>p options
-</span><span class='line'># =&gt; { 'P' =&gt; 'The Times of India', :category =&gt; 'article' }
+</span><span class='line'><span class="n">options</span> <span class="o">=</span> <span class="no">ARGV</span><span class="o">.</span><span class="n">getopts</span><span class="p">(</span><span class="s2">&quot;P:&quot;</span><span class="p">,</span> <span class="s1">&#39;category&#39;</span><span class="p">)</span>
 </span><span class='line'>
-</span><span class='line'>p options['P']
-</span><span class='line'># =&gt; "The Times of India"</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'><span class="nb">p</span> <span class="n">options</span>
+</span><span class='line'><span class="c1"># =&gt; { &#39;P&#39; =&gt; &#39;The Times of India&#39;, :category =&gt; &#39;article&#39; }</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">p</span> <span class="n">options</span><span class="o">[</span><span class="s1">&#39;P&#39;</span><span class="o">]</span>
+</span><span class='line'><span class="c1"># =&gt; &quot;The Times of India&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
 
 </div>
 
