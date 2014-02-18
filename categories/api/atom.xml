@@ -4,7 +4,7 @@
   <title><![CDATA[Category: api | Fun On Rails]]></title>
   <link href="funonrails.com/categories/api/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-18T01:42:48+05:30</updated>
+  <updated>2014-02-18T19:37:56+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -135,17 +135,6 @@ If you are subscriber of blog and not displaying post correctly. I request you t
 <li>Geokit finders: Find locations in/within/beyond particular radius from specified location using acts_as_mappable plugin</li>
 <li>Customizing authlogic for multiple sessions i.e. using different models for role based authentication.</li>
 </ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Download Rails API to work offline]]></title>
-    <link href="funonrails.com/2010/03/download-rails-api-to-work-offline/"/>
-    <updated>2010-03-23T19:08:00+05:30</updated>
-    <id>funonrails.com/2010/03/download-rails-api-to-work-offline</id>
-    <content type="html"><![CDATA[<div class='post'>
-Command to <a href="http://github.com/sandipransing/rails_api">download/copy</a> rails api to work locally(offline) mode. <pre class='ruby'><br />wget -mk www.api.rubyonrails.org<br /></pre>For more information <a href="http://github.com/sandipransing/rails_api">click</a></div>
 
 ]]></content>
   </entry>

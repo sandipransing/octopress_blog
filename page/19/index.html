@@ -9,7 +9,7 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="1. Ruby http://tryruby.org2. Hpricot http://hpricot.com3. Regular expressions http://rubular.com4. Exceptions http://hoptoadapp.com/5. Application& &hellip;">
+  <meta name="description" content="1. Copy One database to another database on same host mysqldump -uroot -p | mysql -uroot 2. Copy database to another database on remote host &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,43 +77,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/02/online-ruby-programming-useful-website/">Online Ruby Programming Useful Website Links</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-02-16T17:27:00+05:30" pubdate data-updated="true">Feb 16<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-1. <b>Ruby</b> http://tryruby.org<br />2. <b>Hpricot</b> http://hpricot.com<br />3. <b>Regular expressions</b> http://rubular.com<br />4. <b>Exceptions</b> http://hoptoadapp.com/<br />5. <b>Application&nbsp;Performance</b>&nbsp;http://newrelic.com<br />6. <b>Ruby Doc</b>&nbsp;http://www.ruby-doc.org/<br />7. <b>Rails API</b> http://api.rubyonrails.org/<br />8. <b>Ruby gems sources&nbsp;</b>http://rubyforge.org / http://gems.github.com / http://gemcutter.org<br />9. <b>Listing remote gems from source</b>&nbsp;gem list &#8211;remote &#8211;source&nbsp;http://gems.github.com<br />10.&nbsp;<b>List of Rails Plugins&nbsp;<span class="Apple-style-span" style="font-weight: normal;"><b><span class="Apple-style-span" style="font-weight: normal;">http://wiki.rubyonrails.org/rails/pages/Plugins</span></b></span></b><br /><b><span class="Apple-style-span" style="font-weight: normal;">http://www.agilewebdevelopment.com/plugins</span></b></div>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -256,6 +219,43 @@ Eval method in ruby executes string/expression passed as parameter. <br/> <b>Exa
 
   <div class="entry-content"><div class='post'>
 Example of polymorphic association using has_many, through, source. <br/> Here post is polymorphic resource which belongs to the author [can be student, teacher]<br/><pre class=ruby># app/models/student.rb class Student < ActiveRecord::Base    has_many :posts, :as => author end  # app/models/teacher.rb class Teacher < ActiveRecord::Base    has_many :posts, :as => author end  # app/models/post.rb class Post < ActiveRecord::Base    belongs to :author, :polymorphic => true end </pre><br/>Has_many through association on polymorphic models <br/><pre class=ruby># app/models/student.rb class Student < ActiveRecord::Base    belongs_to :division   has_many :posts, :as => author end  # app/models/division.rb class Division < ActiveRecord::Base    has_many :students   has_many :student_posts, :through => :students, :source => :posts end </pre><b> Examples </b><br/><pre class=ruby>ruby script/console div = Division.first div.student_posts </pre></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/02/nginx-passenger-configuration-for-rails/">Nginx Passenger Configuration for Rails Application</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-02-15T21:43:00+05:30" pubdate data-updated="true">Feb 15<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<br />#user &nbsp;nobody;<br />user www-data;<br />worker_processes &nbsp;2;<br /><br />#error_log &nbsp;logs/error.log;<br />#error_log &nbsp;logs/error.log &nbsp;notice;<br />#error_log &nbsp;logs/error.log &nbsp;info;<br /><br />#pid &nbsp; &nbsp; &nbsp; &nbsp;logs/nginx.pid;<br /><br />events {<br />&nbsp;&nbsp; &nbsp;worker_connections &nbsp;1024;<br />}<br /><br />http {<br />&nbsp;&nbsp; &nbsp;passenger_root /var/lib/gems/1.8/gems/passenger-2.2.8;<br />&nbsp;&nbsp; &nbsp;passenger_ruby /usr/bin/ruby1.8;<br />&nbsp;&nbsp; &nbsp;passenger_max_pool_size 3;<br /><br />&nbsp;&nbsp; &nbsp;include &nbsp; &nbsp; &nbsp; mime.types;<br /><div><div>default_type &nbsp;application/octet-stream;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp;#log_format &nbsp;main &nbsp;&#8217;$remote_addr - $remote_user [$time_local] &#8220;$request&#8221; &#8217;</div><div>&nbsp;&nbsp; &nbsp;# &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&#8217;$status $body_bytes_sent &#8220;$http_referer&#8221; &#8217;</div><div>&nbsp;&nbsp; &nbsp;# &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&#8217;&#8221;$http_user_agent&#8221; &#8220;$http_x_forwarded_for&#8221;&#8217;;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp;#access_log &nbsp;logs/access.log &nbsp;main;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp;sendfile &nbsp; &nbsp; &nbsp; &nbsp;on;</div><div>&nbsp;&nbsp; &nbsp;#tcp_nopush &nbsp; &nbsp; on;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp;#keepalive_timeout &nbsp;0;</div><div>&nbsp;&nbsp; &nbsp;keepalive_timeout &nbsp;65;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp;#gzip &nbsp;on;</div><div><div>&nbsp;server {</div><div>&nbsp;&nbsp; &nbsp; listen 80;</div><div>&nbsp;&nbsp; &nbsp; server_name localhost;</div><div>&nbsp;&nbsp; &nbsp; root /home/josh/current/public; &nbsp; # &lt;&#8212; be sure to point to &#8216;public&#8217;!</div><div>&nbsp;&nbsp; &nbsp; passenger_enabled on;</div><div>&nbsp;&nbsp; &nbsp; passenger_use_global_queue on;</div><div>&nbsp;&nbsp; }</div><div><br /></div><div>&nbsp;&nbsp; &nbsp;server {</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;listen &nbsp; &nbsp; &nbsp; 80;</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;server_name &nbsp;localhost;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;#charset koi8-r;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;#access_log &nbsp;logs/host.access.log &nbsp;main;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;location / {</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;root &nbsp; html;</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;index &nbsp;index.html index.htm;</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;}</div><div><div>&nbsp;&nbsp; &nbsp; #error_page &nbsp;404 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/404.html;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;# redirect server error pages to the static page /50x.html</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;#</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;error_page &nbsp; 500 502 503 504 &nbsp;/50x.html;</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;location = /50x.html {</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;root &nbsp; html;</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;}</div><div><div>&nbsp;&nbsp; }</div><div>}</div></div></div></div></div></div>
 </div>
   
   

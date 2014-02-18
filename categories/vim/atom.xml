@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vim | Fun On Rails]]></title>
   <link href="funonrails.com/categories/vim/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-18T01:42:48+05:30</updated>
+  <updated>2014-02-18T19:37:56+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -18,9 +18,47 @@
     <link href="funonrails.com/2010/02/vim-editor-for-ruby-on-rails/"/>
     <updated>2010-02-19T20:20:00+05:30</updated>
     <id>funonrails.com/2010/02/vim-editor-for-ruby-on-rails</id>
-    <content type="html"><![CDATA[<div class='post'>
-<b>Vim install On CentOS</b><br /><pre class="console">yum install vim-enhanced</pre><b>Vim install on Ubuntu machine</b><br /><br />Install vim-full using command<br /><pre class="console">apt-get install vim</pre><br />While coding with ruby, html, erb, haml, js and stylesheets.<br />It is great pain to indent code. Using rails vim one can easily<br />keep code always indented.<br /><br />This increases code readability and minimizes effort, bugs and<br />finally proves ease of using vim editor.<br /><br /><b>rails.vim</b> script contains lot of syntax highlighter and indentation<br />plugins that really helps development needs.<br /><br />If you have git installed then clone it under <b>.vim</b> directory of your profile<br /><pre class="console">git clone git://github.com/sandipransing/rails_vim.git ~/.vim</pre><br />To install from zip file download &amp;amp; extract it inside ~/.vim directory<br /><br /><b>download link</b>: http://www.vim.org/scripts/download_script.php?src_id=11920<br /><pre class="console">wget http://www.vim.org/scripts/download_script.php?src_id=11920 /rails.vim </pre>This is how my editor looks like<br /><br /><div class="separator" style="clear: both; text-align: center;"><a href="http://1.bp.blogspot.com/_WmOmsgqsanw/S5voyvHVstI/AAAAAAAAAJI/bi-mSfyN5no/s1600-h/IDE.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="215" src="http://1.bp.blogspot.com/_WmOmsgqsanw/S5voyvHVstI/AAAAAAAAAJI/bi-mSfyN5no/s400/IDE.png" width="500" /></a></div><br /><br /><br /><div style="margin: 0px;">Open your ~/.bashrc and at the bottom add:</div><div style="margin: 0px;"><br /></div><div style="margin: 0px;"><b>alias vi=vim</b></div><div style="margin: 0px;"><b>export EDITOR=vim</b></div></div>
+    <content type="html"><![CDATA[<h4>Vim install On CentOS</h4>
 
+<p><code>
+yum install vim-enhanced
+</code></p>
+
+<h4>Vim install on Ubuntu machine</h4>
+
+<p>Install vim-full using command
+<code>
+apt-get install vim
+</code></p>
+
+<p>While coding with ruby, html, erb, haml, js and stylesheets.
+It is great pain to indent code. Using rails vim one can easily keep code always indented.</p>
+
+<p>This increases code readability and minimizes effort, bugs and finally proves ease of using vim editor.</p>
+
+<p><code>rails.vim</code> script contains lot of syntax highlighter and indentation plugins that really helps development needs.</p>
+
+<p>If you have git installed then clone it under .vim directory of your profile
+<code>
+git clone git://github.com/sandipransing/rails_vim.git ~/.vim
+</code></p>
+
+<h4>To install from zip file download and extract it inside <code>~/.vim</code> directory</h4>
+
+<p>Command to <a href="http://www.vim.org/scripts/download_script.php?src_id=11920">download</a> from console
+<code>
+wget http://www.vim.org/scripts/download_script.php?src_id=11920 /rails.vim
+</code>
+This is how my editor looks like</p>
+
+<p><a href="http://1.bp.blogspot.com/_WmOmsgqsanw/S5voyvHVstI/AAAAAAAAAJI/bi-mSfyN5no/s1600-h/IDE.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="215" src="http://1.bp.blogspot.com/_WmOmsgqsanw/S5voyvHVstI/AAAAAAAAAJI/bi-mSfyN5no/s400/IDE.png" width="500" /></a></p>
+
+<p>Open your ~/.bashrc and at the bottom add:</p>
+
+<p><code>
+alias vi=vim
+export EDITOR=vim
+</code></p>
 ]]></content>
   </entry>
   

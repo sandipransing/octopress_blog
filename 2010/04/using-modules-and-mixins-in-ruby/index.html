@@ -9,7 +9,7 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Before getting started with modules and mixins, lets first find out the need of module & mixins in OOP. In object oriented programming languages &hellip;">
+  <meta name="description" content="Before getting started with modules and mixins, lets first find out the need of module &amp; mixins in OOP. In object oriented programming languages &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -103,8 +103,137 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-Before getting started with modules and mixins, lets first find out the need of module & mixins in OOP.<br/><br/> In object oriented programming languages multiple inheritance is basic paradigm (child class extends behavior of base class).<br/><br/> C++ supports multiple inheritance. Java does support  same using interfaces.<br/> In ruby language, multiple inheritance is achieved very easily using mixin  of modules & classes and that makes ruby as powerful language.<br/><br/> Ruby has classes, modules. Modules can be included inside other classes (mixins) to achieve multiple inheritance.<br/><br/> <b>Modules</b><pre class=ruby>  module Greeting     # here below is the instance method     # and that can be accessed using object of class ONLY     def hi       puts 'Guest'     end   end      </pre>Module methods can be called using scope resolution operator (::) or dot operator (.)<br/><pre class=ruby>Greeting::hi  # => undefined method `hi' for Greeting:Module (NoMethodError) </pre>It is obivous to have an error because we are calling class method and that is not present inside module.<br/><br/> <b>Mixins</b> Lets include greeting module inside person class<br/><pre class=ruby>class Person    include Greeting end </pre><pre class=ruby>person = Person.new person.hi #=> "Guest" </pre>Lets see how module methods can be defined. It can be done using either self or class_name.<br/><pre class=ruby>module Greeting   # here below is the instance method   # and that can be accessed using object of class ONLY   def hi     puts 'Guest'   end   # Below are module methods   # this methods can be invoked   # using Greeting::hi   # OR Greeting.hi   def self.hi     puts 'hi Sandip'   end   # here is one more way to declare   # module methods   def Greeting.bye     puts 'Bye Sandip!'   end end </pre>Lets invoke methods<br/><pre class=ruby>Greeting::hi #=> "hi Sandip" Greeting.bye #=> "Bye Sandip!" </pre> <b>Extending class behavior using modules</b><br/><pre class=ruby>class Person     def self.included(base)     base.extend Greeting   end end </pre> Got easy ?? Cheers!</div>
+<div class="entry-content"><p>Before getting started with modules and mixins, lets first find out the need of module &amp; mixins in OOP.</p>
+
+<p>In object oriented programming languages multiple inheritance is basic paradigm (child class extends behavior of base class).</p>
+
+<p>C++ supports multiple inheritance. Java does support same using interfaces.</p>
+
+<p>In ruby language, multiple inheritance is achieved very easily using mixin of modules &amp; classes and that makes ruby as powerful language.</p>
+
+<p>Ruby has classes, modules. Modules can be included inside other classes (mixins) to achieve multiple inheritance.</p>
+
+<h2>Modules</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="k">module</span> <span class="nn">Greeting</span>
+</span><span class='line'>    <span class="c1"># here below is the instance method</span>
+</span><span class='line'>    <span class="c1"># and that can be accessed using object of class ONLY</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">hi</span>
+</span><span class='line'>      <span class="nb">puts</span> <span class="s1">&#39;Guest&#39;</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Module methods can be called using scope resolution operator (::) or dot operator (.)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="ss">Greeting</span><span class="p">:</span><span class="ss">:hi</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># =&gt; undefined method `hi&#39; for Greeting:Module (NoMethodError)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It is obivous to have an error because we are calling class method and that is not present inside module.</p>
+
+<h2>Mixins</h2>
+
+<p>Lets include greeting module inside person class</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Person</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="no">Greeting</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">person</span> <span class="o">=</span> <span class="no">Person</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'><span class="n">person</span><span class="o">.</span><span class="n">hi</span> <span class="c1">#=&gt; &quot;Guest&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Lets see how module methods can be defined. It can be done using either self or class_name.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">Greeting</span>
+</span><span class='line'>  <span class="c1"># here below is the instance method</span>
+</span><span class='line'>  <span class="c1"># and that can be accessed using object of class ONLY</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">hi</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s1">&#39;Guest&#39;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  <span class="c1"># Below are module methods</span>
+</span><span class='line'>  <span class="c1"># this methods can be invoked</span>
+</span><span class='line'>  <span class="c1"># using Greeting::hi</span>
+</span><span class='line'>  <span class="c1"># OR Greeting.hi</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">hi</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s1">&#39;hi Sandip&#39;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  <span class="c1"># here is one more way to declare</span>
+</span><span class='line'>  <span class="c1"># module methods</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">Greeting</span><span class="o">.</span><span class="nf">bye</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s1">&#39;Bye Sandip!&#39;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Lets invoke methods</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="ss">Greeting</span><span class="p">:</span><span class="ss">:hi</span> <span class="c1">#=&gt; &quot;hi Sandip&quot;</span>
+</span><span class='line'><span class="no">Greeting</span><span class="o">.</span><span class="n">bye</span> <span class="c1">#=&gt; &quot;Bye Sandip!&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Extending class behavior using modules</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Person</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">included</span><span class="p">(</span><span class="n">base</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">base</span><span class="o">.</span><span class="n">extend</span> <span class="no">Greeting</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Got easy ?? Cheers!</p>
 </div>
 
 

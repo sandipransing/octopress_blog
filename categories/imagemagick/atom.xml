@@ -4,7 +4,7 @@
   <title><![CDATA[Category: imagemagick | Fun On Rails]]></title>
   <link href="funonrails.com/categories/imagemagick/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-18T01:42:48+05:30</updated>
+  <updated>2014-02-18T19:37:56+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -65,7 +65,7 @@ p.upload_image(url)
 To install imagemagick following packages needs to be installed.</p>
 
 <p><code>
-dudo apt-get install imagemagick librmagick-ruby libmagickwand-dev
+sudo apt-get install imagemagick librmagick-ruby libmagickwand-dev
 </code></p>
 
 <h4>RMagick gem install</h4>

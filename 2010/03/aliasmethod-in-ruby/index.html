@@ -9,7 +9,8 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Alias method in rubyRuby classes provides a alias_method that can be used to reuse the existing methods.Consider a situation where you need &hellip;">
+  <meta name="description" content="Alias method in ruby Ruby classes provides a alias_method that can be used to reuse the existing methods.
+Consider a situation where you need &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -103,8 +104,83 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-<b>Alias method in ruby</b><br />Ruby classes provides a alias_method that can be used to reuse the existing methods.<br />Consider a situation where you need different methods which has same code and ONLY  they have different names.<br /><br />In this case alias_method uses suits best choice instead duplicating same code or writing common method that will get used in all methods, as i did before.  Example, I have methods search, home, index all are doing same functionality.<br/> <b>Old approach</b><pre class=ruby># URL /  def index   list  end  # URL /search def search   list  end   #URL /home  def home   list  end  private  def list  # code here  end  </pre> <b>Correct approach in ruby</b><pre class=ruby>def index   # code here  end  alias_method :home, :index  alias_method :search, :index  </pre><b>Attributes aliasing in ruby</b><br/>Same way one can easily rename existing class attribute names using alias_attribute method.<br/><b>alias_attribute(new_name, old_name)</b><pre class=ruby>alias_attrinute :username, :login </pre><b>More practical use</b><br/>while deprecating attributes, methods in gems, plugins, extensions, libraries always use aliases in order to maintain backward compatibility.<br/> Got easy ??<br/>that&#8217;s where ruby rocks !</div>
+<div class="entry-content"><h2>Alias method in ruby</h2>
+
+<p>Ruby classes provides a alias_method that can be used to reuse the existing methods.
+Consider a situation where you need different methods which has same code and ONLY they have different names.</p>
+
+<p>In this case alias_method uses suits best choice instead duplicating same code or writing common method that will get used in all methods, as i did before. Example, I have methods search, home, index all are doing same functionality.</p>
+
+<h2>Old approach</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># URL / </span>
+</span><span class='line'><span class="k">def</span> <span class="nf">index</span>
+</span><span class='line'> <span class="n">list</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="c1"># URL /search</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">search</span>
+</span><span class='line'> <span class="n">list</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#URL /home </span>
+</span><span class='line'><span class="k">def</span> <span class="nf">home</span>
+</span><span class='line'> <span class="n">list</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="kp">private</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">list</span>
+</span><span class='line'><span class="c1"># code here </span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Correct approach in ruby</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">index</span>
+</span><span class='line'> <span class="c1"># code here </span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="n">alias_method</span> <span class="ss">:home</span><span class="p">,</span> <span class="ss">:index</span>
+</span><span class='line'><span class="n">alias_method</span> <span class="ss">:search</span><span class="p">,</span> <span class="ss">:index</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Attributes aliasing in ruby</h2>
+
+<p>Same way one can easily rename existing class attribute names using alias_attribute method.</p>
+
+<h2>alias_attribute(new_name, old_name)</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">alias_attrinute</span> <span class="ss">:username</span><span class="p">,</span> <span class="ss">:login</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>More practical use</h2>
+
+<p>while deprecating attributes, methods in gems, plugins, extensions, libraries always use aliases in order to maintain backward compatibility.</p>
+
+<p>Got easy ?? that&rsquo;s where ruby rocks !</p>
 </div>
 
 

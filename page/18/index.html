@@ -9,7 +9,9 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Remove svn files inside directoryrm -rf `find . -type d -name .svnSet path in linuxexport PATH=$PATH:/usr/ruby/binHere /usr/ruby/bin is the path to &hellip;">
+  <meta name="description" content="Remove svn files inside directory 1
+rm -rf `find . -type d -name .svn Set path in linux 1
+export PATH=$PATH:/usr/ruby/bin Here /usr/ruby/bin is the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -106,45 +108,49 @@
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-<b>Remove svn files inside directory</b><br /><b><span class="Apple-style-span" style="font-weight: normal;">rm -rf `find . -type d -name .svn</span></b><br /><b><br /></b><br /><b>Set path in linux</b><br /><b><span class="Apple-style-span" style="font-weight: normal;">export PATH=$PATH:/usr/ruby/bin</span></b><br />Here <b>/usr/ruby/bin</b> is the path to ruby extecuatble.  <br /><br /><b>grep and print process pid</b><br /><b><span class="Apple-style-span" style="font-weight: normal;">ps -ef | grep search_string | grep -v grep | awk &#8216;{print &nbsp;$2 }&#8217;</span></b><br /><b><br /></b><br /><b>Kill process</b><br /><b><span class="Apple-style-span" style="font-weight: normal;">kill -9 process_id_here</span></b><br /><b><span class="Apple-style-span" style="font-weight: normal;">ps -ef | grep search_string | grep -v grep | awk &#8216;{print &nbsp;$2 }&#8217; | xargs kill -9</span></b><br /><b><br /></b><br /><b>Store pid of process in a variable for further process</b><br /><b><span class="Apple-style-span" style="font-weight: normal;">tokill=`ps -ef|grep ruby|grep -v grep|awk &#8216;{print $2}&#8217;`;kill -9 $tokill;</span></b><br /><b><span class="Apple-style-span"><br /></span></b><br /><b><span class="Apple-style-span">Mirror a website</span></b><br />Command to clone/copy a website for offline/local browsing.<br />wget -mk www.funonrails.com<br /><br />Above command downloads all website pages in depth level with stylesheets, images and javascripts.</div>
-</div>
-  
-  
+  <div class="entry-content"><h2>Remove svn files inside directory</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rm -rf `find . -type d -name .svn</span></code></pre></td></tr></table></div></figure>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/02/direct-advertising-on-funonrails/">Direct Advertising on Funonrails</a></h1>
-    
-    
-      <p class="meta">
-        
+<h2>Set path in linux</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>export PATH=$PATH:/usr/ruby/bin</span></code></pre></td></tr></table></div></figure>
 
 
+<p>Here /usr/ruby/bin is the path to ruby extecuatble.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>grep and print process pid
+</span><span class='line'>ps -ef | grep search_string | grep -v grep | awk '{print  $2 }'</span></code></pre></td></tr></table></div></figure>
 
 
+<h2>Kill process</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>kill -9 process_id_here
+</span><span class='line'>ps -ef | grep search_string | grep -v grep | awk '{print  $2 }' | xargs kill -9</span></code></pre></td></tr></table></div></figure>
 
 
+<h2>Store pid of process in a variable for further process</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>tokill=`ps -ef|grep ruby|grep -v grep|awk '{print $2}'`;kill -9 $tokill;</span></code></pre></td></tr></table></div></figure>
 
 
-  
+<h2>Mirror a website</h2>
+
+<p>Command to clone/copy a website for offline/local browsing.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget -mk www.funonrails.com</span></code></pre></td></tr></table></div></figure>
 
 
-<time datetime="2010-02-27T08:31:00+05:30" pubdate data-updated="true">Feb 27<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-</div>
+<p>Above command downloads all website pages in depth level with stylesheets, images and javascripts.</p>
 </div>
   
   
@@ -180,8 +186,52 @@
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-<b>Vim install On CentOS</b><br /><pre class="console">yum install vim-enhanced</pre><b>Vim install on Ubuntu machine</b><br /><br />Install vim-full using command<br /><pre class="console">apt-get install vim</pre><br />While coding with ruby, html, erb, haml, js and stylesheets.<br />It is great pain to indent code. Using rails vim one can easily<br />keep code always indented.<br /><br />This increases code readability and minimizes effort, bugs and<br />finally proves ease of using vim editor.<br /><br /><b>rails.vim</b> script contains lot of syntax highlighter and indentation<br />plugins that really helps development needs.<br /><br />If you have git installed then clone it under <b>.vim</b> directory of your profile<br /><pre class="console">git clone git://github.com/sandipransing/rails_vim.git ~/.vim</pre><br />To install from zip file download &amp;amp; extract it inside ~/.vim directory<br /><br /><b>download link</b>: http://www.vim.org/scripts/download_script.php?src_id=11920<br /><pre class="console">wget http://www.vim.org/scripts/download_script.php?src_id=11920 /rails.vim </pre>This is how my editor looks like<br /><br /><div class="separator" style="clear: both; text-align: center;"><a href="http://1.bp.blogspot.com/_WmOmsgqsanw/S5voyvHVstI/AAAAAAAAAJI/bi-mSfyN5no/s1600-h/IDE.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="215" src="http://1.bp.blogspot.com/_WmOmsgqsanw/S5voyvHVstI/AAAAAAAAAJI/bi-mSfyN5no/s400/IDE.png" width="500" /></a></div><br /><br /><br /><div style="margin: 0px;">Open your ~/.bashrc and at the bottom add:</div><div style="margin: 0px;"><br /></div><div style="margin: 0px;"><b>alias vi=vim</b></div><div style="margin: 0px;"><b>export EDITOR=vim</b></div></div>
+  <div class="entry-content"><h4>Vim install On CentOS</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>yum install vim-enhanced</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Vim install on Ubuntu machine</h4>
+
+<p>Install vim-full using command</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>apt-get install vim</span></code></pre></td></tr></table></div></figure>
+
+
+<p>While coding with ruby, html, erb, haml, js and stylesheets.
+It is great pain to indent code. Using rails vim one can easily keep code always indented.</p>
+
+<p>This increases code readability and minimizes effort, bugs and finally proves ease of using vim editor.</p>
+
+<p><code>rails.vim</code> script contains lot of syntax highlighter and indentation plugins that really helps development needs.</p>
+
+<p>If you have git installed then clone it under .vim directory of your profile</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git://github.com/sandipransing/rails_vim.git ~/.vim</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>To install from zip file download and extract it inside <code>~/.vim</code> directory</h4>
+
+<p>Command to <a href="http://www.vim.org/scripts/download_script.php?src_id=11920">download</a> from console</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget http://www.vim.org/scripts/download_script.php?src_id=11920 /rails.vim </span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is how my editor looks like</p>
+
+<p><a href="http://1.bp.blogspot.com/_WmOmsgqsanw/S5voyvHVstI/AAAAAAAAAJI/bi-mSfyN5no/s1600-h/IDE.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="215" src="http://1.bp.blogspot.com/_WmOmsgqsanw/S5voyvHVstI/AAAAAAAAAJI/bi-mSfyN5no/s400/IDE.png" width="500" /></a></p>
+
+<p>Open your ~/.bashrc and at the bottom add:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>alias vi=vim
+</span><span class='line'>export EDITOR=vim</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   
@@ -217,8 +267,55 @@
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-<b> Extend enumerable functionality to iterate along with index </b><br/><pre class=ruby>module Enumerable   def collect_with_index(i=0)     collect{|elm| yield(elm, i+=1)}   end   alias map_with_index collect_with_index end </pre><br/><b> Example use : </b><br/><pre class=ruby> ree-1.8.7-2010.01 > ['ruby', 'rails', 'sandip'].map_with_index{ |w,i|  [w, i] }  #=> [["ruby", 1], ["rails", 2], ["sandip", 3]]    ree-1.8.7-2010.01 > ['ruby', 'rails', 'sandip'].collect_with_index{ |w,i|  [w,  i] }  #=> [["ruby", 1], ["rails", 2], ["sandip", 3]]   #By default index starts from zero to specify custom index to start from,  #pass index to collect_with_index   ree-1.8.7-2010.01 > ['ruby', 'rails', 'sandip'].map_with_index(-1){ |w,i|  [w, i] }  #=> [["ruby", 0], ["rails", 1], ["sandip", 2]]   ree-1.8.7-2010.01 > ['ruby', 'rails', 'sandip'].map_with_index(5){ |w,i|  [w, i] }  #=> [["ruby", 6], ["rails", 7], ["sandip", 8]] </pre></div>
+  <div class="entry-content"><p>Extend enumerable functionality to iterate along with index</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">Enumerable</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">collect_with_index</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">collect</span><span class="p">{</span><span class="o">|</span><span class="n">elm</span><span class="o">|</span> <span class="k">yield</span><span class="p">(</span><span class="n">elm</span><span class="p">,</span> <span class="n">i</span><span class="o">+=</span><span class="mi">1</span><span class="p">)}</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  <span class="k">alias</span> <span class="n">map_with_index</span> <span class="n">collect_with_index</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Example use :</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'> <span class="o">[</span><span class="s1">&#39;ruby&#39;</span><span class="p">,</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;sandip&#39;</span><span class="o">].</span><span class="n">map_with_index</span><span class="p">{</span> <span class="o">|</span><span class="n">w</span><span class="p">,</span><span class="n">i</span><span class="o">|</span>  <span class="o">[</span><span class="n">w</span><span class="p">,</span> <span class="n">i</span><span class="o">]</span> <span class="p">}</span>
+</span><span class='line'> <span class="c1">#=&gt; [[&quot;ruby&quot;, 1], [&quot;rails&quot;, 2], [&quot;sandip&quot;, 3]] </span>
+</span><span class='line'>
+</span><span class='line'> <span class="o">[</span><span class="s1">&#39;ruby&#39;</span><span class="p">,</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;sandip&#39;</span><span class="o">].</span><span class="n">collect_with_index</span><span class="p">{</span> <span class="o">|</span><span class="n">w</span><span class="p">,</span><span class="n">i</span><span class="o">|</span>  <span class="o">[</span><span class="n">w</span><span class="p">,</span>  <span class="n">i</span><span class="o">]</span> <span class="p">}</span>
+</span><span class='line'> <span class="c1">#=&gt; [[&quot;ruby&quot;, 1], [&quot;rails&quot;, 2], [&quot;sandip&quot;, 3]]</span>
+</span><span class='line'>
+</span><span class='line'> <span class="c1">#By default index starts from zero to specify custom index to start from,</span>
+</span><span class='line'> <span class="c1">#pass index to collect_with_index</span>
+</span><span class='line'>
+</span><span class='line'> <span class="o">[</span><span class="s1">&#39;ruby&#39;</span><span class="p">,</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;sandip&#39;</span><span class="o">].</span><span class="n">map_with_index</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">){</span> <span class="o">|</span><span class="n">w</span><span class="p">,</span><span class="n">i</span><span class="o">|</span>  <span class="o">[</span><span class="n">w</span><span class="p">,</span> <span class="n">i</span><span class="o">]</span> <span class="p">}</span>
+</span><span class='line'> <span class="c1">#=&gt; [[&quot;ruby&quot;, 0], [&quot;rails&quot;, 1], [&quot;sandip&quot;, 2]]</span>
+</span><span class='line'>
+</span><span class='line'> <span class="o">[</span><span class="s1">&#39;ruby&#39;</span><span class="p">,</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;sandip&#39;</span><span class="o">].</span><span class="n">map_with_index</span><span class="p">(</span><span class="mi">5</span><span class="p">){</span> <span class="o">|</span><span class="n">w</span><span class="p">,</span><span class="n">i</span><span class="o">|</span>  <span class="o">[</span><span class="n">w</span><span class="p">,</span> <span class="n">i</span><span class="o">]</span> <span class="p">}</span>
+</span><span class='line'> <span class="c1">#=&gt; [[&quot;ruby&quot;, 6], [&quot;rails&quot;, 7], [&quot;sandip&quot;, 8]]</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   
@@ -254,8 +351,76 @@
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-<span class="Apple-style-span" style="font-family: Verdana, Arial, 'Bitstream Vera Sans', Helvetica, sans-serif; font-size: 13px;"></span><br />This error appears when same action gets called twice. There might be chances to have controller with same name twice inside app as well as plugins<br /><br />In my case the error appeared while migrating from rails 2.1 to 2.3.<br />Application was having application.rb and application_controller.rb<br /><br />Files deleted:<br />trunk/app/controllers/application.rb<br /><br />And that solved problem !<br /></div>
+  <div class="entry-content"><p>This error appears when same action gets called twice. There might be chances to have controller with same name twice inside app as well as plugins</p>
+
+<p>In my case the error appeared while migrating from <code>rails 2.1</code> to <code>2.3</code>
+Application was having <code>application.rb</code> and <code>application_controller.rb</code></p>
+
+<p>Files deleted:
+<code>trunk/app/controllers/application.rb</code></p>
+
+<p>And that solved problem !</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/02/online-ruby-programming-useful-website/">Online Ruby Programming Useful Website Links</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-02-16T17:27:00+05:30" pubdate data-updated="true">Feb 16<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ol>
+<li><p>Ruby
+<a href="http://tryruby.org">http://tryruby.org</a></p></li>
+<li><p>Hpricot
+<a href="http://hpricot.com">http://hpricot.com</a></p></li>
+<li><p>Regular expressions
+<a href="http://rubular.com">http://rubular.com</a></p></li>
+<li><p>Exceptions
+<a href="http://hoptoadapp.com/">http://hoptoadapp.com/</a></p></li>
+<li><p>Application Performance
+<a href="http://newrelic.com">http://newrelic.com</a></p></li>
+<li><p>Ruby Doc
+<a href="http://www.ruby-doc.org/">http://www.ruby-doc.org/</a></p></li>
+<li><p>Rails API
+<a href="http://api.rubyonrails.org/">http://api.rubyonrails.org/</a></p></li>
+<li><p>Ruby gems sources
+<a href="http://rubyforge.org">http://rubyforge.org</a>  /
+<a href="http://gems.github.com">http://gems.github.com</a>  /
+<a href="http://gemcutter.org">http://gemcutter.org</a></p></li>
+<li><p>Listing remote gems from source
+gem list &mdash;remote &mdash;source <a href="http://gems.github.com">http://gems.github.com</a></p></li>
+<li><p>List of Rails Plugins
+<a href="http://wiki.rubyonrails.org/rails/pages/Plugins">http://wiki.rubyonrails.org/rails/pages/Plugins</a> /
+<a href="http://www.agilewebdevelopment.com/plugins">http://www.agilewebdevelopment.com/plugins</a></p></li>
+</ol>
+
 </div>
   
   

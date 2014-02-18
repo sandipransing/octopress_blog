@@ -4,7 +4,7 @@
   <title><![CDATA[Category: nginx | Fun On Rails]]></title>
   <link href="funonrails.com/categories/nginx/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-18T01:42:48+05:30</updated>
+  <updated>2014-02-18T19:37:56+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -137,9 +137,124 @@ client_max_body_size 10m;
     <link href="funonrails.com/2010/03/nginx-and-thin-installation-and/"/>
     <updated>2010-03-26T02:59:00+05:30</updated>
     <id>funonrails.com/2010/03/nginx-and-thin-installation-and</id>
-    <content type="html"><![CDATA[<div class='post'>
-<h3> Install nginx server using following command</h3><pre class=ruby>apt-get install nginx </pre>Edit nginx configuration and add server block inside html block.&amp;nbsp;<br /><pre class=ruby>server {<br />&nbsp;&nbsp; &nbsp;listen &nbsp; &nbsp; &nbsp; 80;<br />&nbsp;&nbsp; &nbsp;server_name &nbsp;boost;<br /><br />&nbsp;&nbsp; &nbsp;root /home/sandip/rails_app/public;<br /><br />&nbsp;&nbsp; &nbsp;location / {<br />&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;proxy_set_header &nbsp;X-Real-IP &nbsp;$remote_addr;<br />&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;proxy_set_header &nbsp;X-Forwarded-For $proxy_add_x_forwarded_for;<br />&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;proxy_set_header Host $http_host;<br />&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;proxy_redirect off;<br /><br />&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;if (-f $request_filename/index.html) {<br />&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;rewrite (.*) $1/index.html break;<br />&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;}<br />&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;if (-f $request_filename.html) {<br />&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;rewrite (.*) $1.html break;<br />&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;}<br />&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;if (!-f $request_filename) {<br />&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;proxy_pass http://thin;<br />&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;break;<br />&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;}<br />&nbsp;&nbsp; &nbsp;}<br /><br />&nbsp;&nbsp; &nbsp;error_page &nbsp; 500 502 503 504 &nbsp;/50x.html;<br />&nbsp;&nbsp; &nbsp;location = /50x.html {<br />&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;root &nbsp; html;<br />&nbsp;&nbsp; &nbsp;}<br />}<br /></pre><br />Install thin server as gem<br /><pre class=ruby>sudo gem install thin<br /><br />Building native extensions. &nbsp;This could take a while...<br />Building native extensions. &nbsp;This could take a while...<br />Successfully installed eventmachine-0.12.10<br />Successfully installed thin-1.2.7<br />2 gems installed<br /></pre><br />Install thin service<br /><pre class=ruby>sudo thin install<br />Installing thin service at /etc/init.d/thin ...<br />mkdir -p /etc/init.d<br />writing /etc/init.d/thin<br />chmod +x /etc/init.d/thin<br />mkdir -p /etc/thin<br /></pre><br />Configure thin to start at system boot<br /><pre class=ruby>sudo /usr/sbin/update-rc.d -f thin defaults<br /></pre><br />Then put your config files in /etc/thin<br /><pre class=ruby>sudo /usr/sbin/update-rc.d -f thin defaults<br />update-rc.d: warning: thin stop runlevel arguments (0 1 6) do not match LSB Default-Stop values (S 0 1 6)<br />&nbsp;Adding system startup for /etc/init.d/thin ...<br />&nbsp;&nbsp; /etc/rc0.d/K20thin -&amp;gt; ../init.d/thin<br />&nbsp;&nbsp; /etc/rc1.d/K20thin -&amp;gt; ../init.d/thin<br />&nbsp;&nbsp; /etc/rc6.d/K20thin -&amp;gt; ../init.d/thin<br />&nbsp;&nbsp; /etc/rc2.d/S20thin -&amp;gt; ../init.d/thin<br />&nbsp;&nbsp; /etc/rc3.d/S20thin -&amp;gt; ../init.d/thin<br />&nbsp;&nbsp; /etc/rc4.d/S20thin -&amp;gt; ../init.d/thin<br />&nbsp;&nbsp; /etc/rc5.d/S20thin -&amp;gt; ../init.d/thin<br /></pre><br />Create thin configuration<br /><pre class=ruby>sudo thin config -C /etc/thin/&lt;config-name&gt;.yml -c &lt;rails-app-root-path&gt; --servers &lt;number-of-threads&gt; -e &lt;environment&gt;<br />&lt;/environment&gt;&lt;/number-of-threads&gt;&lt;/rails-app-root-path&gt;&lt;/config-name&gt; </pre><br />In my case,<br /><pre class=ruby>sudo thin config -C /etc/thin/rails_app.yml -c /home/sandip/rails_app --servers 3 -e production<br />&amp;gt;&amp;gt; Wrote configuration to /etc/thin/rails_app.yml<br /></pre><br />thin configuration file will look like<br /><br />Start/stop/restart Nginx &amp;amp; thin server using command<br /><br /><pre class=ruby>sudo service nginx start|stop|restart<br />sudo service thin start|stop|restart<br /></pre></div>
+    <content type="html"><![CDATA[<p>Install nginx server using following command</p>
 
+<p><code>
+apt-get install nginx
+</code></p>
+
+<p>Edit nginx configuration and add server block inside html block.&nbsp;</p>
+
+<p>```
+server {</p>
+
+<pre><code>listen       80;
+server_name  boost;
+
+root /home/sandip/rails_app/public;
+
+location / {
+
+    proxy_set_header  X-Real-IP  $remote_addr;
+    proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $http_host;
+    proxy_redirect off;
+
+    if (-f $request_filename/index.html) {
+        rewrite (.*) $1/index.html break;
+    }
+
+    if (-f $request_filename.html) {
+        rewrite (.*) $1.html break;
+
+    }
+
+    if (!-f $request_filename) {
+        proxy_pass http://thin;
+        break;
+    }
+}
+
+error_page   500 502 503 504  /50x.html;
+location = /50x.html {
+
+    root   html;
+
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<h2>Install thin server as gem</h2>
+
+<p>```
+sudo gem install thin
+Building native extensions.  This could take a while&hellip;
+Building native extensions.  This could take a while&hellip;</p>
+
+<p>Successfully installed eventmachine-0.12.10
+Successfully installed thin-1.2.7</p>
+
+<p>2 gems installed
+```</p>
+
+<h2>Install thin service</h2>
+
+<p><code>
+sudo thin install
+Installing thin service at /etc/init.d/thin ...
+mkdir -p /etc/init.d
+writing /etc/init.d/thin
+chmod +x /etc/init.d/thin
+mkdir -p /etc/thin
+</code></p>
+
+<h2>Configure thin to start at system boot</h2>
+
+<p><code>
+sudo /usr/sbin/update-rc.d -f thin defaults
+</code></p>
+
+<p>Then put your config files in /etc/thin</p>
+
+<p>```
+sudo /usr/sbin/update-rc.d -f thin defaults
+update-rc.d: warning: thin stop runlevel arguments (0 1 6) do not match LSB Default-Stop values (S 0 1 6)
+ Adding system startup for /etc/init.d/thin &hellip;</p>
+
+<p>   /etc/rc0.d/K20thin &ndash;&gt; ../init.d/thin
+   /etc/rc1.d/K20thin &ndash;&gt; ../init.d/thin
+   /etc/rc6.d/K20thin &ndash;&gt; ../init.d/thin
+   /etc/rc2.d/S20thin &ndash;&gt; ../init.d/thin
+   /etc/rc3.d/S20thin &ndash;&gt; ../init.d/thin
+   /etc/rc4.d/S20thin &ndash;&gt; ../init.d/thin
+   /etc/rc5.d/S20thin &ndash;&gt; ../init.d/thin
+```</p>
+
+<p>Create thin configuration</p>
+
+<p><code>
+sudo thin config -C /etc/thin/&lt;config-name&gt;.yml -c &lt;rails-app-root-path&gt; --servers &lt;number-of-threads&gt; -e &lt;environment&gt;
+&lt;/environment&gt;&lt;/number-of-threads&gt;&lt;/rails-app-root-path&gt;&lt;/config-name&gt;
+</code></p>
+
+<p>In my case,</p>
+
+<p>```
+sudo thin config -C /etc/thin/rails_app.yml -c /home/sandip/rails_app &mdash;servers 3 -e production</p>
+
+<p>&gt;&gt; Wrote configuration to /etc/thin/rails_app.yml
+```</p>
+
+<p>thin configuration file will look like</p>
+
+<p>Start/stop/restart Nginx &amp; thin server using command</p>
+
+<p><code>
+sudo service nginx start|stop|restart
+sudo service thin start|stop|restart
+</code></p>
 ]]></content>
   </entry>
   

@@ -9,7 +9,9 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Remove svn files inside directoryrm -rf `find . -type d -name .svnSet path in linuxexport PATH=$PATH:/usr/ruby/binHere /usr/ruby/bin is the path to &hellip;">
+  <meta name="description" content="Remove svn files inside directory 1
+rm -rf `find . -type d -name .svn Set path in linux 1
+export PATH=$PATH:/usr/ruby/bin Here /usr/ruby/bin is the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -103,8 +105,49 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-<b>Remove svn files inside directory</b><br /><b><span class="Apple-style-span" style="font-weight: normal;">rm -rf `find . -type d -name .svn</span></b><br /><b><br /></b><br /><b>Set path in linux</b><br /><b><span class="Apple-style-span" style="font-weight: normal;">export PATH=$PATH:/usr/ruby/bin</span></b><br />Here <b>/usr/ruby/bin</b> is the path to ruby extecuatble.  <br /><br /><b>grep and print process pid</b><br /><b><span class="Apple-style-span" style="font-weight: normal;">ps -ef | grep search_string | grep -v grep | awk &#8216;{print &nbsp;$2 }&#8217;</span></b><br /><b><br /></b><br /><b>Kill process</b><br /><b><span class="Apple-style-span" style="font-weight: normal;">kill -9 process_id_here</span></b><br /><b><span class="Apple-style-span" style="font-weight: normal;">ps -ef | grep search_string | grep -v grep | awk &#8216;{print &nbsp;$2 }&#8217; | xargs kill -9</span></b><br /><b><br /></b><br /><b>Store pid of process in a variable for further process</b><br /><b><span class="Apple-style-span" style="font-weight: normal;">tokill=`ps -ef|grep ruby|grep -v grep|awk &#8216;{print $2}&#8217;`;kill -9 $tokill;</span></b><br /><b><span class="Apple-style-span"><br /></span></b><br /><b><span class="Apple-style-span">Mirror a website</span></b><br />Command to clone/copy a website for offline/local browsing.<br />wget -mk www.funonrails.com<br /><br />Above command downloads all website pages in depth level with stylesheets, images and javascripts.</div>
+<div class="entry-content"><h2>Remove svn files inside directory</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rm -rf `find . -type d -name .svn</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Set path in linux</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>export PATH=$PATH:/usr/ruby/bin</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here /usr/ruby/bin is the path to ruby extecuatble.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>grep and print process pid
+</span><span class='line'>ps -ef | grep search_string | grep -v grep | awk '{print  $2 }'</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Kill process</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>kill -9 process_id_here
+</span><span class='line'>ps -ef | grep search_string | grep -v grep | awk '{print  $2 }' | xargs kill -9</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Store pid of process in a variable for further process</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>tokill=`ps -ef|grep ruby|grep -v grep|awk '{print $2}'`;kill -9 $tokill;</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Mirror a website</h2>
+
+<p>Command to clone/copy a website for offline/local browsing.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget -mk www.funonrails.com</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Above command downloads all website pages in depth level with stylesheets, images and javascripts.</p>
 </div>
 
 
@@ -152,7 +195,7 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2010/02/direct-advertising-on-funonrails/" title="Previous Post: direct advertising on funonrails">&laquo; direct advertising on funonrails</a>
+        <a class="basic-alignment left" href="/2010/02/vim-editor-for-ruby-on-rails/" title="Previous Post: Vim editor for ruby on rails development using rails.vim">&laquo; Vim editor for ruby on rails development using rails.vim</a>
       
       
         <a class="basic-alignment right" href="/2010/03/page-cache-control-in-radiant-cms/" title="Next Post: Page Cache control in radiant cms">Page Cache control in radiant cms &raquo;</a>

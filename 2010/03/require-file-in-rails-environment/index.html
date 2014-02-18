@@ -9,7 +9,10 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="There are different ways to load particular file in rails application environment if the required file exists.1. Using RAILS_ROOTif File.exists?( &hellip;">
+  <meta name="description" content="There are different ways to load particular file in rails application environment if the required file exists. 1. Using RAILS_ROOT 1
+2
+3
+if File. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -103,8 +106,38 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-<br />There are different ways to load particular file in rails application environment if the required file exists.<br />1. Using RAILS_ROOT<br /><blockquote>if File.exists?(file=File.join(RAILS_ROOT,&#8217;config&#8217;, &#8216;initializers&#8217;, &#8216;smtp_gmail.rb&#8217;))</blockquote><blockquote>&nbsp;&nbsp;require file</blockquote><blockquote>end</blockquote>2. Using Rails.root &amp;amp; join<br /><blockquote>require Rails.root.join(&#8216;config&#8217;, &#8216;initializers&#8217;, &#8216;smtp_gmail.rb&#8217;)</blockquote>3. Using Rails.root, join &amp;amp; exists? method.<br /><blockquote>require file if File.exists?(file = Rails.root.join(&#8216;config&#8217;, &#8216;initializers&#8217;,&#8217;smtp_gmail.rb&#8217;))</blockquote>4. Using File and direct path to file<br /><blockquote>require &nbsp;File.join(&#8216;root&#8217;,&#8217;app&#8217;,&#8217;config&#8217;, &#8216;initializers&#8217;, &#8216;smtp_gmail.rb&#8217;)</blockquote>Among all above methods of &nbsp;loading file, Using Rails.root, join &amp;amp; exists? method seems to be pretty good to have.<br />Any improvements are most welcome!<br /></div>
+<div class="entry-content"><p>There are different ways to load particular file in rails application environment if the required file exists.</p>
+
+<p><strong>1. Using RAILS_ROOT</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>if File.exists?(file=File.join(RAILS_ROOT,'config', 'initializers', 'smtp_gmail.rb'))
+</span><span class='line'>  require file
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>2. Using Rails.root &amp; join</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>require Rails.root.join('config', 'initializers', 'smtp_gmail.rb')</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>3. Using Rails.root, join &amp; exists? method</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>require file if File.exists?(file = Rails.root.join('config', 'initializers','smtp_gmail.rb'))</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>4. Using File and direct path to file</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>require  File.join('root','app','config', 'initializers', 'smtp_gmail.rb')</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Among all above methods of  loading file, Using <code>Rails.root</code>, <code>join &amp;amp; exists?</code> method seems to be pretty good to have.
+Any improvements are most welcome!</p>
 </div>
 
 

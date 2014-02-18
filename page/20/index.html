@@ -9,7 +9,7 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="#user &nbsp;nobody;user www-data;worker_processes &nbsp;2;#error_log &nbsp;logs/error.log;#error_log &nbsp;logs/error.log &nbsp;notice;#error_log & &hellip;">
+  <meta name="description" content="ActiveRecord find with join options retrieves object as readonlystation = Station.find( :first, :joins => :call, :conditions => ["customer_id = ? &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,43 +77,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/02/nginx-passenger-configuration-for-rails/">Nginx Passenger Configuration for Rails Application</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-02-15T21:43:00+05:30" pubdate data-updated="true">Feb 15<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<br />#user &nbsp;nobody;<br />user www-data;<br />worker_processes &nbsp;2;<br /><br />#error_log &nbsp;logs/error.log;<br />#error_log &nbsp;logs/error.log &nbsp;notice;<br />#error_log &nbsp;logs/error.log &nbsp;info;<br /><br />#pid &nbsp; &nbsp; &nbsp; &nbsp;logs/nginx.pid;<br /><br />events {<br />&nbsp;&nbsp; &nbsp;worker_connections &nbsp;1024;<br />}<br /><br />http {<br />&nbsp;&nbsp; &nbsp;passenger_root /var/lib/gems/1.8/gems/passenger-2.2.8;<br />&nbsp;&nbsp; &nbsp;passenger_ruby /usr/bin/ruby1.8;<br />&nbsp;&nbsp; &nbsp;passenger_max_pool_size 3;<br /><br />&nbsp;&nbsp; &nbsp;include &nbsp; &nbsp; &nbsp; mime.types;<br /><div><div>default_type &nbsp;application/octet-stream;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp;#log_format &nbsp;main &nbsp;&#8217;$remote_addr - $remote_user [$time_local] &#8220;$request&#8221; &#8217;</div><div>&nbsp;&nbsp; &nbsp;# &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&#8217;$status $body_bytes_sent &#8220;$http_referer&#8221; &#8217;</div><div>&nbsp;&nbsp; &nbsp;# &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&#8217;&#8221;$http_user_agent&#8221; &#8220;$http_x_forwarded_for&#8221;&#8217;;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp;#access_log &nbsp;logs/access.log &nbsp;main;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp;sendfile &nbsp; &nbsp; &nbsp; &nbsp;on;</div><div>&nbsp;&nbsp; &nbsp;#tcp_nopush &nbsp; &nbsp; on;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp;#keepalive_timeout &nbsp;0;</div><div>&nbsp;&nbsp; &nbsp;keepalive_timeout &nbsp;65;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp;#gzip &nbsp;on;</div><div><div>&nbsp;server {</div><div>&nbsp;&nbsp; &nbsp; listen 80;</div><div>&nbsp;&nbsp; &nbsp; server_name localhost;</div><div>&nbsp;&nbsp; &nbsp; root /home/josh/current/public; &nbsp; # &lt;&#8212; be sure to point to &#8216;public&#8217;!</div><div>&nbsp;&nbsp; &nbsp; passenger_enabled on;</div><div>&nbsp;&nbsp; &nbsp; passenger_use_global_queue on;</div><div>&nbsp;&nbsp; }</div><div><br /></div><div>&nbsp;&nbsp; &nbsp;server {</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;listen &nbsp; &nbsp; &nbsp; 80;</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;server_name &nbsp;localhost;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;#charset koi8-r;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;#access_log &nbsp;logs/host.access.log &nbsp;main;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;location / {</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;root &nbsp; html;</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;index &nbsp;index.html index.htm;</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;}</div><div><div>&nbsp;&nbsp; &nbsp; #error_page &nbsp;404 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/404.html;</div><div><br /></div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;# redirect server error pages to the static page /50x.html</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;#</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;error_page &nbsp; 500 502 503 504 &nbsp;/50x.html;</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;location = /50x.html {</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;root &nbsp; html;</div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;}</div><div><div>&nbsp;&nbsp; }</div><div>}</div></div></div></div></div></div>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -256,6 +219,43 @@ Check out this SlideShare Presentation: <div style="width:425px;text-align:left"
 
   <div class="entry-content"><div class='post'>
 Delayed job variables initialization written on at collectiveidea / delayed_job doesn&#8217;t work.<br/><pre class=ruby> # config/initializers/delayed_job_config.rb  Delayed::Worker.destroy_failed_jobs = false  Delayed::Worker.sleep_delay = 60  Delayed::Worker.max_attempts = 3  Delayed::Worker.max_run_time = 5.minutes </pre><br/>Here is the correct way of doing it as mentioned on tobi / delayed_job <br/><pre class=ruby> # config/initializers/delayed_job_config.rb  Delayed::Job.destroy_failed_jobs = false  silence_warnings do    Delayed::Job.const_set("MAX_ATTEMPTS", 3)    Delayed::Job.const_set("MAX_RUN_TIME", 5.minutes)  end </pre></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/12/getting-wired-and-wireless-working-on/">Getting Wired and Wireless Working on Ubuntu 9.0.4</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-14T15:39:00+05:30" pubdate data-updated="true">Dec 14<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div style="text-align: left;">It might be the case that earlier wireless was working and then it stopped working<br />Follow the simple steps here&#8230;.<br /></div>1. Restart networking <br /><pre class="ruby" name="code">sudo /etc/init.d/networking restart<br /></pre>2. Disable the &#8221;<b>Support for Atheros 802.11 wireless LAN cards</b>&#8221; on system/administration/Hardware Drivers, and reboot your box.<br />3. Restart  <br /><pre class="ruby" name="code">sudo reboot<br /></pre><br />That&#8217;s it, Cheers!  Still having problem follow the instructions <a href="http://www.funonrails.com/2009/10/getting-wireless-working-on-ubuntu.html">here</a><br /></div>
 </div>
   
   

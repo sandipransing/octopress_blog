@@ -4,7 +4,7 @@
   <title><![CDATA[Category: svn | Fun On Rails]]></title>
   <link href="funonrails.com/categories/svn/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-18T01:42:48+05:30</updated>
+  <updated>2014-02-18T19:37:56+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -68,9 +68,15 @@ git svn rebase
     <link href="funonrails.com/2010/03/alternative-for-tortoise-svn-on-ubuntu/"/>
     <updated>2010-03-11T16:59:00+05:30</updated>
     <id>funonrails.com/2010/03/alternative-for-tortoise-svn-on-ubuntu</id>
-    <content type="html"><![CDATA[<div class='post'>
-The Tortoise svn client on windows is one of my favorite svn client.<br />I am working on ubuntu karmic koala from last one year.<br />There are kdesvn. smartsvn svn clients available on ubuntu but still<br />time haven't found any svn client as good as tortoise svn on windows.<br /><br />Is there any alternative ??? Can tortoise svn client installation possible<br />using wine utility package in ubuntu ??<br /><div><br /></div></div>
+    <content type="html"><![CDATA[<p>The Tortoise svn client on windows is one of my favorite svn client.</p>
 
+<p>I am working on ubuntu karmic koala from last one year.
+There are kdesvn. smartsvn svn clients available on ubuntu but still
+time haven’t found any svn client as good as tortoise svn on windows.</p>
+
+<p>Is there any alternative ???</p>
+
+<p>Can tortoise svn client installation possible using wine utility package in ubuntu ??</p>
 ]]></content>
   </entry>
   

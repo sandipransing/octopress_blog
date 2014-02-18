@@ -9,7 +9,7 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Install passenger program that will run your rails application1. sudo gem install passengerInstall nginx server with passenger enabled2. passenger- &hellip;">
+  <meta name="description" content="What is sitemap ? Sitemap is nothing but a .xml file containing urls available on your siteIt contains URL, last modified date, frequency of content &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,56 +77,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/09/4-steps-to-install-nginx-with-passenger/">4 Steps to Install Nginx With Passenger</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-09-09T23:47:00+05:30" pubdate data-updated="true">Sep 9<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-Install passenger program that will run your rails application<br/><strong>1. sudo gem install passenger</strong><br/>Install nginx server with passenger enabled<br/><strong>2. passenger-install-nginx-module</strong><br/><br/>it will open apt, click &#8220;Enter&#8221; to contine<br/>then select option 1 for default install<br/>then it will ask<br/>Where do you want to install Nginx to?<br/><br/>Please specify a prefix directory [/opt/nginx]:<br/>press enter<br/><br/>then copy following block<br/><br/><strong> server {<br/>listen 80;<br/>server_name <a href="http://www.yourhost.com/" target="_blank">www.yourhost.com</a>;<br/>root /somewhere/public;   # &lt;&#8212; be sure to point to &#8216;public&#8217;!<br/>passenger_enabled on;<br/>}</strong><br/><br/>Make nginx Configuration<br/>3. vi /opt/nginx/conf/nginx.conf<br/>Make passenger_root and passenger_ruby path to configuration<br/><strong><br/><br/>http {<br/>passenger_root /usr/local/lib/ruby/gems/1.8/gems/passenger-2.2.4;<br/>passenger_ruby /usr/local/bin/ruby;<br/></strong><br/><br/>then add server configuration block inside http block<br/>http{<br/>&#8230;<br/><strong> server {<br/>listen 80;<br/>server_name <a href="http://www.yourhost.com/" target="_blank">www.yourhost.com</a>; //Make sure this dns entry inside /etc/hosts<br/>root /carsonline/public;   # &lt;&#8212; be sure to point to &#8216;public&#8217;! //here carsonline is RAILS_ROOT<br/>passenger_enabled on;<br/>}</strong><br/><br/>Thats, all<br/><br/>4. Launch Server<br/><br/>/opt/nginx/sbin/nginx</div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>sandip Ransing</div>
-<div class='content'>
-You are right..but sometimes we have to manually configure it when there are multiple ruby installations.</div>
-</div>
-<div class='comment'>
-<div class='author'>gautamrege</div>
-<div class='content'>
-I think passenger_root and passenger_ruby get automatically configured during installation.<br><br>Good article.</div>
-</div>
-</div>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -318,6 +268,51 @@ Rails community has released rails 2.3.3 recently with major upgrades and severa
 
   <div class="entry-content"><div class='post'>
 Search Engines ( like google, yahoo ) mainly uses <strong>crawlers</strong> for returning results.<br/><br/><strong>Crawler</strong> is the program which searches world wide web ( www ) and returns ranked pages.<br/><br/>Lets see what are the search engine optimization (SEO) techniques we can adopt so that your rails<br/>website pages will appear in search results.<br/><br/><strong>1. Title Of Page</strong><br/><br/><strong>2. Meta tags</strong><br/><br/><strong>3. Page URL</strong><br/><br/><strong>4. Page Contents</strong> ( this includes anchors to other pages, headers, image titles and alt texts when image not found then normal texts )<br/><br/>We can easily skip some pages from search by mentioning them in robots.txt which is by default should be in application root.<br/><br/>And Ofcourse, we can manage all this in rails very easily..<br/><br/>How ????<br/><br/>We can have in rails<br/><br/><strong>1. Dynamic page titles,</strong><br/><br/><strong>2. Meta tags and</strong><br/><br/><strong>3. Sexy perma URLs in rails</strong><br/><br/><strong>4. Also, we can define some standard on page content development.</strong><br/><br/>&#8230;got Easy &#8230;&#8230;, Cheers !<br/><br/>$@ndip</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/08/easy-sphinx-install-on-ubuntu-interpid/">Easy Sphinx Install on Ubuntu Interpid</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-08-17T13:02:00+05:30" pubdate data-updated="true">Aug 17<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+sudo apt-get install libmysqlclient15-dev<br/><br/>wget http://sphinxsearch.com/downloads/sphinx-0.9.8-rc2.tar.gz<br/>tar xvf  sphinx-0.9.8-rc2.tar.gz &amp;&amp; rm sphinx-0.9.8-rc2.tar.gz<br/>cd sphinx-0.9.8-rc2<br/>./configure<br/>make<br/>sudo make install</div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>sitemap « Fun On Rails</div>
+<div class='content'>
+[&#8230;] Easy sphinx install on ubuntu interpid « Fun On Rails [&#8230;]</div>
+</div>
+</div>
 </div>
   
   

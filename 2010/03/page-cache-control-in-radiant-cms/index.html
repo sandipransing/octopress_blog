@@ -9,7 +9,7 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Radiant CachingRadiant cms is very powerful and customizable cms as of now which has&nbsp;inbuilt support for page caching.Radiant caching &hellip;">
+  <meta name="description" content="Radiant Caching Radiant cms is very powerful and customizable cms as of now which has inbuilt support for page caching. Radiant caching mechanisam is &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -103,8 +103,88 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-<span class="Apple-style-span" style="font-family: Arial; font-size: small;"><span class="Apple-style-span" style="font-size: 13px;"><div><b>Radiant Caching</b></div><div><br /></div><div>Radiant cms is very powerful and customizable cms as of now which has&nbsp;inbuilt support for page caching.</div><div>Radiant caching mechanisam is somehow similar&nbsp;to action caching in rails.</div><div><br /></div><div><b>In latest radiant version i.e. &gt; 0.8 Responsecache has been replaced with Radiant::Cache.</b></div><div><br /></div><div>By default radiant cache gets automatically invalidated after every 5&nbsp;</div><div>minutes and that is configurable.</div><div><br /></div><div>The interval is easily configurable by adding following lines inside environment</div><div><br /></div><blockquote>if defined? ResponseCache == &#8216;constant&#8217; &nbsp; &nbsp;</blockquote><blockquote>&nbsp;&nbsp; &nbsp;ResponseCache.defaults[:expire_time] = 4.hours</blockquote><blockquote>else</blockquote><blockquote>&nbsp;&nbsp; &nbsp;SiteController.cache_timeout = 4.hours</blockquote><blockquote>end</blockquote><div>There are situations where automatic cache inavalidation won&#8217;t work</div><div>and we need to clear radiant cache on the fly.</div><div>There are two ways to do that to invalidate radiant cache immediately.</div><div><br /></div><div>1. <b>Navigate to the root of your Radiant project and delete the cache directory.</b></div><div><br /></div><blockquote>cd /home/deploy/radiant_site/tmp</blockquote><blockquote>rm -r cache</blockquote><div><br /></div><div>2.<b> Clearing the page cache from within your code</b></div><div>&nbsp;&nbsp; &nbsp;</div><blockquote>if defined? ResponseCache == &#8216;constant&#8217;</blockquote><blockquote>&nbsp;&nbsp; &nbsp;ResponseCache.instance.clear</blockquote><blockquote>else</blockquote><blockquote>&nbsp;&nbsp; &nbsp;Radiant::Cache.clear</blockquote><blockquote>end</blockquote><div><br /></div><div>While building website using radiant cms, it happens that there are certain pages they are static and not going to change frequently that time configuring cache expiry time to long interval is going to be always beneficial and for pages which conatins dynamic content (displaying logged in user on homepage), we need to disable radiant cache for such pages. this can be done by using page_options extension.</div><div><br /></div><div><b>Installation for radiant version &nbsp;0.7</b></div><div>From your RADIANT_ROOT:</div><div><br /></div><blockquote>$ script/extension install page_options</blockquote><div><br /></div><div><b>Installation for radiant version &nbsp;0.8 and higher</b></div><blockquote>git clone git://github.com/sandipransing/radiant-page_options-extension.git vendor/extensions/page_options</blockquote><div><br /></div><div>Restart server</div><div><br /></div><div><b>Usage</b></div><div><br /></div><div>1. Goto /admin/pages</div><div>2. Edit any page</div><div>3. Click on more link and edit cache settings.</div><div><br /></div><div>For more information <a href="http://github.com/avonderluft/radiant-page_options-extension">visit</a></div><div><br /></div></span></span></div>
+<div class="entry-content"><h2>Radiant Caching</h2>
+
+<p>Radiant cms is very powerful and customizable cms as of now which has inbuilt support for page caching.</p>
+
+<p>Radiant caching mechanisam is somehow similar to action caching in rails.</p>
+
+<p>In latest radiant version i.e. > 0.8 Responsecache has been replaced with Radiant::Cache.</p>
+
+<p>By default radiant cache gets automatically invalidated after every 5 minutes and that is configurable.</p>
+
+<p>The interval is easily configurable by adding following lines inside environment</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">if</span> <span class="n">defined?</span> <span class="no">ResponseCache</span> <span class="o">==</span> <span class="s1">&#39;constant&#39;</span>
+</span><span class='line'>  <span class="no">ResponseCache</span><span class="o">.</span><span class="n">defaults</span><span class="o">[</span><span class="ss">:expire_time</span><span class="o">]</span> <span class="o">=</span> <span class="mi">4</span><span class="o">.</span><span class="n">hours</span>
+</span><span class='line'><span class="k">else</span>
+</span><span class='line'>  <span class="no">SiteController</span><span class="o">.</span><span class="n">cache_timeout</span> <span class="o">=</span> <span class="mi">4</span><span class="o">.</span><span class="n">hours</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There are situations where automatic cache inavalidation won&rsquo;t work and we need to clear radiant cache on the fly.
+There are two ways to do that to invalidate radiant cache immediately.</p>
+
+<h2>1. Navigate to the root of your Radiant project and delete the cache directory</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">cd</span> <span class="sr">/home/</span><span class="n">deploy</span><span class="o">/</span><span class="n">radiant_site</span><span class="o">/</span><span class="n">tmp</span>
+</span><span class='line'><span class="n">rm</span> <span class="o">-</span><span class="n">r</span> <span class="n">cache</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>2. Clearing the page cache from within your code</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">if</span> <span class="n">defined?</span> <span class="no">ResponseCache</span> <span class="o">==</span> <span class="s1">&#39;constant&#39;</span>
+</span><span class='line'>  <span class="no">ResponseCache</span><span class="o">.</span><span class="n">instance</span><span class="o">.</span><span class="n">clear</span>
+</span><span class='line'><span class="k">else</span>
+</span><span class='line'>  <span class="ss">Radiant</span><span class="p">:</span><span class="ss">:Cache</span><span class="o">.</span><span class="n">clear</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>While building website using radiant cms, it happens that there are certain pages they are static and not going to change frequently that time configuring cache expiry time to long interval is going to be always beneficial and for pages which conatins dynamic content (displaying logged in user on homepage), we need to disable radiant cache for such pages. this can be done by using page_options extension.</p>
+
+<h2>Installation for radiant version  0.7</h2>
+
+<p>From your RADIANT_ROOT:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">ruby</span> <span class="n">script</span><span class="o">/</span><span class="n">extension</span> <span class="n">install</span> <span class="n">page_options</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Installation for radiant version  0.8 and higher</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">git</span> <span class="nb">clone</span> <span class="ss">git</span><span class="p">:</span><span class="sr">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">sandipransing</span><span class="o">/</span><span class="n">radiant</span><span class="o">-</span><span class="n">page_options</span><span class="o">-</span><span class="n">extension</span><span class="o">.</span><span class="n">git</span> <span class="n">vendor</span><span class="o">/</span><span class="n">extensions</span><span class="o">/</span><span class="n">page_options</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Restart server</p>
+
+<h2>Usage</h2>
+
+<ol>
+<li>Goto /admin/pages</li>
+<li>Edit any page</li>
+<li>Click on more link and edit cache settings.</li>
+</ol>
+
+
+<p>For more information <a href="http://github.com/avonderluft/radiant-page_options-extension">visit</a></p>
 </div>
 
 
@@ -155,7 +235,7 @@
         <a class="basic-alignment left" href="/2010/03/remove-svn-files-inside-directory-rm-rf/" title="Previous Post: Programming ruby Linux basics">&laquo; Programming ruby Linux basics</a>
       
       
-        <a class="basic-alignment right" href="/2010/03/railstinymce-rich-text-editor-for-ruby/" title="Next Post: Rails Tiny MCE - A Rich Text Editor for ruby on rails">Rails Tiny MCE - A Rich Text Editor for ruby on rails &raquo;</a>
+        <a class="basic-alignment right" href="/2010/03/railstinymce-rich-text-editor-for-ruby/" title="Next Post: Rails Tiny MCE - A Rich Text Editor for rails 3">Rails Tiny MCE - A Rich Text Editor for rails 3 &raquo;</a>
       
     </p>
     <p class="meta">

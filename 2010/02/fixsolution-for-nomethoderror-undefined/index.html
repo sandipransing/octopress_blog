@@ -9,7 +9,7 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="This error appears when same action gets called twice. There might be chances to have controller with same name twice inside app as well as &hellip;">
+  <meta name="description" content="This error appears when same action gets called twice. There might be chances to have controller with same name twice inside app as well as plugins &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -103,8 +103,15 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-<span class="Apple-style-span" style="font-family: Verdana, Arial, 'Bitstream Vera Sans', Helvetica, sans-serif; font-size: 13px;"></span><br />This error appears when same action gets called twice. There might be chances to have controller with same name twice inside app as well as plugins<br /><br />In my case the error appeared while migrating from rails 2.1 to 2.3.<br />Application was having application.rb and application_controller.rb<br /><br />Files deleted:<br />trunk/app/controllers/application.rb<br /><br />And that solved problem !<br /></div>
+<div class="entry-content"><p>This error appears when same action gets called twice. There might be chances to have controller with same name twice inside app as well as plugins</p>
+
+<p>In my case the error appeared while migrating from <code>rails 2.1</code> to <code>2.3</code>
+Application was having <code>application.rb</code> and <code>application_controller.rb</code></p>
+
+<p>Files deleted:
+<code>trunk/app/controllers/application.rb</code></p>
+
+<p>And that solved problem !</p>
 </div>
 
 

@@ -103,8 +103,247 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-I am using <b>acts_as_ferret</b> and ferret server as of now with my rails application and it just works fine for me. The ONLY problem is <b>performance</b> as it takes a lot time to build index and to rebuild index when it gets screwed up and that&#8217;s where <b>sphinx rocks</b>! <br />To get started with thinking sphinx you need to install sphinx server first. for installation help click here. <br />To use sphinx search in rails we need to use either thinking sphinx gem or plugin that can be easily find on github. <br /><b>Plugin installation </b><br /><pre class=ruby>./script/plugin install  git://github.com/freelancing-god/thinking-sphinx.git </pre><br />OR <br />To <b>install gem</b> run the following command. <br /><pre class=ruby>gem install thinking-sphinx --source http://rubygems.org/  If you're upgrading, you should read this: http://freelancing-god.github.com/ts/en/upgrading.html  Successfully installed thinking-sphinx-1.3.16 1 gem installed </pre>Edit environment file and add following lines to it inside initializer block. <br /><pre class=ruby>config.gem(      'thinking-sphinx',       :lib     =&gt; 'thinking_sphinx',       :version =&gt; '1.3.16'  ) </pre>Edit Rakefile and add following lines to it. <pre class=ruby>require 'thinking_sphinx/tasks' </pre>List rake task that should <b>show up sphinx related tasks. </b><br /><pre class=ruby>rake -T ts (in /home/sandip/v1) rake doc:plugins:acts_as_audited  # Generate documentation for the acts_as_... rake doc:plugins:acts_as_ferret   # Generate documentation for the acts_as_... rake rails:update:javascripts     # Update your javascripts from your curre... rake rails:update:scripts         # Add new scripts to the application scri... rake stats                        # Report code statistics (KLOCs, etc) fro... rake test:units                   # Run tests for unitsdb:test:prepare / Ru... rake tmp:sockets:clear            # Clears all files in tmp/sockets rake ts:conf                      # Generate the Sphinx configuration file ... rake ts:config                    # Generate the Sphinx configuration file ... rake ts:in                        # Index data for Sphinx using Thinking Sp... rake ts:rebuild                   # Stop Sphinx (if it's running), rebuild ... rake ts:reindex                   # Reindex Sphinx without regenerating the... rake ts:restart                   # Restart Sphinx / Restart Sphinx rake ts:run                       # Stop if running, then start a Sphinx se... rake ts:start                     # Start a Sphinx searchd daemon using Thi... rake ts:stop                      # Stop Sphinx using Thinking Sphinx's set... rake ts:version                   # Output the current Thinking Sphinx vers... </pre><b>Start sphinx server</b> this should give up an error.<br /><pre class=ruby>rake ts:start (in /home/sandip/v1) Failed to start searchd daemon. Check /home/sandip/v1/log/searchd.log. </pre><b>Adding indexes in models</b><br /><pre class=ruby>define_index do      # following fields are database fields      # we can not add model methods in sphinx index       # sphinx fields allows ONLY model based associations      # fields       indexes customer_name       indexes phone       indexes mobile       indexes other_phone       indexes car_make       indexes car_model       indexes registration_no end </pre><b>Configure sphinx </b><br /><pre class=ruby>rake ts:config Generating Configuration to /home/sandip/v1/config/development.sphinx.conf </pre><b>Index sphinx</b><br /><pre class=ruby>rake ts:in (in /home/sandip/v1) Generating Configuration to /home/sandip/v1/config/development.sphinx.conf Sphinx 0.9.8-rc2 (r1234) Copyright (c) 2001-2008, Andrew Aksyonoff  using config file '/home/sandip/v1/config/development.sphinx.conf'... indexing index 'call_core'... collected 113521 docs, 2.1 MB collected 0 attr values sorted 0.1 Mvalues, 100.0% done sorted 0.3 Mhits, 100.0% done total 113521 docs, 2114790 bytes total 6.102 sec, 346589.68 bytes/sec, 18604.78 docs/sec distributed index 'call' can not be directly indexed; skipping. Generating Configuration to /home/sandip/v1/config/development.sphinx.conf Sphinx 0.9.8-rc2 (r1234) Copyright (c) 2001-2008, Andrew Aksyonoff  using config file '/home/sandip/v1/config/development.sphinx.conf'... indexing index 'call_core'... collected 113521 docs, 2.1 MB collected 0 attr values sorted 0.1 Mvalues, 100.0% done sorted 0.3 Mhits, 100.0% done total 113521 docs, 2114790 bytes total 3.628 sec, 582909.70 bytes/sec, 31290.34 docs/sec distributed index 'call' can not be directly indexed; skipping. </pre><b>Search using sphinx</b><br /><pre class=ruby>./script console  &gt;&gt;Call.search 'sandip' =&gt; [#<call 00:00:00"="" 09:22:35",="" 1018,="" 18:10:00",="" 2009-02-10="" 2009-03-27="" 2009-04-07="" 2009-11-18="" 20:29:06",="" 6,="" created_at:="" id:="" insurance_expiry_date:="" is="" is_existing_customer:="" nil,="" note:="" phone="" ringing",="" scheduled_at:="" state_id:="" station_shift_customer_car_insurance_product_id:="" updated_at:="">, #<call 00:00:00"="" 11:13:33",="" 18:30:00",="" 2009-02-10="" 2009-02-16="" 2009-04-03="" 2009-11-18="" 20:34:52",="" 6,="" 6024,="" call="" created",="" created_at:="" customer="" id:="" insurance_expiry_date:="" is_existing_customer:="" new="" nil,="" note:="" scheduled_at:="" state_id:="" station_shift_customer_car_insurance_product_id:="" updated_at:="">] </call></call></pre><br />It returns array of records found. conditions are allowed by sphinx. If you need to add conditions on integer attributes then index block in model needs to have has method like author_id in following. <br /><pre class=ruby>define_index do   indexes content   indexes :name, :sortable =&gt; true   indexes comments.content, :as =&gt; :comment_content   indexes [author.first_name, author.last_name], :as =&gt; :author_name      has author_id, created_at end </pre></div>
+<div class="entry-content"><p>I am using <em>acts_as_ferret</em> and <em>ferret server</em> as of now with my rails application and it just works fine for me. The ONLY problem is <strong>performance</strong> as it takes a lot time to build index and to rebuild index when it gets screwed up and that&rsquo;s where <strong>sphinx rocks</strong>!</p>
+
+<p>To get started with thinking sphinx you need to install sphinx server first. for installation help click here.</p>
+
+<p>To use sphinx search in rails we need to use either thinking sphinx gem or plugin that can be easily find on github.</p>
+
+<h2>Plugin installation</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ruby script/plugin install  git://github.com/freelancing-god/thinking-sphinx.git</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>OR</h4>
+
+<h2>Gem installation</h2>
+
+<p>To install gem run the following command.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install thinking-sphinx --source http://rubygems.org/
+</span><span class='line'>
+</span><span class='line'>If you're upgrading, you should read this:
+</span><span class='line'>http://freelancing-god.github.com/ts/en/upgrading.html
+</span><span class='line'>
+</span><span class='line'>Successfully installed thinking-sphinx-1.3.16
+</span><span class='line'>1 gem installed</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Edit environment file and add following lines to it inside initializer block.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>config.gem(
+</span><span class='line'>     'thinking-sphinx',
+</span><span class='line'>      :lib     =&gt; 'thinking_sphinx',
+</span><span class='line'>      :version =&gt; '1.3.16'
+</span><span class='line'> )</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Edit Rakefile and add following lines to it.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>require 'thinking_sphinx/tasks'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>List rake tasks that should show up sphinx related tasks.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake -T ts
+</span><span class='line'>(in /home/sandip/v1)
+</span><span class='line'>rake doc:plugins:acts_as_audited  # Generate documentation for the acts_as_...
+</span><span class='line'>rake doc:plugins:acts_as_ferret   # Generate documentation for the acts_as_...
+</span><span class='line'>rake rails:update:javascripts     # Update your javascripts from your curre...
+</span><span class='line'>rake rails:update:scripts         # Add new scripts to the application scri...
+</span><span class='line'>rake stats                        # Report code statistics (KLOCs, etc) fro...
+</span><span class='line'>rake test:units                   # Run tests for unitsdb:test:prepare / Ru...
+</span><span class='line'>rake tmp:sockets:clear            # Clears all files in tmp/sockets
+</span><span class='line'>rake ts:conf                      # Generate the Sphinx configuration file ...
+</span><span class='line'>rake ts:config                    # Generate the Sphinx configuration file ...
+</span><span class='line'>rake ts:in                        # Index data for Sphinx using Thinking Sp...
+</span><span class='line'>rake ts:rebuild                   # Stop Sphinx (if it's running), rebuild ...
+</span><span class='line'>rake ts:reindex                   # Reindex Sphinx without regenerating the...
+</span><span class='line'>rake ts:restart                   # Restart Sphinx / Restart Sphinx
+</span><span class='line'>rake ts:run                       # Stop if running, then start a Sphinx se...
+</span><span class='line'>rake ts:start                     # Start a Sphinx searchd daemon using Thi...
+</span><span class='line'>rake ts:stop                      # Stop Sphinx using Thinking Sphinx's set...
+</span><span class='line'>rake ts:version                   # Output the current Thinking Sphinx vers...</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Starting Sphinx</h2>
+
+<p>Start sphinx server this should give up an error.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake ts:start
+</span><span class='line'>(in /home/sandip/v1)
+</span><span class='line'>Failed to start searchd daemon. Check /home/sandip/v1/log/searchd.log.</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Adding indexes in models</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">define_index</span> <span class="k">do</span>
+</span><span class='line'>     <span class="c1"># following fields are database fields</span>
+</span><span class='line'>     <span class="c1"># we can not add model methods in sphinx index </span>
+</span><span class='line'>     <span class="c1"># sphinx fields allows ONLY model based associations</span>
+</span><span class='line'>     <span class="c1"># fields</span>
+</span><span class='line'>      <span class="n">indexes</span> <span class="n">customer_name</span>
+</span><span class='line'>      <span class="n">indexes</span> <span class="n">phone</span>
+</span><span class='line'>      <span class="n">indexes</span> <span class="n">mobile</span>
+</span><span class='line'>      <span class="n">indexes</span> <span class="n">other_phone</span>
+</span><span class='line'>      <span class="n">indexes</span> <span class="n">car_make</span>
+</span><span class='line'>      <span class="n">indexes</span> <span class="n">car_model</span>
+</span><span class='line'>      <span class="n">indexes</span> <span class="n">registration_no</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Configure sphinx</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rake</span> <span class="ss">ts</span><span class="p">:</span><span class="n">config</span>
+</span><span class='line'><span class="no">Generating</span> <span class="no">Configuration</span> <span class="n">to</span> <span class="sr">/home/s</span><span class="n">andip</span><span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">development</span><span class="o">.</span><span class="n">sphinx</span><span class="o">.</span><span class="n">conf</span>
+</span><span class='line'><span class="no">Index</span> <span class="n">sphinx</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">rake</span> <span class="ss">ts</span><span class="p">:</span><span class="k">in</span>
+</span><span class='line'><span class="p">(</span><span class="k">in</span> <span class="sr">/home/s</span><span class="n">andip</span><span class="o">/</span><span class="n">v1</span><span class="p">)</span>
+</span><span class='line'><span class="no">Generating</span> <span class="no">Configuration</span> <span class="n">to</span> <span class="sr">/home/s</span><span class="n">andip</span><span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">development</span><span class="o">.</span><span class="n">sphinx</span><span class="o">.</span><span class="n">conf</span>
+</span><span class='line'><span class="no">Sphinx</span> <span class="mi">0</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">8</span><span class="o">-</span><span class="n">rc2</span> <span class="p">(</span><span class="n">r1234</span><span class="p">)</span>
+</span><span class='line'><span class="no">Copyright</span> <span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="mi">2001</span><span class="o">-</span><span class="mi">2008</span><span class="p">,</span> <span class="no">Andrew</span> <span class="no">Aksyonoff</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">using</span> <span class="n">config</span> <span class="n">file</span> <span class="s1">&#39;/home/sandip/v1/config/development.sphinx.conf&#39;</span><span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'><span class="n">indexing</span> <span class="n">index</span> <span class="s1">&#39;call_core&#39;</span><span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'><span class="n">collected</span> <span class="mi">113521</span> <span class="n">docs</span><span class="p">,</span> <span class="mi">2</span><span class="o">.</span><span class="mi">1</span> <span class="no">MB</span>
+</span><span class='line'><span class="n">collected</span> <span class="mi">0</span> <span class="kp">attr</span> <span class="n">values</span>
+</span><span class='line'><span class="n">sorted</span> <span class="mi">0</span><span class="o">.</span><span class="mi">1</span> <span class="no">Mvalues</span><span class="p">,</span> <span class="mi">100</span><span class="o">.</span><span class="mi">0</span><span class="o">%</span> <span class="n">done</span>
+</span><span class='line'><span class="n">sorted</span> <span class="mi">0</span><span class="o">.</span><span class="mi">3</span> <span class="no">Mhits</span><span class="p">,</span> <span class="mi">100</span><span class="o">.</span><span class="mi">0</span><span class="o">%</span> <span class="n">done</span>
+</span><span class='line'><span class="n">total</span> <span class="mi">113521</span> <span class="n">docs</span><span class="p">,</span> <span class="mi">2114790</span> <span class="n">bytes</span>
+</span><span class='line'><span class="n">total</span> <span class="mi">6</span><span class="o">.</span><span class="mi">102</span> <span class="n">sec</span><span class="p">,</span> <span class="mi">346589</span><span class="o">.</span><span class="mi">68</span> <span class="n">bytes</span><span class="o">/</span><span class="n">sec</span><span class="p">,</span> <span class="mi">18604</span><span class="o">.</span><span class="mi">78</span> <span class="n">docs</span><span class="o">/</span><span class="n">sec</span>
+</span><span class='line'><span class="n">distributed</span> <span class="n">index</span> <span class="s1">&#39;call&#39;</span> <span class="n">can</span> <span class="ow">not</span> <span class="n">be</span> <span class="n">directly</span> <span class="n">indexed</span><span class="p">;</span> <span class="n">skipping</span><span class="o">.</span>
+</span><span class='line'><span class="no">Generating</span> <span class="no">Configuration</span> <span class="n">to</span> <span class="sr">/home/s</span><span class="n">andip</span><span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">development</span><span class="o">.</span><span class="n">sphinx</span><span class="o">.</span><span class="n">conf</span>
+</span><span class='line'><span class="no">Sphinx</span> <span class="mi">0</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">8</span><span class="o">-</span><span class="n">rc2</span> <span class="p">(</span><span class="n">r1234</span><span class="p">)</span>
+</span><span class='line'><span class="no">Copyright</span> <span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="mi">2001</span><span class="o">-</span><span class="mi">2008</span><span class="p">,</span> <span class="no">Andrew</span> <span class="no">Aksyonoff</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">using</span> <span class="n">config</span> <span class="n">file</span> <span class="s1">&#39;/home/sandip/v1/config/development.sphinx.conf&#39;</span><span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'><span class="n">indexing</span> <span class="n">index</span> <span class="s1">&#39;call_core&#39;</span><span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'><span class="n">collected</span> <span class="mi">113521</span> <span class="n">docs</span><span class="p">,</span> <span class="mi">2</span><span class="o">.</span><span class="mi">1</span> <span class="no">MB</span>
+</span><span class='line'><span class="n">collected</span> <span class="mi">0</span> <span class="kp">attr</span> <span class="n">values</span>
+</span><span class='line'><span class="n">sorted</span> <span class="mi">0</span><span class="o">.</span><span class="mi">1</span> <span class="no">Mvalues</span><span class="p">,</span> <span class="mi">100</span><span class="o">.</span><span class="mi">0</span><span class="o">%</span> <span class="n">done</span>
+</span><span class='line'><span class="n">sorted</span> <span class="mi">0</span><span class="o">.</span><span class="mi">3</span> <span class="no">Mhits</span><span class="p">,</span> <span class="mi">100</span><span class="o">.</span><span class="mi">0</span><span class="o">%</span> <span class="n">done</span>
+</span><span class='line'><span class="n">total</span> <span class="mi">113521</span> <span class="n">docs</span><span class="p">,</span> <span class="mi">2114790</span> <span class="n">bytes</span>
+</span><span class='line'><span class="n">total</span> <span class="mi">3</span><span class="o">.</span><span class="mi">628</span> <span class="n">sec</span><span class="p">,</span> <span class="mi">582909</span><span class="o">.</span><span class="mi">70</span> <span class="n">bytes</span><span class="o">/</span><span class="n">sec</span><span class="p">,</span> <span class="mi">31290</span><span class="o">.</span><span class="mi">34</span> <span class="n">docs</span><span class="o">/</span><span class="n">sec</span>
+</span><span class='line'><span class="n">distributed</span> <span class="n">index</span> <span class="s1">&#39;call&#39;</span> <span class="n">can</span> <span class="ow">not</span> <span class="n">be</span> <span class="n">directly</span> <span class="n">indexed</span><span class="p">;</span> <span class="n">skipping</span><span class="o">.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Search using sphinx</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">ruby</span> <span class="n">script</span> <span class="n">console</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&gt;&gt;</span><span class="no">Call</span><span class="o">.</span><span class="n">search</span> <span class="s1">&#39;sandip&#39;</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="o">[</span><span class="c1">#&lt;call 00:00:00&quot;=&quot;&quot; 09:22:35&quot;,=&quot;&quot; 1018,=&quot;&quot; 18:10:00&quot;,=&quot;&quot; 2009-02-10=&quot;&quot; 2009-03-27=&quot;&quot; 2009-04-07=&quot;&quot; 2009-11-18=&quot;&quot; 20:29:06&quot;,=&quot;&quot; 6,=&quot;&quot; created_at:=&quot;&quot; id:=&quot;&quot; insurance_expiry_date:=&quot;&quot; is=&quot;&quot; is_existing_customer:=&quot;&quot; nil,=&quot;&quot; note:=&quot;&quot; phone=&quot;&quot; ringing&quot;,=&quot;&quot; scheduled_at:=&quot;&quot; state_id:=&quot;&quot; station_shift_customer_car_insurance_product_id:=&quot;&quot; updated_at:=&quot;&quot;&gt;, #&lt;call 00:00:00&quot;=&quot;&quot; 11:13:33&quot;,=&quot;&quot; 18:30:00&quot;,=&quot;&quot; 2009-02-10=&quot;&quot; 2009-02-16=&quot;&quot; 2009-04-03=&quot;&quot; 2009-11-18=&quot;&quot; 20:34:52&quot;,=&quot;&quot; 6,=&quot;&quot; 6024,=&quot;&quot; call=&quot;&quot; created&quot;,=&quot;&quot; created_at:=&quot;&quot; customer=&quot;&quot; id:=&quot;&quot; insurance_expiry_date:=&quot;&quot; is_existing_customer:=&quot;&quot; new=&quot;&quot; nil,=&quot;&quot; note:=&quot;&quot; scheduled_at:=&quot;&quot; state_id:=&quot;&quot; station_shift_customer_car_insurance_product_id:=&quot;&quot; updated_at:=&quot;&quot;&gt;] &lt;/call&gt;&lt;/call&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It returns array of records found. conditions are allowed by sphinx. If you need to add conditions on integer attributes then index block in model needs to have has method like author_id in following.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">define_index</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">indexes</span> <span class="n">content</span>
+</span><span class='line'>  <span class="n">indexes</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:sortable</span> <span class="o">=&gt;</span> <span class="kp">true</span>
+</span><span class='line'>  <span class="n">indexes</span> <span class="n">comments</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:comment_content</span>
+</span><span class='line'>  <span class="n">indexes</span> <span class="o">[</span><span class="n">author</span><span class="o">.</span><span class="n">first_name</span><span class="p">,</span> <span class="n">author</span><span class="o">.</span><span class="n">last_name</span><span class="o">]</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:author_name</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">has</span> <span class="n">author_id</span><span class="p">,</span> <span class="n">created_at</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 

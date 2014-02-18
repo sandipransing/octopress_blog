@@ -9,7 +9,7 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Feedzirra is a feed library that is designed to get and update many feeds as quickly as possible. This includes using libcurl-multi through the taf2 &hellip;">
+  <meta name="description" content="While using windows we get ^M characters in files that will get displayed when you open files on unix machines.To remove such ^M characters,Install &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,43 +77,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/10/feedzirra-installtion-on-ubuntu/">Feedzirra Installtion on Ubuntu Interpid</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-10-12T20:36:00+05:30" pubdate data-updated="true">Oct 12<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-Feedzirra is a feed library that is designed to get and update many feeds as quickly as possible. This includes using libcurl-multi through the <a href="http://github.com/taf2/curb/tree/master">taf2-curb</a> gem for faster http gets, and libxml through <a href="http://github.com/tenderlove/nokogiri/tree/master">nokogiri</a> and <a href="http://github.com/pauldix/sax-machine/tree/master">sax-machine</a> for faster parsing.<br/><pre>sudo apt-get install libcurl3 libxml2 libxml2-dev libxslt1-dev<br/><br/><br/><pre>sudo gem install pauldix-feedzirra<br/></pre><br/></pre></div>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -308,6 +271,51 @@ This comment has been removed by a blog administrator.</div>
 <div class='author'>black hattitude</div>
 <div class='content'>
 hello,<br><br><br>Thank you for the great quality of your blog, each  time i come here, i&#39;m amazed.<br><br><br><br><br><br> <a href="http://blackhattitude.luc-quoniam.fr" rel="nofollow" rel="nofollow">black hattitude</a>.</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/09/jruby-rails-installation-on-ubuntu/">Jruby Rails Installation on Ubuntu Interpid</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-09-29T21:22:00+05:30" pubdate data-updated="true">Sep 29<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+# install mysql if you dont have already installed<br/>sudo apt-get install mysql-server mysql-client libhtml-template-perl mailx dbishell libcompress-zlib-perl mysql-doc-5.0 tinyca<br/><br/># install ant and jdk<br/>sudo apt-get install ant sun-java6-jdk<br/><br/># install jruby<br/>mkdir software<br/>cd software<br/>wget http://dist.codehaus.org/jruby/jruby-bin-1.1.5.tar.gz<br/>tar xvfz jruby-bin-1.1.5.tar.gz<br/>ln -s jruby-1.1.5 jruby<br/>export PATH=$PATH:$HOME/software/jruby/bin<br/><br/># install the version of rails wanted by jruby<br/>jruby -S gem install jruby-openssl<br/>jruby -S gem install rails<br/><br/># list your gems<br/>jruby -S gem list<br/><br/># install the gems needed for db<br/>jruby -S gem install activerecord-jdbc-adapter activerecord-jdbcmysql-adapter<br/><br/># generate some code<br/>cd ~/scripts/ruby<br/>jruby -S rails wherehaveyoubeen -d mysql<br/>cd wherehaveyoubeen<br/>jruby script/generate controller states index<br/><br/># configure access to the database server<br/>vi config/database.yml<br/><br/>#development:<br/>#  adapter: jdbcmysql &lt;- very important!<br/>#  encoding: utf8<br/>#  database: test_development<br/>#  username: root<br/>#  password: database<br/>#  socket: /var/run/mysqld/mysqld.sock<br/><br/># generate the db<br/>jruby -S rake db:create:all<br/>jruby -S rake db:migrate<br/><br/><br/># edit your app<br/>sudo apt-get install emacs ruby-elisp irb1.8 emacs22-el<br/>emacs -bg black -fg wheat app/views/states/index.html.erb<br/><br/># uncomment the secret in app/controllers/application.rb<br/>vi app/controllers/application.rb<br/><br/># run your app<br/>jruby script/server</div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Parag</div>
+<div class='content'>
+Very helpful article. Please keep up the great work! :-)</div>
 </div>
 </div>
 </div>

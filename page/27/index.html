@@ -9,7 +9,7 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="# install mysql if you dont have already installedsudo apt-get install mysql-server mysql-client libhtml-template-perl mailx dbishell libcompress- &hellip;">
+  <meta name="description" content="Here are the simple steps to be followed while upgrading rails version to use.# Install rails version1. gem install rails -v == gem install rails 2. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,51 +77,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/09/jruby-rails-installation-on-ubuntu/">Jruby Rails Installation on Ubuntu Interpid</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-09-29T21:22:00+05:30" pubdate data-updated="true">Sep 29<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-# install mysql if you dont have already installed<br/>sudo apt-get install mysql-server mysql-client libhtml-template-perl mailx dbishell libcompress-zlib-perl mysql-doc-5.0 tinyca<br/><br/># install ant and jdk<br/>sudo apt-get install ant sun-java6-jdk<br/><br/># install jruby<br/>mkdir software<br/>cd software<br/>wget http://dist.codehaus.org/jruby/jruby-bin-1.1.5.tar.gz<br/>tar xvfz jruby-bin-1.1.5.tar.gz<br/>ln -s jruby-1.1.5 jruby<br/>export PATH=$PATH:$HOME/software/jruby/bin<br/><br/># install the version of rails wanted by jruby<br/>jruby -S gem install jruby-openssl<br/>jruby -S gem install rails<br/><br/># list your gems<br/>jruby -S gem list<br/><br/># install the gems needed for db<br/>jruby -S gem install activerecord-jdbc-adapter activerecord-jdbcmysql-adapter<br/><br/># generate some code<br/>cd ~/scripts/ruby<br/>jruby -S rails wherehaveyoubeen -d mysql<br/>cd wherehaveyoubeen<br/>jruby script/generate controller states index<br/><br/># configure access to the database server<br/>vi config/database.yml<br/><br/>#development:<br/>#  adapter: jdbcmysql &lt;- very important!<br/>#  encoding: utf8<br/>#  database: test_development<br/>#  username: root<br/>#  password: database<br/>#  socket: /var/run/mysqld/mysqld.sock<br/><br/># generate the db<br/>jruby -S rake db:create:all<br/>jruby -S rake db:migrate<br/><br/><br/># edit your app<br/>sudo apt-get install emacs ruby-elisp irb1.8 emacs22-el<br/>emacs -bg black -fg wheat app/views/states/index.html.erb<br/><br/># uncomment the secret in app/controllers/application.rb<br/>vi app/controllers/application.rb<br/><br/># run your app<br/>jruby script/server</div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>Parag</div>
-<div class='content'>
-Very helpful article. Please keep up the great work! :-)</div>
-</div>
-</div>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -272,6 +227,56 @@ I don&#39;t know If I said it already but &#8230;I&#39;m so glad I found this si
 
   <div class="entry-content"><div class='post'>
 http://watch-online-cricket.blogspot.com/2009/01/watch-india-vs-srilanka-cricket-online.html</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/09/4-steps-to-install-nginx-with-passenger/">4 Steps to Install Nginx With Passenger</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-09-09T23:47:00+05:30" pubdate data-updated="true">Sep 9<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+Install passenger program that will run your rails application<br/><strong>1. sudo gem install passenger</strong><br/>Install nginx server with passenger enabled<br/><strong>2. passenger-install-nginx-module</strong><br/><br/>it will open apt, click &#8220;Enter&#8221; to contine<br/>then select option 1 for default install<br/>then it will ask<br/>Where do you want to install Nginx to?<br/><br/>Please specify a prefix directory [/opt/nginx]:<br/>press enter<br/><br/>then copy following block<br/><br/><strong> server {<br/>listen 80;<br/>server_name <a href="http://www.yourhost.com/" target="_blank">www.yourhost.com</a>;<br/>root /somewhere/public;   # &lt;&#8212; be sure to point to &#8216;public&#8217;!<br/>passenger_enabled on;<br/>}</strong><br/><br/>Make nginx Configuration<br/>3. vi /opt/nginx/conf/nginx.conf<br/>Make passenger_root and passenger_ruby path to configuration<br/><strong><br/><br/>http {<br/>passenger_root /usr/local/lib/ruby/gems/1.8/gems/passenger-2.2.4;<br/>passenger_ruby /usr/local/bin/ruby;<br/></strong><br/><br/>then add server configuration block inside http block<br/>http{<br/>&#8230;<br/><strong> server {<br/>listen 80;<br/>server_name <a href="http://www.yourhost.com/" target="_blank">www.yourhost.com</a>; //Make sure this dns entry inside /etc/hosts<br/>root /carsonline/public;   # &lt;&#8212; be sure to point to &#8216;public&#8217;! //here carsonline is RAILS_ROOT<br/>passenger_enabled on;<br/>}</strong><br/><br/>Thats, all<br/><br/>4. Launch Server<br/><br/>/opt/nginx/sbin/nginx</div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>sandip Ransing</div>
+<div class='content'>
+You are right..but sometimes we have to manually configure it when there are multiple ruby installations.</div>
+</div>
+<div class='comment'>
+<div class='author'>gautamrege</div>
+<div class='content'>
+I think passenger_root and passenger_ruby get automatically configured during installation.<br><br>Good article.</div>
+</div>
+</div>
 </div>
   
   
