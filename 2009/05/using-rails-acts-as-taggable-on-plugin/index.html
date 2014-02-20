@@ -9,7 +9,8 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="A tagging plugin for Rails applications that allows for custom tagging along dynamic contexts.Plugin Installationscript/plugin install git://github. &hellip;">
+  <meta name="description" content="A tagging plugin for Rails applications that allows for custom tagging along dynamic contexts. Plugin Installation 1
+ruby script/plugin install git &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -103,16 +104,147 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-A tagging plugin for Rails applications that allows for custom tagging along dynamic contexts.<br/><br/>Plugin Installation<br/><br/><pre class=ruby>script/plugin install git://github.com/mbleigh/acts-as-taggable-on.git</pre><br/><br/>Gem Installation<br/><br/><br/><pre class=ruby>gem install mbleigh-acts-as-taggable-on --source http://gems.github.com</pre><br/><br/><br/>Auto Install<br/>include following line in environment.rb<br/><br/><pre class=ruby>config.gem "mbleigh-acts-as-taggable-on", :source =&gt; "http://gems.github.com", :lib =&gt; "acts-as-taggable-on"</pre><br/><br/><br/>Post Installation (Rails)<br/><pre class=ruby><br/>1. script/generate acts_as_taggable_on_migration<br/>2. rake db:migrate<br/></pre><br/><br/>Usage<br/>Add following line in your model for which you wanted to be tagged.<br/><br/><pre class=ruby>acts_as_taggable_on :tags</pre><br/><br/>Example<br/><br/><pre class=ruby>class Post &lt; ActiveRecord::Base<br/>  acts_as_taggable_on :tags<br/>end</pre><br/><br/>In your View for Post<br/><pre class=ruby><br/><br/></pre><br/><br/>In your controller create action<br/><br/><pre class=ruby>@post = Post.new (params[:post])<br/># Or just hardcode to test<br/>@post.tag_list ="awesome, slick, hefty"   <br/>@post.save<br/></pre><br/><br/>What are the methods provided ??<br/><br/><pre class=ruby>@post.tag_list = "awesome, slick, hefty"   <br/><br/>Post.tagged_with("awesome", :on =&gt; :tags) # =&gt; [@post1, @post2]</pre><br/><br/><pre class=ruby>Post.tag_counts # =&gt; [,...]</pre><br/><br/>Named Scope<br/><pre class=ruby><br/>class Post  "created_at DESC"<br/>end</pre><br/><br/><pre class=ruby>Post.tagged_with("awesome").by_creation</pre><br/><br/>Pagination can be added on list of tags using will_paginate plugin<br/><pre class=ruby><br/>List Of Tags .paginate(:page =&gt; params[:page], :per_page =&gt; 20)</pre><br/><pre class=ruby><br/>@post.find_related_tags # =&gt; will give related posts having related tags. [ @post1, @post2, ...]</pre><br/><br/><br/>Tag Owners<br/><br/><pre class=ruby>class User &lt; ActiveRecord::Base<br/>  acts_as_tagger<br/>end</pre><br/><br/><br/><pre class=ruby>class Post &lt; ActiveRecord::Base<br/>  acts_as_taggable_on :tags<br/>end</pre><br/><pre class=ruby><br/>@some_user.tag(@some_post, :with =&gt; "paris, normandy", :on =&gt; :tags)<br/>@some_user.owned_taggings<br/>@some_user.owned_tags<br/>@some_post.tags_from(@some_user)</pre><br/><br/><br/>Cheers !<br/>$@ndip</div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>sitemap « Fun On Rails</div>
-<div class='content'>
-[&#8230;] using rails acts as taggable on plugin « Fun On Rails [&#8230;]</div>
-</div>
-</div>
+<div class="entry-content"><p>A tagging plugin for Rails applications that allows for custom tagging along dynamic contexts.</p>
+
+<h2>Plugin Installation</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ruby script/plugin install git://github.com/mbleigh/acts-as-taggable-on.git</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Install as a Gem</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install mbleigh-acts-as-taggable-on --source http://gems.github.com</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Auto Install</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># include following line in environment.rb
+</span><span class='line'>config.gem "mbleigh-acts-as-taggable-on", :source =&gt; "http://gems.github.com", :lib =&gt; "acts-as-taggable-on"
+</span><span class='line'>rake gems:install</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Post Installation (Rails)</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ruby script/generate acts_as_taggable_on_migration
+</span><span class='line'>rake db:migrate</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Adding taggable to model</h2>
+
+<p>Add following line in your model for which you wanted to be tagged</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>acts_as_taggable_on :tags</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Example</h2>
+
+<p>Lets take <code>post</code> model</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class Post &lt; ActiveRecord::Base
+</span><span class='line'>  acts_as_taggable_on :tags
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Controller code</h2>
+
+<p>Inside controller action</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>@post = Post.new(params[:post])
+</span><span class='line'># Or just hardcode to test
+</span><span class='line'>@post.tag_list ="awesome, slick, hefty"   
+</span><span class='line'>@post.save</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Methods</h2>
+
+<p>What are the methods provided?</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>@post.tag_list = "awesome, slick, hefty"   
+</span><span class='line'>Post.tagged_with("awesome", :on =&gt; :tags)
+</span><span class='line'># =&gt; [@post1, @post2]
+</span><span class='line'>
+</span><span class='line'>Post.tag_counts # =&gt; [,...]</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Named Scope</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class Post
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'># created_at DESC
+</span><span class='line'>Post.tagged_with("awesome").by_creation</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Pagination</h2>
+
+<p>It is easy to paginate tags collection using will_paginate plugin</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>List_Of_Tags.paginate(:page =&gt; params[:page], :per_page =&gt; 20)</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>@post.find_related_tags
+</span><span class='line'># =&gt; will give related posts having related tags. [ @post1, @post2, ...]</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Tag Owners</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class User &lt; ActiveRecord::Base
+</span><span class='line'>  acts_as_tagger
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'>class Post &lt; ActiveRecord::Base
+</span><span class='line'>  acts_as_taggable_on :tags
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Console play</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>@some_user.tag(@some_post, :with =&gt; "paris, normandy", :on =&gt; :tags)
+</span><span class='line'>@some_user.owned_taggings
+</span><span class='line'>@some_user.owned_tags
+</span><span class='line'>@some_post.tags_from(@some_user)</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 

@@ -9,7 +9,8 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Last week i moved from ruby version 1.8.6 to 1.8.7.then over a week i found that my 1.2.3 and applications developed in ruby 1.8.6 are not working &hellip;">
+  <meta name="description" content="Last week i shifted from ruby version 1.8.6 to 1.8.7 :&ndash;)
+But over a week i found that rails 1.2.3 applications developed in ruby 1.8.6 are not &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -103,8 +104,104 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-Last week i moved from ruby version 1.8.6 to 1.8.7.<br/>then over a week i found that my 1.2.3 and applications developed in ruby 1.8.6 are not working in ruby 1.8.7.<br/><br/>From lot of search on google, i found that its issue with ruby 1.8.7.<br/><br/>Then, i started searching fix / solution for this incompatibity.<br/>And, Finally i got solution.<br/><br/>We just need to fix file delegate.rb<br/>here is fix<br/><br/><pre class=ruby><strong>Diff of /branches/ruby_1_8_7/lib/delegate.rb</strong></pre><br/><br/><pre class=ruby><pre>--- branches/ruby_1_8_7/lib/delegate.rb 2008/05/31 15:17:53 16732<br/>+++ branches/ruby_1_8_7/lib/delegate.rb 2008/06/02 10:52:07 16756<br/>@@ -163,9 +163,9 @@<br/>   # Checks for a method provided by this the delegate object by fowarding the <br/><br/>   # call through \_\_getobj\_\_.<br/>   # <br/>-  def respond_to?(m)<br/>+  def respond_to?(m, include_private = false)<br/>     return true if super<br/>-    return self.__getobj__.respond_to?(m)<br/>+    return self.__getobj__.respond_to?(m, include_private)<br/><br/>   end<br/><br/>   #<br/>@@ -270,9 +270,9 @@<br/>       end<br/>       @_dc_obj.__send__(m, *args)<br/>     end<br/>-    def respond_to?(m)  # :nodoc:<br/>+    def respond_to?(m, include_private = false)  # :nodoc:<br/>       return true if super<br/><br/>-      return @_dc_obj.respond_to?(m)<br/>+      return @_dc_obj.respond_to?(m, include_private)<br/>     end<br/>     def __getobj__  # :nodoc:<br/>       @_dc_obj</pre></pre><br/>You have to make necessary changes and you are ready to work with ruby 1.8.7.<br/>need not downgrade ruby version :)<br/><br/>for Hash error<br/><br/>Add following line in config/environment.rb<br/><pre class=ruby> unless '1.9'.respond_to?(:force_encoding)<br/>     String.class_eval do<br/>       begin<br/>         remove_method :chars<br/>       rescue NameError<br/>         # OK<br/>       end<br/>     end<br/>   end</pre><br/><br/>Cheers !<br/><br/>Sandip</div>
+<div class="entry-content"><p>Last week i shifted from <code>ruby</code> version <code>1.8.6</code> to <code>1.8.7</code> :&ndash;)
+But over a week i found that rails <code>1.2.3</code> applications developed in ruby <code>1.8.6</code> are not working in ruby <code>1.8.7</code></p>
+
+<p>From lot of search on google, i found that its issue with ruby <code>1.8.7</code></p>
+
+<p>So in order to fix this bug, i started searching <code>fix / solution</code> for this incompatibity and got below fix.</p>
+
+<p>You just need to fix file <code>delegate.rb</code> and done</p>
+
+<h2>Diff of <code>/branches/ruby_1_8_7/lib/delegate.rb</code></h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>--- branches/ruby_1_8_7/lib/delegate.rb 2008/05/31 15:17:53 16732
+</span><span class='line'>+++ branches/ruby_1_8_7/lib/delegate.rb 2008/06/02 10:52:07 16756
+</span><span class='line'>@@ -163,9 +163,9 @@
+</span><span class='line'>   # Checks for a method provided by this the delegate object by fowarding the 
+</span><span class='line'>
+</span><span class='line'>   # call through \_\_getobj\_\_.
+</span><span class='line'>   # 
+</span><span class='line'>-  def respond_to?(m)
+</span><span class='line'>+  def respond_to?(m, include_private = false)
+</span><span class='line'>     return true if super
+</span><span class='line'>-    return self.__getobj__.respond_to?(m)
+</span><span class='line'>+    return self.__getobj__.respond_to?(m, include_private)
+</span><span class='line'>
+</span><span class='line'>   end
+</span><span class='line'>
+</span><span class='line'>   #
+</span><span class='line'>@@ -270,9 +270,9 @@
+</span><span class='line'>       end
+</span><span class='line'>       @_dc_obj.__send__(m, *args)
+</span><span class='line'>     end
+</span><span class='line'>-    def respond_to?(m)  # :nodoc:
+</span><span class='line'>+    def respond_to?(m, include_private = false)  # :nodoc:
+</span><span class='line'>       return true if super
+</span><span class='line'>
+</span><span class='line'>-      return @_dc_obj.respond_to?(m)
+</span><span class='line'>+      return @_dc_obj.respond_to?(m, include_private)
+</span><span class='line'>     end
+</span><span class='line'>     def __getobj__  # :nodoc:
+</span><span class='line'>       @_dc_obj</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You have to make necessary changes and you are ready to work with ruby 1.8.7.
+need not downgrade ruby version :)</p>
+
+<h2>for Hash error</h2>
+
+<p>Add following line in <code>config/environment.rb</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">unless</span> <span class="s1">&#39;1.9&#39;</span><span class="o">.</span><span class="n">respond_to?</span><span class="p">(</span><span class="ss">:force_encoding</span><span class="p">)</span>
+</span><span class='line'>  <span class="nb">String</span><span class="o">.</span><span class="n">class_eval</span> <span class="k">do</span>
+</span><span class='line'>    <span class="k">begin</span>
+</span><span class='line'>      <span class="n">remove_method</span> <span class="ss">:chars</span>
+</span><span class='line'>    <span class="k">rescue</span> <span class="no">NameError</span>
+</span><span class='line'>      <span class="c1"># OK</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 
@@ -132,7 +229,7 @@ Last week i moved from ruby version 1.8.6 to 1.8.7.<br/>then over a week i found
 
 <span class="categories">
   
-    <a class='category' href='/categories/general/'>general</a>, <a class='category' href='/categories/ruby/'>ruby</a>
+    <a class='category' href='/categories/ruby/'>ruby</a>
   
 </span>
 

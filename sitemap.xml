@@ -2,15 +2,15 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>funonrails.com/2009/05/using-rails-acts-as-taggable-on-plugin/</loc>
-        <lastmod>2014-02-14T16:34:57+05:30</lastmod>
+        <lastmod>2014-02-21T02:23:29+05:30</lastmod>
     </url>
     <url>
         <loc>funonrails.com/2009/05/awesome-working-with-rails-console-and/</loc>
-        <lastmod>2014-02-14T16:34:57+05:30</lastmod>
+        <lastmod>2014-02-21T01:29:14+05:30</lastmod>
     </url>
     <url>
         <loc>funonrails.com/2009/05/high-performance-rails-hosting/</loc>
-        <lastmod>2014-02-14T16:34:57+05:30</lastmod>
+        <lastmod>2014-02-21T01:34:06+05:30</lastmod>
     </url>
     <url>
         <loc>funonrails.com/2009/05/rails-coding-standards/</loc>
@@ -18,7 +18,7 @@
     </url>
     <url>
         <loc>funonrails.com/2009/05/fix-for-ruby-187-incompatibity/</loc>
-        <lastmod>2014-02-14T16:34:57+05:30</lastmod>
+        <lastmod>2014-02-21T01:57:39+05:30</lastmod>
     </url>
     <url>
         <loc>funonrails.com/2009/05/ruby-187-and-rails-installation-on/</loc>
@@ -26,11 +26,11 @@
     </url>
     <url>
         <loc>funonrails.com/2009/05/working-with-multiple-ruby-versions-on/</loc>
-        <lastmod>2014-02-14T16:34:57+05:30</lastmod>
+        <lastmod>2014-02-21T01:50:04+05:30</lastmod>
     </url>
     <url>
         <loc>funonrails.com/2009/05/vi-vim-shortcuts/</loc>
-        <lastmod>2014-02-14T16:34:57+05:30</lastmod>
+        <lastmod>2014-02-21T02:18:54+05:30</lastmod>
     </url>
     <url>
         <loc>funonrails.com/2009/05/render-partial-or-view-from-another/</loc>
@@ -602,7 +602,7 @@
     </url>
     <url>
         <loc>funonrails.com/</loc>
-        <lastmod>2014-02-19T01:38:21+05:30</lastmod>
+        <lastmod>2014-02-21T02:23:29+05:30</lastmod>
     </url>
     <url>
         <loc>funonrails.com/thank-you/</loc>
@@ -618,7 +618,7 @@
     </url>
     <url>
         <loc>funonrails.com/archives/</loc>
-        <lastmod>2014-02-19T01:38:21+05:30</lastmod>
+        <lastmod>2014-02-21T02:23:29+05:30</lastmod>
     </url>
     <url>
         <loc>funonrails.com/robots.txt</loc>

@@ -9,7 +9,8 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Last week i moved from ruby version 1.8.6 to 1.8.7.then over a week i found that my 1.2.3 and applications developed in ruby 1.8.6 are not working &hellip;">
+  <meta name="description" content="Last week i shifted from ruby version 1.8.6 to 1.8.7 :&ndash;)
+But over a week i found that rails 1.2.3 applications developed in ruby 1.8.6 are not &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -106,8 +107,104 @@
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-Last week i moved from ruby version 1.8.6 to 1.8.7.<br/>then over a week i found that my 1.2.3 and applications developed in ruby 1.8.6 are not working in ruby 1.8.7.<br/><br/>From lot of search on google, i found that its issue with ruby 1.8.7.<br/><br/>Then, i started searching fix / solution for this incompatibity.<br/>And, Finally i got solution.<br/><br/>We just need to fix file delegate.rb<br/>here is fix<br/><br/><pre class=ruby><strong>Diff of /branches/ruby_1_8_7/lib/delegate.rb</strong></pre><br/><br/><pre class=ruby><pre>--- branches/ruby_1_8_7/lib/delegate.rb 2008/05/31 15:17:53 16732<br/>+++ branches/ruby_1_8_7/lib/delegate.rb 2008/06/02 10:52:07 16756<br/>@@ -163,9 +163,9 @@<br/>   # Checks for a method provided by this the delegate object by fowarding the <br/><br/>   # call through \_\_getobj\_\_.<br/>   # <br/>-  def respond_to?(m)<br/>+  def respond_to?(m, include_private = false)<br/>     return true if super<br/>-    return self.__getobj__.respond_to?(m)<br/>+    return self.__getobj__.respond_to?(m, include_private)<br/><br/>   end<br/><br/>   #<br/>@@ -270,9 +270,9 @@<br/>       end<br/>       @_dc_obj.__send__(m, *args)<br/>     end<br/>-    def respond_to?(m)  # :nodoc:<br/>+    def respond_to?(m, include_private = false)  # :nodoc:<br/>       return true if super<br/><br/>-      return @_dc_obj.respond_to?(m)<br/>+      return @_dc_obj.respond_to?(m, include_private)<br/>     end<br/>     def __getobj__  # :nodoc:<br/>       @_dc_obj</pre></pre><br/>You have to make necessary changes and you are ready to work with ruby 1.8.7.<br/>need not downgrade ruby version :)<br/><br/>for Hash error<br/><br/>Add following line in config/environment.rb<br/><pre class=ruby> unless '1.9'.respond_to?(:force_encoding)<br/>     String.class_eval do<br/>       begin<br/>         remove_method :chars<br/>       rescue NameError<br/>         # OK<br/>       end<br/>     end<br/>   end</pre><br/><br/>Cheers !<br/><br/>Sandip</div>
+  <div class="entry-content"><p>Last week i shifted from <code>ruby</code> version <code>1.8.6</code> to <code>1.8.7</code> :&ndash;)
+But over a week i found that rails <code>1.2.3</code> applications developed in ruby <code>1.8.6</code> are not working in ruby <code>1.8.7</code></p>
+
+<p>From lot of search on google, i found that its issue with ruby <code>1.8.7</code></p>
+
+<p>So in order to fix this bug, i started searching <code>fix / solution</code> for this incompatibity and got below fix.</p>
+
+<p>You just need to fix file <code>delegate.rb</code> and done</p>
+
+<h2>Diff of <code>/branches/ruby_1_8_7/lib/delegate.rb</code></h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>--- branches/ruby_1_8_7/lib/delegate.rb 2008/05/31 15:17:53 16732
+</span><span class='line'>+++ branches/ruby_1_8_7/lib/delegate.rb 2008/06/02 10:52:07 16756
+</span><span class='line'>@@ -163,9 +163,9 @@
+</span><span class='line'>   # Checks for a method provided by this the delegate object by fowarding the 
+</span><span class='line'>
+</span><span class='line'>   # call through \_\_getobj\_\_.
+</span><span class='line'>   # 
+</span><span class='line'>-  def respond_to?(m)
+</span><span class='line'>+  def respond_to?(m, include_private = false)
+</span><span class='line'>     return true if super
+</span><span class='line'>-    return self.__getobj__.respond_to?(m)
+</span><span class='line'>+    return self.__getobj__.respond_to?(m, include_private)
+</span><span class='line'>
+</span><span class='line'>   end
+</span><span class='line'>
+</span><span class='line'>   #
+</span><span class='line'>@@ -270,9 +270,9 @@
+</span><span class='line'>       end
+</span><span class='line'>       @_dc_obj.__send__(m, *args)
+</span><span class='line'>     end
+</span><span class='line'>-    def respond_to?(m)  # :nodoc:
+</span><span class='line'>+    def respond_to?(m, include_private = false)  # :nodoc:
+</span><span class='line'>       return true if super
+</span><span class='line'>
+</span><span class='line'>-      return @_dc_obj.respond_to?(m)
+</span><span class='line'>+      return @_dc_obj.respond_to?(m, include_private)
+</span><span class='line'>     end
+</span><span class='line'>     def __getobj__  # :nodoc:
+</span><span class='line'>       @_dc_obj</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You have to make necessary changes and you are ready to work with ruby 1.8.7.
+need not downgrade ruby version :)</p>
+
+<h2>for Hash error</h2>
+
+<p>Add following line in <code>config/environment.rb</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">unless</span> <span class="s1">&#39;1.9&#39;</span><span class="o">.</span><span class="n">respond_to?</span><span class="p">(</span><span class="ss">:force_encoding</span><span class="p">)</span>
+</span><span class='line'>  <span class="nb">String</span><span class="o">.</span><span class="n">class_eval</span> <span class="k">do</span>
+</span><span class='line'>    <span class="k">begin</span>
+</span><span class='line'>      <span class="n">remove_method</span> <span class="ss">:chars</span>
+</span><span class='line'>    <span class="k">rescue</span> <span class="no">NameError</span>
+</span><span class='line'>      <span class="c1"># OK</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   
@@ -188,16 +285,46 @@ Some more &#8230;&#8230;&#8230;.<br>http://rails.learnhub.com/lesson/5017-ruby-c
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-There are lot of rails hosting, like wired tree,&#8230;, <br/>i am still in search of cost effective and high performance hosting. <br/><br/>recently i came across with joyent rails hosting, please let me know your opinions..<br/><br/><br/><strong>Scale on Demand</strong><br/><br/>Your rails infrastructure can be dynamically expanded or reduced within minutes.<br/> <br/><strong>Support Billions of Hits</strong><br/><br/>The largest ruby on rails application running on Joyent does over 1 Billion page views a month. Joyent&#8217;s hardware load balancers make this kind of scale possible.<br/>Ruby 1.8.6, Rails 2.1, Mongrel, Nginx<br/><br/>Everything you need to get rolling is pre-installed, including Ruby 1.8.6 and Rails 2.1, Apache, lighttpd, nginx and Mongrel.<br/> <br/><strong>Extremely Cost Effective</strong><br/><br/>Static IPs, real storage, 10TB data transfer / bandwidth, and fantastic support all included.<br/>Lightning Fast Speed<br/><br/>We provide direct connections to tier 1 internet back-bones, Force10 switches and f5 BigIP load-balancers.<br/> <br/><strong>Trusted by Companies like LinkedIn</strong><br/><br/><br/>Check out their post<br/><strong>Official Ruby on Rails Host</strong><br/><br/>We&#8217;re the Official Ruby on Rails host. Go check it out at rubyonrails.org. &#8220;If you need hosting, Joyent is the official Ruby on Rails host, offering fantastic plans with a knowledgeable staff. Whether you need shared or dedicated hosting, these guys are experts in Ruby on Rails. &#8221;<br/><strong>Leverage a Large Community</strong><br/><br/>Over 2,400 companies run Rails applications on Joyent. You gain from our experience hosting them and you can connect directly with them through the Joyent Forums and the Joyent Wiki<br/> <br/><strong>Entirely Open Loving Cloud</strong><br/><br/>Joyent offers open protocols, open source solutions. Use any Language, any DB. You can move your application. No vendor lock-in. <br/><br/>please, help me&#8230;&#8230;:(</div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>sitemap « Fun On Rails</div>
-<div class='content'>
-[&#8230;] High Performance Rails Hosting « Fun On Rails [&#8230;]</div>
-</div>
-</div>
+  <div class="entry-content"><p>There are lot of rails hosting, like <code>wired tree</code>, etc.
+While doing search for cost effective and high performance hosting, Recently i came across with <code>joyent</code> rails hosting.
+please let me know your opinions on this.</p>
+
+<p>Here are some of the listed capabilities :</p>
+
+<h4>Scale on Demand</h4>
+
+<p>Your rails infrastructure can be dynamically expanded or reduced within minutes.</p>
+
+<h4>Support Billions of Hits</h4>
+
+<p>The largest ruby on rails application running on Joyent does over 1 Billion page views a month. Joyent’s hardware load balancers make this kind of scale possible.
+<code>Ruby 1.8.6</code>, <code>Rails 2.1</code>, <code>Mongrel</code>, <code>Nginx</code></p>
+
+<p>Everything you need to get rolling is pre-installed, including Ruby 1.8.6 and Rails 2.1, Apache, lighttpd, nginx and Mongrel.</p>
+
+<h4>Extremely Cost Effective</h4>
+
+<p>Static IPs, real storage, 10TB data transfer / bandwidth, and fantastic support all included.
+Lightning Fast Speed</p>
+
+<p>We provide direct connections to tier 1 internet back-bones, Force10 switches and f5 BigIP load-balancers.</p>
+
+<p><strong>Trusted by Companies like LinkedIn</strong></p>
+
+<h4>Check out their post</h4>
+
+<p>Official Ruby on Rails Host</p>
+
+<p>We’re the Official Ruby on Rails host. Go check it out at rubyonrails.org. “If you need hosting, Joyent is the official Ruby on Rails host, offering fantastic plans with a knowledgeable staff. Whether you need shared or dedicated hosting, these guys are experts in Ruby on Rails. ”
+Leverage a Large Community</p>
+
+<p>Over 2,400 companies run Rails applications on Joyent. You gain from our experience hosting them and you can connect directly with them through the Joyent Forums and the Joyent Wiki</p>
+
+<h4>Entirely Open Loving Cloud</h4>
+
+<p>Joyent offers open protocols, open source solutions. Use any Language, any DB. You can move your application. No vendor lock-in.</p>
+
+<p>please, help me……:(</p>
 </div>
   
   
@@ -233,16 +360,53 @@ There are lot of rails hosting, like wired tree,&#8230;, <br/>i am still in sear
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-Testing your active record methods using script/console<br/><br/>If you are using windows, you start the console by using this command:<br/><br/><pre class=ruby>ruby script\console</pre><br/>Linux:<br/><br/><pre class=ruby>./script/console</pre><br/><br/>Just use the following command whenever you make changes to your model objects:<br/><br/><pre class=ruby>reload!</pre><br/><br/>Instead of accessing your MySQL database with<br/><br/><pre class=ruby>mysql -u  -p</pre><br/><br/>You can instead do<br/><br/><pre class=ruby>script/dbconsole</pre><br/><br/>and if you database has a password, just do<br/><br/><pre class=ruby>script/dbconsole -p</pre><br/><br/><pre class=ruby><br/>% script/dbconsole     # connect to development database (or $RAILS_ENV)<br/>% script/dbconsole production    # connect to production database</pre><br/><br/>Cheers !<br/><br/><a href="http://sandip.sosblog.com">$@ndip</a></div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>sitemap « Fun On Rails</div>
-<div class='content'>
-[&#8230;] Awesome: Working with the Rails console and all the tricks « Fun On Rails [&#8230;]</div>
-</div>
-</div>
+  <div class="entry-content"><p>Testing your active record methods using <em>script/console</em></p>
+
+<h4>Windows</h4>
+
+<p>If you are using windows, you start the console by using this command:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ruby script/console</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Linux:</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>./script/console</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Just use the following command whenever you make changes to your model objects:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>reload!</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Instead of accessing your MySQL database with</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mysql -u  -p</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can instead do</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>script/dbconsole</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and if you database has a password, just do</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ruby script/dbconsole -p</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Connecting to different rails environments</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ruby script/dbconsole     # connect to development database (or $RAILS_ENV)
+</span><span class='line'>ruby script/dbconsole production    # connect to production database</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   
@@ -278,16 +442,147 @@ Testing your active record methods using script/console<br/><br/>If you are usin
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-A tagging plugin for Rails applications that allows for custom tagging along dynamic contexts.<br/><br/>Plugin Installation<br/><br/><pre class=ruby>script/plugin install git://github.com/mbleigh/acts-as-taggable-on.git</pre><br/><br/>Gem Installation<br/><br/><br/><pre class=ruby>gem install mbleigh-acts-as-taggable-on --source http://gems.github.com</pre><br/><br/><br/>Auto Install<br/>include following line in environment.rb<br/><br/><pre class=ruby>config.gem "mbleigh-acts-as-taggable-on", :source =&gt; "http://gems.github.com", :lib =&gt; "acts-as-taggable-on"</pre><br/><br/><br/>Post Installation (Rails)<br/><pre class=ruby><br/>1. script/generate acts_as_taggable_on_migration<br/>2. rake db:migrate<br/></pre><br/><br/>Usage<br/>Add following line in your model for which you wanted to be tagged.<br/><br/><pre class=ruby>acts_as_taggable_on :tags</pre><br/><br/>Example<br/><br/><pre class=ruby>class Post &lt; ActiveRecord::Base<br/>  acts_as_taggable_on :tags<br/>end</pre><br/><br/>In your View for Post<br/><pre class=ruby><br/><br/></pre><br/><br/>In your controller create action<br/><br/><pre class=ruby>@post = Post.new (params[:post])<br/># Or just hardcode to test<br/>@post.tag_list ="awesome, slick, hefty"   <br/>@post.save<br/></pre><br/><br/>What are the methods provided ??<br/><br/><pre class=ruby>@post.tag_list = "awesome, slick, hefty"   <br/><br/>Post.tagged_with("awesome", :on =&gt; :tags) # =&gt; [@post1, @post2]</pre><br/><br/><pre class=ruby>Post.tag_counts # =&gt; [,...]</pre><br/><br/>Named Scope<br/><pre class=ruby><br/>class Post  "created_at DESC"<br/>end</pre><br/><br/><pre class=ruby>Post.tagged_with("awesome").by_creation</pre><br/><br/>Pagination can be added on list of tags using will_paginate plugin<br/><pre class=ruby><br/>List Of Tags .paginate(:page =&gt; params[:page], :per_page =&gt; 20)</pre><br/><pre class=ruby><br/>@post.find_related_tags # =&gt; will give related posts having related tags. [ @post1, @post2, ...]</pre><br/><br/><br/>Tag Owners<br/><br/><pre class=ruby>class User &lt; ActiveRecord::Base<br/>  acts_as_tagger<br/>end</pre><br/><br/><br/><pre class=ruby>class Post &lt; ActiveRecord::Base<br/>  acts_as_taggable_on :tags<br/>end</pre><br/><pre class=ruby><br/>@some_user.tag(@some_post, :with =&gt; "paris, normandy", :on =&gt; :tags)<br/>@some_user.owned_taggings<br/>@some_user.owned_tags<br/>@some_post.tags_from(@some_user)</pre><br/><br/><br/>Cheers !<br/>$@ndip</div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>sitemap « Fun On Rails</div>
-<div class='content'>
-[&#8230;] using rails acts as taggable on plugin « Fun On Rails [&#8230;]</div>
-</div>
-</div>
+  <div class="entry-content"><p>A tagging plugin for Rails applications that allows for custom tagging along dynamic contexts.</p>
+
+<h2>Plugin Installation</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ruby script/plugin install git://github.com/mbleigh/acts-as-taggable-on.git</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Install as a Gem</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install mbleigh-acts-as-taggable-on --source http://gems.github.com</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Auto Install</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># include following line in environment.rb
+</span><span class='line'>config.gem "mbleigh-acts-as-taggable-on", :source =&gt; "http://gems.github.com", :lib =&gt; "acts-as-taggable-on"
+</span><span class='line'>rake gems:install</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Post Installation (Rails)</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ruby script/generate acts_as_taggable_on_migration
+</span><span class='line'>rake db:migrate</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Adding taggable to model</h2>
+
+<p>Add following line in your model for which you wanted to be tagged</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>acts_as_taggable_on :tags</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Example</h2>
+
+<p>Lets take <code>post</code> model</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class Post &lt; ActiveRecord::Base
+</span><span class='line'>  acts_as_taggable_on :tags
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Controller code</h2>
+
+<p>Inside controller action</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>@post = Post.new(params[:post])
+</span><span class='line'># Or just hardcode to test
+</span><span class='line'>@post.tag_list ="awesome, slick, hefty"   
+</span><span class='line'>@post.save</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Methods</h2>
+
+<p>What are the methods provided?</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>@post.tag_list = "awesome, slick, hefty"   
+</span><span class='line'>Post.tagged_with("awesome", :on =&gt; :tags)
+</span><span class='line'># =&gt; [@post1, @post2]
+</span><span class='line'>
+</span><span class='line'>Post.tag_counts # =&gt; [,...]</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Named Scope</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class Post
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'># created_at DESC
+</span><span class='line'>Post.tagged_with("awesome").by_creation</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Pagination</h2>
+
+<p>It is easy to paginate tags collection using will_paginate plugin</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>List_Of_Tags.paginate(:page =&gt; params[:page], :per_page =&gt; 20)</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>@post.find_related_tags
+</span><span class='line'># =&gt; will give related posts having related tags. [ @post1, @post2, ...]</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Tag Owners</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class User &lt; ActiveRecord::Base
+</span><span class='line'>  acts_as_tagger
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'>class Post &lt; ActiveRecord::Base
+</span><span class='line'>  acts_as_taggable_on :tags
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Console play</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>@some_user.tag(@some_post, :with =&gt; "paris, normandy", :on =&gt; :tags)
+</span><span class='line'>@some_user.owned_taggings
+</span><span class='line'>@some_user.owned_tags
+</span><span class='line'>@some_post.tags_from(@some_user)</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   
