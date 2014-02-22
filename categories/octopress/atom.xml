@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress, | Fun On Rails]]></title>
   <link href="funonrails.com/categories/octopress/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-22T20:21:48+05:30</updated>
+  <updated>2014-02-22T20:23:19+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -27,7 +27,7 @@
 <p>First, you need to export your posts from blogger.
 Goto <code>blogger admin area</code> and then go to <code>settings &gt;&gt; other &gt;&gt; Export Blog</code> and click on it. Please wait sometime and popup will comeup allowing you to download blog in <code>xml</code> format.</p>
 
-<p><img src="{{ root_url }}/images/export-blog.png" /></p>
+<p><img src="/images/export-blog.png" /></p>
 
 <p>If you still finding some problem with exporting then see <a href="http://www.freetech4teachers.com/2013/01/how-to-export-your-blogger-and.html">here</a></p>
 

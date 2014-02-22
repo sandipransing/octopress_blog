@@ -4,7 +4,7 @@
   <title><![CDATA[Category: active-scaffold | Fun On Rails]]></title>
   <link href="funonrails.com/categories/active-scaffold/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-22T20:21:48+05:30</updated>
+  <updated>2014-02-22T20:23:19+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -124,7 +124,7 @@ rails s
 
 <p>Visit Browser URL: <a href="http://localhost:3000/cities">http://localhost:3000/cities</a></p>
 
-<p>{% img left <a href="http://4.bp.blogspot.com/-CJgSXg5EJyE/TZ8EDHwCwaI/AAAAAAAABPs/81dNxWDwYm0/s1600/active_scaffold.png">http://4.bp.blogspot.com/-CJgSXg5EJyE/TZ8EDHwCwaI/AAAAAAAABPs/81dNxWDwYm0/s1600/active_scaffold.png</a> %}</p>
+<p><img class="left <a" src="href="http://4.bp.blogspot.com/-CJgSXg5EJyE/TZ8EDHwCwaI/AAAAAAAABPs/81dNxWDwYm0/s1600/active_scaffold.png">http://4.bp.blogspot.com/-CJgSXg5EJyE/TZ8EDHwCwaI/AAAAAAAABPs/81dNxWDwYm0/s1600/active_scaffold.png</a>"></p>
 ]]></content>
   </entry>
   
