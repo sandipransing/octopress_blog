@@ -9,7 +9,14 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Remote Login============ssh client is a program for logging into remote machine and execute commands.ssh [-l login_name ] hostname | user@hostname [ &hellip;">
+  <meta name="description" content="Remote Login ssh client is a program for logging into remote system and execute commands on that system 1
+2
+3
+4
+5
+6
+7
+ssh [-l login_name ] hostname &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,7 +90,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2009/11/linux-commands-for-remote-access/">Linux Commands for Remote Access, Compress, Decompress</a></h1>
+      <h1 class="entry-title"><a href="/2009/11/remote-access-remote-copy-compress-decompress-on-linux/">Remote Access, Remote Copy and Files Compress, Decompress on Linux</a></h1>
     
     
       <p class="meta">
@@ -106,8 +113,61 @@
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-<span style="font-family: arial, sans-serif, 'Arial Unicode MS'; font-size: small;"><span style="border-collapse: collapse; font-size: 13px;"><span style="font-family: 'Times New Roman';"><span style="border-collapse: separate; font-size: medium;"><b> </b></span></span></span></span><br /><span style="font-family: arial, sans-serif, 'Arial Unicode MS'; font-size: small;"><span style="font-family: 'Times New Roman';"><b></b></span></span><br /><span style="font-family: arial, sans-serif, 'Arial Unicode MS'; font-size: small;"><span style="font-family: 'Times New Roman';"><b><pre class="western"><b><span style="font-family: Arial, Helvetica, sans-serif;">Remote Login</span></b><span style="font-family: Arial, Helvetica, sans-serif;"><br />============<br /></span><span class="Apple-style-span" style="font-weight: normal;"><span style="font-family: Arial, Helvetica, sans-serif;">ssh client is a program for logging into remote machine and execute commands.</span></span><span style="font-family: Arial, Helvetica, sans-serif;"><br /><br /></span><b><span style="font-family: Arial, Helvetica, sans-serif;">ssh [-l login_name ] hostname | user@hostname [command ]</span></b><span style="font-family: Arial, Helvetica, sans-serif;"><br /><br /></span><b><span style="font-family: Arial, Helvetica, sans-serif;">other options</span></b><span style="font-family: Arial, Helvetica, sans-serif;"><br /><br /></span><span class="Apple-style-span" style="font-weight: normal;"><span style="font-family: Arial, Helvetica, sans-serif;">ssh [-afgknqstvxACNTX1246 ] [-b bind_address ] [-c cipher_spec ]&nbsp;</span></span></pre><pre class="western"><span class="Apple-style-span" style="font-weight: normal;"><span style="font-family: Arial, Helvetica, sans-serif;">[-e escape_char ] [-i identity_file ] [-l login_name ] [-m mac_spec ]&nbsp;</span></span></pre><pre class="western"><span class="Apple-style-span" style="font-weight: normal;"><span style="font-family: Arial, Helvetica, sans-serif;">[-o option ] [-p port ] [-F configfile ] [-L port host hostport ]&nbsp;</span></span></pre><pre class="western"><span class="Apple-style-span" style="font-weight: normal;"><span style="font-family: Arial, Helvetica, sans-serif;">[-R port host hostport ] [-D port ] hostname | user@hostname [command </span></span><span style="font-family: Arial, Helvetica, sans-serif;">]<br /><br />One can use </span><b><span style="font-family: Arial, Helvetica, sans-serif;">putty</span></b><span style="font-family: Arial, Helvetica, sans-serif;"> for remote login through </span><b><span style="font-family: Arial, Helvetica, sans-serif;">windows</span></b><span style="font-family: Arial, Helvetica, sans-serif;"> machine<br /><br /></span><b><span style="font-family: Arial, Helvetica, sans-serif;">Remote Copy</span></b><span style="font-family: Arial, Helvetica, sans-serif;"><br />============<br /></span><b><span style="font-family: Arial, Helvetica, sans-serif;">scp - </span></b><span class="Apple-style-span" style="font-weight: normal;"><span style="font-family: Arial, Helvetica, sans-serif;">secure copy (remote file copy program) that copies file between computers over network</span></span><span style="font-family: Arial, Helvetica, sans-serif;"><br /><br /></span><b><span style="font-family: Arial, Helvetica, sans-serif;">scp source[ source file path] destination[user@funonrails.com:/home]</span></b><span style="font-family: Arial, Helvetica, sans-serif;"><br /><br /></span><b><span style="font-family: Arial, Helvetica, sans-serif;">Other options</span></b><span style="font-family: Arial, Helvetica, sans-serif;"><br /><br /></span><span class="Apple-style-span" style="font-weight: normal;"><span style="font-family: Arial, Helvetica, sans-serif;">[-F ssh_config ] [-S program ] [-P port ] [-c cipher ] [-i identity_file ]&nbsp;</span></span></pre><pre class="western"><span class="Apple-style-span" style="font-weight: normal;"><span style="font-family: Arial, Helvetica, sans-serif;">[-o ssh_option ] [[user@ ] host1 : file1 ] [... ] [[user@ ] host2 : file2 ]</span></span><span style="font-family: Arial, Helvetica, sans-serif;"><br /><br />One can use </span><b><span style="font-family: Arial, Helvetica, sans-serif;">pscp.exe </span></b><span style="font-family: Arial, Helvetica, sans-serif;">for remote copy from </span><b><span style="font-family: Arial, Helvetica, sans-serif;">windows</span></b><span style="font-family: Arial, Helvetica, sans-serif;"> machine<br /><br /></span><b><span style="font-family: Arial, Helvetica, sans-serif;">Compress</span></b><span style="font-family: Arial, Helvetica, sans-serif;"><br />============<br /></span><b><span style="font-family: Arial, Helvetica, sans-serif;">tar</span></b><span style="font-family: Arial, Helvetica, sans-serif;"> - </span><span class="Apple-style-span" style="font-weight: normal;"><span style="font-family: Arial, Helvetica, sans-serif;">is a package that allows you to compress direcory or file</span></span></pre><pre class="western"><span style="font-family: Arial, Helvetica, sans-serif;"><br /></span><b><span style="font-family: Arial, Helvetica, sans-serif;">tar czfv Test.tar.tgz Test/</span></b><span style="font-family: Arial, Helvetica, sans-serif;"><br /><br /></span><b><span style="font-family: Arial, Helvetica, sans-serif;">Decompress</span></b><span style="font-family: Arial, Helvetica, sans-serif;"><br />============<br /></span><b><span style="font-family: Arial, Helvetica, sans-serif;">gzip</span></b><span style="font-family: Arial, Helvetica, sans-serif;"> - </span><span class="Apple-style-span" style="font-weight: normal;"><span style="font-family: Arial, Helvetica, sans-serif;">is a package that allows to extract compressed file/directories.</span></span><span style="font-family: Arial, Helvetica, sans-serif;"><br /><br /></span><b><span style="font-family: Arial, Helvetica, sans-serif;">gzip -dc target.tar.tgz | tar xf -</span></b><span style="font-family: Arial, Helvetica, sans-serif;"><br /></span></pre></b></span></span><br /><span style="font-size: small;"><span style="font-family: Arial, Helvetica, sans-serif;"><b></b></span></span><br /><span style="font-size: small;"><b><div><div><br /></div></div></b></span><br /></div>
+  <div class="entry-content"><h2>Remote Login</h2>
+
+<p><code>ssh</code> client is a program for logging into remote system and execute commands on that system</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ssh [-l login_name ] hostname | user@hostname [command ]
+</span><span class='line'>
+</span><span class='line'># other options
+</span><span class='line'>ssh [-afgknqstvxACNTX1246 ] [-b bind_address ] [-c cipher_spec ] 
+</span><span class='line'>[-e escape_char ] [-i identity_file ] [-l login_name ] [-m mac_spec ] 
+</span><span class='line'>[-o option ] [-p port ] [-F configfile ] [-L port host hostport ] 
+</span><span class='line'>[-R port host hostport ] [-D port ] hostname | user@hostname [command ]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>One can use putty for remote login through windows machine</p>
+
+<h2>Remote Copy</h2>
+
+<p><code>scp</code> &ndash; secure copy (remote file copy program) that copies file between computers over network</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>scp source[ source file path] destination[user@funonrails.com:/home]
+</span><span class='line'>
+</span><span class='line'># Other options
+</span><span class='line'>[-F ssh_config ] [-S program ] [-P port ] [-c cipher ] [-i identity_file ] 
+</span><span class='line'>[-o ssh_option ] [[user@ ] host1 : file1 ] [... ] [[user@ ] host2 : file2 ]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>On windows system <code>pscp.exe</code> can be used for remote copy</p>
+
+<h2>Compress</h2>
+
+<p><code>tar</code> is a package that allows you to compress direcory or file</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>tar czfv Test.tar.tgz Test/</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Decompress</h2>
+
+<p><code>gzip</code> is a package that allows to extract compressed file/directories.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gzip -dc target.tar.tgz | tar xf -</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   
@@ -143,8 +203,68 @@
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-<span style="font-family: Arial; font-size: small;"><span class="Apple-style-span" style="background-color: white; font-size: 13px;">Just a single line variable swap in ruby<br /></span></span><blockquote>x,y=y,x</blockquote>Example:<br /><br /><blockquote>irb&gt;&gt; x = &#8220;Fun&#8221;</blockquote><blockquote>=&gt; &#8220;Fun&#8221;</blockquote><blockquote>irb&gt;&gt; y = &#8220;Rails&#8221;</blockquote><blockquote>=&gt; &#8220;Rails&#8221;</blockquote><blockquote>irb&gt;&gt; x,y = y,x</blockquote><blockquote>=&gt; [&#8220;Rails&#8221;, &#8220;Fun&#8221;]</blockquote><blockquote>irb&gt;&gt; p x</blockquote><blockquote>&#8220;Rails&#8221;</blockquote><blockquote>=&gt; nil</blockquote><blockquote>&gt;&gt; p y</blockquote><blockquote>&#8220;Fun&#8221;</blockquote><div><b>Variable assignments in Ruby</b></div>we can do multiple assignments in a single line.<br /><br /><blockquote>irb&gt;&gt; a,b,c,d = 1,2,3,4</blockquote><blockquote>=&gt; [1, 2, 3, 4]</blockquote><br /><br />here is interpretation of above line<br /><br /><blockquote>irb&gt;&gt;&nbsp;p &#8220;a =&gt; #{a} b =&gt; #{b} c =&gt; #{c} d =&gt; #{d}&#8221;</blockquote><blockquote>&#8220;a =&gt; 1 b =&gt; 2 c =&gt; 3 d =&gt; 4&#8221;</blockquote><br /><b>Multiple assignments in ruby</b><br /><b><br /></b><br /><blockquote>a = b = c = d = 12</blockquote><br />This means a,b,c,d variables has value 12<br /></div>
+  <div class="entry-content"><h2>Single line code to swap variables in ruby</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span><span class="n">x</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Examples</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;Fun&quot;</span>
+</span><span class='line'><span class="n">y</span> <span class="o">=</span> <span class="s2">&quot;Rails&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span><span class="n">x</span>
+</span><span class='line'><span class="c1">#=&gt; [&quot;Rails&quot;, &quot;Fun&quot;]</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="n">x</span>
+</span><span class='line'><span class="c1">#=&gt; &quot;Rails&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="n">y</span>
+</span><span class='line'><span class="c1">#=&gt; &quot;Fun&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Variable assignments in Ruby</h2>
+
+<p>Also Multiple variables assignments can be done in a single line</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">d</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span>
+</span><span class='line'><span class="c1">#=&gt; [1, 2, 3, 4]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here is interpretation of the above line</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">puts</span> <span class="s2">&quot;a is </span><span class="si">#{</span><span class="n">a</span><span class="si">}</span><span class="s2">, b is </span><span class="si">#{</span><span class="n">b</span><span class="si">}</span><span class="s2">, c is </span><span class="si">#{</span><span class="n">c</span><span class="si">}</span><span class="s2">, d is </span><span class="si">#{</span><span class="n">d</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="c1">#=&gt; &quot;a is 1, b is 2, c is 3, d is 4&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Multiple assignments in ruby</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="n">b</span> <span class="o">=</span> <span class="n">c</span> <span class="o">=</span> <span class="n">d</span> <span class="o">=</span> <span class="mi">12</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here <code>a</code>,<code>b</code>,<code>c</code> and <code>d</code> has value 12</p>
 </div>
   
   
@@ -180,16 +300,203 @@
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-Hello ROR lovers,<br/><br/>      I wanted to list down ruby on rails developers in india. I would glad to see your name in this list. Lets, see how much rails hobbies are there in india.<br/>      <br/>Thanks,<br/>Sandip<br/><br/>List goes here&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;<br/><br/><blockquote><b>Name:</b> Sandip Ransing<br/><b>ROR Experience:</b> 2.1 yrs<br/><b>Overall:</b> 2.8+ yrs<br/><b>Location:</b> Pune<br/><b>Company:</b> Josh Software Private Limited.</blockquote><blockquote><b>Name:</b> Amit Yadav<br/><b>Experience:</b> 2.5 yrs<br/><b>Overall:</b> 5.8 yrs<br/><b>Location:</b> Pune<br/><b>Company:</b> Globallogic<br/></blockquote><blockquote><b>Name:</b> Haribhau Ingale<br/><b>ROR Experience:</b> 4 yrs<br/><b>Overall:</b> 5+ yrs<br/>location: Pune<br/><b>Company:</b> Persistent Systems Ltd.<br/></blockquote><blockquote><b>Name:</b> ABHISHEK V. AMBAVANE<br/><b>ROR Experience:</b> WITHOUT ADOBE FLEX AROUND 6 MONTHS WITH FLEX,AIR IS AROUND 1 YR.<br/><b>Overall:</b> 2.8 YRS.<br/><b>Location:</b> PUNE<br/><b>Company:</b> BETTERLABS<br/></blockquote><blockquote><b>Name:</b> Sunny Bogawat<br/><b>ROR Experience:</b> 1.5 YR.<br/><b>Location:</b> PUNE<br/><b>Company:</b> Neova solutions<br/></blockquote><blockquote><b>Name:</b> Kiran Chaudhari<br/><b>ROR Experience:</b> 1.8 YR.<br/><b>Location:</b> PUNE<br/><b>Company:</b> Josh Software Private Limited.<br/></blockquote><blockquote><b>Name:</b> Swati Verma<br/><b>ROR Experience:</b> 1.2 YR.<br/><b>Location:</b> Jaipur<br/><b>Company:</b> Rising Sun Technologies<br/></blockquote><blockquote><b>Name:</b> Satish Talim<br/><b>Ruby Experience:</b> 4 yrs<br/><b>Overall:</b> 32+ yrs<br/><b>Location:</b> Pune<br/><b>Company:</b> RubyLearning portals<br/></blockquote><blockquote><b>Name:</b> Arun Agrawal<br/>Ruby <b>Experience:</b> 3 yrs<br/><b>Overall:</b> 3+ yrs<br/><b>Location:</b> Jaipur<br/><b>Company:</b> Rising Sun(Jaipur)<br/></blockquote><blockquote><b>Name:</b> Piyush Gajjariya<br/><b>ROR Experience:</b> 2.5 Years<br/><b>Location:</b> Bangalore<br/><b>Company:</b> Pramata Knowledge Solutions<br/></blockquote><blockquote><b>Name:</b> Puneet Pandey<br/><b>ROR Experience:</b> 2 yrs<br/><b>Overall:</b> 3 Yrs<br/><b>Location:</b> Hyderabad<br/><b>Company:</b> Zibika Infotech Pvt. Ltd<br/></blockquote><blockquote><b>Name:</b> Uma Mahesh Varma<br/><b>ROR Experience:</b> 2 yrs<br/><b>Overall:</b> 3 Yrs<br/><b>Location:</b> Kakinada<br/><b>Company:</b> Nyros Technologies, Kakinada<br/></blockquote><blockquote><b>Name:</b> Mohammed Imran Ahmed<br/><b>ROR Experience:</b> 1 year<br/><b>Overall:</b> 2 year 3months Yrs<br/><b>Location:</b> Hyderabad<br/><b>Company:</b> Prithvi Information Solutions, Hyd<br/></blockquote><blockquote><b>Name:</b> Amit Kulkarni<br/><b>Title</b>: QA,Rspec Testing in ROR<br/><b>Overall:</b> 1.5 yrs<br/><b>Location:</b> Pune<br/><b>Company:</b> Josh Software Private Limited.<br/></blockquote><blockquote>I am a Software Engineer with more than three years of experience in Information Technology Industry. I worked on different Business Intelligence / Data Warehousing Projects in my experience.<br/>I am a C, C++ & UNIX enthu. I recently learnt ruby & looking forward to work in this.<br/>Thanks,<br/>Pankaj Sisodiya<br/></blockquote><blockquote><b>Name:</b> M B Chowdari<br/><b>ROR Experience:</b> 1.3 yrs<br/><b>Overall:</b> 2.3 Yrs<br/><b>Location:</b> Kakinada<br/><b>Company:</b> Nyros Technologies, Kakinada<br/></blockquote>Now your turn<br/></div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>Anonymous</div>
-<div class='content'>
-Name: Santosh Turamari<br />RoR Experience: 1.5 Yrs<br />Overall: 1.5 Yrs<br />Location: Bangalore, Karnataka<br />Company: SourceBits Technology, Bangalore</div>
-</div>
-</div>
+  <div class="entry-content"><p>Hello Railers,</p>
+
+<p>I wanted to compile list of ruby on rails developers in india. I would glad to see your name in this list.
+Lets see how many rails hobbies are there in india.</p>
+
+<p>List starts here&hellip;</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Name: Sandip Ransing
+</span><span class='line'>ROR Experience: 2.1 yrs
+</span><span class='line'>Overall: 2.8+ yrs
+</span><span class='line'>Location: Pune
+</span><span class='line'>Company: Josh Software Private Limited.</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Name: Amit Yadav
+</span><span class='line'>Experience: 2.5 yrs
+</span><span class='line'>Overall: 5.8 yrs
+</span><span class='line'>Location: Pune
+</span><span class='line'>Company: Globallogic</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Name: Haribhau Ingale
+</span><span class='line'>ROR Experience: 4 yrs
+</span><span class='line'>Overall: 5+ yrs
+</span><span class='line'>location: Pune
+</span><span class='line'>Company: Persistent Systems Ltd.</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Name: ABHISHEK V. AMBAVANE
+</span><span class='line'>ROR Experience: WITHOUT ADOBE FLEX AROUND 6 MONTHS WITH FLEX,AIR IS AROUND 1 YR.
+</span><span class='line'>Overall: 2.8 YRS.
+</span><span class='line'>Location: PUNE
+</span><span class='line'>Company: BETTERLABS</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Name: Sunny Bogawat
+</span><span class='line'>ROR Experience: 1.5 YR.
+</span><span class='line'>Location: PUNE
+</span><span class='line'>Company: Neova solutions</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Name: Kiran Chaudhari
+</span><span class='line'>ROR Experience: 1.8 YR.
+</span><span class='line'>Location: PUNE
+</span><span class='line'>Company: Josh Software Private Limited.</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Name: Swati Verma
+</span><span class='line'>ROR Experience: 1.2 YR.
+</span><span class='line'>Location: Jaipur
+</span><span class='line'>Company: Rising Sun Technologies</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Name: Satish Talim
+</span><span class='line'>Ruby Experience: 4 yrs
+</span><span class='line'>Overall: 32+ yrs
+</span><span class='line'>Location: Pune
+</span><span class='line'>Company: RubyLearning portals</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Name: Arun Agrawal
+</span><span class='line'>Ruby Experience: 3 yrs
+</span><span class='line'>Overall: 3+ yrs
+</span><span class='line'>Location: Jaipur
+</span><span class='line'>Company: Rising Sun(Jaipur)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Name: Piyush Gajjariya
+ROR Experience: 2.5 Years
+Location: Bangalore
+Company: Pramata Knowledge Solutions</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>```
+</span><span class='line'>Name: Puneet Pandey
+</span><span class='line'>ROR Experience: 2 yrs
+</span><span class='line'>Overall: 3 Yrs
+</span><span class='line'>Location: Hyderabad
+</span><span class='line'>Company: Zibika Infotech Pvt. Ltd</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Name: Uma Mahesh Varma
+</span><span class='line'>ROR Experience: 2 yrs
+</span><span class='line'>Overall: 3 Yrs
+</span><span class='line'>Location: Kakinada
+</span><span class='line'>Company: Nyros Technologies, Kakinada</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Name: Mohammed Imran Ahmed
+</span><span class='line'>ROR Experience: 1 year
+</span><span class='line'>Overall: 2 year 3months Yrs
+</span><span class='line'>Location: Hyderabad
+</span><span class='line'>Company: Prithvi Information Solutions, Hyd</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Name: Amit Kulkarni
+</span><span class='line'>Title: QA,Rspec Testing in ROR
+</span><span class='line'>Overall: 1.5 yrs
+</span><span class='line'>Location: Pune
+</span><span class='line'>Company: Josh Software Private Limited.
+</span><span class='line'>I am a Software Engineer with more than three years of experience in Information Technology Industry. I worked on different Business Intelligence / Data Warehousing Projects in my experience.</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>I am a C, C++ & UNIX enthu. I recently learnt ruby & looking forward to work in this.
+</span><span class='line'>Thanks,
+</span><span class='line'>Pankaj Sisodiya</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Name: M B Chowdari
+</span><span class='line'>ROR Experience: 1.3 yrs
+</span><span class='line'>Overall: 2.3 Yrs
+</span><span class='line'>Location: Kakinada
+</span><span class='line'>Company: Nyros Technologies, Kakinada</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Name: Santosh Turamari
+</span><span class='line'>RoR Experience: 1.5 Yrs
+</span><span class='line'>Overall: 1.5 Yrs
+</span><span class='line'>Location: Bangalore, Karnataka
+</span><span class='line'>Company: SourceBits Technology, Bangalore</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   
@@ -225,8 +532,89 @@ Name: Santosh Turamari<br />RoR Experience: 1.5 Yrs<br />Overall: 1.5 Yrs<br />L
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-Follow 10 simple steps in order to use myspace sdk api<br/><br/>1. Remove all your previous gems installed<br/>+ gem uninstall myspace<br/><br/>2. Checkout sample source code<br/><br/>svn checkout http://myspaceid-ruby-sdk.googlecode.com/svn/trunk/ myspacesdk<br/><br/>3. cd myspacesdk/samples/rails/sample<br/>4. Modify config/database.yml accordingly<br/><blockquote><br/><div>development:<br/>adapter: mysql<br/>database: sample_development<br/>password: abcd<br/>pool: 5<br/>timeout: 5000</div></blockquote><br/>5. Download http://myspaceid-ruby-sdk.googlecode.com/files/myspaceid-sdk-0.1.11.gem<br/>6. gem install &#8211;local ~/Desktop/myspaceid-sdk-0.1.11.gem i.e.PATH_TO_GEM<br/>7. Above command supposed to give you following error otherwise skip to step 10<br/><blockquote><br/><div>ERROR:  Error installing /home/sandip/Desktop/myspaceid-sdk-0.1.11.gem:<br/>myspaceid-sdk requires ruby-openid (&gt;= 0, runtime)</div></blockquote><br/>8. gem install ruby-openid go to step 6<br/>9. ruby script/server<br/>10. Browse http://localhost:3000/</div>
+  <div class="entry-content"><p>Follow 10 simple steps listed below in order to use myspace sdk api</p>
+
+<h4>1. Remove existing <code>myspace</code> gems installed if any</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem uninstall myspace</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>2. Checkout sample source code</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>svn checkout http://myspaceid-ruby-sdk.googlecode.com/svn/trunk/ myspacesdk</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>3. Move to sample dir</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd myspacesdk/samples/rails/sample</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>4. Modify DB config</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="c1"># Modify config/database.yml accordingly</span>
+</span><span class='line'><span class="l-Scalar-Plain">development</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">adapter</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">mysql</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">database</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">sample_development</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">password</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">abcd</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">pool</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">5</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">timeout</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">5000</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>5. Download Gem</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">wget http://myspaceid-ruby-sdk.googlecode.com/files/myspaceid-sdk-0.1.11.gem</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>6. Install <code>myspaceid-sdk</code> gem locally</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">gem install --local ~/Desktop/myspaceid-sdk-0.1.11.gem</span>
+</span><span class='line'><span class="l-Scalar-Plain"># --local option taskes local PATH_TO_GEM</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>7. Above command supposed to give following error otherwise skip to step 10</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">ERROR</span><span class="p-Indicator">:</span>  <span class="l-Scalar-Plain">Error installing /home/sandip/Desktop/myspaceid-sdk-0.1.11.gem</span><span class="p-Indicator">:</span>
+</span><span class='line'><span class="l-Scalar-Plain">myspaceid-sdk requires ruby-openid (&gt;= 0, runtime)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>8. Install <code>ruby-openid</code> and go to &ldquo;step 6&rdquo;</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">gem install ruby-openid</span>
+</span><span class='line'><span class="l-Scalar-Plain"># Go to step 6</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>9. Start Server</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">ruby script/server</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>10.  Browse Application</h4>
+
+<p>Open URL <a href="http://localhost:3000/">http://localhost:3000/</a></p>
 </div>
   
   
@@ -239,7 +627,7 @@ Follow 10 simple steps in order to use myspace sdk api<br/><br/>1. Remove all yo
       
   <header>
     
-      <h1 class="entry-title"><a href="/2009/10/hello/">Hello</a></h1>
+      <h1 class="entry-title"><a href="/2009/10/find-processor-cpu-information-on-linux/">Find Processor (Cpu) Information on Linux</a></h1>
     
     
       <p class="meta">
@@ -255,15 +643,230 @@ Follow 10 simple steps in order to use myspace sdk api<br/><br/>1. Remove all yo
   
 
 
-<time datetime="2009-10-27T16:45:00+05:30" pubdate data-updated="true">Oct 27<span>th</span>, 2009</time>
+<time datetime="2009-10-26T23:49:00+05:30" pubdate data-updated="true">Oct 26<span>th</span>, 2009</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-Hello from Fun On Rails <a href="http://www.funonrails.com/">www.funonrails.com</a></div>
+  <div class="entry-content"><p>Below command will give you all the details about CPU</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cat /proc/cpuinfo</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Example use</h4>
+
+<p>on my ubuntu machine, It showed me below information :</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>processor : 0
+</span><span class='line'>vendor_id : GenuineIntel
+</span><span class='line'>cpu family  : 6
+</span><span class='line'>model   : 42
+</span><span class='line'>model name  : Intel(R) Core(TM) i3-2350M CPU @ 2.30GHz
+</span><span class='line'>stepping  : 7
+</span><span class='line'>microcode : 0x1b
+</span><span class='line'>cpu MHz   : 800.000
+</span><span class='line'>cache size  : 3072 KB
+</span><span class='line'>physical id : 0
+</span><span class='line'>siblings  : 4
+</span><span class='line'>core id   : 0
+</span><span class='line'>cpu cores : 2
+</span><span class='line'>apicid    : 0
+</span><span class='line'>initial apicid  : 0
+</span><span class='line'>fpu   : yes
+</span><span class='line'>fpu_exception : yes
+</span><span class='line'>cpuid level : 13
+</span><span class='line'>wp    : yes
+</span><span class='line'>flags   : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf eagerfpu pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer xsave avx lahf_lm arat epb xsaveopt pln pts dtherm tpr_shadow vnmi flexpriority ept vpid
+</span><span class='line'>bogomips  : 4589.39
+</span><span class='line'>clflush size  : 64
+</span><span class='line'>cache_alignment : 64
+</span><span class='line'>address sizes : 36 bits physical, 48 bits virtual
+</span><span class='line'>power management:
+</span><span class='line'>
+</span><span class='line'>processor : 1
+</span><span class='line'>vendor_id : GenuineIntel
+</span><span class='line'>cpu family  : 6
+</span><span class='line'>model   : 42
+</span><span class='line'>model name  : Intel(R) Core(TM) i3-2350M CPU @ 2.30GHz
+</span><span class='line'>stepping  : 7
+</span><span class='line'>microcode : 0x1b
+</span><span class='line'>cpu MHz   : 800.000
+</span><span class='line'>cache size  : 3072 KB
+</span><span class='line'>physical id : 0
+</span><span class='line'>siblings  : 4
+</span><span class='line'>core id   : 1
+</span><span class='line'>cpu cores : 2
+</span><span class='line'>apicid    : 2
+</span><span class='line'>initial apicid  : 2
+</span><span class='line'>fpu   : yes
+</span><span class='line'>fpu_exception : yes
+</span><span class='line'>cpuid level : 13
+</span><span class='line'>wp    : yes
+</span><span class='line'>flags   : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf eagerfpu pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer xsave avx lahf_lm arat epb xsaveopt pln pts dtherm tpr_shadow vnmi flexpriority ept vpid
+</span><span class='line'>bogomips  : 4589.39
+</span><span class='line'>clflush size  : 64
+</span><span class='line'>cache_alignment : 64
+</span><span class='line'>address sizes : 36 bits physical, 48 bits virtual
+</span><span class='line'>power management:
+</span><span class='line'>
+</span><span class='line'>processor : 2
+</span><span class='line'>vendor_id : GenuineIntel
+</span><span class='line'>cpu family  : 6
+</span><span class='line'>model   : 42
+</span><span class='line'>model name  : Intel(R) Core(TM) i3-2350M CPU @ 2.30GHz
+</span><span class='line'>stepping  : 7
+</span><span class='line'>microcode : 0x1b
+</span><span class='line'>cpu MHz   : 800.000
+</span><span class='line'>cache size  : 3072 KB
+</span><span class='line'>physical id : 0
+</span><span class='line'>siblings  : 4
+</span><span class='line'>core id   : 0
+</span><span class='line'>cpu cores : 2
+</span><span class='line'>apicid    : 1
+</span><span class='line'>initial apicid  : 1
+</span><span class='line'>fpu   : yes
+</span><span class='line'>fpu_exception : yes
+</span><span class='line'>cpuid level : 13
+</span><span class='line'>wp    : yes
+</span><span class='line'>flags   : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf eagerfpu pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer xsave avx lahf_lm arat epb xsaveopt pln pts dtherm tpr_shadow vnmi flexpriority ept vpid
+</span><span class='line'>bogomips  : 4589.39
+</span><span class='line'>clflush size  : 64
+</span><span class='line'>cache_alignment : 64
+</span><span class='line'>address sizes : 36 bits physical, 48 bits virtual
+</span><span class='line'>power management:
+</span><span class='line'>
+</span><span class='line'>processor : 3
+</span><span class='line'>vendor_id : GenuineIntel
+</span><span class='line'>cpu family  : 6
+</span><span class='line'>model   : 42
+</span><span class='line'>model name  : Intel(R) Core(TM) i3-2350M CPU @ 2.30GHz
+</span><span class='line'>stepping  : 7
+</span><span class='line'>microcode : 0x1b
+</span><span class='line'>cpu MHz   : 800.000
+</span><span class='line'>cache size  : 3072 KB
+</span><span class='line'>physical id : 0
+</span><span class='line'>siblings  : 4
+</span><span class='line'>core id   : 1
+</span><span class='line'>cpu cores : 2
+</span><span class='line'>apicid    : 3
+</span><span class='line'>initial apicid  : 3
+</span><span class='line'>fpu   : yes
+</span><span class='line'>fpu_exception : yes
+</span><span class='line'>cpuid level : 13
+</span><span class='line'>wp    : yes
+</span><span class='line'>flags   : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf eagerfpu pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer xsave avx lahf_lm arat epb xsaveopt pln pts dtherm tpr_shadow vnmi flexpriority ept vpid
+</span><span class='line'>bogomips  : 4589.39
+</span><span class='line'>clflush size  : 64
+</span><span class='line'>cache_alignment : 64
+</span><span class='line'>address sizes : 36 bits physical, 48 bits virtual
+</span><span class='line'>power management:</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   

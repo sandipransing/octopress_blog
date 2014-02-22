@@ -4,7 +4,7 @@
   <title><![CDATA[Category: cms | Fun On Rails]]></title>
   <link href="funonrails.com/categories/cms/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-21T02:23:40+05:30</updated>
+  <updated>2014-02-22T20:21:48+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -226,9 +226,262 @@ git clone git://github.com/sandipransing/radiant-page_options-extension.git vend
     <link href="funonrails.com/2009/11/understanding-and-creating-radinat/"/>
     <updated>2009-11-10T13:52:00+05:30</updated>
     <id>funonrails.com/2009/11/understanding-and-creating-radinat</id>
-    <content type="html"><![CDATA[<div class='post'>
-Understanding and creating radinat extensions To start with, first of all lets know what is radiant and why to use it ? Radiant is a open source content management system designed that serves cms needs for small organisations Creating new radint application <pre class='ruby' name='code'><br /> radiant -d  mysql cms<br />    create<br />    create    CHANGELOG<br />    create    CONTRIBUTORS<br />    create    INSTALL<br />    create    LICENSE<br />    create    README<br />    create    config<br />    create    config/environments<br />    .....<br /></pre>Radiant supports extensions. It means one can add extra features to radiant based cms to add extra capabilities. Extension directory structure is almost similar to any standard rails application Radiant Extension Directory structure  <pre class='ruby' name='code'><br />       |-- app<br />              |-- controllers<br />              |-- helpers<br />              |-- models<br />              |-- views<br />       |-- db<br />              |-- migrate<br />              |-- seeds.rb<br />       |-- lib<br />              |-- spec<br />                 |-- controllers<br />                 |-- helpers<br />                 |-- models<br />                 |-- spec.opts<br />                 |-- spec_helper<br />                 |-- views<br /></pre>Creating radiant extension radiant has generators to create new radint extension script/generate extension ExtensionName Lets create session management extension for radint cms It will create directory structure for extension. <pre class='ruby' name='code'><br />script/generate extension session_management<br /></pre><pre class='ruby' name='code'><br />    create    vendor/extensions/session_management/app/controllers<br />    create    vendor/extensions/session_management/app/helpers<br />    create    vendor/extensions/session_management/app/models<br />    create    vendor/extensions/session_management/app/views<br />     create vendor/extensions/session_management/db/migrate<br />     create vendor/extensions/session_management/lib/tasks<br />     create vendor/extensions/session_management/README<br />     create vendor/extensions/session_management/session_management_extension.rb<br />     create<br />vendor/extensions/session_management/lib/tasks/session_management_extension_tasks.rake<br />     create vendor/extensions/session_management/spec/controllers<br />     create vendor/extensions/session_management/spec/models<br />     create vendor/extensions/session_management/spec/views<br />     create vendor/extensions/session_management/spec/helpers<br />     create vendor/extensions/session_management/features/support<br />     create vendor/extensions/session_management/features/step_definitions/admin<br />     create vendor/extensions/session_management/Rakefile<br />     create vendor/extensions/session_management/spec/spec_helper.rb<br />     create vendor/extensions/session_management/spec/spec.opts<br />     create vendor/extensions/session_management/cucumber.yml<br />     create vendor/extensions/session_management/features/support/env.rb<br />     create vendor/extensions/session_management/features/support/paths.rb<br /></pre>Edit session_management_extension.rb where extension version, description and website url can be added. <pre class='ruby' name='code'><br /># require_dependency 'application_controller'<br />class SessionManagementExtension < Radiant::Extension<br />  version "1.0"<br />  description "Describe your extension here"<br />  url "http://yourwebsite.com/session_management"<br />  # define_routes do |map|<br />  # map.namespace :admin, :member => { :remove => :get } do |admin|<br />  #     admin.resources :session_management<br />  # end<br />  # end<br />  def activate<br />    # admin.tabs.add "Session Management", "/admin/session_management", :after =><br />"Layouts", :visibility => [:all]<br />  end<br />  def deactivate<br />    # admin.tabs.remove "Session Management"<br />  end<br /></pre>In activate block, specify what are the library files , modules that needs to be activated while application starts. In my case, activate method looks like below.. <pre class='ruby' name='code'><br />  def activate<br />    # admin.tabs.add "Session Management", "/admin/session_management", :after =><br />"Layouts", :visibility => [:all]<br />   ApplicationController.send(:include, SessionManagementExt::ApplicationControllerExt)<br />  end<br /></pre>Generating models and controllers. <pre class='ruby' name='code'><br /> script/generate extension_model session_management session_info<br />session_id:string url:string ip:string<br /></pre>In above command first attribute is the extension name and next is model name and rest specifies attributes that needs to created. It will create <pre class='ruby' name='code'><br />     exists   app/models/<br />     exists   spec/models/<br />     create   app/models/session_info.rb<br />     create   spec/models/session_info_spec.rb<br />     exists   db/migrate<br />     create   db/migrate/20091110075042_create_session_infos.rb<br /></pre>Generating controller <pre class='ruby' name='code'><br />script/generate extension_controller session_management admin/session_managements<br /></pre>It will create an output <pre class='ruby' name='code'><br />create app/controllers/admin<br />     create app/helpers/admin<br />     create app/views/admin/session_managements<br />     create spec/controllers/admin<br />     create spec/helpers/admin<br />     create spec/views/admin/session_managements<br />     create spec/controllers/admin/session_managements_controller_spec.rb<br />     create spec/helpers/admin/session_managements_helper_spec.rb<br />     create app/controllers/admin/session_managements_controller.rb<br />     create app/helpers/admin/session_managements_helper.rb<br /></pre>Modify session managements controller for displaying sesssion infos tracked. We need before filter for every request that will capture session, ip and page url so, we need to override behaviour of application controller to add before_filter We have already added ApplicationControllerExt in activate of extension. <pre class='ruby' name='code'><br />   ApplicationController.send(:include, SessionManagementExt::ApplicationControllerExt)<br />Lets look into ApplicationControllerExt module.<br />module SessionManagementExt<br />  module ApplicationControllerExt<br />    def self.included(base)<br />     base.class_eval do<br />       before_filter :track_session<br />     end<br />    end<br />    def track_session<br />     #**"Hello from Session tracker !!!"**<br />     #TODO: location track<br />     # It can be delayed task<br />     #sudo gem install geoip_city -- --with-geoip-dir=/opt/GeoIP<br />     # require 'geoip_city'<br />     # g = GeoIPCity::Database.new('/opt/GeoIP/share/GeoIP/GeoLiteCity.dat')<br />     # res = g.look_up('201.231.22.125')<br />     # {:latitude=>-33.13330078125, :country_code3=>"ARG",<br />:longitude=>-64.3499984741211, :city=>"Río Cuarto", :country_name=>"Argentina",<br />:country_code=>"AR", :region=>"05"}<br />     SessionInfo.create( :ip => request.remote_ip, :page_url =><br />"http://#{request.env["HTTP_HOST"]}#{request.request_uri}", :session_id =><br />request.session.session_id )<br />    end<br />  end<br />end<br /></pre>That's all Creating rake task for extension module here is default genrated rake task for session management under vendor/extensions/session_management/lib/tasks/session_management_extension_tasks.rake It includes task to migrate database and update extension <pre class='ruby' name='code'><br />namespace :radiant do<br />  namespace :extensions do<br />    namespace :session_management do<br />     desc "Runs the migration of the Session Management extension"<br />     task :migrate => :environment do<br />       require 'radiant/extension_migrator'<br />       if ENV["VERSION"]<br />         SessionManagementExtension.migrator.migrate(ENV["VERSION"].to_i)<br />       else<br />         SessionManagementExtension.migrator.migrate<br />       end<br />     end<br />     desc "Copies public assets of the Session Management to the instance public/ directory."<br />     task :update => :environment do<br />       is_svn_or_dir = proc {|path| path =~ /\.svn/ || File.directory?(path) }<br />       puts "Copying assets from SessionManagementExtension"<br />       Dir[SessionManagementExtension.root + "/public/**/*"].reject(&is_svn_or_dir).each do<br />|file|<br />         path = file.sub(SessionManagementExtension.root, '')<br />         directory = File.dirname(path)<br />         mkdir_p RAILS_ROOT + directory, :verbose => false<br />         cp file, RAILS_ROOT + path, :verbose => false<br />       end<br />     end<br />    end<br />  end<br />end<br /></pre>Add as many custom tasks needed inside this file without changing default tasks.  Migrate all radiant extensions <pre class='ruby' name='code'><br />rake db:migrate:extensions<br /></pre></div>
+    <content type="html"><![CDATA[<h2>Understanding and creating radinat extensions</h2>
 
+<p>To start with, first understand <em>what is radiant</em> and <em>why to use it ?</em></p>
+
+<blockquote><p>Radiant is a open source content management system designed that serves cms needs for small organisations</p></blockquote>
+
+<h2>Creating new radint application</h2>
+
+<p><code>
+radiant -d  mysql cms
+  create
+  create    CHANGELOG
+  create    CONTRIBUTORS
+  create    INSTALL
+  create    LICENSE
+  create    README
+  create    config
+  create    config/environments
+  .....
+</code>
+Radiant supports extensions. It means one can add extra features to radiant based cms to add extra capabilities.
+Extension directory structure is almost similar to any standard rails application</p>
+
+<h2>Radiant Extension Directory structure</h2>
+
+<p>```
+|&mdash; app</p>
+
+<pre><code>   |-- controllers
+   |-- helpers
+   |-- models
+   |-- views
+</code></pre>
+
+<p>|&mdash; db</p>
+
+<pre><code>   |-- migrate
+   |-- seeds.rb
+</code></pre>
+
+<p>|&mdash; lib</p>
+
+<pre><code>   |-- spec
+      |-- controllers
+      |-- helpers
+      |-- models
+      |-- spec.opts
+      |-- spec_helper
+      |-- views
+</code></pre>
+
+<p>```</p>
+
+<h2>Creating radiant extension</h2>
+
+<p>radiant has generators to create new radint extension
+<code>
+script/generate extension ExtensionName
+</code>
+Lets create session management extension for radint cms. It will create directory structure for extension.
+<code>
+script/generate extension session_management
+  create vendor/extensions/session_management/app/controllers
+  create vendor/extensions/session_management/app/helpers
+  create vendor/extensions/session_management/app/models
+  create vendor/extensions/session_management/app/views
+  create vendor/extensions/session_management/db/migrate
+  create vendor/extensions/session_management/lib/tasks
+  create vendor/extensions/session_management/README
+  create vendor/extensions/session_management/session_management_extension.rb
+  create vendor/extensions/session_management/lib/tasks/session_management_extension_tasks.rake
+  create vendor/extensions/session_management/spec/controllers
+  create vendor/extensions/session_management/spec/models
+  create vendor/extensions/session_management/spec/views
+  create vendor/extensions/session_management/spec/helpers
+  create vendor/extensions/session_management/features/support
+  create vendor/extensions/session_management/features/step_definitions/admin
+  create vendor/extensions/session_management/Rakefile
+  create vendor/extensions/session_management/spec/spec_helper.rb
+  create vendor/extensions/session_management/spec/spec.opts
+  create vendor/extensions/session_management/cucumber.yml
+  create vendor/extensions/session_management/features/support/env.rb
+  create vendor/extensions/session_management/features/support/paths.rb
+</code></p>
+
+<p>Edit <code>session_management_extension.rb</code> where extension version, description, and website url can be added.
+```ruby</p>
+
+<h1>require_dependency &lsquo;application_controller&rsquo;</h1>
+
+<p>class SessionManagementExtension &lt; Radiant::Extension
+  version &ldquo;1.0&rdquo;
+  description &ldquo;Describe your extension here&rdquo;
+  url &ldquo;<a href="http://yourwebsite.com/session_management">http://yourwebsite.com/session_management</a>&rdquo;</p>
+
+<p>  # define_routes do |map|
+  # map.namespace :admin, :member => { :remove => :get } do |admin|
+  #     admin.resources :session_management
+  # end
+  # end</p>
+
+<p>  def activate</p>
+
+<pre><code># admin.tabs.add "Session Management", "/admin/session_management", :after =&gt;
+</code></pre>
+
+<p>&ldquo;Layouts&rdquo;, :visibility => [:all]
+  end</p>
+
+<p>  def deactivate</p>
+
+<pre><code># admin.tabs.remove "Session Management"
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<p>In activate block, specify what are the library files , modules that needs to be activated while application starts. In my case, activate method looks like below..</p>
+
+<p><code>ruby
+def activate
+  # admin.tabs.add "Session Management", "/admin/session_management", :after =&gt;
+"Layouts", :visibility =&gt; [:all]
+  ApplicationController.send(:include, SessionManagementExt::ApplicationControllerExt)
+end
+</code></p>
+
+<h2>Generating models and controllers</h2>
+
+<p><code>
+script/generate extension_model session_management session_info
+session_id:string url:string ip:string
+</code>
+In above command first attribute is the extension name and next is model name and rest specifies attributes that needs to created. It will create
+```
+exists   app/models/</p>
+
+<pre><code> exists   spec/models/
+ create   app/models/session_info.rb
+ create   spec/models/session_info_spec.rb
+ exists   db/migrate
+ create   db/migrate/20091110075042_create_session_infos.rb
+</code></pre>
+
+<p>```</p>
+
+<h2>Generating controller</h2>
+
+<p><code>
+script/generate extension_controller session_management admin/session_managements
+</code></p>
+
+<p>It will create an output</p>
+
+<p>```
+create app/controllers/admin</p>
+
+<pre><code> create app/helpers/admin
+ create app/views/admin/session_managements
+ create spec/controllers/admin
+ create spec/helpers/admin
+ create spec/views/admin/session_managements
+ create spec/controllers/admin/session_managements_controller_spec.rb
+ create spec/helpers/admin/session_managements_helper_spec.rb
+ create app/controllers/admin/session_managements_controller.rb
+ create app/helpers/admin/session_managements_helper.rb
+</code></pre>
+
+<p>```
+Modify session managements controller for displaying sesssion infos tracked.</p>
+
+<p>We need before filter for every request that will capture <code>session</code>, <code>ip</code> and <code>page url</code>.
+so we need to override behaviour of application controller to add before_filter</p>
+
+<p>We have already added <code>ApplicationControllerExt</code> in activate of extension.
+<code>
+ApplicationController.send(:include, SessionManagementExt::ApplicationControllerExt)
+</code>
+Lets look into ApplicationControllerExt module.
+```ruby
+module SessionManagementExt
+  module ApplicationControllerExt</p>
+
+<pre><code>def self.included(base)
+ base.class_eval do
+   before_filter :track_session
+ end
+end
+def track_session
+ #**"Hello from Session tracker !!!"**
+ #TODO: location track
+ # It can be delayed task
+ #sudo gem install geoip_city -- --with-geoip-dir=/opt/GeoIP
+ # require 'geoip_city'
+ # g = GeoIPCity::Database.new('/opt/GeoIP/share/GeoIP/GeoLiteCity.dat')
+ # res = g.look_up('201.231.22.125')
+ # {:latitude=&gt;-33.13330078125, :country_code3=&gt;"ARG",
+</code></pre>
+
+<p>:longitude=>-64.3499984741211, :city=>&ldquo;Río Cuarto&rdquo;, :country_name=>&ldquo;Argentina&rdquo;,
+:country_code=>&ldquo;AR&rdquo;, :region=>&ldquo;05&rdquo;}</p>
+
+<pre><code> SessionInfo.create( :ip =&gt; request.remote_ip, :page_url =&gt;
+</code></pre>
+
+<p>&ldquo;<a href="http://#">http://#</a>{request.env["HTTP_HOST&rdquo;]}#{request.request_uri}&ldquo;, :session_id =>
+request.session.session_id )</p>
+
+<pre><code>end
+</code></pre>
+
+<p>  end
+end
+<code>
+That's all! Creating rake task for extension module here is default genrated rake task for session management under `vendor/extensions/session_management/lib/tasks/session_management_extension_tasks.rake`. It includes task to migrate database and update extension
+</code>
+namespace :radiant do
+  namespace :extensions do</p>
+
+<pre><code>namespace :session_management do
+ desc "Runs the migration of the Session Management extension"
+ task :migrate =&gt; :environment do
+   require 'radiant/extension_migrator'
+   if ENV["VERSION"]
+     SessionManagementExtension.migrator.migrate(ENV["VERSION"].to_i)
+   else
+     SessionManagementExtension.migrator.migrate
+   end
+ end
+ desc "Copies public assets of the Session Management to the instance public/ directory."
+ task :update =&gt; :environment do
+   is_svn_or_dir = proc {|path| path =~ /\.svn/ || File.directory?(path) }
+   puts "Copying assets from SessionManagementExtension"
+   Dir[SessionManagementExtension.root + "/public/**/*"].reject(&amp;is_svn_or_dir).each do
+</code></pre>
+
+<p>|file|</p>
+
+<pre><code>     path = file.sub(SessionManagementExtension.root, '')
+     directory = File.dirname(path)
+     mkdir_p RAILS_ROOT + directory, :verbose =&gt; false
+     cp file, RAILS_ROOT + path, :verbose =&gt; false
+   end
+ end
+end
+</code></pre>
+
+<p>  end
+end
+<code>
+Add as many custom tasks needed inside this file without changing default tasks.
+Migrate all radiant extensions
+</code>
+rake db:migrate:extensions
+```</p>
 ]]></content>
   </entry>
   

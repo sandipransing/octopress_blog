@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | Fun On Rails]]></title>
   <link href="funonrails.com/categories/linux/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-21T02:23:40+05:30</updated>
+  <updated>2014-02-22T20:21:48+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -180,9 +180,119 @@ Above command downloads all website pages in depth level with stylesheets, image
     <link href="funonrails.com/2009/10/find-processor-cpu-information-on-linux/"/>
     <updated>2009-10-26T23:49:00+05:30</updated>
     <id>funonrails.com/2009/10/find-processor-cpu-information-on-linux</id>
-    <content type="html"><![CDATA[<div class='post'>
-Here is the command<br/><br/><blockquote>cat /proc/cpuinfo</blockquote><br/><br/>Example use on my ubuntu machine, It shows me.<br/><br/><br/><br/><blockquote><pre class=ruby>cat /proc/cpuinfo<br/>processor : 0<br/>vendor_id : GenuineIntel<br/>cpu family : 6<br/>model  : 15<br/>model name : Intel(R) Pentium(R) Dual  CPU  T2330  @ 1.60GHz<br/>stepping : 13<br/>cpu MHz  : 800.000<br/>cache size : 1024 KB<br/>physical id : 0<br/>siblings : 2<br/>core id  : 0<br/>cpu cores : 2<br/>apicid  : 0<br/>initial apicid : 0<br/>fdiv_bug : no<br/>hlt_bug  : no<br/>f00f_bug : no<br/>coma_bug : no<br/>fpu  : yes<br/>fpu_exception : yes<br/>cpuid level : 10<br/>wp  : yes<br/>flags  : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe nx lm constant_tsc arch_perfmon pebs bts pni monitor ds_cpl est tm2 ssse3 cx16 xtpr lahf_lm<br/>bogomips : 3191.95<br/>clflush size : 64<br/>power management:<br/><br/>processor : 1<br/>vendor_id : GenuineIntel<br/>cpu family : 6<br/>model  : 15<br/>model name : Intel(R) Pentium(R) Dual  CPU  T2330  @ 1.60GHz<br/>stepping : 13<br/>cpu MHz  : 800.000<br/>cache size : 1024 KB<br/>physical id : 0<br/>siblings : 2<br/>core id  : 1<br/>cpu cores : 2<br/>apicid  : 1<br/>initial apicid : 1<br/>fdiv_bug : no<br/>hlt_bug  : no<br/>f00f_bug : no<br/>coma_bug : no<br/>fpu  : yes<br/>fpu_exception : yes<br/>cpuid level : 10<br/>wp  : yes<br/>flags  : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe nx lm constant_tsc arch_perfmon pebs bts pni monitor ds_cpl est tm2 ssse3 cx16 xtpr lahf_lm<br/>bogomips : 3192.03<br/>clflush size : 64<br/>power management:</pre><br/></blockquote></div>
+    <content type="html"><![CDATA[<p>Below command will give you all the details about CPU
+<code>
+cat /proc/cpuinfo
+</code></p>
 
+<h4>Example use</h4>
+
+<p>on my ubuntu machine, It showed me below information :
+```
+processor : 0
+vendor_id : GenuineIntel
+cpu family  : 6
+model   : 42
+model name  : Intel&reg; Core&trade; i3-2350M CPU @ 2.30GHz
+stepping  : 7
+microcode : 0x1b
+cpu MHz   : 800.000
+cache size  : 3072 KB
+physical id : 0
+siblings  : 4
+core id   : 0
+cpu cores : 2
+apicid    : 0
+initial apicid  : 0
+fpu   : yes
+fpu_exception : yes
+cpuid level : 13
+wp    : yes
+flags   : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf eagerfpu pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer xsave avx lahf_lm arat epb xsaveopt pln pts dtherm tpr_shadow vnmi flexpriority ept vpid
+bogomips  : 4589.39
+clflush size  : 64
+cache_alignment : 64
+address sizes : 36 bits physical, 48 bits virtual
+power management:</p>
+
+<p>processor : 1
+vendor_id : GenuineIntel
+cpu family  : 6
+model   : 42
+model name  : Intel&reg; Core&trade; i3-2350M CPU @ 2.30GHz
+stepping  : 7
+microcode : 0x1b
+cpu MHz   : 800.000
+cache size  : 3072 KB
+physical id : 0
+siblings  : 4
+core id   : 1
+cpu cores : 2
+apicid    : 2
+initial apicid  : 2
+fpu   : yes
+fpu_exception : yes
+cpuid level : 13
+wp    : yes
+flags   : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf eagerfpu pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer xsave avx lahf_lm arat epb xsaveopt pln pts dtherm tpr_shadow vnmi flexpriority ept vpid
+bogomips  : 4589.39
+clflush size  : 64
+cache_alignment : 64
+address sizes : 36 bits physical, 48 bits virtual
+power management:</p>
+
+<p>processor : 2
+vendor_id : GenuineIntel
+cpu family  : 6
+model   : 42
+model name  : Intel&reg; Core&trade; i3-2350M CPU @ 2.30GHz
+stepping  : 7
+microcode : 0x1b
+cpu MHz   : 800.000
+cache size  : 3072 KB
+physical id : 0
+siblings  : 4
+core id   : 0
+cpu cores : 2
+apicid    : 1
+initial apicid  : 1
+fpu   : yes
+fpu_exception : yes
+cpuid level : 13
+wp    : yes
+flags   : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf eagerfpu pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer xsave avx lahf_lm arat epb xsaveopt pln pts dtherm tpr_shadow vnmi flexpriority ept vpid
+bogomips  : 4589.39
+clflush size  : 64
+cache_alignment : 64
+address sizes : 36 bits physical, 48 bits virtual
+power management:</p>
+
+<p>processor : 3
+vendor_id : GenuineIntel
+cpu family  : 6
+model   : 42
+model name  : Intel&reg; Core&trade; i3-2350M CPU @ 2.30GHz
+stepping  : 7
+microcode : 0x1b
+cpu MHz   : 800.000
+cache size  : 3072 KB
+physical id : 0
+siblings  : 4
+core id   : 1
+cpu cores : 2
+apicid    : 3
+initial apicid  : 3
+fpu   : yes
+fpu_exception : yes
+cpuid level : 13
+wp    : yes
+flags   : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf eagerfpu pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer xsave avx lahf_lm arat epb xsaveopt pln pts dtherm tpr_shadow vnmi flexpriority ept vpid
+bogomips  : 4589.39
+clflush size  : 64
+cache_alignment : 64
+address sizes : 36 bits physical, 48 bits virtual
+power management:
+```</p>
 ]]></content>
   </entry>
   
@@ -191,9 +301,24 @@ Here is the command<br/><br/><blockquote>cat /proc/cpuinfo</blockquote><br/><br/
     <link href="funonrails.com/2009/10/how-to-find-os-x-version-on-linux/"/>
     <updated>2009-10-26T23:35:00+05:30</updated>
     <id>funonrails.com/2009/10/how-to-find-os-x-version-on-linux</id>
-    <content type="html"><![CDATA[<div class='post'>
-Here is the command which will give you OS name with version along with other detail information.<br/><br/><blockquote><pre class=ruby>cat /etc/*release*</pre></blockquote><br/><br/>Example: On my ubutnu machine, It shows me.<br/><br/><br/><blockquote><br/><pre class=ruby>cat /etc/*release*<br/>DISTRIB_ID=Ubuntu<br/>DISTRIB_RELEASE=8.10<br/>DISTRIB_CODENAME=intrepid<br/>DISTRIB_DESCRIPTION="Ubuntu 8.10"</pre></blockquote></div>
+    <content type="html"><![CDATA[<h2>Command</h2>
 
+<p>Here is the command which will give you OS name with version along with other detail information.
+<code>
+cat /etc/*release*
+</code></p>
+
+<h2>Example</h2>
+
+<p>On my ubutnu machine, It showed me :
+```
+cat /etc/<em>release</em></p>
+
+<p>DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=8.10
+DISTRIB_CODENAME=intrepid
+DISTRIB_DESCRIPTION=&ldquo;Ubuntu 8.10&rdquo;
+```</p>
 ]]></content>
   </entry>
   

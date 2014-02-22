@@ -4,7 +4,7 @@
   <title><![CDATA[Category: passenger | Fun On Rails]]></title>
   <link href="funonrails.com/categories/passenger/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-21T02:23:40+05:30</updated>
+  <updated>2014-02-22T20:21:48+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -236,26 +236,69 @@ keepalive_timeout  65;
     <link href="funonrails.com/2009/09/4-steps-to-install-nginx-with-passenger/"/>
     <updated>2009-09-09T23:47:00+05:30</updated>
     <id>funonrails.com/2009/09/4-steps-to-install-nginx-with-passenger</id>
-    <content type="html"><![CDATA[<div class='post'>
-Install passenger program that will run your rails application<br/><strong>1. sudo gem install passenger</strong><br/>Install nginx server with passenger enabled<br/><strong>2. passenger-install-nginx-module</strong><br/><br/>it will open apt, click "Enter" to contine<br/>then select option 1 for default install<br/>then it will ask<br/>Where do you want to install Nginx to?<br/><br/>Please specify a prefix directory [/opt/nginx]:<br/>press enter<br/><br/>then copy following block<br/><br/><strong> server {<br/>listen 80;<br/>server_name <a href="http://www.yourhost.com/" target="_blank">www.yourhost.com</a>;<br/>root /somewhere/public;   # &lt;--- be sure to point to 'public'!<br/>passenger_enabled on;<br/>}</strong><br/><br/>Make nginx Configuration<br/>3. vi /opt/nginx/conf/nginx.conf<br/>Make passenger_root and passenger_ruby path to configuration<br/><strong><br/><br/>http {<br/>passenger_root /usr/local/lib/ruby/gems/1.8/gems/passenger-2.2.4;<br/>passenger_ruby /usr/local/bin/ruby;<br/></strong><br/><br/>then add server configuration block inside http block<br/>http{<br/>...<br/><strong> server {<br/>listen 80;<br/>server_name <a href="http://www.yourhost.com/" target="_blank">www.yourhost.com</a>; //Make sure this dns entry inside /etc/hosts<br/>root /carsonline/public;   # &lt;--- be sure to point to 'public'! //here carsonline is RAILS_ROOT<br/>passenger_enabled on;<br/>}</strong><br/><br/>Thats, all<br/><br/>4. Launch Server<br/><br/>/opt/nginx/sbin/nginx</div>
+    <content type="html"><![CDATA[<h2>Install passenger program</h2>
 
+<p><code>
+sudo gem install passenger
+</code></p>
 
-<h2>Comments</h2>
+<h2>Install nginx server with passenger enabled</h2>
 
+<p><code>
+passenger-install-nginx-module
+</code></p>
 
-<div class='comments'>
-<div class='comment'>
-<div class='author'>sandip Ransing</div>
-<div class='content'>
-You are right..but sometimes we have to manually configure it when there are multiple ruby installations.</div>
-</div>
-<div class='comment'>
-<div class='author'>gautamrege</div>
-<div class='content'>
-I think passenger_root and passenger_ruby get automatically configured during installation.<br><br>Good article.</div>
-</div>
-</div>
+<p>It will open <code>apt</code>, click <code>Enter</code> to contine then select option 1 for default install
+then it will ask, <em>&ldquo;Where do you want to install Nginx to?&rdquo;</em>
+<code>
+Please specify a prefix directory [/opt/nginx]:
+</code>
+press enter then copy following block
+<code>
+server {
+  listen 80;
+  server_name www.yourhost.com;
+  root /somewhere/public;   # &lt;— be sure to point to ‘public’!
+  passenger_enabled on;
+}
+</code></p>
 
+<h2>Make nginx Configuration</h2>
+
+<p>```</p>
+
+<h1>vi /opt/nginx/conf/nginx.conf</h1>
+
+<h1>Make passenger_root and passenger_ruby path to configuration</h1>
+
+<p>http {
+  passenger_root /usr/local/lib/ruby/gems/1.8/gems/passenger-2.2.4;
+  passenger_ruby /usr/local/bin/ruby;
+  &hellip;
+<code>
+then add server configuration block inside http block
+</code>
+http {
+  &hellip;</p>
+
+<p>  server {</p>
+
+<pre><code>listen 80;
+server_name www.yourhost.com; //Make sure this dns entry inside /etc/hosts
+root /carsonline/public;   # &lt;— be sure to point to ‘public’! //here carsonline is RAILS_ROOT
+passenger_enabled on;
+</code></pre>
+
+<p>  }
+  &hellip;
+```
+That&rsquo;s all, you are done !</p>
+
+<h2>Launch Server</h2>
+
+<p><code>
+  /opt/nginx/sbin/nginx
+</code></p>
 ]]></content>
   </entry>
   

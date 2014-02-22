@@ -9,7 +9,21 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Just a single line variable swap in rubyx,y=y,xExample:irb&gt;&gt; x = &#8220;Fun&#8221;=&gt; &#8220;Fun&#8221;irb&gt;&gt; y = &#8220;Rails&#8221;=& &hellip;">
+  <meta name="description" content="Single line code to swap variables in ruby 1
+x,y = y,x Examples 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+x = &quot;Fun&quot;
+y = &quot;Rails&quot; x,y = y,x
+#=&gt; [& &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -103,8 +117,68 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-<span style="font-family: Arial; font-size: small;"><span class="Apple-style-span" style="background-color: white; font-size: 13px;">Just a single line variable swap in ruby<br /></span></span><blockquote>x,y=y,x</blockquote>Example:<br /><br /><blockquote>irb&gt;&gt; x = &#8220;Fun&#8221;</blockquote><blockquote>=&gt; &#8220;Fun&#8221;</blockquote><blockquote>irb&gt;&gt; y = &#8220;Rails&#8221;</blockquote><blockquote>=&gt; &#8220;Rails&#8221;</blockquote><blockquote>irb&gt;&gt; x,y = y,x</blockquote><blockquote>=&gt; [&#8220;Rails&#8221;, &#8220;Fun&#8221;]</blockquote><blockquote>irb&gt;&gt; p x</blockquote><blockquote>&#8220;Rails&#8221;</blockquote><blockquote>=&gt; nil</blockquote><blockquote>&gt;&gt; p y</blockquote><blockquote>&#8220;Fun&#8221;</blockquote><div><b>Variable assignments in Ruby</b></div>we can do multiple assignments in a single line.<br /><br /><blockquote>irb&gt;&gt; a,b,c,d = 1,2,3,4</blockquote><blockquote>=&gt; [1, 2, 3, 4]</blockquote><br /><br />here is interpretation of above line<br /><br /><blockquote>irb&gt;&gt;&nbsp;p &#8220;a =&gt; #{a} b =&gt; #{b} c =&gt; #{c} d =&gt; #{d}&#8221;</blockquote><blockquote>&#8220;a =&gt; 1 b =&gt; 2 c =&gt; 3 d =&gt; 4&#8221;</blockquote><br /><b>Multiple assignments in ruby</b><br /><b><br /></b><br /><blockquote>a = b = c = d = 12</blockquote><br />This means a,b,c,d variables has value 12<br /></div>
+<div class="entry-content"><h2>Single line code to swap variables in ruby</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span><span class="n">x</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Examples</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;Fun&quot;</span>
+</span><span class='line'><span class="n">y</span> <span class="o">=</span> <span class="s2">&quot;Rails&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span><span class="n">x</span>
+</span><span class='line'><span class="c1">#=&gt; [&quot;Rails&quot;, &quot;Fun&quot;]</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="n">x</span>
+</span><span class='line'><span class="c1">#=&gt; &quot;Rails&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="n">y</span>
+</span><span class='line'><span class="c1">#=&gt; &quot;Fun&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Variable assignments in Ruby</h2>
+
+<p>Also Multiple variables assignments can be done in a single line</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">d</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span>
+</span><span class='line'><span class="c1">#=&gt; [1, 2, 3, 4]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here is interpretation of the above line</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">puts</span> <span class="s2">&quot;a is </span><span class="si">#{</span><span class="n">a</span><span class="si">}</span><span class="s2">, b is </span><span class="si">#{</span><span class="n">b</span><span class="si">}</span><span class="s2">, c is </span><span class="si">#{</span><span class="n">c</span><span class="si">}</span><span class="s2">, d is </span><span class="si">#{</span><span class="n">d</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="c1">#=&gt; &quot;a is 1, b is 2, c is 3, d is 4&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Multiple assignments in ruby</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="n">b</span> <span class="o">=</span> <span class="n">c</span> <span class="o">=</span> <span class="n">d</span> <span class="o">=</span> <span class="mi">12</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here <code>a</code>,<code>b</code>,<code>c</code> and <code>d</code> has value 12</p>
 </div>
 
 
@@ -155,7 +229,7 @@
         <a class="basic-alignment left" href="/2009/11/ruby-on-rails-developers-in-india/" title="Previous Post: Ruby On Rails Developers in India">&laquo; Ruby On Rails Developers in India</a>
       
       
-        <a class="basic-alignment right" href="/2009/11/linux-commands-for-remote-access/" title="Next Post: Linux commands for remote access, compress, decompress">Linux commands for remote access, compress, decompress &raquo;</a>
+        <a class="basic-alignment right" href="/2009/11/remote-access-remote-copy-compress-decompress-on-linux/" title="Next Post: remote access, remote copy and files compress, decompress on linux">remote access, remote copy and files compress, decompress on linux &raquo;</a>
       
     </p>
     <p class="meta">

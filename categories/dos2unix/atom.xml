@@ -4,7 +4,7 @@
   <title><![CDATA[Category: dos2unix | Fun On Rails]]></title>
   <link href="funonrails.com/categories/dos2unix/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-21T02:23:40+05:30</updated>
+  <updated>2014-02-22T20:21:48+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -14,13 +14,32 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Converting dos(windows) files to unix files]]></title>
-    <link href="funonrails.com/2009/10/converting-doswindows-files-to-unix/"/>
+    <title type="html"><![CDATA[Converting dos (windows) files to unix files]]></title>
+    <link href="funonrails.com/2009/10/converting-dos-windows-files-to-unix/"/>
     <updated>2009-10-07T18:27:00+05:30</updated>
-    <id>funonrails.com/2009/10/converting-doswindows-files-to-unix</id>
-    <content type="html"><![CDATA[<div class='post'>
-<div><br/><p>While using windows we get ^M characters in files that will get displayed when you open files on unix machines.</p><br/><p>To remove such ^M characters,</p><br/><p>Install dos2unix package using</p><br/><blockquote><p>sudo apt-get install sysutils</p></blockquote><br/><p>Convert individual file</p><br/><blockquote><p>dos2unix file_path</p></blockquote><br/><p>Run following command to convert recursively all the files inside directory.</p><br/><blockquote><br/><pre>find . -type f -exec dos2unix {} \;<br/></pre><br/></blockquote><br/></div><br/><div id="_mcePaste" style="overflow:hidden;position:absolute;left:-10000px;top:7px;width:1px;height:1px;"><br/><pre class="alt2" style="border:1px inset;overflow:auto;width:640px;height:34px;text-align:left;margin:0;padding:6px;">sudo apt-get install sysutils</pre><br/></div></div>
+    <id>funonrails.com/2009/10/converting-dos-windows-files-to-unix</id>
+    <content type="html"><![CDATA[<p>While editing files on windows system,  we get <code>^M</code> characters added to files and those gets displayed when you open files on <code>unix</code> machines.
+To remove such <code>^M</code> characters,</p>
 
+<h2>Install dos2unix package</h2>
+
+<p><code>
+sudo apt-get install sysutils
+</code></p>
+
+<h2>Convert individual file</h2>
+
+<p><code>
+dos2unix file_path
+</code></p>
+
+<h2>Convert files recursively</h2>
+
+<p>Run following command to convert recursively all the files inside directory.</p>
+
+<p><code>
+find . -type f -exec dos2unix {} \;
+</code></p>
 ]]></content>
   </entry>
   

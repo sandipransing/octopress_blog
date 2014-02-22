@@ -4,7 +4,7 @@
   <title><![CDATA[Category: api | Fun On Rails]]></title>
   <link href="funonrails.com/categories/api/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-21T02:23:40+05:30</updated>
+  <updated>2014-02-22T20:21:48+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -182,9 +182,80 @@ Hpricot API Reference click <a href="http://rdoc.info/github/hpricot/hpricot/Hpr
     <link href="funonrails.com/2009/10/10-steps-to-get-start-with-myspace-ruby/"/>
     <updated>2009-10-27T21:33:00+05:30</updated>
     <id>funonrails.com/2009/10/10-steps-to-get-start-with-myspace-ruby</id>
-    <content type="html"><![CDATA[<div class='post'>
-Follow 10 simple steps in order to use myspace sdk api<br/><br/>1. Remove all your previous gems installed<br/>+ gem uninstall myspace<br/><br/>2. Checkout sample source code<br/><br/>svn checkout http://myspaceid-ruby-sdk.googlecode.com/svn/trunk/ myspacesdk<br/><br/>3. cd myspacesdk/samples/rails/sample<br/>4. Modify config/database.yml accordingly<br/><blockquote><br/><div>development:<br/>adapter: mysql<br/>database: sample_development<br/>password: abcd<br/>pool: 5<br/>timeout: 5000</div></blockquote><br/>5. Download http://myspaceid-ruby-sdk.googlecode.com/files/myspaceid-sdk-0.1.11.gem<br/>6. gem install --local ~/Desktop/myspaceid-sdk-0.1.11.gem i.e.PATH_TO_GEM<br/>7. Above command supposed to give you following error otherwise skip to step 10<br/><blockquote><br/><div>ERROR:  Error installing /home/sandip/Desktop/myspaceid-sdk-0.1.11.gem:<br/>myspaceid-sdk requires ruby-openid (&gt;= 0, runtime)</div></blockquote><br/>8. gem install ruby-openid go to step 6<br/>9. ruby script/server<br/>10. Browse http://localhost:3000/</div>
+    <content type="html"><![CDATA[<p>Follow 10 simple steps listed below in order to use myspace sdk api</p>
 
+<h4>1. Remove existing <code>myspace</code> gems installed if any</h4>
+
+<p><code>
+gem uninstall myspace
+</code></p>
+
+<h4>2. Checkout sample source code</h4>
+
+<p><code>
+svn checkout http://myspaceid-ruby-sdk.googlecode.com/svn/trunk/ myspacesdk
+</code></p>
+
+<h4>3. Move to sample dir</h4>
+
+<p><code>
+cd myspacesdk/samples/rails/sample
+</code></p>
+
+<h4>4. Modify DB config</h4>
+
+<p>```yml</p>
+
+<h1>Modify config/database.yml accordingly</h1>
+
+<p>development:
+  adapter: mysql
+  database: sample_development
+  password: abcd
+  pool: 5
+  timeout: 5000
+```</p>
+
+<h4>5. Download Gem</h4>
+
+<p><code>
+wget http://myspaceid-ruby-sdk.googlecode.com/files/myspaceid-sdk-0.1.11.gem
+</code></p>
+
+<h4>6. Install <code>myspaceid-sdk</code> gem locally</h4>
+
+<p>```
+gem install &mdash;local ~/Desktop/myspaceid-sdk-0.1.11.gem</p>
+
+<h1>&mdash;local option taskes local PATH_TO_GEM</h1>
+
+<p>```</p>
+
+<h4>7. Above command supposed to give following error otherwise skip to step 10</h4>
+
+<p><code>
+ERROR:  Error installing /home/sandip/Desktop/myspaceid-sdk-0.1.11.gem:
+myspaceid-sdk requires ruby-openid (&gt;= 0, runtime)
+</code></p>
+
+<h4>8. Install <code>ruby-openid</code> and go to &ldquo;step 6&rdquo;</h4>
+
+<p>```
+gem install ruby-openid</p>
+
+<h1>Go to step 6</h1>
+
+<p>```</p>
+
+<h4>9. Start Server</h4>
+
+<p><code>
+ruby script/server
+</code></p>
+
+<h4>10.  Browse Application</h4>
+
+<p>Open URL <a href="http://localhost:3000/">http://localhost:3000/</a></p>
 ]]></content>
   </entry>
   

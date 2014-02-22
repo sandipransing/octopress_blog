@@ -9,7 +9,10 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="sudo apt-get install libmysqlclient15-devwget http://sphinxsearch.com/downloads/sphinx-0.9.8-rc2.tar.gztar xvf sphinx-0.9.8-rc2.tar.gz &amp;&amp; rm &hellip;">
+  <meta name="description" content="Download sphinx source from website 1
+2
+sudo apt-get install libmysqlclient15-dev
+wget http://sphinxsearch.com/downloads/sphinx-0.9.8-rc2.tar.gz &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -103,16 +106,35 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-sudo apt-get install libmysqlclient15-dev<br/><br/>wget http://sphinxsearch.com/downloads/sphinx-0.9.8-rc2.tar.gz<br/>tar xvf  sphinx-0.9.8-rc2.tar.gz &amp;&amp; rm sphinx-0.9.8-rc2.tar.gz<br/>cd sphinx-0.9.8-rc2<br/>./configure<br/>make<br/>sudo make install</div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>sitemap « Fun On Rails</div>
-<div class='content'>
-[&#8230;] Easy sphinx install on ubuntu interpid « Fun On Rails [&#8230;]</div>
-</div>
-</div>
+<div class="entry-content"><h4>Download <code>sphinx source</code> from website</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install libmysqlclient15-dev
+</span><span class='line'>wget http://sphinxsearch.com/downloads/sphinx-0.9.8-rc2.tar.gz</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Extract source code</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>tar xvf sphinx-0.9.8-rc2.tar.gz && rm sphinx-0.9.8-rc2.tar.gz</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Configure</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd sphinx-0.9.8-rc2
+</span><span class='line'>./configure</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Install</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>make
+</span><span class='line'>sudo make install</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 
@@ -140,7 +162,7 @@ sudo apt-get install libmysqlclient15-dev<br/><br/>wget http://sphinxsearch.com/
 
 <span class="categories">
   
-    <a class='category' href='/categories/rails/'>rails</a>, <a class='category' href='/categories/thinking-sphinx/'>thinking sphinx</a>
+    <a class='category' href='/categories/thinking-sphinx/'>thinking sphinx</a>
   
 </span>
 

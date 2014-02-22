@@ -183,8 +183,30 @@
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-<div style="text-align: left;">Gem Bundling is basically used to maintain all required gems at your application level. It downloads necessary gems and maintain it under &#8220;/vender/gems&#8221; directory.  Its very easy to use gem bundle.<br /></div>1. Insatll gemcutter gem ( Its gem hosting )<br /><pre class="ruby" name="code">gem install gemcutter<br /></pre>2. Install bundler ( Its<span style="font-family: helvetica, arial, freesans, clean, sans-serif; font-size: 13px; line-height: 20px;">&nbsp;a tool that manages gem dependencies for your ruby application. )</span><br /><pre class="ruby" name="code">gem install bundler<br /></pre>3. Start using <br /><pre class="ruby" name="code">gem bundle<br /></pre></div>
+  <div class="entry-content"><p>Gem Bundling is basically used to maintain all required gems at your application level and its very easy to use.
+It downloads necessary gems and maintain it under <code>/vender/gems</code> directory.</p>
+
+<h2>Install gemcutter</h2>
+
+<p>gemcutter provides hosting for ruby gems</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install gemcutter</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Install bundler</h2>
+
+<p>bundler is a tool that manages gem dependencies for your ruby application</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install bundler</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Start using</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem bundle</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   
@@ -197,7 +219,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2009/11/get-hand-over-vi-vim-editor/">Get Hand Over VI / VIM Editor</a></h1>
+      <h1 class="entry-title"><a href="/2009/11/vim-cheatsheet/">VI/ VIM Cheats</a></h1>
     
     
       <p class="meta">
@@ -220,16 +242,137 @@
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-<span style="font-family: Arial; font-size: small;"><span style="background-color: white; font-size: 13px;"> </span></span><br /><span style="font-family: Arial; font-size: small;"><span style="background-color: white; font-size: 13px;"><pre><b><span style="color: #351c75;">Movements</span></b></pre><pre>b   previous word<br />w   next word<br />e        end of word<br />0/^      begining of line<br />$        end of line<br />G        end of file<br />1G/gg    begining of file<br />/pattern  search next<br />?pattern  search previous<br />n         repeat    search forword ( i.e next occurence )<br />N         repeat    search backword<br />:line     goto line specified<br /><br />  *****Modes****<br />  i   insert mode<br />  r   replace mode<br />  s   delete character under cursor and eneter insert mode<br /><br />  *****Delete******<br />  x    delete character under cursor<br />  dd   delete current line<br />  line dd delete number of lines specified<br /><br />  ****copy********<br />  yy        copy current line<br />  pp        print copied contents<br />  line yy   copy number of lines specified<br /><br />  *******visual******<br /><br />  v     enter visual mode<br />  aw    highlight word<br />  as    highlight sentence<br />  ap    highlight paragraph<br />  ab    highlight block<br /><br />  ******undo/redo******<br />  u       undo<br />  cntrl+r redo<br /><br />  ******autocomplete****<br />  cntrl+x   enter completion mode<br />  cntrl+p   display autocomplete options<br /><br />  ******uppercase/lowercase*****<br />  guu   lowercase line<br />  gUU   uppercase line<br /><br />  *******Regx replace****<br /><br />  range s/foo/bar/arg - replace foo with bar in ‘range’ with<br /><br />  Values of 'range':<br />  %               whole file<br />  number          that particular line<br />  none            apply to current line only<br /><br />  values of 'arg':<br />  none  apply to first occurrence<br />  g     global (all occurrences)<br /><br />Select/Macros<br />  qchar      start recording macro storing it in register ‘char’<br />  q          end recording<br />  @char      replay the macro stored in ‘char’<br />  :1,10 norm! @char run the macro stored in ‘char’ over the 1-10 line range<br /></pre></span></span><br /></div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>Sandip Ransing</div>
-<div class='content'>
-Remove blank lines in vim<br /><br />:g/^ *$/d</div>
-</div>
-</div>
+  <div class="entry-content"><h2>Movements</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>b   previous word
+</span><span class='line'>w   next word
+</span><span class='line'>e        end of word
+</span><span class='line'>0/^      begining of line
+</span><span class='line'>$        end of line
+</span><span class='line'>G        end of file
+</span><span class='line'>1G/gg    begining of file
+</span><span class='line'>/pattern  search next
+</span><span class='line'>?pattern  search previous
+</span><span class='line'>n         repeat    search forword ( i.e next occurence )
+</span><span class='line'>N         repeat    search backword
+</span><span class='line'>:line     goto line specified</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Modes</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>i   insert mode
+</span><span class='line'>r   replace mode
+</span><span class='line'>s   delete character under cursor and eneter insert mode</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Delete</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>x    delete character under cursor
+</span><span class='line'>dd   delete current line
+</span><span class='line'>line dd delete number of lines specified</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Copy</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>yy        copy current line
+</span><span class='line'>pp        print copied contents
+</span><span class='line'>line yy   copy number of lines specified</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Visual</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>v     enter visual mode
+</span><span class='line'>aw    highlight word
+</span><span class='line'>as    highlight sentence
+</span><span class='line'>ap    highlight paragraph
+</span><span class='line'>ab    highlight block</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Undo/ Redo</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>u       undo
+</span><span class='line'>cntrl+r redo</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>autocomplete</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cntrl+x   enter completion mode
+</span><span class='line'>cntrl+p   display autocomplete options</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Uppercase/ Lowercase</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>guu   lowercase line
+</span><span class='line'>gUU   uppercase line</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Regx replace</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>range s/foo/bar/arg - replace foo with bar in 'range' with
+</span><span class='line'>
+</span><span class='line'>Values of 'range':
+</span><span class='line'>%               whole file
+</span><span class='line'>number          that particular line
+</span><span class='line'>none            apply to current line only
+</span><span class='line'>
+</span><span class='line'>values of 'arg':
+</span><span class='line'>none  apply to first occurrence
+</span><span class='line'>g     global (all occurrences)</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Select/Macros</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>qchar      start recording macro storing it in register 'char'
+</span><span class='line'>q          end recording
+</span><span class='line'>@char      replay the macro stored in 'char'
+</span><span class='line'>:1,10 norm! @char run the macro stored in 'char over the 1-10 line range</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   
@@ -265,8 +408,91 @@ Remove blank lines in vim<br /><br />:g/^ *$/d</div>
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-<div style="text-align: left;">While coding in ruby and rails, we often requires variables to be initialized that can be used across application.  There are many ways to define configuration variables <br /></div><br />1. Initialize variables inside environment file  <br /><pre class="ruby" name="code">  # This agencies can be used across application<br />  AGENCIES = ['TIMES NEWS NETWORK', 'AGENCIES', 'AFP', 'PTI']<br /><br />  # Configuration for html nodes<br /><br />  Article_title_tag = "h1.heading"<br />  Date_auth_agency_tag = "span[@class='byline']"<br />  Location_content_tag = "div[@class='Normal']"<br /></pre>2. Inside config/initializers/config.rb. Just make config.rb inside initializers and add variables to it.  <br /><pre class="ruby" name="code">  #config/initializers/config.rb<br />  # This agencies can be used across application<br />  AGENCIES = ['TIMES NEWS NETWORK', 'AGENCIES', 'AFP', 'PTI']<br /><br />  # Configuration for html nodes<br />  Article_title_tag = "h1.heading"<br />  Date_auth_agency_tag = "span[@class='byline']"<br />  Location_content_tag = "div[@class='Normal']"<br /></pre>3. But most efficient way to organize variables is YML file. <br /><pre class="ruby" name="code"># config/config.yml<br />the_times_of_india:<br />  article_title_tag: h1.heading<br />  date_auth_agency_tag: span[@class='byline']<br />  loc_content_tag: div[@class='Normal']<br /></pre>Accessing YML files  <br /><pre class="ruby" name="code"> # config/initializers/load_config.rb<br />APP_CONFIG = YAML.load_file("#{RAILS_ROOT}/config/config.yml")<br />=&gt; true<br />&gt;&gt; APP_CONFIG<br />=&gt; {"the_times_of_india"=&gt;{"article_title_tag"=&gt;"h1.heading", "loc_content_tag"=&gt;"div[@class='Normal']", "date_auth_agency_tag"=&gt;"span[@class='byline']"}}<br />&gt;&gt; APP_CONFIG[:the_times_of_india]<br />=&gt; nil<br />&gt;&gt; APP_CONFIG['the_times_of_india']<br />=&gt; {"article_title_tag"=&gt;"h1.heading", "loc_content_tag"=&gt;"div[@class='Normal']", "date_auth_agency_tag"=&gt;"span[@class='byline']"}<br />&gt;&gt; APP_CONFIG['the_times_of_india']['article_title_tag']<br />=&gt; "h1.heading"<br /></pre></div>
+  <div class="entry-content"><p>While coding in ruby and rails, we often requires variables to be initialized that can be used across application. There are many ways to define configuration variables</p>
+
+<h2>Initialize variables inside environment</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># This agencies can be used across application
+</span><span class='line'>AGENCIES = ['TIMES NEWS NETWORK', 'AGENCIES', 'AFP', 'PTI']
+</span><span class='line'>
+</span><span class='line'># Configuration for html nodes
+</span><span class='line'>
+</span><span class='line'>Article_title_tag = "h1.heading"
+</span><span class='line'>Date_auth_agency_tag = "span[@class='byline']"
+</span><span class='line'>Location_content_tag = "div[@class='Normal']"</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Create config inside initializers</h2>
+
+<p>Just make <code>config.rb</code> inside initializers and add variables to it.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#config/initializers/config.rb
+</span><span class='line'># This agencies can be used across application
+</span><span class='line'>AGENCIES = ['TIMES NEWS NETWORK', 'AGENCIES', 'AFP', 'PTI']
+</span><span class='line'>
+</span><span class='line'># Configuration for html nodes
+</span><span class='line'>Article_title_tag = "h1.heading"
+</span><span class='line'>Date_auth_agency_tag = "span[@class='byline']"
+</span><span class='line'>Location_content_tag = "div[@class='Normal']"</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Load config using YML</h2>
+
+<p>But most efficient way to organize variables is YML file</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="c1"># config/config.yml</span>
+</span><span class='line'><span class="l-Scalar-Plain">the_times_of_india</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">article_title_tag</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">h1.heading</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">date_auth_agency_tag</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">span[@class=&#39;byline&#39;]</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">loc_content_tag</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">div[@class=&#39;Normal&#39;]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Accessing YML files</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">APP_CONFIG</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="no">RAILS_ROOT</span><span class="si">}</span><span class="s2">/config/config.yml&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; true</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="no">APP_CONFIG</span>
+</span><span class='line'><span class="c1">#=&gt; {&quot;the_times_of_india&quot;=&gt;{&quot;article_title_tag&quot;=&gt;&quot;h1.heading&quot;, &quot;loc_content_tag&quot;=&gt;&quot;div[@class=&#39;Normal&#39;]&quot;, &quot;date_auth_agency_tag&quot;=&gt;&quot;span[@class=&#39;byline&#39;]&quot;}}</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="no">APP_CONFIG</span><span class="o">[</span><span class="ss">:the_times_of_india</span><span class="o">]</span>
+</span><span class='line'><span class="c1">#=&gt; nil</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="no">APP_CONFIG</span><span class="o">[</span><span class="s1">&#39;the_times_of_india&#39;</span><span class="o">]</span>
+</span><span class='line'><span class="c1">#=&gt; {&quot;article_title_tag&quot;=&gt;&quot;h1.heading&quot;, &quot;loc_content_tag&quot;=&gt;&quot;div[@class=&#39;Normal&#39;]&quot;, &quot;date_auth_agency_tag&quot;=&gt;&quot;span[@class=&#39;byline&#39;]&quot;}</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="no">APP_CONFIG</span><span class="o">[</span><span class="s1">&#39;the_times_of_india&#39;</span><span class="o">][</span><span class="s1">&#39;article_title_tag&#39;</span><span class="o">]</span>
+</span><span class='line'><span class="c1">#=&gt; &quot;h1.heading&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   

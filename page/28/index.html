@@ -9,7 +9,7 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="What is sitemap ? Sitemap is nothing but a .xml file containing urls available on your siteIt contains URL, last modified date, frequency of content &hellip;">
+  <meta name="description" content="Crawler Search Engines ( like google, yahoo ) mainly uses crawlers for returning results. Crawler is the program which searches world wide web(www) &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,166 +83,6 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2009/09/how-do-i-generate-seo-sitemap-in-rails/">How Do I Generate SEO Sitemap in Rails ?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-09-09T21:44:00+05:30" pubdate data-updated="true">Sep 9<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<strong>What is sitemap ? </strong><br/><br/>Sitemap is nothing but a .xml file containing urls available on your site<br/><br/>It contains URL, last modified date, frequency of content change and priority ( between 0..1 )<br/><br/><strong>Why we need sitemap ? </strong><br/><br/>We can submit sitemap file to search engine. It will help them in analysing what urls on your site are available for crawling.<br/><br/><strong>What is xml pattern ? </strong><br/><pre>   &lt;?xml version="1.0" encoding="UTF-8"?&gt;<br/>      &lt;urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"&gt;<br/><br/>        &lt;url&gt;<br/>           &lt;loc&gt;http://www.example.com/&lt;/loc&gt;<br/>           &lt;lastmod&gt;2005-01-01&lt;/lastmod&gt;<br/>           &lt;changefreq&gt;monthly&lt;/changefreq&gt;<br/>           &lt;priority&gt;0.8&lt;/priority&gt;<br/>        &lt;/url&gt;<br/>       ...<br/>       ...<br/>    &lt;/urlset&gt;</pre><br/><strong> What will be the path for sitemap ? </strong><br/><br/>&#8220;www.example.com/sitemap.xml&#8221;<br/><br/><strong>Are we going to generate sitemap manually ? </strong><br/><br/>No&#8230; there is mephisto sitemap plugin.We can use it.<br/><br/>script/plugin install  http://svn.appelsiini.net/svn/rails/plugins/mephisto_sitemap/<br/><br/><strong>Am i needed to generate to sitemap for each request ? </strong><br/><br/>No &#8230;&#8230;&#8230;..we can generate it in background task daily basis.<br/><br/><strong>How it will be accessed for request to sitemap ? </strong><br/><br/>we can define path to local file in routes.<br/><br/>map.connect &#8220;sitemap.xml&#8221;, :controller =&gt; :sitemap<br/><br/>Class SitemapController<br/><br/>def index<br/><br/>render &#8220;some local file path&#8221;<br/><br/>end<br/><br/>&#8230;.<br/><br/><strong>Here are the reference links </strong><br/><br/>http://www.fortytwo.gr/blog/19/Generating-Sitemaps-With-Rails<br/><br/>http://www.bestechvideos.com/2008/07/04/ruby-plus-71-how-to-create-a-seo-sitemap-for-rails-apps</div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>welkins</div>
-<div class='content'>
-how to generate xml file for cooliris portfolio in wordpress<br><br><br>-welkins</div>
-</div>
-<div class='comment'>
-<div class='author'>sitemap « Fun On Rails</div>
-<div class='content'>
-[&#8230;] How do i generate SEO sitemap in rails ? « Fun On Rails [&#8230;]</div>
-</div>
-<div class='comment'>
-<div class='author'>info ternak</div>
-<div class='content'>
-i got lots of information from your site, thank for your sharing&#8230; :)</div>
-</div>
-<div class='comment'>
-<div class='author'>Elena Morgan</div>
-<div class='content'>
-Search engines generate nearly 90% of all Internet traffic and are responsible for 55% of all E-commerce transactions. Today, it is essential for all online businesses to make SEO an integral part of their online business strategy.<br><br>So I would like to recommend one of my client who helps you define, evolve and implement a powerful SEO strategy to leverage your online business potential<br><br>http://www.redalkemi.com/</div>
-</div>
-<div class='comment'>
-<div class='author'>sandipransing</div>
-<div class='content'>
-Link mentioned is very good !<br>but it has limitation that we will not have any control over urls <br>that will be submitted to search engines :)</div>
-</div>
-<div class='comment'>
-<div class='author'>Sethupathi</div>
-<div class='content'>
-How to create sitemap.xml<br>======================<br>From the following link you can generate the site-map.xml if your application is not in https. Just by giving the application link it will generate the xml for you.<br><br>http://www.xml-sitemaps.com/</div>
-</div>
-</div>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/09/social-media-overview/">Social Media Overview</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-09-04T12:43:00+05:30" pubdate data-updated="true">Sep 4<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<img style="visibility:hidden;width:0;height:0;" border="0" width="0" height="0" src="http://counters.gigya.com/wildfire/IMP/CXNID=2000002.11NXC/bHQ9MTI1MjA*ODM3ODczMSZwdD*xMjUyMDQ4NDM*ODU1JnA9MTAxOTEmZD1MSV9zdl8lMGElMDlwcmVzZW5*YXRpb24lMDkmbj13b3JkcHJlc3MmZz*xJmY9YiZvZj*w.gif" /><div style="width:425px;text-align:left;">[gigya width=&#8221;425&#8221; height=&#8221;355&#8221; src=&#8221;http://static.slideshare.net/swf/ssplayer2.swf?doc=socialmediaoverview-mar09-090325125549-phpapp01&amp;stripped_title=social-media-overview-1197231&#8221; quality=&#8221;high&#8221; wmode=&#8221;tranparent&#8221; ]</div></div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>sitemap « Fun On Rails</div>
-<div class='content'>
-[&#8230;] Social Media Overview « Fun On Rails [&#8230;]</div>
-</div>
-</div>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/09/what-is-new-in-edge-rails-233/">What Is New in Edge Rails 2.3.3 ?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-09-02T17:54:00+05:30" pubdate data-updated="true">Sep 2<span>nd</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-Rails community has released rails 2.3.3 recently with major upgrades and several bug fixes added.<br/><br/>On the other side, Rails 3 ( i.e. merge of rails and merb framework ) is supposed to be officially get released in this May.<br/><br/>Lets see what are the notable features added in rails 2.3.3<br/><br/><strong>1. Rack</strong><br/><em><br/>What is this rack ?</em><br/>Abstraction built on the top of rails framework<br/><br/><em>What it does ?</em><br/>It provides minimal interface between webservers supporting ruby ( like  apache-mongrel, nginx-passenger ) and rails framework.<br/>Gives access to middleware goodness<br/>i.e. wrapping HTML requests and response in simple way<br/>unifies and distills the API for web servers, web frameworks, and software in between<br/><br/><a href="http://guides.rubyonrails.org/rails_on_rack.html" target="_blank">read more &#8230;</a><br/><br/><strong>2. Metal</strong><br/>It is a subset of rack middleware specially designed to integrate with rails    application.<br/><br/><em>Why to use it ?</em><br/>Whenever you need achieve raw speed for certain requests by skipping action controller stack.<br/><a href="http://weblog.rubyonrails.org/2008/12/17/introducing-rails-metal" target="_blank"> read more &#8230;</a><br/><br/><strong>3. Engines</strong><br/>It was a plugin that got merged in rails core.<br/>It is used for sharing controllers, models and views seamlessly from within a plugin to your rails application.<br/><a href="http://rails-engines.org/news/2009/02/02/engines-in-rails-2-3/" target="_blank"> read more &#8230;</a><br/><br/><strong>4. Templates</strong><br/>These are the ruby files which describes which gems, plugins and initiliazers  has to be added while creating new rails project.<br/><a href="http://railscasts.com/episodes/148-app-templates-in-rails-2-3" target="_blank"> read more &#8230;</a><br/><br/><strong>5. Nested Forms</strong><br/>Earlier nested forms for has_one and has_many associations wasn&#8217;t<br/>there in rails.<br/>this release added nested forms complex associations in models.<br/><a href="http://weblog.rubyonrails.org/2009/1/26/nested-model-forms" target="_blank"> read more &#8230;</a> <a href="http://ryandaigle.com/articles/2009/2/1/what-s-new-in-edge-rails-nested-attributes" target="_blank">also see &#8230;</a><br/><br/><strong>One of good rails architecture diagram found while google<br/></strong><br/><br/>[caption id=&#8221;&#8221; align=&#8221;alignnone&#8221; width=&#8221;460&#8221; caption=&#8221;Rails 2.3 architecture diagram&#8221;]<a href="http://cleanair.highgroove.com/articles/2009/04/21/rails-marketecture-diagram"><img title="Rails 2.3 architecture diagram" src="http://img.skitch.com/20090422-gts8sseg1k8rgiafi1d7e54px6.png" alt="Rails 2.3 architecture diagram" width="460" /></a>[/caption]<br/><br/><strong>Edge rails Installation</strong><br/>gem install rails &#8211;source <a href="http://gems.rubyonrails.org" target="_blank">http://gems.rubyonrails.org</a><br/><br/>Thanks to rails community  for bringing this things in rails core.<br/>Cheers, now rails is getting its way !</div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>sitemap « Fun On Rails</div>
-<div class='content'>
-[&#8230;] What is new in edge rails 2.3.3 ? « Fun On Rails [&#8230;]</div>
-</div>
-</div>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
       <h1 class="entry-title"><a href="/2009/08/ruby-on-rails-search-engine/">Ruby on Rails Search Engine Optimization (SEO)</a></h1>
     
     
@@ -266,8 +106,42 @@ Rails community has released rails 2.3.3 recently with major upgrades and severa
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-Search Engines ( like google, yahoo ) mainly uses <strong>crawlers</strong> for returning results.<br/><br/><strong>Crawler</strong> is the program which searches world wide web ( www ) and returns ranked pages.<br/><br/>Lets see what are the search engine optimization (SEO) techniques we can adopt so that your rails<br/>website pages will appear in search results.<br/><br/><strong>1. Title Of Page</strong><br/><br/><strong>2. Meta tags</strong><br/><br/><strong>3. Page URL</strong><br/><br/><strong>4. Page Contents</strong> ( this includes anchors to other pages, headers, image titles and alt texts when image not found then normal texts )<br/><br/>We can easily skip some pages from search by mentioning them in robots.txt which is by default should be in application root.<br/><br/>And Ofcourse, we can manage all this in rails very easily..<br/><br/>How ????<br/><br/>We can have in rails<br/><br/><strong>1. Dynamic page titles,</strong><br/><br/><strong>2. Meta tags and</strong><br/><br/><strong>3. Sexy perma URLs in rails</strong><br/><br/><strong>4. Also, we can define some standard on page content development.</strong><br/><br/>&#8230;got Easy &#8230;&#8230;, Cheers !<br/><br/>$@ndip</div>
+  <div class="entry-content"><h2>Crawler</h2>
+
+<p>Search Engines ( like google, yahoo ) mainly uses crawlers for returning results.</p>
+
+<blockquote><p><code>Crawler</code> is the program which searches world wide web(www) and returns ranked pages.</p></blockquote>
+
+<h4>Techniques</h4>
+
+<p>Lets see what are the search engine optimization (SEO) techniques we can adopt so that your rails
+website pages will appear in search results.</p>
+
+<ol>
+<li>Title Of Page</li>
+<li>Meta tags</li>
+<li>Page URL</li>
+<li>Page Contents ( this includes anchors to other pages, headers, image titles and alt texts when image not found then normal texts )</li>
+</ol>
+
+
+<h4>robots.txt</h4>
+
+<p>We can easily skip some pages from search by mentioning them in <code>robots.txt</code> which is by default should be in application root.</p>
+
+<p>And Ofcourse, we can manage all this in rails very easily..</p>
+
+<h4>Howto?</h4>
+
+<p>We can have in rails :</p>
+
+<ol>
+<li>Dynamic page titles,</li>
+<li>Meta tags and</li>
+<li>Sexy perma URLs in rails</li>
+<li>Also, we can define some standard on page content development.</li>
+</ol>
+
 </div>
   
   
@@ -303,16 +177,591 @@ Search Engines ( like google, yahoo ) mainly uses <strong>crawlers</strong> for 
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-sudo apt-get install libmysqlclient15-dev<br/><br/>wget http://sphinxsearch.com/downloads/sphinx-0.9.8-rc2.tar.gz<br/>tar xvf  sphinx-0.9.8-rc2.tar.gz &amp;&amp; rm sphinx-0.9.8-rc2.tar.gz<br/>cd sphinx-0.9.8-rc2<br/>./configure<br/>make<br/>sudo make install</div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>sitemap « Fun On Rails</div>
-<div class='content'>
-[&#8230;] Easy sphinx install on ubuntu interpid « Fun On Rails [&#8230;]</div>
+  <div class="entry-content"><h4>Download <code>sphinx source</code> from website</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install libmysqlclient15-dev
+</span><span class='line'>wget http://sphinxsearch.com/downloads/sphinx-0.9.8-rc2.tar.gz</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Extract source code</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>tar xvf sphinx-0.9.8-rc2.tar.gz && rm sphinx-0.9.8-rc2.tar.gz</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Configure</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd sphinx-0.9.8-rc2
+</span><span class='line'>./configure</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Install</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>make
+</span><span class='line'>sudo make install</span></code></pre></td></tr></table></div></figure>
+
 </div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/intresting-string-inflections-in-rails/">Intresting String Inflections in Rails</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-22T19:58:00+05:30" pubdate data-updated="true">May 22<span>nd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Here is list of string inflections :</p>
+
+<ul>
+<li>camelcase</li>
+<li>camelize</li>
+<li>classify</li>
+<li>constantize</li>
+<li>dasherize</li>
+<li>demodulize</li>
+<li>foreign_key</li>
+<li>humanize</li>
+<li>parameterize</li>
+<li>pluralize</li>
+<li>singularize</li>
+<li>tableize</li>
+<li>titlecase</li>
+<li>titleize</li>
+<li>underscore</li>
+</ul>
+
+
+<h4>camelcase()</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>camelcase(first_letter = :upper)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Alias for camelize</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">camelize</span><span class="p">(</span><span class="n">first_letter</span> <span class="o">=</span> <span class="ss">:upper</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>By default, camelize converts strings to UpperCamelCase. If the argument to camelize is set to :lower then camelize produces lowerCamelCase.</p>
+
+<p>camelize will also convert ’/’ to ’::’ which is useful for converting paths to namespaces.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;active_record&quot;</span><span class="o">.</span><span class="n">camelize</span> <span class="c1"># =&gt; &quot;ActiveRecord&quot;</span>
+</span><span class='line'><span class="s2">&quot;active_record&quot;</span><span class="o">.</span><span class="n">camelize</span><span class="p">(</span><span class="ss">:lower</span><span class="p">)</span> <span class="c1"># =&gt; &quot;activeRecord&quot;</span>
+</span><span class='line'><span class="s2">&quot;active_record/errors&quot;</span><span class="o">.</span><span class="n">camelize</span> <span class="c1"># =&gt; &quot;ActiveRecord::Errors&quot;</span>
+</span><span class='line'><span class="s2">&quot;active_record/errors&quot;</span><span class="o">.</span><span class="n">camelize</span><span class="p">(</span><span class="ss">:lower</span><span class="p">)</span> <span class="c1"># =&gt; &quot;activeRecord::Errors&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This method is also aliased as camelcase</p>
+
+<h4>classify()</h4>
+
+<p>Create a class name from a plural table name like Rails does for table names to models. Note that this returns a string and not a class. (To convert to an actual class follow classify with constantize.)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;egg_and_hams&quot;</span><span class="o">.</span><span class="n">classify</span> <span class="c1"># =&gt; &quot;EggAndHam&quot;</span>
+</span><span class='line'><span class="s2">&quot;posts&quot;</span><span class="o">.</span><span class="n">classify</span> <span class="c1"># =&gt; &quot;Post&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Singular names are not handled correctly.</span>
+</span><span class='line'>
+</span><span class='line'><span class="s2">&quot;business&quot;</span><span class="o">.</span><span class="n">classify</span> <span class="c1"># =&gt; &quot;Busines&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>constantize()</h4>
+
+<p>constantize tries to find a declared constant with the name specified in the string. It raises a NameError when the name is not in CamelCase or is not initialized.</p>
+
+<p><strong>Examples :</strong></p>
+
+<p>&ldquo;Module&rdquo;.constantize # => Module
+&ldquo;Class&rdquo;.constantize # => Class</p>
+
+<h4>dasherize()</h4>
+
+<p>Replaces underscores with dashes in the string.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;puni_puni&quot;</span> <span class="c1"># =&gt; &quot;puni-puni&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>demodulize()</h4>
+
+<p>Removes the module part from the constant expression in the string.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;ActiveRecord::CoreExtensions::String::Inflections&quot;</span><span class="o">.</span><span class="n">demodulize</span> <span class="c1"># =&gt; &quot;Inflections&quot;</span>
+</span><span class='line'><span class="s2">&quot;Inflections&quot;</span><span class="o">.</span><span class="n">demodulize</span> <span class="c1"># =&gt; &quot;Inflections&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>foreign_key(separate_class_name_and_id_with_underscore = true)</h4>
+
+<p>Creates a foreign key name from a class name. separate_class_name_and_id_with_underscore sets whether the method should put &ldquo;_&rdquo; between the name and &lsquo;id&rsquo;.</p>
+
+<p><strong>Examples :</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;Message&quot;</span><span class="o">.</span><span class="n">foreign_key</span> <span class="c1"># =&gt; &quot;message_id&quot;</span>
+</span><span class='line'><span class="s2">&quot;Message&quot;</span><span class="o">.</span><span class="n">foreign_key</span><span class="p">(</span><span class="kp">false</span><span class="p">)</span> <span class="c1"># =&gt; &quot;messageid&quot;</span>
+</span><span class='line'><span class="s2">&quot;Admin::Post&quot;</span><span class="o">.</span><span class="n">foreign_key</span> <span class="c1"># =&gt; &quot;post_id&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>humanize()</h4>
+
+<p>Capitalizes the first word, turns underscores into spaces, and strips <code>_id</code>. Like titleize, this is meant for creating pretty output.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;employee_salary&quot;</span> <span class="c1"># =&gt; &quot;Employee salary&quot;</span>
+</span><span class='line'><span class="s2">&quot;author_id&quot;</span> <span class="c1"># =&gt; &quot;Author&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>`</p>
+
+<h4>parameterize()</h4>
+
+<p>Replaces special characters in a string so that it may be used as part of a ‘pretty’ URL.
+<strong>Examples :</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Person</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">to_param</span>
+</span><span class='line'>  <span class="s2">&quot;</span><span class="si">#{</span><span class="nb">id</span><span class="si">}</span><span class="s2">-</span><span class="si">#{</span><span class="nb">name</span><span class="o">.</span><span class="n">parameterize</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="vi">@person</span> <span class="o">=</span> <span class="no">Person</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span class='line'><span class="c1"># =&gt; Donald E. Knuth</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>pluralize()</h4>
+
+<p>Returns the plural form of the word in the string.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;post&quot;</span><span class="o">.</span><span class="n">pluralize</span> <span class="c1"># =&gt; &quot;posts&quot;</span>
+</span><span class='line'><span class="s2">&quot;octopus&quot;</span><span class="o">.</span><span class="n">pluralize</span> <span class="c1"># =&gt; &quot;octopi&quot;</span>
+</span><span class='line'><span class="s2">&quot;sheep&quot;</span><span class="o">.</span><span class="n">pluralize</span> <span class="c1"># =&gt; &quot;sheep&quot;</span>
+</span><span class='line'><span class="s2">&quot;words&quot;</span><span class="o">.</span><span class="n">pluralize</span> <span class="c1"># =&gt; &quot;words&quot;</span>
+</span><span class='line'><span class="s2">&quot;the blue mailman&quot;</span><span class="o">.</span><span class="n">pluralize</span> <span class="c1"># =&gt; &quot;the blue mailmen&quot;</span>
+</span><span class='line'><span class="s2">&quot;CamelOctopus&quot;</span><span class="o">.</span><span class="n">pluralize</span> <span class="c1"># =&gt; &quot;CamelOctopi&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>singularize()</h4>
+
+<p>The reverse of pluralize, returns the singular form of a word in a string.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;posts&quot;</span><span class="o">.</span><span class="n">singularize</span> <span class="c1"># =&gt; &quot;post&quot;</span>
+</span><span class='line'><span class="s2">&quot;octopi&quot;</span><span class="o">.</span><span class="n">singularize</span> <span class="c1"># =&gt; &quot;octopus&quot;</span>
+</span><span class='line'><span class="s2">&quot;sheep&quot;</span><span class="o">.</span><span class="n">singularize</span> <span class="c1"># =&gt; &quot;sheep&quot;</span>
+</span><span class='line'><span class="s2">&quot;word&quot;</span><span class="o">.</span><span class="n">singularize</span> <span class="c1"># =&gt; &quot;word&quot;</span>
+</span><span class='line'><span class="s2">&quot;the blue mailmen&quot;</span><span class="o">.</span><span class="n">singularize</span> <span class="c1"># =&gt; &quot;the blue mailman&quot;</span>
+</span><span class='line'><span class="s2">&quot;CamelOctopi&quot;</span><span class="o">.</span><span class="n">singularize</span> <span class="c1"># =&gt; &quot;CamelOctopus&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>tableize()</h4>
+
+<p>Creates the name of a table like Rails does for models to table names. This method uses the pluralize method on the last word in the string.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;RawScaledScorer&quot;</span><span class="o">.</span><span class="n">tableize</span> <span class="c1"># =&gt; &quot;raw_scaled_scorers&quot;</span>
+</span><span class='line'><span class="s2">&quot;egg_and_ham&quot;</span><span class="o">.</span><span class="n">tableize</span> <span class="c1"># =&gt; &quot;egg_and_hams&quot;</span>
+</span><span class='line'><span class="s2">&quot;fancyCategory&quot;</span><span class="o">.</span><span class="n">tableize</span> <span class="c1"># =&gt; &quot;fancy_categories&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>titlecase()</h4>
+
+<p>Alias for titleize
+titleize()</p>
+
+<p>Capitalizes all the words and replaces some characters in the string to create a nicer looking title. titleize is meant for creating pretty output. It is not used in the Rails internals.</p>
+
+<p>titleize is also aliased as titlecase.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;man from the boondocks&quot;</span><span class="o">.</span><span class="n">titleize</span>
+</span><span class='line'><span class="c1"># =&gt; &quot;Man From The Boondocks&quot;</span>
+</span><span class='line'><span class="s2">&quot;x-men: the last stand&quot;</span><span class="o">.</span><span class="n">titleize</span>
+</span><span class='line'><span class="c1"># =&gt; &quot;X Men: The Last Stand&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This method is also aliased as titlecase</p>
+
+<h4>underscore()</h4>
+
+<p>The reverse of camelize. Makes an underscored, lowercase form from the expression in the string.
+underscore will also change ’::’ to ’/’ to convert namespaces to paths.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;ActiveRecord&quot;</span><span class="o">.</span><span class="n">underscore</span>
+</span><span class='line'><span class="c1"># =&gt; &quot;active_record&quot;</span>
+</span><span class='line'><span class="s2">&quot;ActiveRecord::Errors&quot;</span><span class="o">.</span><span class="n">underscore</span>
+</span><span class='line'><span class="c1"># =&gt; active_record/errors</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Remove special characters from string</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;STRING&quot;</span><span class="o">.</span><span class="n">.gsub</span><span class="p">(</span><span class="sr">/[^a-zA-Z 0-9]/</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># escape special chars before save</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">before_save</span>
+</span><span class='line'>  <span class="nb">self</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="sr">/[^a-zA-Z 0-9]/</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/render-partial-or-view-from-another/">Render Partial or View From Another Controller</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-22T19:50:00+05:30" pubdate data-updated="true">May 22<span>nd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>To render view files from another controller&rsquo;s view files</p>
+
+<h2>In rail 2.3</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>render "controller/action"</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>In rails 2.2 or below</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>render :template =&gt; 'controller/action'</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>To render partial from another controller’s views folder</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>render :partial =&gt; "controller/partial"</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/vi-vim-shortcuts/">Vi / Vim Shortcuts</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-22T18:23:00+05:30" pubdate data-updated="true">May 22<span>nd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>As i am newb on linux macine, i dont know vi shortcuts.
+so, i am listing down shortcuts which i am getting familier :)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># Open file
+</span><span class='line'>vi filename
+</span><span class='line'>
+</span><span class='line'># Insert in file
+</span><span class='line'>i
+</span><span class='line'>
+</span><span class='line'># Exit file
+</span><span class='line'>q
+</span><span class='line'>
+</span><span class='line'># Forced exit
+</span><span class='line'>q!
+</span><span class='line'>
+</span><span class='line'># Save file
+</span><span class='line'>wq
+</span><span class='line'>
+</span><span class='line'># Forced save
+</span><span class='line'>wq!
+</span><span class='line'>
+</span><span class='line'># Copy no of lines
+</span><span class='line'>yy
+</span><span class='line'>
+</span><span class='line'># Paste copied lines
+</span><span class='line'>pp
+</span><span class='line'>
+</span><span class='line'># Undo changes
+</span><span class='line'>uu
+</span><span class='line'>
+</span><span class='line'># Delete lines
+</span><span class='line'>dd
+</span><span class='line'>
+</span><span class='line'># To search and replace string in vi
+</span><span class='line'>:%s/search_string/replacement_string/g
+</span><span class='line'>
+</span><span class='line'># To find particular word in file
+</span><span class='line'>?string1</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you have any quick list, please let me know !</p>
+
+<p>Below post is reblogged from <a href="http://nakuls77.wordpress.com/2008/09/14/using-vi-editor/#comment-144">http://nakuls77.wordpress.com/2008/09/14/using-vi-editor/#comment-144</a></p>
+
+<blockquote><p>Vi is a very powerful editor that has been part of nearly every linux/unix distro for a very long time. Many people stray away from Vi due to the curve involved in learning this editor. This guide will help you dive into the world of Vi. Once you do, you will understand why many prefer Vi over other editors.</p></blockquote>
+
+<p>There are countless options for Vi that can be set up inside the /etc/vimrc file.</p>
+
+<p>Auto-indent and creating a macro to change the color of the background.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># vi /etc/vimrc</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Auto-Indent Option &ndash;</h2>
+
+<p>This option is so when you tab-space out a line and then press enter, the cursor will move to the next line, automatically indented to the start of the previous line. This helps programmers indent out code easily to create clean looking code. To implement this feature, please add the following line to the bottom of your /etc/vimrc file:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>set ai</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Please note that generally speaking only programmers will want to turn ON auto-indent.</p>
+
+<h2>Background Color &ndash;</h2>
+
+<p>Some SSH clients have white backgrounds and some have black backgrounds. This can make it very difficult to see the screen depending on the color of the text. This macro allows you to configure F11 to change the background color &amp; color of the text. To implement this feature, please add the following lines to the bottom of your /etc/vimrc file:</p>
+
+<p>set background=dark
+map :let &amp;background = ( &amp;background == “dark”? “light” : “dark” )</p>
+
+<p>I would highly recommend adding in the Background Color option. However if you do not wish to implement either of these features, then please proceed on in the guide.</p>
+
+<p>Commands</p>
+
+<h2>Cursor Movement</h2>
+
+<p>0 (Zero) Start of Line
+^ – First non-Blank Character of Line
+$ – End of Line
+G Go To Command (prefix with number 5G goes to line 5)</p>
+
+<p>Insert Mode Inserting/Appending Text
+Insert Start Insert Mode at Cursor
+A Append at the end of the Line
+o open (append) blank link below current line
+I Open blank line above current line
+Esc Exit Insert Mode</p>
+
+<h2>Editing</h2>
+
+<p>r Replace a single character (does not use insert mode)
+J Join line below with the current one
+cc Change (replace) an entire line
+cw Change (replace) to the end of word
+c$ – Change (replace) to the end of line
+s Delete character at cursor and substitute text
+S Delete line at cursor and substitute text (same as cc)
+u Undo
+. – Repeat last command</p>
+
+<h2>Cut and Paste</h2>
+
+<p>yy Copy(yank) a line
+2yy Copy(yank) two lines
+yw Copy(yank) word
+p Paste the clipboard after the cursor
+P Paste the clipboard before the cursor
+dd Delete a line
+dw Delete the current word
+x Delete the current character</p>
+
+<h2>Exiting</h2>
+
+<p>:w Write (save) the file, but don’t exit
+:wq Write &amp; Quit
+:q Quit
+:q! – Quit and don’t save changes</p>
+
+<h2>Searching</h2>
+
+<p>/pattern Search for a pattern
+?pattern Search backward for a pattern
+n Repeat last search in same direction
+N Repeat last search in opposite direction
+:%2/old/new/g Replace all old with new throughout file
+:%s/old/new/gc Replace all old with new throughout file with confirmations</p>
+
+<h2>Working with Multiple Files</h2>
+
+<p>:e filename Edit a file in a new buffer
+:bn Go to next buffer
+:bp Go to previous buffer
+:bd Close file(buffer)
+:sp filename Open a file in a new buffer and split window
+ctrl-ws Split windows
+ctrl-ww Switch between windows
+ctrl-wq Quite a window
+ctrl-wv Split windows vertically
+ctrl-wq Quite a window
+ctrl-wv Split windows vertically</p>
 </div>
   
   

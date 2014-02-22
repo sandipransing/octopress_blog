@@ -9,8 +9,8 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Last week i shifted from ruby version 1.8.6 to 1.8.7 :&ndash;)
-But over a week i found that rails 1.2.3 applications developed in ruby 1.8.6 are not &hellip;">
+  <meta name="description" content="Testing your active record methods using script/console Windows If you are using windows, you start the console by using this command: 1
+ruby script/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,259 +78,6 @@ But over a week i found that rails 1.2.3 applications developed in ruby 1.8.6 ar
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/05/fix-for-ruby-187-incompatibity/">Fix for Ruby 1.8.7 Incompatibity</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-05-13T19:22:00+05:30" pubdate data-updated="true">May 13<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Last week i shifted from <code>ruby</code> version <code>1.8.6</code> to <code>1.8.7</code> :&ndash;)
-But over a week i found that rails <code>1.2.3</code> applications developed in ruby <code>1.8.6</code> are not working in ruby <code>1.8.7</code></p>
-
-<p>From lot of search on google, i found that its issue with ruby <code>1.8.7</code></p>
-
-<p>So in order to fix this bug, i started searching <code>fix / solution</code> for this incompatibity and got below fix.</p>
-
-<p>You just need to fix file <code>delegate.rb</code> and done</p>
-
-<h2>Diff of <code>/branches/ruby_1_8_7/lib/delegate.rb</code></h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>--- branches/ruby_1_8_7/lib/delegate.rb 2008/05/31 15:17:53 16732
-</span><span class='line'>+++ branches/ruby_1_8_7/lib/delegate.rb 2008/06/02 10:52:07 16756
-</span><span class='line'>@@ -163,9 +163,9 @@
-</span><span class='line'>   # Checks for a method provided by this the delegate object by fowarding the 
-</span><span class='line'>
-</span><span class='line'>   # call through \_\_getobj\_\_.
-</span><span class='line'>   # 
-</span><span class='line'>-  def respond_to?(m)
-</span><span class='line'>+  def respond_to?(m, include_private = false)
-</span><span class='line'>     return true if super
-</span><span class='line'>-    return self.__getobj__.respond_to?(m)
-</span><span class='line'>+    return self.__getobj__.respond_to?(m, include_private)
-</span><span class='line'>
-</span><span class='line'>   end
-</span><span class='line'>
-</span><span class='line'>   #
-</span><span class='line'>@@ -270,9 +270,9 @@
-</span><span class='line'>       end
-</span><span class='line'>       @_dc_obj.__send__(m, *args)
-</span><span class='line'>     end
-</span><span class='line'>-    def respond_to?(m)  # :nodoc:
-</span><span class='line'>+    def respond_to?(m, include_private = false)  # :nodoc:
-</span><span class='line'>       return true if super
-</span><span class='line'>
-</span><span class='line'>-      return @_dc_obj.respond_to?(m)
-</span><span class='line'>+      return @_dc_obj.respond_to?(m, include_private)
-</span><span class='line'>     end
-</span><span class='line'>     def __getobj__  # :nodoc:
-</span><span class='line'>       @_dc_obj</span></code></pre></td></tr></table></div></figure>
-
-
-<p>You have to make necessary changes and you are ready to work with ruby 1.8.7.
-need not downgrade ruby version :)</p>
-
-<h2>for Hash error</h2>
-
-<p>Add following line in <code>config/environment.rb</code></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">unless</span> <span class="s1">&#39;1.9&#39;</span><span class="o">.</span><span class="n">respond_to?</span><span class="p">(</span><span class="ss">:force_encoding</span><span class="p">)</span>
-</span><span class='line'>  <span class="nb">String</span><span class="o">.</span><span class="n">class_eval</span> <span class="k">do</span>
-</span><span class='line'>    <span class="k">begin</span>
-</span><span class='line'>      <span class="n">remove_method</span> <span class="ss">:chars</span>
-</span><span class='line'>    <span class="k">rescue</span> <span class="no">NameError</span>
-</span><span class='line'>      <span class="c1"># OK</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/05/rails-coding-standards/">Rails Coding Standards</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-05-13T16:48:00+05:30" pubdate data-updated="true">May 13<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<strong> IN ESSENCE: ALL CODE SHOULD BE READABLE!</strong><br/><br/># DO NOT OPTIMISE for performance - OPTIMISE FOR CLARITY OF CODE<br/><br/># STYLE: use 2 spaces for indent (not tabs)<br/><br/># STYLE: Line up hash arrows for readability<br/><br/># STYLE: put spaces around =&gt; hash arrows<br/><br/># STYLE: put spaces after &#8216;,&#8217; in method params - but none between method names and &#8216;(&#8217;<br/><br/># VIEWS: use HAML for views<br/><br/># VIEWS: break up the structure with white space to help readability - VERTICALLY TOO!<br/><br/># VIEWS STYLE: Rely on structure of page, without having to insert messages or new components&#8230;<br/><br/># LOGIC:  <strong>Rails Models should be as heavy as in logic and controllers should be lightweight as much as .</strong><br/><br/>* Example: Effect to visually highlight then drop out an existing element rather than flash a message<br/><br/>* Example: Highlight newly added row rather than a message about it<br/><br/># AVOID logic in views - they should be simple<br/><br/># Views indentation should be well formatted.<br/>not like this<br/><pre class=ruby><br/>&lt;% for joke in @jokes %&gt;<br/>&lt;div class="joke"&gt;<br/>&lt;p&gt;<br/>&lt;%= h(truncate(joke.joketext, 20)) %&gt;<br/>&lt;%= link_to 'Read this joke', {:action =&gt; 'show_joke', :id =&gt; joke} %&gt;<br/>&lt;/p&gt;<br/>&lt;p class="author&gt;<br/>by &lt;%= h(joke.author.full_name) %&gt;&lt;/p&gt;<br/>&lt;/div&gt;<br/>&lt;% end %&gt;</pre><br/><br/>* put html generating logic into helpers<br/><br/>* instead of inline ruby logic, add to models (filtering, checking)<br/><br/># NEVER use ActiveRecord models in migrations unless you re-define them within the migration<br/><br/>* &#8230;otherwise the migration fails when you later remove/rename the AR class<br/><br/>* BETTER SOLUTION: use bootstrapping until deployed!!!<br/><br/># AJAX only for sub-components of an object, and avoid over-use<br/><br/><hr /><br/><br/><strong>CONTROLLER CODING STANDARDS<br/></strong><br/><br/>1. Before filter should be added at the top of controller.<br/><br/>2. Before filter implementation should be immediate after filter declaration<br/><br/>3. Standard rails actions<br/><br/>4. Own custom actions<br/><br/>5. Inter-related actions should be clubbed together.<br/><br/>6. please, try to use of protected, private methods and they should be declared at the bottom of page in order.<br/><br/>7. Controller Actions should be like -<br/>use 2 spaces for indent (not tabs)<br/><pre class=ruby><br/>def self.published_jokes<br/>find(:all, :conditions =&gt; "published = 1")<br/>end</pre><br/><br/><strong>MODEL CODING STANDARDS</strong><br/><br/><pre class=ruby><br/>#======= HEADER SECTION=========</pre><br/><pre class=ruby><br/># SCHEMA INFORMATION WILL BE HERE<br/># REQUIRE FILES WILL GO HERE</pre><br/><br/>class Model &lt; ActiveRecord::Base<br/><br/><pre class=ruby> #======== TOP ===================</pre><br/><pre class=ruby><br/># LIBRARY OR INCLUDE METHODS<br/># MODEL RELATIONSHIPS<br/># VIRTUAL ATTRIBUTES<br/># ACTIVE RECORD VALIDATIONS</pre><br/><pre class=ruby> #======== MIDDLE ===============</pre><br/><pre class=ruby> # CUSTOM VALIDATIONS<br/># PUBLIC METHODS</pre><br/><pre class=ruby> #======== BASE ==================</pre><br/><pre class=ruby> # PROTECTED METHODS<br/># PRIVATE METHODS</pre><br/>end<br/><br/>Cheers !!!<br/>Sandip</div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>sandipransing</div>
-<div class='content'>
-Some more &#8230;&#8230;&#8230;.<br>http://rails.learnhub.com/lesson/5017-ruby-coding-convention</div>
-</div>
-</div>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/05/high-performance-rails-hosting/">High Performance Rails Hosting</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-05-08T17:48:00+05:30" pubdate data-updated="true">May 8<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>There are lot of rails hosting, like <code>wired tree</code>, etc.
-While doing search for cost effective and high performance hosting, Recently i came across with <code>joyent</code> rails hosting.
-please let me know your opinions on this.</p>
-
-<p>Here are some of the listed capabilities :</p>
-
-<h4>Scale on Demand</h4>
-
-<p>Your rails infrastructure can be dynamically expanded or reduced within minutes.</p>
-
-<h4>Support Billions of Hits</h4>
-
-<p>The largest ruby on rails application running on Joyent does over 1 Billion page views a month. Joyent’s hardware load balancers make this kind of scale possible.
-<code>Ruby 1.8.6</code>, <code>Rails 2.1</code>, <code>Mongrel</code>, <code>Nginx</code></p>
-
-<p>Everything you need to get rolling is pre-installed, including Ruby 1.8.6 and Rails 2.1, Apache, lighttpd, nginx and Mongrel.</p>
-
-<h4>Extremely Cost Effective</h4>
-
-<p>Static IPs, real storage, 10TB data transfer / bandwidth, and fantastic support all included.
-Lightning Fast Speed</p>
-
-<p>We provide direct connections to tier 1 internet back-bones, Force10 switches and f5 BigIP load-balancers.</p>
-
-<p><strong>Trusted by Companies like LinkedIn</strong></p>
-
-<h4>Check out their post</h4>
-
-<p>Official Ruby on Rails Host</p>
-
-<p>We’re the Official Ruby on Rails host. Go check it out at rubyonrails.org. “If you need hosting, Joyent is the official Ruby on Rails host, offering fantastic plans with a knowledgeable staff. Whether you need shared or dedicated hosting, these guys are experts in Ruby on Rails. ”
-Leverage a Large Community</p>
-
-<p>Over 2,400 companies run Rails applications on Joyent. You gain from our experience hosting them and you can connect directly with them through the Joyent Forums and the Joyent Wiki</p>
-
-<h4>Entirely Open Loving Cloud</h4>
-
-<p>Joyent offers open protocols, open source solutions. Use any Language, any DB. You can move your application. No vendor lock-in.</p>
-
-<p>please, help me……:(</p>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -486,102 +233,110 @@ Leverage a Large Community</p>
 
 <p>Lets take <code>post</code> model</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>class Post &lt; ActiveRecord::Base
-</span><span class='line'>  acts_as_taggable_on :tags
-</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">acts_as_taggable_on</span> <span class="ss">:tags</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>Controller code</h2>
 
 <p>Inside controller action</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>@post = Post.new(params[:post])
-</span><span class='line'># Or just hardcode to test
-</span><span class='line'>@post.tag_list ="awesome, slick, hefty"   
-</span><span class='line'>@post.save</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@post</span> <span class="o">=</span> <span class="no">Post</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:post</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'><span class="c1"># Or just hardcode to test</span>
+</span><span class='line'><span class="vi">@post</span><span class="o">.</span><span class="n">tag_list</span> <span class="o">=</span><span class="s2">&quot;awesome, slick, hefty&quot;</span>
+</span><span class='line'><span class="vi">@post</span><span class="o">.</span><span class="n">save</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>Methods</h2>
 
 <p>What are the methods provided?</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>@post.tag_list = "awesome, slick, hefty"   
-</span><span class='line'>Post.tagged_with("awesome", :on =&gt; :tags)
-</span><span class='line'># =&gt; [@post1, @post2]
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@post</span><span class="o">.</span><span class="n">tag_list</span> <span class="o">=</span> <span class="s2">&quot;awesome, slick, hefty&quot;</span>
+</span><span class='line'><span class="no">Post</span><span class="o">.</span><span class="n">tagged_with</span><span class="p">(</span><span class="s2">&quot;awesome&quot;</span><span class="p">,</span> <span class="ss">:on</span> <span class="o">=&gt;</span> <span class="ss">:tags</span><span class="p">)</span>
+</span><span class='line'><span class="c1"># =&gt; [@post1, @post2]</span>
 </span><span class='line'>
-</span><span class='line'>Post.tag_counts # =&gt; [,...]</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'><span class="no">Post</span><span class="o">.</span><span class="n">tag_counts</span> <span class="c1"># =&gt; [,...]</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>Named Scope</h2>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>class Post
-</span><span class='line'>end
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Post</span>
+</span><span class='line'><span class="k">end</span>
 </span><span class='line'>
-</span><span class='line'># created_at DESC
-</span><span class='line'>Post.tagged_with("awesome").by_creation</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'><span class="c1"># created_at DESC</span>
+</span><span class='line'><span class="no">Post</span><span class="o">.</span><span class="n">tagged_with</span><span class="p">(</span><span class="s2">&quot;awesome&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">by_creation</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>Pagination</h2>
 
 <p>It is easy to paginate tags collection using will_paginate plugin</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>List_Of_Tags.paginate(:page =&gt; params[:page], :per_page =&gt; 20)</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">List_Of_Tags</span><span class="o">.</span><span class="n">paginate</span><span class="p">(</span><span class="ss">:page</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:page</span><span class="o">]</span><span class="p">,</span> <span class="ss">:per_page</span> <span class="o">=&gt;</span> <span class="mi">20</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>@post.find_related_tags
-</span><span class='line'># =&gt; will give related posts having related tags. [ @post1, @post2, ...]</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@post</span><span class="o">.</span><span class="n">find_related_tags</span>
+</span><span class='line'><span class="c1"># =&gt; will give related posts having related tags. [ @post1, @post2, ...]</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>Tag Owners</h2>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>class User &lt; ActiveRecord::Base
-</span><span class='line'>  acts_as_tagger
-</span><span class='line'>end
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">acts_as_tagger</span>
+</span><span class='line'><span class="k">end</span>
 </span><span class='line'>
-</span><span class='line'>class Post &lt; ActiveRecord::Base
-</span><span class='line'>  acts_as_taggable_on :tags
-</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">acts_as_taggable_on</span> <span class="ss">:tags</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>Console play</h2>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>@some_user.tag(@some_post, :with =&gt; "paris, normandy", :on =&gt; :tags)
-</span><span class='line'>@some_user.owned_taggings
-</span><span class='line'>@some_user.owned_tags
-</span><span class='line'>@some_post.tags_from(@some_user)</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@some_user</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="vi">@some_post</span><span class="p">,</span> <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&quot;paris, normandy&quot;</span><span class="p">,</span> <span class="ss">:on</span> <span class="o">=&gt;</span> <span class="ss">:tags</span><span class="p">)</span>
+</span><span class='line'><span class="vi">@some_user</span><span class="o">.</span><span class="n">owned_taggings</span>
+</span><span class='line'><span class="vi">@some_user</span><span class="o">.</span><span class="n">owned_tags</span>
+</span><span class='line'><span class="vi">@some_post</span><span class="o">.</span><span class="n">tags_from</span><span class="p">(</span><span class="vi">@some_user</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
 
 </div>
   

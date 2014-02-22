@@ -9,7 +9,9 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="To render view from another controller# In rail 2.3render "controller/action"# In rails 2.2 or belowrender :template =&gt; 'controller/action'To &hellip;">
+  <meta name="description" content="To render view files from another controller&rsquo;s view files In rail 2.3 1
+render "controller/action" In rails 2.2 or below 1
+render :template =& &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -103,8 +105,25 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-To render view from another controller<br/><br/># In rail 2.3<br/><pre class=ruby>render "controller/action"</pre><br/><br/># In rails 2.2 or below<br/><pre class=ruby>render :template =&gt; 'controller/action'</pre><br/><br/>To render partial from another controller&#8217;s views folder<br/><br/><pre class=ruby>render :partial =&gt; "controller/partial"</pre><br/><br/>Cheers !<br/>Sandip</div>
+<div class="entry-content"><p>To render view files from another controller&rsquo;s view files</p>
+
+<h2>In rail 2.3</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>render "controller/action"</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>In rails 2.2 or below</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>render :template =&gt; 'controller/action'</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>To render partial from another controller’s views folder</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>render :partial =&gt; "controller/partial"</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 

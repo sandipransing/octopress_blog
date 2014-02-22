@@ -9,7 +9,7 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Please follow following steps blindly to get wireless working on ubuntu machine.Here are the steps&#8230;On a fresh clean Ubuntu machine:1. Disable &hellip;">
+  <meta name="description" content="Pleae follow below steps to get wireless working on ubuntu. Disable wireless Disable the Support for Atheros 802.11 wireless LAN cards on Hardware &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -103,16 +103,31 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-Please follow following steps blindly to get wireless working on ubuntu machine.<br/><br/>Here are the steps&#8230;<br/><br/>On a fresh clean Ubuntu machine:<br/>1. Disable the &#8221;<em>Support for Atheros 802.11 <span class="il">wireless</span> LAN cards</em>&#8221; on <strong>Hardware Drivers</strong>, and reboot your box.<br/><br/>2. In a terminal:<br/><br/>2.1 Updates all package lists<br/># sudo apt-get update<br/><br/>2.2 Update driver.<br/># sudo apt-get install linux-backports-modules-intrepid-generic<br/><div id=":6c" class="ii gt"><br/><br/>3. Reboot.</div><br/>Thanks to <a href="http://gautamrege.wordpress.com">Gautam</a>, directing me correct way :)<br/><div id="_mcePaste" style="overflow:hidden;position:absolute;left:-10000px;top:0;width:1px;height:1px;">Here are the steps</div></div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>Online Stock Trading</div>
-<div class='content'>
-Hey, I found your blog  while searching on Google. I have a blog on  <a rel="nofollow">online stock trading</a>, I&#39;ll  bookmark your site.</div>
-</div>
-</div>
+<div class="entry-content"><p>Pleae follow below steps to get wireless working on ubuntu.</p>
+
+<h2>Disable wireless</h2>
+
+<p>Disable the <code>Support for Atheros 802.11 wireless LAN cards</code> on Hardware Drivers, and reboot your box.</p>
+
+<h2>In a terminal:</h2>
+
+<h4>Updates all package lists</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get update</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Update driver</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install linux-backports-modules-intrepid-generic</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Reboot</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo reboot!</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 

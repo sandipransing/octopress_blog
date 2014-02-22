@@ -9,7 +9,16 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Below is ruby code to establish manual database connection. require 'active_record' ActiveRecord::Base.establish_connection( :adapter => "mysql", : &hellip;">
+  <meta name="description" content="Manual DB connection Below ruby code establishes a manual database connection. 1
+2
+3
+4
+5
+6
+7
+8
+require &#39;active_record&#39;
+ActiveRecord::Base. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +27,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="funonrails.com/2009/11/manual-active-record-db-connection-in">
+  <link rel="canonical" href="funonrails.com/2009/11/manual-active-record-db-connection">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="http://feeds.feedburner.com/funonrails" rel="alternate" title="Fun On Rails" type="application/atom+xml">
@@ -103,21 +112,85 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-Below is ruby code to establish manual database connection. <br/><pre class=ruby>require 'active_record' ActiveRecord::Base.establish_connection(     :adapter  => "mysql",     :host     => "localhost",     :username => "root",     :password => "abcd",     :database => "funonrails"   ) </pre><br/>Snippet of database.yml file <br/><pre class=ruby>common: &common   adapter: mysql   database: students_dev   username: root   password:   host: localhost  students_development:   <<: *common   database: students_dev  students_production:   <<: *common   database: students </pre><br/>Load database configurations from yml file<br/><pre class=ruby>dbconfig = YAML::load(File.open('database.yml'))  ActiveRecord::Base.establish_connection( dbconfig[:students_development] ) </pre><br/><b>Active Record Model & DB connection </b><br/><pre class=ruby>class Student < ActiveRecord::Base   establish_connection "students_production"   set_table_name "student"   set_primary_key "stud_number" end </pre></div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>Sandip Ransing</div>
-<div class='content'>
-This is because YAML libray is not installed or not in path.<br /><br />Add library to your code before that ensure it exists.<br /><br />require &quot;yaml&quot;<br /><br />dbconfig = YAML::load(File.open(&#39;database.yml&#39;))<br />ActiveRecord::Base.establish_connection( dbconfig )</div>
-</div>
-<div class='comment'>
-<div class='author'>Anonymous</div>
-<div class='content'>
-getting for the code above uninitialized constant YAML (NameError)<br /><br />what should i do?help me out</div>
-</div>
-</div>
+<div class="entry-content"><h2>Manual DB connection</h2>
+
+<p>Below ruby code establishes a manual database connection.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;active_record&#39;</span>
+</span><span class='line'><span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span><span class="o">.</span><span class="n">establish_connection</span><span class="p">(</span>
+</span><span class='line'>  <span class="ss">:adapter</span>  <span class="o">=&gt;</span> <span class="s2">&quot;mysql&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="ss">:host</span>     <span class="o">=&gt;</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="ss">:username</span> <span class="o">=&gt;</span> <span class="s2">&quot;root&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="s2">&quot;abcd&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="ss">:database</span> <span class="o">=&gt;</span> <span class="s2">&quot;funonrails&quot;</span>
+</span><span class='line'><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Snippet of database.yml file</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">common</span><span class="p-Indicator">:</span> <span class="nl">&amp;common</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">adapter</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">mysql</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">database</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">students_dev</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">username</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">root</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">password</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">host</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">localhost</span>
+</span><span class='line'>
+</span><span class='line'><span class="l-Scalar-Plain">students_development</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">&lt;&lt;</span><span class="p-Indicator">:</span> <span class="nv">*common</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">database</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">students_dev</span>
+</span><span class='line'>
+</span><span class='line'><span class="l-Scalar-Plain">students_production</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">&lt;&lt;</span><span class="p-Indicator">:</span> <span class="nv">*common</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">database</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">students</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Load database configurations from yml file</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">dbconfig</span> <span class="o">=</span> <span class="ss">YAML</span><span class="p">:</span><span class="ss">:load</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;database.yml&#39;</span><span class="p">))</span>
+</span><span class='line'><span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span><span class="o">.</span><span class="n">establish_connection</span><span class="p">(</span> <span class="n">dbconfig</span><span class="o">[</span><span class="ss">:students_development</span><span class="o">]</span> <span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Active Record Model &amp; DB connection</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Student</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">establish_connection</span> <span class="s2">&quot;students_production&quot;</span>
+</span><span class='line'>  <span class="n">set_table_name</span> <span class="s2">&quot;student&quot;</span>
+</span><span class='line'>  <span class="n">set_primary_key</span> <span class="s2">&quot;stud_number&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 
@@ -154,7 +227,7 @@ getting for the code above uninitialized constant YAML (NameError)<br /><br />wh
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="funonrails.com/2009/11/manual-active-record-db-connection-in/" data-via="sandipransing" data-counturl="funonrails.com/2009/11/manual-active-record-db-connection-in/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="funonrails.com/2009/11/manual-active-record-db-connection/" data-via="sandipransing" data-counturl="funonrails.com/2009/11/manual-active-record-db-connection/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -165,7 +238,7 @@ getting for the code above uninitialized constant YAML (NameError)<br /><br />wh
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2009/11/writing-rake-task-in-rails-with/" title="Previous Post: Writing rake task in rails with namespace, parameters">&laquo; Writing rake task in rails with namespace, parameters</a>
+        <a class="basic-alignment left" href="/2009/11/writing-rake-task-in-rails/" title="Previous Post: Writing rake task in rails with namespace, parameters">&laquo; Writing rake task in rails with namespace, parameters</a>
       
       
         <a class="basic-alignment right" href="/2009/11/how-to-remove-extra-spaces-in-ruby/" title="Next Post: How to remove extra spaces in ruby strings">How to remove extra spaces in ruby strings &raquo;</a>

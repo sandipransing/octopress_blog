@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vim | Fun On Rails]]></title>
   <link href="funonrails.com/categories/vim/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-21T02:23:40+05:30</updated>
+  <updated>2014-02-22T20:21:48+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -63,25 +63,105 @@ export EDITOR=vim
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Get hand over VI / VIM editor]]></title>
-    <link href="funonrails.com/2009/11/get-hand-over-vi-vim-editor/"/>
+    <title type="html"><![CDATA[VI/ VIM cheats]]></title>
+    <link href="funonrails.com/2009/11/vim-cheatsheet/"/>
     <updated>2009-11-18T01:20:00+05:30</updated>
-    <id>funonrails.com/2009/11/get-hand-over-vi-vim-editor</id>
-    <content type="html"><![CDATA[<div class='post'>
-<span style="font-family: Arial; font-size: small;"><span style="background-color: white; font-size: 13px;"> </span></span><br /><span style="font-family: Arial; font-size: small;"><span style="background-color: white; font-size: 13px;"><pre><b><span style="color: #351c75;">Movements</span></b></pre><pre>b   previous word<br />w   next word<br />e        end of word<br />0/^      begining of line<br />$        end of line<br />G        end of file<br />1G/gg    begining of file<br />/pattern  search next<br />?pattern  search previous<br />n         repeat    search forword ( i.e next occurence )<br />N         repeat    search backword<br />:line     goto line specified<br /><br />  *****Modes****<br />  i   insert mode<br />  r   replace mode<br />  s   delete character under cursor and eneter insert mode<br /><br />  *****Delete******<br />  x    delete character under cursor<br />  dd   delete current line<br />  line dd delete number of lines specified<br /><br />  ****copy********<br />  yy        copy current line<br />  pp        print copied contents<br />  line yy   copy number of lines specified<br /><br />  *******visual******<br /><br />  v     enter visual mode<br />  aw    highlight word<br />  as    highlight sentence<br />  ap    highlight paragraph<br />  ab    highlight block<br /><br />  ******undo/redo******<br />  u       undo<br />  cntrl+r redo<br /><br />  ******autocomplete****<br />  cntrl+x   enter completion mode<br />  cntrl+p   display autocomplete options<br /><br />  ******uppercase/lowercase*****<br />  guu   lowercase line<br />  gUU   uppercase line<br /><br />  *******Regx replace****<br /><br />  range s/foo/bar/arg - replace foo with bar in ‘range’ with<br /><br />  Values of 'range':<br />  %               whole file<br />  number          that particular line<br />  none            apply to current line only<br /><br />  values of 'arg':<br />  none  apply to first occurrence<br />  g     global (all occurrences)<br /><br />Select/Macros<br />  qchar      start recording macro storing it in register ‘char’<br />  q          end recording<br />  @char      replay the macro stored in ‘char’<br />  :1,10 norm! @char run the macro stored in ‘char’ over the 1-10 line range<br /></pre></span></span><br /></div>
+    <id>funonrails.com/2009/11/vim-cheatsheet</id>
+    <content type="html"><![CDATA[<h2>Movements</h2>
 
+<p><code>   
+b   previous word
+w   next word
+e        end of word
+0/^      begining of line
+$        end of line
+G        end of file
+1G/gg    begining of file
+/pattern  search next
+?pattern  search previous
+n         repeat    search forword ( i.e next occurence )
+N         repeat    search backword
+:line     goto line specified
+</code></p>
 
-<h2>Comments</h2>
+<h2>Modes</h2>
 
+<p><code>
+i   insert mode
+r   replace mode
+s   delete character under cursor and eneter insert mode
+</code></p>
 
-<div class='comments'>
-<div class='comment'>
-<div class='author'>Sandip Ransing</div>
-<div class='content'>
-Remove blank lines in vim<br /><br />:g/^ *$/d</div>
-</div>
-</div>
+<h2>Delete</h2>
 
+<p><code>
+x    delete character under cursor
+dd   delete current line
+line dd delete number of lines specified
+</code></p>
+
+<h2>Copy</h2>
+
+<p><code>
+yy        copy current line
+pp        print copied contents
+line yy   copy number of lines specified
+</code></p>
+
+<h2>Visual</h2>
+
+<p><code>
+v     enter visual mode
+aw    highlight word
+as    highlight sentence
+ap    highlight paragraph
+ab    highlight block
+</code></p>
+
+<h2>Undo/ Redo</h2>
+
+<p><code>
+u       undo
+cntrl+r redo
+</code></p>
+
+<h2>autocomplete</h2>
+
+<p><code>
+cntrl+x   enter completion mode
+cntrl+p   display autocomplete options
+</code></p>
+
+<h2>Uppercase/ Lowercase</h2>
+
+<p><code>
+guu   lowercase line
+gUU   uppercase line
+</code></p>
+
+<h2>Regx replace</h2>
+
+<p>```
+range s/foo/bar/arg &ndash; replace foo with bar in &lsquo;range&rsquo; with</p>
+
+<p>Values of &lsquo;range&rsquo;:
+%               whole file
+number          that particular line
+none            apply to current line only</p>
+
+<p>values of &lsquo;arg&rsquo;:
+none  apply to first occurrence
+g     global (all occurrences)
+```</p>
+
+<h2>Select/Macros</h2>
+
+<p><code>
+qchar      start recording macro storing it in register 'char'
+q          end recording
+@char      replay the macro stored in 'char'
+:1,10 norm! @char run the macro stored in 'char over the 1-10 line range
+</code></p>
 ]]></content>
   </entry>
   

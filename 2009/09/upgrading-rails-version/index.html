@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>upgrading rails version - Fun On Rails</title>
+  <title>upgrading rails version to rails 2.3.3 - Fun On Rails</title>
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Here are the simple steps to be followed while upgrading rails version to use.# Install rails version1. gem install rails -v == gem install rails 2. &hellip;">
+  <meta name="description" content="Here are the simple steps to be followed while upgrading rails version to use. Install rails version Please install rails version 2.3.3 if not &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,7 +80,7 @@
   
   <header>
     
-      <h1 class="entry-title">Upgrading Rails Version</h1>
+      <h1 class="entry-title">Upgrading Rails Version to Rails 2.3.3</h1>
     
     
       <p class="meta">
@@ -103,8 +103,37 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-Here are the simple steps to be followed while upgrading rails version to use.<br/><br/># Install rails version<br/>1. gem install rails -v<br/>    == gem install rails 2.3.3<br/><br/># Upgrade environment.rb for new version<br/>2. RAILS_GEM_VERSION = &#8221; unless defined? RAILS_GEM_VERSION<br/>    == RAILS_GEM_VERSION = &#8216;2.3.3&#8217; unless defined? RAILS_GEM_VERSION<br/><br/># Upgrade necessary files for the new version<br/>3. rake rails:upadte<br/><br/># Start server<br/>4. /script/server<br/><br/><br/>Thats, it !</div>
+<div class="entry-content"><p>Here are the simple steps to be followed while upgrading rails version to use.</p>
+
+<h2>Install rails version</h2>
+
+<p>Please install rails version 2.3.3 if not already installed</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install rails 2.3.3</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Upgrade <code>environment.rb</code> for newer rails version</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>RAILS_GEM_VERSION = ‘2.3.3’ unless defined? RAILS_GEM_VERSION</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Upgrade necessary files for rails <code>2.3.3</code> version</h2>
+
+<p>Run below command to update necessary files for latest version</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake rails:upadte</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Start rails server</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ruby script/server</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Thats, it !</p>
 </div>
 
 
@@ -132,7 +161,7 @@ Here are the simple steps to be followed while upgrading rails version to use.<b
 
 <span class="categories">
   
-    <a class='category' href='/categories/rails/'>rails</a>, <a class='category' href='/categories/rails-3/'>rails 3</a>
+    <a class='category' href='/categories/rails/'>rails</a>, <a class='category' href='/categories/upgrade/'>upgrade</a>
   
 </span>
 

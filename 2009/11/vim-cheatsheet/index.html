@@ -5,11 +5,29 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Get hand over VI / VIM editor - Fun On Rails</title>
+  <title>VI/ VIM cheats - Fun On Rails</title>
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Movementsb previous wordw next worde end of word0/^ begining of line$ end of lineG end of file1G/gg begining of file/pattern search next?pattern &hellip;">
+  <meta name="description" content="Movements 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+b previous word
+w next word
+e end of word
+0/^ begining of line
+$ end of line
+G end of file
+1G/gg begining of &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +36,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="funonrails.com/2009/11/get-hand-over-vi-vim-editor">
+  <link rel="canonical" href="funonrails.com/2009/11/vim-cheatsheet">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="http://feeds.feedburner.com/funonrails" rel="alternate" title="Fun On Rails" type="application/atom+xml">
@@ -80,7 +98,7 @@
   
   <header>
     
-      <h1 class="entry-title">Get Hand Over VI / VIM Editor</h1>
+      <h1 class="entry-title">VI/ VIM Cheats</h1>
     
     
       <p class="meta">
@@ -103,16 +121,137 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-<span style="font-family: Arial; font-size: small;"><span style="background-color: white; font-size: 13px;"> </span></span><br /><span style="font-family: Arial; font-size: small;"><span style="background-color: white; font-size: 13px;"><pre><b><span style="color: #351c75;">Movements</span></b></pre><pre>b   previous word<br />w   next word<br />e        end of word<br />0/^      begining of line<br />$        end of line<br />G        end of file<br />1G/gg    begining of file<br />/pattern  search next<br />?pattern  search previous<br />n         repeat    search forword ( i.e next occurence )<br />N         repeat    search backword<br />:line     goto line specified<br /><br />  *****Modes****<br />  i   insert mode<br />  r   replace mode<br />  s   delete character under cursor and eneter insert mode<br /><br />  *****Delete******<br />  x    delete character under cursor<br />  dd   delete current line<br />  line dd delete number of lines specified<br /><br />  ****copy********<br />  yy        copy current line<br />  pp        print copied contents<br />  line yy   copy number of lines specified<br /><br />  *******visual******<br /><br />  v     enter visual mode<br />  aw    highlight word<br />  as    highlight sentence<br />  ap    highlight paragraph<br />  ab    highlight block<br /><br />  ******undo/redo******<br />  u       undo<br />  cntrl+r redo<br /><br />  ******autocomplete****<br />  cntrl+x   enter completion mode<br />  cntrl+p   display autocomplete options<br /><br />  ******uppercase/lowercase*****<br />  guu   lowercase line<br />  gUU   uppercase line<br /><br />  *******Regx replace****<br /><br />  range s/foo/bar/arg - replace foo with bar in ‘range’ with<br /><br />  Values of 'range':<br />  %               whole file<br />  number          that particular line<br />  none            apply to current line only<br /><br />  values of 'arg':<br />  none  apply to first occurrence<br />  g     global (all occurrences)<br /><br />Select/Macros<br />  qchar      start recording macro storing it in register ‘char’<br />  q          end recording<br />  @char      replay the macro stored in ‘char’<br />  :1,10 norm! @char run the macro stored in ‘char’ over the 1-10 line range<br /></pre></span></span><br /></div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>Sandip Ransing</div>
-<div class='content'>
-Remove blank lines in vim<br /><br />:g/^ *$/d</div>
-</div>
-</div>
+<div class="entry-content"><h2>Movements</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>b   previous word
+</span><span class='line'>w   next word
+</span><span class='line'>e        end of word
+</span><span class='line'>0/^      begining of line
+</span><span class='line'>$        end of line
+</span><span class='line'>G        end of file
+</span><span class='line'>1G/gg    begining of file
+</span><span class='line'>/pattern  search next
+</span><span class='line'>?pattern  search previous
+</span><span class='line'>n         repeat    search forword ( i.e next occurence )
+</span><span class='line'>N         repeat    search backword
+</span><span class='line'>:line     goto line specified</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Modes</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>i   insert mode
+</span><span class='line'>r   replace mode
+</span><span class='line'>s   delete character under cursor and eneter insert mode</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Delete</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>x    delete character under cursor
+</span><span class='line'>dd   delete current line
+</span><span class='line'>line dd delete number of lines specified</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Copy</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>yy        copy current line
+</span><span class='line'>pp        print copied contents
+</span><span class='line'>line yy   copy number of lines specified</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Visual</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>v     enter visual mode
+</span><span class='line'>aw    highlight word
+</span><span class='line'>as    highlight sentence
+</span><span class='line'>ap    highlight paragraph
+</span><span class='line'>ab    highlight block</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Undo/ Redo</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>u       undo
+</span><span class='line'>cntrl+r redo</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>autocomplete</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cntrl+x   enter completion mode
+</span><span class='line'>cntrl+p   display autocomplete options</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Uppercase/ Lowercase</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>guu   lowercase line
+</span><span class='line'>gUU   uppercase line</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Regx replace</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>range s/foo/bar/arg - replace foo with bar in 'range' with
+</span><span class='line'>
+</span><span class='line'>Values of 'range':
+</span><span class='line'>%               whole file
+</span><span class='line'>number          that particular line
+</span><span class='line'>none            apply to current line only
+</span><span class='line'>
+</span><span class='line'>values of 'arg':
+</span><span class='line'>none  apply to first occurrence
+</span><span class='line'>g     global (all occurrences)</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Select/Macros</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>qchar      start recording macro storing it in register 'char'
+</span><span class='line'>q          end recording
+</span><span class='line'>@char      replay the macro stored in 'char'
+</span><span class='line'>:1,10 norm! @char run the macro stored in 'char over the 1-10 line range</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 
@@ -140,7 +279,7 @@ Remove blank lines in vim<br /><br />:g/^ *$/d</div>
 
 <span class="categories">
   
-    <a class='category' href='/categories/general/'>general</a>, <a class='category' href='/categories/ubuntu/'>ubuntu</a>, <a class='category' href='/categories/vim/'>vim</a>
+    <a class='category' href='/categories/vim/'>vim</a>
   
 </span>
 
@@ -149,7 +288,7 @@ Remove blank lines in vim<br /><br />:g/^ *$/d</div>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="funonrails.com/2009/11/get-hand-over-vi-vim-editor/" data-via="sandipransing" data-counturl="funonrails.com/2009/11/get-hand-over-vi-vim-editor/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="funonrails.com/2009/11/vim-cheatsheet/" data-via="sandipransing" data-counturl="funonrails.com/2009/11/vim-cheatsheet/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>

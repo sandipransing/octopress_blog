@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Managing multiple ruby versions and rails versions with rvm - Fun On Rails</title>
+  <title>Category: upgrade - Fun On Rails</title>
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="While working with many projects that uses different ruby versions and rails versions, one big problem arises that how do we manage all this ?We &hellip;">
+  <meta name="description" content="Category: upgrade">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="funonrails.com/2009/09/managing-multiple-ruby-versions-and">
+  <link rel="canonical" href="funonrails.comcategories/upgrade">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="http://feeds.feedburner.com/funonrails" rel="alternate" title="Fun On Rails" type="application/atom+xml">
@@ -76,117 +76,35 @@
   <div id="main">
     <div id="content">
       <div>
-<article class="hentry" role="article">
+<article role="article">
   
   <header>
-    
-      <h1 class="entry-title">Managing Multiple Ruby Versions and Rails Versions With Rvm</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-09-30T18:32:00+05:30" pubdate data-updated="true">Sep 30<span>th</span>, 2009</time>
-        
-      </p>
+    <h1 class="entry-title">Category: Upgrade</h1>
     
   </header>
-
-
-<div class="entry-content"><div class='post'>
-While working with many projects that uses different ruby versions and rails versions, one big problem arises that how do we manage all this ?<br/><br/>We know that managing multiple rails versions wont be problem at all.<br/>but what about ruby versions, How one can manage multiple ruby versions. also while upgrading or degrading ruby version, we need to install all gems again including rails. <br/>i know this is a big pain :(<br/>How we can overcome this headache. meantime there must be some incompatibilities between two different ruby and rails versions.<br/><br/>Yesterday, i did some research and came to know that&#8230;<br/><br/>+ ruby 1.8.7 and rails 2.3.3 got quite stability and effectively. we can use it in next developments.<br/>+ Also, after installing ruby 1.9.1 and dependent gems for my project, <br/>and wondering that there are many incompatibilities while installing new gems with ruby 1.9.1<br/><br/>Some of the gems are mysql, ferret, acts_as_ferret, erubies, etc.<br/><br/>Today, while google, i found rvm gem and that seems very nice to manage multiple ruby versions.<br/><br/><br/>Here are some steps explaining how to use it.<br/><br/># Install rvm gem to manage multiple ruby version<br/># pre-requisite is that we already have ruby and rubygems installation<br/><pre class=ruby>1. sudo gem install rvm</pre><br/><br/># Install rvm for a particular user<br/># It will also show how to use gem<br/><pre class=ruby>2. rvm-install</pre><br/><br/>3. Open new shell<br/><br/># Show all ruby, jruby installations<br/><pre class=ruby>4. rvm list</pre><br/><br/># Install ruby<br/># specify ruby version<br/><pre class=ruby>5. rvm install RUBY_VERSION_TO_BE_INSTALLED</pre><br/>    (rvm install 1.9.1)<br/><br/># Install jruby<br/># By default it will install jruby-1.3.1<br/><pre class=ruby>6. rvm install jruby</pre><br/><br/># Specify which ruby version to use ?<br/># Note: Be sure that ruby version is installed<br/><pre class=ruby>7. rvm use RUBY_VERSION_TO_USE </pre><br/>    (rvm use 1.9.1)<br/><br/>#. Default i.e. version before rvm gem installation<br/><pre class=ruby>8. rvm use default</pre><br/><br/>Sounds, cool :)</div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>togserv</div>
-<div class='content'>
-This comment has been removed by a blog administrator.</div>
-</div>
-<div class='comment'>
-<div class='author'>black hattitude</div>
-<div class='content'>
-hello,<br><br><br>Thank you for the great quality of your blog, each  time i come here, i&#39;m amazed.<br><br><br><br><br><br> <a href="http://blackhattitude.luc-quoniam.fr" rel="nofollow" rel="nofollow">black hattitude</a>.</div>
-</div>
-</div>
-</div>
-
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">sandipransing</span></span>
-
-      
-
-
-
-
-
+  <div id="blog-archives" class="category">
 
 
 
   
+  <h2>2009</h2>
+
+<article>
+  
+<h1><a href="/2009/09/upgrading-rails-version/">upgrading rails version to rails 2.3.3</a></h1>
+<time datetime="2009-09-29T19:12:00+05:30" pubdate><span class='month'>Sep</span> <span class='day'>29</span> <span class='year'>2009</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/categories/rails/'>rails</a>, <a class='category' href='/categories/upgrade/'>upgrade</a></span>
+</footer>
 
 
-<time datetime="2009-09-30T18:32:00+05:30" pubdate data-updated="true">Sep 30<span>th</span>, 2009</time>
-      
+</article>
 
-<span class="categories">
-  
-    <a class='category' href='/categories/ruby/'>ruby</a>, <a class='category' href='/categories/rvm/'>rvm</a>, <a class='category' href='/categories/ubuntu/'>ubuntu</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="funonrails.com/2009/09/managing-multiple-ruby-versions-and/" data-via="sandipransing" data-counturl="funonrails.com/2009/09/managing-multiple-ruby-versions-and/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
 </div>
 
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/2009/09/jruby-rails-installation-on-ubuntu/" title="Previous Post: jruby rails installation on ubuntu interpid">&laquo; jruby rails installation on ubuntu interpid</a>
-      
-      
-        <a class="basic-alignment right" href="/2009/09/no-ri-no-rdoc-for-ruby-gem-installation/" title="Next Post: --no-ri --no-rdoc for ruby gem installation">--no-ri --no-rdoc for ruby gem installation &raquo;</a>
-      
-    </p>
-    <p class="meta">
-      <div class="about">
-  <span class="about-image">
-    <img src="/images/author.jpg" alt="Sandip Ransing">
-  </span>
-  <span class="about-desc">
-    <span>
-      Sandip is a ruby on rails developer based in pune and also a blogger at funonrails. Opensource contributor and working with Josh software. Follow Sandip on <a href="http://twitter.com/sandipransing">Twitter</a> and <a href="http://github.com/sandipransing">Github</a> for updates.
-    </span>
-    </br>
-    <a href="https://twitter.com/sandipransing" class="twitter-follow-button" data-show-count="true" data-size="large">Follow @sandipransing</a>
-  </span>
-</div>
-
-    </p>
-  </footer>
+  
 </article>
 
 
@@ -267,6 +185,19 @@ hello,<br><br><br>Thank you for the great quality of your blog, each  time i com
 
 </footer>
   
+
+<script type="text/javascript">
+      var disqus_shortname = 'funonrails';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
 
 
 

@@ -9,7 +9,7 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Understanding and creating radinat extensions To start with, first of all lets know what is radiant and why to use it ? Radiant is a open source &hellip;">
+  <meta name="description" content="Understanding and creating radinat extensions To start with, first understand what is radiant and why to use it ? Radiant is a open source content &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -103,8 +103,382 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-Understanding and creating radinat extensions To start with, first of all lets know what is radiant and why to use it ? Radiant is a open source content management system designed that serves cms needs for small organisations Creating new radint application <pre class='ruby' name='code'><br /> radiant -d  mysql cms<br />    create<br />    create    CHANGELOG<br />    create    CONTRIBUTORS<br />    create    INSTALL<br />    create    LICENSE<br />    create    README<br />    create    config<br />    create    config/environments<br />    .....<br /></pre>Radiant supports extensions. It means one can add extra features to radiant based cms to add extra capabilities. Extension directory structure is almost similar to any standard rails application Radiant Extension Directory structure  <pre class='ruby' name='code'><br />       |-- app<br />              |-- controllers<br />              |-- helpers<br />              |-- models<br />              |-- views<br />       |-- db<br />              |-- migrate<br />              |-- seeds.rb<br />       |-- lib<br />              |-- spec<br />                 |-- controllers<br />                 |-- helpers<br />                 |-- models<br />                 |-- spec.opts<br />                 |-- spec_helper<br />                 |-- views<br /></pre>Creating radiant extension radiant has generators to create new radint extension script/generate extension ExtensionName Lets create session management extension for radint cms It will create directory structure for extension. <pre class='ruby' name='code'><br />script/generate extension session_management<br /></pre><pre class='ruby' name='code'><br />    create    vendor/extensions/session_management/app/controllers<br />    create    vendor/extensions/session_management/app/helpers<br />    create    vendor/extensions/session_management/app/models<br />    create    vendor/extensions/session_management/app/views<br />     create vendor/extensions/session_management/db/migrate<br />     create vendor/extensions/session_management/lib/tasks<br />     create vendor/extensions/session_management/README<br />     create vendor/extensions/session_management/session_management_extension.rb<br />     create<br />vendor/extensions/session_management/lib/tasks/session_management_extension_tasks.rake<br />     create vendor/extensions/session_management/spec/controllers<br />     create vendor/extensions/session_management/spec/models<br />     create vendor/extensions/session_management/spec/views<br />     create vendor/extensions/session_management/spec/helpers<br />     create vendor/extensions/session_management/features/support<br />     create vendor/extensions/session_management/features/step_definitions/admin<br />     create vendor/extensions/session_management/Rakefile<br />     create vendor/extensions/session_management/spec/spec_helper.rb<br />     create vendor/extensions/session_management/spec/spec.opts<br />     create vendor/extensions/session_management/cucumber.yml<br />     create vendor/extensions/session_management/features/support/env.rb<br />     create vendor/extensions/session_management/features/support/paths.rb<br /></pre>Edit session_management_extension.rb where extension version, description and website url can be added. <pre class='ruby' name='code'><br /># require_dependency 'application_controller'<br />class SessionManagementExtension < Radiant::Extension<br />  version "1.0"<br />  description "Describe your extension here"<br />  url "http://yourwebsite.com/session_management"<br />  # define_routes do |map|<br />  # map.namespace :admin, :member => { :remove => :get } do |admin|<br />  #     admin.resources :session_management<br />  # end<br />  # end<br />  def activate<br />    # admin.tabs.add "Session Management", "/admin/session_management", :after =><br />"Layouts", :visibility => [:all]<br />  end<br />  def deactivate<br />    # admin.tabs.remove "Session Management"<br />  end<br /></pre>In activate block, specify what are the library files , modules that needs to be activated while application starts. In my case, activate method looks like below.. <pre class='ruby' name='code'><br />  def activate<br />    # admin.tabs.add "Session Management", "/admin/session_management", :after =><br />"Layouts", :visibility => [:all]<br />   ApplicationController.send(:include, SessionManagementExt::ApplicationControllerExt)<br />  end<br /></pre>Generating models and controllers. <pre class='ruby' name='code'><br /> script/generate extension_model session_management session_info<br />session_id:string url:string ip:string<br /></pre>In above command first attribute is the extension name and next is model name and rest specifies attributes that needs to created. It will create <pre class='ruby' name='code'><br />     exists   app/models/<br />     exists   spec/models/<br />     create   app/models/session_info.rb<br />     create   spec/models/session_info_spec.rb<br />     exists   db/migrate<br />     create   db/migrate/20091110075042_create_session_infos.rb<br /></pre>Generating controller <pre class='ruby' name='code'><br />script/generate extension_controller session_management admin/session_managements<br /></pre>It will create an output <pre class='ruby' name='code'><br />create app/controllers/admin<br />     create app/helpers/admin<br />     create app/views/admin/session_managements<br />     create spec/controllers/admin<br />     create spec/helpers/admin<br />     create spec/views/admin/session_managements<br />     create spec/controllers/admin/session_managements_controller_spec.rb<br />     create spec/helpers/admin/session_managements_helper_spec.rb<br />     create app/controllers/admin/session_managements_controller.rb<br />     create app/helpers/admin/session_managements_helper.rb<br /></pre>Modify session managements controller for displaying sesssion infos tracked. We need before filter for every request that will capture session, ip and page url so, we need to override behaviour of application controller to add before_filter We have already added ApplicationControllerExt in activate of extension. <pre class='ruby' name='code'><br />   ApplicationController.send(:include, SessionManagementExt::ApplicationControllerExt)<br />Lets look into ApplicationControllerExt module.<br />module SessionManagementExt<br />  module ApplicationControllerExt<br />    def self.included(base)<br />     base.class_eval do<br />       before_filter :track_session<br />     end<br />    end<br />    def track_session<br />     #**"Hello from Session tracker !!!"**<br />     #TODO: location track<br />     # It can be delayed task<br />     #sudo gem install geoip_city -- --with-geoip-dir=/opt/GeoIP<br />     # require 'geoip_city'<br />     # g = GeoIPCity::Database.new('/opt/GeoIP/share/GeoIP/GeoLiteCity.dat')<br />     # res = g.look_up('201.231.22.125')<br />     # {:latitude=>-33.13330078125, :country_code3=>"ARG",<br />:longitude=>-64.3499984741211, :city=>"Río Cuarto", :country_name=>"Argentina",<br />:country_code=>"AR", :region=>"05"}<br />     SessionInfo.create( :ip => request.remote_ip, :page_url =><br />"http://#{request.env["HTTP_HOST"]}#{request.request_uri}", :session_id =><br />request.session.session_id )<br />    end<br />  end<br />end<br /></pre>That&#8217;s all Creating rake task for extension module here is default genrated rake task for session management under vendor/extensions/session_management/lib/tasks/session_management_extension_tasks.rake It includes task to migrate database and update extension <pre class='ruby' name='code'><br />namespace :radiant do<br />  namespace :extensions do<br />    namespace :session_management do<br />     desc "Runs the migration of the Session Management extension"<br />     task :migrate => :environment do<br />       require 'radiant/extension_migrator'<br />       if ENV["VERSION"]<br />         SessionManagementExtension.migrator.migrate(ENV["VERSION"].to_i)<br />       else<br />         SessionManagementExtension.migrator.migrate<br />       end<br />     end<br />     desc "Copies public assets of the Session Management to the instance public/ directory."<br />     task :update => :environment do<br />       is_svn_or_dir = proc {|path| path =~ /\.svn/ || File.directory?(path) }<br />       puts "Copying assets from SessionManagementExtension"<br />       Dir[SessionManagementExtension.root + "/public/**/*"].reject(&is_svn_or_dir).each do<br />|file|<br />         path = file.sub(SessionManagementExtension.root, '')<br />         directory = File.dirname(path)<br />         mkdir_p RAILS_ROOT + directory, :verbose => false<br />         cp file, RAILS_ROOT + path, :verbose => false<br />       end<br />     end<br />    end<br />  end<br />end<br /></pre>Add as many custom tasks needed inside this file without changing default tasks.  Migrate all radiant extensions <pre class='ruby' name='code'><br />rake db:migrate:extensions<br /></pre></div>
+<div class="entry-content"><h2>Understanding and creating radinat extensions</h2>
+
+<p>To start with, first understand <em>what is radiant</em> and <em>why to use it ?</em></p>
+
+<blockquote><p>Radiant is a open source content management system designed that serves cms needs for small organisations</p></blockquote>
+
+<h2>Creating new radint application</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>radiant -d  mysql cms
+</span><span class='line'>  create
+</span><span class='line'>  create    CHANGELOG
+</span><span class='line'>  create    CONTRIBUTORS
+</span><span class='line'>  create    INSTALL
+</span><span class='line'>  create    LICENSE
+</span><span class='line'>  create    README
+</span><span class='line'>  create    config
+</span><span class='line'>  create    config/environments
+</span><span class='line'>  .....</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Radiant supports extensions. It means one can add extra features to radiant based cms to add extra capabilities.
+Extension directory structure is almost similar to any standard rails application</p>
+
+<h2>Radiant Extension Directory structure</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>|-- app
+</span><span class='line'>       |-- controllers
+</span><span class='line'>       |-- helpers
+</span><span class='line'>       |-- models
+</span><span class='line'>       |-- views
+</span><span class='line'>|-- db
+</span><span class='line'>       |-- migrate
+</span><span class='line'>       |-- seeds.rb
+</span><span class='line'>|-- lib
+</span><span class='line'>       |-- spec
+</span><span class='line'>          |-- controllers
+</span><span class='line'>          |-- helpers
+</span><span class='line'>          |-- models
+</span><span class='line'>          |-- spec.opts
+</span><span class='line'>          |-- spec_helper
+</span><span class='line'>          |-- views</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Creating radiant extension</h2>
+
+<p>radiant has generators to create new radint extension</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>script/generate extension ExtensionName</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Lets create session management extension for radint cms. It will create directory structure for extension.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>script/generate extension session_management
+</span><span class='line'>  create vendor/extensions/session_management/app/controllers
+</span><span class='line'>  create vendor/extensions/session_management/app/helpers
+</span><span class='line'>  create vendor/extensions/session_management/app/models
+</span><span class='line'>  create vendor/extensions/session_management/app/views
+</span><span class='line'>  create vendor/extensions/session_management/db/migrate
+</span><span class='line'>  create vendor/extensions/session_management/lib/tasks
+</span><span class='line'>  create vendor/extensions/session_management/README
+</span><span class='line'>  create vendor/extensions/session_management/session_management_extension.rb
+</span><span class='line'>  create vendor/extensions/session_management/lib/tasks/session_management_extension_tasks.rake
+</span><span class='line'>  create vendor/extensions/session_management/spec/controllers
+</span><span class='line'>  create vendor/extensions/session_management/spec/models
+</span><span class='line'>  create vendor/extensions/session_management/spec/views
+</span><span class='line'>  create vendor/extensions/session_management/spec/helpers
+</span><span class='line'>  create vendor/extensions/session_management/features/support
+</span><span class='line'>  create vendor/extensions/session_management/features/step_definitions/admin
+</span><span class='line'>  create vendor/extensions/session_management/Rakefile
+</span><span class='line'>  create vendor/extensions/session_management/spec/spec_helper.rb
+</span><span class='line'>  create vendor/extensions/session_management/spec/spec.opts
+</span><span class='line'>  create vendor/extensions/session_management/cucumber.yml
+</span><span class='line'>  create vendor/extensions/session_management/features/support/env.rb
+</span><span class='line'>  create vendor/extensions/session_management/features/support/paths.rb</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Edit <code>session_management_extension.rb</code> where extension version, description, and website url can be added.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># require_dependency &#39;application_controller&#39;</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">SessionManagementExtension</span> <span class="o">&lt;</span> <span class="ss">Radiant</span><span class="p">:</span><span class="ss">:Extension</span>
+</span><span class='line'>  <span class="n">version</span> <span class="s2">&quot;1.0&quot;</span>
+</span><span class='line'>  <span class="n">description</span> <span class="s2">&quot;Describe your extension here&quot;</span>
+</span><span class='line'>  <span class="n">url</span> <span class="s2">&quot;http://yourwebsite.com/session_management&quot;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># define_routes do |map|</span>
+</span><span class='line'>  <span class="c1"># map.namespace :admin, :member =&gt; { :remove =&gt; :get } do |admin|</span>
+</span><span class='line'>  <span class="c1">#     admin.resources :session_management</span>
+</span><span class='line'>  <span class="c1"># end</span>
+</span><span class='line'>  <span class="c1"># end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">activate</span>
+</span><span class='line'>    <span class="c1"># admin.tabs.add &quot;Session Management&quot;, &quot;/admin/session_management&quot;, :after =&gt;</span>
+</span><span class='line'><span class="s2">&quot;Layouts&quot;</span><span class="p">,</span> <span class="ss">:visibility</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="ss">:all</span><span class="o">]</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">deactivate</span>
+</span><span class='line'>    <span class="c1"># admin.tabs.remove &quot;Session Management&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In activate block, specify what are the library files , modules that needs to be activated while application starts. In my case, activate method looks like below..</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">activate</span>
+</span><span class='line'>  <span class="c1"># admin.tabs.add &quot;Session Management&quot;, &quot;/admin/session_management&quot;, :after =&gt;</span>
+</span><span class='line'><span class="s2">&quot;Layouts&quot;</span><span class="p">,</span> <span class="ss">:visibility</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="ss">:all</span><span class="o">]</span>
+</span><span class='line'>  <span class="no">ApplicationController</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="ss">:include</span><span class="p">,</span> <span class="ss">SessionManagementExt</span><span class="p">:</span><span class="ss">:ApplicationControllerExt</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Generating models and controllers</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">script</span><span class="o">/</span><span class="n">generate</span> <span class="n">extension_model</span> <span class="n">session_management</span> <span class="n">session_info</span>
+</span><span class='line'><span class="n">session_id</span><span class="ss">:string</span> <span class="ss">url</span><span class="p">:</span><span class="n">string</span> <span class="ss">ip</span><span class="p">:</span><span class="n">string</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In above command first attribute is the extension name and next is model name and rest specifies attributes that needs to created. It will create</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">exists</span>   <span class="n">app</span><span class="o">/</span><span class="n">models</span><span class="o">/</span>
+</span><span class='line'>     <span class="n">exists</span>   <span class="n">spec</span><span class="o">/</span><span class="n">models</span><span class="o">/</span>
+</span><span class='line'>     <span class="n">create</span>   <span class="n">app</span><span class="o">/</span><span class="n">models</span><span class="o">/</span><span class="n">session_info</span><span class="o">.</span><span class="n">rb</span>
+</span><span class='line'>     <span class="n">create</span>   <span class="n">spec</span><span class="o">/</span><span class="n">models</span><span class="o">/</span><span class="n">session_info_spec</span><span class="o">.</span><span class="n">rb</span>
+</span><span class='line'>     <span class="n">exists</span>   <span class="n">db</span><span class="o">/</span><span class="n">migrate</span>
+</span><span class='line'>     <span class="n">create</span>   <span class="n">db</span><span class="o">/</span><span class="n">migrate</span><span class="o">/</span><span class="mi">20091110075042</span><span class="n">_create_session_infos</span><span class="o">.</span><span class="n">rb</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Generating controller</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">script</span><span class="o">/</span><span class="n">generate</span> <span class="n">extension_controller</span> <span class="n">session_management</span> <span class="n">admin</span><span class="o">/</span><span class="n">session_managements</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It will create an output</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">create</span> <span class="n">app</span><span class="o">/</span><span class="n">controllers</span><span class="o">/</span><span class="n">admin</span>
+</span><span class='line'>     <span class="n">create</span> <span class="n">app</span><span class="o">/</span><span class="n">helpers</span><span class="o">/</span><span class="n">admin</span>
+</span><span class='line'>     <span class="n">create</span> <span class="n">app</span><span class="o">/</span><span class="n">views</span><span class="o">/</span><span class="n">admin</span><span class="o">/</span><span class="n">session_managements</span>
+</span><span class='line'>     <span class="n">create</span> <span class="n">spec</span><span class="o">/</span><span class="n">controllers</span><span class="o">/</span><span class="n">admin</span>
+</span><span class='line'>     <span class="n">create</span> <span class="n">spec</span><span class="o">/</span><span class="n">helpers</span><span class="o">/</span><span class="n">admin</span>
+</span><span class='line'>     <span class="n">create</span> <span class="n">spec</span><span class="o">/</span><span class="n">views</span><span class="o">/</span><span class="n">admin</span><span class="o">/</span><span class="n">session_managements</span>
+</span><span class='line'>     <span class="n">create</span> <span class="n">spec</span><span class="o">/</span><span class="n">controllers</span><span class="o">/</span><span class="n">admin</span><span class="o">/</span><span class="n">session_managements_controller_spec</span><span class="o">.</span><span class="n">rb</span>
+</span><span class='line'>     <span class="n">create</span> <span class="n">spec</span><span class="o">/</span><span class="n">helpers</span><span class="o">/</span><span class="n">admin</span><span class="o">/</span><span class="n">session_managements_helper_spec</span><span class="o">.</span><span class="n">rb</span>
+</span><span class='line'>     <span class="n">create</span> <span class="n">app</span><span class="o">/</span><span class="n">controllers</span><span class="o">/</span><span class="n">admin</span><span class="o">/</span><span class="n">session_managements_controller</span><span class="o">.</span><span class="n">rb</span>
+</span><span class='line'>     <span class="n">create</span> <span class="n">app</span><span class="o">/</span><span class="n">helpers</span><span class="o">/</span><span class="n">admin</span><span class="o">/</span><span class="n">session_managements_helper</span><span class="o">.</span><span class="n">rb</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Modify session managements controller for displaying sesssion infos tracked.</p>
+
+<p>We need before filter for every request that will capture <code>session</code>, <code>ip</code> and <code>page url</code>.
+so we need to override behaviour of application controller to add before_filter</p>
+
+<p>We have already added <code>ApplicationControllerExt</code> in activate of extension.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">ApplicationController</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="ss">:include</span><span class="p">,</span> <span class="ss">SessionManagementExt</span><span class="p">:</span><span class="ss">:ApplicationControllerExt</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Lets look into ApplicationControllerExt module.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">SessionManagementExt</span>
+</span><span class='line'>  <span class="k">module</span> <span class="nn">ApplicationControllerExt</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">included</span><span class="p">(</span><span class="n">base</span><span class="p">)</span>
+</span><span class='line'>     <span class="n">base</span><span class="o">.</span><span class="n">class_eval</span> <span class="k">do</span>
+</span><span class='line'>       <span class="n">before_filter</span> <span class="ss">:track_session</span>
+</span><span class='line'>     <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">track_session</span>
+</span><span class='line'>     <span class="c1">#**&quot;Hello from Session tracker !!!&quot;**</span>
+</span><span class='line'>     <span class="c1">#TODO: location track</span>
+</span><span class='line'>     <span class="c1"># It can be delayed task</span>
+</span><span class='line'>     <span class="c1">#sudo gem install geoip_city -- --with-geoip-dir=/opt/GeoIP</span>
+</span><span class='line'>     <span class="c1"># require &#39;geoip_city&#39;</span>
+</span><span class='line'>     <span class="c1"># g = GeoIPCity::Database.new(&#39;/opt/GeoIP/share/GeoIP/GeoLiteCity.dat&#39;)</span>
+</span><span class='line'>     <span class="c1"># res = g.look_up(&#39;201.231.22.125&#39;)</span>
+</span><span class='line'>     <span class="c1"># {:latitude=&gt;-33.13330078125, :country_code3=&gt;&quot;ARG&quot;,</span>
+</span><span class='line'><span class="ss">:longitude</span><span class="o">=&gt;-</span><span class="mi">64</span><span class="o">.</span><span class="mi">3499984741211</span><span class="p">,</span> <span class="ss">:city</span><span class="o">=&gt;</span><span class="s2">&quot;Río Cuarto&quot;</span><span class="p">,</span> <span class="ss">:country_name</span><span class="o">=&gt;</span><span class="s2">&quot;Argentina&quot;</span><span class="p">,</span>
+</span><span class='line'><span class="ss">:country_code</span><span class="o">=&gt;</span><span class="s2">&quot;AR&quot;</span><span class="p">,</span> <span class="ss">:region</span><span class="o">=&gt;</span><span class="s2">&quot;05&quot;</span><span class="p">}</span>
+</span><span class='line'>     <span class="no">SessionInfo</span><span class="o">.</span><span class="n">create</span><span class="p">(</span> <span class="ss">:ip</span> <span class="o">=&gt;</span> <span class="n">request</span><span class="o">.</span><span class="n">remote_ip</span><span class="p">,</span> <span class="ss">:page_url</span> <span class="o">=&gt;</span>
+</span><span class='line'><span class="s2">&quot;http://</span><span class="si">#{</span><span class="n">request</span><span class="o">.</span><span class="n">env</span><span class="o">[</span><span class="s2">&quot;HTTP_HOST&quot;</span><span class="o">]</span><span class="si">}#{</span><span class="n">request</span><span class="o">.</span><span class="n">request_uri</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="ss">:session_id</span> <span class="o">=&gt;</span>
+</span><span class='line'><span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">session_id</span> <span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&rsquo;s all! Creating rake task for extension module here is default genrated rake task for session management under <code>vendor/extensions/session_management/lib/tasks/session_management_extension_tasks.rake</code>. It includes task to migrate database and update extension</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">namespace</span> <span class="ss">:radiant</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">namespace</span> <span class="ss">:extensions</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">namespace</span> <span class="ss">:session_management</span> <span class="k">do</span>
+</span><span class='line'>     <span class="n">desc</span> <span class="s2">&quot;Runs the migration of the Session Management extension&quot;</span>
+</span><span class='line'>     <span class="n">task</span> <span class="ss">:migrate</span> <span class="o">=&gt;</span> <span class="ss">:environment</span> <span class="k">do</span>
+</span><span class='line'>       <span class="nb">require</span> <span class="s1">&#39;radiant/extension_migrator&#39;</span>
+</span><span class='line'>       <span class="k">if</span> <span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;VERSION&quot;</span><span class="o">]</span>
+</span><span class='line'>         <span class="no">SessionManagementExtension</span><span class="o">.</span><span class="n">migrator</span><span class="o">.</span><span class="n">migrate</span><span class="p">(</span><span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;VERSION&quot;</span><span class="o">].</span><span class="n">to_i</span><span class="p">)</span>
+</span><span class='line'>       <span class="k">else</span>
+</span><span class='line'>         <span class="no">SessionManagementExtension</span><span class="o">.</span><span class="n">migrator</span><span class="o">.</span><span class="n">migrate</span>
+</span><span class='line'>       <span class="k">end</span>
+</span><span class='line'>     <span class="k">end</span>
+</span><span class='line'>     <span class="n">desc</span> <span class="s2">&quot;Copies public assets of the Session Management to the instance public/ directory.&quot;</span>
+</span><span class='line'>     <span class="n">task</span> <span class="ss">:update</span> <span class="o">=&gt;</span> <span class="ss">:environment</span> <span class="k">do</span>
+</span><span class='line'>       <span class="n">is_svn_or_dir</span> <span class="o">=</span> <span class="nb">proc</span> <span class="p">{</span><span class="o">|</span><span class="n">path</span><span class="o">|</span> <span class="n">path</span> <span class="o">=~</span> <span class="sr">/\.svn/</span> <span class="o">||</span> <span class="no">File</span><span class="o">.</span><span class="n">directory?</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="p">}</span>
+</span><span class='line'>       <span class="nb">puts</span> <span class="s2">&quot;Copying assets from SessionManagementExtension&quot;</span>
+</span><span class='line'>       <span class="no">Dir</span><span class="o">[</span><span class="no">SessionManagementExtension</span><span class="o">.</span><span class="n">root</span> <span class="o">+</span> <span class="s2">&quot;/public/**/*&quot;</span><span class="o">].</span><span class="n">reject</span><span class="p">(</span><span class="o">&amp;</span><span class="n">is_svn_or_dir</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span>
+</span><span class='line'><span class="o">|</span><span class="n">file</span><span class="o">|</span>
+</span><span class='line'>         <span class="n">path</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="no">SessionManagementExtension</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span><span class='line'>         <span class="n">directory</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+</span><span class='line'>         <span class="n">mkdir_p</span> <span class="no">RAILS_ROOT</span> <span class="o">+</span> <span class="n">directory</span><span class="p">,</span> <span class="ss">:verbose</span> <span class="o">=&gt;</span> <span class="kp">false</span>
+</span><span class='line'>         <span class="n">cp</span> <span class="n">file</span><span class="p">,</span> <span class="no">RAILS_ROOT</span> <span class="o">+</span> <span class="n">path</span><span class="p">,</span> <span class="ss">:verbose</span> <span class="o">=&gt;</span> <span class="kp">false</span>
+</span><span class='line'>       <span class="k">end</span>
+</span><span class='line'>     <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Add as many custom tasks needed inside this file without changing default tasks.
+Migrate all radiant extensions</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rake</span> <span class="ss">db</span><span class="p">:</span><span class="ss">migrate</span><span class="p">:</span><span class="n">extensions</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 
@@ -152,10 +526,10 @@ Understanding and creating radinat extensions To start with, first of all lets k
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2009/11/linux-commands-for-remote-access/" title="Previous Post: Linux commands for remote access, compress, decompress">&laquo; Linux commands for remote access, compress, decompress</a>
+        <a class="basic-alignment left" href="/2009/11/remote-access-remote-copy-compress-decompress-on-linux/" title="Previous Post: remote access, remote copy and files compress, decompress on linux">&laquo; remote access, remote copy and files compress, decompress on linux</a>
       
       
-        <a class="basic-alignment right" href="/2009/11/writing-rake-task-in-rails-with/" title="Next Post: Writing rake task in rails with namespace, parameters">Writing rake task in rails with namespace, parameters &raquo;</a>
+        <a class="basic-alignment right" href="/2009/11/writing-rake-task-in-rails/" title="Next Post: Writing rake task in rails with namespace, parameters">Writing rake task in rails with namespace, parameters &raquo;</a>
       
     </p>
     <p class="meta">

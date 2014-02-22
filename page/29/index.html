@@ -9,7 +9,7 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="* camelcase * camelize * classify * constantize * dasherize * demodulize * foreign_key * humanize * parameterize * pluralize * singularize * &hellip;">
+  <meta name="description" content="click for original postNice post by Michael GreenlyI recently changed how I&#8217;m handling multiple simultaneous Ruby installations and I&#8217;d &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,299 +77,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/05/intresting-string-inflections-in-rails/">Intresting String Inflections in Rails</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-05-22T19:58:00+05:30" pubdate data-updated="true">May 22<span>nd</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-*  camelcase<br/>    * camelize<br/>    * classify<br/>    * constantize<br/>    * dasherize<br/>    * demodulize<br/>    * foreign_key<br/>    * humanize<br/>    * parameterize<br/>    * pluralize<br/>    * singularize<br/>    * tableize<br/>    * titlecase<br/>    * titleize<br/>    * underscore<br/><br/><br/><strong>camelcase(first_letter = :upper)</strong><br/><br/>Alias for camelize<br/>camelize(first_letter = :upper)<br/><br/>By default, camelize converts strings to UpperCamelCase. If the argument to camelize is set to :lower then camelize produces lowerCamelCase.<br/><br/>camelize will also convert ’/’ to ’::’ which is useful for converting paths to namespaces.<br/><br/>  &#8220;active_record&#8221;.camelize                # =&gt; &#8220;ActiveRecord&#8221;<br/>  &#8220;active_record&#8221;.camelize(:lower)        # =&gt; &#8220;activeRecord&#8221;<br/>  &#8220;active_record/errors&#8221;.camelize         # =&gt; &#8220;ActiveRecord::Errors&#8221;<br/>  &#8220;active_record/errors&#8221;.camelize(:lower) # =&gt; &#8220;activeRecord::Errors&#8221;<br/><br/>This method is also aliased as camelcase<br/><br/><strong>classify()</strong><br/><br/>Create a class name from a plural table name like Rails does for table names to models. Note that this returns a string and not a class. (To convert to an actual class follow classify with constantize.)<br/><br/>  &#8220;egg_and_hams&#8221;.classify # =&gt; &#8220;EggAndHam&#8221;<br/>  &#8220;posts&#8221;.classify        # =&gt; &#8220;Post&#8221;<br/><br/>Singular names are not handled correctly.<br/><br/>  &#8220;business&#8221;.classify # =&gt; &#8220;Busines&#8221;<br/><br/><strong>constantize()</strong><br/><br/>constantize tries to find a declared constant with the name specified in the string. It raises a NameError when the name is not in CamelCase or is not initialized.<br/><br/>Examples<br/><br/>  &#8220;Module&#8221;.constantize # =&gt; Module<br/>  &#8220;Class&#8221;.constantize  # =&gt; Class<br/><br/><strong>dasherize()</strong><br/><br/>Replaces underscores with dashes in the string.<br/><br/>  &#8220;puni_puni&#8221; # =&gt; &#8220;puni-puni&#8221;<br/><br/><strong>demodulize()</strong><br/><br/>Removes the module part from the constant expression in the string.<br/><br/>  &#8220;ActiveRecord::CoreExtensions::String::Inflections&#8221;.demodulize # =&gt; &#8220;Inflections&#8221;<br/>  &#8220;Inflections&#8221;.demodulize                                       # =&gt; &#8220;Inflections&#8221;<br/><br/><br/><strong>foreign_key(separate_class_name_and_id_with_underscore = true)</strong><br/><br/>Creates a foreign key name from a class name. separate_class_name_and_id_with_underscore sets whether the method should put ‘_’ between the name and ‘id’.<br/><br/>Examples<br/><br/>  &#8220;Message&#8221;.foreign_key        # =&gt; &#8220;message_id&#8221;<br/>  &#8220;Message&#8221;.foreign_key(false) # =&gt; &#8220;messageid&#8221;<br/>  &#8220;Admin::Post&#8221;.foreign_key    # =&gt; &#8220;post_id&#8221;<br/><br/><strong>humanize()</strong><br/><br/>Capitalizes the first word, turns underscores into spaces, and strips ‘_id’. Like titleize, this is meant for creating pretty output.<br/><br/>  &#8220;employee_salary&#8221; # =&gt; &#8220;Employee salary&#8221;<br/>  &#8220;author_id&#8221;       # =&gt; &#8220;Author&#8221;<br/><br/><strong>parameterize()</strong><br/><br/>Replaces special characters in a string so that it may be used as part of a ‘pretty’ URL.<br/>Examples<br/><br/>  class Person<br/>    def to_param<br/>      &#8220;#{id}-#{name.parameterize}&#8221;<br/>    end<br/>  end<br/><br/>  @person = Person.find(1)<br/>  # =&gt; #<br/><br/>  <br/>  # =&gt; <a href="/person/1-donald-e-knuth">Donald E. Knuth</a><br/><br/><strong>pluralize()</strong><br/><br/>Returns the plural form of the word in the string.<br/><br/>  &#8220;post&#8221;.pluralize             # =&gt; &#8220;posts&#8221;<br/>  &#8220;octopus&#8221;.pluralize          # =&gt; &#8220;octopi&#8221;<br/>  &#8220;sheep&#8221;.pluralize            # =&gt; &#8220;sheep&#8221;<br/>  &#8220;words&#8221;.pluralize            # =&gt; &#8220;words&#8221;<br/>  &#8220;the blue mailman&#8221;.pluralize # =&gt; &#8220;the blue mailmen&#8221;<br/>  &#8220;CamelOctopus&#8221;.pluralize     # =&gt; &#8220;CamelOctopi&#8221;<br/><br/><strong>singularize()</strong><br/><br/>The reverse of pluralize, returns the singular form of a word in a string.<br/><br/>  &#8220;posts&#8221;.singularize            # =&gt; &#8220;post&#8221;<br/>  &#8220;octopi&#8221;.singularize           # =&gt; &#8220;octopus&#8221;<br/>  &#8220;sheep&#8221;.singularize            # =&gt; &#8220;sheep&#8221;<br/>  &#8220;word&#8221;.singularize             # =&gt; &#8220;word&#8221;<br/>  &#8220;the blue mailmen&#8221;.singularize # =&gt; &#8220;the blue mailman&#8221;<br/>  &#8220;CamelOctopi&#8221;.singularize      # =&gt; &#8220;CamelOctopus&#8221;<br/><br/><strong>tableize()</strong><br/><br/>Creates the name of a table like Rails does for models to table names. This method uses the pluralize method on the last word in the string.<br/><br/>  &#8220;RawScaledScorer&#8221;.tableize # =&gt; &#8220;raw_scaled_scorers&#8221;<br/>  &#8220;egg_and_ham&#8221;.tableize     # =&gt; &#8220;egg_and_hams&#8221;<br/>  &#8220;fancyCategory&#8221;.tableize   # =&gt; &#8220;fancy_categories&#8221;<br/><br/><strong>titlecase()</strong><br/><br/>Alias for titleize<br/><strong>titleize()</strong><br/><br/>Capitalizes all the words and replaces some characters in the string to create a nicer looking title. titleize is meant for creating pretty output. It is not used in the Rails internals.<br/><br/>titleize is also aliased as titlecase.<br/><br/>  &#8220;man from the boondocks&#8221;.titleize # =&gt; &#8220;Man From The Boondocks&#8221;<br/>  &#8220;x-men: the last stand&#8221;.titleize  # =&gt; &#8220;X Men: The Last Stand&#8221;<br/><br/>This method is also aliased as titlecase<br/><br/><strong>underscore()</strong><br/><br/>The reverse of camelize. Makes an underscored, lowercase form from the expression in the string.<br/><br/>underscore will also change ’::’ to ’/’ to convert namespaces to paths.<br/><br/>  &#8220;ActiveRecord&#8221;.underscore         # =&gt; &#8220;active_record&#8221;<br/>  &#8220;ActiveRecord::Errors&#8221;.underscore # =&gt; active_record/errors</div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>sandip</div>
-<div class='content'>
-Remove special characters from string  <br>  <br>&quot;STRING&quot;..gsub(/[^a-zA-Z 0-9]/, &quot;&quot;)<br><br># escape special chars before save<br>  def before_save<br> self.name.gsub(/[^a-zA-Z 0-9]/, &quot;&quot;)<br>  end</div>
-</div>
-</div>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/05/render-partial-or-view-from-another/">Render Partial or View From Another Controller</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-05-22T19:50:00+05:30" pubdate data-updated="true">May 22<span>nd</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-To render view from another controller<br/><br/># In rail 2.3<br/><pre class=ruby>render "controller/action"</pre><br/><br/># In rails 2.2 or below<br/><pre class=ruby>render :template =&gt; 'controller/action'</pre><br/><br/>To render partial from another controller&#8217;s views folder<br/><br/><pre class=ruby>render :partial =&gt; "controller/partial"</pre><br/><br/>Cheers !<br/>Sandip</div>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/05/vi-vim-shortcuts/">Vi / Vim Shortcuts</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-05-22T18:23:00+05:30" pubdate data-updated="true">May 22<span>nd</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>As i am newb on linux macine, i dont know vi shortcuts.
-so, i am listing down shortcuts which i am getting familier :)</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># Open file
-</span><span class='line'>vi filename
-</span><span class='line'>
-</span><span class='line'># Insert in file
-</span><span class='line'>i
-</span><span class='line'>
-</span><span class='line'># Exit file
-</span><span class='line'>q
-</span><span class='line'>
-</span><span class='line'># Forced exit
-</span><span class='line'>q!
-</span><span class='line'>
-</span><span class='line'># Save file
-</span><span class='line'>wq
-</span><span class='line'>
-</span><span class='line'># Forced save
-</span><span class='line'>wq!
-</span><span class='line'>
-</span><span class='line'># Copy no of lines
-</span><span class='line'>yy
-</span><span class='line'>
-</span><span class='line'># Paste copied lines
-</span><span class='line'>pp
-</span><span class='line'>
-</span><span class='line'># Undo changes
-</span><span class='line'>uu
-</span><span class='line'>
-</span><span class='line'># Delete lines
-</span><span class='line'>dd
-</span><span class='line'>
-</span><span class='line'># To search and replace string in vi
-</span><span class='line'>:%s/search_string/replacement_string/g
-</span><span class='line'>
-</span><span class='line'># To find particular word in file
-</span><span class='line'>?string1</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If you have any quick list, please let me know !</p>
-
-<p>Below post is reblogged from <a href="http://nakuls77.wordpress.com/2008/09/14/using-vi-editor/#comment-144">http://nakuls77.wordpress.com/2008/09/14/using-vi-editor/#comment-144</a></p>
-
-<blockquote><p>Vi is a very powerful editor that has been part of nearly every linux/unix distro for a very long time. Many people stray away from Vi due to the curve involved in learning this editor. This guide will help you dive into the world of Vi. Once you do, you will understand why many prefer Vi over other editors.</p></blockquote>
-
-<p>There are countless options for Vi that can be set up inside the /etc/vimrc file.</p>
-
-<p>Auto-indent and creating a macro to change the color of the background.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># vi /etc/vimrc</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Auto-Indent Option &ndash;</h2>
-
-<p>This option is so when you tab-space out a line and then press enter, the cursor will move to the next line, automatically indented to the start of the previous line. This helps programmers indent out code easily to create clean looking code. To implement this feature, please add the following line to the bottom of your /etc/vimrc file:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>set ai</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Please note that generally speaking only programmers will want to turn ON auto-indent.</p>
-
-<h2>Background Color &ndash;</h2>
-
-<p>Some SSH clients have white backgrounds and some have black backgrounds. This can make it very difficult to see the screen depending on the color of the text. This macro allows you to configure F11 to change the background color &amp; color of the text. To implement this feature, please add the following lines to the bottom of your /etc/vimrc file:</p>
-
-<p>set background=dark
-map :let &amp;background = ( &amp;background == “dark”? “light” : “dark” )</p>
-
-<p>I would highly recommend adding in the Background Color option. However if you do not wish to implement either of these features, then please proceed on in the guide.</p>
-
-<p>Commands</p>
-
-<h2>Cursor Movement</h2>
-
-<p>0 (Zero) Start of Line
-^ – First non-Blank Character of Line
-$ – End of Line
-G Go To Command (prefix with number 5G goes to line 5)</p>
-
-<p>Insert Mode Inserting/Appending Text
-Insert Start Insert Mode at Cursor
-A Append at the end of the Line
-o open (append) blank link below current line
-I Open blank line above current line
-Esc Exit Insert Mode</p>
-
-<h2>Editing</h2>
-
-<p>r Replace a single character (does not use insert mode)
-J Join line below with the current one
-cc Change (replace) an entire line
-cw Change (replace) to the end of word
-c$ – Change (replace) to the end of line
-s Delete character at cursor and substitute text
-S Delete line at cursor and substitute text (same as cc)
-u Undo
-. – Repeat last command</p>
-
-<h2>Cut and Paste</h2>
-
-<p>yy Copy(yank) a line
-2yy Copy(yank) two lines
-yw Copy(yank) word
-p Paste the clipboard after the cursor
-P Paste the clipboard before the cursor
-dd Delete a line
-dw Delete the current word
-x Delete the current character</p>
-
-<h2>Exiting</h2>
-
-<p>:w Write (save) the file, but don’t exit
-:wq Write &amp; Quit
-:q Quit
-:q! – Quit and don’t save changes</p>
-
-<h2>Searching</h2>
-
-<p>/pattern Search for a pattern
-?pattern Search backward for a pattern
-n Repeat last search in same direction
-N Repeat last search in opposite direction
-:%2/old/new/g Replace all old with new throughout file
-:%s/old/new/gc Replace all old with new throughout file with confirmations</p>
-
-<h2>Working with Multiple Files</h2>
-
-<p>:e filename Edit a file in a new buffer
-:bn Go to next buffer
-:bp Go to previous buffer
-:bd Close file(buffer)
-:sp filename Open a file in a new buffer and split window
-ctrl-ws Split windows
-ctrl-ww Switch between windows
-ctrl-wq Quite a window
-ctrl-wv Split windows vertically
-ctrl-wq Quite a window
-ctrl-wv Split windows vertically</p>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -449,16 +156,446 @@ ctrl-wv Split windows vertically</p>
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-Execute following commands in order to install ruby and rails.<br/><br/><pre class=ruby>sudo apt-get install build-essential</pre><br/><br/>Below command will install all necessary packages.<br/>if you dont want any remove it from command.<br/><br/><pre class=ruby>sudo apt-get install ruby ri rdoc mysql-server libmysql-ruby ruby1.8-dev irb1.8 libdbd-mysql-perl libdbi-perl libmysql-ruby1.8 libmysqlclient15off libnet-daemon-perl libplrpc-perl libreadline-ruby1.8 libruby1.8 mysql-client-5.0 mysql-common mysql-server-5.0 rdoc1.8 ri1.8 ruby1.8 irb libopenssl-ruby libopenssl-ruby1.8 libterm-readkey-perl psmisc</pre><br/><br/>Gem Installation<br/>Please find latest stable gem version on rubyforge.<br/><br/><pre class=ruby>wget http://rubyforge.org/frs/download.php/45905/rubygems-1.3.1.tgz<br/>tar xvzf rubygems-1.3.1.tgz<br/>cd rubygems-1.3.1<br/>sudo ruby setup.rb</pre><br/><br/>And last to install rails without documentation<br/><br/><pre class=ruby>sudo gem install rails --no-rdoc --no-ri</pre><br/><br/>and finally rails server, you can install apache mongrel, nginx + thin, whichever you feel suitable.<br/><br/>for mongrel install<br/><br/><pre class=ruby>sudu gem install mongrel</pre></div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>Anonymous</div>
-<div class='content'>
-Very helpful, thank you!</div>
+  <div class="entry-content"><p>Execute following commands in order to install ruby and rails</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install build-essential</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Below command will install all necessary packages. if you don&rsquo;t want any <code>package</code> from list then remove it from command.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install ruby ri rdoc mysql-server libmysql-ruby ruby1.8-dev irb1.8 libdbd-mysql-perl libdbi-perl libmysql-ruby1.8 libmysqlclient15off libnet-daemon-perl libplrpc-perl libreadline-ruby1.8 libruby1.8 mysql-client-5.0 mysql-common mysql-server-5.0 rdoc1.8 ri1.8 ruby1.8 irb libopenssl-ruby libopenssl-ruby1.8 libterm-readkey-perl psmisc</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Gem Installation</h2>
+
+<p>Please find the latest stable gem version on rubyforge.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget http://rubyforge.org/frs/download.php/45905/rubygems-1.3.1.tgz
+</span><span class='line'>tar xvzf rubygems-1.3.1.tgz
+</span><span class='line'>cd rubygems-1.3.1
+</span><span class='line'>sudo ruby setup.rb</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And last to install rails without documentation</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo gem install rails --no-rdoc --no-ri</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and finally rails server, you can either install <code>apache mongrel</code> or <code>nginx + thin</code> whichever you feel suitable.</p>
+
+<h2>Mongrel install</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudu gem install mongrel</span></code></pre></td></tr></table></div></figure>
+
 </div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/fix-for-ruby-187-incompatibity/">Fix for Ruby 1.8.7 Incompatibity</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-13T19:22:00+05:30" pubdate data-updated="true">May 13<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Last week i shifted from <code>ruby</code> version <code>1.8.6</code> to <code>1.8.7</code> :&ndash;)
+But over a week i found that rails <code>1.2.3</code> applications developed in ruby <code>1.8.6</code> are not working in ruby <code>1.8.7</code></p>
+
+<p>From lot of search on google, i found that its issue with ruby <code>1.8.7</code></p>
+
+<p>So in order to fix this bug, i started searching <code>fix / solution</code> for this incompatibity and got below fix.</p>
+
+<p>You just need to fix file <code>delegate.rb</code> and done</p>
+
+<h2>Diff of <code>/branches/ruby_1_8_7/lib/delegate.rb</code></h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>--- branches/ruby_1_8_7/lib/delegate.rb 2008/05/31 15:17:53 16732
+</span><span class='line'>+++ branches/ruby_1_8_7/lib/delegate.rb 2008/06/02 10:52:07 16756
+</span><span class='line'>@@ -163,9 +163,9 @@
+</span><span class='line'>   # Checks for a method provided by this the delegate object by fowarding the 
+</span><span class='line'>
+</span><span class='line'>   # call through \_\_getobj\_\_.
+</span><span class='line'>   # 
+</span><span class='line'>-  def respond_to?(m)
+</span><span class='line'>+  def respond_to?(m, include_private = false)
+</span><span class='line'>     return true if super
+</span><span class='line'>-    return self.__getobj__.respond_to?(m)
+</span><span class='line'>+    return self.__getobj__.respond_to?(m, include_private)
+</span><span class='line'>
+</span><span class='line'>   end
+</span><span class='line'>
+</span><span class='line'>   #
+</span><span class='line'>@@ -270,9 +270,9 @@
+</span><span class='line'>       end
+</span><span class='line'>       @_dc_obj.__send__(m, *args)
+</span><span class='line'>     end
+</span><span class='line'>-    def respond_to?(m)  # :nodoc:
+</span><span class='line'>+    def respond_to?(m, include_private = false)  # :nodoc:
+</span><span class='line'>       return true if super
+</span><span class='line'>
+</span><span class='line'>-      return @_dc_obj.respond_to?(m)
+</span><span class='line'>+      return @_dc_obj.respond_to?(m, include_private)
+</span><span class='line'>     end
+</span><span class='line'>     def __getobj__  # :nodoc:
+</span><span class='line'>       @_dc_obj</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You have to make necessary changes and you are ready to work with ruby 1.8.7.
+need not downgrade ruby version :)</p>
+
+<h2>for Hash error</h2>
+
+<p>Add following line in <code>config/environment.rb</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">unless</span> <span class="s1">&#39;1.9&#39;</span><span class="o">.</span><span class="n">respond_to?</span><span class="p">(</span><span class="ss">:force_encoding</span><span class="p">)</span>
+</span><span class='line'>  <span class="nb">String</span><span class="o">.</span><span class="n">class_eval</span> <span class="k">do</span>
+</span><span class='line'>    <span class="k">begin</span>
+</span><span class='line'>      <span class="n">remove_method</span> <span class="ss">:chars</span>
+</span><span class='line'>    <span class="k">rescue</span> <span class="no">NameError</span>
+</span><span class='line'>      <span class="c1"># OK</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/rails-coding-standards/">Rails Coding Standards</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-13T16:48:00+05:30" pubdate data-updated="true">May 13<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><blockquote><p>IN ESSENCE: ALL CODE SHOULD BE READABLE!</p></blockquote>
+
+<ol>
+<li>DO NOT OPTIMISE for performance &ndash; OPTIMISE FOR CLARITY OF CODE</li>
+<li>STYLE: use 2 spaces for indent (not tabs)</li>
+<li>STYLE: Line up hash arrows for readability</li>
+<li>STYLE: put spaces around => hash arrows</li>
+<li>STYLE: put spaces after ‘,’ in method params &ndash; but none between method names and ‘(’</li>
+<li>VIEWS: use HAML for views</li>
+<li>VIEWS: break up the structure with white space to help readability &ndash; VERTICALLY TOO!</li>
+<li>VIEWS STYLE: Rely on structure of page, without having to insert messages or new components…</li>
+<li>LOGIC: Rails Models should be as heavy as in logic and controllers should be lightweight as much as .</li>
+<li>Example: Effect to visually highlight then drop out an existing element rather than flash a message</li>
+<li>Example: Highlight newly added row rather than a message about it</li>
+<li>AVOID logic in views &ndash; they should be simple</li>
+<li>Views indentation should be well formatted and not like this :
+
+<h4>WRONG</h4></li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="err">&lt;</span>% for joke in @jokes %&gt;
+</span><span class='line'><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;joke&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>
+</span><span class='line'><span class="err">&lt;</span>%= h(truncate(joke.joketext, 20)) %&gt;
+</span><span class='line'><span class="err">&lt;</span>%= link_to &#39;Read this joke&#39;, {:action =&gt; &#39;show_joke&#39;, :id =&gt; joke} %&gt;
+</span><span class='line'><span class="nt">&lt;/p&gt;</span>
+</span><span class='line'><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;author</span><span class="nt">&gt;</span>
+</span><span class='line'>by <span class="err">&lt;</span>%= h(joke.author.full_name) %&gt;<span class="nt">&lt;/p&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span><span class='line'><span class="err">&lt;</span>% end %&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>CORRECT</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="err">&lt;</span>% for joke in @jokes %&gt;
+</span><span class='line'>  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;joke&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;p&gt;</span>
+</span><span class='line'>      <span class="err">&lt;</span>%= h(truncate(joke.joketext, 20)) %&gt;
+</span><span class='line'>      <span class="err">&lt;</span>%= link_to &#39;Read this joke&#39;, { :action =&gt; &#39;show_joke&#39;, :id =&gt; joke } %&gt;
+</span><span class='line'>    <span class="nt">&lt;/p&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;author</span><span class="nt">&gt;</span>
+</span><span class='line'>      by <span class="err">&lt;</span>%= h(joke.author.full_name) %&gt;
+</span><span class='line'>    <span class="nt">&lt;/p&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'><span class="err">&lt;</span>% end %&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Put html generating logic into helpers</li>
+<li>instead of inline ruby logic, add to models (filtering, checking)</li>
+<li>NEVER use ActiveRecord models in migrations unless you re-define them within the migration</li>
+<li>…otherwise the migration fails when you later remove/rename the AR class</li>
+<li>BETTER SOLUTION: use bootstrapping until deployed!!!</li>
+<li>AJAX only for sub-components of an object, and avoid over-use</li>
+</ol>
+
+
+<h2>CONTROLLER CODING STANDARDS</h2>
+
+<ol>
+<li>Before filter should be added at the top of controller.</li>
+<li>Before filter implementation should be immediate after filter declaration</li>
+<li>Standard rails actions</li>
+<li>Own custom actions</li>
+<li>Inter-related actions should be clubbed together.</li>
+<li>please, try to use of protected, private methods and they should be declared at the bottom of page in order.</li>
+<li>Controller Actions should be like :
+(use 2 spaces for indent and not tabs)</li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">published_jokes</span>
+</span><span class='line'>  <span class="n">find</span><span class="p">(</span><span class="ss">:all</span><span class="p">,</span> <span class="ss">:conditions</span> <span class="o">=&gt;</span> <span class="s2">&quot;published = 1&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>MODEL CODING STANDARDS</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#======= HEADER SECTION=========</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># SCHEMA INFORMATION WILL BE HERE</span>
+</span><span class='line'><span class="c1"># REQUIRE FILES WILL GO HERE</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Model</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>
+</span><span class='line'> <span class="c1">#======== TOP ===================</span>
+</span><span class='line'>
+</span><span class='line'> <span class="c1"># LIBRARY OR INCLUDE METHODS</span>
+</span><span class='line'> <span class="c1"># MODEL RELATIONSHIPS</span>
+</span><span class='line'> <span class="c1"># VIRTUAL ATTRIBUTES</span>
+</span><span class='line'> <span class="c1"># ACTIVE RECORD VALIDATIONS</span>
+</span><span class='line'>
+</span><span class='line'> <span class="c1">#======== MIDDLE ===============</span>
+</span><span class='line'>
+</span><span class='line'> <span class="c1"># CUSTOM VALIDATIONS</span>
+</span><span class='line'> <span class="c1"># PUBLIC METHODS</span>
+</span><span class='line'>
+</span><span class='line'> <span class="c1">#======== BASE ==================</span>
+</span><span class='line'>
+</span><span class='line'> <span class="c1"># PROTECTED METHODS</span>
+</span><span class='line'> <span class="c1"># PRIVATE METHODS</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/high-performance-rails-hosting/">High Performance Rails Hosting</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-08T17:48:00+05:30" pubdate data-updated="true">May 8<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>There are lot of rails hosting, like <code>wired tree</code>, etc.
+While doing search for cost effective and high performance hosting, Recently i came across with <code>joyent</code> rails hosting.
+please let me know your opinions on this.</p>
+
+<p>Here are some of the listed capabilities :</p>
+
+<h4>Scale on Demand</h4>
+
+<p>Your rails infrastructure can be dynamically expanded or reduced within minutes.</p>
+
+<h4>Support Billions of Hits</h4>
+
+<p>The largest ruby on rails application running on Joyent does over 1 Billion page views a month. Joyent’s hardware load balancers make this kind of scale possible.
+<code>Ruby 1.8.6</code>, <code>Rails 2.1</code>, <code>Mongrel</code>, <code>Nginx</code></p>
+
+<p>Everything you need to get rolling is pre-installed, including Ruby 1.8.6 and Rails 2.1, Apache, lighttpd, nginx and Mongrel.</p>
+
+<h4>Extremely Cost Effective</h4>
+
+<p>Static IPs, real storage, 10TB data transfer / bandwidth, and fantastic support all included.
+Lightning Fast Speed</p>
+
+<p>We provide direct connections to tier 1 internet back-bones, Force10 switches and f5 BigIP load-balancers.</p>
+
+<p><strong>Trusted by Companies like LinkedIn</strong></p>
+
+<h4>Check out their post</h4>
+
+<p>Official Ruby on Rails Host</p>
+
+<p>We’re the Official Ruby on Rails host. Go check it out at rubyonrails.org. “If you need hosting, Joyent is the official Ruby on Rails host, offering fantastic plans with a knowledgeable staff. Whether you need shared or dedicated hosting, these guys are experts in Ruby on Rails. ”
+Leverage a Large Community</p>
+
+<p>Over 2,400 companies run Rails applications on Joyent. You gain from our experience hosting them and you can connect directly with them through the Joyent Forums and the Joyent Wiki</p>
+
+<h4>Entirely Open Loving Cloud</h4>
+
+<p>Joyent offers open protocols, open source solutions. Use any Language, any DB. You can move your application. No vendor lock-in.</p>
+
+<p>please, help me……:(</p>
 </div>
   
   

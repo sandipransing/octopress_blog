@@ -9,7 +9,7 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Rails specifies conventions while creating models, controllers, migrations ( database tables ). Conventions for creating database tables 1. Table &hellip;">
+  <meta name="description" content="Rails specifies conventions while creating models, controllers, migrations ( database tables ). Conventions for creating database tables Table name &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -103,21 +103,88 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-Rails specifies conventions while creating models, controllers, migrations ( database tables ). <br/><br/><b>Conventions for creating database tables </b>  <br/> 1. Table name should be plural <br/>2. id field should be primary_key for table. <br/>3. foreign_key should be like <model_name>_id i.e. post_id, site_id <br/><br/><b>Conventions for creating models & Controllers </b><br/> 1. Model name should be singular <br/>2. controller name should be plural. <br/> Although rails has standard defined, In some cases it becomes quite necessary to map irregular  <br/><br/><b>1. Table mapping </b><br/><pre class=ruby>class Review < ActiveRecord::Base   # Here comments is name of database table   set_table_name :comments end </pre><br/><b>2. Set primary key ( other than rails standar &#8216;id&#8217; primary_key )</b><br/><pre class=ruby>class Review < ActiveRecord::Base   # It assumes "reviews" as table in database   # Below line indicates reviews table contains column_name "reviewId" which is a primary_key   set_primary_key :reviewId end </pre><br/><b>3. Foreign key association </b><br/><pre class=ruby>class Review < ActiveRecord::Base   # Below line indicates reviews table contains column_name 'RatingId' which is foreign_key to primary_key   # of 'ratings' table.   # It can be applied to any associan type [ has_one, has_many, belongs_to, has_many_through ]   belongs_to :rating, :class_name => "SiteUser", :foreign_key => "RatingId" end </pre><br/> <b>4. Model association ( non-standard model name )</b><br/><pre class=ruby>class Review < ActiveRecord::Base   # Below line indicates reviews table contains column_name 'UserId' which is foreign_key to primary_key   # of model with class_name 'SiteUser'   belongs_to :user, :class_name => 'SiteUser', :foreign_key: => 'UserId' end </pre></div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>sandipransing</div>
-<div class='content'>
-confirmed</div>
-</div>
-<div class='comment'>
-<div class='author'>Gautam Rege</div>
-<div class='content'>
-If is use &quot;set_primary_key :reviewId&quot; in my Class Review model, how do I access the object ?<br><br>What will object#id return? I believe object#id will take the primary key reviewId .. can you confirm this?</div>
-</div>
-</div>
+<div class="entry-content"><p>Rails specifies conventions while creating models, controllers, migrations ( database tables ).</p>
+
+<h2>Conventions for creating database tables</h2>
+
+<ol>
+<li>Table name should be plural</li>
+<li>id field should be primary_key for table.</li>
+<li>foreign_key should be like _id i.e. post_id, site_id</li>
+</ol>
+
+
+<h2>Conventions for creating models &amp; Controllers</h2>
+
+<ol>
+<li>Model name should be singular</li>
+<li>controller name should be plural.</li>
+</ol>
+
+
+<p>Although rails has standard defined, In some cases it becomes quite necessary to map irregular</p>
+
+<h4>1. Table mapping</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Review</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="c1"># Here comments is name of database table   </span>
+</span><span class='line'>  <span class="n">set_table_name</span> <span class="ss">:comments</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>2. Set primary key ( other than rails standar ‘id’ primary_key )</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Review</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="c1"># It assumes &quot;reviews&quot; as table in database   </span>
+</span><span class='line'>  <span class="c1"># Below line indicates reviews table contains column_name &quot;reviewId&quot; which is a primary_key   </span>
+</span><span class='line'>  <span class="n">set_primary_key</span> <span class="ss">:reviewId</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>3. Foreign key association</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Review</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="c1"># Below line indicates reviews table contains column_name &#39;RatingId&#39; which is foreign_key to primary_key   </span>
+</span><span class='line'>  <span class="c1"># of &#39;ratings&#39; table.   </span>
+</span><span class='line'>  <span class="c1"># It can be applied to any associan type [ has_one, has_many, belongs_to, has_many_through ]   </span>
+</span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:rating</span><span class="p">,</span> <span class="ss">:class_name</span> <span class="o">=&gt;</span> <span class="s2">&quot;SiteUser&quot;</span><span class="p">,</span> <span class="ss">:foreign_key</span> <span class="o">=&gt;</span> <span class="s2">&quot;RatingId&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>4. Model association ( non-standard model name )</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Review</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="c1"># Below line indicates reviews table contains column_name &#39;UserId&#39; which is foreign_key to primary_key   </span>
+</span><span class='line'>  <span class="c1"># of model with class_name &#39;SiteUser&#39;   </span>
+</span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:user</span><span class="p">,</span> <span class="ss">:class_name</span> <span class="o">=&gt;</span> <span class="s1">&#39;SiteUser&#39;</span><span class="p">,</span> <span class="ss">:foreign_key</span><span class="p">:</span> <span class="o">=&gt;</span> <span class="s1">&#39;UserId&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 

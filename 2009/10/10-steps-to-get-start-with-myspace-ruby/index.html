@@ -9,7 +9,8 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Follow 10 simple steps in order to use myspace sdk api1. Remove all your previous gems installed+ gem uninstall myspace2. Checkout sample source &hellip;">
+  <meta name="description" content="Follow 10 simple steps listed below in order to use myspace sdk api 1. Remove existing myspace gems installed if any 1
+gem uninstall myspace 2. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -103,8 +104,89 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-Follow 10 simple steps in order to use myspace sdk api<br/><br/>1. Remove all your previous gems installed<br/>+ gem uninstall myspace<br/><br/>2. Checkout sample source code<br/><br/>svn checkout http://myspaceid-ruby-sdk.googlecode.com/svn/trunk/ myspacesdk<br/><br/>3. cd myspacesdk/samples/rails/sample<br/>4. Modify config/database.yml accordingly<br/><blockquote><br/><div>development:<br/>adapter: mysql<br/>database: sample_development<br/>password: abcd<br/>pool: 5<br/>timeout: 5000</div></blockquote><br/>5. Download http://myspaceid-ruby-sdk.googlecode.com/files/myspaceid-sdk-0.1.11.gem<br/>6. gem install &#8211;local ~/Desktop/myspaceid-sdk-0.1.11.gem i.e.PATH_TO_GEM<br/>7. Above command supposed to give you following error otherwise skip to step 10<br/><blockquote><br/><div>ERROR:  Error installing /home/sandip/Desktop/myspaceid-sdk-0.1.11.gem:<br/>myspaceid-sdk requires ruby-openid (&gt;= 0, runtime)</div></blockquote><br/>8. gem install ruby-openid go to step 6<br/>9. ruby script/server<br/>10. Browse http://localhost:3000/</div>
+<div class="entry-content"><p>Follow 10 simple steps listed below in order to use myspace sdk api</p>
+
+<h4>1. Remove existing <code>myspace</code> gems installed if any</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem uninstall myspace</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>2. Checkout sample source code</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>svn checkout http://myspaceid-ruby-sdk.googlecode.com/svn/trunk/ myspacesdk</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>3. Move to sample dir</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd myspacesdk/samples/rails/sample</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>4. Modify DB config</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="c1"># Modify config/database.yml accordingly</span>
+</span><span class='line'><span class="l-Scalar-Plain">development</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">adapter</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">mysql</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">database</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">sample_development</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">password</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">abcd</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">pool</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">5</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">timeout</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">5000</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>5. Download Gem</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">wget http://myspaceid-ruby-sdk.googlecode.com/files/myspaceid-sdk-0.1.11.gem</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>6. Install <code>myspaceid-sdk</code> gem locally</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">gem install --local ~/Desktop/myspaceid-sdk-0.1.11.gem</span>
+</span><span class='line'><span class="l-Scalar-Plain"># --local option taskes local PATH_TO_GEM</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>7. Above command supposed to give following error otherwise skip to step 10</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">ERROR</span><span class="p-Indicator">:</span>  <span class="l-Scalar-Plain">Error installing /home/sandip/Desktop/myspaceid-sdk-0.1.11.gem</span><span class="p-Indicator">:</span>
+</span><span class='line'><span class="l-Scalar-Plain">myspaceid-sdk requires ruby-openid (&gt;= 0, runtime)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>8. Install <code>ruby-openid</code> and go to &ldquo;step 6&rdquo;</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">gem install ruby-openid</span>
+</span><span class='line'><span class="l-Scalar-Plain"># Go to step 6</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>9. Start Server</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">ruby script/server</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>10.  Browse Application</h4>
+
+<p>Open URL <a href="http://localhost:3000/">http://localhost:3000/</a></p>
 </div>
 
 
@@ -152,7 +234,7 @@ Follow 10 simple steps in order to use myspace sdk api<br/><br/>1. Remove all yo
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2009/10/hello/" title="Previous Post: Hello">&laquo; Hello</a>
+        <a class="basic-alignment left" href="/2009/10/find-processor-cpu-information-on-linux/" title="Previous Post: Find processor (cpu) information on linux">&laquo; Find processor (cpu) information on linux</a>
       
       
         <a class="basic-alignment right" href="/2009/11/ruby-on-rails-developers-in-india/" title="Next Post: Ruby On Rails Developers in India">Ruby On Rails Developers in India &raquo;</a>

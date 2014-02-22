@@ -4,7 +4,7 @@
   <title><![CDATA[Category: developers | Fun On Rails]]></title>
   <link href="funonrails.com/categories/developers/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-21T02:23:40+05:30</updated>
+  <updated>2014-02-22T20:21:48+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -18,21 +18,125 @@
     <link href="funonrails.com/2009/11/ruby-on-rails-developers-in-india/"/>
     <updated>2009-11-03T16:45:00+05:30</updated>
     <id>funonrails.com/2009/11/ruby-on-rails-developers-in-india</id>
-    <content type="html"><![CDATA[<div class='post'>
-Hello ROR lovers,<br/><br/>      I wanted to list down ruby on rails developers in india. I would glad to see your name in this list. Lets, see how much rails hobbies are there in india.<br/>      <br/>Thanks,<br/>Sandip<br/><br/>List goes here..................<br/><br/><blockquote><b>Name:</b> Sandip Ransing<br/><b>ROR Experience:</b> 2.1 yrs<br/><b>Overall:</b> 2.8+ yrs<br/><b>Location:</b> Pune<br/><b>Company:</b> Josh Software Private Limited.</blockquote><blockquote><b>Name:</b> Amit Yadav<br/><b>Experience:</b> 2.5 yrs<br/><b>Overall:</b> 5.8 yrs<br/><b>Location:</b> Pune<br/><b>Company:</b> Globallogic<br/></blockquote><blockquote><b>Name:</b> Haribhau Ingale<br/><b>ROR Experience:</b> 4 yrs<br/><b>Overall:</b> 5+ yrs<br/>location: Pune<br/><b>Company:</b> Persistent Systems Ltd.<br/></blockquote><blockquote><b>Name:</b> ABHISHEK V. AMBAVANE<br/><b>ROR Experience:</b> WITHOUT ADOBE FLEX AROUND 6 MONTHS WITH FLEX,AIR IS AROUND 1 YR.<br/><b>Overall:</b> 2.8 YRS.<br/><b>Location:</b> PUNE<br/><b>Company:</b> BETTERLABS<br/></blockquote><blockquote><b>Name:</b> Sunny Bogawat<br/><b>ROR Experience:</b> 1.5 YR.<br/><b>Location:</b> PUNE<br/><b>Company:</b> Neova solutions<br/></blockquote><blockquote><b>Name:</b> Kiran Chaudhari<br/><b>ROR Experience:</b> 1.8 YR.<br/><b>Location:</b> PUNE<br/><b>Company:</b> Josh Software Private Limited.<br/></blockquote><blockquote><b>Name:</b> Swati Verma<br/><b>ROR Experience:</b> 1.2 YR.<br/><b>Location:</b> Jaipur<br/><b>Company:</b> Rising Sun Technologies<br/></blockquote><blockquote><b>Name:</b> Satish Talim<br/><b>Ruby Experience:</b> 4 yrs<br/><b>Overall:</b> 32+ yrs<br/><b>Location:</b> Pune<br/><b>Company:</b> RubyLearning portals<br/></blockquote><blockquote><b>Name:</b> Arun Agrawal<br/>Ruby <b>Experience:</b> 3 yrs<br/><b>Overall:</b> 3+ yrs<br/><b>Location:</b> Jaipur<br/><b>Company:</b> Rising Sun(Jaipur)<br/></blockquote><blockquote><b>Name:</b> Piyush Gajjariya<br/><b>ROR Experience:</b> 2.5 Years<br/><b>Location:</b> Bangalore<br/><b>Company:</b> Pramata Knowledge Solutions<br/></blockquote><blockquote><b>Name:</b> Puneet Pandey<br/><b>ROR Experience:</b> 2 yrs<br/><b>Overall:</b> 3 Yrs<br/><b>Location:</b> Hyderabad<br/><b>Company:</b> Zibika Infotech Pvt. Ltd<br/></blockquote><blockquote><b>Name:</b> Uma Mahesh Varma<br/><b>ROR Experience:</b> 2 yrs<br/><b>Overall:</b> 3 Yrs<br/><b>Location:</b> Kakinada<br/><b>Company:</b> Nyros Technologies, Kakinada<br/></blockquote><blockquote><b>Name:</b> Mohammed Imran Ahmed<br/><b>ROR Experience:</b> 1 year<br/><b>Overall:</b> 2 year 3months Yrs<br/><b>Location:</b> Hyderabad<br/><b>Company:</b> Prithvi Information Solutions, Hyd<br/></blockquote><blockquote><b>Name:</b> Amit Kulkarni<br/><b>Title</b>: QA,Rspec Testing in ROR<br/><b>Overall:</b> 1.5 yrs<br/><b>Location:</b> Pune<br/><b>Company:</b> Josh Software Private Limited.<br/></blockquote><blockquote>I am a Software Engineer with more than three years of experience in Information Technology Industry. I worked on different Business Intelligence / Data Warehousing Projects in my experience.<br/>I am a C, C++ & UNIX enthu. I recently learnt ruby & looking forward to work in this.<br/>Thanks,<br/>Pankaj Sisodiya<br/></blockquote><blockquote><b>Name:</b> M B Chowdari<br/><b>ROR Experience:</b> 1.3 yrs<br/><b>Overall:</b> 2.3 Yrs<br/><b>Location:</b> Kakinada<br/><b>Company:</b> Nyros Technologies, Kakinada<br/></blockquote>Now your turn<br/></div>
+    <content type="html"><![CDATA[<p>Hello Railers,</p>
 
+<p>I wanted to compile list of ruby on rails developers in india. I would glad to see your name in this list.
+Lets see how many rails hobbies are there in india.</p>
 
-<h2>Comments</h2>
-
-
-<div class='comments'>
-<div class='comment'>
-<div class='author'>Anonymous</div>
-<div class='content'>
-Name: Santosh Turamari<br />RoR Experience: 1.5 Yrs<br />Overall: 1.5 Yrs<br />Location: Bangalore, Karnataka<br />Company: SourceBits Technology, Bangalore</div>
-</div>
-</div>
-
+<p>List starts here&hellip;
+<code>
+Name: Sandip Ransing
+ROR Experience: 2.1 yrs
+Overall: 2.8+ yrs
+Location: Pune
+Company: Josh Software Private Limited.
+</code>
+<code>
+Name: Amit Yadav
+Experience: 2.5 yrs
+Overall: 5.8 yrs
+Location: Pune
+Company: Globallogic
+</code>
+<code>
+Name: Haribhau Ingale
+ROR Experience: 4 yrs
+Overall: 5+ yrs
+location: Pune
+Company: Persistent Systems Ltd.
+</code>
+<code>
+Name: ABHISHEK V. AMBAVANE
+ROR Experience: WITHOUT ADOBE FLEX AROUND 6 MONTHS WITH FLEX,AIR IS AROUND 1 YR.
+Overall: 2.8 YRS.
+Location: PUNE
+Company: BETTERLABS
+</code>
+<code>
+Name: Sunny Bogawat
+ROR Experience: 1.5 YR.
+Location: PUNE
+Company: Neova solutions
+</code>
+<code>
+Name: Kiran Chaudhari
+ROR Experience: 1.8 YR.
+Location: PUNE
+Company: Josh Software Private Limited.
+</code>
+<code>
+Name: Swati Verma
+ROR Experience: 1.2 YR.
+Location: Jaipur
+Company: Rising Sun Technologies
+</code>
+<code>
+Name: Satish Talim
+Ruby Experience: 4 yrs
+Overall: 32+ yrs
+Location: Pune
+Company: RubyLearning portals
+</code>
+<code>
+Name: Arun Agrawal
+Ruby Experience: 3 yrs
+Overall: 3+ yrs
+Location: Jaipur
+Company: Rising Sun(Jaipur)
+</code>
+Name: Piyush Gajjariya
+ROR Experience: 2.5 Years
+Location: Bangalore
+Company: Pramata Knowledge Solutions
+<code>
+</code>
+Name: Puneet Pandey
+ROR Experience: 2 yrs
+Overall: 3 Yrs
+Location: Hyderabad
+Company: Zibika Infotech Pvt. Ltd
+<code>
+</code>
+Name: Uma Mahesh Varma
+ROR Experience: 2 yrs
+Overall: 3 Yrs
+Location: Kakinada
+Company: Nyros Technologies, Kakinada
+<code>
+</code>
+Name: Mohammed Imran Ahmed
+ROR Experience: 1 year
+Overall: 2 year 3months Yrs
+Location: Hyderabad
+Company: Prithvi Information Solutions, Hyd
+<code>
+</code>
+Name: Amit Kulkarni
+Title: QA,Rspec Testing in ROR
+Overall: 1.5 yrs
+Location: Pune
+Company: Josh Software Private Limited.
+I am a Software Engineer with more than three years of experience in Information Technology Industry. I worked on different Business Intelligence / Data Warehousing Projects in my experience.
+<code>
+</code>
+I am a C, C++ &amp; UNIX enthu. I recently learnt ruby &amp; looking forward to work in this.
+Thanks,
+Pankaj Sisodiya
+<code>
+</code>
+Name: M B Chowdari
+ROR Experience: 1.3 yrs
+Overall: 2.3 Yrs
+Location: Kakinada
+Company: Nyros Technologies, Kakinada
+<code>
+</code>
+Name: Santosh Turamari
+RoR Experience: 1.5 Yrs
+Overall: 1.5 Yrs
+Location: Bangalore, Karnataka
+Company: SourceBits Technology, Bangalore
+```</p>
 ]]></content>
   </entry>
   

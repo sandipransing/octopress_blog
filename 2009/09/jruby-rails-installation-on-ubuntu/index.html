@@ -9,7 +9,8 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="# install mysql if you dont have already installedsudo apt-get install mysql-server mysql-client libhtml-template-perl mailx dbishell libcompress- &hellip;">
+  <meta name="description" content="Installations Install mysql if you dont have already installed 1
+sudo apt-get install mysql-server mysql-client libhtml-template-perl mailx dbishell &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -103,16 +104,130 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-# install mysql if you dont have already installed<br/>sudo apt-get install mysql-server mysql-client libhtml-template-perl mailx dbishell libcompress-zlib-perl mysql-doc-5.0 tinyca<br/><br/># install ant and jdk<br/>sudo apt-get install ant sun-java6-jdk<br/><br/># install jruby<br/>mkdir software<br/>cd software<br/>wget http://dist.codehaus.org/jruby/jruby-bin-1.1.5.tar.gz<br/>tar xvfz jruby-bin-1.1.5.tar.gz<br/>ln -s jruby-1.1.5 jruby<br/>export PATH=$PATH:$HOME/software/jruby/bin<br/><br/># install the version of rails wanted by jruby<br/>jruby -S gem install jruby-openssl<br/>jruby -S gem install rails<br/><br/># list your gems<br/>jruby -S gem list<br/><br/># install the gems needed for db<br/>jruby -S gem install activerecord-jdbc-adapter activerecord-jdbcmysql-adapter<br/><br/># generate some code<br/>cd ~/scripts/ruby<br/>jruby -S rails wherehaveyoubeen -d mysql<br/>cd wherehaveyoubeen<br/>jruby script/generate controller states index<br/><br/># configure access to the database server<br/>vi config/database.yml<br/><br/>#development:<br/>#  adapter: jdbcmysql &lt;- very important!<br/>#  encoding: utf8<br/>#  database: test_development<br/>#  username: root<br/>#  password: database<br/>#  socket: /var/run/mysqld/mysqld.sock<br/><br/># generate the db<br/>jruby -S rake db:create:all<br/>jruby -S rake db:migrate<br/><br/><br/># edit your app<br/>sudo apt-get install emacs ruby-elisp irb1.8 emacs22-el<br/>emacs -bg black -fg wheat app/views/states/index.html.erb<br/><br/># uncomment the secret in app/controllers/application.rb<br/>vi app/controllers/application.rb<br/><br/># run your app<br/>jruby script/server</div>
+<div class="entry-content"><h2>Installations</h2>
+
+<p>Install mysql if you dont have already installed</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install mysql-server mysql-client libhtml-template-perl mailx dbishell libcompress-zlib-perl mysql-doc-5.0 tinyca</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Install ant and jdk</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install ant sun-java6-jdk</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Install jruby</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mkdir software
+</span><span class='line'>cd software
+</span><span class='line'>wget http://dist.codehaus.org/jruby/jruby-bin-1.1.5.tar.gz
+</span><span class='line'>tar xvfz jruby-bin-1.1.5.tar.gz
+</span><span class='line'>ln -s jruby-1.1.5 jruby
+</span><span class='line'>export PATH=$PATH:$HOME/software/jruby/bin</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Install the version of rails wanted by jruby</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>jruby -S gem install jruby-openssl
+</span><span class='line'>jruby -S gem install rails</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>List your gems</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>jruby -S gem list</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Install required gems</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>jruby -S gem install activerecord-jdbc-adapter activerecord-jdbcmysql-adapter</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Create a rails app using mysql DB</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd ~/scripts/ruby
+</span><span class='line'>jruby -S rails wherehaveyoubeen -d mysql
+</span><span class='line'>cd wherehaveyoubeen
+</span><span class='line'>jruby script/generate controller states index</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Configure access to the database server</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="c1"># vi config/database.yml</span>
+</span><span class='line'>
+</span><span class='line'><span class="l-Scalar-Plain">development</span><span class="p-Indicator">:</span>
+</span><span class='line'> <span class="l-Scalar-Plain">adapter</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">jdbcmysql &lt;- very important!</span>
+</span><span class='line'> <span class="l-Scalar-Plain">encoding</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">utf8</span>
+</span><span class='line'> <span class="l-Scalar-Plain">database</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">test_development</span>
+</span><span class='line'> <span class="l-Scalar-Plain">username</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">root</span>
+</span><span class='line'> <span class="l-Scalar-Plain">password</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">database</span>
+</span><span class='line'> <span class="l-Scalar-Plain">socket</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/var/run/mysqld/mysqld.sock</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Generate DB</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">jruby -S rake db:create:all</span>
+</span><span class='line'><span class="l-Scalar-Plain">jruby -S rake db:migrate</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Edit your app</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">sudo apt-get install emacs ruby-elisp irb1.8 emacs22-el</span>
+</span><span class='line'><span class="l-Scalar-Plain">emacs -bg black -fg wheat app/views/states/index.html.erb</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Uncomment the secret in app/controllers/application.rb</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">vi app/controllers/application.rb</span>
+</span><span class='line'><span class="l-Scalar-Plain"># remove secret from this file</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Run Server</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">jruby script/server</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
 <h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>Parag</div>
-<div class='content'>
-Very helpful article. Please keep up the great work! :-)</div>
-</div>
-</div>
+
+<p><strong>@Parag</strong></p>
+
+<p>Very helpful article. Please keep up the great work! :&ndash;)</p>
 </div>
 
 
@@ -160,10 +275,10 @@ Very helpful article. Please keep up the great work! :-)</div>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2009/09/upgrading-rails-version/" title="Previous Post: upgrading rails version">&laquo; upgrading rails version</a>
+        <a class="basic-alignment left" href="/2009/09/upgrading-rails-version/" title="Previous Post: upgrading rails version to rails 2.3.3">&laquo; upgrading rails version to rails 2.3.3</a>
       
       
-        <a class="basic-alignment right" href="/2009/09/managing-multiple-ruby-versions-and/" title="Next Post: Managing multiple ruby versions and rails versions with rvm">Managing multiple ruby versions and rails versions with rvm &raquo;</a>
+        <a class="basic-alignment right" href="/2009/09/managing-multiple-ruby-versions-with-rvm/" title="Next Post: Managing multiple ruby versions with RVM">Managing multiple ruby versions with RVM &raquo;</a>
       
     </p>
     <p class="meta">

@@ -9,7 +9,7 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="In ruby, one can write multiple codes to remove multiple blank spaces inside strings (sentenses) "Write &nbsp; &nbsp; &nbsp;your &nbsp; &nbsp; &nbsp &hellip;">
+  <meta name="description" content="There are many methods in ruby which will allow to remove blank spaces from ruby strings (sentenses) squeeze This will remove extra spaces (more than &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -103,8 +103,34 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-<div style="text-align: left;">In ruby, one can write multiple codes to remove multiple blank spaces inside strings (sentenses)  <br /></div><pre class="ruby" name="code"> <br />"Write &nbsp; &nbsp; &nbsp;your &nbsp; &nbsp; &nbsp; string &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;here &nbsp; ".squeeze.strip<br />"This &nbsp; &nbsp; is my &nbsp; &nbsp; &nbsp;input &nbsp;string &nbsp; &nbsp; ".gsub(/ +/, ' ')<br />"Write &nbsp; &nbsp; &nbsp;your &nbsp; &nbsp; &nbsp; string &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;here &nbsp; ".split(' &nbsp;').join(' ')<br /></pre></div>
+<div class="entry-content"><p>There are many methods in ruby which will allow to remove blank spaces from ruby strings (sentenses)</p>
+
+<h4>squeeze</h4>
+
+<p>This will remove extra spaces (more than one) in between two words</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;Write      your       string            here   &quot;</span><span class="o">.</span><span class="n">squeeze</span><span class="o">.</span><span class="n">strip</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>gsub</h4>
+
+<p>It can be used to match and substitue additional spaces</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;This     is my      input  string     &quot;</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="sr">/ +/</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>split &amp; join strings</h4>
+
+<p>Strings can be splitted based on spaces and joined.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;Write      your       string          here   &quot;</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;  &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 
@@ -132,7 +158,7 @@
 
 <span class="categories">
   
-    <a class='category' href='/categories/regular-expression/'>regular expression</a>, <a class='category' href='/categories/ruby/'>ruby</a>
+    <a class='category' href='/categories/ruby/'>ruby</a>
   
 </span>
 
@@ -152,7 +178,7 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2009/11/manual-active-record-db-connection-in/" title="Previous Post: Manual active record db connection in ruby using mysql adapter">&laquo; Manual active record db connection in ruby using mysql adapter</a>
+        <a class="basic-alignment left" href="/2009/11/manual-active-record-db-connection/" title="Previous Post: Manual active record db connection in ruby using mysql adapter">&laquo; Manual active record db connection in ruby using mysql adapter</a>
       
       
         <a class="basic-alignment right" href="/2009/11/pidgin-install-and-update-pidgin/" title="Next Post: pidgin install and update pidgin messenger on ubuntu interpid">pidgin install and update pidgin messenger on ubuntu interpid &raquo;</a>

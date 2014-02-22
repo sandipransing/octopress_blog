@@ -9,7 +9,8 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="One can install gem without rdoc usinggem install GEM_NAME &#8211;no-ri &#8211;no-rdocSkip ri rdoc for all gem installation as i haven&#8217;t seen &hellip;">
+  <meta name="description" content="GEM install without rdoc 1
+gem install GEM_NAME –no-ri –no-rdoc Skip ri rdoc for all gem installation as i haven’t seen anyone using it. Edit gemrc &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -103,16 +104,54 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-One can install gem without rdoc using<br /><br />gem install GEM_NAME &#8211;no-ri &#8211;no-rdoc<br /><br /><br />Skip ri rdoc for all gem installation as i haven&#8217;t seen anyone using it.<br /><br />Edit gemrc file<br />Add following line to it<br /><pre class=ruby>vi ~/.gemrc<br />:gem: --no-ri --no-rdoc</pre><br /><br />Here is my ~/.gemrc file<br /><pre class=ruby>---<br />:verbose: true<br />gem: --no-ri --no-rdoc<br />:update_sources: true<br />:sources:<br />- http://gems.rubyforge.org<br />- http://gems.github.com<br />:backtrace: false<br />:bulk_threshold: 1000<br />:benchmark: false</pre><br /><br />That&#8217;s it !</div>
+<div class="entry-content"><h2>GEM install without rdoc</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install GEM_NAME –no-ri –no-rdoc</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Skip ri rdoc for all gem installation as i haven’t seen anyone using it.</p>
+
+<h2>Edit gemrc file</h2>
+
+<p>Add following line to it</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># vi ~/.gemrc
+</span><span class='line'>:gem: --no-ri --no-rdoc</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here is my <code>~/.gemrc</code> file</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>---
+</span><span class='line'>:verbose: true
+</span><span class='line'>gem: --no-ri --no-rdoc
+</span><span class='line'>:update_sources: true
+</span><span class='line'>:sources:
+</span><span class='line'>- http://gems.rubyforge.org
+</span><span class='line'>- http://gems.github.com
+</span><span class='line'>:backtrace: false
+</span><span class='line'>:bulk_threshold: 1000
+</span><span class='line'>:benchmark: false</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That’s it !</p>
+
 <h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>Tnelson</div>
-<div class='content'>
-I don’t usually reply to posts but I will in this case, great info&#8230;I will add a backlink and bookmark your site. Keep up the good work!</div>
-</div>
-</div>
+
+<p><strong>@Tnelson</strong>
+I don’t usually reply to posts but I will in this case, great info…I will add a backlink and bookmark your site. Keep up the good work!</p>
 </div>
 
 
@@ -160,10 +199,10 @@ I don’t usually reply to posts but I will in this case, great info&#8230;I wil
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2009/09/managing-multiple-ruby-versions-and/" title="Previous Post: Managing multiple ruby versions and rails versions with rvm">&laquo; Managing multiple ruby versions and rails versions with rvm</a>
+        <a class="basic-alignment left" href="/2009/09/managing-multiple-ruby-versions-with-rvm/" title="Previous Post: Managing multiple ruby versions with RVM">&laquo; Managing multiple ruby versions with RVM</a>
       
       
-        <a class="basic-alignment right" href="/2009/10/how-to-submit-sitemap-to-search-engines/" title="Next Post: How to submit sitemap to search engines">How to submit sitemap to search engines &raquo;</a>
+        <a class="basic-alignment right" href="/2009/10/how-to-submit-sitemap-to-search-engines/" title="Next Post: How to submit sitemap to different search engines">How to submit sitemap to different search engines &raquo;</a>
       
     </p>
     <p class="meta">

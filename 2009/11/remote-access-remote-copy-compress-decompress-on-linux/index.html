@@ -5,11 +5,18 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Linux commands for remote access, compress, decompress - Fun On Rails</title>
+  <title>remote access, remote copy and files compress, decompress on linux - Fun On Rails</title>
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Remote Login============ssh client is a program for logging into remote machine and execute commands.ssh [-l login_name ] hostname | user@hostname [ &hellip;">
+  <meta name="description" content="Remote Login ssh client is a program for logging into remote system and execute commands on that system 1
+2
+3
+4
+5
+6
+7
+ssh [-l login_name ] hostname &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +25,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="funonrails.com/2009/11/linux-commands-for-remote-access">
+  <link rel="canonical" href="funonrails.com/2009/11/remote-access-remote-copy-compress-decompress-on-linux">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="http://feeds.feedburner.com/funonrails" rel="alternate" title="Fun On Rails" type="application/atom+xml">
@@ -80,7 +87,7 @@
   
   <header>
     
-      <h1 class="entry-title">Linux Commands for Remote Access, Compress, Decompress</h1>
+      <h1 class="entry-title">Remote Access, Remote Copy and Files Compress, Decompress on Linux</h1>
     
     
       <p class="meta">
@@ -103,8 +110,61 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-<span style="font-family: arial, sans-serif, 'Arial Unicode MS'; font-size: small;"><span style="border-collapse: collapse; font-size: 13px;"><span style="font-family: 'Times New Roman';"><span style="border-collapse: separate; font-size: medium;"><b> </b></span></span></span></span><br /><span style="font-family: arial, sans-serif, 'Arial Unicode MS'; font-size: small;"><span style="font-family: 'Times New Roman';"><b></b></span></span><br /><span style="font-family: arial, sans-serif, 'Arial Unicode MS'; font-size: small;"><span style="font-family: 'Times New Roman';"><b><pre class="western"><b><span style="font-family: Arial, Helvetica, sans-serif;">Remote Login</span></b><span style="font-family: Arial, Helvetica, sans-serif;"><br />============<br /></span><span class="Apple-style-span" style="font-weight: normal;"><span style="font-family: Arial, Helvetica, sans-serif;">ssh client is a program for logging into remote machine and execute commands.</span></span><span style="font-family: Arial, Helvetica, sans-serif;"><br /><br /></span><b><span style="font-family: Arial, Helvetica, sans-serif;">ssh [-l login_name ] hostname | user@hostname [command ]</span></b><span style="font-family: Arial, Helvetica, sans-serif;"><br /><br /></span><b><span style="font-family: Arial, Helvetica, sans-serif;">other options</span></b><span style="font-family: Arial, Helvetica, sans-serif;"><br /><br /></span><span class="Apple-style-span" style="font-weight: normal;"><span style="font-family: Arial, Helvetica, sans-serif;">ssh [-afgknqstvxACNTX1246 ] [-b bind_address ] [-c cipher_spec ]&nbsp;</span></span></pre><pre class="western"><span class="Apple-style-span" style="font-weight: normal;"><span style="font-family: Arial, Helvetica, sans-serif;">[-e escape_char ] [-i identity_file ] [-l login_name ] [-m mac_spec ]&nbsp;</span></span></pre><pre class="western"><span class="Apple-style-span" style="font-weight: normal;"><span style="font-family: Arial, Helvetica, sans-serif;">[-o option ] [-p port ] [-F configfile ] [-L port host hostport ]&nbsp;</span></span></pre><pre class="western"><span class="Apple-style-span" style="font-weight: normal;"><span style="font-family: Arial, Helvetica, sans-serif;">[-R port host hostport ] [-D port ] hostname | user@hostname [command </span></span><span style="font-family: Arial, Helvetica, sans-serif;">]<br /><br />One can use </span><b><span style="font-family: Arial, Helvetica, sans-serif;">putty</span></b><span style="font-family: Arial, Helvetica, sans-serif;"> for remote login through </span><b><span style="font-family: Arial, Helvetica, sans-serif;">windows</span></b><span style="font-family: Arial, Helvetica, sans-serif;"> machine<br /><br /></span><b><span style="font-family: Arial, Helvetica, sans-serif;">Remote Copy</span></b><span style="font-family: Arial, Helvetica, sans-serif;"><br />============<br /></span><b><span style="font-family: Arial, Helvetica, sans-serif;">scp - </span></b><span class="Apple-style-span" style="font-weight: normal;"><span style="font-family: Arial, Helvetica, sans-serif;">secure copy (remote file copy program) that copies file between computers over network</span></span><span style="font-family: Arial, Helvetica, sans-serif;"><br /><br /></span><b><span style="font-family: Arial, Helvetica, sans-serif;">scp source[ source file path] destination[user@funonrails.com:/home]</span></b><span style="font-family: Arial, Helvetica, sans-serif;"><br /><br /></span><b><span style="font-family: Arial, Helvetica, sans-serif;">Other options</span></b><span style="font-family: Arial, Helvetica, sans-serif;"><br /><br /></span><span class="Apple-style-span" style="font-weight: normal;"><span style="font-family: Arial, Helvetica, sans-serif;">[-F ssh_config ] [-S program ] [-P port ] [-c cipher ] [-i identity_file ]&nbsp;</span></span></pre><pre class="western"><span class="Apple-style-span" style="font-weight: normal;"><span style="font-family: Arial, Helvetica, sans-serif;">[-o ssh_option ] [[user@ ] host1 : file1 ] [... ] [[user@ ] host2 : file2 ]</span></span><span style="font-family: Arial, Helvetica, sans-serif;"><br /><br />One can use </span><b><span style="font-family: Arial, Helvetica, sans-serif;">pscp.exe </span></b><span style="font-family: Arial, Helvetica, sans-serif;">for remote copy from </span><b><span style="font-family: Arial, Helvetica, sans-serif;">windows</span></b><span style="font-family: Arial, Helvetica, sans-serif;"> machine<br /><br /></span><b><span style="font-family: Arial, Helvetica, sans-serif;">Compress</span></b><span style="font-family: Arial, Helvetica, sans-serif;"><br />============<br /></span><b><span style="font-family: Arial, Helvetica, sans-serif;">tar</span></b><span style="font-family: Arial, Helvetica, sans-serif;"> - </span><span class="Apple-style-span" style="font-weight: normal;"><span style="font-family: Arial, Helvetica, sans-serif;">is a package that allows you to compress direcory or file</span></span></pre><pre class="western"><span style="font-family: Arial, Helvetica, sans-serif;"><br /></span><b><span style="font-family: Arial, Helvetica, sans-serif;">tar czfv Test.tar.tgz Test/</span></b><span style="font-family: Arial, Helvetica, sans-serif;"><br /><br /></span><b><span style="font-family: Arial, Helvetica, sans-serif;">Decompress</span></b><span style="font-family: Arial, Helvetica, sans-serif;"><br />============<br /></span><b><span style="font-family: Arial, Helvetica, sans-serif;">gzip</span></b><span style="font-family: Arial, Helvetica, sans-serif;"> - </span><span class="Apple-style-span" style="font-weight: normal;"><span style="font-family: Arial, Helvetica, sans-serif;">is a package that allows to extract compressed file/directories.</span></span><span style="font-family: Arial, Helvetica, sans-serif;"><br /><br /></span><b><span style="font-family: Arial, Helvetica, sans-serif;">gzip -dc target.tar.tgz | tar xf -</span></b><span style="font-family: Arial, Helvetica, sans-serif;"><br /></span></pre></b></span></span><br /><span style="font-size: small;"><span style="font-family: Arial, Helvetica, sans-serif;"><b></b></span></span><br /><span style="font-size: small;"><b><div><div><br /></div></div></b></span><br /></div>
+<div class="entry-content"><h2>Remote Login</h2>
+
+<p><code>ssh</code> client is a program for logging into remote system and execute commands on that system</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ssh [-l login_name ] hostname | user@hostname [command ]
+</span><span class='line'>
+</span><span class='line'># other options
+</span><span class='line'>ssh [-afgknqstvxACNTX1246 ] [-b bind_address ] [-c cipher_spec ] 
+</span><span class='line'>[-e escape_char ] [-i identity_file ] [-l login_name ] [-m mac_spec ] 
+</span><span class='line'>[-o option ] [-p port ] [-F configfile ] [-L port host hostport ] 
+</span><span class='line'>[-R port host hostport ] [-D port ] hostname | user@hostname [command ]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>One can use putty for remote login through windows machine</p>
+
+<h2>Remote Copy</h2>
+
+<p><code>scp</code> &ndash; secure copy (remote file copy program) that copies file between computers over network</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>scp source[ source file path] destination[user@funonrails.com:/home]
+</span><span class='line'>
+</span><span class='line'># Other options
+</span><span class='line'>[-F ssh_config ] [-S program ] [-P port ] [-c cipher ] [-i identity_file ] 
+</span><span class='line'>[-o ssh_option ] [[user@ ] host1 : file1 ] [... ] [[user@ ] host2 : file2 ]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>On windows system <code>pscp.exe</code> can be used for remote copy</p>
+
+<h2>Compress</h2>
+
+<p><code>tar</code> is a package that allows you to compress direcory or file</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>tar czfv Test.tar.tgz Test/</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Decompress</h2>
+
+<p><code>gzip</code> is a package that allows to extract compressed file/directories.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gzip -dc target.tar.tgz | tar xf -</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 
@@ -132,7 +192,7 @@
 
 <span class="categories">
   
-    <a class='category' href='/categories/general/'>general</a>, <a class='category' href='/categories/ubuntu/'>ubuntu</a>
+    <a class='category' href='/categories/ubuntu/'>ubuntu</a>
   
 </span>
 
@@ -141,7 +201,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="funonrails.com/2009/11/linux-commands-for-remote-access/" data-via="sandipransing" data-counturl="funonrails.com/2009/11/linux-commands-for-remote-access/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="funonrails.com/2009/11/remote-access-remote-copy-compress-decompress-on-linux/" data-via="sandipransing" data-counturl="funonrails.com/2009/11/remote-access-remote-copy-compress-decompress-on-linux/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>

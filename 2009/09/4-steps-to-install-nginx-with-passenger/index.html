@@ -9,7 +9,9 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Install passenger program that will run your rails application1. sudo gem install passengerInstall nginx server with passenger enabled2. passenger- &hellip;">
+  <meta name="description" content="Install passenger program 1
+sudo gem install passenger Install nginx server with passenger enabled 1
+passenger-install-nginx-module It will open apt &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -103,21 +105,90 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-Install passenger program that will run your rails application<br/><strong>1. sudo gem install passenger</strong><br/>Install nginx server with passenger enabled<br/><strong>2. passenger-install-nginx-module</strong><br/><br/>it will open apt, click &#8220;Enter&#8221; to contine<br/>then select option 1 for default install<br/>then it will ask<br/>Where do you want to install Nginx to?<br/><br/>Please specify a prefix directory [/opt/nginx]:<br/>press enter<br/><br/>then copy following block<br/><br/><strong> server {<br/>listen 80;<br/>server_name <a href="http://www.yourhost.com/" target="_blank">www.yourhost.com</a>;<br/>root /somewhere/public;   # &lt;&#8212; be sure to point to &#8216;public&#8217;!<br/>passenger_enabled on;<br/>}</strong><br/><br/>Make nginx Configuration<br/>3. vi /opt/nginx/conf/nginx.conf<br/>Make passenger_root and passenger_ruby path to configuration<br/><strong><br/><br/>http {<br/>passenger_root /usr/local/lib/ruby/gems/1.8/gems/passenger-2.2.4;<br/>passenger_ruby /usr/local/bin/ruby;<br/></strong><br/><br/>then add server configuration block inside http block<br/>http{<br/>&#8230;<br/><strong> server {<br/>listen 80;<br/>server_name <a href="http://www.yourhost.com/" target="_blank">www.yourhost.com</a>; //Make sure this dns entry inside /etc/hosts<br/>root /carsonline/public;   # &lt;&#8212; be sure to point to &#8216;public&#8217;! //here carsonline is RAILS_ROOT<br/>passenger_enabled on;<br/>}</strong><br/><br/>Thats, all<br/><br/>4. Launch Server<br/><br/>/opt/nginx/sbin/nginx</div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>sandip Ransing</div>
-<div class='content'>
-You are right..but sometimes we have to manually configure it when there are multiple ruby installations.</div>
-</div>
-<div class='comment'>
-<div class='author'>gautamrege</div>
-<div class='content'>
-I think passenger_root and passenger_ruby get automatically configured during installation.<br><br>Good article.</div>
-</div>
-</div>
+<div class="entry-content"><h2>Install passenger program</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo gem install passenger</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Install nginx server with passenger enabled</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>passenger-install-nginx-module</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It will open <code>apt</code>, click <code>Enter</code> to contine then select option 1 for default install
+then it will ask, <em>&ldquo;Where do you want to install Nginx to?&rdquo;</em></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Please specify a prefix directory [/opt/nginx]:</span></code></pre></td></tr></table></div></figure>
+
+
+<p>press enter then copy following block</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>server {
+</span><span class='line'>  listen 80;
+</span><span class='line'>  server_name www.yourhost.com;
+</span><span class='line'>  root /somewhere/public;   # &lt;— be sure to point to ‘public’!
+</span><span class='line'>  passenger_enabled on;
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Make nginx Configuration</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># vi /opt/nginx/conf/nginx.conf
+</span><span class='line'># Make passenger_root and passenger_ruby path to configuration
+</span><span class='line'>
+</span><span class='line'>http {
+</span><span class='line'>  passenger_root /usr/local/lib/ruby/gems/1.8/gems/passenger-2.2.4;
+</span><span class='line'>  passenger_ruby /usr/local/bin/ruby;
+</span><span class='line'>  ...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>then add server configuration block inside http block</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>http {
+</span><span class='line'>  ...
+</span><span class='line'>
+</span><span class='line'>  server {
+</span><span class='line'>    listen 80;
+</span><span class='line'>    server_name www.yourhost.com; //Make sure this dns entry inside /etc/hosts
+</span><span class='line'>    root /carsonline/public;   # &lt;— be sure to point to ‘public’! //here carsonline is RAILS_ROOT
+</span><span class='line'>    passenger_enabled on;
+</span><span class='line'>  }
+</span><span class='line'>  ...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&rsquo;s all, you are done !</p>
+
+<h2>Launch Server</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  /opt/nginx/sbin/nginx</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 
@@ -165,10 +236,10 @@ I think passenger_root and passenger_ruby get automatically configured during in
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2009/09/how-do-i-generate-seo-sitemap-in-rails/" title="Previous Post: How do i generate SEO sitemap in rails ?">&laquo; How do i generate SEO sitemap in rails ?</a>
+        <a class="basic-alignment left" href="/2009/09/how-to-generate-seo-sitemap-in-rails/" title="Previous Post: How to generate SEO sitemap in rails ?">&laquo; How to generate SEO sitemap in rails ?</a>
       
       
-        <a class="basic-alignment right" href="/2009/09/watch-live-india-vs-srilanka-cricket/" title="Next Post: Watch live India vs Srilanka cricket">Watch live India vs Srilanka cricket &raquo;</a>
+        <a class="basic-alignment right" href="/2009/09/migrating-project-from-rails-2-1-0-to-2-3-3/" title="Next Post: Migrating project from rails 2.1.0 to edge rails 2.3.3">Migrating project from rails 2.1.0 to edge rails 2.3.3 &raquo;</a>
       
     </p>
     <p class="meta">

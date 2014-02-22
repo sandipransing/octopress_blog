@@ -9,7 +9,7 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Rails community has released rails 2.3.3 recently with major upgrades and several bug fixes added.On the other side, Rails 3 ( i.e. merge of rails &hellip;">
+  <meta name="description" content="Rails community has released rails 2.3.3 recently with major upgrades and several bug fixes added. On the other hand, rails 3 ( i.e. merge of rails &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -103,16 +103,59 @@
   </header>
 
 
-<div class="entry-content"><div class='post'>
-Rails community has released rails 2.3.3 recently with major upgrades and several bug fixes added.<br/><br/>On the other side, Rails 3 ( i.e. merge of rails and merb framework ) is supposed to be officially get released in this May.<br/><br/>Lets see what are the notable features added in rails 2.3.3<br/><br/><strong>1. Rack</strong><br/><em><br/>What is this rack ?</em><br/>Abstraction built on the top of rails framework<br/><br/><em>What it does ?</em><br/>It provides minimal interface between webservers supporting ruby ( like  apache-mongrel, nginx-passenger ) and rails framework.<br/>Gives access to middleware goodness<br/>i.e. wrapping HTML requests and response in simple way<br/>unifies and distills the API for web servers, web frameworks, and software in between<br/><br/><a href="http://guides.rubyonrails.org/rails_on_rack.html" target="_blank">read more &#8230;</a><br/><br/><strong>2. Metal</strong><br/>It is a subset of rack middleware specially designed to integrate with rails    application.<br/><br/><em>Why to use it ?</em><br/>Whenever you need achieve raw speed for certain requests by skipping action controller stack.<br/><a href="http://weblog.rubyonrails.org/2008/12/17/introducing-rails-metal" target="_blank"> read more &#8230;</a><br/><br/><strong>3. Engines</strong><br/>It was a plugin that got merged in rails core.<br/>It is used for sharing controllers, models and views seamlessly from within a plugin to your rails application.<br/><a href="http://rails-engines.org/news/2009/02/02/engines-in-rails-2-3/" target="_blank"> read more &#8230;</a><br/><br/><strong>4. Templates</strong><br/>These are the ruby files which describes which gems, plugins and initiliazers  has to be added while creating new rails project.<br/><a href="http://railscasts.com/episodes/148-app-templates-in-rails-2-3" target="_blank"> read more &#8230;</a><br/><br/><strong>5. Nested Forms</strong><br/>Earlier nested forms for has_one and has_many associations wasn&#8217;t<br/>there in rails.<br/>this release added nested forms complex associations in models.<br/><a href="http://weblog.rubyonrails.org/2009/1/26/nested-model-forms" target="_blank"> read more &#8230;</a> <a href="http://ryandaigle.com/articles/2009/2/1/what-s-new-in-edge-rails-nested-attributes" target="_blank">also see &#8230;</a><br/><br/><strong>One of good rails architecture diagram found while google<br/></strong><br/><br/>[caption id=&#8221;&#8221; align=&#8221;alignnone&#8221; width=&#8221;460&#8221; caption=&#8221;Rails 2.3 architecture diagram&#8221;]<a href="http://cleanair.highgroove.com/articles/2009/04/21/rails-marketecture-diagram"><img title="Rails 2.3 architecture diagram" src="http://img.skitch.com/20090422-gts8sseg1k8rgiafi1d7e54px6.png" alt="Rails 2.3 architecture diagram" width="460" /></a>[/caption]<br/><br/><strong>Edge rails Installation</strong><br/>gem install rails &#8211;source <a href="http://gems.rubyonrails.org" target="_blank">http://gems.rubyonrails.org</a><br/><br/>Thanks to rails community  for bringing this things in rails core.<br/>Cheers, now rails is getting its way !</div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>sitemap « Fun On Rails</div>
-<div class='content'>
-[&#8230;] What is new in edge rails 2.3.3 ? « Fun On Rails [&#8230;]</div>
-</div>
-</div>
+<div class="entry-content"><p>Rails community has released rails 2.3.3 recently with major upgrades and several bug fixes added.</p>
+
+<p>On the other hand, <code>rails 3</code> ( i.e. merge of rails and merb framework ) is supposed to be officially get released in this May.</p>
+
+<p>Lets see what are the notable features added in rails 2.3.3</p>
+
+<h2>1. Rack</h2>
+
+<p>Rack is an abstraction built on the top of rails framework</p>
+
+<p>It provides minimal interface between webservers supporting ruby ( like  apache-mongrel, nginx-passenger ) and rails framework.
+Gives access to middleware goodness i.e. wrapping HTML requests and response in simple way
+unifies and distills the API for web servers, web frameworks, and software in between</p>
+
+<p><a href="http://guides.rubyonrails.org/rails_on_rack.html">read more …</a></p>
+
+<h2>2. Metal</h2>
+
+<p>It is a subset of rack middleware specially designed to integrate with rails application.</p>
+
+<p>Whenever you need achieve raw speed for certain requests by skipping action controller stack.</p>
+
+<p><a href="http://weblog.rubyonrails.org/2008/12/17/introducing-rails-metal">read more …</a></p>
+
+<h2>3. Engines</h2>
+
+<p>It was a plugin that got merged in rails core.</p>
+
+<p>It is used for sharing controllers, models and views seamlessly from within a plugin to your rails application.</p>
+
+<p><a href="http://rails-engines.org/news/2009/02/02/engines-in-rails-2-3/">read more …</a></p>
+
+<h2>4. Templates</h2>
+
+<p>These are the ruby files which describes which gems, plugins and initiliazers  has to be added while creating new rails project.</p>
+
+<p><a href="http://rails-engines.org/news/2009/02/02/engines-in-rails-2-3/">read more …</a></p>
+
+<h2>5. Nested Forms</h2>
+
+<p>Earlier nested forms for has_one and has_many associations wasn’t there in rails.
+this release added nested forms complex associations in models.</p>
+
+<p><a href="http://weblog.rubyonrails.org/2009/1/26/nested-model-forms">read more here…</a> and <a href="http://ryandaigle.com/articles/2009/2/1/what-s-new-in-edge-rails-nested-attributes">also see here …</a></p>
+
+<h2>Edge rails Installation</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install rails --source http://gems.rubyonrails.org</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I am  always thankful to rails community for continuous improvements to rails core.
+Cheers, now rails is getting its way !</p>
 </div>
 
 
@@ -163,7 +206,7 @@ Rails community has released rails 2.3.3 recently with major upgrades and severa
         <a class="basic-alignment left" href="/2009/08/ruby-on-rails-search-engine/" title="Previous Post: Ruby On Rails Search Engine Optimization (SEO)">&laquo; Ruby On Rails Search Engine Optimization (SEO)</a>
       
       
-        <a class="basic-alignment right" href="/2009/09/social-media-overview/" title="Next Post: Social Media Overview">Social Media Overview &raquo;</a>
+        <a class="basic-alignment right" href="/2009/09/how-to-generate-seo-sitemap-in-rails/" title="Next Post: How to generate SEO sitemap in rails ?">How to generate SEO sitemap in rails ? &raquo;</a>
       
     </p>
     <p class="meta">

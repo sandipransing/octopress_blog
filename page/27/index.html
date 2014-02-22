@@ -9,7 +9,8 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Here are the simple steps to be followed while upgrading rails version to use.# Install rails version1. gem install rails -v == gem install rails 2. &hellip;">
+  <meta name="description" content="Installing ruby 1.9.1 got very easy. Please follow these simple steps : Download 1
+wget ftp://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.1-p0.tar.gz &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,43 +84,6 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2009/09/upgrading-rails-version/">Upgrading Rails Version</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-09-29T19:12:00+05:30" pubdate data-updated="true">Sep 29<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-Here are the simple steps to be followed while upgrading rails version to use.<br/><br/># Install rails version<br/>1. gem install rails -v<br/>    == gem install rails 2.3.3<br/><br/># Upgrade environment.rb for new version<br/>2. RAILS_GEM_VERSION = &#8221; unless defined? RAILS_GEM_VERSION<br/>    == RAILS_GEM_VERSION = &#8216;2.3.3&#8217; unless defined? RAILS_GEM_VERSION<br/><br/># Upgrade necessary files for the new version<br/>3. rake rails:upadte<br/><br/># Start server<br/>4. /script/server<br/><br/><br/>Thats, it !</div>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
       <h1 class="entry-title"><a href="/2009/09/installing-ruby-191/">Installing Ruby 1.9.1</a></h1>
     
     
@@ -143,8 +107,39 @@ Here are the simple steps to be followed while upgrading rails version to use.<b
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-installing ruby 1.9.1 is very easy &#8230;&#8230;.<br/>follow simple steps<br/><br/>wget ftp://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.1-p0.tar.gz<br/><br/>tar -xvf ruby-1.9.1-p0.tar.gz<br/><br/>cd ruby-1.9.1-p0<br/>./configure<br/><br/>make<br/>make test<br/>sudo make install<br/><br/><br/>Thats, it !</div>
+  <div class="entry-content"><p>Installing ruby <code>1.9.1</code> got very easy. Please follow these simple steps :</p>
+
+<h2>Download</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget ftp://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.1-p0.tar.gz</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Extract</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>tar -xvf ruby-1.9.1-p0.tar.gz</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Configure</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd ruby-1.9.1-p0
+</span><span class='line'>./configure</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Install</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>make
+</span><span class='line'>make test
+</span><span class='line'>sudo make install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Thats, it !</p>
 </div>
   
   
@@ -157,7 +152,7 @@ installing ruby 1.9.1 is very easy &#8230;&#8230;.<br/>follow simple steps<br/><
       
   <header>
     
-      <h1 class="entry-title"><a href="/2009/09/migrating-project-from-rails-210-to/">Migrating Project From Rails 2.1.0 to Edge Rails 2.3.3</a></h1>
+      <h1 class="entry-title"><a href="/2009/09/migrating-project-from-rails-2-1-0-to-2-3-3/">Migrating Project From Rails 2.1.0 to Edge Rails 2.3.3</a></h1>
     
     
       <p class="meta">
@@ -180,53 +175,45 @@ installing ruby 1.9.1 is very easy &#8230;&#8230;.<br/>follow simple steps<br/><
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-I wanted to migrate my project from rails 2.1.0 to rails 2.3.3<br/>so, i performed following steps, but it shows me memcached-client error.<br/><br/>vi config/environment.rb<br/><br/><pre class=ruby># Specifies gem version of Rails to use when vendor/rails is not present<br/>RAILS_GEM_VERSION = '2.3.3' unless defined? RAILS_GEM_VERSION</pre><br/><br/>ruby script/server<br/><br/>It shows me error<br/><pre class=ruby> `install_memcached': 'memcache-client' client requested but not installed. Try 'sudo gem install memcache-client'. (Interlock::ConfigurationError)</pre><br/><br/>so, i installed memcache-client gem<br/><br/><pre class=ruby>gem install memcache-client</pre><br/><br/>but still i am showing same error, any ideas ??</div>
+  <div class="entry-content"><p>I wanted to migrate my project from rails <code>2.1.0</code> to rails <code>2.3.3</code></p>
+
+<p>so, i performed following steps, but it shows me memcached-client error.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># vi config/environment.rb
+</span><span class='line'>
+</span><span class='line'># Specifies gem version of Rails to use when vendor/rails is not present
+</span><span class='line'>RAILS_GEM_VERSION = '2.3.3' unless defined? RAILS_GEM_VERSION
+</span><span class='line'>
+</span><span class='line'>ruby script/server</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It shows me error</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>`install_memcached': 'memcache-client' client requested but not installed. Try 'sudo gem install memcache-client'. (Interlock::ConfigurationError)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>so i installed <code>memcache-client</code> gem</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install memcache-client</span></code></pre></td></tr></table></div></figure>
+
+
+<p>but still i am showing same error, any ideas ??</p>
+
 <h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>JimmyBean</div>
-<div class='content'>
-I don&#39;t know If I said it already but &#8230;I&#39;m so glad I found this site&#8230;Keep up the good work I read a lot of blogs on a daily basis and for the most part, people lack substance but, I just wanted to make a quick comment to say GREAT blog.  Thanks, :)<br><br>A definite great read..Jim Bean</div>
-</div>
-</div>
-</div>
-  
-  
 
+<p><strong>JimmyBean</strong></p>
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/09/watch-live-india-vs-srilanka-cricket/">Watch Live India vs Srilanka Cricket</a></h1>
-    
-    
-      <p class="meta">
-        
+<p>I don&rsquo;t know If I said it already but …I&rsquo;m so glad I found this site…Keep up the good work I read a lot of blogs on a daily basis and for the most part, people lack substance but, I just wanted to make a quick comment to say GREAT blog. Thanks, :)</p>
 
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-09-14T21:13:00+05:30" pubdate data-updated="true">Sep 14<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-http://watch-online-cricket.blogspot.com/2009/01/watch-india-vs-srilanka-cricket-online.html</div>
+<p>A definite great read..Jim Bean</p>
 </div>
   
   
@@ -262,21 +249,327 @@ http://watch-online-cricket.blogspot.com/2009/01/watch-india-vs-srilanka-cricket
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-Install passenger program that will run your rails application<br/><strong>1. sudo gem install passenger</strong><br/>Install nginx server with passenger enabled<br/><strong>2. passenger-install-nginx-module</strong><br/><br/>it will open apt, click &#8220;Enter&#8221; to contine<br/>then select option 1 for default install<br/>then it will ask<br/>Where do you want to install Nginx to?<br/><br/>Please specify a prefix directory [/opt/nginx]:<br/>press enter<br/><br/>then copy following block<br/><br/><strong> server {<br/>listen 80;<br/>server_name <a href="http://www.yourhost.com/" target="_blank">www.yourhost.com</a>;<br/>root /somewhere/public;   # &lt;&#8212; be sure to point to &#8216;public&#8217;!<br/>passenger_enabled on;<br/>}</strong><br/><br/>Make nginx Configuration<br/>3. vi /opt/nginx/conf/nginx.conf<br/>Make passenger_root and passenger_ruby path to configuration<br/><strong><br/><br/>http {<br/>passenger_root /usr/local/lib/ruby/gems/1.8/gems/passenger-2.2.4;<br/>passenger_ruby /usr/local/bin/ruby;<br/></strong><br/><br/>then add server configuration block inside http block<br/>http{<br/>&#8230;<br/><strong> server {<br/>listen 80;<br/>server_name <a href="http://www.yourhost.com/" target="_blank">www.yourhost.com</a>; //Make sure this dns entry inside /etc/hosts<br/>root /carsonline/public;   # &lt;&#8212; be sure to point to &#8216;public&#8217;! //here carsonline is RAILS_ROOT<br/>passenger_enabled on;<br/>}</strong><br/><br/>Thats, all<br/><br/>4. Launch Server<br/><br/>/opt/nginx/sbin/nginx</div>
+  <div class="entry-content"><h2>Install passenger program</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo gem install passenger</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Install nginx server with passenger enabled</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>passenger-install-nginx-module</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It will open <code>apt</code>, click <code>Enter</code> to contine then select option 1 for default install
+then it will ask, <em>&ldquo;Where do you want to install Nginx to?&rdquo;</em></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Please specify a prefix directory [/opt/nginx]:</span></code></pre></td></tr></table></div></figure>
+
+
+<p>press enter then copy following block</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>server {
+</span><span class='line'>  listen 80;
+</span><span class='line'>  server_name www.yourhost.com;
+</span><span class='line'>  root /somewhere/public;   # &lt;— be sure to point to ‘public’!
+</span><span class='line'>  passenger_enabled on;
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Make nginx Configuration</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># vi /opt/nginx/conf/nginx.conf
+</span><span class='line'># Make passenger_root and passenger_ruby path to configuration
+</span><span class='line'>
+</span><span class='line'>http {
+</span><span class='line'>  passenger_root /usr/local/lib/ruby/gems/1.8/gems/passenger-2.2.4;
+</span><span class='line'>  passenger_ruby /usr/local/bin/ruby;
+</span><span class='line'>  ...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>then add server configuration block inside http block</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>http {
+</span><span class='line'>  ...
+</span><span class='line'>
+</span><span class='line'>  server {
+</span><span class='line'>    listen 80;
+</span><span class='line'>    server_name www.yourhost.com; //Make sure this dns entry inside /etc/hosts
+</span><span class='line'>    root /carsonline/public;   # &lt;— be sure to point to ‘public’! //here carsonline is RAILS_ROOT
+</span><span class='line'>    passenger_enabled on;
+</span><span class='line'>  }
+</span><span class='line'>  ...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&rsquo;s all, you are done !</p>
+
+<h2>Launch Server</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  /opt/nginx/sbin/nginx</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/09/how-to-generate-seo-sitemap-in-rails/">How to Generate SEO Sitemap in Rails ?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-09-09T21:44:00+05:30" pubdate data-updated="true">Sep 9<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>What is sitemap ?</h2>
+
+<p>Sitemap is nothing but a .xml file containing urls available on your website</p>
+
+<p>It contains URL, last modified date, frequency of content change and priority ( between 0..1 )</p>
+
+<h2>Why we need sitemap ?</h2>
+
+<p>We can submit sitemap file to search engine. It will help them in analysing what urls on your site are available for crawling.</p>
+
+<h2>What is xml pattern ?</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'>   <span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;urlset</span> <span class="na">xmlns=</span><span class="s">&quot;http://www.sitemaps.org/schemas/sitemap/0.9&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="nt">&lt;url&gt;</span>
+</span><span class='line'>           <span class="nt">&lt;loc&gt;</span>http://www.example.com/<span class="nt">&lt;/loc&gt;</span>
+</span><span class='line'>           <span class="nt">&lt;lastmod&gt;</span>2005-01-01<span class="nt">&lt;/lastmod&gt;</span>
+</span><span class='line'>           <span class="nt">&lt;changefreq&gt;</span>monthly<span class="nt">&lt;/changefreq&gt;</span>
+</span><span class='line'>           <span class="nt">&lt;priority&gt;</span>0.8<span class="nt">&lt;/priority&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/url&gt;</span>
+</span><span class='line'>       ...
+</span><span class='line'>       ...
+</span><span class='line'>    <span class="nt">&lt;/urlset&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>What will be the path for sitemap ?</h2>
+
+<p><strong>&ldquo;www.example.com/sitemap.xml&rdquo;</strong></p>
+
+<h4>Are we going to generate sitemap manually ?</h4>
+
+<p>No&hellip; there is <code>mephisto sitemap plugin</code> and you can make can use it.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'>ruby script/plugin install http://svn.appelsiini.net/svn/rails/plugins/mephisto_sitemap/
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Am i needed to generate to sitemap for each request ?</h4>
+
+<p>No&hellip; we can generate it in background task daily basis.</p>
+
+<h4>How it will be accessed for request to sitemap ?</h4>
+
+<p>We can define path to local file in routes</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'>map.connect &quot;sitemap.xml&quot;, :controller =&gt; :sitemap
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">SitemapController</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">index</span>
+</span><span class='line'>    <span class="n">render</span> <span class="s2">&quot;some local file path&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here are some reference links :</p>
+
+<ol>
+<li><a href="http://www.fortytwo.gr/blog/19/Generating-Sitemaps-With-Rails">http://www.fortytwo.gr/blog/19/Generating-Sitemaps-With-Rails</a></li>
+<li><a href="http://www.bestechvideos.com/2008/07/04/ruby-plus-71-how-to-create-a-seo-sitemap-for-rails-apps">http://www.bestechvideos.com/2008/07/04/ruby-plus-71-how-to-create-a-seo-sitemap-for-rails-apps</a></li>
+</ol>
+
+
 <h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>sandip Ransing</div>
-<div class='content'>
-You are right..but sometimes we have to manually configure it when there are multiple ruby installations.</div>
+
+<p><strong>info ternak</strong></p>
+
+<p>i got lots of information from your site, thank for your sharing… :)</p>
+
+<p><strong>Elena Morgan</strong></p>
+
+<p>Search engines generate nearly 90% of all Internet traffic and are responsible for 55% of all E-commerce transactions. Today, it is essential for all online businesses to make SEO an integral part of their online business strategy.</p>
+
+<p>So I would like to recommend one of my client who helps you define, evolve and implement a powerful SEO strategy to leverage your online business potential</p>
+
+<p><a href="http://www.redalkemi.com/">http://www.redalkemi.com/</a></p>
+
+<p><strong>sandipransing</strong></p>
+
+<p>Link mentioned is very good !
+but it has limitation that we will not have any control over urls that will be submitted to search engines :)</p>
+
+<p><strong>Sethupathi</strong></p>
+
+<p><em>How to create sitemap.xml</em></p>
+
+<p>From the following link you can generate the site-map.xml if your application is not in https. Just by giving the application link it will generate the xml for you.</p>
+
+<p><a href="http://www.xml-sitemaps.com/">http://www.xml-sitemaps.com/</a></p>
 </div>
-<div class='comment'>
-<div class='author'>gautamrege</div>
-<div class='content'>
-I think passenger_root and passenger_ruby get automatically configured during installation.<br><br>Good article.</div>
-</div>
-</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/09/what-is-new-in-edge-rails-233/">What Is New in Edge Rails 2.3.3 ?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-09-02T17:54:00+05:30" pubdate data-updated="true">Sep 2<span>nd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Rails community has released rails 2.3.3 recently with major upgrades and several bug fixes added.</p>
+
+<p>On the other hand, <code>rails 3</code> ( i.e. merge of rails and merb framework ) is supposed to be officially get released in this May.</p>
+
+<p>Lets see what are the notable features added in rails 2.3.3</p>
+
+<h2>1. Rack</h2>
+
+<p>Rack is an abstraction built on the top of rails framework</p>
+
+<p>It provides minimal interface between webservers supporting ruby ( like  apache-mongrel, nginx-passenger ) and rails framework.
+Gives access to middleware goodness i.e. wrapping HTML requests and response in simple way
+unifies and distills the API for web servers, web frameworks, and software in between</p>
+
+<p><a href="http://guides.rubyonrails.org/rails_on_rack.html">read more …</a></p>
+
+<h2>2. Metal</h2>
+
+<p>It is a subset of rack middleware specially designed to integrate with rails application.</p>
+
+<p>Whenever you need achieve raw speed for certain requests by skipping action controller stack.</p>
+
+<p><a href="http://weblog.rubyonrails.org/2008/12/17/introducing-rails-metal">read more …</a></p>
+
+<h2>3. Engines</h2>
+
+<p>It was a plugin that got merged in rails core.</p>
+
+<p>It is used for sharing controllers, models and views seamlessly from within a plugin to your rails application.</p>
+
+<p><a href="http://rails-engines.org/news/2009/02/02/engines-in-rails-2-3/">read more …</a></p>
+
+<h2>4. Templates</h2>
+
+<p>These are the ruby files which describes which gems, plugins and initiliazers  has to be added while creating new rails project.</p>
+
+<p><a href="http://rails-engines.org/news/2009/02/02/engines-in-rails-2-3/">read more …</a></p>
+
+<h2>5. Nested Forms</h2>
+
+<p>Earlier nested forms for has_one and has_many associations wasn’t there in rails.
+this release added nested forms complex associations in models.</p>
+
+<p><a href="http://weblog.rubyonrails.org/2009/1/26/nested-model-forms">read more here…</a> and <a href="http://ryandaigle.com/articles/2009/2/1/what-s-new-in-edge-rails-nested-attributes">also see here …</a></p>
+
+<h2>Edge rails Installation</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install rails --source http://gems.rubyonrails.org</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I am  always thankful to rails community for continuous improvements to rails core.
+Cheers, now rails is getting its way !</p>
 </div>
   
   

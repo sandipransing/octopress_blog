@@ -4,7 +4,7 @@
   <title><![CDATA[Category: rake-tasks | Fun On Rails]]></title>
   <link href="funonrails.com/categories/rake-tasks/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-21T02:23:40+05:30</updated>
+  <updated>2014-02-22T20:21:48+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -15,12 +15,126 @@
   
   <entry>
     <title type="html"><![CDATA[Writing rake task in rails with namespace, parameters]]></title>
-    <link href="funonrails.com/2009/11/writing-rake-task-in-rails-with/"/>
+    <link href="funonrails.com/2009/11/writing-rake-task-in-rails/"/>
     <updated>2009-11-10T15:09:00+05:30</updated>
-    <id>funonrails.com/2009/11/writing-rake-task-in-rails-with</id>
-    <content type="html"><![CDATA[<div class='post'>
-<div style="text-align: left;">Rake tasks itself defines that “they are bunch of ruby code that performs some task.” Rake tasks are placed in lib/tasks directory of application and files have .rake extension. There are many lovable tasks defined in rails. read more  Rake tasks are executed from console.  Benefit of writing rake task are Testing of code   Scheduled rake tasks ( backgroundRb and scheduled tasks using cron )   Simplifies code Lets, understand what is code inside rake tasks.<br /></div><div style="text-align: left;"><b><br /></b><br /></div><div style="text-align: left;"><b>Simple greet rake task  </b><br /></div><pre class="ruby" name="code"> <br /># lib/tasks/welcome.rake<br />task :greet do<br />  puts “Hello !!”<br />end<br /><br />## Execute task<br />rake greet<br /></pre><b><br /></b><br /><b>Adding description to rake task  </b><br /><pre class="ruby" name="code"> <br /># lib/tasks/welcome.rake<br />desc “This is new style of greet”<br />task :greet do<br />  puts “Hello !!”<br />end<br /></pre><pre class="ruby" name="code">## Execute task<br />rake greet<br /></pre><br /><b>Adding namespace to rake tasks</b><br /><br />It's nothing but prefix that takes while executing rake task. Benefit of adding namespace is to categories similar rake tasks.  <br /><pre class="ruby" name="code"> <br /># lib/tasks/welcome.rake<br />namespace :introduction do<br />desc “This is one style of introduction”<br />task :greet do<br />  puts “Hello !!”<br />end<br />desc “This is 2nd style of introduction”<br />task :hi do<br />  puts “Hi ”<br />end<br />end<br /></pre><pre class="ruby" name="code">## Execute task<br />rake introduction:greet<br />rake introduction:hi<br /><br /></pre><b>Passing arguments to rake tasks </b><br /><pre class="ruby" name="code"> <br /># lib/tasks/welcome.rake<br /><br />namespace :introduction do<br />desc “This is one style of introduction”<br />task :greet do<br />  puts “Hello !!”<br />end<br /><br />desc “This is 2nd style of introduction”<br />task :hi =&gt; :enviroment do<br />  puts “Hi #{ENV['name']}”<br />end<br />end<br /></pre><pre class="ruby" name="code">## Execute task<br />rake introduction:hi name=Raj<br /></pre><a href="http://www.blogger.com/For%20more%20reference%20http://railsenvy.com/2007/6/11/ruby-on-rails-rake-tutorial#namespaces">read more</a><br /></div>
+    <id>funonrails.com/2009/11/writing-rake-task-in-rails</id>
+    <content type="html"><![CDATA[<p>Rake tasks itself defines that &ldquo;they are bunch of ruby code that performs some task.&rdquo;</p>
 
+<p>Rake tasks are placed in lib/tasks directory of application and files have <code>.rake</code> extension.
+There are many lovable tasks defined in rails. They can be executed from console.</p>
+
+<h2>Benefits of writing rake task :</h2>
+
+<ol>
+<li>Testing of code</li>
+<li>Scheduled rake tasks ( backgroundRb and scheduled tasks using cron )</li>
+<li>Simplifies code.</li>
+</ol>
+
+
+<p>Lets, understand what is code inside rake tasks.</p>
+
+<h2>Simple greet rake task</h2>
+
+<p>```</p>
+
+<h1>lib/tasks/welcome.rake</h1>
+
+<p>task :greet do
+  puts &ldquo;Hello !!&rdquo;
+end
+```</p>
+
+<h2>Execute task</h2>
+
+<p><code>
+rake greet
+</code></p>
+
+<h2>Adding description to rake task</h2>
+
+<p>```ruby</p>
+
+<h1>lib/tasks/welcome.rake</h1>
+
+<p>desc &ldquo;This is new style of greet&rdquo;
+task :greet do
+  puts &ldquo;Hello !!&rdquo;
+end
+```</p>
+
+<h2>Execute task</h2>
+
+<p><code>
+rake greet
+</code></p>
+
+<h2>Adding namespace to rake tasks</h2>
+
+<p>It’s nothing but prefix that takes while executing rake task. Benefit of adding namespace is to categories similar rake tasks.
+```</p>
+
+<h1>lib/tasks/welcome.rake</h1>
+
+<p>namespace :introduction do
+  desc &ldquo;This is one style of introduction&rdquo;
+  task :greet do</p>
+
+<pre><code>puts "Hello !!"
+</code></pre>
+
+<p>  end</p>
+
+<p>  desc &ldquo;This is 2nd style of introduction&rdquo;
+  task :hi do</p>
+
+<pre><code>puts "Hi "
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<h2>Execute task</h2>
+
+<p><code>
+rake introduction:greet
+rake introduction:hi
+</code></p>
+
+<h2>Passing arguments to rake tasks</h2>
+
+<p>```ruby</p>
+
+<h1>lib/tasks/welcome.rake</h1>
+
+<p>namespace :introduction do
+  desc &ldquo;This is one style of introduction&rdquo;
+  task :greet do</p>
+
+<pre><code>puts "Hello !!"
+</code></pre>
+
+<p>  end</p>
+
+<p>  # Here rails environment is loaded
+  # Here you can access model, controllers, etc
+  desc &ldquo;This is 2nd style of introduction&rdquo;
+  task :hi => :enviroment do</p>
+
+<pre><code>puts "Hi #{ENV['name']}"
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<h2>Execute task</h2>
+
+<p><code>
+rake introduction:hi name=Raj
+</code>
+You can read more on this <a href="http://www.blogger.com/For%20more%20reference%20http://railsenvy.com/2007/6/11/ruby-on-rails-rake-tutorial#namespaces">here</a></p>
 ]]></content>
   </entry>
   

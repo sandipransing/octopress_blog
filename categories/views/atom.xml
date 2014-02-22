@@ -4,7 +4,7 @@
   <title><![CDATA[Category: views | Fun On Rails]]></title>
   <link href="funonrails.com/categories/views/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-21T02:23:40+05:30</updated>
+  <updated>2014-02-22T20:21:48+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -186,9 +186,25 @@ class Notifier &lt; ActionMailer::Base</p>
     <link href="funonrails.com/2009/05/render-partial-or-view-from-another/"/>
     <updated>2009-05-22T19:50:00+05:30</updated>
     <id>funonrails.com/2009/05/render-partial-or-view-from-another</id>
-    <content type="html"><![CDATA[<div class='post'>
-To render view from another controller<br/><br/># In rail 2.3<br/><pre class=ruby>render "controller/action"</pre><br/><br/># In rails 2.2 or below<br/><pre class=ruby>render :template =&gt; 'controller/action'</pre><br/><br/>To render partial from another controller's views folder<br/><br/><pre class=ruby>render :partial =&gt; "controller/partial"</pre><br/><br/>Cheers !<br/>Sandip</div>
+    <content type="html"><![CDATA[<p>To render view files from another controller&rsquo;s view files</p>
 
+<h2>In rail 2.3</h2>
+
+<p><code>
+render "controller/action"
+</code></p>
+
+<h2>In rails 2.2 or below</h2>
+
+<p><code>
+render :template =&gt; 'controller/action'
+</code></p>
+
+<h2>To render partial from another controller’s views folder</h2>
+
+<p><code>
+render :partial =&gt; "controller/partial"
+</code></p>
 ]]></content>
   </entry>
   
