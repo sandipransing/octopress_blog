@@ -4,7 +4,7 @@
   <title><![CDATA[Category: associations | Fun On Rails]]></title>
   <link href="funonrails.com/categories/associations/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-24T15:52:27+05:30</updated>
+  <updated>2014-02-24T16:29:31+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -77,9 +77,9 @@ div.student_posts
   
   <entry>
     <title type="html"><![CDATA[How to get all associated models of rails model]]></title>
-    <link href="funonrails.com/2009/11/how-to-get-all-associted-models-of/"/>
+    <link href="funonrails.com/2009/11/how-to-get-all-associted-models-of-rails-model/"/>
     <updated>2009-11-26T20:40:00+05:30</updated>
-    <id>funonrails.com/2009/11/how-to-get-all-associted-models-of</id>
+    <id>funonrails.com/2009/11/how-to-get-all-associted-models-of-rails-model</id>
     <content type="html"><![CDATA[<p>I have Site Model and i wanted to find all associated models of Site model which are having belongs_to relationship.
 After doing lot headache, here is the solution i found</p>
 

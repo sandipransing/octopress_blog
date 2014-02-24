@@ -4,7 +4,7 @@
   <title><![CDATA[Category: geokit | Fun On Rails]]></title>
   <link href="funonrails.com/categories/geokit/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-24T15:52:27+05:30</updated>
+  <updated>2014-02-24T16:29:31+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Zipcode validation using geokit in rails]]></title>
-    <link href="funonrails.com/2010/08/zipcode-validation-using-geokit-in/"/>
+    <link href="funonrails.com/2010/08/zipcode-validation-using-geokit-in-rails/"/>
     <updated>2010-08-21T04:58:00+05:30</updated>
-    <id>funonrails.com/2010/08/zipcode-validation-using-geokit-in</id>
+    <id>funonrails.com/2010/08/zipcode-validation-using-geokit-in-rails</id>
     <content type="html"><![CDATA[<ol>
 <li><strong>Install geokit gem</strong>
 <code>

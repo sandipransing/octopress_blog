@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jQuery | Fun On Rails]]></title>
   <link href="funonrails.com/categories/jquery/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-24T15:52:27+05:30</updated>
+  <updated>2014-02-24T16:29:31+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -211,9 +211,9 @@ rails s
   
   <entry>
     <title type="html"><![CDATA[Ghost-Type input Placeholder for search text fields using jQuery]]></title>
-    <link href="funonrails.com/2011/04/ghostype-input-placeholder-for-search/"/>
+    <link href="funonrails.com/2011/04/ghostype-input-placeholder-for-search-inputs-using-jquery/"/>
     <updated>2011-04-07T14:14:00+05:30</updated>
-    <id>funonrails.com/2011/04/ghostype-input-placeholder-for-search</id>
+    <id>funonrails.com/2011/04/ghostype-input-placeholder-for-search-inputs-using-jquery</id>
     <content type="html"><![CDATA[<p>Placeholder Demo:
 <input type=text placeholder='Enter search text here'/>
 Click on input box and placeholder text will disappear.</p>

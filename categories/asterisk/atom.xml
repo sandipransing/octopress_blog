@@ -4,7 +4,7 @@
   <title><![CDATA[Category: asterisk | Fun On Rails]]></title>
   <link href="funonrails.com/categories/asterisk/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-24T15:52:27+05:30</updated>
+  <updated>2014-02-24T16:29:31+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Twinkle + FF Setup (Click To Call) using telify]]></title>
-    <link href="funonrails.com/2010/10/twinkle-ff-setup-click-to-call-using/"/>
+    <link href="funonrails.com/2010/10/twinkle-ff-setup-click-to-call-using-telify/"/>
     <updated>2010-10-17T00:47:00+05:30</updated>
-    <id>funonrails.com/2010/10/twinkle-ff-setup-click-to-call-using</id>
+    <id>funonrails.com/2010/10/twinkle-ff-setup-click-to-call-using-telify</id>
     <content type="html"><![CDATA[<p>On linux machine following settings needs to be done in order to get in browser calling enabled for phone numbers.</p>
 
 <h2>Installation setup</h2>

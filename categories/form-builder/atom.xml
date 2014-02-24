@@ -4,7 +4,7 @@
   <title><![CDATA[Category: form-builder | Fun On Rails]]></title>
   <link href="funonrails.com/categories/form-builder/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-24T15:52:27+05:30</updated>
+  <updated>2014-02-24T16:29:31+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[twitter-bootstrap form builder for rails]]></title>
-    <link href="funonrails.com/2012/01/twitter-bootstrap-form-builder-for/"/>
+    <link href="funonrails.com/2012/01/twitter-bootstrap-form-builder-for-rails/"/>
     <updated>2012-01-17T05:39:00+05:30</updated>
-    <id>funonrails.com/2012/01/twitter-bootstrap-form-builder-for</id>
+    <id>funonrails.com/2012/01/twitter-bootstrap-form-builder-for-rails</id>
     <content type="html"><![CDATA[<p><a href="twitter.github.com/bootstrap/">twitter-bootstrap</a> is pluggable css suit provided by twitter.
 To know more about how to get started on it click <a href="http://www.funonrails.com/2011/11/rails-311-haml-sass-jquery-coffee-rails">here</a>.</p>
 

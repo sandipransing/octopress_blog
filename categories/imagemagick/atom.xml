@@ -4,7 +4,7 @@
   <title><![CDATA[Category: imagemagick | Fun On Rails]]></title>
   <link href="funonrails.com/categories/imagemagick/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-24T15:52:27+05:30</updated>
+  <updated>2014-02-24T16:29:31+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -56,9 +56,9 @@ p.upload_image(url)
   
   <entry>
     <title type="html"><![CDATA[Imagemagick/ RMagick Installation on ubuntu]]></title>
-    <link href="funonrails.com/2010/03/imagemagick-rmagick-installation-on/"/>
+    <link href="funonrails.com/2010/03/imagemagick-rmagick-installation-on-ubuntu/"/>
     <updated>2010-03-23T18:11:00+05:30</updated>
-    <id>funonrails.com/2010/03/imagemagick-rmagick-installation-on</id>
+    <id>funonrails.com/2010/03/imagemagick-rmagick-installation-on-ubuntu</id>
     <content type="html"><![CDATA[<h4>ImageMagick Installation</h4>
 
 <p>Ubuntu machine has default apt-get package manager.

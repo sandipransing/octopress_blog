@@ -4,7 +4,7 @@
   <title><![CDATA[Category: railroady | Fun On Rails]]></title>
   <link href="funonrails.com/categories/railroady/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-24T15:52:27+05:30</updated>
+  <updated>2014-02-24T16:29:31+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[railroady UML diagram generator for rails]]></title>
-    <link href="funonrails.com/2011/12/railroady-uml-diagram-generator-for/"/>
+    <link href="funonrails.com/2011/12/railroady-uml-diagram-generator-for-rails/"/>
     <updated>2011-12-28T23:42:00+05:30</updated>
-    <id>funonrails.com/2011/12/railroady-uml-diagram-generator-for</id>
+    <id>funonrails.com/2011/12/railroady-uml-diagram-generator-for-rails</id>
     <content type="html"><![CDATA[<p>railroady is UML class diagram generator for rails.
 First you need to install <code>graphviz</code> pkg in order to have <code>dot</code> , <code>neato</code> commands available</p>
 

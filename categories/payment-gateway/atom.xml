@@ -4,7 +4,7 @@
   <title><![CDATA[Category: payment gateway | Fun On Rails]]></title>
   <link href="funonrails.com/categories/payment-gateway/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-24T15:52:27+05:30</updated>
+  <updated>2014-02-24T16:29:31+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[stripe payment gateway integration with rails]]></title>
-    <link href="funonrails.com/2012/01/stripe-gateway-payment-integration-with/"/>
+    <link href="funonrails.com/2012/01/stripe-gateway-payment-integration-with-rails/"/>
     <updated>2012-01-15T00:53:00+05:30</updated>
-    <id>funonrails.com/2012/01/stripe-gateway-payment-integration-with</id>
+    <id>funonrails.com/2012/01/stripe-gateway-payment-integration-with-rails</id>
     <content type="html"><![CDATA[<p>Stripe is simple website payment solution and its very easy to easy setup.
 It currently supports only in US and seems to be very popular compared to other payment gateways because of its api &amp; pricing</p>
 
@@ -446,9 +446,9 @@ end
   
   <entry>
     <title type="html"><![CDATA[Authorize Net (SIM) payment integration with rails]]></title>
-    <link href="funonrails.com/2011/12/authorize-net-sim-payment-integration/"/>
+    <link href="funonrails.com/2011/12/authorize-net-sim-payment-integration-with-rails/"/>
     <updated>2011-12-30T16:16:00+05:30</updated>
-    <id>funonrails.com/2011/12/authorize-net-sim-payment-integration</id>
+    <id>funonrails.com/2011/12/authorize-net-sim-payment-integration-with-rails</id>
     <content type="html"><![CDATA[<p>Authorize Net SIM gateway transaction skips merchant side creditcard details form and directs transaction to be take place on gateway server.
 ```</p>
 
@@ -631,9 +631,9 @@ end
   
   <entry>
     <title type="html"><![CDATA[Authorize Net Payment Gateway integration with rails]]></title>
-    <link href="funonrails.com/2011/12/authorize-net-payment-gateway/"/>
+    <link href="funonrails.com/2011/12/authorize-net-payment-gateway-with-rails/"/>
     <updated>2011-12-29T00:36:00+05:30</updated>
-    <id>funonrails.com/2011/12/authorize-net-payment-gateway</id>
+    <id>funonrails.com/2011/12/authorize-net-payment-gateway-with-rails</id>
     <content type="html"><![CDATA[<p>Authorize Net Payment gateway provides api access to enable online payments
 Gateway provides different api options to integrate &ndash;</p>
 

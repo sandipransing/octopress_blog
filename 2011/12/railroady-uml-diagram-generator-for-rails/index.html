@@ -1,0 +1,431 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>railroady UML diagram generator for rails - Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="railroady is UML class diagram generator for rails.
+First you need to install graphviz pkg in order to have dot , neato commands available 1
+2
+3
+4
+# &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="funonrails.com/2011/12/railroady-uml-diagram-generator-for-rails">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="http://feeds.feedburner.com/funonrails" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-48366424-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="http://feeds.feedburner.com/funonrails" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="http://feedburner.google.com/fb/a/mailverify?uri=funonrails&amp;loc=en_US" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:funonrails.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+
+  
+    <a href="http://feedburner.google.com/fb/a/mailverify?uri=funonrails&amp;loc=en_US" style="float:right"><img src="http://feeds.feedburner.com/~fc/funonrails?bg=CC3300&amp;fg=000000&amp;anim=0" height="26" width="88" style="border:0" /></a>
+  
+
+
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/contact">Contact</a></li>
+  <li><a href="/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Railroady UML Diagram Generator for Rails</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-28T23:42:00+05:30" pubdate data-updated="true">Dec 28<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>railroady is UML class diagram generator for rails.
+First you need to install <code>graphviz</code> pkg in order to have <code>dot</code> , <code>neato</code> commands available</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># Gemfile
+</span><span class='line'>group :development, :test do
+</span><span class='line'>  gem railroady
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Run below command to generate MVC diagrams</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>bundle install
+</span><span class='line'>rake diagram:all</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Individual diagram generation</p>
+
+<p><strong>1.  Model Diagram</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>railroady -M | dot -Tpng &gt; models.png</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>2.  Controller Diagram</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>railroady -C | dot -Tpng &gt; controllers.png</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>3.  AASM Diagram</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>railroady -A | dot -Tpng &gt; aasm.png</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Commands</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>-M, --models                     Generate models diagram
+</span><span class='line'>-C, --controllers                Generate controllers diagram
+</span><span class='line'>-A, --aasm                       Generate "acts as state machine" diagram</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Other options which can be passed along-with commands &ndash;</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># Common options
+</span><span class='line'>-b, --brief                      Generate compact diagram
+</span><span class='line'>                                   (no attributes nor methods)
+</span><span class='line'>-s, --specify file1[,fileN]      Specify given files only for the diagram
+</span><span class='line'>                                   (can take a glob pattern)
+</span><span class='line'>-e, --exclude file1[,fileN]      Exclude given files
+</span><span class='line'>                                   (can take a glob pattern)
+</span><span class='line'>-i, --inheritance                Include inheritance relations
+</span><span class='line'>-l, --label                      Add a label with diagram information
+</span><span class='line'>                                   (type, date, migration, version)
+</span><span class='line'>-o, --output FILE                Write diagram to file FILE
+</span><span class='line'>-v, --verbose                    Enable verbose output
+</span><span class='line'>                                   (produce messages to STDOUT)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Models diagram options:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>-a, --all                        Include all models
+</span><span class='line'>                                   (not only ActiveRecord::Base derived)
+</span><span class='line'>    --all-columns                Show all columns 
+</span><span class='line'>                                   (not just content columns)
+</span><span class='line'>    --hide-magic                 Hide magic field names
+</span><span class='line'>    --hide-types                 Hide attributes type
+</span><span class='line'>-j, --join                       Concentrate edges
+</span><span class='line'>-m, --modules                    Include modules
+</span><span class='line'>-p, --plugins-models             Include plugins models
+</span><span class='line'>-t, --transitive                 Include transitive associations
+</span><span class='line'>                                 (through inheritance)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Controllers diagram options:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>--hide-public                Hide public methods
+</span><span class='line'>--hide-protected             Hide protected methods
+</span><span class='line'>--hide-private               Hide private methods</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Other Options</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>-h, --help                       Show this message
+</span><span class='line'>    --version                    Show version and copyright</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">sandipransing</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-28T23:42:00+05:30" pubdate data-updated="true">Dec 28<span>th</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/railroady/'>railroady</a>, <a class='category' href='/categories/rails-3/'>rails 3</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="funonrails.com/2011/12/railroady-uml-diagram-generator-for-rails/" data-via="sandipransing" data-counturl="funonrails.com/2011/12/railroady-uml-diagram-generator-for-rails/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2011/12/bugging-around-active-supports/" title="Previous Post: Bugging around Active Support's Class.class_attribute extension">&laquo; Bugging around Active Support's Class.class_attribute extension</a>
+      
+      
+        <a class="basic-alignment right" href="/2011/12/authorize-net-payment-gateway-with-rails/" title="Next Post: Authorize Net Payment Gateway integration with rails">Authorize Net Payment Gateway integration with rails &raquo;</a>
+      
+    </p>
+    <p class="meta">
+      <div class="about">
+  <span class="about-image">
+    <img src="/images/author.jpg" alt="Sandip Ransing">
+  </span>
+  <span class="about-desc">
+    <span>
+      Sandip is a ruby on rails developer based in pune and also a blogger at funonrails. Opensource contributor and working with Josh software. Follow Sandip on <a href="http://twitter.com/sandipransing">Twitter</a> and <a href="http://github.com/sandipransing">Github</a> for updates.
+    </span>
+    </br>
+    <a href="https://twitter.com/sandipransing" class="twitter-follow-button" data-show-count="true" data-size="large">Follow @sandipransing</a>
+  </span>
+</div>
+
+    </p>
+  </footer>
+</article>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/02/moving-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/upgrading-from-rails-2-1-x-to-rails-2-3-11/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/sandipransing">@sandipransing</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'sandipransing',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

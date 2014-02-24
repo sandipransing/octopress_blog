@@ -1,0 +1,399 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Fix for ruby 1.8.7 incompatibity - Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="Last week i shifted from ruby version 1.8.6 to 1.8.7 :&ndash;)
+But over a week i found that rails 1.2.3 applications developed in ruby 1.8.6 are not &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="funonrails.com/2009/05/fix-for-ruby-1-8-7-incompatibity">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="http://feeds.feedburner.com/funonrails" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-48366424-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="http://feeds.feedburner.com/funonrails" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="http://feedburner.google.com/fb/a/mailverify?uri=funonrails&amp;loc=en_US" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:funonrails.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+
+  
+    <a href="http://feedburner.google.com/fb/a/mailverify?uri=funonrails&amp;loc=en_US" style="float:right"><img src="http://feeds.feedburner.com/~fc/funonrails?bg=CC3300&amp;fg=000000&amp;anim=0" height="26" width="88" style="border:0" /></a>
+  
+
+
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/contact">Contact</a></li>
+  <li><a href="/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Fix for Ruby 1.8.7 Incompatibity</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-13T19:22:00+05:30" pubdate data-updated="true">May 13<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Last week i shifted from <code>ruby</code> version <code>1.8.6</code> to <code>1.8.7</code> :&ndash;)
+But over a week i found that rails <code>1.2.3</code> applications developed in ruby <code>1.8.6</code> are not working in ruby <code>1.8.7</code></p>
+
+<p>From lot of search on google, i found that its issue with ruby <code>1.8.7</code></p>
+
+<p>So in order to fix this bug, i started searching <code>fix / solution</code> for this incompatibity and got below fix.</p>
+
+<p>You just need to fix file <code>delegate.rb</code> and done</p>
+
+<h2>Diff of <code>/branches/ruby_1_8_7/lib/delegate.rb</code></h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>--- branches/ruby_1_8_7/lib/delegate.rb 2008/05/31 15:17:53 16732
+</span><span class='line'>+++ branches/ruby_1_8_7/lib/delegate.rb 2008/06/02 10:52:07 16756
+</span><span class='line'>@@ -163,9 +163,9 @@
+</span><span class='line'>   # Checks for a method provided by this the delegate object by fowarding the 
+</span><span class='line'>
+</span><span class='line'>   # call through \_\_getobj\_\_.
+</span><span class='line'>   # 
+</span><span class='line'>-  def respond_to?(m)
+</span><span class='line'>+  def respond_to?(m, include_private = false)
+</span><span class='line'>     return true if super
+</span><span class='line'>-    return self.__getobj__.respond_to?(m)
+</span><span class='line'>+    return self.__getobj__.respond_to?(m, include_private)
+</span><span class='line'>
+</span><span class='line'>   end
+</span><span class='line'>
+</span><span class='line'>   #
+</span><span class='line'>@@ -270,9 +270,9 @@
+</span><span class='line'>       end
+</span><span class='line'>       @_dc_obj.__send__(m, *args)
+</span><span class='line'>     end
+</span><span class='line'>-    def respond_to?(m)  # :nodoc:
+</span><span class='line'>+    def respond_to?(m, include_private = false)  # :nodoc:
+</span><span class='line'>       return true if super
+</span><span class='line'>
+</span><span class='line'>-      return @_dc_obj.respond_to?(m)
+</span><span class='line'>+      return @_dc_obj.respond_to?(m, include_private)
+</span><span class='line'>     end
+</span><span class='line'>     def __getobj__  # :nodoc:
+</span><span class='line'>       @_dc_obj</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You have to make necessary changes and you are ready to work with ruby 1.8.7.
+need not downgrade ruby version :)</p>
+
+<h2>for Hash error</h2>
+
+<p>Add following line in <code>config/environment.rb</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">unless</span> <span class="s1">&#39;1.9&#39;</span><span class="o">.</span><span class="n">respond_to?</span><span class="p">(</span><span class="ss">:force_encoding</span><span class="p">)</span>
+</span><span class='line'>  <span class="nb">String</span><span class="o">.</span><span class="n">class_eval</span> <span class="k">do</span>
+</span><span class='line'>    <span class="k">begin</span>
+</span><span class='line'>      <span class="n">remove_method</span> <span class="ss">:chars</span>
+</span><span class='line'>    <span class="k">rescue</span> <span class="no">NameError</span>
+</span><span class='line'>      <span class="c1"># OK</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">sandipransing</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-13T19:22:00+05:30" pubdate data-updated="true">May 13<span>th</span>, 2009</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/ruby/'>ruby</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="funonrails.com/2009/05/fix-for-ruby-1-8-7-incompatibity/" data-via="sandipransing" data-counturl="funonrails.com/2009/05/fix-for-ruby-1-8-7-incompatibity/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2009/05/rails-coding-standards/" title="Previous Post: Rails Coding Standards">&laquo; Rails Coding Standards</a>
+      
+      
+        <a class="basic-alignment right" href="/2009/05/ruby-1-8-7-and-rails-installation-on-ubuntu/" title="Next Post: Ruby 1.8.7 and rails installation on ubuntu interpid">Ruby 1.8.7 and rails installation on ubuntu interpid &raquo;</a>
+      
+    </p>
+    <p class="meta">
+      <div class="about">
+  <span class="about-image">
+    <img src="/images/author.jpg" alt="Sandip Ransing">
+  </span>
+  <span class="about-desc">
+    <span>
+      Sandip is a ruby on rails developer based in pune and also a blogger at funonrails. Opensource contributor and working with Josh software. Follow Sandip on <a href="http://twitter.com/sandipransing">Twitter</a> and <a href="http://github.com/sandipransing">Github</a> for updates.
+    </span>
+    </br>
+    <a href="https://twitter.com/sandipransing" class="twitter-follow-button" data-show-count="true" data-size="large">Follow @sandipransing</a>
+  </span>
+</div>
+
+    </p>
+  </footer>
+</article>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/02/moving-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/upgrading-from-rails-2-1-x-to-rails-2-3-11/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/sandipransing">@sandipransing</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'sandipransing',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

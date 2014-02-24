@@ -4,7 +4,7 @@
   <title><![CDATA[Category: passenger | Fun On Rails]]></title>
   <link href="funonrails.com/categories/passenger/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-24T15:52:27+05:30</updated>
+  <updated>2014-02-24T16:29:31+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[nginx and thin installation and configuration]]></title>
-    <link href="funonrails.com/2010/03/nginx-and-thin-installation-and/"/>
+    <link href="funonrails.com/2010/03/nginx-and-thin-installation/"/>
     <updated>2010-03-26T02:59:00+05:30</updated>
-    <id>funonrails.com/2010/03/nginx-and-thin-installation-and</id>
+    <id>funonrails.com/2010/03/nginx-and-thin-installation</id>
     <content type="html"><![CDATA[<p>Install nginx server using following command</p>
 
 <p><code>

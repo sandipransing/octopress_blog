@@ -4,7 +4,7 @@
   <title><![CDATA[Category: rails | Fun On Rails]]></title>
   <link href="funonrails.com/categories/rails/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-24T15:52:27+05:30</updated>
+  <updated>2014-02-24T16:29:31+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Upgrading from Rails 2.1.x to Rails 2.3.11]]></title>
-    <link href="funonrails.com/2012/04/upgrading-from-rails-21x-to-rails-2311/"/>
+    <link href="funonrails.com/2012/04/upgrading-from-rails-2-1-x-to-rails-2-3-11/"/>
     <updated>2012-04-04T22:13:00+05:30</updated>
-    <id>funonrails.com/2012/04/upgrading-from-rails-21x-to-rails-2311</id>
+    <id>funonrails.com/2012/04/upgrading-from-rails-2-1-x-to-rails-2-3-11</id>
     <content type="html"><![CDATA[<p>If your application is currently on any version of Rails 2.1.x,
 Then following changes needs to be done for upgrading your application to Rails <code>2.3.11</code></p>
 
@@ -160,9 +160,9 @@ url.password #=&gt; "2121"
 
 <p>Extracting urls form string paragraph
 ```ruby
-URI.extract(&lsquo;<a href="http://funonrails.com">http://funonrails.com</a> is rails blog authored by <a href="http://sandipransing.github.com">http://sandipransing.github.com</a> contact <a href="&#x6d;&#x61;&#105;&#108;&#116;&#111;&#58;&#47;&#x2f;&#115;&#97;&#110;&#x64;&#x69;&#112;&#x40;&#x66;&#117;&#x6e;&#111;&#x6e;&#x72;&#97;&#105;&#108;&#115;&#x2e;&#99;&#111;&#x6d;">&#47;&#47;&#x73;&#97;&#110;&#x64;&#105;&#x70;&#64;&#x66;&#x75;&#110;&#111;&#110;&#114;&#97;&#x69;&#x6c;&#115;&#46;&#x63;&#111;&#x6d;</a>&rsquo;)</p>
+URI.extract(&lsquo;<a href="http://funonrails.com">http://funonrails.com</a> is rails blog authored by <a href="http://sandipransing.github.com">http://sandipransing.github.com</a> contact <a href="&#x6d;&#97;&#105;&#x6c;&#x74;&#x6f;&#58;&#47;&#47;&#x73;&#x61;&#110;&#x64;&#x69;&#112;&#x40;&#x66;&#x75;&#110;&#111;&#x6e;&#x72;&#97;&#x69;&#x6c;&#115;&#x2e;&#x63;&#111;&#109;">&#x2f;&#x2f;&#115;&#x61;&#110;&#100;&#105;&#x70;&#64;&#102;&#117;&#110;&#111;&#x6e;&#x72;&#97;&#105;&#108;&#115;&#x2e;&#99;&#x6f;&#109;</a>&rsquo;)</p>
 
-<h1>=> [&ldquo;<a href="http://funonrails.com">http://funonrails.com</a>&rdquo;, &ldquo;<a href="http://sandipransing.github.com">http://sandipransing.github.com</a>&rdquo;, &ldquo;<a href="&#109;&#97;&#x69;&#108;&#116;&#111;&#x3a;&#x2f;&#47;&#x73;&#97;&#110;&#x64;&#105;&#112;&#64;&#102;&#117;&#x6e;&#111;&#110;&#x72;&#97;&#105;&#108;&#115;&#46;&#99;&#x6f;&#109;">&#x2f;&#x2f;&#x73;&#x61;&#110;&#x64;&#x69;&#x70;&#64;&#x66;&#117;&#x6e;&#x6f;&#x6e;&#x72;&#x61;&#105;&#x6c;&#x73;&#x2e;&#x63;&#x6f;&#x6d;</a>&rdquo;]</h1>
+<h1>=> [&ldquo;<a href="http://funonrails.com">http://funonrails.com</a>&rdquo;, &ldquo;<a href="http://sandipransing.github.com">http://sandipransing.github.com</a>&rdquo;, &ldquo;<a href="&#109;&#97;&#x69;&#108;&#x74;&#111;&#58;&#x2f;&#x2f;&#x73;&#97;&#110;&#100;&#105;&#112;&#x40;&#102;&#117;&#x6e;&#111;&#110;&#x72;&#x61;&#105;&#x6c;&#x73;&#46;&#99;&#x6f;&#x6d;">&#47;&#47;&#x73;&#x61;&#110;&#100;&#x69;&#x70;&#64;&#102;&#117;&#110;&#111;&#110;&#114;&#97;&#x69;&#108;&#115;&#x2e;&#x63;&#111;&#109;</a>&rdquo;]</h1>
 
 <p>```</p>
 
@@ -430,9 +430,9 @@ end
   
   <entry>
     <title type="html"><![CDATA[Authorize Net (SIM) payment integration with rails]]></title>
-    <link href="funonrails.com/2011/12/authorize-net-sim-payment-integration/"/>
+    <link href="funonrails.com/2011/12/authorize-net-sim-payment-integration-with-rails/"/>
     <updated>2011-12-30T16:16:00+05:30</updated>
-    <id>funonrails.com/2011/12/authorize-net-sim-payment-integration</id>
+    <id>funonrails.com/2011/12/authorize-net-sim-payment-integration-with-rails</id>
     <content type="html"><![CDATA[<p>Authorize Net SIM gateway transaction skips merchant side creditcard details form and directs transaction to be take place on gateway server.
 ```</p>
 

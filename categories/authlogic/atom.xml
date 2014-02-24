@@ -4,7 +4,7 @@
   <title><![CDATA[Category: authlogic | Fun On Rails]]></title>
   <link href="funonrails.com/categories/authlogic/atom.xml" rel="self"/>
   <link href="funonrails.com/"/>
-  <updated>2014-02-24T15:52:27+05:30</updated>
+  <updated>2014-02-24T16:29:31+05:30</updated>
   <id>funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[authlogic custom conditions for authentication]]></title>
-    <link href="funonrails.com/2010/11/authlogic-custom-conditions-for/"/>
+    <link href="funonrails.com/2010/11/authlogic-custom-conditions-for-authentication/"/>
     <updated>2010-11-28T23:23:00+05:30</updated>
-    <id>funonrails.com/2010/11/authlogic-custom-conditions-for</id>
+    <id>funonrails.com/2010/11/authlogic-custom-conditions-for-authentication</id>
     <content type="html"><![CDATA[<p>To Add custom conditions to authlogic finders first of all we need to override authlogic find_by_login method.</p>
 
 <p>```ruby

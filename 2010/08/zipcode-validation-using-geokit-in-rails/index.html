@@ -1,0 +1,478 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Zipcode validation using geokit in rails - Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="Install geokit gem 1
+gem install geokit OR 1
+2
+3
+4
+# Add following line inside rails initialize block
+Rails::Initializer.run do |config| config.gem &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="funonrails.com/2010/08/zipcode-validation-using-geokit-in-rails">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="http://feeds.feedburner.com/funonrails" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-48366424-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="http://feeds.feedburner.com/funonrails" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="http://feedburner.google.com/fb/a/mailverify?uri=funonrails&amp;loc=en_US" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:funonrails.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+
+  
+    <a href="http://feedburner.google.com/fb/a/mailverify?uri=funonrails&amp;loc=en_US" style="float:right"><img src="http://feeds.feedburner.com/~fc/funonrails?bg=CC3300&amp;fg=000000&amp;anim=0" height="26" width="88" style="border:0" /></a>
+  
+
+
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/contact">Contact</a></li>
+  <li><a href="/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Zipcode Validation Using Geokit in Rails</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-08-21T04:58:00+05:30" pubdate data-updated="true">Aug 21<span>st</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><ol>
+<li><strong>Install geokit gem</strong></li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install geokit</span></code></pre></td></tr></table></div></figure>
+
+
+<p>OR</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Add following line inside rails initialize block</span>
+</span><span class='line'><span class="ss">Rails</span><span class="p">:</span><span class="ss">:Initializer</span><span class="o">.</span><span class="n">run</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+</span><span class='line'> <span class="n">config</span><span class="o">.</span><span class="n">gem</span> <span class="s1">&#39;geokit&#39;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And then run command</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rake</span> <span class="ss">gems</span><span class="p">:</span><span class="n">install</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li><strong>Consider User model with zipcode as attribute field</strong></li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="kp">include</span> <span class="ss">Geokit</span><span class="p">:</span><span class="ss">:Geocoders</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">set_table_name</span> <span class="ss">:users</span>
+</span><span class='line'>  <span class="n">validate_presence_of</span> <span class="ss">:zipcode</span>
+</span><span class='line'>  <span class="n">validate</span> <span class="ss">:request_zipcode_validation_using_geokit</span><span class="p">,</span> <span class="ss">:if</span> <span class="o">=&gt;</span> <span class="ss">:zipcode</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">private</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">request_zipcode_validation_using_geokit</span>
+</span><span class='line'>    <span class="c1"># Method request google api for location</span>
+</span><span class='line'>    <span class="c1"># if location found then zipcode is valid otherwise</span>
+</span><span class='line'>    <span class="c1"># add validation error on zipcode field</span>
+</span><span class='line'>    <span class="c1"># as it method contacts with google api and takes time</span>
+</span><span class='line'>    <span class="c1"># to return result, poll request only when zipcode gets</span>
+</span><span class='line'>    <span class="c1"># changed</span>
+</span><span class='line'>    <span class="n">poll</span> <span class="o">=</span> <span class="kp">true</span> <span class="c1"># default true for new objects</span>
+</span><span class='line'>    <span class="k">if</span> <span class="nb">self</span><span class="o">.</span><span class="n">id</span> <span class="c1">## this means already existing user and zipcode is valid last time</span>
+</span><span class='line'>      <span class="c1"># Hack to find where zipcode got modified or not </span>
+</span><span class='line'>      <span class="c1"># old_user = User.find self.id</span>
+</span><span class='line'>      <span class="n">poll</span> <span class="o">=</span> <span class="kp">false</span> <span class="k">if</span> <span class="n">old_user</span><span class="o">.</span><span class="n">zipcode</span> <span class="o">==</span> <span class="nb">self</span><span class="o">.</span><span class="n">zipcode</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1"># Actual requesting api to return location associated with zipcode</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">poll</span>
+</span><span class='line'>      <span class="n">loc</span> <span class="o">=</span> <span class="no">MultiGeocoder</span><span class="o">.</span><span class="n">geocode</span><span class="p">(</span><span class="nb">self</span><span class="o">.</span><span class="n">zip_code</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>    <span class="c1"># Add Validation Error if location is not found</span>
+</span><span class='line'>    <span class="n">errors</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="ss">:zip_code</span><span class="p">,</span> <span class="s2">&quot;Unable to geocode your location from zipcode entered.&quot;</span><span class="p">)</span> <span class="k">unless</span> <span class="n">loc</span><span class="o">.</span><span class="n">success</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Please note that same method can also be used to validate state, city and country.
+Again we can use combination of fields to validate each other.
+Like &ndash;</strong></p>
+
+<ol>
+<li><strong>Based on country entered, state validation</strong></li>
+<li><strong>Based on state, city validation</strong></li>
+<li><strong>Based on city, zipcode validation</strong>
+or</li>
+<li><strong>Based on zipcode and country, state and city validation</strong></li>
+</ol>
+
+
+<p>Here is another method to validate state and city based on zipcode and country.
+Lets take example of &lsquo;US&rsquo;</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">request_state_and_city_validation_based_on_zipcode</span>
+</span><span class='line'>  <span class="n">poll</span> <span class="o">=</span> <span class="kp">true</span> <span class="c1"># default true for new objects</span>
+</span><span class='line'>  <span class="k">if</span> <span class="nb">self</span><span class="o">.</span><span class="n">id</span> <span class="c1">## this means already existing user and all attributes were valid last time</span>
+</span><span class='line'>    <span class="c1"># Hack to find any one of location attribute got modified</span>
+</span><span class='line'>    <span class="c1"># old_user = User.find self.id</span>
+</span><span class='line'>    <span class="n">loc_attrs</span> <span class="o">=</span> <span class="sx">%w{zipcode state city}</span> <span class="c1"># keep in mind country US is default assumed</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">loc_attrs</span><span class="o">.</span><span class="n">all?</span> <span class="p">{</span><span class="o">|</span><span class="kp">attr</span><span class="o">|</span> <span class="nb">self</span><span class="o">.</span><span class="n">attribute_for_inspect</span><span class="p">(</span><span class="kp">attr</span><span class="p">)</span> <span class="o">==</span> <span class="n">old_user</span><span class="o">.</span><span class="n">attribute_for_inspect</span><span class="p">(</span><span class="kp">attr</span><span class="p">)}</span>
+</span><span class='line'>      <span class="nb">self</span><span class="o">.</span><span class="n">poll</span> <span class="o">=</span> <span class="kp">false</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># Actual requesting api to return location associated with zipcode</span>
+</span><span class='line'>  <span class="k">if</span> <span class="n">poll</span>
+</span><span class='line'>    <span class="n">loc</span> <span class="o">=</span> <span class="no">MultiGeocoder</span><span class="o">.</span><span class="n">geocode</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="nb">self</span><span class="o">.</span><span class="n">zip_code</span><span class="si">}</span><span class="s2">, US&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  <span class="c1"># Add Validation Error if location is not found</span>
+</span><span class='line'>  <span class="k">unless</span> <span class="n">loc</span><span class="o">.</span><span class="n">success</span>
+</span><span class='line'>    <span class="n">errors</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="ss">:zip_code</span><span class="p">,</span> <span class="s2">&quot;Unable to geocode your location from zipcode entered.&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>    <span class="c1"># Validate state and city fields in compare to loc object returned by geocode</span>
+</span><span class='line'>    <span class="n">errors</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="ss">:state</span><span class="p">,</span> <span class="s2">&quot;State doesn&#39;t matches with zipcode entered&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="nb">self</span><span class="o">.</span><span class="n">state</span> <span class="o">!=</span> <span class="n">loc</span><span class="o">.</span><span class="n">state</span>
+</span><span class='line'>    <span class="n">errors</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="ss">:city</span><span class="p">,</span> <span class="s2">&quot;City doesn&#39;t matches with zipcode entered&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="nb">self</span><span class="o">.</span><span class="n">city</span> <span class="o">!=</span> <span class="n">loc</span><span class="o">.</span><span class="n">city</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Note</strong> **
+If you are subscriber of blog and not displaying post correctly. I request you to visit post on blog itself. Somehow style is not getting correctly in email. I will try to fix this problem asap.</p>
+
+<p><strong>Upcoming Posts</strong></p>
+
+<ol>
+<li>Geokit finders: Find locations in/within/beyond particular radius from specified location using acts_as_mappable plugin</li>
+<li>Customizing authlogic for multiple sessions i.e. using different models for role based authentication.</li>
+</ol>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">sandipransing</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-08-21T04:58:00+05:30" pubdate data-updated="true">Aug 21<span>st</span>, 2010</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/api/'>api</a>, <a class='category' href='/categories/geokit/'>geokit</a>, <a class='category' href='/categories/rails/'>rails</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="funonrails.com/2010/08/zipcode-validation-using-geokit-in-rails/" data-via="sandipransing" data-counturl="funonrails.com/2010/08/zipcode-validation-using-geokit-in-rails/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2010/08/actionmailer-smtp-settings-in-rails/" title="Previous Post: ActionMailer SMTP settings in rails">&laquo; ActionMailer SMTP settings in rails</a>
+      
+      
+        <a class="basic-alignment right" href="/2010/09/rails-3-beautiful-code/" title="Next Post: Rails 3 Beautiful Code">Rails 3 Beautiful Code &raquo;</a>
+      
+    </p>
+    <p class="meta">
+      <div class="about">
+  <span class="about-image">
+    <img src="/images/author.jpg" alt="Sandip Ransing">
+  </span>
+  <span class="about-desc">
+    <span>
+      Sandip is a ruby on rails developer based in pune and also a blogger at funonrails. Opensource contributor and working with Josh software. Follow Sandip on <a href="http://twitter.com/sandipransing">Twitter</a> and <a href="http://github.com/sandipransing">Github</a> for updates.
+    </span>
+    </br>
+    <a href="https://twitter.com/sandipransing" class="twitter-follow-button" data-show-count="true" data-size="large">Follow @sandipransing</a>
+  </span>
+</div>
+
+    </p>
+  </footer>
+</article>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/02/moving-from-blogger-to-octopress/">Migrating from blogger to octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/upgrading-from-rails-2-1-x-to-rails-2-3-11/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/sandipransing">@sandipransing</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'sandipransing',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
