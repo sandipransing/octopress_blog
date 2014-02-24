@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>funonrails.com/2009/05/using-rails-acts-as-taggable-on-plugin/</loc>
-        <lastmod>2014-02-21T02:26:28+05:30</lastmod>
+        <loc>funonrails.com/2009/05/rails-acts-as-taggable-on-plugin/</loc>
+        <lastmod>2014-02-24T15:39:51+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/05/awesome-working-with-rails-console-and/</loc>
+        <loc>funonrails.com/2009/05/working-with-rails-console/</loc>
         <lastmod>2014-02-21T01:29:14+05:30</lastmod>
     </url>
     <url>
@@ -590,7 +590,7 @@
     </url>
     <url>
         <loc>funonrails.com/</loc>
-        <lastmod>2014-02-22T20:22:37+05:30</lastmod>
+        <lastmod>2014-02-24T15:39:51+05:30</lastmod>
     </url>
     <url>
         <loc>funonrails.com/thank-you/</loc>
@@ -606,7 +606,7 @@
     </url>
     <url>
         <loc>funonrails.com/archives/</loc>
-        <lastmod>2014-02-22T20:22:37+05:30</lastmod>
+        <lastmod>2014-02-24T15:39:51+05:30</lastmod>
     </url>
     <url>
         <loc>funonrails.com/robots.txt</loc>
