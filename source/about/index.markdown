@@ -7,6 +7,8 @@ sharing: false
 footer: true
 ---
 
+[<img src="http://stackexchange.com/users/flair/314608.png" width="208" height="58" title="profile for Sandip Ransing on Stack Exchange, a network of free, community-driven Q&amp;A sites" style='-webkit-box-shadow:none;box-shadow:none'>](http://stackexchange.com/users/314608)
+
 Hi I'm Sandip Ransing, a ruby on rails developer in Pune (India).
 
 I did my bachelor in Computer Engineering from PES Modern College of Engineering, Pune.
@@ -23,6 +25,7 @@ I am working with Josh Software private Limited from February 2009. Josh is one 
 It's always fun for me to work in ruby on rails. I always strive to keep myself updated with latest.
 
 Thurst of getting new is endless :) :)
+
 To contact me, email san2821 at gmail dot com
 
 <img src="{{ root_url }}/images/signature.png" style='-webkit-box-shadow:none;box-shadow:none'/>

@@ -156,3 +156,50 @@ aside {
     float: right
   }
 }
+
+html {
+  background: #F7F6F4;
+}
+body>nav {
+  margin: 0;
+}
+body>header {
+  text-align: center;
+  background-image: url(/images/cover.jpg);
+  text-shadow: 0 1px 1px rgba(0,0,0,.5);
+  margin: 0;
+}
+body>footer {
+  margin: 0;
+}
+body>header h1 a, body>header h1 a:visited, body>header h1 a:hover {
+  font-family: "Fjalla One","Georgia","Helvetica Neue",Arial,sans-serif;
+  //color: #737373;
+  color: #fff;
+  font-size: 47px;
+  text-shadow: 0 8px 8px rgba(0,0,0,1);
+}
+body>header h2 {
+  color: #fff;
+  text-shadow: 0 4px 4px rgba(0,0,0,1);
+}
+body>nav {
+  border-top: 0;
+  border-bottom: 2px solid #6A2D1A;
+  background-color: #993300;
+  text-shadow: 0 1px 1px rgba(0,0,0,.5);
+  padding-top: .15em;
+  padding-bottom: 0;
+}
+body>nav a:visited {
+  color: #fff;
+}
+.maskImage a[rel=subscribe-rss], .maskImage a[rel=subscribe-rss]:after {
+  background-color: #fff;
+}
+.maskImage a[rel=subscribe-email], .maskImage a[rel=subscribe-email]:after {
+  background-color: #fff;
+}
+article h1 a:hover{
+  color: #6A2D1A !important;
+}
