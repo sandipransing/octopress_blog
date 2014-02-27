@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: tinyMCE | Fun On Rails]]></title>
-  <link href="funonrails.com/categories/tinymce/atom.xml" rel="self"/>
-  <link href="funonrails.com/"/>
-  <updated>2014-02-24T16:29:31+05:30</updated>
-  <id>funonrails.com/</id>
+  <link href="http://funonrails.com/categories/tinymce/atom.xml" rel="self"/>
+  <link href="http://funonrails.com/"/>
+  <updated>2014-02-27T15:02:56+05:30</updated>
+  <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
     <email><![CDATA[sandip@funonrails.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Rails Tiny MCE - A Rich Text Editor for rails 3]]></title>
-    <link href="funonrails.com/2010/03/rails-tinymce-rich-text-editor-for-rails/"/>
+    <link href="http://funonrails.com/2010/03/rails-tinymce-rich-text-editor-for-rails/"/>
     <updated>2010-03-06T04:18:00+05:30</updated>
-    <id>funonrails.com/2010/03/rails-tinymce-rich-text-editor-for-rails</id>
+    <id>http://funonrails.com/2010/03/rails-tinymce-rich-text-editor-for-rails</id>
     <content type="html"><![CDATA[<p>TinyMCE is a javascript rich text editor. It is easy to integrate with blogs, cms, messages and mailers.</p>
 
 <p>Plugin uses jrails(jQuery) and Paperclip plugin for image &amp; media upload support</p>

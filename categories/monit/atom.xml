@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: monit | Fun On Rails]]></title>
-  <link href="funonrails.com/categories/monit/atom.xml" rel="self"/>
-  <link href="funonrails.com/"/>
-  <updated>2014-02-24T16:29:31+05:30</updated>
-  <id>funonrails.com/</id>
+  <link href="http://funonrails.com/categories/monit/atom.xml" rel="self"/>
+  <link href="http://funonrails.com/"/>
+  <updated>2014-02-27T15:02:56+05:30</updated>
+  <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
     <email><![CDATA[sandip@funonrails.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Monitor Delayed Job in rails]]></title>
-    <link href="funonrails.com/2011/03/monitor-delayedjob-in-rails/"/>
+    <link href="http://funonrails.com/2011/03/monitor-delayedjob-in-rails/"/>
     <updated>2011-03-01T01:22:00+05:30</updated>
-    <id>funonrails.com/2011/03/monitor-delayedjob-in-rails</id>
+    <id>http://funonrails.com/2011/03/monitor-delayedjob-in-rails</id>
     <content type="html"><![CDATA[<p>Delayed Job &amp; Monit configuration</p>
 
 <p>We were struggling through how to monit delayed_job from past few months because monit doesn&rsquo;t work seamlessly with delayed_job start/stop commands and finally we got able to monit delayed_job.</p>

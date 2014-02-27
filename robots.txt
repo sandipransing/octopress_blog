@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: funonrails.com/sitemap.xml 
+Sitemap: http://funonrails.com/sitemap.xml 

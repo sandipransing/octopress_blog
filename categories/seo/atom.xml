@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: seo | Fun On Rails]]></title>
-  <link href="funonrails.com/categories/seo/atom.xml" rel="self"/>
-  <link href="funonrails.com/"/>
-  <updated>2014-02-24T16:29:31+05:30</updated>
-  <id>funonrails.com/</id>
+  <link href="http://funonrails.com/categories/seo/atom.xml" rel="self"/>
+  <link href="http://funonrails.com/"/>
+  <updated>2014-02-27T15:02:56+05:30</updated>
+  <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
     <email><![CDATA[sandip@funonrails.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[How to submit sitemap to different search engines]]></title>
-    <link href="funonrails.com/2009/10/how-to-submit-sitemap-to-search-engines/"/>
+    <link href="http://funonrails.com/2009/10/how-to-submit-sitemap-to-search-engines/"/>
     <updated>2009-10-01T22:57:00+05:30</updated>
-    <id>funonrails.com/2009/10/how-to-submit-sitemap-to-search-engines</id>
+    <id>http://funonrails.com/2009/10/how-to-submit-sitemap-to-search-engines</id>
     <content type="html"><![CDATA[<p>There are many ways that can be used to submit sitemap to search engines.</p>
 
 <p>Lets discuss approaches :</p>
@@ -67,9 +67,9 @@
   
   <entry>
     <title type="html"><![CDATA[How to generate SEO sitemap in rails ?]]></title>
-    <link href="funonrails.com/2009/09/how-to-generate-seo-sitemap-in-rails/"/>
+    <link href="http://funonrails.com/2009/09/how-to-generate-seo-sitemap-in-rails/"/>
     <updated>2009-09-09T21:44:00+05:30</updated>
-    <id>funonrails.com/2009/09/how-to-generate-seo-sitemap-in-rails</id>
+    <id>http://funonrails.com/2009/09/how-to-generate-seo-sitemap-in-rails</id>
     <content type="html"><![CDATA[<h2>What is sitemap ?</h2>
 
 <p>Sitemap is nothing but a .xml file containing urls available on your website</p>
@@ -173,9 +173,9 @@ but it has limitation that we will not have any control over urls that will be s
   
   <entry>
     <title type="html"><![CDATA[Ruby On Rails Search Engine Optimization (SEO)]]></title>
-    <link href="funonrails.com/2009/08/ruby-on-rails-search-engine/"/>
+    <link href="http://funonrails.com/2009/08/ruby-on-rails-search-engine/"/>
     <updated>2009-08-17T16:16:00+05:30</updated>
-    <id>funonrails.com/2009/08/ruby-on-rails-search-engine</id>
+    <id>http://funonrails.com/2009/08/ruby-on-rails-search-engine</id>
     <content type="html"><![CDATA[<h2>Crawler</h2>
 
 <p>Search Engines ( like google, yahoo ) mainly uses crawlers for returning results.</p>

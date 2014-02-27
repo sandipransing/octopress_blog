@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: active-support | Fun On Rails]]></title>
-  <link href="funonrails.com/categories/active-support/atom.xml" rel="self"/>
-  <link href="funonrails.com/"/>
-  <updated>2014-02-24T16:29:31+05:30</updated>
-  <id>funonrails.com/</id>
+  <link href="http://funonrails.com/categories/active-support/atom.xml" rel="self"/>
+  <link href="http://funonrails.com/"/>
+  <updated>2014-02-27T15:02:56+05:30</updated>
+  <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
     <email><![CDATA[sandip@funonrails.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Bugging around Active Support's Class.class_attribute extension]]></title>
-    <link href="funonrails.com/2011/12/bugging-around-active-supports/"/>
+    <link href="http://funonrails.com/2011/12/bugging-around-active-supports/"/>
     <updated>2011-12-28T19:14:00+05:30</updated>
-    <id>funonrails.com/2011/12/bugging-around-active-supports</id>
+    <id>http://funonrails.com/2011/12/bugging-around-active-supports</id>
     <content type="html"><![CDATA[<p>We all know Active Support library constantly keeps adding new extensions to ruby core library and hence rails framework.
 Do you know now inside ruby class we can have class_attribute placeholder.</p>
 

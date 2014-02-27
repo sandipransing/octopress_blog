@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: thinking sphinx | Fun On Rails]]></title>
-  <link href="funonrails.com/categories/thinking-sphinx/atom.xml" rel="self"/>
-  <link href="funonrails.com/"/>
-  <updated>2014-02-24T16:29:31+05:30</updated>
-  <id>funonrails.com/</id>
+  <link href="http://funonrails.com/categories/thinking-sphinx/atom.xml" rel="self"/>
+  <link href="http://funonrails.com/"/>
+  <updated>2014-02-27T15:02:56+05:30</updated>
+  <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
     <email><![CDATA[sandip@funonrails.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[using thinking sphinx search in rails app]]></title>
-    <link href="funonrails.com/2010/04/using-thinking-sphinx-search-in-rails/"/>
+    <link href="http://funonrails.com/2010/04/using-thinking-sphinx-search-in-rails/"/>
     <updated>2010-04-12T19:07:00+05:30</updated>
-    <id>funonrails.com/2010/04/using-thinking-sphinx-search-in-rails</id>
+    <id>http://funonrails.com/2010/04/using-thinking-sphinx-search-in-rails</id>
     <content type="html"><![CDATA[<p>I am using <em>acts_as_ferret</em> and <em>ferret server</em> as of now with my rails application and it just works fine for me. The ONLY problem is <strong>performance</strong> as it takes a lot time to build index and to rebuild index when it gets screwed up and that&rsquo;s where <strong>sphinx rocks</strong>!</p>
 
 <p>To get started with thinking sphinx you need to install sphinx server first. for installation help click here.</p>
@@ -176,9 +176,9 @@ end
   
   <entry>
     <title type="html"><![CDATA[Easy sphinx install on ubuntu interpid]]></title>
-    <link href="funonrails.com/2009/08/easy-sphinx-install-on-ubuntu-interpid/"/>
+    <link href="http://funonrails.com/2009/08/easy-sphinx-install-on-ubuntu-interpid/"/>
     <updated>2009-08-17T13:02:00+05:30</updated>
-    <id>funonrails.com/2009/08/easy-sphinx-install-on-ubuntu-interpid</id>
+    <id>http://funonrails.com/2009/08/easy-sphinx-install-on-ubuntu-interpid</id>
     <content type="html"><![CDATA[<h4>Download <code>sphinx source</code> from website</h4>
 
 <p><code>

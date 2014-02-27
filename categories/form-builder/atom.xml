@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: form-builder | Fun On Rails]]></title>
-  <link href="funonrails.com/categories/form-builder/atom.xml" rel="self"/>
-  <link href="funonrails.com/"/>
-  <updated>2014-02-24T16:29:31+05:30</updated>
-  <id>funonrails.com/</id>
+  <link href="http://funonrails.com/categories/form-builder/atom.xml" rel="self"/>
+  <link href="http://funonrails.com/"/>
+  <updated>2014-02-27T15:02:56+05:30</updated>
+  <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
     <email><![CDATA[sandip@funonrails.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[twitter-bootstrap form builder for rails]]></title>
-    <link href="funonrails.com/2012/01/twitter-bootstrap-form-builder-for-rails/"/>
+    <link href="http://funonrails.com/2012/01/twitter-bootstrap-form-builder-for-rails/"/>
     <updated>2012-01-17T05:39:00+05:30</updated>
-    <id>funonrails.com/2012/01/twitter-bootstrap-form-builder-for-rails</id>
+    <id>http://funonrails.com/2012/01/twitter-bootstrap-form-builder-for-rails</id>
     <content type="html"><![CDATA[<p><a href="twitter.github.com/bootstrap/">twitter-bootstrap</a> is pluggable css suit provided by twitter.
 To know more about how to get started on it click <a href="http://www.funonrails.com/2011/11/rails-311-haml-sass-jquery-coffee-rails">here</a>.</p>
 
@@ -195,9 +195,9 @@ end
   
   <entry>
     <title type="html"><![CDATA[Customizing rails default form builder]]></title>
-    <link href="funonrails.com/2011/12/using-formbuilder-in-rails/"/>
+    <link href="http://funonrails.com/2011/12/using-formbuilder-in-rails/"/>
     <updated>2011-12-29T01:29:00+05:30</updated>
-    <id>funonrails.com/2011/12/using-formbuilder-in-rails</id>
+    <id>http://funonrails.com/2011/12/using-formbuilder-in-rails</id>
     <content type="html"><![CDATA[<p>Customizing default rails form builder to adopt for labels, input fields, errors, hints, etc. in order to build forms just in minutes</p>
 
 <p>```ruby</p>

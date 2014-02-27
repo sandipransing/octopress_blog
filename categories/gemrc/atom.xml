@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: gemrc | Fun On Rails]]></title>
-  <link href="funonrails.com/categories/gemrc/atom.xml" rel="self"/>
-  <link href="funonrails.com/"/>
-  <updated>2014-02-24T16:29:31+05:30</updated>
-  <id>funonrails.com/</id>
+  <link href="http://funonrails.com/categories/gemrc/atom.xml" rel="self"/>
+  <link href="http://funonrails.com/"/>
+  <updated>2014-02-27T15:02:56+05:30</updated>
+  <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
     <email><![CDATA[sandip@funonrails.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[--no-ri --no-rdoc for ruby gem installation]]></title>
-    <link href="funonrails.com/2009/09/no-ri-no-rdoc-for-ruby-gem-installation/"/>
+    <link href="http://funonrails.com/2009/09/no-ri-no-rdoc-for-ruby-gem-installation/"/>
     <updated>2009-09-30T23:27:00+05:30</updated>
-    <id>funonrails.com/2009/09/no-ri-no-rdoc-for-ruby-gem-installation</id>
+    <id>http://funonrails.com/2009/09/no-ri-no-rdoc-for-ruby-gem-installation</id>
     <content type="html"><![CDATA[<h2>GEM install without rdoc</h2>
 
 <p><code>

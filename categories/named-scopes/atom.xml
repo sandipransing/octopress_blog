@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: named-scopes | Fun On Rails]]></title>
-  <link href="funonrails.com/categories/named-scopes/atom.xml" rel="self"/>
-  <link href="funonrails.com/"/>
-  <updated>2014-02-24T16:29:31+05:30</updated>
-  <id>funonrails.com/</id>
+  <link href="http://funonrails.com/categories/named-scopes/atom.xml" rel="self"/>
+  <link href="http://funonrails.com/"/>
+  <updated>2014-02-27T15:02:56+05:30</updated>
+  <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
     <email><![CDATA[sandip@funonrails.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Best practices to use named scopes inside models]]></title>
-    <link href="funonrails.com/2011/12/best-practices-to-use-named-scopes/"/>
+    <link href="http://funonrails.com/2011/12/best-practices-to-use-named-scopes/"/>
     <updated>2011-12-22T18:50:00+05:30</updated>
-    <id>funonrails.com/2011/12/best-practices-to-use-named-scopes</id>
+    <id>http://funonrails.com/2011/12/best-practices-to-use-named-scopes</id>
     <content type="html"><![CDATA[<blockquote><p>Scopes are partial query conditions to database queries. scopes are always prefixed to class finders. There are several ways to use scopes inside rails models.</p></blockquote>
 
 <p><strong>1.  Scope defined below gets loaded while class definition loads</strong>

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: mongoid | Fun On Rails]]></title>
-  <link href="funonrails.com/categories/mongoid/atom.xml" rel="self"/>
-  <link href="funonrails.com/"/>
-  <updated>2014-02-24T16:29:31+05:30</updated>
-  <id>funonrails.com/</id>
+  <link href="http://funonrails.com/categories/mongoid/atom.xml" rel="self"/>
+  <link href="http://funonrails.com/"/>
+  <updated>2014-02-27T15:02:56+05:30</updated>
+  <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
     <email><![CDATA[sandip@funonrails.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Mongoid embeded_in and Array field management]]></title>
-    <link href="funonrails.com/2012/01/mongoid-embededin-and-array-field/"/>
+    <link href="http://funonrails.com/2012/01/mongoid-embededin-and-array-field/"/>
     <updated>2012-01-20T01:12:00+05:30</updated>
-    <id>funonrails.com/2012/01/mongoid-embededin-and-array-field</id>
+    <id>http://funonrails.com/2012/01/mongoid-embededin-and-array-field</id>
     <content type="html"><![CDATA[<p>Previous post explains on <a href="http://www.funonrails.com/2012/01/mongoid-array-field-and-rails-form.html">mongoid document array field and rails form implementation</a>
 Below example shows rails form integration of array field of embedded mongoid document
 consider scenario, student embeds one family who has many assets
@@ -91,9 +91,9 @@ view form will look like-
   
   <entry>
     <title type="html"><![CDATA[mongoid array field and rails form]]></title>
-    <link href="funonrails.com/2012/01/mongoid-array-field-and-rails-form/"/>
+    <link href="http://funonrails.com/2012/01/mongoid-array-field-and-rails-form/"/>
     <updated>2012-01-19T23:59:00+05:30</updated>
-    <id>funonrails.com/2012/01/mongoid-array-field-and-rails-form</id>
+    <id>http://funonrails.com/2012/01/mongoid-array-field-and-rails-form</id>
     <content type="html"><![CDATA[<p>Mongoid document supports array as field. array field in mongoid document is a ruby array but its quite complex to manage array field in rails forms.</p>
 
 <p>After lot of google and reading comments from stack-overflow at last i felt helpless. Finally after doing research on rails form helper object(form_for, fields_for) am pleased to get it working as expected :)</p>

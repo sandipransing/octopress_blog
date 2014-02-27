@@ -1,621 +1,625 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>funonrails.com/2009/05/rails-acts-as-taggable-on-plugin/</loc>
+        <loc>http://funonrails.com/2009/05/rails-acts-as-taggable-on-plugin/</loc>
         <lastmod>2014-02-24T15:39:51+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/05/working-with-rails-console/</loc>
+        <loc>http://funonrails.com/2009/05/working-with-rails-console/</loc>
         <lastmod>2014-02-21T01:29:14+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/05/high-performance-rails-hosting/</loc>
+        <loc>http://funonrails.com/2009/05/high-performance-rails-hosting/</loc>
         <lastmod>2014-02-21T01:34:06+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/05/rails-coding-standards/</loc>
+        <loc>http://funonrails.com/2009/05/rails-coding-standards/</loc>
         <lastmod>2014-02-21T02:37:38+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/05/fix-for-ruby-1-8-7-incompatibity/</loc>
+        <loc>http://funonrails.com/2009/05/fix-for-ruby-1-8-7-incompatibity/</loc>
         <lastmod>2014-02-21T01:57:39+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/05/ruby-1-8-7-and-rails-installation-on-ubuntu/</loc>
+        <loc>http://funonrails.com/2009/05/ruby-1-8-7-and-rails-installation-on-ubuntu/</loc>
         <lastmod>2014-02-21T10:12:48+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/05/working-with-multiple-ruby-versions-on-same-server/</loc>
+        <loc>
+            http://funonrails.com/2009/05/working-with-multiple-ruby-versions-on-same-server/
+        </loc>
         <lastmod>2014-02-24T16:22:37+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/05/vi-vim-shortcuts/</loc>
+        <loc>http://funonrails.com/2009/05/vi-vim-shortcuts/</loc>
         <lastmod>2014-02-21T02:18:54+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/05/render-partial-or-view-from-another/</loc>
+        <loc>http://funonrails.com/2009/05/render-partial-or-view-from-another/</loc>
         <lastmod>2014-02-21T10:16:19+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/05/interesting-string-inflections-in-rails/</loc>
+        <loc>http://funonrails.com/2009/05/interesting-string-inflections-in-rails/</loc>
         <lastmod>2014-02-21T10:08:00+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/08/easy-sphinx-install-on-ubuntu-interpid/</loc>
+        <loc>http://funonrails.com/2009/08/easy-sphinx-install-on-ubuntu-interpid/</loc>
         <lastmod>2014-02-21T10:21:38+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/08/ruby-on-rails-search-engine/</loc>
+        <loc>http://funonrails.com/2009/08/ruby-on-rails-search-engine/</loc>
         <lastmod>2014-02-21T10:25:53+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/09/what-is-new-in-edge-rails-2-3-3/</loc>
+        <loc>http://funonrails.com/2009/09/what-is-new-in-edge-rails-2-3-3/</loc>
         <lastmod>2014-02-21T10:49:16+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/09/how-to-generate-seo-sitemap-in-rails/</loc>
+        <loc>http://funonrails.com/2009/09/how-to-generate-seo-sitemap-in-rails/</loc>
         <lastmod>2014-02-21T11:06:20+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/09/4-steps-to-install-nginx-with-passenger/</loc>
+        <loc>http://funonrails.com/2009/09/4-steps-to-install-nginx-with-passenger/</loc>
         <lastmod>2014-02-21T10:56:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/09/migrating-project-from-rails-2-1-0-to-2-3-3/</loc>
+        <loc>http://funonrails.com/2009/09/migrating-project-from-rails-2-1-0-to-2-3-3/</loc>
         <lastmod>2014-02-22T20:20:08+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/09/installing-ruby-191/</loc>
+        <loc>http://funonrails.com/2009/09/installing-ruby-191/</loc>
         <lastmod>2014-02-21T18:18:33+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/09/upgrading-rails-version/</loc>
+        <loc>http://funonrails.com/2009/09/upgrading-rails-version/</loc>
         <lastmod>2014-02-21T20:47:56+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/09/jruby-rails-installation-on-ubuntu/</loc>
+        <loc>http://funonrails.com/2009/09/jruby-rails-installation-on-ubuntu/</loc>
         <lastmod>2014-02-21T20:43:08+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/09/managing-multiple-ruby-versions-with-rvm/</loc>
+        <loc>http://funonrails.com/2009/09/managing-multiple-ruby-versions-with-rvm/</loc>
         <lastmod>2014-02-22T02:39:06+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/09/no-ri-no-rdoc-for-ruby-gem-installation/</loc>
+        <loc>http://funonrails.com/2009/09/no-ri-no-rdoc-for-ruby-gem-installation/</loc>
         <lastmod>2014-02-22T02:52:28+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/10/how-to-submit-sitemap-to-search-engines/</loc>
+        <loc>http://funonrails.com/2009/10/how-to-submit-sitemap-to-search-engines/</loc>
         <lastmod>2014-02-22T18:40:11+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/10/converting-dos-windows-files-to-unix/</loc>
+        <loc>http://funonrails.com/2009/10/converting-dos-windows-files-to-unix/</loc>
         <lastmod>2014-02-22T17:51:30+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/10/feedzirra-installtion-on-ubuntu/</loc>
+        <loc>http://funonrails.com/2009/10/feedzirra-installtion-on-ubuntu/</loc>
         <lastmod>2014-02-22T18:06:22+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/10/getting-wireless-working-on-ubuntu/</loc>
+        <loc>http://funonrails.com/2009/10/getting-wireless-working-on-ubuntu/</loc>
         <lastmod>2014-02-22T03:09:47+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/10/how-to-map-irregular-database-tables/</loc>
+        <loc>http://funonrails.com/2009/10/how-to-map-irregular-database-tables/</loc>
         <lastmod>2014-02-22T03:15:44+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/10/how-to-find-os-x-version-on-linux/</loc>
+        <loc>http://funonrails.com/2009/10/how-to-find-os-x-version-on-linux/</loc>
         <lastmod>2014-02-22T03:02:36+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/10/find-processor-cpu-information-on-linux/</loc>
+        <loc>http://funonrails.com/2009/10/find-processor-cpu-information-on-linux/</loc>
         <lastmod>2014-02-22T18:02:37+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/10/10-steps-to-get-start-with-myspace-ruby/</loc>
+        <loc>http://funonrails.com/2009/10/10-steps-to-get-start-with-myspace-ruby/</loc>
         <lastmod>2014-02-22T18:53:48+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/11/ruby-on-rails-developers-in-india/</loc>
+        <loc>http://funonrails.com/2009/11/ruby-on-rails-developers-in-india/</loc>
         <lastmod>2014-02-22T20:22:37+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/11/variables-initialization-assignments/</loc>
+        <loc>http://funonrails.com/2009/11/variables-initialization-assignments/</loc>
         <lastmod>2014-02-22T19:46:51+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/11/remote-access-remote-copy-compress-decompress-on-linux/</loc>
+        <loc>
+            http://funonrails.com/2009/11/remote-access-remote-copy-compress-decompress-on-linux/
+        </loc>
         <lastmod>2014-02-22T19:57:24+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/11/understanding-and-creating-radinat/</loc>
+        <loc>http://funonrails.com/2009/11/understanding-and-creating-radinat/</loc>
         <lastmod>2014-02-22T19:34:27+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/11/writing-rake-task-in-rails/</loc>
+        <loc>http://funonrails.com/2009/11/writing-rake-task-in-rails/</loc>
         <lastmod>2014-02-22T03:27:27+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/11/manual-active-record-db-connection/</loc>
+        <loc>http://funonrails.com/2009/11/manual-active-record-db-connection/</loc>
         <lastmod>2014-02-22T03:00:22+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/11/how-to-remove-extra-spaces-in-ruby/</loc>
+        <loc>http://funonrails.com/2009/11/how-to-remove-extra-spaces-in-ruby/</loc>
         <lastmod>2014-02-22T18:18:32+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/11/pidgin-install-and-update-pidgin/</loc>
+        <loc>http://funonrails.com/2009/11/pidgin-install-and-update-pidgin/</loc>
         <lastmod>2014-02-22T02:43:13+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/11/yaml-file-configuration-in-ruby-rails/</loc>
+        <loc>http://funonrails.com/2009/11/yaml-file-configuration-in-ruby-rails/</loc>
         <lastmod>2014-02-22T02:50:32+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/11/vim-cheatsheet/</loc>
+        <loc>http://funonrails.com/2009/11/vim-cheatsheet/</loc>
         <lastmod>2014-02-22T20:10:17+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/11/bundling-gems-in-rails-application/</loc>
+        <loc>http://funonrails.com/2009/11/bundling-gems-in-rails-application/</loc>
         <lastmod>2014-02-22T19:01:49+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/11/upgrading-openoffice-in-ubuntu-interpid/</loc>
+        <loc>http://funonrails.com/2009/11/upgrading-openoffice-in-ubuntu-interpid/</loc>
         <lastmod>2014-02-19T01:38:21+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/11/gravity-master-game/</loc>
+        <loc>http://funonrails.com/2009/11/gravity-master-game/</loc>
         <lastmod>2014-02-21T16:51:10+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/11/3rd-worm-game/</loc>
+        <loc>http://funonrails.com/2009/11/3rd-worm-game/</loc>
         <lastmod>2014-02-19T01:36:28+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/11/cricket-challenge-flash-game/</loc>
+        <loc>http://funonrails.com/2009/11/cricket-challenge-flash-game/</loc>
         <lastmod>2014-02-19T01:34:14+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/11/how-to-get-all-associted-models-of-rails-model/</loc>
+        <loc>http://funonrails.com/2009/11/how-to-get-all-associted-models-of-rails-model/</loc>
         <lastmod>2014-02-19T01:32:04+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/11/passing-commandline-parameter-arguments/</loc>
+        <loc>http://funonrails.com/2009/11/passing-commandline-parameter-arguments/</loc>
         <lastmod>2014-02-19T01:29:45+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/12/hpricot-scraping-in-ruby/</loc>
+        <loc>http://funonrails.com/2009/12/hpricot-scraping-in-ruby/</loc>
         <lastmod>2014-02-19T01:21:41+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2009/12/getting-wired-and-wireless-working-on-ubuntu/</loc>
+        <loc>http://funonrails.com/2009/12/getting-wired-and-wireless-working-on-ubuntu/</loc>
         <lastmod>2014-02-19T01:23:09+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/01/delayed-job-changing-job-parameters-in-rails/</loc>
+        <loc>http://funonrails.com/2010/01/delayed-job-changing-job-parameters-in-rails/</loc>
         <lastmod>2014-02-24T16:00:32+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/02/adhearsion-and-telegraph-framework/</loc>
+        <loc>http://funonrails.com/2010/02/adhearsion-and-telegraph-framework/</loc>
         <lastmod>2014-02-19T01:12:56+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/02/mysql-cheatsheet/</loc>
+        <loc>http://funonrails.com/2010/02/mysql-cheatsheet/</loc>
         <lastmod>2014-02-19T01:11:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/02/activerecordreadonlyrecord-while/</loc>
+        <loc>http://funonrails.com/2010/02/activerecordreadonlyrecord-while/</loc>
         <lastmod>2014-02-19T01:09:38+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/02/nginx-passenger-configuration-for-rails/</loc>
+        <loc>http://funonrails.com/2010/02/nginx-passenger-configuration-for-rails/</loc>
         <lastmod>2014-02-19T01:07:56+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/02/hasmany-through-association-for-rails/</loc>
+        <loc>http://funonrails.com/2010/02/hasmany-through-association-for-rails/</loc>
         <lastmod>2014-02-19T01:05:34+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/02/eval-method-in-ruby/</loc>
+        <loc>http://funonrails.com/2010/02/eval-method-in-ruby/</loc>
         <lastmod>2014-02-19T00:54:07+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/02/dynamic-creation-of-variables-in-ruby/</loc>
+        <loc>http://funonrails.com/2010/02/dynamic-creation-of-variables-in-ruby/</loc>
         <lastmod>2014-02-19T00:59:03+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/02/copy-database-to-another-database/</loc>
+        <loc>http://funonrails.com/2010/02/copy-database-to-another-database/</loc>
         <lastmod>2014-02-19T01:01:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/02/online-ruby-programming-useful-website/</loc>
+        <loc>http://funonrails.com/2010/02/online-ruby-programming-useful-website/</loc>
         <lastmod>2014-02-18T19:37:51+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/02/fixsolution-for-nomethoderror-undefined/</loc>
+        <loc>http://funonrails.com/2010/02/fixsolution-for-nomethoderror-undefined/</loc>
         <lastmod>2014-02-18T19:34:08+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/02/extend-enumerable-to-add-method/</loc>
+        <loc>http://funonrails.com/2010/02/extend-enumerable-to-add-method/</loc>
         <lastmod>2014-02-18T19:33:00+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/02/vim-editor-for-ruby-on-rails/</loc>
+        <loc>http://funonrails.com/2010/02/vim-editor-for-ruby-on-rails/</loc>
         <lastmod>2014-02-18T19:30:24+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/03/remove-svn-files-inside-directory-rm-rf/</loc>
+        <loc>http://funonrails.com/2010/03/remove-svn-files-inside-directory-rm-rf/</loc>
         <lastmod>2014-02-18T19:24:34+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/03/page-cache-control-in-radiant-cms/</loc>
+        <loc>http://funonrails.com/2010/03/page-cache-control-in-radiant-cms/</loc>
         <lastmod>2014-02-18T19:22:15+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/03/rails-tinymce-rich-text-editor-for-rails/</loc>
+        <loc>http://funonrails.com/2010/03/rails-tinymce-rich-text-editor-for-rails/</loc>
         <lastmod>2014-02-18T19:17:14+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/03/blogger-tips/</loc>
+        <loc>http://funonrails.com/2010/03/blogger-tips/</loc>
         <lastmod>2014-02-18T19:07:41+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/03/alternative-for-tortoise-svn-on-ubuntu/</loc>
+        <loc>http://funonrails.com/2010/03/alternative-for-tortoise-svn-on-ubuntu/</loc>
         <lastmod>2014-02-18T19:06:44+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/03/require-file-in-rails-environment/</loc>
+        <loc>http://funonrails.com/2010/03/require-file-in-rails-environment/</loc>
         <lastmod>2014-02-18T18:32:19+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/03/wordpress-blog-software-installation/</loc>
+        <loc>http://funonrails.com/2010/03/wordpress-blog-software-installation/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/03/mvc-coding-principles-in-rails/</loc>
+        <loc>http://funonrails.com/2010/03/mvc-coding-principles-in-rails/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/03/rubyconf-2009-lt/</loc>
+        <loc>http://funonrails.com/2010/03/rubyconf-2009-lt/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/03/imagemagick-rmagick-installation-on-ubuntu/</loc>
+        <loc>http://funonrails.com/2010/03/imagemagick-rmagick-installation-on-ubuntu/</loc>
         <lastmod>2014-02-18T19:04:10+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/03/download-rails-api-to-work-offline/</loc>
+        <loc>http://funonrails.com/2010/03/download-rails-api-to-work-offline/</loc>
         <lastmod>2014-02-18T19:03:24+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/03/ruby-on-rails-installation-on-fresh-ubuntu/</loc>
+        <loc>http://funonrails.com/2010/03/ruby-on-rails-installation-on-fresh-ubuntu/</loc>
         <lastmod>2014-02-18T18:59:29+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/03/nginx-and-thin-installation/</loc>
+        <loc>http://funonrails.com/2010/03/nginx-and-thin-installation/</loc>
         <lastmod>2014-02-18T18:36:35+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/03/aliasmethod-in-ruby/</loc>
+        <loc>http://funonrails.com/2010/03/aliasmethod-in-ruby/</loc>
         <lastmod>2014-02-18T18:40:34+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/04/using-thinking-sphinx-with-rails/</loc>
+        <loc>http://funonrails.com/2010/04/using-thinking-sphinx-with-rails/</loc>
         <lastmod>2014-02-18T18:41:19+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/04/using-thinking-sphinx-search-in-rails/</loc>
+        <loc>http://funonrails.com/2010/04/using-thinking-sphinx-search-in-rails/</loc>
         <lastmod>2014-02-18T18:48:46+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/04/using-modules-and-mixins-in-ruby/</loc>
+        <loc>http://funonrails.com/2010/04/using-modules-and-mixins-in-ruby/</loc>
         <lastmod>2014-02-18T18:53:00+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/05/specify-rails-version-to-use-while/</loc>
+        <loc>http://funonrails.com/2010/05/specify-rails-version-to-use-while/</loc>
         <lastmod>2014-02-18T18:13:21+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/08/pdf-in-rails-using-prawn-library/</loc>
+        <loc>http://funonrails.com/2010/08/pdf-in-rails-using-prawn-library/</loc>
         <lastmod>2014-02-18T18:28:07+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/08/rails-3-beautiful-code/</loc>
+        <loc>http://funonrails.com/2010/08/rails-3-beautiful-code/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/08/spell-check-in-ruby-and-rails-using/</loc>
+        <loc>http://funonrails.com/2010/08/spell-check-in-ruby-and-rails-using/</loc>
         <lastmod>2014-02-18T01:42:31+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/08/multiple-sites-hosting-using-radiant/</loc>
+        <loc>http://funonrails.com/2010/08/multiple-sites-hosting-using-radiant/</loc>
         <lastmod>2014-02-18T01:34:26+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/08/email-attachments-in-ruby-rails/</loc>
+        <loc>http://funonrails.com/2010/08/email-attachments-in-ruby-rails/</loc>
         <lastmod>2014-02-18T01:21:32+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/08/actionmailer-smtp-settings-in-rails/</loc>
+        <loc>http://funonrails.com/2010/08/actionmailer-smtp-settings-in-rails/</loc>
         <lastmod>2014-02-18T01:16:45+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/08/zipcode-validation-using-geokit-in-rails/</loc>
+        <loc>http://funonrails.com/2010/08/zipcode-validation-using-geokit-in-rails/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/09/rails-3-beautiful-code/</loc>
+        <loc>http://funonrails.com/2010/09/rails-3-beautiful-code/</loc>
         <lastmod>2014-02-18T01:04:28+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/09/best-ways-to-populate-dynamic-array-in-ruby/</loc>
+        <loc>http://funonrails.com/2010/09/best-ways-to-populate-dynamic-array-in-ruby/</loc>
         <lastmod>2014-02-18T00:58:43+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/10/introduction-to-delayed-job/</loc>
+        <loc>http://funonrails.com/2010/10/introduction-to-delayed-job/</loc>
         <lastmod>2014-02-18T00:43:27+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/10/solution-to-delayedjobdj-gem-server/</loc>
+        <loc>http://funonrails.com/2010/10/solution-to-delayedjobdj-gem-server/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/10/delayedjobs-dj-fancy-methods/</loc>
+        <loc>http://funonrails.com/2010/10/delayedjobs-dj-fancy-methods/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/10/twinkle-ff-setup-click-to-call-using-telify/</loc>
+        <loc>http://funonrails.com/2010/10/twinkle-ff-setup-click-to-call-using-telify/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/10/overriding-tos-method-for-bigdecimal/</loc>
+        <loc>http://funonrails.com/2010/10/overriding-tos-method-for-bigdecimal/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/11/authlogic-custom-conditions-for-authentication/</loc>
+        <loc>http://funonrails.com/2010/11/authlogic-custom-conditions-for-authentication/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/12/accessing-helper-modules-in-rails/</loc>
+        <loc>http://funonrails.com/2010/12/accessing-helper-modules-in-rails/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/12/active-record-inheritance-in-rails-ari/</loc>
+        <loc>http://funonrails.com/2010/12/active-record-inheritance-in-rails-ari/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2010/12/rails-3-dashing-to-finish/</loc>
+        <loc>http://funonrails.com/2010/12/rails-3-dashing-to-finish/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2011/01/getting-started-with-mysql-on-amazon/</loc>
+        <loc>http://funonrails.com/2011/01/getting-started-with-mysql-on-amazon/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2011/01/testing-restful-polymorphic-resource/</loc>
+        <loc>http://funonrails.com/2011/01/testing-restful-polymorphic-resource/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2011/01/installing-and-running-cronjob-crontab/</loc>
+        <loc>http://funonrails.com/2011/01/installing-and-running-cronjob-crontab/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2011/01/using-hoptoad-notifier-as-gem-in-rails/</loc>
+        <loc>http://funonrails.com/2011/01/using-hoptoad-notifier-as-gem-in-rails/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2011/02/auto-login-remote-server-by-copying-ssh/</loc>
+        <loc>http://funonrails.com/2011/02/auto-login-remote-server-by-copying-ssh/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2011/03/getting-started-with-rails-3-postgres/</loc>
+        <loc>http://funonrails.com/2011/03/getting-started-with-rails-3-postgres/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2011/03/monitor-delayedjob-in-rails/</loc>
+        <loc>http://funonrails.com/2011/03/monitor-delayedjob-in-rails/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2011/03/accessing-view-helpers-routes-in-rails/</loc>
+        <loc>http://funonrails.com/2011/03/accessing-view-helpers-routes-in-rails/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2011/03/number-to-indian-currency-helper-for-rails/</loc>
+        <loc>http://funonrails.com/2011/03/number-to-indian-currency-helper-for-rails/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2011/03/twitter-share-and-facebook-like-button/</loc>
+        <loc>http://funonrails.com/2011/03/twitter-share-and-facebook-like-button/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2011/03/setting-up-nginx-maximum-upload-size/</loc>
+        <loc>http://funonrails.com/2011/03/setting-up-nginx-maximum-upload-size/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
         <loc>
-            funonrails.com/2011/04/ghostype-input-placeholder-for-search-inputs-using-jquery/
+            http://funonrails.com/2011/04/ghostype-input-placeholder-for-search-inputs-using-jquery/
         </loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2011/04/setup-active-scaffold-with-rails-3/</loc>
+        <loc>http://funonrails.com/2011/04/setup-active-scaffold-with-rails-3/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2011/07/how-to-get-started-with-tata-photon-on-ubuntu/</loc>
+        <loc>http://funonrails.com/2011/07/how-to-get-started-with-tata-photon-on-ubuntu/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2011/08/migrating-from-svn-to-git/</loc>
+        <loc>http://funonrails.com/2011/08/migrating-from-svn-to-git/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2011/09/print-particular-div-inside-html-page/</loc>
+        <loc>http://funonrails.com/2011/09/print-particular-div-inside-html-page/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2011/10/connecting-to-multiple-databases-in-rails/</loc>
+        <loc>http://funonrails.com/2011/10/connecting-to-multiple-databases-in-rails/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2011/11/paperclip-image-upload-via-url/</loc>
+        <loc>http://funonrails.com/2011/11/paperclip-image-upload-via-url/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2011/11/paperclip-options-aws-s3-config-and-rails/</loc>
+        <loc>http://funonrails.com/2011/11/paperclip-options-aws-s3-config-and-rails/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2011/11/rails-311-haml-sass-jquery-coffee-rails/</loc>
+        <loc>http://funonrails.com/2011/11/rails-311-haml-sass-jquery-coffee-rails/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2011/12/multiple-resources-registrations-with/</loc>
+        <loc>http://funonrails.com/2011/12/multiple-resources-registrations-with/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2011/12/getting-assets-working-on-heroku/</loc>
+        <loc>http://funonrails.com/2011/12/getting-assets-working-on-heroku/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2011/12/using-jquery-rails-and-datepicker/</loc>
+        <loc>http://funonrails.com/2011/12/using-jquery-rails-and-datepicker/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2011/12/dynamic-methods-inside-ruby-classes/</loc>
+        <loc>http://funonrails.com/2011/12/dynamic-methods-inside-ruby-classes/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2011/12/best-practices-to-use-named-scopes/</loc>
+        <loc>http://funonrails.com/2011/12/best-practices-to-use-named-scopes/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2011/12/twitter-bootstrap-paginate-and-rails-3/</loc>
+        <loc>http://funonrails.com/2011/12/twitter-bootstrap-paginate-and-rails-3/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2011/12/simplified-active-record-extensions/</loc>
+        <loc>http://funonrails.com/2011/12/simplified-active-record-extensions/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2011/12/active-admin-sass-and-rails-3/</loc>
+        <loc>http://funonrails.com/2011/12/active-admin-sass-and-rails-3/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2011/12/authorizenet-aim-payment-integration/</loc>
+        <loc>http://funonrails.com/2011/12/authorizenet-aim-payment-integration/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2011/12/bugging-around-active-supports/</loc>
+        <loc>http://funonrails.com/2011/12/bugging-around-active-supports/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2011/12/railroady-uml-diagram-generator-for-rails/</loc>
+        <loc>http://funonrails.com/2011/12/railroady-uml-diagram-generator-for-rails/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2011/12/authorize-net-payment-gateway-with-rails/</loc>
+        <loc>http://funonrails.com/2011/12/authorize-net-payment-gateway-with-rails/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2011/12/using-formbuilder-in-rails/</loc>
+        <loc>http://funonrails.com/2011/12/using-formbuilder-in-rails/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2011/12/authorize-net-sim-payment-integration-with-rails/</loc>
+        <loc>http://funonrails.com/2011/12/authorize-net-sim-payment-integration-with-rails/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2011/12/paypal-payments-integration-with-rails/</loc>
+        <loc>http://funonrails.com/2011/12/paypal-payments-integration-with-rails/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2012/01/understanding-rails-uri/</loc>
+        <loc>http://funonrails.com/2012/01/understanding-rails-uri/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2012/01/stripe-gateway-payment-integration-with-rails/</loc>
+        <loc>http://funonrails.com/2012/01/stripe-gateway-payment-integration-with-rails/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2012/01/get-models-used-in-rails-app/</loc>
+        <loc>http://funonrails.com/2012/01/get-models-used-in-rails-app/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2012/01/twitter-bootstrap-form-builder-for-rails/</loc>
+        <loc>http://funonrails.com/2012/01/twitter-bootstrap-form-builder-for-rails/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2012/01/mongoid-array-field-and-rails-form/</loc>
+        <loc>http://funonrails.com/2012/01/mongoid-array-field-and-rails-form/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2012/01/mongoid-embededin-and-array-field/</loc>
+        <loc>http://funonrails.com/2012/01/mongoid-embededin-and-array-field/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2012/01/csv-file-import-export-in-rails-3/</loc>
+        <loc>http://funonrails.com/2012/01/csv-file-import-export-in-rails-3/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2012/01/puts-tos-and-inspect-on-ruby-object/</loc>
+        <loc>http://funonrails.com/2012/01/puts-tos-and-inspect-on-ruby-object/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2012/01/dynamic-bounded-parameters-and-named-scopes/</loc>
+        <loc>http://funonrails.com/2012/01/dynamic-bounded-parameters-and-named-scopes/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2012/02/ruby-enumerable-toproc-ampersond-colon/</loc>
+        <loc>http://funonrails.com/2012/02/ruby-enumerable-toproc-ampersond-colon/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2012/04/upgrading-from-rails-2-1-x-to-rails-2-3-11/</loc>
+        <loc>http://funonrails.com/2012/04/upgrading-from-rails-2-1-x-to-rails-2-3-11/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2012/10/dynamic-conditions-to-rails-associations/</loc>
+        <loc>http://funonrails.com/2012/10/dynamic-conditions-to-rails-associations/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2014/02/octopress-powered-and-github-hosted-blog/</loc>
+        <loc>http://funonrails.com/2014/02/octopress-powered-and-github-hosted-blog/</loc>
         <lastmod>2014-02-14T17:12:50+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2014/02/writing-octopress-blog-posts-using-markdown/</loc>
+        <loc>http://funonrails.com/2014/02/writing-octopress-blog-posts-using-markdown/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/2014/02/moving-from-blogger-to-octopress/</loc>
+        <loc>http://funonrails.com/2014/02/moving-from-blogger-to-octopress/</loc>
         <lastmod>2014-02-21T16:20:24+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/</loc>
+        <loc>http://funonrails.com/</loc>
         <lastmod>2014-02-24T16:22:37+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/thank-you/</loc>
+        <loc>http://funonrails.com/thank-you/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/about/</loc>
+        <loc>http://funonrails.com/about/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/archives/</loc>
+        <loc>http://funonrails.com/archives/</loc>
         <lastmod>2014-02-24T16:22:37+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/robots.txt</loc>
+        <loc>http://funonrails.com/robots.txt</loc>
         <lastmod>2014-02-09T17:26:19+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/404.html</loc>
+        <loc>http://funonrails.com/404.html</loc>
         <lastmod>2014-02-24T15:52:16+05:30</lastmod>
     </url>
     <url>
-        <loc>funonrails.com/contact/</loc>
+        <loc>http://funonrails.com/contact/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
 </urlset>

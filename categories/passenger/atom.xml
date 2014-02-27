@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: passenger | Fun On Rails]]></title>
-  <link href="funonrails.com/categories/passenger/atom.xml" rel="self"/>
-  <link href="funonrails.com/"/>
-  <updated>2014-02-24T16:29:31+05:30</updated>
-  <id>funonrails.com/</id>
+  <link href="http://funonrails.com/categories/passenger/atom.xml" rel="self"/>
+  <link href="http://funonrails.com/"/>
+  <updated>2014-02-27T15:02:56+05:30</updated>
+  <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
     <email><![CDATA[sandip@funonrails.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[nginx and thin installation and configuration]]></title>
-    <link href="funonrails.com/2010/03/nginx-and-thin-installation/"/>
+    <link href="http://funonrails.com/2010/03/nginx-and-thin-installation/"/>
     <updated>2010-03-26T02:59:00+05:30</updated>
-    <id>funonrails.com/2010/03/nginx-and-thin-installation</id>
+    <id>http://funonrails.com/2010/03/nginx-and-thin-installation</id>
     <content type="html"><![CDATA[<p>Install nginx server using following command</p>
 
 <p><code>
@@ -141,9 +141,9 @@ sudo service thin start|stop|restart
   
   <entry>
     <title type="html"><![CDATA[nginx passenger configuration for rails application]]></title>
-    <link href="funonrails.com/2010/02/nginx-passenger-configuration-for-rails/"/>
+    <link href="http://funonrails.com/2010/02/nginx-passenger-configuration-for-rails/"/>
     <updated>2010-02-15T21:43:00+05:30</updated>
-    <id>funonrails.com/2010/02/nginx-passenger-configuration-for-rails</id>
+    <id>http://funonrails.com/2010/02/nginx-passenger-configuration-for-rails</id>
     <content type="html"><![CDATA[<p>```</p>
 
 <h1>user  nobody;</h1>
@@ -233,9 +233,9 @@ keepalive_timeout  65;
   
   <entry>
     <title type="html"><![CDATA[4 steps to install nginx with passenger]]></title>
-    <link href="funonrails.com/2009/09/4-steps-to-install-nginx-with-passenger/"/>
+    <link href="http://funonrails.com/2009/09/4-steps-to-install-nginx-with-passenger/"/>
     <updated>2009-09-09T23:47:00+05:30</updated>
-    <id>funonrails.com/2009/09/4-steps-to-install-nginx-with-passenger</id>
+    <id>http://funonrails.com/2009/09/4-steps-to-install-nginx-with-passenger</id>
     <content type="html"><![CDATA[<h2>Install passenger program</h2>
 
 <p><code>

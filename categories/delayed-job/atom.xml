@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: delayed-job | Fun On Rails]]></title>
-  <link href="funonrails.com/categories/delayed-job/atom.xml" rel="self"/>
-  <link href="funonrails.com/"/>
-  <updated>2014-02-24T16:29:31+05:30</updated>
-  <id>funonrails.com/</id>
+  <link href="http://funonrails.com/categories/delayed-job/atom.xml" rel="self"/>
+  <link href="http://funonrails.com/"/>
+  <updated>2014-02-27T15:02:56+05:30</updated>
+  <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
     <email><![CDATA[sandip@funonrails.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Monitor Delayed Job in rails]]></title>
-    <link href="funonrails.com/2011/03/monitor-delayedjob-in-rails/"/>
+    <link href="http://funonrails.com/2011/03/monitor-delayedjob-in-rails/"/>
     <updated>2011-03-01T01:22:00+05:30</updated>
-    <id>funonrails.com/2011/03/monitor-delayedjob-in-rails</id>
+    <id>http://funonrails.com/2011/03/monitor-delayedjob-in-rails</id>
     <content type="html"><![CDATA[<p>Delayed Job &amp; Monit configuration</p>
 
 <p>We were struggling through how to monit delayed_job from past few months because monit doesn&rsquo;t work seamlessly with delayed_job start/stop commands and finally we got able to monit delayed_job.</p>
@@ -124,9 +124,9 @@ if 10 restarts within 10 cycles then timeout
   
   <entry>
     <title type="html"><![CDATA[DelayedJOb's (DJ) fancy methods]]></title>
-    <link href="funonrails.com/2010/10/delayedjobs-dj-fancy-methods/"/>
+    <link href="http://funonrails.com/2010/10/delayedjobs-dj-fancy-methods/"/>
     <updated>2010-10-06T19:39:00+05:30</updated>
-    <id>funonrails.com/2010/10/delayedjobs-dj-fancy-methods</id>
+    <id>http://funonrails.com/2010/10/delayedjobs-dj-fancy-methods</id>
     <content type="html"><![CDATA[<p>Delayed Job provides <code>send_later</code> and <code>send_at</code> as <em>instance</em> as well as <em>class</em>  methods. It also gives us <code>handle_asynchronously</code> as <em>class</em> method to be written inside class.
 ```ruby
 module Delayed
@@ -179,9 +179,9 @@ end
   
   <entry>
     <title type="html"><![CDATA[Solution to DelayedJob(DJ) gem server start problem]]></title>
-    <link href="funonrails.com/2010/10/solution-to-delayedjobdj-gem-server/"/>
+    <link href="http://funonrails.com/2010/10/solution-to-delayedjobdj-gem-server/"/>
     <updated>2010-10-05T16:15:00+05:30</updated>
-    <id>funonrails.com/2010/10/solution-to-delayedjobdj-gem-server</id>
+    <id>http://funonrails.com/2010/10/solution-to-delayedjobdj-gem-server</id>
     <content type="html"><![CDATA[<p>Solution to DelayedJob(DJ) gem server start problem</p>
 
 <p>I had installed delayed_job gem 2.0.3, daemons gem but after staring DJ server it shows daemon started but actually process gets killed automatically.</p>
@@ -228,9 +228,9 @@ RAILS_ENV=production script/delayed_job status
   
   <entry>
     <title type="html"><![CDATA[Delayed Job changing job parameters in Rails]]></title>
-    <link href="funonrails.com/2010/01/delayed-job-changing-job-parameters-in-rails/"/>
+    <link href="http://funonrails.com/2010/01/delayed-job-changing-job-parameters-in-rails/"/>
     <updated>2010-01-13T19:59:00+05:30</updated>
-    <id>funonrails.com/2010/01/delayed-job-changing-job-parameters-in-rails</id>
+    <id>http://funonrails.com/2010/01/delayed-job-changing-job-parameters-in-rails</id>
     <content type="html"><![CDATA[<p>Delayed job variables initialization written on at collectiveidea / delayed_job doesn&rsquo;t work.
 ```ruby</p>
 

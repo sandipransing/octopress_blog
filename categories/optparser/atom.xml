@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: optparser | Fun On Rails]]></title>
-  <link href="funonrails.com/categories/optparser/atom.xml" rel="self"/>
-  <link href="funonrails.com/"/>
-  <updated>2014-02-24T16:29:31+05:30</updated>
-  <id>funonrails.com/</id>
+  <link href="http://funonrails.com/categories/optparser/atom.xml" rel="self"/>
+  <link href="http://funonrails.com/"/>
+  <updated>2014-02-27T15:02:56+05:30</updated>
+  <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
     <email><![CDATA[sandip@funonrails.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Passing commandline parameter (arguments) to ruby file using optparser]]></title>
-    <link href="funonrails.com/2009/11/passing-commandline-parameter-arguments/"/>
+    <link href="http://funonrails.com/2009/11/passing-commandline-parameter-arguments/"/>
     <updated>2009-11-27T19:13:00+05:30</updated>
-    <id>funonrails.com/2009/11/passing-commandline-parameter-arguments</id>
+    <id>http://funonrails.com/2009/11/passing-commandline-parameter-arguments</id>
     <content type="html"><![CDATA[<p>Ruby file accepts from command prompt in the form of array</p>
 
 <h2>Passing parameters</h2>

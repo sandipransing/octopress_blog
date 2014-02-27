@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: core-extensions | Fun On Rails]]></title>
-  <link href="funonrails.com/categories/core-extensions/atom.xml" rel="self"/>
-  <link href="funonrails.com/"/>
-  <updated>2014-02-24T16:29:31+05:30</updated>
-  <id>funonrails.com/</id>
+  <link href="http://funonrails.com/categories/core-extensions/atom.xml" rel="self"/>
+  <link href="http://funonrails.com/"/>
+  <updated>2014-02-27T15:02:56+05:30</updated>
+  <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
     <email><![CDATA[sandip@funonrails.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Overriding to_s method for BigDecimal instance]]></title>
-    <link href="funonrails.com/2010/10/overriding-tos-method-for-bigdecimal/"/>
+    <link href="http://funonrails.com/2010/10/overriding-tos-method-for-bigdecimal/"/>
     <updated>2010-10-22T19:31:00+05:30</updated>
-    <id>funonrails.com/2010/10/overriding-tos-method-for-bigdecimal</id>
+    <id>http://funonrails.com/2010/10/overriding-tos-method-for-bigdecimal</id>
     <content type="html"><![CDATA[<h2>Requirement</h2>
 
 <p>It was requirement to display decimal numbers which are having scale values present to be displayed in decimal format otherwise display them as integer.</p>
@@ -50,9 +50,9 @@ end
   
   <entry>
     <title type="html"><![CDATA[Extend enumerable to add method collect_with_index]]></title>
-    <link href="funonrails.com/2010/02/extend-enumerable-to-add-method/"/>
+    <link href="http://funonrails.com/2010/02/extend-enumerable-to-add-method/"/>
     <updated>2010-02-18T14:24:00+05:30</updated>
-    <id>funonrails.com/2010/02/extend-enumerable-to-add-method</id>
+    <id>http://funonrails.com/2010/02/extend-enumerable-to-add-method</id>
     <content type="html"><![CDATA[<p>Extend enumerable functionality to iterate along with index</p>
 
 <p>```ruby

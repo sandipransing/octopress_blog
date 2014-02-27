@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: imagemagick | Fun On Rails]]></title>
-  <link href="funonrails.com/categories/imagemagick/atom.xml" rel="self"/>
-  <link href="funonrails.com/"/>
-  <updated>2014-02-24T16:29:31+05:30</updated>
-  <id>funonrails.com/</id>
+  <link href="http://funonrails.com/categories/imagemagick/atom.xml" rel="self"/>
+  <link href="http://funonrails.com/"/>
+  <updated>2014-02-27T15:02:56+05:30</updated>
+  <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
     <email><![CDATA[sandip@funonrails.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Paperclip image upload via URL]]></title>
-    <link href="funonrails.com/2011/11/paperclip-image-upload-via-url/"/>
+    <link href="http://funonrails.com/2011/11/paperclip-image-upload-via-url/"/>
     <updated>2011-11-21T17:56:00+05:30</updated>
-    <id>funonrails.com/2011/11/paperclip-image-upload-via-url</id>
+    <id>http://funonrails.com/2011/11/paperclip-image-upload-via-url</id>
     <content type="html"><![CDATA[<p>Upload image via paperclip via passing URL instead of file upload</p>
 
 <p>```ruby</p>
@@ -56,9 +56,9 @@ p.upload_image(url)
   
   <entry>
     <title type="html"><![CDATA[Imagemagick/ RMagick Installation on ubuntu]]></title>
-    <link href="funonrails.com/2010/03/imagemagick-rmagick-installation-on-ubuntu/"/>
+    <link href="http://funonrails.com/2010/03/imagemagick-rmagick-installation-on-ubuntu/"/>
     <updated>2010-03-23T18:11:00+05:30</updated>
-    <id>funonrails.com/2010/03/imagemagick-rmagick-installation-on-ubuntu</id>
+    <id>http://funonrails.com/2010/03/imagemagick-rmagick-installation-on-ubuntu</id>
     <content type="html"><![CDATA[<h4>ImageMagick Installation</h4>
 
 <p>Ubuntu machine has default apt-get package manager.

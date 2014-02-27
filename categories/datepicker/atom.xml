@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: datepicker | Fun On Rails]]></title>
-  <link href="funonrails.com/categories/datepicker/atom.xml" rel="self"/>
-  <link href="funonrails.com/"/>
-  <updated>2014-02-24T16:29:31+05:30</updated>
-  <id>funonrails.com/</id>
+  <link href="http://funonrails.com/categories/datepicker/atom.xml" rel="self"/>
+  <link href="http://funonrails.com/"/>
+  <updated>2014-02-27T15:02:56+05:30</updated>
+  <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
     <email><![CDATA[sandip@funonrails.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[using jQuery-rails and datepicker, timepicker & datetimepicker]]></title>
-    <link href="funonrails.com/2011/12/using-jquery-rails-and-datepicker/"/>
+    <link href="http://funonrails.com/2011/12/using-jquery-rails-and-datepicker/"/>
     <updated>2011-12-22T03:52:00+05:30</updated>
-    <id>funonrails.com/2011/12/using-jquery-rails-and-datepicker</id>
+    <id>http://funonrails.com/2011/12/using-jquery-rails-and-datepicker</id>
     <content type="html"><![CDATA[<p>jQuery datepicker plugin is used to display inline calendar popup that eases user input experience while entering date/time fields. Calendar can be easily binded to any html DOM element. To Apply different styles download css from <a href="http://jqueryui.com/demos/datepicker">here</a></p>
 
 <p>```</p>

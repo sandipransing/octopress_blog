@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: wordpress | Fun On Rails]]></title>
-  <link href="funonrails.com/categories/wordpress/atom.xml" rel="self"/>
-  <link href="funonrails.com/"/>
-  <updated>2014-02-24T16:29:31+05:30</updated>
-  <id>funonrails.com/</id>
+  <link href="http://funonrails.com/categories/wordpress/atom.xml" rel="self"/>
+  <link href="http://funonrails.com/"/>
+  <updated>2014-02-27T15:02:56+05:30</updated>
+  <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
     <email><![CDATA[sandip@funonrails.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[WordPress blog software installation]]></title>
-    <link href="funonrails.com/2010/03/wordpress-blog-software-installation/"/>
+    <link href="http://funonrails.com/2010/03/wordpress-blog-software-installation/"/>
     <updated>2010-03-12T01:55:00+05:30</updated>
-    <id>funonrails.com/2010/03/wordpress-blog-software-installation</id>
+    <id>http://funonrails.com/2010/03/wordpress-blog-software-installation</id>
     <content type="html"><![CDATA[<p><a href="http://wordpress.org/">WordPress</a> &nbsp;is a&nbsp;open source&nbsp;software developed by and for community with ongoing development on it. Easy installation, customizable, with lots of available plugins, themes and SEO friendly are the strengths of it!</p>
 
 <blockquote><p>Software is mainly serves the purpose of blogging, hosting static websites.

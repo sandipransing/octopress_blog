@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: cms | Fun On Rails]]></title>
-  <link href="funonrails.com/categories/cms/atom.xml" rel="self"/>
-  <link href="funonrails.com/"/>
-  <updated>2014-02-24T16:29:31+05:30</updated>
-  <id>funonrails.com/</id>
+  <link href="http://funonrails.com/categories/cms/atom.xml" rel="self"/>
+  <link href="http://funonrails.com/"/>
+  <updated>2014-02-27T15:02:56+05:30</updated>
+  <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
     <email><![CDATA[sandip@funonrails.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Multiple sites hosting using radiant cms]]></title>
-    <link href="funonrails.com/2010/08/multiple-sites-hosting-using-radiant/"/>
+    <link href="http://funonrails.com/2010/08/multiple-sites-hosting-using-radiant/"/>
     <updated>2010-08-07T20:49:00+05:30</updated>
-    <id>funonrails.com/2010/08/multiple-sites-hosting-using-radiant</id>
+    <id>http://funonrails.com/2010/08/multiple-sites-hosting-using-radiant</id>
     <content type="html"><![CDATA[<p>This involves 4-5 simple in-order to get multiple sites working using radiant cms. Follow the below steps one by one.</p>
 
 <h4>Setup radiant cms</h4>
@@ -150,9 +150,9 @@ Please be sure to make them published and modify contents to identify them</p>
   
   <entry>
     <title type="html"><![CDATA[Page Cache control in radiant cms]]></title>
-    <link href="funonrails.com/2010/03/page-cache-control-in-radiant-cms/"/>
+    <link href="http://funonrails.com/2010/03/page-cache-control-in-radiant-cms/"/>
     <updated>2010-03-04T00:43:00+05:30</updated>
-    <id>funonrails.com/2010/03/page-cache-control-in-radiant-cms</id>
+    <id>http://funonrails.com/2010/03/page-cache-control-in-radiant-cms</id>
     <content type="html"><![CDATA[<h2>Radiant Caching</h2>
 
 <p>Radiant cms is very powerful and customizable cms as of now which has inbuilt support for page caching.</p>
@@ -223,9 +223,9 @@ git clone git://github.com/sandipransing/radiant-page_options-extension.git vend
   
   <entry>
     <title type="html"><![CDATA[Understanding and creating radinat extensions]]></title>
-    <link href="funonrails.com/2009/11/understanding-and-creating-radinat/"/>
+    <link href="http://funonrails.com/2009/11/understanding-and-creating-radinat/"/>
     <updated>2009-11-10T13:52:00+05:30</updated>
-    <id>funonrails.com/2009/11/understanding-and-creating-radinat</id>
+    <id>http://funonrails.com/2009/11/understanding-and-creating-radinat</id>
     <content type="html"><![CDATA[<h2>Understanding and creating radinat extensions</h2>
 
 <p>To start with, first understand <em>what is radiant</em> and <em>why to use it ?</em></p>

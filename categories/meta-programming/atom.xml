@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: meta-programming | Fun On Rails]]></title>
-  <link href="funonrails.com/categories/meta-programming/atom.xml" rel="self"/>
-  <link href="funonrails.com/"/>
-  <updated>2014-02-24T16:29:31+05:30</updated>
-  <id>funonrails.com/</id>
+  <link href="http://funonrails.com/categories/meta-programming/atom.xml" rel="self"/>
+  <link href="http://funonrails.com/"/>
+  <updated>2014-02-27T15:02:56+05:30</updated>
+  <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
     <email><![CDATA[sandip@funonrails.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Dynamic methods inside ruby classes]]></title>
-    <link href="funonrails.com/2011/12/dynamic-methods-inside-ruby-classes/"/>
+    <link href="http://funonrails.com/2011/12/dynamic-methods-inside-ruby-classes/"/>
     <updated>2011-12-22T17:54:00+05:30</updated>
-    <id>funonrails.com/2011/12/dynamic-methods-inside-ruby-classes</id>
+    <id>http://funonrails.com/2011/12/dynamic-methods-inside-ruby-classes</id>
     <content type="html"><![CDATA[<p>Ruby language is dynamic and robust. We can define methods inside ruby classes at runtime.</p>
 
 <p>```ruby
@@ -122,9 +122,9 @@ end
   
   <entry>
     <title type="html"><![CDATA[alias methods in ruby]]></title>
-    <link href="funonrails.com/2010/03/aliasmethod-in-ruby/"/>
+    <link href="http://funonrails.com/2010/03/aliasmethod-in-ruby/"/>
     <updated>2010-03-31T17:46:00+05:30</updated>
-    <id>funonrails.com/2010/03/aliasmethod-in-ruby</id>
+    <id>http://funonrails.com/2010/03/aliasmethod-in-ruby</id>
     <content type="html"><![CDATA[<h2>Alias method in ruby</h2>
 
 <p>Ruby classes provides a alias_method that can be used to reuse the existing methods.
@@ -191,9 +191,9 @@ alias_attrinute :username, :login
   
   <entry>
     <title type="html"><![CDATA[Dynamic creation of variables in ruby]]></title>
-    <link href="funonrails.com/2010/02/dynamic-creation-of-variables-in-ruby/"/>
+    <link href="http://funonrails.com/2010/02/dynamic-creation-of-variables-in-ruby/"/>
     <updated>2010-02-16T16:12:00+05:30</updated>
-    <id>funonrails.com/2010/02/dynamic-creation-of-variables-in-ruby</id>
+    <id>http://funonrails.com/2010/02/dynamic-creation-of-variables-in-ruby</id>
     <content type="html"><![CDATA[<h2>1. To create local variables in ruby dynamically</h2>
 
 <p>Using eval method in ruby
@@ -257,9 +257,9 @@ end</p>
   
   <entry>
     <title type="html"><![CDATA[Eval method in ruby]]></title>
-    <link href="funonrails.com/2010/02/eval-method-in-ruby/"/>
+    <link href="http://funonrails.com/2010/02/eval-method-in-ruby/"/>
     <updated>2010-02-16T15:34:00+05:30</updated>
-    <id>funonrails.com/2010/02/eval-method-in-ruby</id>
+    <id>http://funonrails.com/2010/02/eval-method-in-ruby</id>
     <content type="html"><![CDATA[<p>Eval method in ruby executes string/expression passed as parameter.</p>
 
 <p>Example:

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: ubuntu | Fun On Rails]]></title>
-  <link href="funonrails.com/categories/ubuntu/atom.xml" rel="self"/>
-  <link href="funonrails.com/"/>
-  <updated>2014-02-24T16:29:31+05:30</updated>
-  <id>funonrails.com/</id>
+  <link href="http://funonrails.com/categories/ubuntu/atom.xml" rel="self"/>
+  <link href="http://funonrails.com/"/>
+  <updated>2014-02-27T15:02:56+05:30</updated>
+  <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
     <email><![CDATA[sandip@funonrails.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[How to get started with tata photon on ubuntu machine]]></title>
-    <link href="funonrails.com/2011/07/how-to-get-started-with-tata-photon-on-ubuntu/"/>
+    <link href="http://funonrails.com/2011/07/how-to-get-started-with-tata-photon-on-ubuntu/"/>
     <updated>2011-07-05T14:06:00+05:30</updated>
-    <id>funonrails.com/2011/07/how-to-get-started-with-tata-photon-on-ubuntu</id>
+    <id>http://funonrails.com/2011/07/how-to-get-started-with-tata-photon-on-ubuntu</id>
     <content type="html"><![CDATA[<p>In order to get tata photon working on ubuntu machine you need to install following packages</p>
 
 <p><strong>1. usb-modeswitch-data 2. usb-modeswitch</strong></p>
@@ -54,9 +54,9 @@ wvdial
   
   <entry>
     <title type="html"><![CDATA[ruby on rails installation on fresh ubuntu machine]]></title>
-    <link href="funonrails.com/2010/03/ruby-on-rails-installation-on-fresh-ubuntu/"/>
+    <link href="http://funonrails.com/2010/03/ruby-on-rails-installation-on-fresh-ubuntu/"/>
     <updated>2010-03-25T23:36:00+05:30</updated>
-    <id>funonrails.com/2010/03/ruby-on-rails-installation-on-fresh-ubuntu</id>
+    <id>http://funonrails.com/2010/03/ruby-on-rails-installation-on-fresh-ubuntu</id>
     <content type="html"><![CDATA[<p>Ruby On Rails Installation on fresh ubuntu machine</p>
 
 <p>Installation steps are applicable to ubuntu versions interpid, karmic koala. Make necessary changes according to package manager provided by other linux operating systems in order install ruby and rails.</p>
@@ -148,9 +148,9 @@ Thanks to @vwadhwani!</p>
   
   <entry>
     <title type="html"><![CDATA[Imagemagick/ RMagick Installation on ubuntu]]></title>
-    <link href="funonrails.com/2010/03/imagemagick-rmagick-installation-on-ubuntu/"/>
+    <link href="http://funonrails.com/2010/03/imagemagick-rmagick-installation-on-ubuntu/"/>
     <updated>2010-03-23T18:11:00+05:30</updated>
-    <id>funonrails.com/2010/03/imagemagick-rmagick-installation-on-ubuntu</id>
+    <id>http://funonrails.com/2010/03/imagemagick-rmagick-installation-on-ubuntu</id>
     <content type="html"><![CDATA[<h4>ImageMagick Installation</h4>
 
 <p>Ubuntu machine has default apt-get package manager.
@@ -183,9 +183,9 @@ sudo apt-get install libmagickcore-dev graphicsmagick-libmagick-dev-compat
   
   <entry>
     <title type="html"><![CDATA[alternative for tortoise svn on ubuntu]]></title>
-    <link href="funonrails.com/2010/03/alternative-for-tortoise-svn-on-ubuntu/"/>
+    <link href="http://funonrails.com/2010/03/alternative-for-tortoise-svn-on-ubuntu/"/>
     <updated>2010-03-11T16:59:00+05:30</updated>
-    <id>funonrails.com/2010/03/alternative-for-tortoise-svn-on-ubuntu</id>
+    <id>http://funonrails.com/2010/03/alternative-for-tortoise-svn-on-ubuntu</id>
     <content type="html"><![CDATA[<p>The Tortoise svn client on windows is one of my favorite svn client.</p>
 
 <p>I am working on ubuntu karmic koala from last one year.
@@ -200,9 +200,9 @@ time haven’t found any svn client as good as tortoise svn on windows.</p>
   
   <entry>
     <title type="html"><![CDATA[Programming ruby Linux basics]]></title>
-    <link href="funonrails.com/2010/03/remove-svn-files-inside-directory-rm-rf/"/>
+    <link href="http://funonrails.com/2010/03/remove-svn-files-inside-directory-rm-rf/"/>
     <updated>2010-03-02T12:29:00+05:30</updated>
-    <id>funonrails.com/2010/03/remove-svn-files-inside-directory-rm-rf</id>
+    <id>http://funonrails.com/2010/03/remove-svn-files-inside-directory-rm-rf</id>
     <content type="html"><![CDATA[<h2>Remove svn files inside directory</h2>
 
 <p><code>

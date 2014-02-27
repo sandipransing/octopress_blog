@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: views | Fun On Rails]]></title>
-  <link href="funonrails.com/categories/views/atom.xml" rel="self"/>
-  <link href="funonrails.com/"/>
-  <updated>2014-02-24T16:29:31+05:30</updated>
-  <id>funonrails.com/</id>
+  <link href="http://funonrails.com/categories/views/atom.xml" rel="self"/>
+  <link href="http://funonrails.com/"/>
+  <updated>2014-02-27T15:02:56+05:30</updated>
+  <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
     <email><![CDATA[sandip@funonrails.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[number to indian currency helper for rails with WebRupee]]></title>
-    <link href="funonrails.com/2011/03/number-to-indian-currency-helper-for-rails/"/>
+    <link href="http://funonrails.com/2011/03/number-to-indian-currency-helper-for-rails/"/>
     <updated>2011-03-17T02:13:00+05:30</updated>
-    <id>funonrails.com/2011/03/number-to-indian-currency-helper-for-rails</id>
+    <id>http://funonrails.com/2011/03/number-to-indian-currency-helper-for-rails</id>
     <content type="html"><![CDATA[<blockquote><p>rails has built in <code>number_to_currency</code> helper which takes options like unit, delimeter, seperator which displays foreign currency correctly but somehow it is not best suited for indian currency.</p></blockquote>
 
 <p>Below is how we managed 2 years ago to display indian currency formatted properly with comma as seperator. personally i think it could be more better than what it is currently ;)</p>
@@ -120,9 +120,9 @@ helper.number_to_indian_currency(9921)
   
   <entry>
     <title type="html"><![CDATA[Accessing Helper modules in rails]]></title>
-    <link href="funonrails.com/2010/12/accessing-helper-modules-in-rails/"/>
+    <link href="http://funonrails.com/2010/12/accessing-helper-modules-in-rails/"/>
     <updated>2010-12-06T15:51:00+05:30</updated>
-    <id>funonrails.com/2010/12/accessing-helper-modules-in-rails</id>
+    <id>http://funonrails.com/2010/12/accessing-helper-modules-in-rails</id>
     <content type="html"><![CDATA[<p>Methods defined in Helper modules can directly accessed in rails views because this is what they are pretended for but we often come across with situations where we wanted to use some helper methods in controllers, views, models and mailers and obvious we don&rsquo;t want to repeat same lines of code everywhere which also rail does not permit. forgotten DRY? Oh then how to do achieve same without violating rails principle.</p>
 
 <p>Certainly there are ways to do this ..</p>
@@ -183,9 +183,9 @@ class Notifier &lt; ActionMailer::Base</p>
   
   <entry>
     <title type="html"><![CDATA[Render partial or view from another controller]]></title>
-    <link href="funonrails.com/2009/05/render-partial-or-view-from-another/"/>
+    <link href="http://funonrails.com/2009/05/render-partial-or-view-from-another/"/>
     <updated>2009-05-22T19:50:00+05:30</updated>
-    <id>funonrails.com/2009/05/render-partial-or-view-from-another</id>
+    <id>http://funonrails.com/2009/05/render-partial-or-view-from-another</id>
     <content type="html"><![CDATA[<p>To render view files from another controller&rsquo;s view files</p>
 
 <h2>In rail 2.3</h2>

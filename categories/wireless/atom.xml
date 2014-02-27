@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: wireless | Fun On Rails]]></title>
-  <link href="funonrails.com/categories/wireless/atom.xml" rel="self"/>
-  <link href="funonrails.com/"/>
-  <updated>2014-02-24T16:29:31+05:30</updated>
-  <id>funonrails.com/</id>
+  <link href="http://funonrails.com/categories/wireless/atom.xml" rel="self"/>
+  <link href="http://funonrails.com/"/>
+  <updated>2014-02-27T15:02:56+05:30</updated>
+  <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
     <email><![CDATA[sandip@funonrails.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Getting wired and wireless working on ubuntu 9.0.4]]></title>
-    <link href="funonrails.com/2009/12/getting-wired-and-wireless-working-on-ubuntu/"/>
+    <link href="http://funonrails.com/2009/12/getting-wired-and-wireless-working-on-ubuntu/"/>
     <updated>2009-12-14T15:39:00+05:30</updated>
-    <id>funonrails.com/2009/12/getting-wired-and-wireless-working-on-ubuntu</id>
+    <id>http://funonrails.com/2009/12/getting-wired-and-wireless-working-on-ubuntu</id>
     <content type="html"><![CDATA[<p>It might be the case that earlier wireless was working and then it stopped working</p>
 
 <p>Follow the simple steps here&hellip;.</p>

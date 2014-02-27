@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: ruby | Fun On Rails]]></title>
-  <link href="funonrails.com/categories/ruby/atom.xml" rel="self"/>
-  <link href="funonrails.com/"/>
-  <updated>2014-02-24T16:29:31+05:30</updated>
-  <id>funonrails.com/</id>
+  <link href="http://funonrails.com/categories/ruby/atom.xml" rel="self"/>
+  <link href="http://funonrails.com/"/>
+  <updated>2014-02-27T15:02:56+05:30</updated>
+  <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
     <email><![CDATA[sandip@funonrails.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[ruby enumerable & to_proc (ampersond & symbol shortcut)]]></title>
-    <link href="funonrails.com/2012/02/ruby-enumerable-toproc-ampersond-colon/"/>
+    <link href="http://funonrails.com/2012/02/ruby-enumerable-toproc-ampersond-colon/"/>
     <updated>2012-02-23T02:09:00+05:30</updated>
-    <id>funonrails.com/2012/02/ruby-enumerable-toproc-ampersond-colon</id>
+    <id>http://funonrails.com/2012/02/ruby-enumerable-toproc-ampersond-colon</id>
     <content type="html"><![CDATA[<p>Basically Enumerable mixin gives collection classes a variety of traverse, search, sort methods.</p>
 
 <p><strong>Understanding ruby blocks</strong></p>
@@ -119,9 +119,9 @@ q.map(&amp;:even?.to_proc)</p>
   
   <entry>
     <title type="html"><![CDATA[puts, to_s and inspect on ruby object]]></title>
-    <link href="funonrails.com/2012/01/puts-tos-and-inspect-on-ruby-object/"/>
+    <link href="http://funonrails.com/2012/01/puts-tos-and-inspect-on-ruby-object/"/>
     <updated>2012-01-31T01:07:00+05:30</updated>
-    <id>funonrails.com/2012/01/puts-tos-and-inspect-on-ruby-object</id>
+    <id>http://funonrails.com/2012/01/puts-tos-and-inspect-on-ruby-object</id>
     <content type="html"><![CDATA[<p><code>puts</code> converts ruby object into string by invoking to_s method on object. The default to_s prints the object&rsquo;s class and an encoding of the object id. In order to print human readable form of object use inspect
 <code>ruby
 locs = Location.find_by_sql('select * from locations')
@@ -156,9 +156,9 @@ end</p>
   
   <entry>
     <title type="html"><![CDATA[Bugging around Active Support's Class.class_attribute extension]]></title>
-    <link href="funonrails.com/2011/12/bugging-around-active-supports/"/>
+    <link href="http://funonrails.com/2011/12/bugging-around-active-supports/"/>
     <updated>2011-12-28T19:14:00+05:30</updated>
-    <id>funonrails.com/2011/12/bugging-around-active-supports</id>
+    <id>http://funonrails.com/2011/12/bugging-around-active-supports</id>
     <content type="html"><![CDATA[<p>We all know Active Support library constantly keeps adding new extensions to ruby core library and hence rails framework.
 Do you know now inside ruby class we can have class_attribute placeholder.</p>
 
@@ -213,9 +213,9 @@ p.help #=> &ldquo;Got a second!&rdquo;
   
   <entry>
     <title type="html"><![CDATA[Dynamic methods inside ruby classes]]></title>
-    <link href="funonrails.com/2011/12/dynamic-methods-inside-ruby-classes/"/>
+    <link href="http://funonrails.com/2011/12/dynamic-methods-inside-ruby-classes/"/>
     <updated>2011-12-22T17:54:00+05:30</updated>
-    <id>funonrails.com/2011/12/dynamic-methods-inside-ruby-classes</id>
+    <id>http://funonrails.com/2011/12/dynamic-methods-inside-ruby-classes</id>
     <content type="html"><![CDATA[<p>Ruby language is dynamic and robust. We can define methods inside ruby classes at runtime.</p>
 
 <p>```ruby
@@ -320,9 +320,9 @@ end
   
   <entry>
     <title type="html"><![CDATA[Active Record Inheritance in Rails (ARI)]]></title>
-    <link href="funonrails.com/2010/12/active-record-inheritance-in-rails-ari/"/>
+    <link href="http://funonrails.com/2010/12/active-record-inheritance-in-rails-ari/"/>
     <updated>2010-12-09T01:28:00+05:30</updated>
-    <id>funonrails.com/2010/12/active-record-inheritance-in-rails-ari</id>
+    <id>http://funonrails.com/2010/12/active-record-inheritance-in-rails-ari</id>
     <content type="html"><![CDATA[<p><a href="http://www.scribd.com/doc/44922200/Active-Record-Inheritance-ARI" style="display: block; font: 14px Helvetica,Arial,Sans-serif; margin: 12px auto 6px; text-decoration: underline;" title="View Active Record Inheritance (ARI) on Scribd">Active Record Inheritance (ARI)</a> <object data="http://d1.scribdassets.com/ScribdViewer.swf" height="600" id="doc_427046804884780" name="doc_427046804884780" style="outline: medium none;" type="application/x-shockwave-flash" width="100%">  <param name="movie" value="http://d1.scribdassets.com/ScribdViewer.swf">  <param name="wmode" value="opaque">   <param name="bgcolor" value="#ffffff">   <param name="allowFullScreen" value="true">   <param name="allowScriptAccess" value="always">   <param name="FlashVars" value="document_id=44922200&access_key=key-2ix0qbm381eltbaykpu7&page=1&viewMode=list">   <embed id="doc_427046804884780" name="doc_427046804884780" src="http://d1.scribdassets.com/ScribdViewer.swf?document_id=44922200&access_key=key-2ix0qbm381eltbaykpu7&page=1&viewMode=list" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" height="600" width="100%" wmode="opaque" bgcolor="#ffffff"></embed>  </object></p>
 ]]></content>
   </entry>
