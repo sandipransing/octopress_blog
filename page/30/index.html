@@ -9,8 +9,8 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Testing your active record methods using script/console Windows If you are using windows, you start the console by using this command: 1
-ruby script/ &hellip;">
+  <meta name="description" content="A tagging plugin for Rails applications that allows for custom tagging along dynamic contexts. Plugin Installation 1
+ruby script/plugin install git &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,6 +82,7 @@ ruby script/ &hellip;">
   <li><a href="/">Home</a></li>
   <li><a href="/about">About</a></li>
   <li><a href="/contact">Contact</a></li>
+  <li><a href="/ruby-on-rails-developers-in-india">ROR devs in india</a></li>
   <li><a href="/archives">Archives</a></li>
 </ul>
 
@@ -90,88 +91,6 @@ ruby script/ &hellip;">
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/05/working-with-rails-console/">Awesome: Working With the Rails Console and All the Tricks</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-05-08T16:03:00+05:30" pubdate data-updated="true">May 8<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Testing your active record methods using <em>script/console</em></p>
-
-<h4>Windows</h4>
-
-<p>If you are using windows, you start the console by using this command:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ruby script/console</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>Linux:</h4>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>./script/console</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Just use the following command whenever you make changes to your model objects:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>reload!</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Instead of accessing your MySQL database with</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mysql -u  -p</span></code></pre></td></tr></table></div></figure>
-
-
-<p>You can instead do</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>script/dbconsole</span></code></pre></td></tr></table></div></figure>
-
-
-<p>and if you database has a password, just do</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ruby script/dbconsole -p</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Connecting to different rails environments</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ruby script/dbconsole     # connect to development database (or $RAILS_ENV)
-</span><span class='line'>ruby script/dbconsole production    # connect to production database</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>

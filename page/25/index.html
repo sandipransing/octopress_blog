@@ -9,8 +9,7 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Command Here is the command which will give you OS name with version along with other detail information. 1
-cat /etc/*release* Example On my ubutnu &hellip;">
+  <meta name="description" content="Rails specifies conventions while creating models, controllers, migrations ( database tables ). Conventions for creating database tables Table name &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,6 +81,7 @@ cat /etc/*release* Example On my ubutnu &hellip;">
   <li><a href="/">Home</a></li>
   <li><a href="/about">About</a></li>
   <li><a href="/contact">Contact</a></li>
+  <li><a href="/ruby-on-rails-developers-in-india">ROR devs in india</a></li>
   <li><a href="/archives">Archives</a></li>
 </ul>
 
@@ -90,66 +90,6 @@ cat /etc/*release* Example On my ubutnu &hellip;">
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/10/how-to-find-os-x-version-on-linux/">How to Find OS X Version on Linux Machine</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-10-26T23:35:00+05:30" pubdate data-updated="true">Oct 26<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Command</h2>
-
-<p>Here is the command which will give you OS name with version along with other detail information.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cat /etc/*release*</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Example</h2>
-
-<p>On my ubutnu machine, It showed me :</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cat /etc/*release*
-</span><span class='line'>
-</span><span class='line'>DISTRIB_ID=Ubuntu
-</span><span class='line'>DISTRIB_RELEASE=8.10
-</span><span class='line'>DISTRIB_CODENAME=intrepid
-</span><span class='line'>DISTRIB_DESCRIPTION="Ubuntu 8.10"</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -427,6 +367,85 @@ To remove such <code>^M</code> characters,</p>
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>find . -type f -exec dos2unix {} \;</span></code></pre></td></tr></table></div></figure>
 
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/10/how-to-submit-sitemap-to-search-engines/">How to Submit Sitemap to Different Search Engines</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-10-01T22:57:00+05:30" pubdate data-updated="true">Oct 1<span>st</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>There are many ways that can be used to submit sitemap to search engines.</p>
+
+<p>Lets discuss approaches :</p>
+
+<h4>1. Put sitemap.xml in public folder and you are done</h4>
+
+<p>Crawlers will be finding <code>sitemap.xml</code> file through url
+<a href="http://yourdomain.com/sitemap.xml">http://yourdomain.com/sitemap.xml</a></p>
+
+<h4>2. There are many online sites which generates sitemaps for you</h4>
+
+<p><a href="http://www.xml-sitemaps.com/">http://www.xml-sitemaps.com/</a></p>
+
+<h4>3. Open following urls in browser</h4>
+
+<p>Make sure to add <code>sitemap url</code> of your website in-place of <code>XML_SITEMAP_PATH</code> in the below urls</p>
+
+<p><strong>a. Google submit</strong></p>
+
+<p><a href="http://www.google.com/webmasters/tools/ping?sitemap=XML_SITEMAP_PATH">http://www.google.com/webmasters/tools/ping?sitemap=XML_SITEMAP_PATH</a></p>
+
+<p><strong>b. Yahoo Submit</strong></p>
+
+<p><a href="http://search.yahooapis.com/SiteExplorerService/V1/ping?sitemap=XML_SITEMAP_PATH">http://search.yahooapis.com/SiteExplorerService/V1/ping?sitemap=XML_SITEMAP_PATH</a></p>
+
+<p><strong>c. Ask Submit</strong></p>
+
+<p><a href="http://submissions.ask.com/ping?sitemap=XML_SITEMAP_PATH">http://submissions.ask.com/ping?sitemap=XML_SITEMAP_PATH</a></p>
+
+<p><strong>d. Webmaster submit</strong></p>
+
+<p><a href="http://webmaster.live.com/ping.aspx?siteMap=XML_SITEMAP_PATH">http://webmaster.live.com/ping.aspx?siteMap=XML_SITEMAP_PATH</a></p>
+
+<h4>4. Best practice in rails to submit sitemap i.e. use of scheduled task (cron job)</h4>
+
+<p>Write a rake task that will perform following actions:</p>
+
+<ol>
+<li>Generate sitemap in rails public folder</li>
+<li>Submit <code>sitemap.xml</code> file to search engines</li>
+</ol>
+
+
+<p>Submitting sitemaps is already explained above and you just need to invoke above urls for each engine</p>
 </div>
   
   

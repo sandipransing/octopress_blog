@@ -9,7 +9,8 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="There are many ways that can be used to submit sitemap to search engines. Lets discuss approaches : 1. Put sitemap.xml in public folder and you are &hellip;">
+  <meta name="description" content="GEM install without rdoc 1
+gem install GEM_NAME –no-ri –no-rdoc Skip ri rdoc for all gem installation as i haven’t seen anyone using it. Edit gemrc &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +82,7 @@
   <li><a href="/">Home</a></li>
   <li><a href="/about">About</a></li>
   <li><a href="/contact">Contact</a></li>
+  <li><a href="/ruby-on-rails-developers-in-india">ROR devs in india</a></li>
   <li><a href="/archives">Archives</a></li>
 </ul>
 
@@ -89,85 +91,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/10/how-to-submit-sitemap-to-search-engines/">How to Submit Sitemap to Different Search Engines</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-10-01T22:57:00+05:30" pubdate data-updated="true">Oct 1<span>st</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>There are many ways that can be used to submit sitemap to search engines.</p>
-
-<p>Lets discuss approaches :</p>
-
-<h4>1. Put sitemap.xml in public folder and you are done</h4>
-
-<p>Crawlers will be finding <code>sitemap.xml</code> file through url
-<a href="http://yourdomain.com/sitemap.xml">http://yourdomain.com/sitemap.xml</a></p>
-
-<h4>2. There are many online sites which generates sitemaps for you</h4>
-
-<p><a href="http://www.xml-sitemaps.com/">http://www.xml-sitemaps.com/</a></p>
-
-<h4>3. Open following urls in browser</h4>
-
-<p>Make sure to add <code>sitemap url</code> of your website in-place of <code>XML_SITEMAP_PATH</code> in the below urls</p>
-
-<p><strong>a. Google submit</strong></p>
-
-<p><a href="http://www.google.com/webmasters/tools/ping?sitemap=XML_SITEMAP_PATH">http://www.google.com/webmasters/tools/ping?sitemap=XML_SITEMAP_PATH</a></p>
-
-<p><strong>b. Yahoo Submit</strong></p>
-
-<p><a href="http://search.yahooapis.com/SiteExplorerService/V1/ping?sitemap=XML_SITEMAP_PATH">http://search.yahooapis.com/SiteExplorerService/V1/ping?sitemap=XML_SITEMAP_PATH</a></p>
-
-<p><strong>c. Ask Submit</strong></p>
-
-<p><a href="http://submissions.ask.com/ping?sitemap=XML_SITEMAP_PATH">http://submissions.ask.com/ping?sitemap=XML_SITEMAP_PATH</a></p>
-
-<p><strong>d. Webmaster submit</strong></p>
-
-<p><a href="http://webmaster.live.com/ping.aspx?siteMap=XML_SITEMAP_PATH">http://webmaster.live.com/ping.aspx?siteMap=XML_SITEMAP_PATH</a></p>
-
-<h4>4. Best practice in rails to submit sitemap i.e. use of scheduled task (cron job)</h4>
-
-<p>Write a rake task that will perform following actions:</p>
-
-<ol>
-<li>Generate sitemap in rails public folder</li>
-<li>Submit <code>sitemap.xml</code> file to search engines</li>
-</ol>
-
-
-<p>Submitting sitemaps is already explained above and you just need to invoke above urls for each engine</p>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -581,6 +504,74 @@ i know this is a fucking pain in ass.. isn&rsquo;t it?</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>ruby script/server</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Thats, it !</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/09/installing-ruby-191/">Installing Ruby 1.9.1</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-09-29T19:05:00+05:30" pubdate data-updated="true">Sep 29<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Installing ruby <code>1.9.1</code> got very easy. Please follow these simple steps :</p>
+
+<h2>Download</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget ftp://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.1-p0.tar.gz</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Extract</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>tar -xvf ruby-1.9.1-p0.tar.gz</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Configure</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd ruby-1.9.1-p0
+</span><span class='line'>./configure</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Install</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>make
+</span><span class='line'>make test
+</span><span class='line'>sudo make install</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Thats, it !</p>

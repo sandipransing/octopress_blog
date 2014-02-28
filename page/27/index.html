@@ -9,8 +9,12 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Installing ruby 1.9.1 got very easy. Please follow these simple steps : Download 1
-wget ftp://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.1-p0.tar.gz &hellip;">
+  <meta name="description" content="I wanted to migrate my project from rails 2.1.0 to rails 2.3.3 so, i performed following steps, but it shows me memcached-client error. 1
+2
+3
+4
+5
+6 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,6 +86,7 @@ wget ftp://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.1-p0.tar.gz &hellip;">
   <li><a href="/">Home</a></li>
   <li><a href="/about">About</a></li>
   <li><a href="/contact">Contact</a></li>
+  <li><a href="/ruby-on-rails-developers-in-india">ROR devs in india</a></li>
   <li><a href="/archives">Archives</a></li>
 </ul>
 
@@ -90,74 +95,6 @@ wget ftp://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.1-p0.tar.gz &hellip;">
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/09/installing-ruby-191/">Installing Ruby 1.9.1</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-09-29T19:05:00+05:30" pubdate data-updated="true">Sep 29<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Installing ruby <code>1.9.1</code> got very easy. Please follow these simple steps :</p>
-
-<h2>Download</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>wget ftp://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.1-p0.tar.gz</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Extract</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>tar -xvf ruby-1.9.1-p0.tar.gz</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Configure</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd ruby-1.9.1-p0
-</span><span class='line'>./configure</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Install</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>make
-</span><span class='line'>make test
-</span><span class='line'>sudo make install</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Thats, it !</p>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -582,6 +519,77 @@ this release added nested forms complex associations in models.</p>
 
 <p>I am  always thankful to rails community for continuous improvements to rails core.
 Cheers, now rails is getting its way !</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/08/ruby-on-rails-search-engine/">Ruby on Rails Search Engine Optimization (SEO)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-08-17T16:16:00+05:30" pubdate data-updated="true">Aug 17<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Crawler</h2>
+
+<p>Search Engines ( like google, yahoo ) mainly uses crawlers for returning results.</p>
+
+<blockquote><p><code>Crawler</code> is the program which searches world wide web(www) and returns ranked pages.</p></blockquote>
+
+<h4>Techniques</h4>
+
+<p>Lets see what are the search engine optimization (SEO) techniques we can adopt so that your rails
+website pages will appear in search results.</p>
+
+<ol>
+<li>Title Of Page</li>
+<li>Meta tags</li>
+<li>Page URL</li>
+<li>Page Contents ( this includes anchors to other pages, headers, image titles and alt texts when image not found then normal texts )</li>
+</ol>
+
+
+<h4>robots.txt</h4>
+
+<p>We can easily skip some pages from search by mentioning them in <code>robots.txt</code> which is by default should be in application root.</p>
+
+<p>And Ofcourse, we can manage all this in rails very easily..</p>
+
+<h4>Howto?</h4>
+
+<p>We can have in rails :</p>
+
+<ol>
+<li>Dynamic page titles,</li>
+<li>Meta tags and</li>
+<li>Sexy perma URLs in rails</li>
+<li>Also, we can define some standard on page content development.</li>
+</ol>
+
 </div>
   
   
