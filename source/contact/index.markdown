@@ -1,12 +1,12 @@
 ---
 layout: page
 title: "contact"
-date: 2014-02-10 18:43
+date: 2009-09-21 18:43
 comments: false
 sharing: false
 footer: false
 ---
-I would be thankful for your suggestions or advice you give for the improvement of this blog !
+I would be very grateful for any feedback or suggestion you could give me for the improvement of this blog.
 
 <form method="post" action="http://www.emailmeform.com/fid.php?formid=622173" enctype="multipart/form-data" accept-charset="UTF-8">
 <table cellpadding="2" cellspacing="0" border="0" bgcolor="#FFFFFF">
