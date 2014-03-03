@@ -120,11 +120,13 @@
   </header>
 
 
-  <div class="entry-content"><p>Mongoid document supports array as field. array field in mongoid document is a ruby array but its quite complex to manage array field in rails forms.</p>
+  <div class="entry-content"><p>Mongoid document supports <code>array</code> field. Mongoid array field is a ruby <code>array</code> but it becomes quite complex to manage array field in rails forms.</p>
 
-<p>After lot of google and reading comments from stack-overflow at last i felt helpless. Finally after doing research on rails form helper object(form_for, fields_for) am pleased to get it working as expected :)</p>
+<p>I didn&rsquo;t find anything matching on google as well on stackoverflow hence decided to dig into rails form helpers (<code>form_for</code>, <code>fields_for</code>).</p>
 
-<p>In below example, product can have multiple categories</p>
+<p>Finally i am pleased to get it working as expected :)</p>
+
+<p>In below example, <code>product</code> can have multiple <code>categories</code> :</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -866,7 +868,7 @@ Rails Integration</p>
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;http://funonrails.com/search/label/rails3&#39;</span><span class="p">)</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;http://funonrails.com/categories/rails3&#39;</span><span class="p">)</span>
 </span><span class='line'><span class="n">url</span><span class="o">.</span><span class="n">host</span> <span class="c1">#=&gt; &quot;http://funonrails.com&quot;</span>
 </span><span class='line'><span class="n">url</span><span class="o">.</span><span class="n">port</span> <span class="c1">#=&gt; 80</span>
 </span></code></pre></td></tr></table></div></figure>
@@ -877,7 +879,7 @@ Rails Integration</p>
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;http://sandip:2121@funonrails.com/search/label/rails3&#39;</span><span class="p">)</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;http://sandip:2121@funonrails.com/categories/rails3&#39;</span><span class="p">)</span>
 </span><span class='line'><span class="n">url</span><span class="o">.</span><span class="n">user</span> <span class="c1">#=&gt; &quot;sandip&quot;</span>
 </span><span class='line'><span class="n">url</span><span class="o">.</span><span class="n">password</span> <span class="c1">#=&gt; &quot;2121&quot;</span>
 </span></code></pre></td></tr></table></div></figure>
@@ -901,13 +903,13 @@ Rails Integration</p>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">URI</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;http://sandip:2121@funonrails.com/search/label/rails3&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="c1">#=&gt; [&quot;http&quot;, &quot;sandip:2121&quot;, &quot;funonrails.com&quot;, nil, nil, &quot;/search/label/rails3&quot;, nil, nil, nil]</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">URI</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;http://sandip:2121@funonrails.com/categories/rails3&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; [&quot;http&quot;, &quot;sandip:2121&quot;, &quot;funonrails.com&quot;, nil, nil, &quot;/categories/rails3&quot;, nil, nil, nil]</span>
 </span><span class='line'>
 </span><span class='line'><span class="o">&lt;=&gt;</span> <span class="o">[</span><span class="no">Scheme</span><span class="p">,</span> <span class="no">Userinfo</span><span class="p">,</span> <span class="no">Host</span><span class="p">,</span> <span class="no">Port</span><span class="p">,</span> <span class="no">Registry</span><span class="p">,</span> <span class="no">Path</span><span class="p">,</span> <span class="no">Opaque</span><span class="p">,</span> <span class="no">Query</span><span class="p">,</span> <span class="no">Fragment</span><span class="o">]</span>
 </span><span class='line'>
-</span><span class='line'><span class="no">URI</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;http://funonrails.com&#39;</span><span class="p">,</span><span class="s1">&#39;search/label/rails3&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="c1">#=&gt; #&lt;URI::HTTP:0x7fbf9202efc8 URL:http://funonrails.com/search/label/rails3&gt;</span>
+</span><span class='line'><span class="no">URI</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;http://funonrails.com&#39;</span><span class="p">,</span><span class="s1">&#39;categories/rails3&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; #&lt;URI::HTTP:0x7fbf9202efc8 URL:http://funonrails.com/categories/rails3&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 

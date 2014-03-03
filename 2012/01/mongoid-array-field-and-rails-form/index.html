@@ -9,7 +9,7 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Mongoid document supports array as field. array field in mongoid document is a ruby array but its quite complex to manage array field in rails forms &hellip;">
+  <meta name="description" content="Mongoid document supports array field. Mongoid array field is a ruby array but it becomes quite complex to manage array field in rails forms. I didn& &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -117,11 +117,13 @@
   </header>
 
 
-<div class="entry-content"><p>Mongoid document supports array as field. array field in mongoid document is a ruby array but its quite complex to manage array field in rails forms.</p>
+<div class="entry-content"><p>Mongoid document supports <code>array</code> field. Mongoid array field is a ruby <code>array</code> but it becomes quite complex to manage array field in rails forms.</p>
 
-<p>After lot of google and reading comments from stack-overflow at last i felt helpless. Finally after doing research on rails form helper object(form_for, fields_for) am pleased to get it working as expected :)</p>
+<p>I didn&rsquo;t find anything matching on google as well on stackoverflow hence decided to dig into rails form helpers (<code>form_for</code>, <code>fields_for</code>).</p>
 
-<p>In below example, product can have multiple categories</p>
+<p>Finally i am pleased to get it working as expected :)</p>
+
+<p>In below example, <code>product</code> can have multiple <code>categories</code> :</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>

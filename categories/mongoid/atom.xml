@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mongoid | Fun On Rails]]></title>
   <link href="http://funonrails.com/categories/mongoid/atom.xml" rel="self"/>
   <link href="http://funonrails.com/"/>
-  <updated>2014-03-03T17:53:56+05:30</updated>
+  <updated>2014-03-03T18:50:35+05:30</updated>
   <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -18,7 +18,7 @@
     <link href="http://funonrails.com/2012/01/mongoid-embededin-and-array-field/"/>
     <updated>2012-01-20T01:12:00+05:30</updated>
     <id>http://funonrails.com/2012/01/mongoid-embededin-and-array-field</id>
-    <content type="html"><![CDATA[<p>Previous post explains on <a href="http://www.funonrails.com/2012/01/mongoid-array-field-and-rails-form.html">mongoid document array field and rails form implementation</a></p>
+    <content type="html"><![CDATA[<p>Previous post explains on <a href="http://www.funonrails.com/2012/01/mongoid-array-field-and-rails-form">mongoid document array field and rails form implementation</a></p>
 
 <p>Below example shows rails form integration of array field of embedded mongoid document</p>
 
@@ -100,11 +100,13 @@ view form will look like-
     <link href="http://funonrails.com/2012/01/mongoid-array-field-and-rails-form/"/>
     <updated>2012-01-19T23:59:00+05:30</updated>
     <id>http://funonrails.com/2012/01/mongoid-array-field-and-rails-form</id>
-    <content type="html"><![CDATA[<p>Mongoid document supports array as field. array field in mongoid document is a ruby array but its quite complex to manage array field in rails forms.</p>
+    <content type="html"><![CDATA[<p>Mongoid document supports <code>array</code> field. Mongoid array field is a ruby <code>array</code> but it becomes quite complex to manage array field in rails forms.</p>
 
-<p>After lot of google and reading comments from stack-overflow at last i felt helpless. Finally after doing research on rails form helper object(form_for, fields_for) am pleased to get it working as expected :)</p>
+<p>I didn&rsquo;t find anything matching on google as well on stackoverflow hence decided to dig into rails form helpers (<code>form_for</code>, <code>fields_for</code>).</p>
 
-<p>In below example, product can have multiple categories
+<p>Finally i am pleased to get it working as expected :)</p>
+
+<p>In below example, <code>product</code> can have multiple <code>categories</code> :
 <code>ruby
 class Product
   CATEGORIES = %w(Apparel Media Software Sports Agri Education)

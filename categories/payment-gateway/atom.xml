@@ -4,7 +4,7 @@
   <title><![CDATA[Category: payment gateway | Fun On Rails]]></title>
   <link href="http://funonrails.com/categories/payment-gateway/atom.xml" rel="self"/>
   <link href="http://funonrails.com/"/>
-  <updated>2014-03-03T17:53:56+05:30</updated>
+  <updated>2014-03-03T18:50:35+05:30</updated>
   <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -643,7 +643,7 @@ In this method gateway handles all steps required in payment transaction flow se
 <li><p>Server Integration Method (SIM)
 Here, Payment form and creditcard detail form resides on gateway site and all the steps in transaction carried out at gateway server</p></li>
 <li><p>Advance Integration Method (AIM)
-Provides full control of all the transaction steps at merchant server. Payment form resides on merchant side. merchnat server sends authorization and payment capture requests to gateway server where actual transaction takes place and response is sent back to merchant server to notify transaction status. To know detail integration on this click <a href="http://www.funonrails.com/2011/12/authorizenet-aim-payment-integration.html">here</a>.</p></li>
+Provides full control of all the transaction steps at merchant server. Payment form resides on merchant side. merchnat server sends authorization and payment capture requests to gateway server where actual transaction takes place and response is sent back to merchant server to notify transaction status. To know detail integration on this click <a href="http://www.funonrails.com/2011/12/authorizenet-aim-payment-integration">here</a>.</p></li>
 </ol>
 
 

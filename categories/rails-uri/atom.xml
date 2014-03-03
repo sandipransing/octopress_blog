@@ -4,7 +4,7 @@
   <title><![CDATA[Category: rails-uri | Fun On Rails]]></title>
   <link href="http://funonrails.com/categories/rails-uri/atom.xml" rel="self"/>
   <link href="http://funonrails.com/"/>
-  <updated>2014-03-03T17:53:56+05:30</updated>
+  <updated>2014-03-03T18:50:35+05:30</updated>
   <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -22,36 +22,36 @@
 
 <p>Parse string url
 <code>ruby
-url = URI.parse('http://funonrails.com/search/label/rails3')
+url = URI.parse('http://funonrails.com/categories/rails3')
 url.host #=&gt; "http://funonrails.com"
 url.port #=&gt; 80
 </code>
 URL with Basic Authentication
 <code>ruby
-url = URI.parse('http://sandip:2121@funonrails.com/search/label/rails3')
+url = URI.parse('http://sandip:2121@funonrails.com/categories/rails3')
 url.user #=&gt; "sandip"
 url.password #=&gt; "2121"
 </code></p>
 
 <p>Extracting urls form string paragraph
 ```ruby
-URI.extract(&lsquo;<a href="http://funonrails.com">http://funonrails.com</a> is rails blog authored by <a href="http://sandipransing.github.com">http://sandipransing.github.com</a> contact <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#47;&#x2f;&#115;&#x61;&#x6e;&#100;&#105;&#112;&#x40;&#102;&#x75;&#x6e;&#111;&#x6e;&#x72;&#x61;&#x69;&#108;&#115;&#x2e;&#99;&#111;&#109;">&#x2f;&#x2f;&#115;&#x61;&#x6e;&#x64;&#x69;&#112;&#x40;&#x66;&#117;&#x6e;&#111;&#110;&#x72;&#x61;&#x69;&#x6c;&#115;&#46;&#99;&#111;&#x6d;</a>&rsquo;)</p>
+URI.extract(&lsquo;<a href="http://funonrails.com">http://funonrails.com</a> is rails blog authored by <a href="http://sandipransing.github.com">http://sandipransing.github.com</a> contact <a href="&#109;&#97;&#x69;&#x6c;&#116;&#111;&#x3a;&#x2f;&#47;&#115;&#x61;&#x6e;&#x64;&#105;&#x70;&#64;&#102;&#x75;&#x6e;&#x6f;&#x6e;&#x72;&#97;&#105;&#108;&#115;&#x2e;&#x63;&#111;&#109;">&#47;&#47;&#115;&#x61;&#x6e;&#100;&#x69;&#x70;&#x40;&#x66;&#x75;&#110;&#111;&#110;&#x72;&#97;&#105;&#x6c;&#x73;&#46;&#99;&#x6f;&#x6d;</a>&rsquo;)</p>
 
-<h1>=> [&ldquo;<a href="http://funonrails.com">http://funonrails.com</a>&rdquo;, &ldquo;<a href="http://sandipransing.github.com">http://sandipransing.github.com</a>&rdquo;, &ldquo;<a href="&#x6d;&#x61;&#105;&#x6c;&#116;&#111;&#58;&#47;&#x2f;&#x73;&#x61;&#110;&#100;&#105;&#112;&#64;&#x66;&#x75;&#110;&#111;&#x6e;&#114;&#x61;&#105;&#x6c;&#x73;&#x2e;&#99;&#x6f;&#x6d;">&#x2f;&#47;&#115;&#x61;&#x6e;&#100;&#x69;&#x70;&#x40;&#102;&#117;&#110;&#x6f;&#x6e;&#114;&#x61;&#x69;&#x6c;&#115;&#46;&#99;&#x6f;&#109;</a>&rdquo;]</h1>
+<h1>=> [&ldquo;<a href="http://funonrails.com">http://funonrails.com</a>&rdquo;, &ldquo;<a href="http://sandipransing.github.com">http://sandipransing.github.com</a>&rdquo;, &ldquo;<a href="&#x6d;&#x61;&#105;&#x6c;&#116;&#x6f;&#x3a;&#47;&#x2f;&#x73;&#97;&#110;&#x64;&#x69;&#112;&#64;&#102;&#x75;&#x6e;&#x6f;&#110;&#x72;&#97;&#105;&#x6c;&#x73;&#x2e;&#x63;&#x6f;&#109;">&#x2f;&#47;&#x73;&#x61;&#x6e;&#100;&#105;&#112;&#64;&#102;&#117;&#x6e;&#111;&#x6e;&#114;&#97;&#x69;&#108;&#115;&#46;&#x63;&#111;&#x6d;</a>&rdquo;]</h1>
 
 <p>```</p>
 
 <p>Split &amp; Join URI
 ```ruby
-URI.split(&lsquo;<a href="http://sandip:2121@funonrails.com/search/label/rails3">http://sandip:2121@funonrails.com/search/label/rails3</a>&rsquo;)</p>
+URI.split(&lsquo;<a href="http://sandip:2121@funonrails.com/categories/rails3">http://sandip:2121@funonrails.com/categories/rails3</a>&rsquo;)</p>
 
-<h1>=> [&ldquo;http&rdquo;, &ldquo;sandip:2121&rdquo;, &ldquo;funonrails.com&rdquo;, nil, nil, &ldquo;/search/label/rails3&rdquo;, nil, nil, nil]</h1>
+<h1>=> [&ldquo;http&rdquo;, &ldquo;sandip:2121&rdquo;, &ldquo;funonrails.com&rdquo;, nil, nil, &ldquo;/categories/rails3&rdquo;, nil, nil, nil]</h1>
 
 <p>&lt;=> [Scheme, Userinfo, Host, Port, Registry, Path, Opaque, Query, Fragment]</p>
 
-<p>URI.join(&lsquo;<a href="http://funonrails.com">http://funonrails.com</a>&rsquo;,&lsquo;search/label/rails3&rsquo;)</p>
+<p>URI.join(&lsquo;<a href="http://funonrails.com">http://funonrails.com</a>&rsquo;,&lsquo;categories/rails3&rsquo;)</p>
 
-<h1>=> #&lt;URI::<a href="HTTP:0x7fbf9202efc8">HTTP:0x7fbf9202efc8</a> URL:<a href="http://funonrails.com/search/label/rails3">http://funonrails.com/search/label/rails3</a>></h1>
+<h1>=> #&lt;URI::<a href="HTTP:0x7fbf9202efc8">HTTP:0x7fbf9202efc8</a> URL:<a href="http://funonrails.com/categories/rails3">http://funonrails.com/categories/rails3</a>></h1>
 
 <p><code>
 Escape &amp; Unescape alias encode/decode URI
