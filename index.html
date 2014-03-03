@@ -327,19 +327,13 @@ So, Lets first understand about octopress framework and its features.</p>
   <div class="entry-content"><p>If your application is currently on any version of Rails 2.1.x,
 Then following changes needs to be done for upgrading your application to Rails <code>2.3.11</code></p>
 
-<ol>
-<li>First install Rails version <code>2.3.11</code></li>
-</ol>
-
+<p><strong>1. First install Rails version <code>2.3.11</code></strong></p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>gem install rails -v2.3.11</span></code></pre></td></tr></table></div></figure>
 
 
-<ol>
-<li>Freeze app ruby gems</li>
-</ol>
-
+<p><strong>2. Freeze app ruby gems</strong></p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>rake rails:freeze:gems</span></code></pre></td></tr></table></div></figure>
@@ -347,8 +341,9 @@ Then following changes needs to be done for upgrading your application to Rails 
 
 <p>Hopefully it should work for you but it gave me following error</p>
 
-<blockquote><p>undefined method `manage_gems&#8217; for Gem:Module
-3. Create sample rails 2.3.11 app</p></blockquote>
+<blockquote><p>undefined method `manage_gems&#8217; for Gem:Module</p></blockquote>
+
+<p><strong>3. Create sample rails 2.3.11 app</strong></p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>rails _2.3.11_ testsapp</span></code></pre></td></tr></table></div></figure>

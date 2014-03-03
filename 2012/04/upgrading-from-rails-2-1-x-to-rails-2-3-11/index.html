@@ -121,19 +121,13 @@ Then following changes needs to be done for upgrading your application to Rails 
 <div class="entry-content"><p>If your application is currently on any version of Rails 2.1.x,
 Then following changes needs to be done for upgrading your application to Rails <code>2.3.11</code></p>
 
-<ol>
-<li>First install Rails version <code>2.3.11</code></li>
-</ol>
-
+<p><strong>1. First install Rails version <code>2.3.11</code></strong></p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>gem install rails -v2.3.11</span></code></pre></td></tr></table></div></figure>
 
 
-<ol>
-<li>Freeze app ruby gems</li>
-</ol>
-
+<p><strong>2. Freeze app ruby gems</strong></p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>rake rails:freeze:gems</span></code></pre></td></tr></table></div></figure>
@@ -141,8 +135,9 @@ Then following changes needs to be done for upgrading your application to Rails 
 
 <p>Hopefully it should work for you but it gave me following error</p>
 
-<blockquote><p>undefined method `manage_gems&#8217; for Gem:Module
-3. Create sample rails 2.3.11 app</p></blockquote>
+<blockquote><p>undefined method `manage_gems&#8217; for Gem:Module</p></blockquote>
+
+<p><strong>3. Create sample rails 2.3.11 app</strong></p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>rails _2.3.11_ testsapp</span></code></pre></td></tr></table></div></figure>
@@ -151,16 +146,13 @@ Then following changes needs to be done for upgrading your application to Rails 
 <!--more-->
 
 
-<p>Now, Copy all missing &ldquo;config/initializers/*&rdquo; files from new &ldquo;testapp to the application that to be upgraded.</p>
+<p>Now, Copy all missing &ldquo;config/initializers/*&rdquo; files from newly created &ldquo;testapp&rdquo; to the application that is to be upgraded.</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>cp testapp/config/initializers/* config/initializers</span></code></pre></td></tr></table></div></figure>
 
 
-<ol>
-<li>Change Rails version inside <em>environment.rb</em> to <em>Rails 2.3.11</em></li>
-</ol>
-
+<p><strong>4. Change Rails version inside <code>environment.rb</code> to <code>Rails 2.3.11</code></strong></p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -169,21 +161,16 @@ Then following changes needs to be done for upgrading your application to Rails 
 </span></code></pre></td></tr></table></div></figure>
 
 
-<ol>
-<li>Rename <i>app/controllers/application.rb</i> file to <i>app/controllers/application_controller.rb</i>
-<strong>OR</strong></li>
-</ol>
+<p><strong>5. Rename <i>app/controllers/application.rb</i> file to <i>app/controllers/application_controller.rb</i></strong></p>
 
+<p><strong>OR</strong></p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="ss">rails</span><span class="p">:</span><span class="ss">update</span><span class="p">:</span><span class="n">application_controller</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<ol>
-<li>Start rails server and fix the issues one by one.</li>
-</ol>
-
+<p><strong>6. Start rails server and fix the issues one by one</strong></p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">ruby</span> <span class="n">script</span><span class="o">/</span><span class="n">server</span>
