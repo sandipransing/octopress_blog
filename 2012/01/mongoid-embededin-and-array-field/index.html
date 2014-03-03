@@ -9,8 +9,7 @@
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="Previous post explains on mongoid document array field and rails form implementation
-Below example shows rails form integration of array field of &hellip;">
+  <meta name="description" content="Previous post explains on mongoid document array field and rails form implementation Below example shows rails form integration of array field of &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -118,9 +117,11 @@ Below example shows rails form integration of array field of &hellip;">
   </header>
 
 
-<div class="entry-content"><p>Previous post explains on <a href="http://www.funonrails.com/2012/01/mongoid-array-field-and-rails-form.html">mongoid document array field and rails form implementation</a>
-Below example shows rails form integration of array field of embedded mongoid document
-consider scenario, student embeds one family who has many assets</p>
+<div class="entry-content"><p>Previous post explains on <a href="http://www.funonrails.com/2012/01/mongoid-array-field-and-rails-form.html">mongoid document array field and rails form implementation</a></p>
+
+<p>Below example shows rails form integration of array field of embedded mongoid document</p>
+
+<p>Lets consider scenario that <code>student</code> embeds one <code>family</code> who has many <code>assets</code></p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -145,6 +146,9 @@ consider scenario, student embeds one family who has many assets</p>
 </span><span class='line'>  <span class="n">accepts_nested_attributes_for</span> <span class="ss">:family</span>
 </span><span class='line'><span class="k">end</span>
 </span></code></pre></td></tr></table></div></figure>
+
+
+<!--more-->
 
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>

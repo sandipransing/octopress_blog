@@ -4,7 +4,7 @@
   <title><![CDATA[Category: routes | Fun On Rails]]></title>
   <link href="http://funonrails.com/categories/routes/atom.xml" rel="self"/>
   <link href="http://funonrails.com/"/>
-  <updated>2014-03-03T16:50:34+05:30</updated>
+  <updated>2014-03-03T17:41:54+05:30</updated>
   <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -18,9 +18,54 @@
     <link href="http://funonrails.com/2012/01/dynamic-bounded-parameters-and-named-scopes/"/>
     <updated>2012-01-31T02:43:00+05:30</updated>
     <id>http://funonrails.com/2012/01/dynamic-bounded-parameters-and-named-scopes</id>
-    <content type="html"><![CDATA[<div class='post'>
-Rails routes can be customized as your own routes with parameters but first you should understand how routes behaves. <br/> <b>Adding dynamic parameters to routes </b> <br/>Here exact parameters are matched to route and presence of each parameter is mandatory in order to construct urls. blank parameter will raise RoutingError exception. <br/>Exact matched named route declared as -  <pre class=ruby>  match ':a/:b/:c', :to => 'home#index', :as => :q </pre> now go to the rails console - <pre class=ruby> ruby-1.9.3-head :005 > app.q_url(:a, :b, :c)   => "http://www.example.com/a/b/c"        ruby-1.9.3-head :006 > app.q_url(:a, :b, '')   ActionController::RoutingError: No route matches {:controller=>"home", :a=>:a, :b=>:b, :c=>""} </pre><b>Bound parameters to named routes</b><br/>If you are too sure that certain parameter can be blank then you can define it as optional parameter inside route -  <br/><pre class=ruby> match ':a/:b(/:c)', :to => 'home#index', :as => :q </pre><b>rails console</b><pre class=ruby> ruby-1.9.3-head :010 > app.q_url(:a, :b, '')   => "http://www.example.com/a/b?c="   ruby-1.9.3-head :011 > app.q_url(:a, :b)   => "http://www.example.com/a/b" </pre></div>
+    <content type="html"><![CDATA[<p>Rails routes can be customized to include your own parameters inside it. Lets first understand how named routes works:</p>
 
+<h2>Adding dynamic parameters to routes</h2>
+
+<p>Here exact parameters are matched to route and presence of each parameter is mandatory in order to construct urls. If blank parameter is supplied then it will raise <code>RoutingError</code> exception.</p>
+
+<h2>Exact matched named route declared as :</h2>
+
+<p><code>ruby
+match ':a/:b/:c', :to =&gt; 'home#index', :as =&gt; :q
+</code></p>
+
+<h4>rails console :</h4>
+
+<p>```ruby
+app.q_url(:a, :b, :c)</p>
+
+<h1>=> &ldquo;<a href="http://www.example.com/a/b/c">http://www.example.com/a/b/c</a>&rdquo;</h1>
+
+<p>app.q_url(:a, :b, &lsquo;&rsquo;)</p>
+
+<h1>=> ActionController::RoutingError: No route matches {:controller=>&ldquo;home&rdquo;, :a=>:a, :b=>:b, :c=>&ldquo;&rdquo;}</h1>
+
+<p>```</p>
+
+<!--more-->
+
+
+<h2>Bound parameters to named routes</h2>
+
+<p>If you are sure that certain parameters can be blank then you can define them as optional parameter inside route</p>
+
+<p><code>ruby
+match ':a/:b(/:c)', :to =&gt; 'home#index', :as =&gt; :q
+</code></p>
+
+<h4>rails console :</h4>
+
+<p>`&ldquo;ruby
+app.q_url(:a, :b, &rdquo;)</p>
+
+<h1>=> &ldquo;<a href="http://www.example.com/a/b?c=">http://www.example.com/a/b?c=</a>&rdquo;</h1>
+
+<p>app.q_url(:a, :b)</p>
+
+<h1>=> &ldquo;<a href="http://www.example.com/a/b">http://www.example.com/a/b</a>&rdquo;</h1>
+
+<p>```</p>
 ]]></content>
   </entry>
   

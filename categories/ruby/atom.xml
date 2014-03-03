@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby | Fun On Rails]]></title>
   <link href="http://funonrails.com/categories/ruby/atom.xml" rel="self"/>
   <link href="http://funonrails.com/"/>
-  <updated>2014-03-03T16:50:34+05:30</updated>
+  <updated>2014-03-03T17:41:54+05:30</updated>
   <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -38,8 +38,12 @@ b.call(&lsquo;sandip&rsquo;)#=> hello sandip</p>
 
 <p>c = proc {|user| puts user }
 c.call(&lsquo;sandip&rsquo;) #=> sandip
-```
-<strong>Passing block to enumerator</strong></p>
+```</p>
+
+<!--more-->
+
+
+<p><strong>Passing block to enumerator</strong></p>
 
 <p>Lets assume we have collection array of strings and we want to print it
 ```ruby
@@ -139,6 +143,9 @@ end</p>
 <h1>&lt;Location:0x000000055bb058></h1>
 
 <p>```</p>
+
+<!--more-->
+
 
 <p>puts object followed by subsequent invoke of inspect method outputs readable object
 ```ruby

@@ -4,7 +4,7 @@
   <title><![CDATA[Fun On Rails]]></title>
   <link href="http://funonrails.com/atom.xml" rel="self"/>
   <link href="http://funonrails.com/"/>
-  <updated>2014-03-03T16:50:34+05:30</updated>
+  <updated>2014-03-03T17:41:54+05:30</updated>
   <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -30,6 +30,9 @@ Goto <code>blogger admin area</code> and then go to <code>settings &gt;&gt; othe
 <p><img src="http://funonrails.com/images/export-blog.png" /></p>
 
 <p>If you still finding some problem with exporting then see <a href="http://www.freetech4teachers.com/2013/01/how-to-export-your-blogger-and.html">here</a></p>
+
+<!--more-->
+
 
 <h2>Formatting posts for octopress</h2>
 
@@ -64,12 +67,18 @@ After successful run, this will be creating static markdown octopress formatted 
     <link href="http://funonrails.com/2014/02/writing-octopress-blog-posts-using-markdown/"/>
     <updated>2014-02-07T19:20:07+05:30</updated>
     <id>http://funonrails.com/2014/02/writing-octopress-blog-posts-using-markdown</id>
-    <content type="html"><![CDATA[<p><strong>Hello Octopress!</strong>
-This an example post for more information see:</p>
+    <content type="html"><![CDATA[<p>This is an example post which shows various markdown syntax that can be used while writing octopress markdown posts.</p>
+
+<h2>Bold text</h2>
+
+<p><strong>Hello Octopress!</strong></p>
 
 <h2>Blockquote</h2>
 
 <blockquote><p>Don&#8217;t stop when you&#8217;re tired, stop when you&#8217;re done.</p><footer><strong>@TheJeetBanerjee</strong> <cite><a href='http://twitter.com/TheJeetBanerjee'>twitter.com/TheJeetBanerjee/&hellip;</a></cite></footer></blockquote>
+
+
+<!--more-->
 
 
 <blockquote><p>We have to go for what we think we&#8217;re fully capable of, not limit ourselves by what we&#8217;ve been in the past.</p><footer><strong>@Vivek Paul</strong></footer></blockquote>
@@ -93,12 +102,12 @@ This an example post for more information see:</p>
 <h2>Console</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">$</span> sudo apt-get install cakePHP
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">cakePHP</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">$</span> git clone git@github.com:imathis/octopress.git <span class="c"># fork octopress</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">git</span> <span class="nb">clone</span> <span class="n">git</span><span class="vi">@github</span><span class="o">.</span><span class="n">com</span><span class="ss">:imathis</span><span class="o">/</span><span class="n">octopress</span><span class="o">.</span><span class="n">git</span> <span class="c1"># fork octopress</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -106,8 +115,14 @@ This an example post for more information see:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
 </pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="s">&#39;.help&#39;</span><span class="p">).</span><span class="nx">html</span> <span class="s">&quot;(?)&quot;</span>
 </span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s">&quot;print something&quot;</span>
+</span><span class='line'><span class="c1"># sum function</span>
+</span><span class='line'><span class="nv">sum = </span><span class="nf">(a, b) -&gt;</span>
+</span><span class='line'>  <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -184,6 +199,9 @@ So, Lets first understand about octopress framework and its features.</p>
 <h2>Octopress</h2>
 
 <blockquote><p>Octopress is a framework designed by Brandon Mathis for Jekyll, the blog aware static site generator. If you wanted to know more then it can be found <a href="http://octopress.org/2011/07/23/octopress-20-surfaces/">here</a></p></blockquote>
+
+<!--more-->
+
 
 <h2>Octopress Setup</h2>
 
@@ -326,14 +344,14 @@ If you want more help on this then please see <a href="http://octopress.org/docs
 
 <p>But still you can make use of <code>block parameter</code> to conditions to have <code>dynamic query conditions</code> inside associations.</p>
 
-<p>Below line explains <strong>how to</strong> define dynamic associations &ndash;</p>
+<p>Below line explains <strong>how to</strong> define dynamic associations :</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">has_one</span> <span class="ss">:code_sequence</span><span class="p">,</span> <span class="ss">:class_name</span> <span class="o">=&gt;</span> <span class="s1">&#39;Sequence&#39;</span><span class="p">,</span> <span class="ss">:conditions</span> <span class="o">=&gt;</span> <span class="s1">&#39;kind = &quot;#{self.kind}&quot;&#39;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Please make a note that below code won&rsquo;t be working &ndash;</p>
+<p>Please make a note that below code will not work :</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">has_one</span> <span class="ss">:code_sequence</span><span class="p">,</span> <span class="ss">:class_name</span> <span class="o">=&gt;</span> <span class="s1">&#39;Sequence&#39;</span><span class="p">,</span> <span class="ss">:conditions</span> <span class="o">=&gt;</span> <span class="nb">proc</span> <span class="p">{</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span> <span class="o">[</span><span class="s1">&#39;kind = ?&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">kind</span><span class="o">]</span> <span class="p">}</span>
@@ -375,6 +393,9 @@ Then following changes needs to be done for upgrading your application to Rails 
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>rails _2.3.11_ testsapp</span></code></pre></td></tr></table></div></figure>
+
+
+<!--more-->
 
 
 <p>Now, Copy all missing &ldquo;config/initializers/*&rdquo; files from new &ldquo;testapp to the application that to be upgraded.</p>
@@ -456,6 +477,9 @@ Then following changes needs to be done for upgrading your application to Rails 
 </span><span class='line'><span class="n">c</span> <span class="o">=</span> <span class="nb">proc</span> <span class="p">{</span><span class="o">|</span><span class="n">user</span><span class="o">|</span> <span class="nb">puts</span> <span class="n">user</span> <span class="p">}</span>
 </span><span class='line'><span class="n">c</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;sandip&#39;</span><span class="p">)</span> <span class="c1">#=&gt; sandip</span>
 </span></code></pre></td></tr></table></div></figure>
+
+
+<!--more-->
 
 
 <p><strong>Passing block to enumerator</strong></p>
@@ -583,8 +607,59 @@ Yes, there is shortcut to have block passed to enumerators on the fly using ampe
     <link href="http://funonrails.com/2012/01/dynamic-bounded-parameters-and-named-scopes/"/>
     <updated>2012-01-31T02:43:00+05:30</updated>
     <id>http://funonrails.com/2012/01/dynamic-bounded-parameters-and-named-scopes</id>
-    <content type="html"><![CDATA[<div class='post'>
-Rails routes can be customized as your own routes with parameters but first you should understand how routes behaves. <br/> <b>Adding dynamic parameters to routes </b> <br/>Here exact parameters are matched to route and presence of each parameter is mandatory in order to construct urls. blank parameter will raise RoutingError exception. <br/>Exact matched named route declared as -  <pre class=ruby>  match ':a/:b/:c', :to => 'home#index', :as => :q </pre> now go to the rails console - <pre class=ruby> ruby-1.9.3-head :005 > app.q_url(:a, :b, :c)   => "http://www.example.com/a/b/c"        ruby-1.9.3-head :006 > app.q_url(:a, :b, '')   ActionController::RoutingError: No route matches {:controller=>"home", :a=>:a, :b=>:b, :c=>""} </pre><b>Bound parameters to named routes</b><br/>If you are too sure that certain parameter can be blank then you can define it as optional parameter inside route -  <br/><pre class=ruby> match ':a/:b(/:c)', :to => 'home#index', :as => :q </pre><b>rails console</b><pre class=ruby> ruby-1.9.3-head :010 > app.q_url(:a, :b, '')   => "http://www.example.com/a/b?c="   ruby-1.9.3-head :011 > app.q_url(:a, :b)   => "http://www.example.com/a/b" </pre></div>
+    <content type="html"><![CDATA[<p>Rails routes can be customized to include your own parameters inside it. Lets first understand how named routes works:</p>
+
+<h2>Adding dynamic parameters to routes</h2>
+
+<p>Here exact parameters are matched to route and presence of each parameter is mandatory in order to construct urls. If blank parameter is supplied then it will raise <code>RoutingError</code> exception.</p>
+
+<h2>Exact matched named route declared as :</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">match</span> <span class="s1">&#39;:a/:b/:c&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;home#index&#39;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:q</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>rails console :</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">app</span><span class="o">.</span><span class="n">q_url</span><span class="p">(</span><span class="ss">:a</span><span class="p">,</span> <span class="ss">:b</span><span class="p">,</span> <span class="ss">:c</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; &quot;http://www.example.com/a/b/c&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">app</span><span class="o">.</span><span class="n">q_url</span><span class="p">(</span><span class="ss">:a</span><span class="p">,</span> <span class="ss">:b</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; ActionController::RoutingError: No route matches {:controller=&gt;&quot;home&quot;, :a=&gt;:a, :b=&gt;:b, :c=&gt;&quot;&quot;}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<!--more-->
+
+
+<h2>Bound parameters to named routes</h2>
+
+<p>If you are sure that certain parameters can be blank then you can define them as optional parameter inside route</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">match</span> <span class="s1">&#39;:a/:b(/:c)&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;home#index&#39;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:q</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>rails console :</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">app</span><span class="o">.</span><span class="n">q_url</span><span class="p">(</span><span class="ss">:a</span><span class="p">,</span> <span class="ss">:b</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; &quot;http://www.example.com/a/b?c=&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">app</span><span class="o">.</span><span class="n">q_url</span><span class="p">(</span><span class="ss">:a</span><span class="p">,</span> <span class="ss">:b</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; &quot;http://www.example.com/a/b&quot; </span>
+</span></code></pre></td></tr></table></div></figure>
 
 ]]></content>
   </entry>
@@ -622,6 +697,9 @@ Rails routes can be customized as your own routes with parameters but first you 
 </span></code></pre></td></tr></table></div></figure>
 
 
+<!--more-->
+
+
 <p>puts object followed by subsequent invoke of inspect method outputs readable object</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -650,7 +728,7 @@ Rails routes can be customized as your own routes with parameters but first you 
 
 <p>In rails 3, <code>FasterCSV</code> comes as default and below is the way to upload csv files inside rails applications. The code below will also show you how to generate csv in memory, parse on csv data, skip header, iterate over records, save records inside db, export upload error file and many more.</p>
 
-<p>First, View to upload file</p>
+<h4>Upload form</h4>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -663,8 +741,12 @@ Rails routes can be customized as your own routes with parameters but first you 
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Assume upload_url maps to import action of customers controller
-Controller code</p>
+<!--more-->
+
+
+<p>Assume <code>upload_url</code> maps to import action of customers controller</p>
+
+<h4>Controller code</h4>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -749,7 +831,7 @@ Controller code</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Customer model</p>
+<h4>Customer model</h4>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -806,8 +888,9 @@ Controller code</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Export customer records in CSV format
-Below code loads customer records from database then generate csv_data inside memory and exports data to browser using send_data method.</p>
+<h2>Export customer records in CSV format</h2>
+
+<p>Below code loads customer records from database then generate <code>csv_data</code> inside memory and exports data to browser using <code>send_data</code> method.</p>
 
 <p>Note: As we are not writing on file system hence code can easily work heroku.</p>
 
@@ -851,9 +934,11 @@ Below code loads customer records from database then generate csv_data inside me
     <link href="http://funonrails.com/2012/01/mongoid-embededin-and-array-field/"/>
     <updated>2012-01-20T01:12:00+05:30</updated>
     <id>http://funonrails.com/2012/01/mongoid-embededin-and-array-field</id>
-    <content type="html"><![CDATA[<p>Previous post explains on <a href="http://www.funonrails.com/2012/01/mongoid-array-field-and-rails-form.html">mongoid document array field and rails form implementation</a>
-Below example shows rails form integration of array field of embedded mongoid document
-consider scenario, student embeds one family who has many assets</p>
+    <content type="html"><![CDATA[<p>Previous post explains on <a href="http://www.funonrails.com/2012/01/mongoid-array-field-and-rails-form.html">mongoid document array field and rails form implementation</a></p>
+
+<p>Below example shows rails form integration of array field of embedded mongoid document</p>
+
+<p>Lets consider scenario that <code>student</code> embeds one <code>family</code> who has many <code>assets</code></p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -878,6 +963,9 @@ consider scenario, student embeds one family who has many assets</p>
 </span><span class='line'>  <span class="n">accepts_nested_attributes_for</span> <span class="ss">:family</span>
 </span><span class='line'><span class="k">end</span>
 </span></code></pre></td></tr></table></div></figure>
+
+
+<!--more-->
 
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -991,6 +1079,9 @@ consider scenario, student embeds one family who has many assets</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
+<!--more-->
+
+
 <p>Here is form code</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -1072,8 +1163,12 @@ consider scenario, student embeds one family who has many assets</p>
 To know more about how to get started on it click <a href="http://www.funonrails.com/2011/11/rails-311-haml-sass-jquery-coffee-rails">here</a>.</p>
 
 <p>Below post will help you out in getting started bootstrap css with rails app. One need to add below files to helpers directory.
-MainForm can be used as base version of form builder and can be overriden for its subsequent use inside other custom form builders.
-1. Main Form</p>
+MainForm can be used as base version of form builder and can be overriden for its subsequent use inside other custom form builders.</p>
+
+<ol>
+<li>Main Form</li>
+</ol>
+
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -1204,7 +1299,11 @@ MainForm can be used as base version of form builder and can be overriden for it
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>ZeroForm is custom form builder which is inherited from main_form and its going to be actually used inside forms. Feel free to make custom form related changes inside this</p>
+<!--more-->
+
+
+<p>ZeroForm is custom form builder which is inherited from <code>main_form</code> and its going to be actually used inside forms.
+Feel free to make custom form related changes inside this</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>

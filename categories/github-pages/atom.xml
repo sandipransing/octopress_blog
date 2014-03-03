@@ -4,7 +4,7 @@
   <title><![CDATA[Category: github-pages | Fun On Rails]]></title>
   <link href="http://funonrails.com/categories/github-pages/atom.xml" rel="self"/>
   <link href="http://funonrails.com/"/>
-  <updated>2014-03-03T16:50:34+05:30</updated>
+  <updated>2014-03-03T17:41:54+05:30</updated>
   <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -26,6 +26,9 @@ So, Lets first understand about octopress framework and its features.</p>
 <h2>Octopress</h2>
 
 <blockquote><p>Octopress is a framework designed by Brandon Mathis for Jekyll, the blog aware static site generator. If you wanted to know more then it can be found <a href="http://octopress.org/2011/07/23/octopress-20-surfaces/">here</a></p></blockquote>
+
+<!--more-->
+
 
 <h2>Octopress Setup</h2>
 

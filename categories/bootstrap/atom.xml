@@ -4,7 +4,7 @@
   <title><![CDATA[Category: bootstrap | Fun On Rails]]></title>
   <link href="http://funonrails.com/categories/bootstrap/atom.xml" rel="self"/>
   <link href="http://funonrails.com/"/>
-  <updated>2014-03-03T16:50:34+05:30</updated>
+  <updated>2014-03-03T17:41:54+05:30</updated>
   <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -22,24 +22,25 @@
 To know more about how to get started on it click <a href="http://www.funonrails.com/2011/11/rails-311-haml-sass-jquery-coffee-rails">here</a>.</p>
 
 <p>Below post will help you out in getting started bootstrap css with rails app. One need to add below files to helpers directory.
-MainForm can be used as base version of form builder and can be overriden for its subsequent use inside other custom form builders.
-1. Main Form
-```ruby</p>
+MainForm can be used as base version of form builder and can be overriden for its subsequent use inside other custom form builders.</p>
+
+<ol>
+<li>Main Form
+```ruby
 
 <h1>app/helpers/main_form.rb</h1>
 
 <p>class MainForm &lt; ActionView::Helpers::FormBuilder # NestedForm::Builder
-  CSS = {</p>
+CSS = {
+ :label => &lsquo;label-control&rsquo;,
+ :hint => &lsquo;hint&rsquo;,
+ :hint_ptr => &lsquo;hint-pointer&rsquo;,
+ :error => &lsquo;help-inline&rsquo;,
+ :field_error => &lsquo;error&rsquo;,
+ :main_class => &lsquo;clearfix&rsquo;
+}</p></li>
+</ol>
 
-<pre><code>:label =&gt; 'label-control',
-:hint =&gt; 'hint',
-:hint_ptr =&gt; 'hint-pointer',
-:error =&gt; 'help-inline',
-:field_error =&gt; 'error',
-:main_class =&gt; 'clearfix'
-</code></pre>
-
-<p>  }</p>
 
 <p>  FIELDS = %w(radio_button check_box text_field text_area password_field select file_field collection_select email_field date_select)</p>
 
@@ -125,7 +126,11 @@ hintT = @template.content_tag(:span, txt + hintPtr, {:class =&gt; CSS[:hint]}, f
 end<br/>
 ```</p>
 
-<p>ZeroForm is custom form builder which is inherited from main_form and its going to be actually used inside forms. Feel free to make custom form related changes inside this</p>
+<!--more-->
+
+
+<p>ZeroForm is custom form builder which is inherited from <code>main_form</code> and its going to be actually used inside forms.
+Feel free to make custom form related changes inside this</p>
 
 <p>```ruby</p>
 

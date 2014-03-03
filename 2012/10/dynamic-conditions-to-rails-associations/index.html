@@ -121,14 +121,14 @@
 
 <p>But still you can make use of <code>block parameter</code> to conditions to have <code>dynamic query conditions</code> inside associations.</p>
 
-<p>Below line explains <strong>how to</strong> define dynamic associations &ndash;</p>
+<p>Below line explains <strong>how to</strong> define dynamic associations :</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">has_one</span> <span class="ss">:code_sequence</span><span class="p">,</span> <span class="ss">:class_name</span> <span class="o">=&gt;</span> <span class="s1">&#39;Sequence&#39;</span><span class="p">,</span> <span class="ss">:conditions</span> <span class="o">=&gt;</span> <span class="s1">&#39;kind = &quot;#{self.kind}&quot;&#39;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Please make a note that below code won&rsquo;t be working &ndash;</p>
+<p>Please make a note that below code will not work :</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">has_one</span> <span class="ss">:code_sequence</span><span class="p">,</span> <span class="ss">:class_name</span> <span class="o">=&gt;</span> <span class="s1">&#39;Sequence&#39;</span><span class="p">,</span> <span class="ss">:conditions</span> <span class="o">=&gt;</span> <span class="nb">proc</span> <span class="p">{</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span> <span class="o">[</span><span class="s1">&#39;kind = ?&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">kind</span><span class="o">]</span> <span class="p">}</span>

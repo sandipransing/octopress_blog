@@ -4,7 +4,7 @@
   <title><![CDATA[Category: blogger | Fun On Rails]]></title>
   <link href="http://funonrails.com/categories/blogger/atom.xml" rel="self"/>
   <link href="http://funonrails.com/"/>
-  <updated>2014-03-03T16:50:34+05:30</updated>
+  <updated>2014-03-03T17:41:54+05:30</updated>
   <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -30,6 +30,9 @@ Goto <code>blogger admin area</code> and then go to <code>settings &gt;&gt; othe
 <p><img src="/images/export-blog.png" /></p>
 
 <p>If you still finding some problem with exporting then see <a href="http://www.freetech4teachers.com/2013/01/how-to-export-your-blogger-and.html">here</a></p>
+
+<!--more-->
+
 
 <h2>Formatting posts for octopress</h2>
 

@@ -141,77 +141,12 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Here is form code</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='haml'><span class='line'><span class="p">=</span> <span class="n">form_for</span><span class="p">(</span><span class="vi">@product</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
-</span><span class='line'>  <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:name</span>
-</span><span class='line'>  <span class="p">-</span> <span class="ss">Product</span><span class="p">:</span><span class="ss">:CATEGORIES</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">category</span><span class="o">|</span>
-</span><span class='line'>    <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">check_box</span> <span class="ss">:categories</span><span class="p">,</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&quot;product[categories][]&quot;</span><span class="p">,</span> <span class="n">category</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Here is products controller code</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">ProductsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
-</span><span class='line'>  <span class="n">before_filter</span> <span class="ss">:load_product</span><span class="p">,</span> <span class="ss">:only</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="ss">:new</span><span class="p">,</span> <span class="ss">:create</span><span class="o">]</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="o">[.</span><span class="n">.</span><span class="o">.]</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1"># We don&#39;t need new action to be defined</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">create</span>
-</span><span class='line'>    <span class="vi">@product</span><span class="o">.</span><span class="n">attributes</span> <span class="o">=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:product</span><span class="o">]</span>
-</span><span class='line'>    <span class="c1"># Here we need to reject blank categories</span>
-</span><span class='line'>    <span class="vi">@product</span><span class="o">.</span><span class="n">categories</span><span class="o">.</span><span class="n">reject!</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:blank?</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">if</span> <span class="vi">@product</span><span class="o">.</span><span class="n">save</span>
-</span><span class='line'>      <span class="n">flash</span><span class="o">[</span><span class="ss">:notice</span><span class="o">]</span> <span class="o">=</span> <span class="no">I18n</span><span class="o">.</span><span class="n">t</span><span class="p">(</span><span class="s1">&#39;product.create.success&#39;</span><span class="p">)</span>
-</span><span class='line'>      <span class="n">redirect_to</span><span class="p">(</span><span class="ss">:action</span> <span class="o">=&gt;</span> <span class="ss">:index</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">else</span>
-</span><span class='line'>      <span class="n">render</span> <span class="ss">:action</span> <span class="o">=&gt;</span> <span class="ss">:new</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="o">[.</span><span class="n">.</span><span class="o">.]</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kp">private</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">load_product</span>
-</span><span class='line'>    <span class="vi">@product</span> <span class="o">=</span> <span class="no">Product</span><span class="o">.</span><span class="n">new</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/2012/01/mongoid-array-field-and-rails-form/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -249,8 +184,12 @@
 To know more about how to get started on it click <a href="http://www.funonrails.com/2011/11/rails-311-haml-sass-jquery-coffee-rails">here</a>.</p>
 
 <p>Below post will help you out in getting started bootstrap css with rails app. One need to add below files to helpers directory.
-MainForm can be used as base version of form builder and can be overriden for its subsequent use inside other custom form builders.
-1. Main Form</p>
+MainForm can be used as base version of form builder and can be overriden for its subsequent use inside other custom form builders.</p>
+
+<ol>
+<li>Main Form</li>
+</ol>
+
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -381,106 +320,12 @@ MainForm can be used as base version of form builder and can be overriden for it
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>ZeroForm is custom form builder which is inherited from main_form and its going to be actually used inside forms. Feel free to make custom form related changes inside this</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/helpers/zero_form.rb</span>
-</span><span class='line'><span class="k">class</span> <span class="nc">ZeroForm</span> <span class="o">&lt;</span> <span class="no">MainForm</span>
-</span><span class='line'>  <span class="c1"># Overridden label_class here as we dont need class to be applied</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">label_class</span>
-</span><span class='line'>    <span class="p">{}</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">create_tagged_field</span><span class="p">(</span><span class="n">method_name</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">define_method</span><span class="p">(</span><span class="n">method_name</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">attribute</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="o">|</span>
-</span><span class='line'>      <span class="n">arg</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">last</span> <span class="o">&amp;&amp;</span> <span class="n">args</span><span class="o">.</span><span class="n">last</span><span class="o">.</span><span class="n">is_a?</span><span class="p">(</span><span class="no">Hash</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">args</span><span class="o">.</span><span class="n">last</span> <span class="o">||</span> <span class="p">{}</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="c1"># Bypass form-builder and do your own custom stuff!</span>
-</span><span class='line'>      <span class="k">return</span> <span class="k">super</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="k">if</span> <span class="n">arg</span><span class="o">[</span><span class="ss">:skip</span><span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="n">args</span><span class="o">.</span><span class="n">last</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="ss">:skip</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="n">errT</span> <span class="o">=</span> <span class="n">error_tag</span><span class="p">(</span><span class="n">method_name</span><span class="p">,</span> <span class="n">attribute</span><span class="p">)</span>
-</span><span class='line'>      <span class="n">labelT</span> <span class="o">=</span> <span class="n">label_tag</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="n">mainT</span> <span class="o">=</span> <span class="k">super</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
-</span><span class='line'>      <span class="n">baseT</span> <span class="o">=</span> <span class="vi">@template</span><span class="o">.</span><span class="n">content_tag</span><span class="p">(</span><span class="ss">:div</span><span class="p">,</span> <span class="n">mainT</span> <span class="o">+</span> <span class="n">errT</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="n">hintT</span> <span class="o">=</span> <span class="n">hint_tag</span><span class="p">(</span><span class="n">arg</span><span class="o">[</span><span class="ss">:hint</span><span class="o">]</span><span class="p">)</span> <span class="k">if</span> <span class="n">arg</span><span class="o">[</span><span class="ss">:hint</span><span class="o">]</span>
-</span><span class='line'>      <span class="n">spinnerT</span> <span class="o">=</span> <span class="n">spinner_tag</span> <span class="k">if</span> <span class="n">arg</span><span class="o">[</span><span class="ss">:spinner</span><span class="o">]</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="n">allT</span> <span class="o">=</span> <span class="n">labelT</span> <span class="o">+</span> <span class="n">baseT</span> <span class="o">+</span> <span class="n">spinnerT</span> <span class="o">+</span> <span class="n">hintT</span>
-</span><span class='line'>      <span class="vi">@template</span><span class="o">.</span><span class="n">content_tag</span><span class="p">(</span><span class="ss">:div</span><span class="p">,</span> <span class="n">allT</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="n">main_class</span><span class="p">(</span><span class="n">errT</span><span class="p">))</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="no">FIELDS</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="nb">name</span><span class="o">|</span>
-</span><span class='line'>    <span class="n">create_tagged_field</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>In order to use Nested Forms you need to extend MainForm with NestedForm Builder</p>
-
-<p><strong>Integrate NestedForm with FormBuilder</strong></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">MainForm</span> <span class="o">&lt;</span> <span class="ss">NestedForm</span><span class="p">:</span><span class="ss">:Builder</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>View Form</strong></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='haml'><span class='line'><span class="p">=</span> <span class="n">form_for</span> <span class="vi">@address</span> <span class="o">||=</span> <span class="no">Address</span><span class="o">.</span><span class="n">new</span><span class="p">,</span> <span class="ss">:builder</span> <span class="o">=&gt;</span> <span class="no">ZeroForm</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
-</span><span class='line'>  <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:street_address</span>
-</span><span class='line'>  <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_area</span> <span class="ss">:detail_address</span><span class="p">,</span> <span class="ss">:rows</span> <span class="o">=&gt;</span> <span class="mi">2</span>
-</span><span class='line'>  <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:city</span>
-</span><span class='line'>  <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">select</span> <span class="ss">:state</span><span class="p">,</span> <span class="sx">%w(US IN AUS UK UKRAINE)</span>
-</span><span class='line'>  <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">submit</span> <span class="s1">&#39;Save &amp; Continue&#39;</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s1">&#39;btn primary&#39;</span>
-</span><span class='line'>  <span class="p">=</span> <span class="n">link_to</span> <span class="s1">&#39;Skip »&#39;</span><span class="p">,</span> <span class="s1">&#39;#&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/2012/01/twitter-bootstrap-form-builder-for-rails/">Read on &rarr;</a>
+    </footer>
   
 
 

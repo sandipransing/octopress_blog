@@ -135,33 +135,12 @@ Goto <code>blogger admin area</code> and then go to <code>settings &gt;&gt; othe
 
 <p>If you still finding some problem with exporting then see <a href="http://www.freetech4teachers.com/2013/01/how-to-export-your-blogger-and.html">here</a></p>
 
-<h2>Formatting posts for octopress</h2>
-
-<p>Now the big challenge ! We have <code>xml posts</code> downloaded from blogger but octopress posts format is different.
-So, we need to convert xml posts to markdown formatted octopress posts.
-If you do it manually then its not an easy task but don&rsquo;t worry. There is already a ruby code that will do it for you.
-Thanks to <a href="https://gist.github.com/juniorz">Reinaldo de Souza </a> for sharing the script. Download the <code>import.rb</code> script from <a href="https://gist.github.com/baldowl/1578928">here</a></p>
-
-<h2>Run the script against downloaded xml file</h2>
-
-<p>Script requires <code>nokogiri</code>. if you not don&rsquo;t have already then install using <code>gem install nokogiri</code>
-After successful run, this will be creating static markdown octopress formatted posts inside <code>_posts</code> and <code>_drafts</code> directories.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ruby import.rb blog-02-09-2014.xml</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Copy generated posts to octopress blog posts</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mv _posts/* blog/_posts/`
-</span><span class='line'>mv _drafts/* blog/_drafts/`</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This finishes migration and run <code>rake preview</code> and you will start seeing your blogger posts.</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/2014/02/moving-from-blogspot-to-octopress/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -195,112 +174,23 @@ After successful run, this will be creating static markdown octopress formatted 
   </header>
 
 
-  <div class="entry-content"><p><strong>Hello Octopress!</strong>
-This an example post for more information see:</p>
+  <div class="entry-content"><p>This is an example post which shows various markdown syntax that can be used while writing octopress markdown posts.</p>
+
+<h2>Bold text</h2>
+
+<p><strong>Hello Octopress!</strong></p>
 
 <h2>Blockquote</h2>
 
 <blockquote><p>Don&#8217;t stop when you&#8217;re tired, stop when you&#8217;re done.</p><footer><strong>@TheJeetBanerjee</strong> <cite><a href='http://twitter.com/TheJeetBanerjee'>twitter.com/TheJeetBanerjee/&hellip;</a></cite></footer></blockquote>
 
 
-<blockquote><p>We have to go for what we think we&#8217;re fully capable of, not limit ourselves by what we&#8217;ve been in the past.</p><footer><strong>@Vivek Paul</strong></footer></blockquote>
-
-
-<h2>Ruby</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">A</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">abc</span>
-</span><span class='line'>    <span class="nb">puts</span> <span class="s1">&#39;hii&#39;</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Console</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">$</span> sudo apt-get install cakePHP
-</span></code></pre></td></tr></table></div></figure>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">$</span> git clone git@github.com:imathis/octopress.git <span class="c"># fork octopress</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Coffeescript</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="s">&#39;.help&#39;</span><span class="p">).</span><span class="nx">html</span> <span class="s">&quot;(?)&quot;</span>
-</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s">&quot;print something&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Gist Embedding</h2>
-
-<div><script src='https://gist.github.com/cc14d6039f1ff35b4be3.js?file=multiple-ssh-config'></script>
-<noscript><pre><code># Default GitHub user (sandip)
-Host github.com
-  HostName github.com
-  User git
-  IdentityFile /home/sandip/.ssh/id_rsa
-
-# github user (client)
-Host github-client
-  HostName github.com
-  User git
-  IdentityFile /home/sandip/.ssh/id_rsa_client
-
-# github user (friend)
-Host github-swapnil
-  HostName github.com
-  User git
-  IdentityFile /home/sandip/.ssh/id_dsa_swapnil
-</code></pre></noscript></div>
-
-
-<h2>Include Code Snippets</h2>
-
-<p>File /home/sandip/octopress/source/downloads/code/[linenos:false] could not be found</p>
-
-<h2>Selecting tags from sentence</h2>
-
-<p>This is a <code>ruby</code> and <code>rails</code> blog</p>
-
-<h2>Pullquote</h2>
-
-<p><span class='pullquote-left' data-pullquote='almost exactly like the default,'>
-Left-aligning pullquotes are good to alternate breaks in the text. They&rsquo;re
-almost exactly like the default, right pullquotes, but a little different.
-</span></p>
-
-<h2>Images</h2>
-
-<p><img src="http://placekitten.com/890/280"></p>
-
-<h2>AngularJS Tutorial &ndash; YouTube</h2>
-
-<p>AngularJS is a client-side JavaScript framework.A video tutorial to help you get started with AngularJS.
-<a href="http://youtube.com/watch?v=WuiHuZq_cg4"><img src="http://img.youtube.com/vi/WuiHuZq_cg4/0.jpg" alt="Angular JS" /></a></p>
-
-<h2>Inline HTML</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="o">&lt;</span><span class="nx">div</span> <span class="k">class</span><span class="o">=</span><span class="s">&#39;well&#39;</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="nx">All</span> <span class="o">is</span> <span class="nx">well</span><span class="p">.</span> <span class="nx">Way</span> <span class="nx">to</span> <span class="nx">go</span> <span class="o">!!</span>
-</span><span class='line'><span class="o">&lt;/</span><span class="nx">div</span><span class="o">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/2014/02/writing-octopress-blog-posts-using-markdown/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -343,137 +233,12 @@ So, Lets first understand about octopress framework and its features.</p>
 
 <blockquote><p>Octopress is a framework designed by Brandon Mathis for Jekyll, the blog aware static site generator. If you wanted to know more then it can be found <a href="http://octopress.org/2011/07/23/octopress-20-surfaces/">here</a></p></blockquote>
 
-<h2>Octopress Setup</h2>
-
-<p><strong>1.  Before starting make sure you have <code>git</code> installed.</strong>
-If not then do install using,</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install git</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>2.  Install <code>ruby 1.9.3</code> or higher</strong>
-Make git clone of octopress source code</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git://github.com/imathis/octopress.git octopress
-</span><span class='line'>cd octopress
-</span><span class='line'>bundle install</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Installing Octopress theme</h2>
-
-<p>Install the default Octopress theme using</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rake install</span></code></pre></td></tr></table></div></figure>
-
-
-<p>In order to install custom themes,
-Please <a href="http://opthemes.com/">browse through themes</a> and make a selection for your blog.
-Once choice is made, you need to do <code>git clone</code> of theme source and install it.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd octopress
-</span><span class='line'>git clone https://github.com/kAworu/octostrap3 .themes/octostrap3
-</span><span class='line'>rake 'install[octostrap3]'</span></code></pre></td></tr></table></div></figure>
-
-
-<p>To genrate infrastrcture for your blog i.e. <code>layouts</code>, <code>js</code> and <code>css</code></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rake generate</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Edit <code>_config.yml</code> to configure blog <code>title</code>, <code>header</code>, <code>metadata</code>, <code>plugins</code> and <code>3rd Party Settings</code>.
-more on configurations can be found <a href="http://octopress.org/docs/configuring/">here</a>.</p>
-
-<p>We are almost done, and now ready to create our first blog post &ndash;</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rake new_post["My first octopress post"]
-</span><span class='line'>mkdir -p source/_posts
-</span><span class='line'>Creating new post: source/_posts/2014-02-09-my-first-octopress-post.markdown</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now you can open a post inside editor and change as you wanted. More on writing markdown can be found <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet#wiki-html">here</a> and <a href="http://daringfireball.net/projects/markdown/syntax">here too</a></p>
-
-<p>Well ! Now its time to see, how our blog looks like &ndash;</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd octopress
-</span><span class='line'>rake watch
-</span><span class='line'>rake preview</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Visit browser <code>http://localhost:4000</code> and you should be seeing blog running there :&ndash;)</p>
-
-<h2>Deployment</h2>
-
-<p>There are ways to deploy octopress blog. You can either deploy this blog on <code>heroku</code> or on <code>github</code> using github pages.</p>
-
-<p><strong>1. Heroku</strong>:
-As heroku provides free hosting (1 node) you may want to deploy at heroku.
-More on this deployment can be found <a href="http://def.reyssi.net/blog/2012/01/14/get-blogging-with-octopress-on-heroku/">here</a></p>
-
-<p><strong>2. With Github Project Pages</strong>:
-Github provides free static website hosting using github pages and deployment is also very simple.</p>
-
-<p>Note: You should have a github repository called <code>username.github.io</code></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd octopress
-</span><span class='line'>rake setup_github_pages
-</span><span class='line'>git remote add origin git@github.com:username/username.github.io.git
-</span><span class='line'>rake generate
-</span><span class='line'>rake deploy</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Visit <code>http://username.github.io</code> to see your blog hosted on github.
-Also, do not forget to commit and push your source code on github.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git add .
-</span><span class='line'>git commit -m 'octopress first blog'
-</span><span class='line'>git push origin source</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Adding custom domain</h2>
-
-<p>First create a <code>CNAME</code> file and add naked domain name to it.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>echo 'funonrails.com' &gt;&gt; source/CNAME</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Then goto your domain provider website and point your <code>domain</code> i.e A record to github ip address <code>204.232.175.78</code>.</p>
-
-<h2>Adding subdomain</h2>
-
-<p>If you want to point subdomain to github blog then &ndash;</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>echo 'blog.sandipransing.in' &gt;&gt; source/CNAME</span></code></pre></td></tr></table></div></figure>
-
-
-<p>then go to your domain provider website and create a CNAME record for your <code>subdomain</code> i.e. <code>blog</code> pointing to <code>yourname.github.io.</code>
-If you want more help on this then please see <a href="http://octopress.org/docs/deploying/github/">here</a> and also <a href="http://help.github.com/pages/#custom_domains">here</a></p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/2014/02/octopress-powered-and-github-hosted-blog/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -511,14 +276,14 @@ If you want more help on this then please see <a href="http://octopress.org/docs
 
 <p>But still you can make use of <code>block parameter</code> to conditions to have <code>dynamic query conditions</code> inside associations.</p>
 
-<p>Below line explains <strong>how to</strong> define dynamic associations &ndash;</p>
+<p>Below line explains <strong>how to</strong> define dynamic associations :</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">has_one</span> <span class="ss">:code_sequence</span><span class="p">,</span> <span class="ss">:class_name</span> <span class="o">=&gt;</span> <span class="s1">&#39;Sequence&#39;</span><span class="p">,</span> <span class="ss">:conditions</span> <span class="o">=&gt;</span> <span class="s1">&#39;kind = &quot;#{self.kind}&quot;&#39;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Please make a note that below code won&rsquo;t be working &ndash;</p>
+<p>Please make a note that below code will not work :</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">has_one</span> <span class="ss">:code_sequence</span><span class="p">,</span> <span class="ss">:class_name</span> <span class="o">=&gt;</span> <span class="s1">&#39;Sequence&#39;</span><span class="p">,</span> <span class="ss">:conditions</span> <span class="o">=&gt;</span> <span class="nb">proc</span> <span class="p">{</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span> <span class="o">[</span><span class="s1">&#39;kind = ?&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">kind</span><span class="o">]</span> <span class="p">}</span>
@@ -589,46 +354,12 @@ Then following changes needs to be done for upgrading your application to Rails 
 </pre></td><td class='code'><pre><code class=''><span class='line'>rails _2.3.11_ testsapp</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Now, Copy all missing &ldquo;config/initializers/*&rdquo; files from new &ldquo;testapp to the application that to be upgraded.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cp testapp/config/initializers/* config/initializers</span></code></pre></td></tr></table></div></figure>
-
-
-<ol>
-<li>Change Rails version inside <em>environment.rb</em> to <em>Rails 2.3.11</em></li>
-</ol>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Specifies gem version of Rails to use when vendor/rails is not present</span>
-</span><span class='line'><span class="no">RAILS_GEM_VERSION</span> <span class="o">=</span> <span class="s1">&#39;2.3.11&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ol>
-<li>Rename <i>app/controllers/application.rb</i> file to <i>app/controllers/application_controller.rb</i>
-<strong>OR</strong></li>
-</ol>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="ss">rails</span><span class="p">:</span><span class="ss">update</span><span class="p">:</span><span class="n">application_controller</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ol>
-<li>Start rails server and fix the issues one by one.</li>
-</ol>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">ruby</span> <span class="n">script</span><span class="o">/</span><span class="n">server</span>
-</span></code></pre></td></tr></table></div></figure>
-
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/2012/04/upgrading-from-rails-2-1-x-to-rails-2-3-11/">Read on &rarr;</a>
+    </footer>
   
 
 
