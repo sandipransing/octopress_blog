@@ -8,11 +8,11 @@ We all know that rails models associations gets defined while class definitions 
 
 But still you can make use of `block parameter` to conditions to have `dynamic query conditions` inside associations.
 
-Below line explains **how to** define dynamic associations -
+Below line explains **how to** define dynamic associations :
 ```ruby
 has_one :code_sequence, :class_name => 'Sequence', :conditions => 'kind = "#{self.kind}"'
 ```
-Please make a note that below code won't be working - 
+Please make a note that below code will not work :
 ```ruby
 has_one :code_sequence, :class_name => 'Sequence', :conditions => proc { |c| ['kind = ?', c.kind] }
 ```

@@ -8,8 +8,10 @@ categories:
  - rails
 ---
 Previous post explains on [mongoid document array field and rails form implementation](http://www.funonrails.com/2012/01/mongoid-array-field-and-rails-form.html)
-Below example shows rails form integration of array field of embedded mongoid document 
-consider scenario, student embeds one family who has many assets
+
+Below example shows rails form integration of array field of embedded mongoid document
+
+Lets consider scenario that `student` embeds one `family` who has many `assets`
 ```ruby
 class Student
   include Mongoid::Document
@@ -23,6 +25,7 @@ class Student
   accepts_nested_attributes_for :family
 end
 ```
+<!--more-->
 ```ruby
 class Family
   include Mongoid::Document

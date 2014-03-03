@@ -13,6 +13,7 @@ To know more about how to get started on it click [here](http://www.funonrails.c
 
 Below post will help you out in getting started bootstrap css with rails app. One need to add below files to helpers directory.
 MainForm can be used as base version of form builder and can be overriden for its subsequent use inside other custom form builders. 
+
 1. Main Form
 ```ruby
 # app/helpers/main_form.rb 
@@ -79,8 +80,10 @@ class MainForm < ActionView::Helpers::FormBuilder # NestedForm::Builder
   end
 end  
 ```
+<!--more-->
 
-ZeroForm is custom form builder which is inherited from main_form and its going to be actually used inside forms. Feel free to make custom form related changes inside this
+ZeroForm is custom form builder which is inherited from `main_form` and its going to be actually used inside forms. 
+Feel free to make custom form related changes inside this
 
 ```ruby
 # app/helpers/zero_form.rb

@@ -20,6 +20,7 @@ class Product
   field :categories, :type => Array
 end
 ```
+<!--more-->
 Here is form code 
 ```haml
 = form_for(@product) do |f|

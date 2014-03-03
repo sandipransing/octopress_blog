@@ -7,13 +7,15 @@ author: Sandip Ransing
 published: true
 categories: octopress 
 ---
+This is an example post which shows various markdown syntax that can be used while writing octopress markdown posts.
+## Bold text
 **Hello Octopress!**
-This an example post for more information see:
 
 ## Blockquote
 {% blockquote @TheJeetBanerjee http://twitter.com/TheJeetBanerjee %}
 Don't stop when you're tired, stop when you're done.
 {% endblockquote %}
+<!--more-->
 {% blockquote @Vivek Paul %}
 We have to go for what we think we're fully capable of, not limit ourselves by what we've been in the past.
 {% endblockquote %}
@@ -28,7 +30,7 @@ end
 ```
 
 ## Console
-```console
+```
 $ sudo apt-get install cakePHP
 ```
 ```
@@ -39,6 +41,9 @@ $ git clone git@github.com:imathis/octopress.git # fork octopress
 ```coffeescript
 $('.help').html "(?)"
 console.log "print something"
+# sum function
+sum = (a, b) ->
+  a + b
 
 ```
 

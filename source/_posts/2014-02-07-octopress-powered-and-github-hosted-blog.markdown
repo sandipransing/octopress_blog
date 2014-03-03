@@ -14,6 +14,7 @@ So, Lets first understand about octopress framework and its features.
 ## Octopress
 
 > Octopress is a framework designed by Brandon Mathis for Jekyll, the blog aware static site generator. If you wanted to know more then it can be found [here](http://octopress.org/2011/07/23/octopress-20-surfaces/)
+<!--more-->
 
 ## Octopress Setup
 

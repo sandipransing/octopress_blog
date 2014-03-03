@@ -30,6 +30,7 @@ b.call('sandip')#=> hello sandip
 c = proc {|user| puts user }
 c.call('sandip') #=> sandip
 ```
+<!--more-->
 **Passing block to enumerator**
 
 Lets assume we have collection array of strings and we want to print it

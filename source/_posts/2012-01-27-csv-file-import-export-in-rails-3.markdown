@@ -11,7 +11,7 @@ CSV (comma separated values) files are frequently used to import/export data.
 
 In rails 3, `FasterCSV` comes as default and below is the way to upload csv files inside rails applications. The code below will also show you how to generate csv in memory, parse on csv data, skip header, iterate over records, save records inside db, export upload error file and many more. 
 
-First, View to upload file
+#### Upload form
 
 ```haml
 = form_tag upload_url, :multipart => true do
@@ -19,8 +19,10 @@ First, View to upload file
   = file_field_tag "file"
   = submit_tag
 ```
-Assume upload_url maps to import action of customers controller 
-Controller code 
+<!--more-->
+Assume `upload_url` maps to import action of customers controller 
+
+#### Controller code 
 
 ```ruby
 class CustomersController < ApplicationController  
@@ -64,7 +66,7 @@ class CustomersController < ApplicationController
   [...]
 end
 ```
-Customer model 
+#### Customer model 
 
 ```ruby
 class Customer < ActiveRecord::Base
@@ -95,8 +97,9 @@ class Customer < ActiveRecord::Base
 end
 ```
 
-Export customer records in CSV format
-Below code loads customer records from database then generate csv_data inside memory and exports data to browser using send_data method.
+## Export customer records in CSV format
+
+Below code loads customer records from database then generate `csv_data` inside memory and exports data to browser using `send_data` method.
 
 Note: As we are not writing on file system hence code can easily work heroku.
 ```ruby

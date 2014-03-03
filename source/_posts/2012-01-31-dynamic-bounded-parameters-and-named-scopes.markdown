@@ -7,6 +7,37 @@ categories:
  - rails 3
  - routes
 ---
+Rails routes can be customized to include your own parameters inside it. Lets first understand how named routes works:
 
-<div class='post'>
-Rails routes can be customized as your own routes with parameters but first you should understand how routes behaves. <br/> <b>Adding dynamic parameters to routes </b> <br/>Here exact parameters are matched to route and presence of each parameter is mandatory in order to construct urls. blank parameter will raise RoutingError exception. <br/>Exact matched named route declared as -  <pre class=ruby>  match ':a/:b/:c', :to => 'home#index', :as => :q </pre> now go to the rails console - <pre class=ruby> ruby-1.9.3-head :005 > app.q_url(:a, :b, :c)   => "http://www.example.com/a/b/c"        ruby-1.9.3-head :006 > app.q_url(:a, :b, '')   ActionController::RoutingError: No route matches {:controller=>"home", :a=>:a, :b=>:b, :c=>""} </pre><b>Bound parameters to named routes</b><br/>If you are too sure that certain parameter can be blank then you can define it as optional parameter inside route -  <br/><pre class=ruby> match ':a/:b(/:c)', :to => 'home#index', :as => :q </pre><b>rails console</b><pre class=ruby> ruby-1.9.3-head :010 > app.q_url(:a, :b, '')   => "http://www.example.com/a/b?c="   ruby-1.9.3-head :011 > app.q_url(:a, :b)   => "http://www.example.com/a/b" </pre></div>
+## Adding dynamic parameters to routes 
+
+Here exact parameters are matched to route and presence of each parameter is mandatory in order to construct urls. If blank parameter is supplied then it will raise `RoutingError` exception. 
+
+## Exact matched named route declared as :
+
+```ruby
+match ':a/:b/:c', :to => 'home#index', :as => :q
+```
+#### rails console :
+```ruby
+app.q_url(:a, :b, :c)
+#=> "http://www.example.com/a/b/c"
+
+app.q_url(:a, :b, '')
+#=> ActionController::RoutingError: No route matches {:controller=>"home", :a=>:a, :b=>:b, :c=>""}
+```
+<!--more-->
+## Bound parameters to named routes
+If you are sure that certain parameters can be blank then you can define them as optional parameter inside route
+
+```ruby
+match ':a/:b(/:c)', :to => 'home#index', :as => :q
+```
+#### rails console :
+```ruby
+app.q_url(:a, :b, '')   
+#=> "http://www.example.com/a/b?c="
+
+app.q_url(:a, :b)   
+#=> "http://www.example.com/a/b" 
+```

@@ -21,6 +21,7 @@ end
 #<Location:0x000000055bb328>
 #<Location:0x000000055bb058>
 ```
+<!--more-->
 
 puts object followed by subsequent invoke of inspect method outputs readable object
 ```ruby

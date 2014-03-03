@@ -13,10 +13,10 @@ Below post explains steps involved in migration:
 First, you need to export your posts from blogger.
 Goto `blogger admin area` and then go to `settings >> other >> Export Blog` and click on it. Please wait sometime and popup will comeup allowing you to download blog in `xml` format.
 
-
 <img src="{{ root_url }}/images/export-blog.png" />
 
 If you still finding some problem with exporting then see [here](http://www.freetech4teachers.com/2013/01/how-to-export-your-blogger-and.html)
+<!--more-->
 
 ## Formatting posts for octopress
 Now the big challenge ! We have `xml posts` downloaded from blogger but octopress posts format is different.
