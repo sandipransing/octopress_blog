@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Migrating from blogger to octopress"
+title: "Migrating from blogspot to octopress"
 date: 2014-02-09 19:00:56 +0530
 comments: true
 categories: octopress, blogger

@@ -7,7 +7,8 @@ title: "Fun On Rails"
 subtitle: "Journal of a Web Developer #ruby #rails #JS"
 author: sandipransing
 simple_search: http://google.com/search
-description: Journal of a web developer about his daily learnings and experiences around ruby, rails, JS, linux, etc.
+description: Journal of a web developer containing learnings and experiences while developing with ruby, rails, JS and linux
+keywords: ruby, rails, gems, plugins, radiant, cms, SEO, geokit, asterisk, adhearsion, pdf, prawn, ubuntu, vim, linux, jQuery, sass, haml, nginx, passenger
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
 # You can customize the format as defined in
