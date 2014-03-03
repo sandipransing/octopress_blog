@@ -12,7 +12,7 @@
   <meta name="description" content="rails-uri module provides us with url manipulation methods Parse string url 1
 2
 3
-url = URI.parse(&#39;http://funonrails.com/categories/rails3&#39;) &hellip;">
+url = URI.parse(&#39;http://funonrails.com/categories/rails-3&#39 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -120,31 +120,31 @@ url = URI.parse(&#39;http://funonrails.com/categories/rails3&#39;) &hellip;">
   </header>
 
 
-<div class="entry-content"><p>rails-uri module provides us with url manipulation methods</p>
+<div class="entry-content"><p><code>rails-uri</code> module provides us with url manipulation methods</p>
 
-<p>Parse string url</p>
+<h2>Parse string url</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;http://funonrails.com/categories/rails3&#39;</span><span class="p">)</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;http://funonrails.com/categories/rails-3&#39;</span><span class="p">)</span>
 </span><span class='line'><span class="n">url</span><span class="o">.</span><span class="n">host</span> <span class="c1">#=&gt; &quot;http://funonrails.com&quot;</span>
 </span><span class='line'><span class="n">url</span><span class="o">.</span><span class="n">port</span> <span class="c1">#=&gt; 80</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>URL with Basic Authentication</p>
+<h2>URL with Basic Authentication</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;http://sandip:2121@funonrails.com/categories/rails3&#39;</span><span class="p">)</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;http://sandip:2121@funonrails.com/categories/rails-3&#39;</span><span class="p">)</span>
 </span><span class='line'><span class="n">url</span><span class="o">.</span><span class="n">user</span> <span class="c1">#=&gt; &quot;sandip&quot;</span>
 </span><span class='line'><span class="n">url</span><span class="o">.</span><span class="n">password</span> <span class="c1">#=&gt; &quot;2121&quot;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Extracting urls form string paragraph</p>
+<h2>Extracting urls form string paragraph</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -153,7 +153,7 @@ url = URI.parse(&#39;http://funonrails.com/categories/rails3&#39;) &hellip;">
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Split &amp; Join URI</p>
+<h2>Split &amp; Join URI</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -162,17 +162,17 @@ url = URI.parse(&#39;http://funonrails.com/categories/rails3&#39;) &hellip;">
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">URI</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;http://sandip:2121@funonrails.com/categories/rails3&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="c1">#=&gt; [&quot;http&quot;, &quot;sandip:2121&quot;, &quot;funonrails.com&quot;, nil, nil, &quot;/categories/rails3&quot;, nil, nil, nil]</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">URI</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;http://sandip:2121@funonrails.com/categories/rails-3&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; [&quot;http&quot;, &quot;sandip:2121&quot;, &quot;funonrails.com&quot;, nil, nil, &quot;/categories/rails-3&quot;, nil, nil, nil]</span>
 </span><span class='line'>
 </span><span class='line'><span class="o">&lt;=&gt;</span> <span class="o">[</span><span class="no">Scheme</span><span class="p">,</span> <span class="no">Userinfo</span><span class="p">,</span> <span class="no">Host</span><span class="p">,</span> <span class="no">Port</span><span class="p">,</span> <span class="no">Registry</span><span class="p">,</span> <span class="no">Path</span><span class="p">,</span> <span class="no">Opaque</span><span class="p">,</span> <span class="no">Query</span><span class="p">,</span> <span class="no">Fragment</span><span class="o">]</span>
 </span><span class='line'>
-</span><span class='line'><span class="no">URI</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;http://funonrails.com&#39;</span><span class="p">,</span><span class="s1">&#39;categories/rails3&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="c1">#=&gt; #&lt;URI::HTTP:0x7fbf9202efc8 URL:http://funonrails.com/categories/rails3&gt;</span>
+</span><span class='line'><span class="no">URI</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;http://funonrails.com&#39;</span><span class="p">,</span><span class="s1">&#39;categories/rails-3&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; #&lt;URI::HTTP:0x7fbf9202efc8 URL:http://funonrails.com/categories/rails-3&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Escape &amp; Unescape alias encode/decode URI</p>
+<h2>Escape &amp; Unescape alias encode/decode URI</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -181,30 +181,56 @@ url = URI.parse(&#39;http://funonrails.com/categories/rails3&#39;) &hellip;">
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">URI</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="s1">&#39;http://funonrails.com/search/?label=\\rails\3&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="no">URI</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;http://funonrails.com/search/?label=\\rails\3&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="c1">#=&gt; &quot;http://funonrails.com/search/?label=%5Crails%5C3&quot;</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">URI</span><span class="o">.</span><span class="n">escape</span> <span class="s2">&quot;http://funonrails.com/categories/named scopes&quot;</span>
+</span><span class='line'><span class="c1">#=&gt; &quot;http://funonrails.com/categories/named%20scopes&quot;</span>
 </span><span class='line'>
-</span><span class='line'><span class="no">URI</span><span class="o">.</span><span class="n">unescape</span><span class="p">(</span><span class="s2">&quot;http://funonrails.com/search/?label=%5Crails%5C3&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="no">URI</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;http://funonrails.com/search/?label=%5Crails%5C3&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="c1">#=&gt; &quot;http://funonrails.com/search/?label=\\rails\\3&quot;</span>
+</span><span class='line'><span class="no">URI</span><span class="o">.</span><span class="n">encode</span> <span class="s2">&quot;http://funonrails.com/categories/named scopes&quot;</span>
+</span><span class='line'><span class="c1">#=&gt; &quot;http://funonrails.com/categories/named%20scopes&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">URI</span><span class="o">.</span><span class="n">decode</span> <span class="s2">&quot;http://funonrails.com/categories/named%20scopes&quot;</span>
+</span><span class='line'><span class="c1">#=&gt; &quot;http://funonrails.com/categories/named scopes&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">URI</span><span class="o">.</span><span class="n">unescape</span> <span class="s2">&quot;http://funonrails.com/categories/named%20scopes&quot;</span>
+</span><span class='line'><span class="c1">#=&gt; &quot;http://funonrails.com/categories/named scopes&quot;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Match urls using regular expressions</p>
+<h2>Match urls using regular expressions</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;http://funonrails.com/search/label/rails3&quot;</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="no">URI</span><span class="o">.</span><span class="n">regexp</span><span class="p">(</span><span class="o">[</span><span class="s1">&#39;search&#39;</span><span class="o">]</span><span class="p">))</span> <span class="k">do</span> <span class="o">|*</span><span class="n">matchs</span><span class="o">|</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># extract first URI from html_string</span>
+</span><span class='line'><span class="s2">&quot;ftp://localhost http://funonrails.com/categories/rails-3&quot;</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="no">URI</span><span class="o">.</span><span class="n">regexp</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; &quot;ftp://localhost&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># remove ftp URIs</span>
+</span><span class='line'><span class="s2">&quot;ftp://localhost http://funonrails.com/categories/rails-3&quot;</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="no">URI</span><span class="o">.</span><span class="n">regexp</span><span class="p">(</span><span class="o">[</span><span class="s1">&#39;ftp&#39;</span><span class="o">]</span><span class="p">))</span>
+</span><span class='line'><span class="c1">#=&gt; &quot; http://funonrails.com/categories/rails-3&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># You should not rely on the number of parentheses</span>
+</span><span class='line'><span class="s2">&quot;ftp://localhost http://funonrails.com/categories/rails-3&quot;</span><span class="o">.</span><span class="n">scan</span><span class="p">(</span><span class="no">URI</span><span class="o">.</span><span class="n">regexp</span><span class="p">(</span><span class="o">[</span><span class="s1">&#39;ftp&#39;</span><span class="o">]</span><span class="p">))</span> <span class="k">do</span> <span class="o">|*</span><span class="n">matchs</span><span class="o">|</span>
 </span><span class='line'>  <span class="nb">p</span> <span class="vg">$&amp;</span>
+</span><span class='line'>  <span class="c1">#=&gt; ftp://localhost</span>
 </span><span class='line'><span class="k">end</span>
-</span><span class='line'><span class="c1">#=&gt; &quot;http://funonrails.com/search/label/rails3&quot;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Getting requested url inside rails</p>
+<h2>Getting requested url inside rails</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -213,7 +239,7 @@ url = URI.parse(&#39;http://funonrails.com/categories/rails3&#39;) &hellip;">
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Getting previous page url inside rails</p>
+<h2>Getting previous page url inside rails</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">request</span><span class="o">.</span><span class="n">referrer</span>
