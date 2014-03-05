@@ -97,7 +97,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2010/08/spell-check-in-ruby-and-rails-using/">Spell Check in Ruby and Rails Using BOSSMan</a></h1>
+      <h1 class="entry-title"><a href="/2009/09/migrating-project-from-rails-2-1-0-to-2-3-3/">Migrating Project From Rails 2.1.0 to Edge Rails 2.3.3</a></h1>
     
     
       <p class="meta">
@@ -113,83 +113,143 @@
   
 
 
-<time datetime="2010-08-04T02:26:00+05:30" pubdate data-updated="true">Aug 4<span>th</span>, 2010</time>
+<time datetime="2009-09-25T01:25:00+05:30" pubdate data-updated="true">Sep 25<span>th</span>, 2009</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Wrong English is an often problem while developing any website product as it gives bad view to website user and thus does direct impact on product. <strong>BOSSMan</strong> is a ruby gem that interacts with <strong>yahoo web service</strong> and provides a simplest way to overcome such errors.</p>
+  <div class="entry-content"><p>I wanted to migrate my project from rails <code>2.1.0</code> to rails <code>2.3.3</code></p>
 
-<h4>Installation:</h4>
+<p>so, i performed following steps, but it shows me memcached-client error.</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>gem sources -a http://gems.github.com
-</span><span class='line'>gem install jpignata-bossman</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Apply and get Application ID from yahoo developer network</p>
-
-<p><code>URl https://developer.apps.yahoo.com/</code></p>
-
-<p>Make sure to note it for reference</p>
-
-<p>Usage in ruby app</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;rubygems&#39;</span>
-</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;bossman&#39;</span>
-</span><span class='line'><span class="kp">include</span> <span class="no">BOSSMan</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># vi config/environment.rb
 </span><span class='line'>
-</span><span class='line'><span class="no">BOSSMan</span><span class="o">.</span><span class="n">application_id</span> <span class="o">=</span> <span class="s2">&quot;Your Application ID here&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>Spelling Suggestions</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">text</span> <span class="o">=</span> <span class="ss">BOSSMan</span><span class="p">:</span><span class="ss">:Search</span><span class="o">.</span><span class="n">spelling</span><span class="p">(</span><span class="s2">&quot;gooogle&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="c1">#{&quot;resultset_spell&quot;=&gt;[{&quot;suggestion&quot;=&gt;&quot;google&quot;}], &quot;responsecode&quot;=&gt;&quot;200&quot;, &quot;deephits&quot;=&gt;&quot;1&quot;, &quot;start&quot;=&gt;&quot;0&quot;, &quot;count&quot;=&gt;&quot;1&quot;, &quot;totalhits&quot;=&gt;&quot;1&quot;}}&gt;</span>
+</span><span class='line'># Specifies gem version of Rails to use when vendor/rails is not present
+</span><span class='line'>RAILS_GEM_VERSION = '2.3.3' unless defined? RAILS_GEM_VERSION
 </span><span class='line'>
-</span><span class='line'><span class="n">text</span><span class="o">.</span><span class="n">suggestion</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;google&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>ruby script/server</span></code></pre></td></tr></table></div></figure>
 
 
-<p>More sophisticated way of use &ndash;</p>
+<p>It shows me error</p>
 
-<ol>
-<li>Create a YML file containing list of kewords</li>
-<li>Load YML file</li>
-<li>Iterate YML hash to find out spell suggestions
-<strong>Example: spelling.yml</strong></li>
-</ol>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>`install_memcached': 'memcache-client' client requested but not installed. Try 'sudo gem install memcache-client'. (Interlock::ConfigurationError)</span></code></pre></td></tr></table></div></figure>
 
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p>so i installed <code>memcache-client</code> gem</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install memcache-client</span></code></pre></td></tr></table></div></figure>
+
+
+<p>but still i am showing same error, any ideas ??</p>
+
+<h2>Comments</h2>
+
+<p><strong>JimmyBean</strong></p>
+
+<p>I don&rsquo;t know If I said it already but …I&rsquo;m so glad I found this site…Keep up the good work I read a lot of blogs on a daily basis and for the most part, people lack substance but, I just wanted to make a quick comment to say GREAT blog. Thanks, :)</p>
+
+<p>A definite great read..Jim Bean</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/09/4-steps-to-install-nginx-with-passenger/">4 Steps to Install Nginx With Passenger</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-09-09T23:47:00+05:30" pubdate data-updated="true">Sep 9<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Install passenger program</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo gem install passenger</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Install nginx server with passenger enabled</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>passenger-install-nginx-module</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It will open <code>apt</code>, click <code>Enter</code> to contine then select option 1 for default install
+then it will ask, <em>&ldquo;Where do you want to install Nginx to?&rdquo;</em></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Please specify a prefix directory [/opt/nginx]:</span></code></pre></td></tr></table></div></figure>
+
+
+<p>press enter then copy following block</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="mi">1</span> <span class="ss">keywords</span><span class="p">:</span>
-</span><span class='line'>  <span class="mi">2</span>   <span class="ss">gooogle</span><span class="p">:</span>
-</span><span class='line'>  <span class="mi">3</span>   <span class="no">Barack</span> <span class="ss">Oabama</span><span class="p">:</span>
-</span><span class='line'>  <span class="mi">4</span>   <span class="ss">Indian</span><span class="p">:</span>
-</span><span class='line'>  <span class="mi">5</span>   <span class="ss">Latuur</span><span class="p">:</span>
-</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>server {
+</span><span class='line'>  listen 80;
+</span><span class='line'>  server_name www.yourhost.com;
+</span><span class='line'>  root /somewhere/public;   # &lt;— be sure to point to ‘public’!
+</span><span class='line'>  passenger_enabled on;
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<h2>Make nginx Configuration</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># vi /opt/nginx/conf/nginx.conf
+</span><span class='line'># Make passenger_root and passenger_ruby path to configuration
+</span><span class='line'>
+</span><span class='line'>http {
+</span><span class='line'>  passenger_root /usr/local/lib/ruby/gems/1.8/gems/passenger-2.2.4;
+</span><span class='line'>  passenger_ruby /usr/local/bin/ruby;
+</span><span class='line'>  ...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>then add server configuration block inside http block</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -198,32 +258,26 @@
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">keywords</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span><span class="s1">&#39;spelling.yml&#39;</span><span class="p">)</span><span class="o">[</span><span class="s1">&#39;keywords&#39;</span><span class="o">].</span><span class="n">keys</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>http {
+</span><span class='line'>  ...
 </span><span class='line'>
-</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;Correction suggested&quot;</span>
-</span><span class='line'>  <span class="n">keywords</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">keyword</span><span class="o">|</span>
-</span><span class='line'>    <span class="n">text</span> <span class="o">=</span> <span class="ss">BOSSMan</span><span class="p">:</span><span class="ss">:Search</span><span class="o">.</span><span class="n">spelling</span><span class="p">(</span><span class="n">keyword</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">if</span> <span class="n">defined?</span> <span class="n">text</span><span class="o">.</span><span class="n">suggestion</span>
-</span><span class='line'>      <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">keyword</span><span class="si">}</span><span class="s2"> =&gt; </span><span class="si">#{</span><span class="n">text</span><span class="o">.</span><span class="n">suggestion</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>  server {
+</span><span class='line'>    listen 80;
+</span><span class='line'>    server_name www.yourhost.com; //Make sure this dns entry inside /etc/hosts
+</span><span class='line'>    root /carsonline/public;   # &lt;— be sure to point to ‘public’! //here carsonline is RAILS_ROOT
+</span><span class='line'>    passenger_enabled on;
+</span><span class='line'>  }
+</span><span class='line'>  ...</span></code></pre></td></tr></table></div></figure>
 
 
-<h4>Output</h4>
+<p>That&rsquo;s all, you are done !</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Correction</span> <span class="n">suggested</span>
-</span><span class='line'><span class="n">gooogle</span> <span class="o">=&gt;</span> <span class="n">google</span>
-</span><span class='line'><span class="no">Barack</span> <span class="no">Oabama</span> <span class="o">=&gt;</span> <span class="no">Barack</span> <span class="no">Obama</span>
-</span><span class='line'><span class="no">Latuur</span> <span class="o">=&gt;</span> <span class="no">Latour</span>
-</span></code></pre></td></tr></table></div></figure>
+<h2>Launch Server</h2>
 
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  /opt/nginx/sbin/nginx</span></code></pre></td></tr></table></div></figure>
 
-<p>Analyze suggestions manually and make neccesary corrections..</p>
 </div>
   
   
@@ -236,7 +290,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2010/08/rails-3-beautiful-code/">Rails 3 Beautiful Code</a></h1>
+      <h1 class="entry-title"><a href="/2009/09/how-to-generate-seo-sitemap-in-rails/">How to Generate SEO Sitemap in Rails ?</a></h1>
     
     
       <p class="meta">
@@ -252,83 +306,24 @@
   
 
 
-<time datetime="2010-08-02T14:57:00+05:30" pubdate data-updated="true">Aug 2<span>nd</span>, 2010</time>
+<time datetime="2009-09-09T21:44:00+05:30" pubdate data-updated="true">Sep 9<span>th</span>, 2009</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-Check out this SlideShare Presentation: <div style="width:425px" id="__ss_3219240"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/GreggPollack/rails-3-beautiful-code-3219240" title="Rails 3 Beautiful Code">Rails 3 Beautiful Code</a></strong><object id="__sse3219240" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=beautifulcodeinrails3-greggpollack-100218130149-phpapp02&stripped_title=rails-3-beautiful-code-3219240" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse3219240" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=beautifulcodeinrails3-greggpollack-100218130149-phpapp02&stripped_title=rails-3-beautiful-code-3219240" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/GreggPollack">GreggPollack</a>.</div></div></div>
+  <div class="entry-content"><h2>What is sitemap ?</h2>
 
-</div>
-  
-  
+<p>Sitemap is nothing but a .xml file containing urls available on your website</p>
 
+<p>It contains URL, last modified date, frequency of content change and priority ( between 0..1 )</p>
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/08/pdf-in-rails-using-prawn-library/">PDF in Rails Using Prawn Library</a></h1>
-    
-    
-      <p class="meta">
-        
+<h2>Why we need sitemap ?</h2>
 
+<p>We can submit sitemap file to search engine. It will help them in analysing what urls on your site are available for crawling.</p>
 
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-08-01T16:45:00+05:30" pubdate data-updated="true">Aug 1<span>st</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Building PDF Document in ruby &amp; rails application using prawn Library
-<strong>Brief</strong>. Before getting started with this tutorial, I would like to thanks <strong>Greg and
-Prawn team</strong> for their awesome work towards ruby and rails community</p>
-
-<h2>Installing prawn (core, layout, format, security)</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>gem install prawn</span></code></pre></td></tr></table></div></figure>
-
-
-<p>or
-Add following line in rails environment file inside initializer block</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>config.gem 'prawn'</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Optionally you can specify version to be used and then run task</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rake gems:install</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Generating pdf using rails console</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ruby script/console
-</span><span class='line'>pdf = Prawn::Document.new</span></code></pre></td></tr></table></div></figure>
-
-
-<p>It creates new pdf document object. Here you can additionally pass options parameters such as &ndash;</p>
+<h2>What is xml pattern ?</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -342,73 +337,485 @@ Add following line in rails environment file inside initializer block</p>
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="ss">Prawn</span><span class="p">:</span><span class="ss">:Document</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:page_size</span>   <span class="o">=&gt;</span> <span class="o">[</span><span class="mi">11</span><span class="o">.</span><span class="mi">32</span><span class="p">,</span> <span class="mi">8</span><span class="o">.</span><span class="mi">49</span><span class="o">]</span><span class="p">,</span> <span class="ss">:page_layout</span> <span class="o">=&gt;</span> <span class="ss">:portrait</span><span class="p">)</span>
-</span><span class='line'><span class="ss">Prawn</span><span class="p">:</span><span class="ss">:Document</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="no">A0</span><span class="p">)</span> <span class="no">Here</span> <span class="no">A0</span> <span class="n">is</span> <span class="n">page</span> <span class="n">size</span><span class="o">.</span>
-</span><span class='line'><span class="ss">Prawn</span><span class="p">:</span><span class="ss">:Document</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:page_layout</span> <span class="o">=&gt;</span> <span class="ss">:portrait</span><span class="p">,</span>
-</span><span class='line'>                     <span class="ss">:left_margin</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="o">.</span><span class="n">mm</span><span class="p">,</span>    <span class="c1"># different</span>
-</span><span class='line'>                     <span class="ss">:right_margin</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="o">.</span><span class="n">cm</span><span class="p">,</span>    <span class="c1"># units</span>
-</span><span class='line'>                     <span class="ss">:top_margin</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="n">dm</span><span class="p">,</span>    <span class="c1"># work</span>
-</span><span class='line'>                     <span class="ss">:bottom_margin</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="o">.</span><span class="mo">01</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="c1"># well</span>
-</span><span class='line'>                     <span class="ss">:page_size</span> <span class="o">=&gt;</span> <span class="s1">&#39;A4&#39;</span><span class="p">)</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'>   <span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;urlset</span> <span class="na">xmlns=</span><span class="s">&quot;http://www.sitemaps.org/schemas/sitemap/0.9&quot;</span><span class="nt">&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="n">pdf</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s2">&quot;Prawn Rocks&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="mi">12</span>
-</span><span class='line'> <span class="n">pdf</span><span class="o">.</span><span class="n">render_file</span><span class="p">(</span><span class="s1">&#39;prawn.pdf&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="c1">#&lt;file:prawn.pdf (closed)=&quot;&quot;&gt;&lt;/file:prawn.pdf&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;url&gt;</span>
+</span><span class='line'>           <span class="nt">&lt;loc&gt;</span>http://www.example.com/<span class="nt">&lt;/loc&gt;</span>
+</span><span class='line'>           <span class="nt">&lt;lastmod&gt;</span>2005-01-01<span class="nt">&lt;/lastmod&gt;</span>
+</span><span class='line'>           <span class="nt">&lt;changefreq&gt;</span>monthly<span class="nt">&lt;/changefreq&gt;</span>
+</span><span class='line'>           <span class="nt">&lt;priority&gt;</span>0.8<span class="nt">&lt;/priority&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/url&gt;</span>
+</span><span class='line'>       ...
+</span><span class='line'>       ...
+</span><span class='line'>    <span class="nt">&lt;/urlset&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Here is output file generated
-<a href="http://github.com/sandipransing/prawn-example/raw/master/sample/prawn.pdf">click</a></p>
+<h2>What will be the path for sitemap ?</h2>
 
-<p>Now let&rsquo;s go through other goodness of prawn library</p>
+<p><strong>&ldquo;www.example.com/sitemap.xml&rdquo;</strong></p>
+
+<h4>Are we going to generate sitemap manually ?</h4>
+
+<p>No&hellip; there is <code>mephisto sitemap plugin</code> and you can make can use it.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">pdf</span>  <span class="o">=</span> <span class="ss">Prawn</span><span class="p">:</span><span class="ss">:Document</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s1">&#39;A3&#39;</span><span class="p">)</span> <span class="k">do</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'>ruby script/plugin install http://svn.appelsiini.net/svn/rails/plugins/mephisto_sitemap/
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h2>FONTS</h2>
+<h4>Am i needed to generate to sitemap for each request ?</h4>
 
-<p><a href="http://github.com/sandipransing/prawn-example/raw/master/sample/font.pdf">click</a></p>
+<p>No&hellip; we can generate it in background task daily basis.</p>
+
+<h4>How it will be accessed for request to sitemap ?</h4>
+
+<p>We can define path to local file in routes</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Specify font to be used or specify path to font file.</span>
-</span><span class='line'><span class="n">font</span> <span class="s2">&quot;times.ttf&quot;</span>
-</span><span class='line'><span class="n">font</span><span class="p">(</span><span class="s2">&quot;/times.ttf&quot;</span><span class="p">)</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'>map.connect &quot;sitemap.xml&quot;, :controller =&gt; :sitemap
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h2>TEXT</h2>
 
-<p><a href="http://github.com/sandipransing/prawn-example/raw/master/sample/font.pdf">click</a></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">text</span> <span class="s1">&#39;Sandip Ransing&#39;</span><span class="p">,</span> <span class="ss">:size</span> <span class="o">=&gt;</span> <span class="mi">41</span><span class="p">,</span> <span class="ss">:position</span> <span class="o">=&gt;</span> <span class="ss">:center</span><span class="p">,</span> <span class="ss">:style</span> <span class="o">=&gt;</span> <span class="ss">:bold</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>STROKE LINE</h2>
-
-<p><a href="http://github.com/sandipransing/prawn-example/raw/master/sample/stroke.pdf">click</a></p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">stroke</span> <span class="k">do</span>
-</span><span class='line'>      <span class="n">rectangle</span> <span class="o">[</span><span class="mi">300</span><span class="p">,</span><span class="mi">300</span><span class="o">]</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">200</span>
-</span><span class='line'> <span class="k">end</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">SitemapController</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">index</span>
+</span><span class='line'>    <span class="n">render</span> <span class="s2">&quot;some local file path&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h2>IMAGE</h2>
+<p>Here are some reference links :</p>
 
-<p><a href="http://github.com/sandipransing/prawn-example/raw/master/sample/image.pdf">click</a></p>
+<ol>
+<li><a href="http://www.fortytwo.gr/blog/19/Generating-Sitemaps-With-Rails">http://www.fortytwo.gr/blog/19/Generating-Sitemaps-With-Rails</a></li>
+<li><a href="http://www.bestechvideos.com/2008/07/04/ruby-plus-71-how-to-create-a-seo-sitemap-for-rails-apps">http://www.bestechvideos.com/2008/07/04/ruby-plus-71-how-to-create-a-seo-sitemap-for-rails-apps</a></li>
+</ol>
 
-<p>Displaying Local file system Image</p>
+
+<h2>Comments</h2>
+
+<p><strong>info ternak</strong></p>
+
+<p>i got lots of information from your site, thank for your sharing… :)</p>
+
+<p><strong>Elena Morgan</strong></p>
+
+<p>Search engines generate nearly 90% of all Internet traffic and are responsible for 55% of all E-commerce transactions. Today, it is essential for all online businesses to make SEO an integral part of their online business strategy.</p>
+
+<p>So I would like to recommend one of my client who helps you define, evolve and implement a powerful SEO strategy to leverage your online business potential</p>
+
+<p><a href="http://www.redalkemi.com/">http://www.redalkemi.com/</a></p>
+
+<p><strong>sandipransing</strong></p>
+
+<p>Link mentioned is very good !
+but it has limitation that we will not have any control over urls that will be submitted to search engines :)</p>
+
+<p><strong>Sethupathi</strong></p>
+
+<p><em>How to create sitemap.xml</em></p>
+
+<p>From the following link you can generate the site-map.xml if your application is not in https. Just by giving the application link it will generate the xml for you.</p>
+
+<p><a href="http://www.xml-sitemaps.com/">http://www.xml-sitemaps.com/</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/09/what-is-new-in-edge-rails-2-3-3/">What Is New in Edge Rails 2.3.3 ?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-09-02T17:54:00+05:30" pubdate data-updated="true">Sep 2<span>nd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Rails community has released rails 2.3.3 recently with major upgrades and several bug fixes added.</p>
+
+<p>On the other hand, <code>rails 3</code> ( i.e. merge of rails and merb framework ) is supposed to be officially get released in this May.</p>
+
+<p>Lets see what are the notable features added in rails 2.3.3</p>
+
+<h2>1. Rack</h2>
+
+<p>Rack is an abstraction built on the top of rails framework</p>
+
+<p>It provides minimal interface between webservers supporting ruby ( like  apache-mongrel, nginx-passenger ) and rails framework.
+Gives access to middleware goodness i.e. wrapping HTML requests and response in simple way
+unifies and distills the API for web servers, web frameworks, and software in between</p>
+
+<p><a href="http://guides.rubyonrails.org/rails_on_rack.html">read more …</a></p>
+
+<h2>2. Metal</h2>
+
+<p>It is a subset of rack middleware specially designed to integrate with rails application.</p>
+
+<p>Whenever you need achieve raw speed for certain requests by skipping action controller stack.</p>
+
+<p><a href="http://weblog.rubyonrails.org/2008/12/17/introducing-rails-metal">read more …</a></p>
+
+<h2>3. Engines</h2>
+
+<p>It was a plugin that got merged in rails core.</p>
+
+<p>It is used for sharing controllers, models and views seamlessly from within a plugin to your rails application.</p>
+
+<p><a href="http://rails-engines.org/news/2009/02/02/engines-in-rails-2-3/">read more …</a></p>
+
+<h2>4. Templates</h2>
+
+<p>These are the ruby files which describes which gems, plugins and initiliazers  has to be added while creating new rails project.</p>
+
+<p><a href="http://rails-engines.org/news/2009/02/02/engines-in-rails-2-3/">read more …</a></p>
+
+<h2>5. Nested Forms</h2>
+
+<p>Earlier nested forms for has_one and has_many associations wasn’t there in rails.
+this release added nested forms complex associations in models.</p>
+
+<p><a href="http://weblog.rubyonrails.org/2009/1/26/nested-model-forms">read more here…</a> and <a href="http://ryandaigle.com/articles/2009/2/1/what-s-new-in-edge-rails-nested-attributes">also see here …</a></p>
+
+<h2>Edge rails Installation</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install rails --source http://gems.rubyonrails.org</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I am  always thankful to rails community for continuous improvements to rails core.
+Cheers, now rails is getting its way !</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/08/ruby-on-rails-search-engine/">Ruby on Rails Search Engine Optimization (SEO)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-08-17T16:16:00+05:30" pubdate data-updated="true">Aug 17<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Crawler</h2>
+
+<p>Search Engines ( like google, yahoo ) mainly uses crawlers for returning results.</p>
+
+<blockquote><p><code>Crawler</code> is the program which searches world wide web(www) and returns ranked pages.</p></blockquote>
+
+<h4>Techniques</h4>
+
+<p>Lets see what are the search engine optimization (SEO) techniques we can adopt so that your rails
+website pages will appear in search results.</p>
+
+<ol>
+<li>Title Of Page</li>
+<li>Meta tags</li>
+<li>Page URL</li>
+<li>Page Contents ( this includes anchors to other pages, headers, image titles and alt texts when image not found then normal texts )</li>
+</ol>
+
+
+<h4>robots.txt</h4>
+
+<p>We can easily skip some pages from search by mentioning them in <code>robots.txt</code> which is by default should be in application root.</p>
+
+<p>And Ofcourse, we can manage all this in rails very easily..</p>
+
+<h4>Howto?</h4>
+
+<p>We can have in rails :</p>
+
+<ol>
+<li>Dynamic page titles,</li>
+<li>Meta tags and</li>
+<li>Sexy perma URLs in rails</li>
+<li>Also, we can define some standard on page content development.</li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/08/easy-sphinx-install-on-ubuntu-interpid/">Easy Sphinx Install on Ubuntu Interpid</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-08-17T13:02:00+05:30" pubdate data-updated="true">Aug 17<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h4>Download <code>sphinx source</code> from website</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install libmysqlclient15-dev
+</span><span class='line'>wget http://sphinxsearch.com/downloads/sphinx-0.9.8-rc2.tar.gz</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Extract source code</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>tar xvf sphinx-0.9.8-rc2.tar.gz && rm sphinx-0.9.8-rc2.tar.gz</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Configure</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd sphinx-0.9.8-rc2
+</span><span class='line'>./configure</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Install</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>make
+</span><span class='line'>sudo make install</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/interesting-string-inflections-in-rails/">Intresting String Inflections in Rails</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-22T19:58:00+05:30" pubdate data-updated="true">May 22<span>nd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Here is list of string inflections :</p>
+
+<ul>
+<li>camelcase</li>
+<li>camelize</li>
+<li>classify</li>
+<li>constantize</li>
+<li>dasherize</li>
+<li>demodulize</li>
+<li>foreign_key</li>
+<li>humanize</li>
+<li>parameterize</li>
+<li>pluralize</li>
+<li>singularize</li>
+<li>tableize</li>
+<li>titlecase</li>
+<li>titleize</li>
+<li>underscore</li>
+</ul>
+
+
+<h4>camelcase()</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>camelcase(first_letter = :upper)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Alias for camelize</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">camelize</span><span class="p">(</span><span class="n">first_letter</span> <span class="o">=</span> <span class="ss">:upper</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>By default, camelize converts strings to UpperCamelCase. If the argument to camelize is set to :lower then camelize produces lowerCamelCase.</p>
+
+<p>camelize will also convert ’/’ to ’::’ which is useful for converting paths to namespaces.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;active_record&quot;</span><span class="o">.</span><span class="n">camelize</span> <span class="c1"># =&gt; &quot;ActiveRecord&quot;</span>
+</span><span class='line'><span class="s2">&quot;active_record&quot;</span><span class="o">.</span><span class="n">camelize</span><span class="p">(</span><span class="ss">:lower</span><span class="p">)</span> <span class="c1"># =&gt; &quot;activeRecord&quot;</span>
+</span><span class='line'><span class="s2">&quot;active_record/errors&quot;</span><span class="o">.</span><span class="n">camelize</span> <span class="c1"># =&gt; &quot;ActiveRecord::Errors&quot;</span>
+</span><span class='line'><span class="s2">&quot;active_record/errors&quot;</span><span class="o">.</span><span class="n">camelize</span><span class="p">(</span><span class="ss">:lower</span><span class="p">)</span> <span class="c1"># =&gt; &quot;activeRecord::Errors&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This method is also aliased as camelcase</p>
+
+<h4>classify()</h4>
+
+<p>Create a class name from a plural table name like Rails does for table names to models. Note that this returns a string and not a class. (To convert to an actual class follow classify with constantize.)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;egg_and_hams&quot;</span><span class="o">.</span><span class="n">classify</span> <span class="c1"># =&gt; &quot;EggAndHam&quot;</span>
+</span><span class='line'><span class="s2">&quot;posts&quot;</span><span class="o">.</span><span class="n">classify</span> <span class="c1"># =&gt; &quot;Post&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Singular names are not handled correctly.</span>
+</span><span class='line'>
+</span><span class='line'><span class="s2">&quot;business&quot;</span><span class="o">.</span><span class="n">classify</span> <span class="c1"># =&gt; &quot;Busines&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>constantize()</h4>
+
+<p>constantize tries to find a declared constant with the name specified in the string. It raises a NameError when the name is not in CamelCase or is not initialized.</p>
+
+<p><strong>Examples :</strong></p>
+
+<p>&ldquo;Module&rdquo;.constantize # => Module
+&ldquo;Class&rdquo;.constantize # => Class</p>
+
+<h4>dasherize()</h4>
+
+<p>Replaces underscores with dashes in the string.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;puni_puni&quot;</span> <span class="c1"># =&gt; &quot;puni-puni&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>demodulize()</h4>
+
+<p>Removes the module part from the constant expression in the string.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;ActiveRecord::CoreExtensions::String::Inflections&quot;</span><span class="o">.</span><span class="n">demodulize</span> <span class="c1"># =&gt; &quot;Inflections&quot;</span>
+</span><span class='line'><span class="s2">&quot;Inflections&quot;</span><span class="o">.</span><span class="n">demodulize</span> <span class="c1"># =&gt; &quot;Inflections&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>foreign_key(separate_class_name_and_id_with_underscore = true)</h4>
+
+<p>Creates a foreign key name from a class name. separate_class_name_and_id_with_underscore sets whether the method should put &ldquo;_&rdquo; between the name and &lsquo;id&rsquo;.</p>
+
+<p><strong>Examples :</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;Message&quot;</span><span class="o">.</span><span class="n">foreign_key</span> <span class="c1"># =&gt; &quot;message_id&quot;</span>
+</span><span class='line'><span class="s2">&quot;Message&quot;</span><span class="o">.</span><span class="n">foreign_key</span><span class="p">(</span><span class="kp">false</span><span class="p">)</span> <span class="c1"># =&gt; &quot;messageid&quot;</span>
+</span><span class='line'><span class="s2">&quot;Admin::Post&quot;</span><span class="o">.</span><span class="n">foreign_key</span> <span class="c1"># =&gt; &quot;post_id&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>humanize()</h4>
+
+<p>Capitalizes the first word, turns underscores into spaces, and strips <code>_id</code>. Like titleize, this is meant for creating pretty output.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;employee_salary&quot;</span> <span class="c1"># =&gt; &quot;Employee salary&quot;</span>
+</span><span class='line'><span class="s2">&quot;author_id&quot;</span> <span class="c1"># =&gt; &quot;Author&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>`</p>
+
+<h4>parameterize()</h4>
+
+<p>Replaces special characters in a string so that it may be used as part of a ‘pretty’ URL.
+<strong>Examples :</strong></p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -418,31 +825,215 @@ Add following line in rails environment file inside initializer block</p>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">image</span> <span class="s1">&#39;sandip.png&#39;</span><span class="p">,</span> <span class="ss">:height</span> <span class="o">=&gt;</span> <span class="mi">50</span><span class="p">,</span> <span class="ss">:position</span> <span class="o">=&gt;</span> <span class="ss">:center</span><span class="p">,</span> <span class="ss">:border</span> <span class="o">=&gt;</span> <span class="mi">2</span>
-</span><span class='line'><span class="no">Scale</span> <span class="no">Image</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Person</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">to_param</span>
+</span><span class='line'>  <span class="s2">&quot;</span><span class="si">#{</span><span class="nb">id</span><span class="si">}</span><span class="s2">-</span><span class="si">#{</span><span class="nb">name</span><span class="o">.</span><span class="n">parameterize</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
 </span><span class='line'>
-</span><span class='line'><span class="n">image</span> <span class="s1">&#39;sandip.png&#39;</span><span class="p">,</span> <span class="ss">:scale</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="ss">:position</span> <span class="o">=&gt;</span> <span class="ss">:left</span>
-</span><span class='line'><span class="no">Display</span> <span class="no">Remote</span> <span class="n">image</span> <span class="n">from</span> <span class="no">Internet</span> <span class="n">inside</span> <span class="n">pdf</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">require</span> <span class="s2">&quot;open-uri&quot;</span>
-</span><span class='line'> <span class="n">image</span> <span class="nb">open</span><span class="p">(</span><span class="err">&#39;</span><span class="ss">http</span><span class="p">:</span><span class="sr">//</span><span class="n">t2</span><span class="o">.</span><span class="n">gstatic</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">images?q</span><span class="o">=</span><span class="ss">tbn</span><span class="p">:</span><span class="ss">kTG6gAKrnou2gM</span><span class="p">:</span><span class="ss">http</span><span class="p">:</span><span class="sr">//</span><span class="n">www</span><span class="o">.</span><span class="n">facebook</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">profile</span><span class="o">/</span><span class="n">pic</span><span class="o">.</span><span class="n">php?uid</span><span class="o">=</span><span class="no">AAAAAQAQrLXvTWfyY2ANjttV8D1c0QAAAAnDHPFJe0pPFR84iIzXPKro</span><span class="o">&amp;</span><span class="n">t</span><span class="o">=</span><span class="mi">1</span><span class="s2">&quot;)</span>
-</span><span class='line'><span class="s2">end</span>
+</span><span class='line'><span class="vi">@person</span> <span class="o">=</span> <span class="no">Person</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span class='line'><span class="c1"># =&gt; Donald E. Knuth</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h2>LINE BREAKS</h2>
+<h4>pluralize()</h4>
+
+<p>Returns the plural form of the word in the string.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">movedown</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;post&quot;</span><span class="o">.</span><span class="n">pluralize</span> <span class="c1"># =&gt; &quot;posts&quot;</span>
+</span><span class='line'><span class="s2">&quot;octopus&quot;</span><span class="o">.</span><span class="n">pluralize</span> <span class="c1"># =&gt; &quot;octopi&quot;</span>
+</span><span class='line'><span class="s2">&quot;sheep&quot;</span><span class="o">.</span><span class="n">pluralize</span> <span class="c1"># =&gt; &quot;sheep&quot;</span>
+</span><span class='line'><span class="s2">&quot;words&quot;</span><span class="o">.</span><span class="n">pluralize</span> <span class="c1"># =&gt; &quot;words&quot;</span>
+</span><span class='line'><span class="s2">&quot;the blue mailman&quot;</span><span class="o">.</span><span class="n">pluralize</span> <span class="c1"># =&gt; &quot;the blue mailmen&quot;</span>
+</span><span class='line'><span class="s2">&quot;CamelOctopus&quot;</span><span class="o">.</span><span class="n">pluralize</span> <span class="c1"># =&gt; &quot;CamelOctopi&quot;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h2>TABLE/GRID</h2>
+<h4>singularize()</h4>
 
-<p><a href="http://github.com/sandipransing/prawn-example/raw/master/sample/table.pdf">click</a></p>
+<p>The reverse of pluralize, returns the singular form of a word in a string.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;posts&quot;</span><span class="o">.</span><span class="n">singularize</span> <span class="c1"># =&gt; &quot;post&quot;</span>
+</span><span class='line'><span class="s2">&quot;octopi&quot;</span><span class="o">.</span><span class="n">singularize</span> <span class="c1"># =&gt; &quot;octopus&quot;</span>
+</span><span class='line'><span class="s2">&quot;sheep&quot;</span><span class="o">.</span><span class="n">singularize</span> <span class="c1"># =&gt; &quot;sheep&quot;</span>
+</span><span class='line'><span class="s2">&quot;word&quot;</span><span class="o">.</span><span class="n">singularize</span> <span class="c1"># =&gt; &quot;word&quot;</span>
+</span><span class='line'><span class="s2">&quot;the blue mailmen&quot;</span><span class="o">.</span><span class="n">singularize</span> <span class="c1"># =&gt; &quot;the blue mailman&quot;</span>
+</span><span class='line'><span class="s2">&quot;CamelOctopi&quot;</span><span class="o">.</span><span class="n">singularize</span> <span class="c1"># =&gt; &quot;CamelOctopus&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>tableize()</h4>
+
+<p>Creates the name of a table like Rails does for models to table names. This method uses the pluralize method on the last word in the string.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;RawScaledScorer&quot;</span><span class="o">.</span><span class="n">tableize</span> <span class="c1"># =&gt; &quot;raw_scaled_scorers&quot;</span>
+</span><span class='line'><span class="s2">&quot;egg_and_ham&quot;</span><span class="o">.</span><span class="n">tableize</span> <span class="c1"># =&gt; &quot;egg_and_hams&quot;</span>
+</span><span class='line'><span class="s2">&quot;fancyCategory&quot;</span><span class="o">.</span><span class="n">tableize</span> <span class="c1"># =&gt; &quot;fancy_categories&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>titlecase()</h4>
+
+<p>Alias for titleize
+titleize()</p>
+
+<p>Capitalizes all the words and replaces some characters in the string to create a nicer looking title. titleize is meant for creating pretty output. It is not used in the Rails internals.</p>
+
+<p>titleize is also aliased as titlecase.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;man from the boondocks&quot;</span><span class="o">.</span><span class="n">titleize</span>
+</span><span class='line'><span class="c1"># =&gt; &quot;Man From The Boondocks&quot;</span>
+</span><span class='line'><span class="s2">&quot;x-men: the last stand&quot;</span><span class="o">.</span><span class="n">titleize</span>
+</span><span class='line'><span class="c1"># =&gt; &quot;X Men: The Last Stand&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This method is also aliased as titlecase</p>
+
+<h4>underscore()</h4>
+
+<p>The reverse of camelize. Makes an underscored, lowercase form from the expression in the string.
+underscore will also change ’::’ to ’/’ to convert namespaces to paths.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;ActiveRecord&quot;</span><span class="o">.</span><span class="n">underscore</span>
+</span><span class='line'><span class="c1"># =&gt; &quot;active_record&quot;</span>
+</span><span class='line'><span class="s2">&quot;ActiveRecord::Errors&quot;</span><span class="o">.</span><span class="n">underscore</span>
+</span><span class='line'><span class="c1"># =&gt; active_record/errors</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Remove special characters from string</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;STRING&quot;</span><span class="o">.</span><span class="n">.gsub</span><span class="p">(</span><span class="sr">/[^a-zA-Z 0-9]/</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># escape special chars before save</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">before_save</span>
+</span><span class='line'>  <span class="nb">self</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="sr">/[^a-zA-Z 0-9]/</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/render-partial-or-view-from-another/">Render Partial or View From Another Controller</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-22T19:50:00+05:30" pubdate data-updated="true">May 22<span>nd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>To render view files from another controller&rsquo;s view files</p>
+
+<h2>In rail 2.3</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>render "controller/action"</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>In rails 2.2 or below</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>render :template =&gt; 'controller/action'</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>To render partial from another controller’s views folder</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>render :partial =&gt; "controller/partial"</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/vi-vim-shortcuts/">Vi / Vim Shortcuts</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-22T18:23:00+05:30" pubdate data-updated="true">May 22<span>nd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>As i am newb on linux macine, i dont know vi shortcuts.
+so, i am listing down shortcuts which i am getting familier :)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -463,75 +1054,158 @@ Add following line in rails environment file inside initializer block</p>
 <span class='line-number'>19</span>
 <span class='line-number'>20</span>
 <span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">data</span> <span class="o">=</span> <span class="o">[</span>
-</span><span class='line'>    <span class="o">[</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span> <span class="p">{</span><span class="ss">:text</span> <span class="o">=&gt;</span> <span class="s1">&#39;Sandip Ransing&#39;</span><span class="p">,</span> <span class="ss">:font_style</span> <span class="o">=&gt;</span> <span class="ss">:bold</span><span class="p">,</span> <span class="ss">:colspan</span> <span class="o">=&gt;</span> <span class="mi">4</span> <span class="p">}</span><span class="o">]</span><span class="p">,</span>
-</span><span class='line'>    <span class="o">[</span><span class="s2">&quot;Address&quot;</span><span class="p">,</span> <span class="p">{</span><span class="ss">:text</span> <span class="o">=&gt;</span> <span class="s1">&#39;SHIVAJINAGAR, PUNE 411005&#39;</span><span class="p">,</span> <span class="ss">:colspan</span> <span class="o">=&gt;</span> <span class="mi">4</span> <span class="p">}</span><span class="o">]</span><span class="p">,</span>
-</span><span class='line'>    <span class="o">[</span><span class="s2">&quot;Landmark&quot;</span><span class="p">,{</span><span class="ss">:text</span> <span class="o">=&gt;</span> <span class="s1">&#39;NEAR FC COLLEGE&#39;</span><span class="p">,</span> <span class="ss">:colspan</span> <span class="o">=&gt;</span> <span class="mi">4</span> <span class="p">}</span><span class="o">]</span><span class="p">,</span>
-</span><span class='line'>    <span class="o">[</span><span class="s2">&quot;Mobile&quot;</span><span class="p">,</span><span class="s2">&quot;9860648108&quot;</span><span class="p">,</span> <span class="p">{</span><span class="ss">:text</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="ss">:colspan</span> <span class="o">=&gt;</span> <span class="mi">3</span> <span class="p">}</span><span class="o">]</span><span class="p">,</span>
-</span><span class='line'>    <span class="o">[</span><span class="s2">&quot;Education&quot;</span><span class="p">,</span> <span class="p">{</span><span class="ss">:text</span> <span class="o">=&gt;</span> <span class="s2">&quot;Bachelor in Computer Engineering&quot;</span><span class="p">,</span> <span class="ss">:colspan</span> <span class="o">=&gt;</span> <span class="mi">4</span> <span class="p">}</span><span class="o">]</span><span class="p">,</span>
-</span><span class='line'>      <span class="o">[</span><span class="s2">&quot;Vehicle&quot;</span><span class="p">,</span> <span class="s1">&#39;Hero Honda&#39;</span><span class="p">,</span><span class="s2">&quot;Reg. No.&quot;</span><span class="p">,</span> <span class="p">{</span><span class="ss">:text</span> <span class="o">=&gt;</span> <span class="s2">&quot;MH 12 EN 921&quot;</span><span class="p">,</span> <span class="ss">:colspan</span> <span class="o">=&gt;</span> <span class="mi">3</span> <span class="p">}</span><span class="o">]</span><span class="p">,</span>
-</span><span class='line'>      <span class="o">[</span><span class="s2">&quot;Additional&quot;</span><span class="p">,</span> <span class="s2">&quot;GDCA&quot;</span><span class="p">,</span> <span class="s2">&quot;class&quot;</span><span class="p">,</span> <span class="s1">&#39;First&#39;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="o">]</span><span class="p">,</span>
-</span><span class='line'>      <span class="o">[</span><span class="p">{</span><span class="ss">:text</span> <span class="o">=&gt;</span> <span class="s2">&quot;Areas of Speciality&quot;</span><span class="p">,</span> <span class="ss">:font_style</span> <span class="o">=&gt;</span> <span class="ss">:bold</span><span class="p">},</span> <span class="p">{</span><span class="ss">:text</span> <span class="o">=&gt;</span> <span class="s2">&quot;Ruby, Rails, Radiant, Asterisk, Adhearsion, Geokit, Prawn, ....,...&quot;</span><span class="p">,</span> <span class="ss">:font_style</span> <span class="o">=&gt;</span> <span class="ss">:bold</span><span class="p">,</span> <span class="ss">:colspan</span> <span class="o">=&gt;</span> <span class="mi">4</span><span class="p">}</span><span class="o">]</span><span class="p">,</span>
-</span><span class='line'>      <span class="o">[</span><span class="p">{</span><span class="ss">:text</span> <span class="o">=&gt;</span> <span class="s2">&quot;Website&quot;</span><span class="p">,</span> <span class="ss">:colspan</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">},{</span><span class="ss">:text</span> <span class="o">=&gt;</span> <span class="s2">&quot;www.funonrails.com&quot;</span><span class="p">,</span> <span class="ss">:colspan</span> <span class="o">=&gt;</span> <span class="mi">3</span><span class="p">}</span><span class="o">]</span><span class="p">,</span>
-</span><span class='line'>      <span class="o">[</span><span class="p">{</span><span class="ss">:text</span> <span class="o">=&gt;</span> <span class="s2">&quot;Company&quot;</span><span class="p">,</span> <span class="ss">:colspan</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">},{</span><span class="ss">:text</span> <span class="o">=&gt;</span> <span class="s2">&quot;Josh Software&quot;</span><span class="p">,</span> <span class="ss">:colspan</span> <span class="o">=&gt;</span> <span class="mi">3</span><span class="p">}</span><span class="o">]</span>
-</span><span class='line'>  <span class="o">]</span>
-</span><span class='line'><span class="n">table</span> <span class="n">data</span><span class="p">,</span>
-</span><span class='line'>    <span class="ss">:border_style</span> <span class="o">=&gt;</span> <span class="ss">:grid</span><span class="p">,</span> <span class="c1">#:underline_header</span>
-</span><span class='line'>    <span class="ss">:font_size</span>  <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">,</span>
-</span><span class='line'>    <span class="ss">:horizontal_padding</span> <span class="o">=&gt;</span> <span class="mi">6</span><span class="p">,</span>
-</span><span class='line'>    <span class="ss">:vertical_padding</span>   <span class="o">=&gt;</span> <span class="mi">3</span><span class="p">,</span>
-</span><span class='line'>    <span class="ss">:border_width</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="o">.</span><span class="mi">7</span><span class="p">,</span>
-</span><span class='line'>    <span class="ss">:column_widths</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="mi">0</span> <span class="o">=&gt;</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">1</span> <span class="o">=&gt;</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">2</span> <span class="o">=&gt;</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">3</span> <span class="o">=&gt;</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">4</span> <span class="o">=&gt;</span> <span class="mi">80</span> <span class="p">},</span>
-</span><span class='line'>    <span class="ss">:position</span> <span class="o">=&gt;</span> <span class="ss">:left</span><span class="p">,</span>
-</span><span class='line'>    <span class="ss">:align</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="mi">0</span> <span class="o">=&gt;</span> <span class="ss">:left</span><span class="p">,</span> <span class="mi">1</span> <span class="o">=&gt;</span> <span class="ss">:right</span><span class="p">,</span> <span class="mi">2</span> <span class="o">=&gt;</span> <span class="ss">:left</span><span class="p">,</span> <span class="mi">3</span> <span class="o">=&gt;</span> <span class="ss">:right</span><span class="p">,</span> <span class="mi">4</span> <span class="o">=&gt;</span> <span class="ss">:right</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># Open file
+</span><span class='line'>vi filename
+</span><span class='line'>
+</span><span class='line'># Insert in file
+</span><span class='line'>i
+</span><span class='line'>
+</span><span class='line'># Exit file
+</span><span class='line'>q
+</span><span class='line'>
+</span><span class='line'># Forced exit
+</span><span class='line'>q!
+</span><span class='line'>
+</span><span class='line'># Save file
+</span><span class='line'>wq
+</span><span class='line'>
+</span><span class='line'># Forced save
+</span><span class='line'>wq!
+</span><span class='line'>
+</span><span class='line'># Copy no of lines
+</span><span class='line'>yy
+</span><span class='line'>
+</span><span class='line'># Paste copied lines
+</span><span class='line'>pp
+</span><span class='line'>
+</span><span class='line'># Undo changes
+</span><span class='line'>uu
+</span><span class='line'>
+</span><span class='line'># Delete lines
+</span><span class='line'>dd
+</span><span class='line'>
+</span><span class='line'># To search and replace string in vi
+</span><span class='line'>:%s/search_string/replacement_string/g
+</span><span class='line'>
+</span><span class='line'># To find particular word in file
+</span><span class='line'>?string1</span></code></pre></td></tr></table></div></figure>
 
 
-<h2>LINKS</h2>
+<p>If you have any quick list, please let me know !</p>
 
-<p><a href="http://github.com/sandipransing/prawn-example/raw/master/sample/link.pdf">click</a></p>
+<p>Below post is reblogged from <a href="http://nakuls77.wordpress.com/2008/09/14/using-vi-editor/#comment-144">http://nakuls77.wordpress.com/2008/09/14/using-vi-editor/#comment-144</a></p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">link_annotation</span><span class="p">(</span><span class="o">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">40</span><span class="o">]</span><span class="p">,</span><span class="ss">:Border</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">]</span><span class="p">,</span> <span class="ss">:A</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:Type</span> <span class="o">=&gt;</span> <span class="ss">:Action</span><span class="p">,</span> <span class="ss">:S</span> <span class="o">=&gt;</span> <span class="ss">:URI</span><span class="p">,</span> <span class="ss">:URI</span> <span class="o">=&gt;</span> <span class="ss">Prawn</span><span class="p">:</span><span class="ss">:LiteralString</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;http://twitter.com/sandipransing&quot;</span><span class="p">)</span> <span class="p">}</span> <span class="p">)</span>
-</span><span class='line'><span class="n">link_annotation</span><span class="p">((</span><span class="o">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">150</span><span class="o">]</span><span class="p">),</span> <span class="ss">:Border</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">]</span><span class="p">,</span> <span class="ss">:Dest</span> <span class="o">=&gt;</span> <span class="n">s</span><span class="s2">&quot;http://funonrails.com&quot;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
+<blockquote><p>Vi is a very powerful editor that has been part of nearly every linux/unix distro for a very long time. Many people stray away from Vi due to the curve involved in learning this editor. This guide will help you dive into the world of Vi. Once you do, you will understand why many prefer Vi over other editors.</p></blockquote>
 
+<p>There are countless options for Vi that can be set up inside the /etc/vimrc file.</p>
 
-<h2>PDF Security</h2>
+<p>Auto-indent and creating a macro to change the color of the background.</p>
 
-<p><a href="http://github.com/sandipransing/prawn-example/raw/master/sample/secure.pdf">click</a></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">encrypt_document</span> <span class="ss">:user_password</span> <span class="o">=&gt;</span> <span class="s1">&#39;hello&#39;</span><span class="p">,</span> <span class="ss">:owner_password</span> <span class="o">=&gt;</span> <span class="s1">&#39;railer&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="ss">:permissions</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:print_document</span> <span class="o">=&gt;</span> <span class="kp">false</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># vi /etc/vimrc</span></code></pre></td></tr></table></div></figure>
 
 
-<h2>Prawn Inline Formatting</h2>
+<h2>Auto-Indent Option &ndash;</h2>
 
-<p>Prawn-format supports inline text formatting that gives user enough flexibility to use html tags</p>
+<p>This option is so when you tab-space out a line and then press enter, the cursor will move to the next line, automatically indented to the start of the previous line. This helps programmers indent out code easily to create clean looking code. To implement this feature, please add the following line to the bottom of your /etc/vimrc file:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;prawn/format&#39;</span>
-</span><span class='line'><span class="n">text</span> <span class="s1">&#39;This is Strong  text&#39;</span><span class="p">,</span> <span class="ss">:inline_format</span> <span class="o">=&gt;</span> <span class="kp">true</span>
-</span><span class='line'><span class="n">text</span> <span class="s1">&#39;This is bold text \n It should be on newline.&#39;</span><span class="p">,</span> <span class="ss">:inline_format</span> <span class="o">=&gt;</span> <span class="kp">true</span>
-</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>set ai</span></code></pre></td></tr></table></div></figure>
 
 
-<h2>SAVE Generated PDF</h2>
+<p>Please note that generally speaking only programmers will want to turn ON auto-indent.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">end</span>
-</span><span class='line'><span class="n">pdf</span><span class="o">.</span><span class="n">render_file</span> <span class="s1">&#39;my.pdf&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
+<h2>Background Color &ndash;</h2>
 
+<p>Some SSH clients have white backgrounds and some have black backgrounds. This can make it very difficult to see the screen depending on the color of the text. This macro allows you to configure F11 to change the background color &amp; color of the text. To implement this feature, please add the following lines to the bottom of your /etc/vimrc file:</p>
 
-<p>!!! NOTE: As of time now &lsquo;prawn-format&rsquo; is incompatible with latest prawn gem, It is compatible with prawn version &lt;= 0.6 s</p>
+<p>set background=dark
+map :let &amp;background = ( &amp;background == “dark”? “light” : “dark” )</p>
+
+<p>I would highly recommend adding in the Background Color option. However if you do not wish to implement either of these features, then please proceed on in the guide.</p>
+
+<p>Commands</p>
+
+<h2>Cursor Movement</h2>
+
+<p>0 (Zero) Start of Line
+^ – First non-Blank Character of Line
+$ – End of Line
+G Go To Command (prefix with number 5G goes to line 5)</p>
+
+<p>Insert Mode Inserting/Appending Text
+Insert Start Insert Mode at Cursor
+A Append at the end of the Line
+o open (append) blank link below current line
+I Open blank line above current line
+Esc Exit Insert Mode</p>
+
+<h2>Editing</h2>
+
+<p>r Replace a single character (does not use insert mode)
+J Join line below with the current one
+cc Change (replace) an entire line
+cw Change (replace) to the end of word
+c$ – Change (replace) to the end of line
+s Delete character at cursor and substitute text
+S Delete line at cursor and substitute text (same as cc)
+u Undo
+. – Repeat last command</p>
+
+<h2>Cut and Paste</h2>
+
+<p>yy Copy(yank) a line
+2yy Copy(yank) two lines
+yw Copy(yank) word
+p Paste the clipboard after the cursor
+P Paste the clipboard before the cursor
+dd Delete a line
+dw Delete the current word
+x Delete the current character</p>
+
+<h2>Exiting</h2>
+
+<p>:w Write (save) the file, but don’t exit
+:wq Write &amp; Quit
+:q Quit
+:q! – Quit and don’t save changes</p>
+
+<h2>Searching</h2>
+
+<p>/pattern Search for a pattern
+?pattern Search backward for a pattern
+n Repeat last search in same direction
+N Repeat last search in opposite direction
+:%2/old/new/g Replace all old with new throughout file
+:%s/old/new/gc Replace all old with new throughout file with confirmations</p>
+
+<h2>Working with Multiple Files</h2>
+
+<p>:e filename Edit a file in a new buffer
+:bn Go to next buffer
+:bp Go to previous buffer
+:bd Close file(buffer)
+:sp filename Open a file in a new buffer and split window
+ctrl-ws Split windows
+ctrl-ww Switch between windows
+ctrl-wq Quite a window
+ctrl-wv Split windows vertically
+ctrl-wq Quite a window
+ctrl-wv Split windows vertically</p>
 </div>
   
   
@@ -544,7 +1218,7 @@ Add following line in rails environment file inside initializer block</p>
       
   <header>
     
-      <h1 class="entry-title"><a href="/2010/05/specify-rails-version-to-use-while/">Specify Rails Version to New Rails App</a></h1>
+      <h1 class="entry-title"><a href="/2009/05/working-with-multiple-ruby-versions-on-same-server/">Working With Multiple Ruby Versions on Same Server</a></h1>
     
     
       <p class="meta">
@@ -560,143 +1234,84 @@ Add following line in rails environment file inside initializer block</p>
   
 
 
-<time datetime="2010-05-07T18:40:00+05:30" pubdate data-updated="true">May 7<span>th</span>, 2010</time>
+<time datetime="2009-05-13T20:12:00+05:30" pubdate data-updated="true">May 13<span>th</span>, 2009</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>On my development machine, I have rails versions installed ranging from rails <code>1.2.3</code> to <code>2.3</code>
-How do i create new rails app that will use <code>rails 2.1.0</code>
-Create new app with rails version <code>2.1.0</code></p>
+  <div class="entry-content"><p>This post is reblogged from Michael Greenly blog <a href="http://blog.michaelgreenly.com/2008/08/multiple-versions-of-ruby-on-ubuntu-2.html">post</a></p>
+
+<p>I recently changed how I&rsquo;m handling multiple simultaneous Ruby installations and I&rsquo;d like to share.</p>
+
+<p>What I needed was to make it convenient to switch between the system provided packages and specific, from source, installations. After some experiments I decided to use &lsquo;update-alternatives&rsquo; to do it.</p>
+
+<p>Here&rsquo;s a quick walk through&hellip;</p>
+
+<p>First I removed all of my Ruby and RubyGem environment variables, they&rsquo;re not needed.</p>
+
+<p>Then I installed Ubuntu&rsquo;s default Ruby packages via apt-get.</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rails _2.1.0_ simple_blog</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-get install ruby irb ri rdoc libruby-extras rubygems ruby1.8-dev</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Specify database to use while creating new rails app</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rails _2.1.0_ simple_blog -d mysql</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Comments</h2>
-
-<p>sitemap « Fun On Rails</p>
-
-<p>[…] Specify rails version to use while creating rails project « Fun On Rails […]</p>
-
-<p>sandipransing</p>
-
-<p>specify database while creating rails application</p>
+<p>Next I downloaded and installed alternate versions of Ruby from source. In this example I&rsquo;m going to use two additional versions; the newest stable release and the newest development release.</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rails demo -d 
-</span><span class='line'>rails _2.1.0_ my_rails_app -d mysql</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/04/using-modules-and-mixins-in-ruby/">Using Modules and Mixins in Ruby</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-04-28T18:11:00+05:30" pubdate data-updated="true">Apr 28<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Before getting started with modules and mixins, lets first find out the need of module &amp; mixins in OOP.</p>
-
-<p>In object oriented programming languages multiple inheritance is basic paradigm (child class extends behavior of base class).</p>
-
-<p>C++ supports multiple inheritance. Java does support same using interfaces.</p>
-
-<p>In ruby language, multiple inheritance is achieved very easily using mixin of modules &amp; classes and that makes ruby as powerful language.</p>
-
-<p>Ruby has classes, modules. Modules can be included inside other classes (mixins) to achieve multiple inheritance.</p>
-
-<h2>Modules</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="k">module</span> <span class="nn">Greeting</span>
-</span><span class='line'>    <span class="c1"># here below is the instance method</span>
-</span><span class='line'>    <span class="c1"># and that can be accessed using object of class ONLY</span>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">hi</span>
-</span><span class='line'>      <span class="nb">puts</span> <span class="s1">&#39;Guest&#39;</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd /tmp
+</span><span class='line'>$ wget -c ftp://ftp.ruby-lang.org/pub/ruby/1.8/ruby-1.8.7-p71.tar.gz
+</span><span class='line'>$ tar -xvzf ruby-1.8.7-p71.tar.gz
+</span><span class='line'>$ cd ruby-1.8.7-p71
+</span><span class='line'>$ ./configure --prefix=/opt/ruby-1.8.7-p71
+</span><span class='line'>$ make
+</span><span class='line'>$ sudo make install
+</span><span class='line'>$ wget -c ftp://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.0-3.tar.gz
+</span><span class='line'>$ tar -xvzf ruby-1.9.0-3.tar.gz
+</span><span class='line'>$ ./configure --prefix=/opt/ruby-ruby-1.9.0-3
+</span><span class='line'>$ make
+</span><span class='line'>$ sudo make install</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Module methods can be called using scope resolution operator (::) or dot operator (.)</p>
+<p>At this point I have three versions of Ruby installed and each can be accessed through it&rsquo;s full path.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="ss">Greeting</span><span class="p">:</span><span class="ss">:hi</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># =&gt; undefined method `hi&#39; for Greeting:Module (NoMethodError)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>It is obivous to have an error because we are calling class method and that is not present inside module.</p>
-
-<h2>Mixins</h2>
-
-<p>Lets include greeting module inside person class</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Person</span>
-</span><span class='line'>  <span class="kp">include</span> <span class="no">Greeting</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">person</span> <span class="o">=</span> <span class="no">Person</span><span class="o">.</span><span class="n">new</span>
-</span><span class='line'><span class="n">person</span><span class="o">.</span><span class="n">hi</span> <span class="c1">#=&gt; &quot;Guest&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ /usr/bin/ruby --version
+</span><span class='line'># ruby 1.8.6 (2007-09-24 patchlevel 111) [i486-linux]
+</span><span class='line'>$ /opt/ruby-1.8.7-p71/bin/ruby --version
+</span><span class='line'># ruby 1.8.7 (2008-08-08 patchlevel 71) [i686-linux]
+</span><span class='line'>$ /opt/ruby-1.9.0-r18217/bin/ruby --version
+</span><span class='line'># ruby 1.9.0 (2008-07-25 revision 18217) [i686-linux]</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Lets see how module methods can be defined. It can be done using either self or class_name.</p>
+<p>You&rsquo;ll also notice that the default installation is the one provided by Ubuntu.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ruby --version
+</span><span class='line'># ruby 1.8.6 (2007-09-24 patchlevel 111) [i486-linux]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Next we&rsquo;ll use &lsquo;update-alternatives&rsquo; to make it a bit easier to switch between them. You could do this on the command line but it becomes a fairly long nasty command so I found it easier to write a quick shell script and run it. The script:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -715,53 +1330,96 @@ Create new app with rails version <code>2.1.0</code></p>
 <span class='line-number'>17</span>
 <span class='line-number'>18</span>
 <span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">Greeting</span>
-</span><span class='line'>  <span class="c1"># here below is the instance method</span>
-</span><span class='line'>  <span class="c1"># and that can be accessed using object of class ONLY</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">hi</span>
-</span><span class='line'>    <span class="nb">puts</span> <span class="s1">&#39;Guest&#39;</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>  <span class="c1"># Below are module methods</span>
-</span><span class='line'>  <span class="c1"># this methods can be invoked</span>
-</span><span class='line'>  <span class="c1"># using Greeting::hi</span>
-</span><span class='line'>  <span class="c1"># OR Greeting.hi</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">hi</span>
-</span><span class='line'>    <span class="nb">puts</span> <span class="s1">&#39;hi Sandip&#39;</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>  <span class="c1"># here is one more way to declare</span>
-</span><span class='line'>  <span class="c1"># module methods</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nc">Greeting</span><span class="o">.</span><span class="nf">bye</span>
-</span><span class='line'>    <span class="nb">puts</span> <span class="s1">&#39;Bye Sandip!&#39;</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>update-alternatives --install \
+</span><span class='line'>/usr/local/bin/ruby ruby /usr/bin/ruby 100 \
+</span><span class='line'>--slave /usr/local/bin/erb erb /usr/bin/erb \
+</span><span class='line'>--slave /usr/local/bin/gem gem /usr/bin/gem \
+</span><span class='line'>--slave /usr/local/bin/irb irb /usr/bin/irb \
+</span><span class='line'>--slave /usr/local/bin/rdoc rdoc /usr/bin/rdoc \
+</span><span class='line'>--slave /usr/local/bin/ri ri /usr/bin/ri \
+</span><span class='line'>--slave /usr/local/bin/testrb testrb /usr/bin/testrb
+</span><span class='line'>
+</span><span class='line'>update-alternatives --install \
+</span><span class='line'>/usr/local/bin/ruby   ruby /opt/ruby-1.8.7-p71/bin/ruby 50 \
+</span><span class='line'>--slave /usr/local/bin/erb erb /opt/ruby-1.8.7-p71/bin/erb \
+</span><span class='line'>--slave /usr/local/bin/gem gem /opt/ruby-1.8.7-p71/bin/gem \
+</span><span class='line'>--slave /usr/local/bin/irb irb /opt/ruby-1.8.7-p71/bin/irb \
+</span><span class='line'>--slave /usr/local/bin/rdoc rdoc /opt/ruby-1.8.7-p71/bin/rdoc \
+</span><span class='line'>--slave /usr/local/bin/ri ri /opt/ruby-1.8.7-p71/bin/ri \
+</span><span class='line'>--slave /usr/local/bin/testrb testrb /opt/ruby-1.8.7-p71/bin/testrb
+</span><span class='line'>
+</span><span class='line'>update-alternatives --install \
+</span><span class='line'>/usr/local/bin/ruby   ruby /opt/ruby-1.9.0-r18217/bin/ruby 25 \
+</span><span class='line'>--slave /usr/local/bin/erb erb /opt/ruby-1.9.0-r18217/bin/erb \
+</span><span class='line'>--slave /usr/local/bin/gem gem /opt/ruby-1.9.0-r18217/bin/gem \
+</span><span class='line'>--slave /usr/local/bin/irb irb /opt/ruby-1.9.0-r18217//bin/irb \
+</span><span class='line'>--slave /usr/local/bin/rdoc rdoc /opt/ruby-1.9.0-r18217/bin/rdoc \
+</span><span class='line'>--slave /usr/local/bin/ri ri /opt/ruby-1.9.0-r18217/bin/ri \
+</span><span class='line'>--slave /usr/local/bin/testrb testrb /opt/ruby-1.9.0-r18217/bin/testrb</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Lets invoke methods</p>
+<p>What that does is create a group of applications under the generic name Ruby. In addition each application has several slave applications tied to it; erb, irb, etc&hellip; In defining each application we specify what symbolic link it will be accessed through and where the application is actually installed. In my case Ubuntu installed Ruby in /usr/bin and the source installed versions are in /opt. All of the installations will be accessed through the generic name Ruby and will have there symbolic links created in /usr/local/bin. I choose /usr/local/bin because it supercedes /usr/bin in the default path.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p>Before moving on make sure that &lsquo;update-alternatives&rsquo; sees all of our Ruby installations:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="ss">Greeting</span><span class="p">:</span><span class="ss">:hi</span> <span class="c1">#=&gt; &quot;hi Sandip&quot;</span>
-</span><span class='line'><span class="no">Greeting</span><span class="o">.</span><span class="n">bye</span> <span class="c1">#=&gt; &quot;Bye Sandip!&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ update-alternatives --list ruby
+</span><span class='line'># /opt/ruby-1.9.0-r18217/bin/ruby
+</span><span class='line'># /opt/ruby-1.8.7-p71/bin/ruby
+</span><span class='line'># /usr/bin/ruby</span></code></pre></td></tr></table></div></figure>
 
 
-<h4>Extending class behavior using modules</h4>
+<p>Now switching between them is as easy as running the &lsquo;update-alternatives&rsquo; command and selecting the number of the installation you&rsquo;d like to use. Example:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo update-alternatives --config ruby</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It&rsquo;s important to keep in mind that each installation is separate. So for example if you install RubyGems while using /usr/bin/ruby it will not be available to /opt/ruby-1.9.0-r18217/bin/ruby, or /opt/ruby-1.8.7-p71/bin/ruby, etc&hellip;.</p>
+
+<p>While it&rsquo;s probably possible to use a shared repository for RubyGems across multiple installations I haven&rsquo;t tried it and instead have choosen to use multiple separate RubyGem installs, one for each Ruby installation.</p>
+
+<p>Also RubyGem&rsquo;s bindir will most likely not be in your path. To get around this I created a short script called &lsquo;gemexec&rsquo; in /usr/local/bin</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Person</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">included</span><span class="p">(</span><span class="n">base</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">base</span><span class="o">.</span><span class="n">extend</span> <span class="no">Greeting</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#!/usr/bin/env ruby
+</span><span class='line'>
+</span><span class='line'>require 'rubygems'
+</span><span class='line'>
+</span><span class='line'>if ARGV.size &gt; 1
+</span><span class='line'>exec "#{Gem.bindir}/#{ARGV.shift}",ARGV.join(" ")
+</span><span class='line'>else
+</span><span class='line'>exec "#{Gem.bindir}/#{ARGV.shift}"
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Got easy ?? Cheers!</p>
+<p>This script uses the RubyGems installation of the currently selected Ruby to determine where the executable gem should be found, then runs it with any additional command line arguments provided. example:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ gemexec rake --version
+</span><span class='line'># rake, version 0.8.1</span></code></pre></td></tr></table></div></figure>
+
+
+<p>With all that in place the only thing to watch out for is other peoples scripts that hardcode the shebang line with something like &ldquo;#!/usr/bin/ruby&rdquo;. What I do myself, and prefer in general, is to use &ldquo;#!/usr/bin/env ruby&rdquo;.</p>
 </div>
   
   

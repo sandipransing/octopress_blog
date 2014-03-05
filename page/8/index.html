@@ -97,7 +97,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2011/08/migrating-from-svn-to-git/">Migrating From Svn to Git</a></h1>
+      <h1 class="entry-title"><a href="/2010/04/using-thinking-sphinx-search-in-rails/">Using Thinking Sphinx Search in Rails App</a></h1>
     
     
       <p class="meta">
@@ -113,189 +113,30 @@
   
 
 
-<time datetime="2011-08-17T19:44:00+05:30" pubdate data-updated="true">Aug 17<span>th</span>, 2011</time>
+<time datetime="2010-04-12T19:07:00+05:30" pubdate data-updated="true">Apr 12<span>th</span>, 2010</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Migrating from svn to git</p>
+  <div class="entry-content"><p>I am using <em>acts_as_ferret</em> and <em>ferret server</em> as of now with my rails application and it just works fine for me. The ONLY problem is <strong>performance</strong> as it takes a lot time to build index and to rebuild index when it gets screwed up and that&rsquo;s where <strong>sphinx rocks</strong>!</p>
 
-<p><strong>1. Install git-svn</strong></p>
+<p>To get started with thinking sphinx you need to install sphinx server first. for installation help click here.</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install git-svn</span></code></pre></td></tr></table></div></figure>
+<p>To use sphinx search in rails we need to use either thinking sphinx gem or plugin that can be easily find on github.</p>
 
-
-<p><strong>2. Clone svn repositoy</strong></p>
+<h2>Plugin installation</h2>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git svn clone -s svn://server/project_myt/trunk proj</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ruby script/plugin install  git://github.com/freelancing-god/thinking-sphinx.git</span></code></pre></td></tr></table></div></figure>
 
 
-<p>To add svn users and git users mapping
-Create author-file</p>
+<h4>OR</h4>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># authorsfile 
-</span><span class='line'>sandip = sandipransing 
-</span><span class='line'>amit = amitk 
-</span><span class='line'>root = sandipransing </span></code></pre></td></tr></table></div></figure>
+<h2>Gem installation</h2>
 
-
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git svn --author-file=authorfile clone -s svn://server/project_myt/trunk proj</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>3. Add git repository ur</strong></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd proj
-</span><span class='line'>git remote add git@github.com:USERNAME/project.git</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>4. Push repository to git</strong></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git push origin master</span></code></pre></td></tr></table></div></figure>
-
-
-<p>To do svn pull for latest changes</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git svn rebase</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/07/how-to-get-started-with-tata-photon-on-ubuntu/">How to Get Started With Tata Photon on Ubuntu Machine</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-07-05T14:06:00+05:30" pubdate data-updated="true">Jul 5<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>In order to get tata photon working on ubuntu machine you need to install following packages</p>
-
-<p><strong>1. usb-modeswitch-data 2. usb-modeswitch</strong></p>
-
-<p>Either you can download them from ubuntu site and install locally or install using apt manager</p>
-
-<p>Download links</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>http://packages.debian.org/squeeze/usb-modeswitch-data
-</span><span class='line'>http://packages.debian.org/squeeze/usb-modeswitch</span></code></pre></td></tr></table></div></figure>
-
-
-<p>apt installation</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install usb-modeswitch-data usb-modeswitch usb-modeswitch</span></code></pre></td></tr></table></div></figure>
-
-
-<p>After successful installation,</p>
-
-<ol>
-<li>Connect photon usb card</li>
-<li>Execute following commands one after another</li>
-</ol>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo usb_modeswitch -c /etc/usb_modeswitch.d/12d1\:1446
-</span><span class='line'>wvdial</span></code></pre></td></tr></table></div></figure>
-
-
-<p>..and you should get connected via photon!</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/04/setup-active-scaffold-with-rails-3/">Setup Active Scaffold With Rails 3 Using jQuery</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-04-08T18:27:00+05:30" pubdate data-updated="true">Apr 8<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Create new rails project</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rails new demo -d mysql</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Add active_scaffold gem to bundler</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>gem "active_scaffold_vho"</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Run bundle install command</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>bundle install</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Setup active scaffold to use jQuery</p>
+<p>To install gem run the following command.</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -304,16 +145,36 @@ Create author-file</p>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rails g active_scaffold_setup jquery
-</span><span class='line'>      create  public/javascripts/rails_jquery.js
-</span><span class='line'>      create  public/javascripts/jquery-ui-timepicker-addon.js
-</span><span class='line'>      create  config/initializers/active_scaffold.rb
-</span><span class='line'>      insert  app/views/layouts/application.html.erb
-</span><span class='line'>      insert  config/locales/en.yml
-</span><span class='line'>      gsub  app/views/layouts/application.html.erb</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install thinking-sphinx --source http://rubygems.org/
+</span><span class='line'>
+</span><span class='line'>If you're upgrading, you should read this:
+</span><span class='line'>http://freelancing-god.github.com/ts/en/upgrading.html
+</span><span class='line'>
+</span><span class='line'>Successfully installed thinking-sphinx-1.3.16
+</span><span class='line'>1 gem installed</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Generate active scaffold for resource city &amp; zone</p>
+<p>Edit environment file and add following lines to it inside initializer block.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>config.gem(
+</span><span class='line'>     'thinking-sphinx',
+</span><span class='line'>      :lib     =&gt; 'thinking_sphinx',
+</span><span class='line'>      :version =&gt; '1.3.16'
+</span><span class='line'> )</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Edit Rakefile and add following lines to it.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>require 'thinking_sphinx/tasks'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>List rake tasks that should show up sphinx related tasks.</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -329,168 +190,45 @@ Create author-file</p>
 <span class='line-number'>12</span>
 <span class='line-number'>13</span>
 <span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rails g active_scaffold City name:string
-</span><span class='line'>      invoke  active_record
-</span><span class='line'>      create    db/migrate/20110408123206_create_cities.rb
-</span><span class='line'>      create    app/models/city.rb
-</span><span class='line'>      invoke    test_unit
-</span><span class='line'>      create      test/unit/city_test.rb
-</span><span class='line'>      create      test/fixtures/cities.yml
-</span><span class='line'>      route  resources :cities do as_routes end
-</span><span class='line'>      invoke  active_scaffold_controller
-</span><span class='line'>      create    app/controllers/cities_controller.rb
-</span><span class='line'>      create    app/helpers/cities_helper.rb
-</span><span class='line'>      invoke    test_unit
-</span><span class='line'>      create    test/functional/cities_controller_test.rb
-</span><span class='line'>      create    app/views/cities</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake -T ts
+</span><span class='line'>(in /home/sandip/v1)
+</span><span class='line'>rake doc:plugins:acts_as_audited  # Generate documentation for the acts_as_...
+</span><span class='line'>rake doc:plugins:acts_as_ferret   # Generate documentation for the acts_as_...
+</span><span class='line'>rake rails:update:javascripts     # Update your javascripts from your curre...
+</span><span class='line'>rake rails:update:scripts         # Add new scripts to the application scri...
+</span><span class='line'>rake stats                        # Report code statistics (KLOCs, etc) fro...
+</span><span class='line'>rake test:units                   # Run tests for unitsdb:test:prepare / Ru...
+</span><span class='line'>rake tmp:sockets:clear            # Clears all files in tmp/sockets
+</span><span class='line'>rake ts:conf                      # Generate the Sphinx configuration file ...
+</span><span class='line'>rake ts:config                    # Generate the Sphinx configuration file ...
+</span><span class='line'>rake ts:in                        # Index data for Sphinx using Thinking Sp...
+</span><span class='line'>rake ts:rebuild                   # Stop Sphinx (if it's running), rebuild ...
+</span><span class='line'>rake ts:reindex                   # Reindex Sphinx without regenerating the...
+</span><span class='line'>rake ts:restart                   # Restart Sphinx / Restart Sphinx
+</span><span class='line'>rake ts:run                       # Stop if running, then start a Sphinx se...
+</span><span class='line'>rake ts:start                     # Start a Sphinx searchd daemon using Thi...
+</span><span class='line'>rake ts:stop                      # Stop Sphinx using Thinking Sphinx's set...
+</span><span class='line'>rake ts:version                   # Output the current Thinking Sphinx vers...</span></code></pre></td></tr></table></div></figure>
 
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rails g active_scaffold Zone name:string city:references      
-</span><span class='line'>      invoke  active_record
-</span><span class='line'>      create    db/migrate/20110408123531_create_zones.rb
-</span><span class='line'>      create    app/models/zone.rb
-</span><span class='line'>      invoke    test_unit
-</span><span class='line'>      create      test/unit/zone_test.rb
-</span><span class='line'>      create      test/fixtures/zones.yml
-</span><span class='line'>       route  resources :zones do as_routes end
-</span><span class='line'>      invoke  active_scaffold_controller
-</span><span class='line'>      create    app/controllers/zones_controller.rb
-</span><span class='line'>      create    app/helpers/zones_helper.rb
-</span><span class='line'>      invoke    test_unit
-</span><span class='line'>      create      test/functional/zones_controller_test.rb
-</span><span class='line'>      create    app/views/zones</span></code></pre></td></tr></table></div></figure>
+<h2>Starting Sphinx</h2>
 
-
-<p>Add Associations</p>
+<p>Start sphinx server this should give up an error.</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>class City &lt; ActiveRecord::Base
-</span><span class='line'> end
-</span><span class='line'>
-</span><span class='line'> class Zone &lt; ActiveRecord::Base
-</span><span class='line'>   belongs_to :city
-</span><span class='line'> end
-</span><span class='line'>
-</span><span class='line'> class City &lt; ActiveRecord::Base
-</span><span class='line'>   has_many :zones
-</span><span class='line'> end</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake ts:start
+</span><span class='line'>(in /home/sandip/v1)
+</span><span class='line'>Failed to start searchd daemon. Check /home/sandip/v1/log/searchd.log.</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Migrate database</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rake db:create
-</span><span class='line'>
-</span><span class='line'>rake db:migrate
-</span><span class='line'>  ==  CreateCities: migrating ===================================
-</span><span class='line'>  -- create_table(:cities)
-</span><span class='line'>   -&gt; 0.1411s
-</span><span class='line'>  ==  CreateCities: migrated (0.1413s) ==========================
-</span><span class='line'>
-</span><span class='line'>  ==  CreateZones: migrating ====================================
-</span><span class='line'>  -- create_table(:zones)
-</span><span class='line'>   -&gt; 0.1507s
-</span><span class='line'>  ==  CreateZones: migrated (0.1510s) ===========================</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Start Server</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rails s</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Visit Browser URL: <a href="http://localhost:3000/cities">http://localhost:3000/cities</a></p>
-
-<p><img class="left" src="http://4.bp.blogspot.com/-CJgSXg5EJyE/TZ8EDHwCwaI/AAAAAAAABPs/81dNxWDwYm0/s1600/active_scaffold.png"></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/04/ghostype-input-placeholder-for-search-inputs-using-jquery/">Ghost-Type Input Placeholder for Search Text Fields Using jQuery</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-04-07T14:14:00+05:30" pubdate data-updated="true">Apr 7<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Placeholder Demo:
-<input type=text placeholder='Enter search text here'/>
-Click on input box and placeholder text will disappear.</p>
-
-<p>Ghost-type Demo:
-<input id='home-search' class="query" placeholder='Enter search text here' type="search"/>
-After page load observe inside input box to enter placeholder text char by char.</p>
-
-<p>jQuery placeholder plugin can be used to display default text inside input text fields. HTML5 introduced type search fields with placeholder attribute support.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;input class="query" id="home-search" placeholder="Enter search text here" type="search" /&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>It should display default text &ldquo;Enter search text here&rdquo; inside text-field and when user tries to type something it disappears.
-In order to achieve text marquee like effect to default text value with jQery use following jQuery code. It will type text character by character from left to right.</p>
-
-<p>Same effect can be achieved by creating gif image of typing and placing it as background-image to text field with certain drawbacks like changing default text on the fly.</p>
-
-<p>Place below code inside javascript tag in your html file</p>
+<h2>Adding indexes in models</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -502,33 +240,127 @@ In order to achieve text marquee like effect to default text value with jQery us
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="err">#</span><span class="nx">jQuery</span> <span class="nx">Code</span>
-</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-</span><span class='line'>  <span class="kd">var</span> <span class="nx">search</span> <span class="o">=</span> <span class="s2">&quot;#home-search&quot;</span><span class="p">;</span>
-</span><span class='line'>  <span class="kd">var</span> <span class="nx">chars</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">search</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;placeholder&#39;</span><span class="p">).</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
-</span><span class='line'>  <span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">chars</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">v</span><span class="p">){</span>
-</span><span class='line'>    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="nx">search</span><span class="p">).</span><span class="nx">val</span><span class="p">((</span><span class="nx">chars</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)));</span>
-</span><span class='line'>    <span class="p">},</span> <span class="mi">100</span><span class="o">*</span><span class="nx">i</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">});</span>
-</span><span class='line'><span class="p">});</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">define_index</span> <span class="k">do</span>
+</span><span class='line'>     <span class="c1"># following fields are database fields</span>
+</span><span class='line'>     <span class="c1"># we can not add model methods in sphinx index </span>
+</span><span class='line'>     <span class="c1"># sphinx fields allows ONLY model based associations</span>
+</span><span class='line'>     <span class="c1"># fields</span>
+</span><span class='line'>      <span class="n">indexes</span> <span class="n">customer_name</span>
+</span><span class='line'>      <span class="n">indexes</span> <span class="n">phone</span>
+</span><span class='line'>      <span class="n">indexes</span> <span class="n">mobile</span>
+</span><span class='line'>      <span class="n">indexes</span> <span class="n">other_phone</span>
+</span><span class='line'>      <span class="n">indexes</span> <span class="n">car_make</span>
+</span><span class='line'>      <span class="n">indexes</span> <span class="n">car_model</span>
+</span><span class='line'>      <span class="n">indexes</span> <span class="n">registration_no</span>
+</span><span class='line'><span class="k">end</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<script type='text/javascript'>
-$(document).ready(function(){
-  var search = "#home-search";
-  var chars = $(search).attr('placeholder').split('');
-  $.each(chars, function(i, v){
-    setTimeout(function() {
-      $(search).val((chars.slice(0, i+1).join('')));
-    }, 1000*i);
-  });
-});
-</script>
+<h2>Configure sphinx</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rake</span> <span class="ss">ts</span><span class="p">:</span><span class="n">config</span>
+</span><span class='line'><span class="no">Generating</span> <span class="no">Configuration</span> <span class="n">to</span> <span class="sr">/home/s</span><span class="n">andip</span><span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">development</span><span class="o">.</span><span class="n">sphinx</span><span class="o">.</span><span class="n">conf</span>
+</span><span class='line'><span class="no">Index</span> <span class="n">sphinx</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">rake</span> <span class="ss">ts</span><span class="p">:</span><span class="k">in</span>
+</span><span class='line'><span class="p">(</span><span class="k">in</span> <span class="sr">/home/s</span><span class="n">andip</span><span class="o">/</span><span class="n">v1</span><span class="p">)</span>
+</span><span class='line'><span class="no">Generating</span> <span class="no">Configuration</span> <span class="n">to</span> <span class="sr">/home/s</span><span class="n">andip</span><span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">development</span><span class="o">.</span><span class="n">sphinx</span><span class="o">.</span><span class="n">conf</span>
+</span><span class='line'><span class="no">Sphinx</span> <span class="mi">0</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">8</span><span class="o">-</span><span class="n">rc2</span> <span class="p">(</span><span class="n">r1234</span><span class="p">)</span>
+</span><span class='line'><span class="no">Copyright</span> <span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="mi">2001</span><span class="o">-</span><span class="mi">2008</span><span class="p">,</span> <span class="no">Andrew</span> <span class="no">Aksyonoff</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">using</span> <span class="n">config</span> <span class="n">file</span> <span class="s1">&#39;/home/sandip/v1/config/development.sphinx.conf&#39;</span><span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'><span class="n">indexing</span> <span class="n">index</span> <span class="s1">&#39;call_core&#39;</span><span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'><span class="n">collected</span> <span class="mi">113521</span> <span class="n">docs</span><span class="p">,</span> <span class="mi">2</span><span class="o">.</span><span class="mi">1</span> <span class="no">MB</span>
+</span><span class='line'><span class="n">collected</span> <span class="mi">0</span> <span class="kp">attr</span> <span class="n">values</span>
+</span><span class='line'><span class="n">sorted</span> <span class="mi">0</span><span class="o">.</span><span class="mi">1</span> <span class="no">Mvalues</span><span class="p">,</span> <span class="mi">100</span><span class="o">.</span><span class="mi">0</span><span class="o">%</span> <span class="n">done</span>
+</span><span class='line'><span class="n">sorted</span> <span class="mi">0</span><span class="o">.</span><span class="mi">3</span> <span class="no">Mhits</span><span class="p">,</span> <span class="mi">100</span><span class="o">.</span><span class="mi">0</span><span class="o">%</span> <span class="n">done</span>
+</span><span class='line'><span class="n">total</span> <span class="mi">113521</span> <span class="n">docs</span><span class="p">,</span> <span class="mi">2114790</span> <span class="n">bytes</span>
+</span><span class='line'><span class="n">total</span> <span class="mi">6</span><span class="o">.</span><span class="mi">102</span> <span class="n">sec</span><span class="p">,</span> <span class="mi">346589</span><span class="o">.</span><span class="mi">68</span> <span class="n">bytes</span><span class="o">/</span><span class="n">sec</span><span class="p">,</span> <span class="mi">18604</span><span class="o">.</span><span class="mi">78</span> <span class="n">docs</span><span class="o">/</span><span class="n">sec</span>
+</span><span class='line'><span class="n">distributed</span> <span class="n">index</span> <span class="s1">&#39;call&#39;</span> <span class="n">can</span> <span class="ow">not</span> <span class="n">be</span> <span class="n">directly</span> <span class="n">indexed</span><span class="p">;</span> <span class="n">skipping</span><span class="o">.</span>
+</span><span class='line'><span class="no">Generating</span> <span class="no">Configuration</span> <span class="n">to</span> <span class="sr">/home/s</span><span class="n">andip</span><span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">development</span><span class="o">.</span><span class="n">sphinx</span><span class="o">.</span><span class="n">conf</span>
+</span><span class='line'><span class="no">Sphinx</span> <span class="mi">0</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">8</span><span class="o">-</span><span class="n">rc2</span> <span class="p">(</span><span class="n">r1234</span><span class="p">)</span>
+</span><span class='line'><span class="no">Copyright</span> <span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="mi">2001</span><span class="o">-</span><span class="mi">2008</span><span class="p">,</span> <span class="no">Andrew</span> <span class="no">Aksyonoff</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">using</span> <span class="n">config</span> <span class="n">file</span> <span class="s1">&#39;/home/sandip/v1/config/development.sphinx.conf&#39;</span><span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'><span class="n">indexing</span> <span class="n">index</span> <span class="s1">&#39;call_core&#39;</span><span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'><span class="n">collected</span> <span class="mi">113521</span> <span class="n">docs</span><span class="p">,</span> <span class="mi">2</span><span class="o">.</span><span class="mi">1</span> <span class="no">MB</span>
+</span><span class='line'><span class="n">collected</span> <span class="mi">0</span> <span class="kp">attr</span> <span class="n">values</span>
+</span><span class='line'><span class="n">sorted</span> <span class="mi">0</span><span class="o">.</span><span class="mi">1</span> <span class="no">Mvalues</span><span class="p">,</span> <span class="mi">100</span><span class="o">.</span><span class="mi">0</span><span class="o">%</span> <span class="n">done</span>
+</span><span class='line'><span class="n">sorted</span> <span class="mi">0</span><span class="o">.</span><span class="mi">3</span> <span class="no">Mhits</span><span class="p">,</span> <span class="mi">100</span><span class="o">.</span><span class="mi">0</span><span class="o">%</span> <span class="n">done</span>
+</span><span class='line'><span class="n">total</span> <span class="mi">113521</span> <span class="n">docs</span><span class="p">,</span> <span class="mi">2114790</span> <span class="n">bytes</span>
+</span><span class='line'><span class="n">total</span> <span class="mi">3</span><span class="o">.</span><span class="mi">628</span> <span class="n">sec</span><span class="p">,</span> <span class="mi">582909</span><span class="o">.</span><span class="mi">70</span> <span class="n">bytes</span><span class="o">/</span><span class="n">sec</span><span class="p">,</span> <span class="mi">31290</span><span class="o">.</span><span class="mi">34</span> <span class="n">docs</span><span class="o">/</span><span class="n">sec</span>
+</span><span class='line'><span class="n">distributed</span> <span class="n">index</span> <span class="s1">&#39;call&#39;</span> <span class="n">can</span> <span class="ow">not</span> <span class="n">be</span> <span class="n">directly</span> <span class="n">indexed</span><span class="p">;</span> <span class="n">skipping</span><span class="o">.</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Got easy ??</p>
+<h2>Search using sphinx</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">ruby</span> <span class="n">script</span> <span class="n">console</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&gt;&gt;</span><span class="no">Call</span><span class="o">.</span><span class="n">search</span> <span class="s1">&#39;sandip&#39;</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="o">[</span><span class="c1">#&lt;call 00:00:00&quot;=&quot;&quot; 09:22:35&quot;,=&quot;&quot; 1018,=&quot;&quot; 18:10:00&quot;,=&quot;&quot; 2009-02-10=&quot;&quot; 2009-03-27=&quot;&quot; 2009-04-07=&quot;&quot; 2009-11-18=&quot;&quot; 20:29:06&quot;,=&quot;&quot; 6,=&quot;&quot; created_at:=&quot;&quot; id:=&quot;&quot; insurance_expiry_date:=&quot;&quot; is=&quot;&quot; is_existing_customer:=&quot;&quot; nil,=&quot;&quot; note:=&quot;&quot; phone=&quot;&quot; ringing&quot;,=&quot;&quot; scheduled_at:=&quot;&quot; state_id:=&quot;&quot; station_shift_customer_car_insurance_product_id:=&quot;&quot; updated_at:=&quot;&quot;&gt;, #&lt;call 00:00:00&quot;=&quot;&quot; 11:13:33&quot;,=&quot;&quot; 18:30:00&quot;,=&quot;&quot; 2009-02-10=&quot;&quot; 2009-02-16=&quot;&quot; 2009-04-03=&quot;&quot; 2009-11-18=&quot;&quot; 20:34:52&quot;,=&quot;&quot; 6,=&quot;&quot; 6024,=&quot;&quot; call=&quot;&quot; created&quot;,=&quot;&quot; created_at:=&quot;&quot; customer=&quot;&quot; id:=&quot;&quot; insurance_expiry_date:=&quot;&quot; is_existing_customer:=&quot;&quot; new=&quot;&quot; nil,=&quot;&quot; note:=&quot;&quot; scheduled_at:=&quot;&quot; state_id:=&quot;&quot; station_shift_customer_car_insurance_product_id:=&quot;&quot; updated_at:=&quot;&quot;&gt;] &lt;/call&gt;&lt;/call&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It returns array of records found. conditions are allowed by sphinx. If you need to add conditions on integer attributes then index block in model needs to have has method like author_id in following.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">define_index</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">indexes</span> <span class="n">content</span>
+</span><span class='line'>  <span class="n">indexes</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:sortable</span> <span class="o">=&gt;</span> <span class="kp">true</span>
+</span><span class='line'>  <span class="n">indexes</span> <span class="n">comments</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:comment_content</span>
+</span><span class='line'>  <span class="n">indexes</span> <span class="o">[</span><span class="n">author</span><span class="o">.</span><span class="n">first_name</span><span class="p">,</span> <span class="n">author</span><span class="o">.</span><span class="n">last_name</span><span class="o">]</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:author_name</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">has</span> <span class="n">author_id</span><span class="p">,</span> <span class="n">created_at</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   
@@ -541,7 +373,7 @@ $(document).ready(function(){
       
   <header>
     
-      <h1 class="entry-title"><a href="/2011/03/setting-up-nginx-maximum-upload-size/">Setting Up Nginx Maximum Upload Size</a></h1>
+      <h1 class="entry-title"><a href="/2010/04/using-thinking-sphinx-with-rails/">Using Thinking Sphinx With Rails</a></h1>
     
     
       <p class="meta">
@@ -557,16 +389,168 @@ $(document).ready(function(){
   
 
 
-<time datetime="2011-03-31T15:56:00+05:30" pubdate data-updated="true">Mar 31<span>st</span>, 2011</time>
+<time datetime="2010-04-12T18:19:00+05:30" pubdate data-updated="true">Apr 12<span>th</span>, 2010</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Edit nginx configuration and look for <code>http</code> block inside it.</p>
+  <div class="entry-content"><p>Check out this SlideShare Presentation: <div style="width:825px" id="__ss_782883"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/sazwqa/using-thinking-sphinx-with-rails-presentation" title="Using Thinking Sphinx with rails">Using Thinking Sphinx with rails</a></strong><object width="825" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=sp4-1227528901740588-8&stripped_title=using-thinking-sphinx-with-rails-presentation" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=sp4-1227528901740588-8&stripped_title=using-thinking-sphinx-with-rails-presentation" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="825" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/sazwqa">saz wqa</a>.</div></div></p>
+</div>
+  
+  
 
-<p>Then inside <code>htttp</code> block add following lines.</p>
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/03/aliasmethod-in-ruby/">Alias Methods in Ruby</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-03-31T17:46:00+05:30" pubdate data-updated="true">Mar 31<span>st</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Alias method in ruby</h2>
+
+<p>Ruby classes provides a alias_method that can be used to reuse the existing methods.
+Consider a situation where you need different methods which has same code and ONLY they have different names.</p>
+
+<p>In this case alias_method uses suits best choice instead duplicating same code or writing common method that will get used in all methods, as i did before. Example, I have methods search, home, index all are doing same functionality.</p>
+
+<h2>Old approach</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># URL / </span>
+</span><span class='line'><span class="k">def</span> <span class="nf">index</span>
+</span><span class='line'> <span class="n">list</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="c1"># URL /search</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">search</span>
+</span><span class='line'> <span class="n">list</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#URL /home </span>
+</span><span class='line'><span class="k">def</span> <span class="nf">home</span>
+</span><span class='line'> <span class="n">list</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="kp">private</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">list</span>
+</span><span class='line'><span class="c1"># code here </span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Correct approach in ruby</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">index</span>
+</span><span class='line'> <span class="c1"># code here </span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="n">alias_method</span> <span class="ss">:home</span><span class="p">,</span> <span class="ss">:index</span>
+</span><span class='line'><span class="n">alias_method</span> <span class="ss">:search</span><span class="p">,</span> <span class="ss">:index</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Attributes aliasing in ruby</h2>
+
+<p>Same way one can easily rename existing class attribute names using alias_attribute method.</p>
+
+<h2>alias_attribute(new_name, old_name)</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">alias_attrinute</span> <span class="ss">:username</span><span class="p">,</span> <span class="ss">:login</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>More practical use</h2>
+
+<p>while deprecating attributes, methods in gems, plugins, extensions, libraries always use aliases in order to maintain backward compatibility.</p>
+
+<p>Got easy ?? that&rsquo;s where ruby rocks !</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/03/nginx-and-thin-installation/">Nginx and Thin Installation and Configuration</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-03-26T02:59:00+05:30" pubdate data-updated="true">Mar 26<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Install nginx server using following command</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>apt-get install nginx</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Edit nginx configuration and add server block inside html block.&nbsp;</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -574,15 +558,694 @@ $(document).ready(function(){
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>http {
-</span><span class='line'>    include conf/mime.types;
-</span><span class='line'>    default_type application/octet-stream;
-</span><span class='line'>    client_max_body_size 10m;
-</span><span class='line'>    ....
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>server {
+</span><span class='line'>
+</span><span class='line'>    listen       80;
+</span><span class='line'>    server_name  boost;
+</span><span class='line'>
+</span><span class='line'>    root /home/sandip/rails_app/public;
+</span><span class='line'>
+</span><span class='line'>    location / {
+</span><span class='line'>
+</span><span class='line'>        proxy_set_header  X-Real-IP  $remote_addr;
+</span><span class='line'>        proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+</span><span class='line'>        proxy_set_header Host $http_host;
+</span><span class='line'>        proxy_redirect off;
+</span><span class='line'>
+</span><span class='line'>        if (-f $request_filename/index.html) {
+</span><span class='line'>            rewrite (.*) $1/index.html break;
+</span><span class='line'>        }
+</span><span class='line'>
+</span><span class='line'>        if (-f $request_filename.html) {
+</span><span class='line'>            rewrite (.*) $1.html break;
+</span><span class='line'>
+</span><span class='line'>        }
+</span><span class='line'>
+</span><span class='line'>        if (!-f $request_filename) {
+</span><span class='line'>            proxy_pass http://thin;
+</span><span class='line'>            break;
+</span><span class='line'>        }
+</span><span class='line'>    }
+</span><span class='line'>
+</span><span class='line'>    error_page   500 502 503 504  /50x.html;
+</span><span class='line'>    location = /50x.html {
+</span><span class='line'>
+</span><span class='line'>        root   html;
+</span><span class='line'>
+</span><span class='line'>    }
+</span><span class='line'>
 </span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
 
-<p>In above configuration <em>application/octet-stream</em> supports any kind of file upload.</p>
+<h2>Install thin server as gem</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo gem install thin
+</span><span class='line'>Building native extensions.  This could take a while...
+</span><span class='line'>Building native extensions.  This could take a while...
+</span><span class='line'>
+</span><span class='line'>Successfully installed eventmachine-0.12.10
+</span><span class='line'>Successfully installed thin-1.2.7
+</span><span class='line'>
+</span><span class='line'>2 gems installed</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Install thin service</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo thin install
+</span><span class='line'>Installing thin service at /etc/init.d/thin ...
+</span><span class='line'>mkdir -p /etc/init.d
+</span><span class='line'>writing /etc/init.d/thin
+</span><span class='line'>chmod +x /etc/init.d/thin
+</span><span class='line'>mkdir -p /etc/thin</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Configure thin to start at system boot</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo /usr/sbin/update-rc.d -f thin defaults</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then put your config files in /etc/thin</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo /usr/sbin/update-rc.d -f thin defaults
+</span><span class='line'>update-rc.d: warning: thin stop runlevel arguments (0 1 6) do not match LSB Default-Stop values (S 0 1 6)
+</span><span class='line'> Adding system startup for /etc/init.d/thin ...
+</span><span class='line'>
+</span><span class='line'>   /etc/rc0.d/K20thin -&gt; ../init.d/thin
+</span><span class='line'>   /etc/rc1.d/K20thin -&gt; ../init.d/thin
+</span><span class='line'>   /etc/rc6.d/K20thin -&gt; ../init.d/thin
+</span><span class='line'>   /etc/rc2.d/S20thin -&gt; ../init.d/thin
+</span><span class='line'>   /etc/rc3.d/S20thin -&gt; ../init.d/thin
+</span><span class='line'>   /etc/rc4.d/S20thin -&gt; ../init.d/thin
+</span><span class='line'>   /etc/rc5.d/S20thin -&gt; ../init.d/thin</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Create thin configuration</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo thin config -C /etc/thin/&lt;config-name&gt;.yml -c &lt;rails-app-root-path&gt; --servers &lt;number-of-threads&gt; -e &lt;environment&gt;
+</span><span class='line'>&lt;/environment&gt;&lt;/number-of-threads&gt;&lt;/rails-app-root-path&gt;&lt;/config-name&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In my case,</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo thin config -C /etc/thin/rails_app.yml -c /home/sandip/rails_app --servers 3 -e production
+</span><span class='line'>
+</span><span class='line'>&gt;&gt; Wrote configuration to /etc/thin/rails_app.yml</span></code></pre></td></tr></table></div></figure>
+
+
+<p>thin configuration file will look like</p>
+
+<p>Start/stop/restart Nginx &amp; thin server using command</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo service nginx start|stop|restart
+</span><span class='line'>sudo service thin start|stop|restart</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/03/ruby-on-rails-installation-on-fresh-ubuntu/">Ruby on Rails Installation on Fresh Ubuntu Machine</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-03-25T23:36:00+05:30" pubdate data-updated="true">Mar 25<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Ruby On Rails Installation on fresh ubuntu machine</p>
+
+<p>Installation steps are applicable to ubuntu versions interpid, karmic koala. Make necessary changes according to package manager provided by other linux operating systems in order install ruby and rails.</p>
+
+<p>Before getting started to installations make sure to build essential packages on fresh ubutnu machine. Ubuntu machine has built in apt-get package manager and that i loves because it is very to use as compared to other OS.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install build-essential</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now there are many versions of ruby available including latest 1.9.2</p>
+
+<p>But would like to prefer ruby version 1.8.7 as it is the most stable version as of now. I would like to recommend installtion of Ruby Enterprise Edition (REE) version as it is uses minimal system resources and consumes less memory.</p>
+
+<p>Instrunctions to setup normal ruby and rails environment</p>
+
+<h2>1. Install Ruby, Rails, MySQL, irb and neceesary packages using single command</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install ruby ri rdoc mysql-server libmysql-ruby ruby1.8-dev irb1.8 libdbd-mysql-perl libdbi-perl libmysql-ruby1.8 libmysqlclient15off libnet-daemon-perl libplrpc-perl libreadline-ruby1.8 libruby1.8 mysql-client-5.1 mysql-common mysql-server-5.1 rdoc1.8 ri1.8 ruby1.8 irb libopenssl-ruby libopenssl-ruby1.8 libhtml-template-perl mysql-server-core-5.1 libmysqlclient16 libreadline5 psmisc</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>2. Install ruby gems</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget http://rubyforge.org/frs/download.php/60718/rubygems-1.3.5.tgz
+</span><span class='line'>tar xvzf rubygems-1.3.5.tgz
+</span><span class='line'>cd rubygems-1.3.5
+</span><span class='line'>sudo ruby setup.rb</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>3. Create symbolic links to installation paths</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo ln -s /usr/bin/gem1.8 /usr/local/bin/gem
+</span><span class='line'>sudo ln -s /usr/bin/ruby1.8 /usr/local/bin/ruby
+</span><span class='line'>sudo ln -s /usr/bin/rdoc1.8 /usr/local/bin/rdoc
+</span><span class='line'>sudo ln -s /usr/bin/ri1.8 /usr/local/bin/ri
+</span><span class='line'>sudo ln -s /usr/bin/irb1.8 /usr/local/bin/irb</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>4. Setup gemrc in order to avoid rdoc installation and to setup gem sources.</h2>
+
+<p>Add following lines to ~/.gemrc file</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>---
+</span><span class='line'>gem: --no-ri --no-rdoc
+</span><span class='line'>:benchmark: false
+</span><span class='line'>:verbose: true
+</span><span class='line'>:backtrace: false
+</span><span class='line'>:update_sources: true
+</span><span class='line'>:sources:
+</span><span class='line'>- http://gems.rubyforge.org
+</span><span class='line'>- http://gems.github.com
+</span><span class='line'>:bulk_threshold: 1000</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>5. Install rails</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo gem install rails --no-rdoc --no-ri</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Ruby Enterprise Edition i.e. REE (ruby 1.8.7) Installation</h2>
+
+<p>This will install ruby, rails, mysql, nginx and passenger</p>
+
+<h4>1. Download REE setup and install it</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget http://rubyforge.org/frs/download.php/68719/ruby-enterprise-1.8.7-2010.01.tar.gz /opt/ruby
+</span><span class='line'>
+</span><span class='line'>cd /opt
+</span><span class='line'>./ruby/installer</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>2. Add ruby inside path</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vi ~/.bashrc
+</span><span class='line'># Add following line at the end of file
+</span><span class='line'>export PATH=/opt/ruby/bin:$PATH</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Thanks to @vwadhwani!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/03/download-rails-api-to-work-offline/">Download Rails API to Work Offline</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-03-23T19:08:00+05:30" pubdate data-updated="true">Mar 23<span>rd</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>We often need rails API help while working without internet connection.</p>
+
+<p>Below command can be used to <a href="http://github.com/sandipransing/rails_api">download/copy</a> rails api to work locally(offline) mode</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget -mk www.api.rubyonrails.org</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For more information on this click <a href="http://github.com/sandipransing/rails_api">here</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/03/imagemagick-rmagick-installation-on-ubuntu/">Imagemagick/ RMagick Installation on Ubuntu</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-03-23T18:11:00+05:30" pubdate data-updated="true">Mar 23<span>rd</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h4>ImageMagick Installation</h4>
+
+<p>Ubuntu machine has default apt-get package manager.
+To install imagemagick following packages needs to be installed.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install imagemagick librmagick-ruby libmagickwand-dev</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>RMagick gem install</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install rmagick</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you still facing problems with gem installation, Please look that following packages are installed
+on your system.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>dpkg -l | grep libmagickcore-dev graphicsmagick-libmagick-dev-compat</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If there are no packages installed then try to install then first.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install libmagickcore-dev graphicsmagick-libmagick-dev-compat</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Try to install rmagick gem again. Now it should be installed without any error.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/03/rubyconf-2009-lt/">RubyConf 2009 LT Termtter</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-03-19T13:18:00+05:30" pubdate data-updated="true">Mar 19<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Check out this SlideShare Presentation:
+Termtter ruby gem is provides a way to work
+with twitter which is easy to use and integrate.
+Basically it can be used in ruby and rails application
+to get full control over twitter as like we have in web
+browser. Also, it works with terminal.</p>
+
+<div style="width:425px" id="__ss_2557295">
+  <strong style="display:block;margin:12px 0 4px">
+    <a href="http://www.slideshare.net/ujihisa/rubyconf-2009-lt-termtter" title="RubyConf 2009 LT &quot;Termtter&quot;">
+      RubyConf 2009 LT &quot;Termtter&quot;
+    </a>
+  </strong>
+  <object width="800" height="355">
+    <param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=rubyconflttermtter-091122030721-phpapp01&stripped_title=rubyconf-2009-lt-termtter" />
+    <param name="allowFullScreen" value="true"/>
+    <param name="allowScriptAccess" value="always"/>
+    <embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=rubyconflttermtter-091122030721-phpapp01&stripped_title=rubyconf-2009-lt-termtter" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="800" height="355"></embed>
+  </object>
+  <div style="padding:5px 0 12px">
+    View more 
+    <a href="http://www.slideshare.net/">presentations</a> 
+    from 
+    <a href="http://www.slideshare.net/ujihisa">ujihisa</a>.
+  </div>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/03/mvc-coding-principles-in-rails/">MVC Coding Principles in Rails</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-03-13T05:26:00+05:30" pubdate data-updated="true">Mar 13<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I believe this post should clear basic coding standards before getting started with rails development.</p>
+
+<p>I just came with conversion started for declaring variables on rubyonrailstalk google group and that ended up with&nbsp;exploring the concepts of rails MVC coding principles.
+so, i thought it would be nice if they gets summarized somewhere.</p>
+
+<p>The question raised was:</p>
+
+<blockquote><p>How to declare variables like arrays so that they are available everytime that layout or its related partials are used. Putting `@myarray = MyArray.all` into every action in every controller doesn&#8217;t seem very dry, so I guess I&#8217;m just looking for a very simple straighforward convention, but can&#8217;t seem to find it documented anywhere or figure it out</p><footer><strong>@capsized</strong></footer></blockquote>
+
+
+<p>Before getting into actual conversion, I would like to notedown what rails is.</p>
+
+<blockquote><p>Rails is web framework developed in ruby language. The main purpose behind is to make programmers life easy and development would be a fun. It is  built over MVC framework and philosophy includes DRY, Convention over configuration and REST.</p></blockquote>
+
+<p>Adding conversation as it is here:</p>
+
+<blockquote><p>Noria Normally something like that goes into a high-level filter, like one  in ApplicationController.</p><footer><strong>@Xavier</strong></footer></blockquote>
+
+
+<p>Put a before_filter in your ApplicationController.</p>
+
+<figure class='code'><figcaption><span>@Andy</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'> <span class="k">class</span> <span class="nc">ApplicationController</span>
+</span><span class='line'>  <span class="n">before_filter</span> <span class="ss">:set_my_array</span>
+</span><span class='line'>  <span class="kp">private</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">set_my_array</span>
+</span><span class='line'>    <span class="vi">@myarray</span> <span class="o">=</span> <span class="no">MyArray</span><span class="o">.</span><span class="n">all</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<blockquote><p>If it is literally something as simple as MyArray.all I believe there<br/>is nothing wrong with calling the model direct from the view.</p><footer><strong>@Colin</strong></footer></blockquote>
+
+
+<p>And here started the debate conversation. First of all, i was also convinced with this suggestion but next reply started conversion.</p>
+
+<blockquote><p>It&#8217;s dirty, horrible, bad form, breaks the separation of layers&#8230;<br/>Don&#8217;t call the model from the view!</p><footer><strong>@Andy</strong></footer></blockquote>
+
+
+
+
+<blockquote><p>Beware of the MVC police Colin, this suggestion will certanly not get<br/>good housekeeping seal of approval :D<br/>I agree through. I&#8217;m not gonna add a before filter just to set<br/>MyArray.all into a class variable. I&#8217;d rather call it directly and claim<br/>to be pragmatic.</p><footer><strong>@Sharagoz</strong></footer></blockquote>
+
+
+
+
+<blockquote><p>But you are wrong.  The view should never, ever, ever touch the database.<br/>Claim all you like.  The fact is that in MVC architecture, database<br/>queries don&#8217;t belong in the view. A before_filter is the proper place for this.</p><footer><strong>@Marnen</strong></footer></blockquote>
+
+
+
+
+<blockquote><p>Is it considered ok to call model methods if they do not touch the db,<br/>or are model methods forbidden also?</p><footer><strong>@Colin</strong></footer></blockquote>
+
+
+
+
+<blockquote><p>I would say the view can call instance methods of the model (attributes - real and virtual) but no class methods. So: is OK, but:<br/>is not.  It&#8217;s a bit of a contrived example, but there you go.  Accessing the model through instance variables you&#8217;ve created is OK, going directly to the model bypassing the controller is not.</p><footer><strong>@Andy</strong></footer></blockquote>
+
+
+<p>I think it is appropriate for the view to call methods on the objects passed in by the controller, provided that these methods do not change the model or touch the database.
+Example:</p>
+
+<figure class='code'><figcaption><span>Good: @Marnen</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># controller</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">my_action</span>
+</span><span class='line'> <span class="vi">@person</span> <span class="o">=</span> <span class="no">Person</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="c1">#my_action.html.erb</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here started conclusion on topic:</p>
+
+<blockquote><p>Good example. I just want to throw in a couple more twists and see what<br/>you think.<br/>1.  What about methods on models that change themselves in some way?<br/>Suppose the last_viewed_at method returned a previously stored time,<br/>then updated the model to store a new current time. Maybe a bad example,<br/>but I hope you get my meaning.<br/>2.  What about aggregating class methods like count, sum or avg?<br/>Obviously a class methods and does touch the database. I assume it would<br/>be better to let the controller deal with stuff like this.<br/><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/></pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Controller</span><br/></span><span class='line'> <span class="vi">@person_count</span> <span class="o">=</span> <span class="no">Person</span><span class="o">.</span><span class="n">count</span><br/></span></code></pre></td></tr></table></div></figure></p><footer><strong>@Robert</strong></footer></blockquote>
+
+
+
+
+<blockquote><p>I don&#8217;t know what you mean by dirty, it saves several lines of code<br/>and when looking at the view code it is easier to see what is<br/>happening than to see a variable that has to be hunted for in a filter<br/>somewhere to find out what it is.<br/>It does not break the separation of layers any more than calling an<br/>instance method of a model does when using something like &gt; Don&#8217;t call the model from the view!<br/>`@person.name` is a model call from the view</p><footer><strong>@Colin</strong></footer></blockquote>
+
+
+
+
+<blockquote><p>But think how many lines of code you are going to have to go edit when you realize that you need to change it. <br/>Also, I wouldn&#8217;t consider Person.all to be more clean than @people. What if you need to exclude some? Person.all :conditions =&gt; {whatever}, if you are just using a before filter, it is easy to override, you can override it for any given controller, and for any given controller method. If it&#8217;s hard coded into the view, then that view has to serve everybody&#8217;s wishes, it ends up having to know how it is to be used, and having lots of brittle conditional code for each of these situations.<br/>This is why the controller must be responsible for supplying the appropriate data to the view, not the view being responsible for creating it&#8217;s own data. <br/>It might start as innocently as `Person.all`, it can easily turn into<br/><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/><span class='line-number'>6</span><br/><span class='line-number'>7</span><br/></pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">if</span> <span class="n">this</span><br/></span><span class='line'>  <span class="no">Person</span><span class="o">.</span><span class="n">all</span><br/></span><span class='line'><span class="k">elsif</span> <span class="n">that</span><br/></span><span class='line'>  <span class="no">OtherPerson</span><span class="o">.</span><span class="n">all</span><br/></span><span class='line'><span class="k">else</span><br/></span><span class='line'>  <span class="no">Person</span><span class="o">.</span><span class="n">all</span> <span class="o">+</span> <span class="no">OtherPerson</span><span class="o">.</span><span class="n">all</span><br/></span><span class='line'><span class="k">end</span><br/></span></code></pre></td></tr></table></div></figure></p><footer><strong>@Josh</strong></footer></blockquote>
+
+
+<p>This took another turn in conversion &ndash;</p>
+
+<blockquote><p>Did you misunderstand my post?  I was arguing for putting it in a filter rather than in the view (hence saying the 4 lines of before_filter, private, def and end was worth it).<br/>It sounds like - when you start with &#8220;But&#8221; - that you disagree, but the rest of your post seems to be arguing from the same side as my posts.</p><footer><strong>@Andy</strong></footer></blockquote>
+
+
+<p>And finally Colin ended up conversion with conclusion &ndash;</p>
+
+<blockquote><p>An excellent post if I may say so that brings out the salient points I think.  Can the issues be summarised as follows?<br/>The controller should provide all the data that the view should display in instance variables (@person for example).<br/>The view is expected to understand the structure of the objects and so can access attributes (virtual or otherwise) of the objects.<br/>If the model needs to access the db in order to provide an attribute value, or accessing the attribute has some side effect that affects the db, then this is ok, providing the view does not &#8216;know&#8217; that the side effect or db access is happening. (Not very well written but I hope you know what I mean).<br/>The view must not call any method of the model who&#8217;s purpose is to perform an action rather than return a value.<br/>The view should not make any explicit use of model classes.  For example there should be no reference to Person or any other model class</p></blockquote>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/03/wordpress-blog-software-installation/">WordPress Blog Software Installation</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-03-12T01:55:00+05:30" pubdate data-updated="true">Mar 12<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://wordpress.org/">WordPress</a> &nbsp;is a&nbsp;open source&nbsp;software developed by and for community with ongoing development on it. Easy installation, customizable, with lots of available plugins, themes and SEO friendly are the strengths of it!</p>
+
+<blockquote><p>Software is mainly serves the purpose of blogging, hosting static websites.
+People with knowledge of php, javascipt and little knowledge of mysql db&nbsp;can customize it however they want.</p></blockquote>
+
+<ol>
+<li>Minimum server requirements</li>
+<li>PHP 4.3 or greater</li>
+<li>MySQL 4.1.2 or greater</li>
+<li>Apache/NGINX (or any web server supporting php &amp; mysql )</li>
+</ol>
+
+
+<p><strong>For detailed information on installation click <a href="http://codex.wordpress.org/Installing_WordPress#Famous%205-Minute%20Install">here</a></strong></p>
+
+<p>Now you will need to decide where on your web site you&rsquo;d like your blog to appear:</p>
+
+<ol>
+<li>In the root directory of your web site. (For example, <a href="http://yoursite.com/">http://yoursite.com/</a>)</li>
+<li>In a subdirectory of your web site. (For example, <a href="http://yoursite.com/blog/">http://yoursite.com/blog/</a></li>
+</ol>
+
+
+<blockquote><p>This can be done by adding new route at nginx configuration file or deploying wordpress software inside blog directory of main website.</p></blockquote>
+
+<p>There are millions of satisfied users using&nbsp;word-press blog.</p>
+
+<p><strong>To create and start blogging with free wordpress.com blog click <a href="http://en.wordpress.com/signup/">here</a></strong></p>
+
+<p><a href="http://codex.wordpress.org/WordPressMU">WordPress MU</a> multiblog software provides a way to create thousands of wordpress blogs
+just like wordpress.com site does.</p>
+
+<p>Download and&nbsp;detailed information on installation click <a href="http://codex.wordpress.org/Installing_WPMU">here</a></p>
 </div>
   
   

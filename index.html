@@ -360,6 +360,340 @@ Then following changes needs to be done for upgrading your application to Rails 
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/02/ruby-enumerable-toproc-ampersond-colon/">Ruby Enumerable & To_proc (Ampersond & Symbol Shortcut)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-23T02:09:00+05:30" pubdate data-updated="true">Feb 23<span>rd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Basically Enumerable mixin gives collection classes a variety of traverse, search, sort methods.</p>
+
+<p><strong>Understanding ruby blocks</strong></p>
+
+<blockquote><p>Blocks are statements of code written in ruby. one can take them as similar to c language macro&rsquo;s</p></blockquote>
+
+<p><strong>Different ways to define blocks</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">proc</span> <span class="k">do</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;hello&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">call</span> <span class="c1">#=&gt; hello</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">b</span> <span class="o">=</span> <span class="nb">lambda</span> <span class="k">do</span> <span class="o">|</span><span class="n">u</span><span class="o">|</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;hello </span><span class="si">#{</span><span class="n">u</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="n">b</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;sandip&#39;</span><span class="p">)</span><span class="c1">#=&gt; hello sandip</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">c</span> <span class="o">=</span> <span class="nb">proc</span> <span class="p">{</span><span class="o">|</span><span class="n">user</span><span class="o">|</span> <span class="nb">puts</span> <span class="n">user</span> <span class="p">}</span>
+</span><span class='line'><span class="n">c</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;sandip&#39;</span><span class="p">)</span> <span class="c1">#=&gt; sandip</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2012/02/ruby-enumerable-toproc-ampersond-colon/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/01/dynamic-bounded-parameters-and-named-scopes/">Dynamic & Bounded Parameters and Named Routes</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-31T02:43:00+05:30" pubdate data-updated="true">Jan 31<span>st</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Rails routes can be customized to include your own parameters inside it. Lets first understand how named routes works:</p>
+
+<h2>Adding dynamic parameters to routes</h2>
+
+<p>Here exact parameters are matched to route and presence of each parameter is mandatory in order to construct urls. If blank parameter is supplied then it will raise <code>RoutingError</code> exception.</p>
+
+<h2>Exact matched named route declared as :</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">match</span> <span class="s1">&#39;:a/:b/:c&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;home#index&#39;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:q</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>rails console :</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">app</span><span class="o">.</span><span class="n">q_url</span><span class="p">(</span><span class="ss">:a</span><span class="p">,</span> <span class="ss">:b</span><span class="p">,</span> <span class="ss">:c</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; &quot;http://www.example.com/a/b/c&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">app</span><span class="o">.</span><span class="n">q_url</span><span class="p">(</span><span class="ss">:a</span><span class="p">,</span> <span class="ss">:b</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; ActionController::RoutingError: No route matches {:controller=&gt;&quot;home&quot;, :a=&gt;:a, :b=&gt;:b, :c=&gt;&quot;&quot;}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2012/01/dynamic-bounded-parameters-and-named-scopes/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/01/puts-tos-and-inspect-on-ruby-object/">Puts, To_s and Inspect on Ruby Object</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-31T01:07:00+05:30" pubdate data-updated="true">Jan 31<span>st</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><code>puts</code> converts ruby object into string by invoking to_s method on object. The default to_s prints the object&rsquo;s class and an encoding of the object id. In order to print human readable form of object use inspect</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">locs</span> <span class="o">=</span> <span class="no">Location</span><span class="o">.</span><span class="n">find_by_sql</span><span class="p">(</span><span class="s1">&#39;select * from locations&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="no">Location</span> <span class="no">Load</span> <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span><span class="n">ms</span><span class="p">)</span>  <span class="nb">select</span> <span class="o">*</span> <span class="n">from</span> <span class="n">locations</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Puts Object internally invokes to_s method on object to print</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">locs</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">l</span><span class="o">|</span>
+</span><span class='line'>  <span class="c1"># it calls to_s method on object</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="n">l</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#&lt;Location:0x000000055bb328&gt;</span>
+</span><span class='line'><span class="c1">#&lt;Location:0x000000055bb058&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2012/01/puts-tos-and-inspect-on-ruby-object/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/01/csv-file-import-export-in-rails-3/">Csv File Import / Export in Rails 3</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-27T14:28:00+05:30" pubdate data-updated="true">Jan 27<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>CSV (comma separated values) files are frequently used to import/export data.</p>
+
+<p>In rails 3, <code>FasterCSV</code> comes as default and below is the way to upload csv files inside rails applications. The code below will also show you how to generate csv in memory, parse on csv data, skip header, iterate over records, save records inside db, export upload error file and many more.</p>
+
+<h4>Upload form</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='haml'><span class='line'><span class="p">=</span> <span class="n">form_tag</span> <span class="n">upload_url</span><span class="p">,</span> <span class="ss">:multipart</span> <span class="o">=&gt;</span> <span class="kp">true</span> <span class="k">do</span>
+</span><span class='line'>  <span class="nt">%label</span><span class="p">{</span><span class="ss">:for</span> <span class="o">=&gt;</span> <span class="s2">&quot;file&quot;</span><span class="p">}</span> File to Upload
+</span><span class='line'>  <span class="p">=</span> <span class="n">file_field_tag</span> <span class="s2">&quot;file&quot;</span>
+</span><span class='line'>  <span class="p">=</span> <span class="n">submit_tag</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2012/01/csv-file-import-export-in-rails-3/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/01/mongoid-embededin-and-array-field/">Mongoid Embeded_in and Array Field Management</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-20T01:12:00+05:30" pubdate data-updated="true">Jan 20<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Previous post explains on <a href="http://www.funonrails.com/2012/01/mongoid-array-field-and-rails-form">mongoid document array field and rails form implementation</a></p>
+
+<p>Below example shows rails form integration of array field of embedded mongoid document</p>
+
+<p>Lets consider scenario that <code>student</code> embeds one <code>family</code> who has many <code>assets</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Student</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="ss">Mongoid</span><span class="p">:</span><span class="ss">:Document</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">field</span> <span class="ss">:name</span>
+</span><span class='line'>  <span class="n">field</span> <span class="ss">:phone</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">embeds_one</span>  <span class="ss">:family</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">validates_associated</span> <span class="ss">:family</span>
+</span><span class='line'>  <span class="n">accepts_nested_attributes_for</span> <span class="ss">:family</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2012/01/mongoid-embededin-and-array-field/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/page/2/">&larr; Older</a>

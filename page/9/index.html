@@ -97,7 +97,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2011/03/twitter-share-and-facebook-like-button/">Twitter Share and Facebook Like Button for Haml-rails, Html/erb</a></h1>
+      <h1 class="entry-title"><a href="/2010/03/require-file-in-rails-environment/">Require File in Rails Environment</a></h1>
     
     
       <p class="meta">
@@ -113,59 +113,289 @@
   
 
 
-<time datetime="2011-03-17T02:45:00+05:30" pubdate data-updated="true">Mar 17<span>th</span>, 2011</time>
+<time datetime="2010-03-12T00:39:00+05:30" pubdate data-updated="true">Mar 12<span>th</span>, 2010</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Twitter share and facebook like button for <code>html/erb</code></p>
+  <div class="entry-content"><p>There are different ways to load particular file in rails application environment if the required file exists.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p><strong>1. Using RAILS_ROOT</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&#39;spread&#39;</span><span class="nt">&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&#39;twshare left&#39;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://twitter.com/share&quot;</span> <span class="na">class=</span><span class="s">&quot;twitter-share-button&quot;</span> <span class="na">data-count=</span><span class="s">&quot;horizontal&quot;</span> <span class="na">data-via=</span><span class="s">&quot;funonrails&quot;</span><span class="nt">&gt;</span>Tweet<span class="nt">&lt;/a&gt;&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;http://platform.twitter.com/widgets.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://connect.facebook.net/en_US/all.js#xfbml=1&quot;</span><span class="nt">&gt;&lt;/script&gt;&lt;fb:like</span> <span class="na">href=</span><span class="s">&quot;&quot;</span> <span class="na">layout=</span><span class="s">&quot;button_count&quot;</span> <span class="na">show_faces=</span><span class="s">&quot;false&quot;</span> <span class="na">width=</span><span class="s">&quot;450&quot;</span> <span class="na">font=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;&lt;/fb:like&gt;</span>
-</span><span class='line'><span class="nt">&lt;/div&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>if File.exists?(file=File.join(RAILS_ROOT,'config', 'initializers', 'smtp_gmail.rb'))
+</span><span class='line'>  require file
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Twitter share and facebook like button for <code>haml</code></p>
+<p><strong>2. Using Rails.root &amp; join</strong></p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='haml'><span class='line'><span class="nc">.spread</span>
-</span><span class='line'>  <span class="nc">.twshare.left</span>
-</span><span class='line'>    <span class="nt">%a</span><span class="nc">.twitter-share-button.left</span><span class="p">{</span><span class="s2">&quot;data-count&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;horizontal&quot;</span><span class="p">,</span> <span class="s2">&quot;data-via&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;fuonrails&quot;</span><span class="p">,</span> <span class="ss">:href</span> <span class="o">=&gt;</span> <span class="s2">&quot;http://twitter.com/share&quot;</span><span class="p">}</span> Tweet
-</span><span class='line'>    <span class="nt">%script</span><span class="p">{</span><span class="ss">:src</span> <span class="o">=&gt;</span> <span class="s2">&quot;http://platform.twitter.com/widgets.js&quot;</span><span class="p">,</span> <span class="ss">:type</span> <span class="o">=&gt;</span> <span class="s2">&quot;text/javascript&quot;</span><span class="p">}</span>
-</span><span class='line'>  <span class="nc">.fshare.left</span><span class="p">{</span><span class="ss">:style</span> <span class="o">=&gt;</span> <span class="s1">&#39;padding-left: 0px; margin-left: 10px;&#39;</span><span class="p">}</span>
-</span><span class='line'>    <span class="nt">%script</span><span class="p">{</span><span class="ss">:src</span> <span class="o">=&gt;</span> <span class="s2">&quot;http://connect.facebook.net/en_US/all.js#xfbml=1&quot;</span><span class="p">}</span>
-</span><span class='line'>    <span class="nt">%fb:like</span><span class="p">{</span><span class="ss">:layout</span> <span class="o">=&gt;</span> <span class="s2">&quot;button_count&quot;</span><span class="p">,</span> <span class="ss">:show_faces</span> <span class="o">=&gt;</span> <span class="s2">&quot;false&quot;</span><span class="p">,</span> <span class="ss">:width</span> <span class="o">=&gt;</span> <span class="s2">&quot;450&quot;</span><span class="p">}</span>
-</span><span class='line'>  <span class="nc">.CLR</span>
-</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>require Rails.root.join('config', 'initializers', 'smtp_gmail.rb')</span></code></pre></td></tr></table></div></figure>
 
 
-<p>See example Buttons listed below:</p>
+<p><strong>3. Using Rails.root, join &amp; exists? method</strong></p>
 
-<div class='spread'>
-  <div class='twshare left'>
-    <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="funonrails">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-  </div>
-  <script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script><fb:like href="" layout="button_count" show_faces="false" width="450" font=""></fb:like>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>require file if File.exists?(file = Rails.root.join('config', 'initializers','smtp_gmail.rb'))</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>4. Using File and direct path to file</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>require  File.join('root','app','config', 'initializers', 'smtp_gmail.rb')</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Among all above methods of  loading file, Using <code>Rails.root</code>, <code>join &amp;amp; exists?</code> method seems to be pretty good to have.
+Any improvements are most welcome!</p>
 </div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/03/alternative-for-tortoise-svn-on-ubuntu/">Alternative for Tortoise Svn on Ubuntu</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-03-11T16:59:00+05:30" pubdate data-updated="true">Mar 11<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The Tortoise svn client on windows is one of my favorite svn client.</p>
+
+<p>I am working on ubuntu karmic koala from last one year.
+There are kdesvn. smartsvn svn clients available on ubuntu but still
+time haven’t found any svn client as good as tortoise svn on windows.</p>
+
+<p>Is there any alternative ???</p>
+
+<p>Can tortoise svn client installation possible using wine utility package in ubuntu ??</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/03/blogger-tips/">Blogger Tips</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-03-11T01:19:00+05:30" pubdate data-updated="true">Mar 11<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><b><span class="Apple-style-span" style="font-size: large;">Change default favicon on blogger</span></b><br /><div class="separator" style="clear: both; text-align: left;">Go to the layout click on Edit HTML link<br /></div><div class="separator" style="clear: both; text-align: center;"><a href="http://lh4.ggpht.com/_WmOmsgqsanw/S5frfs8mKuI/AAAAAAAAAGs/flm5FFFGAxg/dashboard.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://lh4.ggpht.com/_WmOmsgqsanw/S5frfs8mKuI/AAAAAAAAAGs/flm5FFFGAxg/dashboard.jpg" /></a></div><div class="separator" style="clear: both; text-align: left;"><a href="http://lh4.ggpht.com/_WmOmsgqsanw/S5frfs8mKuI/AAAAAAAAAGs/flm5FFFGAxg/dashboard.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"></a></div><div class="separator" style="clear: both; text-align: left;">Insert following link code inside head tag</div><blockquote>&lt;link href=&lsquo;IMAGE_ICON_LINK&rsquo; rel=&lsquo;icon&rsquo; type=&lsquo;image/x-icon&rsquo;/&gt;</blockquote>Replace&nbsp;IMAGE_ICON_LINK url with your icon file url on web<br /><br /><div class="separator" style="clear: both; text-align: center;"><a href="http://lh4.ggpht.com/_WmOmsgqsanw/S5fssi1aLcI/AAAAAAAAAG0/uIyPHdVVED4/favicon.jpg" imageanchor="1" style="display: inline !important; margin-left: 1em; margin-right: 1em;"><img border="0" height="70" src="http://lh4.ggpht.com/_WmOmsgqsanw/S5fssi1aLcI/AAAAAAAAAG0/uIyPHdVVED4/favicon.jpg" width="400" /></a></div><br /><div style="text-align: left;"><span class="Apple-style-span" style="font-family: arial, sans-serif; font-size: small;">Use&nbsp;<a class="l" href="http://tools.dynamicdrive.com/favicon/" onmousedown="return clk(this.href,'','','res','1','&amp;sig2=jqF0S1VsF0XMf7hsfg0bPw','0CAYQFjAA')"><em style="font-style: normal; font-weight: bold;"><span class="Apple-style-span" style="color: #351c75;">Dynamic Drive</span></em><span class="Apple-style-span" style="color: #351c75;">&ndash;&nbsp;</span><em style="font-style: normal; font-weight: bold;"><span class="Apple-style-span" style="color: #351c75;">FavIcon Generator</span></em></a>&nbsp;online tool to easily create a favorites icon (<em style="font-style: normal; font-weight: bold;">favicon</em>) for your site</span></div><div style="text-align: left;"><span class="Apple-style-span" style="font-family: arial, sans-serif; font-size: small;"><br /></span></div><div class="separator" style="clear: both; text-align: center;"><img border="0" src="http://tools.dynamicdrive.com/favicon/indexalt.php?demo=toolbar&amp;img=14f6c409d655c92ad136ca89a28de19f_16&amp;x=52&amp;y=5" /><img border="0" src="http://tools.dynamicdrive.com/favicon/export/faviconlogo1.jpg" /></div><div style="text-align: center;"><br /></div><br /></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/03/rails-tinymce-rich-text-editor-for-rails/">Rails Tiny MCE - a Rich Text Editor for Rails 3</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-03-06T04:18:00+05:30" pubdate data-updated="true">Mar 6<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>TinyMCE is a javascript rich text editor. It is easy to integrate with blogs, cms, messages and mailers.</p>
+
+<p>Plugin uses jrails(jQuery) and Paperclip plugin for image &amp; media upload support</p>
+
+<h2>Features</h2>
+
+<ul>
+<li>Provides Rich Text Editor</li>
+<li>Customisable TinyMCE plugins</li>
+<li>Easy to integrate</li>
+<li>Supports Image upload &amp; insert</li>
+<li>Supports Media upload &amp; Youtube embed</li>
+<li>TODO: Document upload plugin</li>
+</ul>
+
+
+<h2>1. Installation</h2>
+
+<pre><code>rails plugin install git://github.com/sandipransing/rails_tiny_mce.git
+</code></pre>
+
+<h2>2. Migrations</h2>
+
+<pre><code>rails g tiny_migration
+
+rake db:migrate
+</code></pre>
+
+<h2>2. Install jrails(jquery) plugin using</h2>
+
+<pre><code>rails plugin install git://github.com/aaronchi/jrails.git
+</code></pre>
+
+<h2>3. Install dependent plugins(if you did not already)</h2>
+
+<pre><code>rake rails_tiny_mce:plugins
+</code></pre>
+
+<p>Above command will copy <code>paperclip</code>, <code>respond_to_parent</code>, <code>will_paginate</code> plugins to vendor/plugins directory.</p>
+
+<ul>
+<li>paperclip <code>git://github.com/thoughtbot/paperclip.git</code></li>
+<li>respond_to_parent <code>git://github.com/itkin/respond_to_parent.git</code></li>
+<li>will_paginate <code>git://github.com/mislav/will_paginate.git</code></li>
+</ul>
+
+
+<h2>4. In your layout add following lines</h2>
+
+<pre><code>&lt;%= javascript_include_tag :defaults %&gt;
+&lt;%= javascript_include_tiny_mce_if_used %&gt;
+&lt;%= tiny_mce if using_tiny_mce? %&gt;
+</code></pre>
+
+<h2>5. Inside controller class on top add following lines</h2>
+
+<pre><code>uses_tiny_mce(:options =&gt; AppConfig.default_mce_options, :only =&gt; [:new, :edit])
+</code></pre>
+
+<p>This <code>AppConfig.default_mce_options</code> is in <code>config/initializers/tiny_mce_plus_config.rb</code>, you could change the setting there</p>
+
+<h2>6. In your view add class mceEditor to text_area</h2>
+
+<p>Then append the following to the text area you want to transform into a TinyMCE editor.</p>
+
+<pre><code>:class =&gt; :mceEditor
+</code></pre>
+
+<h2>7. Install file lists</h2>
+
+<pre><code>rake rails_tiny_mce:install
+</code></pre>
+
+<p>will install following files:</p>
+
+<pre><code>app
+  |-- controller
+    |-- attachments_controller.rb
+  |-- helpers
+    |-- remote_link_renderer.rb
+  |-- models
+    |-- print.rb
+    |-- video.rb
+  |-- views
+    |-- attachments
+       |-- _show_attachment_list.html.erb
+config
+  |-- initializers
+    |-- tiny_mce_plus_config.rb
+public
+  |-- images
+    |-- tiny_mce
+  |-- javascripts
+    |-- tiny_mce
+</code></pre>
+
+<p>You may have your custom config in <code>tiny_mce_plus_config.rb.</code></p>
+
+<h2>Attention Note:</h2>
+
+<ul>
+<li>Do not put <code>\&lt;p&gt; \&lt;/p&gt;</code> around the textarea.</li>
+<li>If you are using <code>old will_paginate plugin</code>, change the <em>url_for</em> to <em>url_option</em> in <em>remote_link_renderer.rb</em></li>
+<li>If you are using <code>gem "will_paginate", "~&gt; 3.0.pre2"</code>
+you need changes in <code>app/helpers/remote_link_renderer.rb</code>
+<code>class RemoteLinkRenderer &lt; WillPaginate::LinkRenderer</code> to
+<code>class RemoteLinkRenderer &lt; WillPaginate::ViewHelpers::LinkRenderer</code></li>
+</ul>
+
+
+<h2>Example use:</h2>
+
+<ul>
+<li><p>Create CRUD for post</p>
+
+<p>  rails g scaffold post title:string text:description</p></li>
+<li><p>Run Migrations</p>
+
+<p>  rake db:migrate</p></li>
+<li><p>Add following line to <em>posts_controller.rb</em></p>
+
+<p>  uses_tiny_mce(:options => AppConfig.default_mce_options, :only => [:new, :edit])</p></li>
+<li><p>Open <em>/views/posts/_form.html.erb</em></p></li>
+<li><p>Modifiy following line</p>
+
+<p>  &lt;%= f.text_area :description %>
+to
+  &lt;%= f.text_area :description, :class => :mceEditor %></p></li>
+</ul>
 
 </div>
   
@@ -179,7 +409,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2011/03/number-to-indian-currency-helper-for-rails/">Number to Indian Currency Helper for Rails With WebRupee</a></h1>
+      <h1 class="entry-title"><a href="/2010/03/page-cache-control-in-radiant-cms/">Page Cache Control in Radiant Cms</a></h1>
     
     
       <p class="meta">
@@ -195,150 +425,95 @@
   
 
 
-<time datetime="2011-03-17T02:13:00+05:30" pubdate data-updated="true">Mar 17<span>th</span>, 2011</time>
+<time datetime="2010-03-04T00:43:00+05:30" pubdate data-updated="true">Mar 4<span>th</span>, 2010</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><blockquote><p>rails has built in <code>number_to_currency</code> helper which takes options like unit, delimeter, seperator which displays foreign currency correctly but somehow it is not best suited for indian currency.</p></blockquote>
+  <div class="entry-content"><h2>Radiant Caching</h2>
 
-<p>Below is how we managed 2 years ago to display indian currency formatted properly with comma as seperator. personally i think it could be more better than what it is currently ;)</p>
+<p>Radiant cms is very powerful and customizable cms as of now which has inbuilt support for page caching.</p>
 
-<h2>Number to indian currency(rupees) helper</h2>
+<p>Radiant caching mechanisam is somehow similar to action caching in rails.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">ApplicationHelper</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">number_to_indian_currency</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">if</span> <span class="n">number</span>
-</span><span class='line'>      <span class="n">string</span> <span class="o">=</span> <span class="n">number</span><span class="o">.</span><span class="n">to_s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
-</span><span class='line'>      <span class="n">number</span> <span class="o">=</span> <span class="n">string</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="n">gsub</span><span class="p">(</span><span class="sr">/(\d+)(\d{3})$/</span><span class="p">){</span> <span class="nb">p</span> <span class="o">=</span> <span class="vg">$2</span><span class="p">;</span><span class="s2">&quot;</span><span class="si">#{</span><span class="vg">$1</span><span class="o">.</span><span class="n">reverse</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="sr">/(\d{2})/</span><span class="p">,</span><span class="s1">&#39;\1,&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reverse</span><span class="si">}</span><span class="s2">,</span><span class="si">#{</span><span class="nb">p</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">}</span>
-</span><span class='line'>      <span class="n">number</span> <span class="o">=</span> <span class="n">number</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="sr">/^,/</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="n">string</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="k">if</span> <span class="n">string</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span>
-</span><span class='line'>      <span class="c1"># remove leading comma</span>
-</span><span class='line'>      <span class="n">number</span> <span class="o">=</span> <span class="n">number</span><span class="o">[</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="k">if</span> <span class="n">number</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">==</span> <span class="mi">44</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>    <span class="s2">&quot;Rs.</span><span class="si">#{</span><span class="n">number</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span class='line'>  <span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
+<p>In latest radiant version i.e. > 0.8 Responsecache has been replaced with Radiant::Cache.</p>
 
+<p>By default radiant cache gets automatically invalidated after every 5 minutes and that is configurable.</p>
 
-<h2>Sample Output for different combinations</h2>
+<p>The interval is easily configurable by adding following lines inside environment</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="n">helper</span><span class="o">.</span><span class="n">number_to_indian_currency</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;Rs.2,000&quot;</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">helper</span><span class="o">.</span><span class="n">number_to_indian_currency</span><span class="p">(</span><span class="mi">2040</span><span class="p">)</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;Rs.2,040&quot;</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">helper</span><span class="o">.</span><span class="n">number_to_indian_currency</span><span class="p">(</span><span class="mi">2040</span><span class="o">.</span><span class="mi">50</span><span class="p">)</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;Rs.2,040.5&quot;</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">helper</span><span class="o">.</span><span class="n">number_to_indian_currency</span><span class="p">(</span><span class="mi">2040</span><span class="o">.</span><span class="mi">54</span><span class="p">)</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;Rs.2,040.54&quot;</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">helper</span><span class="o">.</span><span class="n">number_to_indian_currency</span><span class="p">(</span><span class="mi">1222040</span><span class="o">.</span><span class="mi">54</span><span class="p">)</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;Rs.12,22,040.54&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>After doing google today found from Piyush Ranjan&rsquo;s Blog that yes there are ways to optimize code.</p>
-
-<h2>Optimized Version</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">ApplicationHelper</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">number_to_indian_currency</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
-</span><span class='line'>    <span class="s2">&quot;Rs.</span><span class="si">#{</span><span class="n">number</span><span class="o">.</span><span class="n">to_s</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="sr">/(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">1,&quot;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span class='line'>  <span class="k">end</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">if</span> <span class="n">defined?</span> <span class="no">ResponseCache</span> <span class="o">==</span> <span class="s1">&#39;constant&#39;</span>
+</span><span class='line'>  <span class="no">ResponseCache</span><span class="o">.</span><span class="n">defaults</span><span class="o">[</span><span class="ss">:expire_time</span><span class="o">]</span> <span class="o">=</span> <span class="mi">4</span><span class="o">.</span><span class="n">hours</span>
+</span><span class='line'><span class="k">else</span>
+</span><span class='line'>  <span class="no">SiteController</span><span class="o">.</span><span class="n">cache_timeout</span> <span class="o">=</span> <span class="mi">4</span><span class="o">.</span><span class="n">hours</span>
 </span><span class='line'><span class="k">end</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Waw one line of code, Look at the beauty of regular expression :) Truely amazing !</p>
+<p>There are situations where automatic cache inavalidation won&rsquo;t work and we need to clear radiant cache on the fly.
+There are two ways to do that to invalidate radiant cache immediately.</p>
 
-<h2>Integrating Webrupee symbol</h2>
-
-<p>First include follwing stylesheet in your layout</p>
+<h2>1. Navigate to the root of your Radiant project and delete the cache directory</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">//</span><span class="nt">public</span><span class="o">/</span><span class="nt">stylesheets</span><span class="o">/</span><span class="nt">font</span><span class="nc">.css</span>
-</span><span class='line'><span class="k">@font-face</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nt">font-family</span><span class="o">:</span> <span class="s2">&quot;WebRupee&quot;</span><span class="o">;</span>
-</span><span class='line'>  <span class="nt">font-style</span><span class="o">:</span> <span class="nt">normal</span><span class="o">;</span>
-</span><span class='line'>  <span class="nt">font-weight</span><span class="o">:</span> <span class="nt">normal</span><span class="o">;</span>
-</span><span class='line'>  <span class="nt">src</span><span class="o">:</span> <span class="nt">local</span><span class="o">(</span><span class="s2">&quot;WebRupee&quot;</span><span class="o">),</span> <span class="nt">url</span><span class="o">(</span><span class="s2">&quot;http://cdn.webrupee.com/WebRupee.V2.0.ttf&quot;</span><span class="o">)</span> <span class="nt">format</span><span class="o">(</span><span class="s2">&quot;truetype&quot;</span><span class="o">),</span> <span class="nt">url</span><span class="o">(</span><span class="s2">&quot;http://cdn.webrupee.com/WebRupee.V2.0.woff&quot;</span><span class="o">)</span> <span class="nt">format</span><span class="o">(</span><span class="s2">&quot;woff&quot;</span><span class="o">),</span> <span class="nt">url</span><span class="o">(</span><span class="s2">&quot;http://cdn.webrupee.com/WebRupee.V2.0.svg&quot;</span><span class="o">)</span> <span class="nt">format</span><span class="o">(</span><span class="s2">&quot;svg&quot;</span><span class="o">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nc">.WebRupee</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">font-family</span><span class="o">:</span> <span class="s1">&#39;WebRupee&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">cd</span> <span class="sr">/home/</span><span class="n">deploy</span><span class="o">/</span><span class="n">radiant_site</span><span class="o">/</span><span class="n">tmp</span>
+</span><span class='line'><span class="n">rm</span> <span class="o">-</span><span class="n">r</span> <span class="n">cache</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h2>Improved Version of Helper</h2>
+<h2>2. Clearing the page cache from within your code</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">ApplicationHelper</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">number_to_indian_currency</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="n">html</span><span class="o">=</span><span class="kp">true</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">txt</span> <span class="o">=</span> <span class="n">html</span> <span class="p">?</span> <span class="n">content_tag</span><span class="p">(</span><span class="ss">:span</span><span class="p">,</span> <span class="s1">&#39;Rs.&#39;</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="ss">:WebRupee</span><span class="p">)</span> <span class="p">:</span> <span class="s1">&#39;Rs.&#39;</span>
-</span><span class='line'>    <span class="s2">&quot;</span><span class="si">#{</span><span class="n">txt</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="n">number</span><span class="o">.</span><span class="n">to_s</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="sr">/(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">1,&quot;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span class='line'>  <span class="k">end</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">if</span> <span class="n">defined?</span> <span class="no">ResponseCache</span> <span class="o">==</span> <span class="s1">&#39;constant&#39;</span>
+</span><span class='line'>  <span class="no">ResponseCache</span><span class="o">.</span><span class="n">instance</span><span class="o">.</span><span class="n">clear</span>
+</span><span class='line'><span class="k">else</span>
+</span><span class='line'>  <span class="ss">Radiant</span><span class="p">:</span><span class="ss">:Cache</span><span class="o">.</span><span class="n">clear</span>
 </span><span class='line'><span class="k">end</span>
 </span></code></pre></td></tr></table></div></figure>
 
+
+<p>While building website using radiant cms, it happens that there are certain pages they are static and not going to change frequently that time configuring cache expiry time to long interval is going to be always beneficial and for pages which conatins dynamic content (displaying logged in user on homepage), we need to disable radiant cache for such pages. this can be done by using page_options extension.</p>
+
+<h2>Installation for radiant version  0.7</h2>
+
+<p>From your RADIANT_ROOT:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">ruby</span> <span class="n">script</span><span class="o">/</span><span class="n">extension</span> <span class="n">install</span> <span class="n">page_options</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Installation for radiant version  0.8 and higher</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">git</span> <span class="nb">clone</span> <span class="ss">git</span><span class="p">:</span><span class="sr">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">sandipransing</span><span class="o">/</span><span class="n">radiant</span><span class="o">-</span><span class="n">page_options</span><span class="o">-</span><span class="n">extension</span><span class="o">.</span><span class="n">git</span> <span class="n">vendor</span><span class="o">/</span><span class="n">extensions</span><span class="o">/</span><span class="n">page_options</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Restart server</p>
 
 <h2>Usage</h2>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="n">helper</span><span class="o">.</span><span class="n">number_to_indian_currency</span><span class="p">(</span><span class="mi">400</span><span class="p">)</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;&lt;span class=&quot;</span><span class="no">WebRupee</span><span class="s2">&quot;&gt;Rs.&lt;/span&gt; 400&quot;</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">helper</span><span class="o">.</span><span class="n">number_to_indian_currency</span><span class="p">(</span><span class="mi">5921</span><span class="p">,</span> <span class="kp">false</span><span class="p">)</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;Rs. 5,921&quot;</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">helper</span><span class="o">.</span><span class="n">number_to_indian_currency</span><span class="p">(</span><span class="mi">9921</span><span class="p">)</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;&lt;span class=&quot;</span><span class="no">WebRupee</span><span class="s2">&quot;&gt;Rs.&lt;/span&gt; 9,921&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
+<ol>
+<li>Goto /admin/pages</li>
+<li>Edit any page</li>
+<li>Click on more link and edit cache settings.</li>
+</ol>
 
 
-<p>This will show you rupees symbol on your webpages.</p>
+<p>For more information <a href="http://github.com/avonderluft/radiant-page_options-extension">visit</a></p>
 </div>
   
   
@@ -351,7 +526,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2011/03/accessing-view-helpers-routes-in-rails/">Accessing View Helpers & Routes in Rails Console, Rake Tasks and Mailers</a></h1>
+      <h1 class="entry-title"><a href="/2010/03/remove-svn-files-inside-directory-rm-rf/">Programming Ruby Linux Basics</a></h1>
     
     
       <p class="meta">
@@ -367,184 +542,56 @@
   
 
 
-<time datetime="2011-03-17T01:01:00+05:30" pubdate data-updated="true">Mar 17<span>th</span>, 2011</time>
+<time datetime="2010-03-02T12:29:00+05:30" pubdate data-updated="true">Mar 2<span>nd</span>, 2010</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>While looking for accessing rails template tags to be accessed on rails console in order to examine whatever written needs to be correct, found that &ndash; rails template tags can be tested on rails console using <em>helper</em> object</p>
+  <div class="entry-content"><h2>Remove svn files inside directory</h2>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rm -rf `find . -type d -name .svn</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Set path in linux</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>export PATH=$PATH:/usr/ruby/bin</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here /usr/ruby/bin is the path to ruby extecuatble.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">ApplicationHelper</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">display_amount</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">number_to_currency</span> <span class="n">amount</span><span class="p">,</span> <span class="ss">:precision</span> <span class="o">=&gt;</span> <span class="mi">0</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>grep and print process pid
+</span><span class='line'>ps -ef | grep search_string | grep -v grep | awk '{print  $2 }'</span></code></pre></td></tr></table></div></figure>
 
 
-<h2>Helpers on rails console</h2>
+<h2>Kill process</h2>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rails</span> <span class="n">c</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">helper</span><span class="o">.</span><span class="n">text_field_tag</span> <span class="ss">:name</span><span class="p">,</span> <span class="s1">&#39;sandip&#39;</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;&lt;input id=&quot;</span><span class="nb">name</span><span class="s2">&quot; name=&quot;</span><span class="nb">name</span><span class="s2">&quot; type=&quot;</span><span class="n">text</span><span class="s2">&quot; value=&quot;</span><span class="n">sandip</span><span class="s2">&quot; /&gt;&quot;</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">helper</span><span class="o">.</span><span class="n">link_to</span> <span class="s1">&#39;my blog&#39;</span><span class="p">,</span> <span class="s1">&#39;http://funonrails.com&#39;</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;&lt;a href=&#39;&#39;http://funonrails.com&gt;my blog&lt;/a&gt;&quot;</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">helper</span><span class="o">.</span><span class="n">display_amount</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;$2,000&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>kill -9 process_id_here
+</span><span class='line'>ps -ef | grep search_string | grep -v grep | awk '{print  $2 }' | xargs kill -9</span></code></pre></td></tr></table></div></figure>
 
 
-<p>isn&rsquo;t it cool ? though it&rsquo;s not finished yet. we can include helper files on console and access custom helper methods too</p>
+<h2>Store pid of process in a variable for further process</h2>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="kp">include</span> <span class="ss">ActionView</span><span class="p">:</span><span class="ss">:Helpers</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="no">Object</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="kp">include</span> <span class="no">ApplicationHelper</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="no">Object</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="kp">include</span> <span class="ss">ActionView</span><span class="p">:</span><span class="ss">:Helpers</span><span class="o">::</span><span class="no">ApplicationHelper</span><span class="o">^</span><span class="n">C</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">display_amount</span> <span class="mi">2500</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;$2,500&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>tokill=`ps -ef|grep ruby|grep -v grep|awk '{print $2}'`;kill -9 $tokill;</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Using same way one can make use helpers in rake tasks file. Make sure environment is getting loaded into rake task.</p>
+<h2>Mirror a website</h2>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'> <span class="n">lib</span><span class="o">/</span><span class="n">tasks</span><span class="o">/</span><span class="n">helper_task</span><span class="o">.</span><span class="n">rake</span>
-</span><span class='line'><span class="n">namespace</span> <span class="ss">:helper</span> <span class="k">do</span>
-</span><span class='line'> <span class="n">desc</span> <span class="s1">&#39;Access helper methods in rake tasks&#39;</span>
-</span><span class='line'> <span class="n">task</span> <span class="ss">:test</span> <span class="o">=&gt;</span> <span class="ss">:environment</span> <span class="k">do</span>
-</span><span class='line'>  <span class="kp">include</span> <span class="ss">ActionView</span><span class="p">:</span><span class="ss">:Helpers</span>
-</span><span class='line'>  <span class="kp">include</span> <span class="no">ApplicationHelper</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nb">puts</span> <span class="n">display_amount</span> <span class="mi">2500</span>  <span class="c1">#=&gt; &quot;$2,500&quot;</span>
-</span><span class='line'> <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
+<p>Command to clone/copy a website for offline/local browsing.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget -mk www.funonrails.com</span></code></pre></td></tr></table></div></figure>
 
 
-<h2>Accessing helpers in Action Mailers</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Notifier</span> <span class="o">&lt;</span> <span class="ss">ActionMailer</span><span class="p">:</span><span class="ss">:Base</span>
-</span><span class='line'>  <span class="n">add_template_helper</span><span class="p">(</span><span class="no">ApplicationHelper</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">subject</span> <span class="s2">&quot;Hello </span><span class="si">#{</span><span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span class='line'>    <span class="n">from</span>          <span class="s1">&#39;no-reply@example.com&#39;</span>
-</span><span class='line'>    <span class="n">recipients</span>    <span class="n">user</span><span class="o">.</span><span class="n">email</span>
-</span><span class='line'>    <span class="n">sent_on</span>       <span class="no">Time</span><span class="o">.</span><span class="n">now</span>
-</span><span class='line'>    <span class="vi">@user</span> <span class="o">=</span> <span class="n">user</span>
-</span><span class='line'>  <span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'># app/views/notifier/greet.html.erb
-</span><span class='line'>Hi <span class="err">&lt;</span>%= @user.try(:name)%&gt;,
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>Greetings !!!
-</span><span class='line'>You have got <span class="err">&lt;</span>%= display_amount(3000) %&gt;
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Rails routes on rails console</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rails</span> <span class="n">c</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">root_url</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;http://www.example.com/&quot;</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">change_password_path</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;/change/password&quot;</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">change_password_url</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;http://www.example.com/change/password&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now you may have got requirement to access routes inside rake tasks. Here is the way to do that &ndash;</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># lib/tasks/route_test.rake</span>
-</span><span class='line'><span class="n">namespace</span> <span class="ss">:routes</span> <span class="k">do</span>
-</span><span class='line'> <span class="n">desc</span> <span class="s1">&#39;Access helper methods in rake tasks&#39;</span>
-</span><span class='line'> <span class="n">task</span> <span class="ss">:test</span> <span class="o">=&gt;</span> <span class="ss">:environment</span> <span class="k">do</span>
-</span><span class='line'>  <span class="kp">include</span> <span class="ss">ActionController</span><span class="p">:</span><span class="ss">:UrlWriter</span>
-</span><span class='line'>  <span class="n">default_url_options</span><span class="o">[</span><span class="ss">:host</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;myroutes.check&quot;</span>
-</span><span class='line'>  <span class="nb">puts</span> <span class="n">root_url</span>  <span class="c1">#=&gt; &quot;http://myroutes.check&quot;</span>
-</span><span class='line'> <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Optionally you can set value of host parameter from action mailer host configuration using</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">default_url_options</span><span class="o">[</span><span class="ss">:host</span><span class="o">]</span> <span class="o">=</span> <span class="ss">ActionMailer</span><span class="p">:</span><span class="ss">:Base</span><span class="o">.</span><span class="n">default_url_options</span><span class="o">[</span><span class="ss">:host</span><span class="o">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Attention: This is my preferred way to use helpers and routes when needed and there may have other choices to do same. Anyone having better approach please feel free to add your valuable comment. I will definitely incorporate that in further developments.
-Got Easy, Cheers ;)</p>
+<p>Above command downloads all website pages in depth level with stylesheets, images and javascripts.</p>
 </div>
   
   
@@ -557,7 +604,7 @@ Got Easy, Cheers ;)</p>
       
   <header>
     
-      <h1 class="entry-title"><a href="/2011/03/monitor-delayedjob-in-rails/">Monitor Delayed Job in Rails</a></h1>
+      <h1 class="entry-title"><a href="/2010/02/vim-editor-for-ruby-on-rails/">Vim Editor for Ruby on Rails Development Using rails.vim</a></h1>
     
     
       <p class="meta">
@@ -573,40 +620,114 @@ Got Easy, Cheers ;)</p>
   
 
 
-<time datetime="2011-03-01T01:22:00+05:30" pubdate data-updated="true">Mar 1<span>st</span>, 2011</time>
+<time datetime="2010-02-19T20:20:00+05:30" pubdate data-updated="true">Feb 19<span>th</span>, 2010</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Delayed Job &amp; Monit configuration</p>
-
-<p>We were struggling through how to monit delayed_job from past few months because monit doesn&rsquo;t work seamlessly with delayed_job start/stop commands and finally we got able to monit delayed_job.</p>
-
-<p>Here is our old configuration that wasn&rsquo;t working anyhow-</p>
+  <div class="entry-content"><h4>Vim install On CentOS</h4>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>yum install vim-enhanced</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Vim install on Ubuntu machine</h4>
+
+<p>Install vim-full using command</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>apt-get install vim</span></code></pre></td></tr></table></div></figure>
+
+
+<p>While coding with ruby, html, erb, haml, js and stylesheets.
+It is great pain to indent code. Using rails vim one can easily keep code always indented.</p>
+
+<p>This increases code readability and minimizes effort, bugs and finally proves ease of using vim editor.</p>
+
+<p><code>rails.vim</code> script contains lot of syntax highlighter and indentation plugins that really helps development needs.</p>
+
+<p>If you have git installed then clone it under .vim directory of your profile</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git://github.com/sandipransing/rails_vim.git ~/.vim</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>To install from zip file download and extract it inside <code>~/.vim</code> directory</h4>
+
+<p>Command to <a href="http://www.vim.org/scripts/download_script.php?src_id=11920">download</a> from console</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget http://www.vim.org/scripts/download_script.php?src_id=11920 /rails.vim </span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is how my editor looks like</p>
+
+<p><a href="http://1.bp.blogspot.com/_WmOmsgqsanw/S5voyvHVstI/AAAAAAAAAJI/bi-mSfyN5no/s1600-h/IDE.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="215" src="http://1.bp.blogspot.com/_WmOmsgqsanw/S5voyvHVstI/AAAAAAAAAJI/bi-mSfyN5no/s400/IDE.png" width="500" /></a></p>
+
+<p>Open your ~/.bashrc and at the bottom add:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>alias vi=vim
+</span><span class='line'>export EDITOR=vim</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/02/extend-enumerable-to-add-method/">Extend Enumerable to Add Method Collect_with_index</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-02-18T14:24:00+05:30" pubdate data-updated="true">Feb 18<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Extend enumerable functionality to iterate along with index</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>check process delayed_job with pidfile /home/sandip/shared/pids/delayed_job.pid
-</span><span class='line'>    stop program = "/bin/bash -c 'cd /home/sandip/current && RAILS_ENV=production script/delayed_job stop'"
-</span><span class='line'>    start program = "/bin/bash -c 'cd /home/sandip/current && RAILS_ENV=production script/delayed_job start'"
-</span><span class='line'>    if totalmem &gt; 100.0 MB for 3 cycles then restart
-</span><span class='line'>    if cpu usage &gt; 95% for 3 cycles then restart</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">Enumerable</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">collect_with_index</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">collect</span><span class="p">{</span><span class="o">|</span><span class="n">elm</span><span class="o">|</span> <span class="k">yield</span><span class="p">(</span><span class="n">elm</span><span class="p">,</span> <span class="n">i</span><span class="o">+=</span><span class="mi">1</span><span class="p">)}</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  <span class="k">alias</span> <span class="n">map_with_index</span> <span class="n">collect_with_index</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-<p>After doing google &amp; looking at stackoverflow, we found different solutions to work with but none of them found useful to me. :(</p>
+<h4>Example use :</h4>
 
-<p>After reading google group someone (not remembering exactly) directed to write a init script for delayed_job server and that perfectly worked for me and my headache of self moniting delayed_job ended up ;)</p>
-
-<p>Here is delayed_job init script</p>
-
-<h1>/etc/init.d/delayed_job</h1>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -620,92 +741,21 @@ Got Easy, Cheers ;)</p>
 <span class='line-number'>12</span>
 <span class='line-number'>13</span>
 <span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#! /bin/sh
-</span><span class='line'>set_path="cd /home/sandip/current"
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'> <span class="o">[</span><span class="s1">&#39;ruby&#39;</span><span class="p">,</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;sandip&#39;</span><span class="o">].</span><span class="n">map_with_index</span><span class="p">{</span> <span class="o">|</span><span class="n">w</span><span class="p">,</span><span class="n">i</span><span class="o">|</span>  <span class="o">[</span><span class="n">w</span><span class="p">,</span> <span class="n">i</span><span class="o">]</span> <span class="p">}</span>
+</span><span class='line'> <span class="c1">#=&gt; [[&quot;ruby&quot;, 1], [&quot;rails&quot;, 2], [&quot;sandip&quot;, 3]] </span>
 </span><span class='line'>
-</span><span class='line'>case "$1" in
-</span><span class='line'>    start)
-</span><span class='line'>    echo -n "Starting delayed_job: "
-</span><span class='line'>    su - root -c "$set_path; RAILS_ENV=production script/delayed_job start" &gt;&gt; /var/log/delayed_job.log 2&gt;&1
-</span><span class='line'>    echo "done."
-</span><span class='line'>    ;;
-</span><span class='line'>    stop)
-</span><span class='line'>    echo -n "Stopping delayed_job: "
-</span><span class='line'>    su - root -c "$set_path; RAILS_ENV=production script/delayed_job stop" &gt;&gt; /var/log/delayed_job.log 2&gt;&1
-</span><span class='line'>    echo "done."
-</span><span class='line'>    ;;
-</span><span class='line'>    *)
-</span><span class='line'>    echo "Usage: $N {start|stop}" &gt;&2
-</span><span class='line'>    exit 1
-</span><span class='line'>    ;;
-</span><span class='line'>esac
+</span><span class='line'> <span class="o">[</span><span class="s1">&#39;ruby&#39;</span><span class="p">,</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;sandip&#39;</span><span class="o">].</span><span class="n">collect_with_index</span><span class="p">{</span> <span class="o">|</span><span class="n">w</span><span class="p">,</span><span class="n">i</span><span class="o">|</span>  <span class="o">[</span><span class="n">w</span><span class="p">,</span>  <span class="n">i</span><span class="o">]</span> <span class="p">}</span>
+</span><span class='line'> <span class="c1">#=&gt; [[&quot;ruby&quot;, 1], [&quot;rails&quot;, 2], [&quot;sandip&quot;, 3]]</span>
 </span><span class='line'>
-</span><span class='line'>exit 0</span></code></pre></td></tr></table></div></figure>
-
-
-<p>finally here is the working monit delayed_job configuration</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>check process delayed_job with pidfile /home/sandip/shared/pids/delayed_job.pid
-</span><span class='line'>    stop program = "/etc/init.d/delayed_job stop"
-</span><span class='line'>    start program = "/etc/init.d/delayed_job start"
-</span><span class='line'>    if totalmem &gt; 100.0 MB for 3 cycles then restart
-</span><span class='line'>    if cpu usage &gt; 95% for 3 cycles then restart</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Thinking Sphinx monit configuration</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>check process sphinx with pidfile /home/sandip/shared/pids/searchd.pid
-</span><span class='line'>    stop program = "/bin/bash -c 'cd /home/sandip/current && /usr/bin/rake RAILS_ENV=production ts:stop'"
-</span><span class='line'>    start program = "/bin/bash -c 'cd /home/sandip/current && /usr/bin/rake RAILS_ENV=production ts:start'"
-</span><span class='line'>    if totalmem &gt; 85.0 MB for 3 cycles then restart
-</span><span class='line'>    if cpu usage &gt; 95% for 3 cycles then restart</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Adhearsion (ahn) monit confiuration</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>check process ahn with pidfile /home/josh/shared/pids/ahnctl.pid
-</span><span class='line'>    stop program = "/bin/bash -c 'cd /home/sandip/current && /usr/bin/ahnctl stop adhearsion'"
-</span><span class='line'>    start program = "/bin/bash -c 'cd /home/sandip/current && /usr/bin/ahnctl start adhearsion'"
-</span><span class='line'>    if totalmem &gt; 100.0 MB for 3 cycles then restart
-</span><span class='line'>    if cpu usage &gt; 95% for 3 cycles then restart</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Nginx monit configuration</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>check process nginx with pidfile /opt/nginx/logs/nginx.pid
-</span><span class='line'>    start program = "/opt/nginx/sbin/nginx"
-</span><span class='line'>    stop  program = "/opt/nginx/sbin/nginx -s stop"
-</span><span class='line'>    if cpu is greater than 70% for 3 cycles then alert
-</span><span class='line'>    if cpu &gt; 80% for 5 cycles then restart
-</span><span class='line'>    if 10 restarts within 10 cycles then timeout</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'> <span class="c1">#By default index starts from zero to specify custom index to start from,</span>
+</span><span class='line'> <span class="c1">#pass index to collect_with_index</span>
+</span><span class='line'>
+</span><span class='line'> <span class="o">[</span><span class="s1">&#39;ruby&#39;</span><span class="p">,</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;sandip&#39;</span><span class="o">].</span><span class="n">map_with_index</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">){</span> <span class="o">|</span><span class="n">w</span><span class="p">,</span><span class="n">i</span><span class="o">|</span>  <span class="o">[</span><span class="n">w</span><span class="p">,</span> <span class="n">i</span><span class="o">]</span> <span class="p">}</span>
+</span><span class='line'> <span class="c1">#=&gt; [[&quot;ruby&quot;, 0], [&quot;rails&quot;, 1], [&quot;sandip&quot;, 2]]</span>
+</span><span class='line'>
+</span><span class='line'> <span class="o">[</span><span class="s1">&#39;ruby&#39;</span><span class="p">,</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;sandip&#39;</span><span class="o">].</span><span class="n">map_with_index</span><span class="p">(</span><span class="mi">5</span><span class="p">){</span> <span class="o">|</span><span class="n">w</span><span class="p">,</span><span class="n">i</span><span class="o">|</span>  <span class="o">[</span><span class="n">w</span><span class="p">,</span> <span class="n">i</span><span class="o">]</span> <span class="p">}</span>
+</span><span class='line'> <span class="c1">#=&gt; [[&quot;ruby&quot;, 6], [&quot;rails&quot;, 7], [&quot;sandip&quot;, 8]]</span>
+</span></code></pre></td></tr></table></div></figure>
 
 </div>
   
@@ -719,7 +769,7 @@ Got Easy, Cheers ;)</p>
       
   <header>
     
-      <h1 class="entry-title"><a href="/2011/03/getting-started-with-rails-3-postgres/">Getting Started With Rails 3 & Postgres Database</a></h1>
+      <h1 class="entry-title"><a href="/2010/02/fixsolution-for-nomethoderror-undefined/">Fix/Solution for NoMethodError? (Undefined Method `controller_name&#8217; for nil:NilClass)</a></h1>
     
     
       <p class="meta">
@@ -735,172 +785,82 @@ Got Easy, Cheers ;)</p>
   
 
 
-<time datetime="2011-03-01T00:40:00+05:30" pubdate data-updated="true">Mar 1<span>st</span>, 2011</time>
+<time datetime="2010-02-16T20:32:00+05:30" pubdate data-updated="true">Feb 16<span>th</span>, 2010</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Rails 3 Installation</p>
+  <div class="entry-content"><p>This error appears when same action gets called twice. There might be chances to have controller with same name twice inside app as well as plugins</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo gem install rails -v3.0.4</span></code></pre></td></tr></table></div></figure>
+<p>In my case the error appeared while migrating from <code>rails 2.1</code> to <code>2.3</code>
+Application was having <code>application.rb</code> and <code>application_controller.rb</code></p>
 
+<p>Files deleted:
+<code>trunk/app/controllers/application.rb</code></p>
 
-<p>Postgres as <code>DB</code> installation</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install postgresql</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Rails 3 App with postgres as database</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rails new pg -d postgres</span></code></pre></td></tr></table></div></figure>
+<p>And that solved problem !</p>
+</div>
+  
+  
 
 
-<p>Bundle installation
-It will install dependency gems &amp; postgres adapter for db connection</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>bundle install</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Here by default <code>postgres</code> database user gets created while installation but i recommend to create new db user with name same as of system user owning project directory permissions.</p>
-
-<p>User owning file permission can be found using</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ls -l pg
-</span><span class='line'>drwxr-xr-x 7 sandip sandip 4096 2011-02-23 15:38 app
-</span><span class='line'>drwxr-xr-x 5 sandip sandip 4096 2011-02-23 18:14 config
-</span><span class='line'>-rw-r--r-- 1 sandip sandip  152 2011-02-23 15:38 config.ru
-</span><span class='line'>...</span></code></pre></td></tr></table></div></figure>
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/02/online-ruby-programming-useful-website/">Online Ruby Programming Useful Website Links</a></h1>
+    
+    
+      <p class="meta">
+        
 
 
-<p>Default &lsquo;postgres&rsquo; database user gets created while installation</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>## Snap of database.yml
-</span><span class='line'>development:
-</span><span class='line'>  adapter: postgresql
-</span><span class='line'>  encoding: unicode
-</span><span class='line'>  database: pg_development
-</span><span class='line'>  username: sandip
-</span><span class='line'>  pool: 5</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Create new database user</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>pg $ sudo su postgres
-</span><span class='line'>pg $ createuser sandip
-</span><span class='line'>Shall the new role be a superuser? (y/n) y
-</span><span class='line'>pg $ exit
-</span><span class='line'>exit</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Create a first development database:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>pg $ psql template1
-</span><span class='line'>Welcome to psql 8.4.6, the PostgreSQL interactive terminal.
-</span><span class='line'>...
-</span><span class='line'>
-</span><span class='line'>template1=# \l
-</span><span class='line'>        List of databases
-</span><span class='line'>   Name    |  Owner   | Encoding 
-</span><span class='line'>-----------+----------+----------
-</span><span class='line'> postgres  | postgres | UTF8
-</span><span class='line'> template0 | postgres | UTF8
-</span><span class='line'> template1 | postgres | UTF8
-</span><span class='line'>(3 rows)
-</span><span class='line'>
-</span><span class='line'>template1=# CREATE DATABASE pg_development;
-</span><span class='line'>CREATE DATABASE
-</span><span class='line'>template1=# \l
-</span><span class='line'>            List of databases
-</span><span class='line'>       Name        |  Owner   | Encoding 
-</span><span class='line'>-------------------+----------+----------
-</span><span class='line'> postgres          | postgres | UTF8
-</span><span class='line'> pg_development | sandip   | UTF8
-</span><span class='line'> template0         | postgres | UTF8
-</span><span class='line'> template1         | postgres | UTF8
-</span><span class='line'>(4 rows)
-</span><span class='line'>
-</span><span class='line'>template1=# \q</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Start rails server</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>pg $ rails s</span></code></pre></td></tr></table></div></figure>
+  
 
 
-<h3>Getting hands on postgres terminal</h3>
-
-<p><strong>1.  Login onto terminal</strong></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>psql -U DB_USERNAME -d DB_NAME -W DB_PASSWORD</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>2.  List databases</strong></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>\l</span></code></pre></td></tr></table></div></figure>
+<time datetime="2010-02-16T17:27:00+05:30" pubdate data-updated="true">Feb 16<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
 
 
-<p><strong>3.  Display tables</strong></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>\dt</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>4.  Exit from terminal</strong></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>\q</span></code></pre></td></tr></table></div></figure>
+  <div class="entry-content"><ol>
+<li><p>Ruby
+<a href="http://tryruby.org">http://tryruby.org</a></p></li>
+<li><p>Hpricot
+<a href="http://hpricot.com">http://hpricot.com</a></p></li>
+<li><p>Regular expressions
+<a href="http://rubular.com">http://rubular.com</a></p></li>
+<li><p>Exceptions
+<a href="http://hoptoadapp.com/">http://hoptoadapp.com/</a></p></li>
+<li><p>Application Performance
+<a href="http://newrelic.com">http://newrelic.com</a></p></li>
+<li><p>Ruby Doc
+<a href="http://www.ruby-doc.org/">http://www.ruby-doc.org/</a></p></li>
+<li><p>Rails API
+<a href="http://api.rubyonrails.org/">http://api.rubyonrails.org/</a></p></li>
+<li><p>Ruby gems sources
+<a href="http://rubyforge.org">http://rubyforge.org</a>  /
+<a href="http://gems.github.com">http://gems.github.com</a>  /
+<a href="http://gemcutter.org">http://gemcutter.org</a></p></li>
+<li><p>Listing remote gems from source
+gem list &mdash;remote &mdash;source <a href="http://gems.github.com">http://gems.github.com</a></p></li>
+<li><p>List of Rails Plugins
+<a href="http://wiki.rubyonrails.org/rails/pages/Plugins">http://wiki.rubyonrails.org/rails/pages/Plugins</a> /
+<a href="http://www.agilewebdevelopment.com/plugins">http://www.agilewebdevelopment.com/plugins</a></p></li>
+</ol>
 
 </div>
   

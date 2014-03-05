@@ -357,11 +357,11 @@
         <lastmod>2014-02-18T00:43:27+05:30</lastmod>
     </url>
     <url>
-        <loc>http://funonrails.com/2010/10/solution-to-delayedjobdj-gem-server/</loc>
+        <loc>http://funonrails.com/2010/10/solution-to-delayed-job-gem-server-start-problem/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>http://funonrails.com/2010/10/delayedjobs-dj-fancy-methods/</loc>
+        <loc>http://funonrails.com/2010/10/delayed-jobs-fancy-methods/</loc>
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
@@ -413,8 +413,8 @@
         <lastmod>2014-02-14T16:34:57+05:30</lastmod>
     </url>
     <url>
-        <loc>http://funonrails.com/2011/03/monitor-delayedjob-in-rails/</loc>
-        <lastmod>2014-02-14T16:34:57+05:30</lastmod>
+        <loc>http://funonrails.com/2011/03/monitor-delayed-job-in-rails/</loc>
+        <lastmod>2014-03-05T15:41:37+05:30</lastmod>
     </url>
     <url>
         <loc>http://funonrails.com/2011/03/accessing-view-helpers-routes-in-rails/</loc>
@@ -592,7 +592,7 @@
     </url>
     <url>
         <loc>http://funonrails.com/</loc>
-        <lastmod>2014-03-03T23:10:46+05:30</lastmod>
+        <lastmod>2014-03-05T15:41:37+05:30</lastmod>
     </url>
     <url>
         <loc>http://funonrails.com/thank-you/</loc>
@@ -604,7 +604,7 @@
     </url>
     <url>
         <loc>http://funonrails.com/archives/</loc>
-        <lastmod>2014-03-03T23:10:46+05:30</lastmod>
+        <lastmod>2014-03-05T15:41:37+05:30</lastmod>
     </url>
     <url>
         <loc>http://funonrails.com/robots.txt</loc>

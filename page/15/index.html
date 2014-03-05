@@ -97,7 +97,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2010/04/using-thinking-sphinx-search-in-rails/">Using Thinking Sphinx Search in Rails App</a></h1>
+      <h1 class="entry-title"><a href="/2009/05/ruby-1-8-7-and-rails-installation-on-ubuntu/">Ruby 1.8.7 and Rails Installation on Ubuntu Interpid</a></h1>
     
     
       <p class="meta">
@@ -113,702 +113,97 @@
   
 
 
-<time datetime="2010-04-12T19:07:00+05:30" pubdate data-updated="true">Apr 12<span>th</span>, 2010</time>
+<time datetime="2009-05-13T20:02:00+05:30" pubdate data-updated="true">May 13<span>th</span>, 2009</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>I am using <em>acts_as_ferret</em> and <em>ferret server</em> as of now with my rails application and it just works fine for me. The ONLY problem is <strong>performance</strong> as it takes a lot time to build index and to rebuild index when it gets screwed up and that&rsquo;s where <strong>sphinx rocks</strong>!</p>
-
-<p>To get started with thinking sphinx you need to install sphinx server first. for installation help click here.</p>
-
-<p>To use sphinx search in rails we need to use either thinking sphinx gem or plugin that can be easily find on github.</p>
-
-<h2>Plugin installation</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ruby script/plugin install  git://github.com/freelancing-god/thinking-sphinx.git</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>OR</h4>
-
-<h2>Gem installation</h2>
-
-<p>To install gem run the following command.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>gem install thinking-sphinx --source http://rubygems.org/
-</span><span class='line'>
-</span><span class='line'>If you're upgrading, you should read this:
-</span><span class='line'>http://freelancing-god.github.com/ts/en/upgrading.html
-</span><span class='line'>
-</span><span class='line'>Successfully installed thinking-sphinx-1.3.16
-</span><span class='line'>1 gem installed</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Edit environment file and add following lines to it inside initializer block.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>config.gem(
-</span><span class='line'>     'thinking-sphinx',
-</span><span class='line'>      :lib     =&gt; 'thinking_sphinx',
-</span><span class='line'>      :version =&gt; '1.3.16'
-</span><span class='line'> )</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Edit Rakefile and add following lines to it.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>require 'thinking_sphinx/tasks'</span></code></pre></td></tr></table></div></figure>
-
-
-<p>List rake tasks that should show up sphinx related tasks.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rake -T ts
-</span><span class='line'>(in /home/sandip/v1)
-</span><span class='line'>rake doc:plugins:acts_as_audited  # Generate documentation for the acts_as_...
-</span><span class='line'>rake doc:plugins:acts_as_ferret   # Generate documentation for the acts_as_...
-</span><span class='line'>rake rails:update:javascripts     # Update your javascripts from your curre...
-</span><span class='line'>rake rails:update:scripts         # Add new scripts to the application scri...
-</span><span class='line'>rake stats                        # Report code statistics (KLOCs, etc) fro...
-</span><span class='line'>rake test:units                   # Run tests for unitsdb:test:prepare / Ru...
-</span><span class='line'>rake tmp:sockets:clear            # Clears all files in tmp/sockets
-</span><span class='line'>rake ts:conf                      # Generate the Sphinx configuration file ...
-</span><span class='line'>rake ts:config                    # Generate the Sphinx configuration file ...
-</span><span class='line'>rake ts:in                        # Index data for Sphinx using Thinking Sp...
-</span><span class='line'>rake ts:rebuild                   # Stop Sphinx (if it's running), rebuild ...
-</span><span class='line'>rake ts:reindex                   # Reindex Sphinx without regenerating the...
-</span><span class='line'>rake ts:restart                   # Restart Sphinx / Restart Sphinx
-</span><span class='line'>rake ts:run                       # Stop if running, then start a Sphinx se...
-</span><span class='line'>rake ts:start                     # Start a Sphinx searchd daemon using Thi...
-</span><span class='line'>rake ts:stop                      # Stop Sphinx using Thinking Sphinx's set...
-</span><span class='line'>rake ts:version                   # Output the current Thinking Sphinx vers...</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Starting Sphinx</h2>
-
-<p>Start sphinx server this should give up an error.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rake ts:start
-</span><span class='line'>(in /home/sandip/v1)
-</span><span class='line'>Failed to start searchd daemon. Check /home/sandip/v1/log/searchd.log.</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Adding indexes in models</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">define_index</span> <span class="k">do</span>
-</span><span class='line'>     <span class="c1"># following fields are database fields</span>
-</span><span class='line'>     <span class="c1"># we can not add model methods in sphinx index </span>
-</span><span class='line'>     <span class="c1"># sphinx fields allows ONLY model based associations</span>
-</span><span class='line'>     <span class="c1"># fields</span>
-</span><span class='line'>      <span class="n">indexes</span> <span class="n">customer_name</span>
-</span><span class='line'>      <span class="n">indexes</span> <span class="n">phone</span>
-</span><span class='line'>      <span class="n">indexes</span> <span class="n">mobile</span>
-</span><span class='line'>      <span class="n">indexes</span> <span class="n">other_phone</span>
-</span><span class='line'>      <span class="n">indexes</span> <span class="n">car_make</span>
-</span><span class='line'>      <span class="n">indexes</span> <span class="n">car_model</span>
-</span><span class='line'>      <span class="n">indexes</span> <span class="n">registration_no</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Configure sphinx</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rake</span> <span class="ss">ts</span><span class="p">:</span><span class="n">config</span>
-</span><span class='line'><span class="no">Generating</span> <span class="no">Configuration</span> <span class="n">to</span> <span class="sr">/home/s</span><span class="n">andip</span><span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">development</span><span class="o">.</span><span class="n">sphinx</span><span class="o">.</span><span class="n">conf</span>
-</span><span class='line'><span class="no">Index</span> <span class="n">sphinx</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">rake</span> <span class="ss">ts</span><span class="p">:</span><span class="k">in</span>
-</span><span class='line'><span class="p">(</span><span class="k">in</span> <span class="sr">/home/s</span><span class="n">andip</span><span class="o">/</span><span class="n">v1</span><span class="p">)</span>
-</span><span class='line'><span class="no">Generating</span> <span class="no">Configuration</span> <span class="n">to</span> <span class="sr">/home/s</span><span class="n">andip</span><span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">development</span><span class="o">.</span><span class="n">sphinx</span><span class="o">.</span><span class="n">conf</span>
-</span><span class='line'><span class="no">Sphinx</span> <span class="mi">0</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">8</span><span class="o">-</span><span class="n">rc2</span> <span class="p">(</span><span class="n">r1234</span><span class="p">)</span>
-</span><span class='line'><span class="no">Copyright</span> <span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="mi">2001</span><span class="o">-</span><span class="mi">2008</span><span class="p">,</span> <span class="no">Andrew</span> <span class="no">Aksyonoff</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">using</span> <span class="n">config</span> <span class="n">file</span> <span class="s1">&#39;/home/sandip/v1/config/development.sphinx.conf&#39;</span><span class="o">.</span><span class="n">.</span><span class="o">.</span>
-</span><span class='line'><span class="n">indexing</span> <span class="n">index</span> <span class="s1">&#39;call_core&#39;</span><span class="o">.</span><span class="n">.</span><span class="o">.</span>
-</span><span class='line'><span class="n">collected</span> <span class="mi">113521</span> <span class="n">docs</span><span class="p">,</span> <span class="mi">2</span><span class="o">.</span><span class="mi">1</span> <span class="no">MB</span>
-</span><span class='line'><span class="n">collected</span> <span class="mi">0</span> <span class="kp">attr</span> <span class="n">values</span>
-</span><span class='line'><span class="n">sorted</span> <span class="mi">0</span><span class="o">.</span><span class="mi">1</span> <span class="no">Mvalues</span><span class="p">,</span> <span class="mi">100</span><span class="o">.</span><span class="mi">0</span><span class="o">%</span> <span class="n">done</span>
-</span><span class='line'><span class="n">sorted</span> <span class="mi">0</span><span class="o">.</span><span class="mi">3</span> <span class="no">Mhits</span><span class="p">,</span> <span class="mi">100</span><span class="o">.</span><span class="mi">0</span><span class="o">%</span> <span class="n">done</span>
-</span><span class='line'><span class="n">total</span> <span class="mi">113521</span> <span class="n">docs</span><span class="p">,</span> <span class="mi">2114790</span> <span class="n">bytes</span>
-</span><span class='line'><span class="n">total</span> <span class="mi">6</span><span class="o">.</span><span class="mi">102</span> <span class="n">sec</span><span class="p">,</span> <span class="mi">346589</span><span class="o">.</span><span class="mi">68</span> <span class="n">bytes</span><span class="o">/</span><span class="n">sec</span><span class="p">,</span> <span class="mi">18604</span><span class="o">.</span><span class="mi">78</span> <span class="n">docs</span><span class="o">/</span><span class="n">sec</span>
-</span><span class='line'><span class="n">distributed</span> <span class="n">index</span> <span class="s1">&#39;call&#39;</span> <span class="n">can</span> <span class="ow">not</span> <span class="n">be</span> <span class="n">directly</span> <span class="n">indexed</span><span class="p">;</span> <span class="n">skipping</span><span class="o">.</span>
-</span><span class='line'><span class="no">Generating</span> <span class="no">Configuration</span> <span class="n">to</span> <span class="sr">/home/s</span><span class="n">andip</span><span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">development</span><span class="o">.</span><span class="n">sphinx</span><span class="o">.</span><span class="n">conf</span>
-</span><span class='line'><span class="no">Sphinx</span> <span class="mi">0</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">8</span><span class="o">-</span><span class="n">rc2</span> <span class="p">(</span><span class="n">r1234</span><span class="p">)</span>
-</span><span class='line'><span class="no">Copyright</span> <span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="mi">2001</span><span class="o">-</span><span class="mi">2008</span><span class="p">,</span> <span class="no">Andrew</span> <span class="no">Aksyonoff</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">using</span> <span class="n">config</span> <span class="n">file</span> <span class="s1">&#39;/home/sandip/v1/config/development.sphinx.conf&#39;</span><span class="o">.</span><span class="n">.</span><span class="o">.</span>
-</span><span class='line'><span class="n">indexing</span> <span class="n">index</span> <span class="s1">&#39;call_core&#39;</span><span class="o">.</span><span class="n">.</span><span class="o">.</span>
-</span><span class='line'><span class="n">collected</span> <span class="mi">113521</span> <span class="n">docs</span><span class="p">,</span> <span class="mi">2</span><span class="o">.</span><span class="mi">1</span> <span class="no">MB</span>
-</span><span class='line'><span class="n">collected</span> <span class="mi">0</span> <span class="kp">attr</span> <span class="n">values</span>
-</span><span class='line'><span class="n">sorted</span> <span class="mi">0</span><span class="o">.</span><span class="mi">1</span> <span class="no">Mvalues</span><span class="p">,</span> <span class="mi">100</span><span class="o">.</span><span class="mi">0</span><span class="o">%</span> <span class="n">done</span>
-</span><span class='line'><span class="n">sorted</span> <span class="mi">0</span><span class="o">.</span><span class="mi">3</span> <span class="no">Mhits</span><span class="p">,</span> <span class="mi">100</span><span class="o">.</span><span class="mi">0</span><span class="o">%</span> <span class="n">done</span>
-</span><span class='line'><span class="n">total</span> <span class="mi">113521</span> <span class="n">docs</span><span class="p">,</span> <span class="mi">2114790</span> <span class="n">bytes</span>
-</span><span class='line'><span class="n">total</span> <span class="mi">3</span><span class="o">.</span><span class="mi">628</span> <span class="n">sec</span><span class="p">,</span> <span class="mi">582909</span><span class="o">.</span><span class="mi">70</span> <span class="n">bytes</span><span class="o">/</span><span class="n">sec</span><span class="p">,</span> <span class="mi">31290</span><span class="o">.</span><span class="mi">34</span> <span class="n">docs</span><span class="o">/</span><span class="n">sec</span>
-</span><span class='line'><span class="n">distributed</span> <span class="n">index</span> <span class="s1">&#39;call&#39;</span> <span class="n">can</span> <span class="ow">not</span> <span class="n">be</span> <span class="n">directly</span> <span class="n">indexed</span><span class="p">;</span> <span class="n">skipping</span><span class="o">.</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Search using sphinx</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">ruby</span> <span class="n">script</span> <span class="n">console</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&gt;&gt;</span><span class="no">Call</span><span class="o">.</span><span class="n">search</span> <span class="s1">&#39;sandip&#39;</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="o">[</span><span class="c1">#&lt;call 00:00:00&quot;=&quot;&quot; 09:22:35&quot;,=&quot;&quot; 1018,=&quot;&quot; 18:10:00&quot;,=&quot;&quot; 2009-02-10=&quot;&quot; 2009-03-27=&quot;&quot; 2009-04-07=&quot;&quot; 2009-11-18=&quot;&quot; 20:29:06&quot;,=&quot;&quot; 6,=&quot;&quot; created_at:=&quot;&quot; id:=&quot;&quot; insurance_expiry_date:=&quot;&quot; is=&quot;&quot; is_existing_customer:=&quot;&quot; nil,=&quot;&quot; note:=&quot;&quot; phone=&quot;&quot; ringing&quot;,=&quot;&quot; scheduled_at:=&quot;&quot; state_id:=&quot;&quot; station_shift_customer_car_insurance_product_id:=&quot;&quot; updated_at:=&quot;&quot;&gt;, #&lt;call 00:00:00&quot;=&quot;&quot; 11:13:33&quot;,=&quot;&quot; 18:30:00&quot;,=&quot;&quot; 2009-02-10=&quot;&quot; 2009-02-16=&quot;&quot; 2009-04-03=&quot;&quot; 2009-11-18=&quot;&quot; 20:34:52&quot;,=&quot;&quot; 6,=&quot;&quot; 6024,=&quot;&quot; call=&quot;&quot; created&quot;,=&quot;&quot; created_at:=&quot;&quot; customer=&quot;&quot; id:=&quot;&quot; insurance_expiry_date:=&quot;&quot; is_existing_customer:=&quot;&quot; new=&quot;&quot; nil,=&quot;&quot; note:=&quot;&quot; scheduled_at:=&quot;&quot; state_id:=&quot;&quot; station_shift_customer_car_insurance_product_id:=&quot;&quot; updated_at:=&quot;&quot;&gt;] &lt;/call&gt;&lt;/call&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>It returns array of records found. conditions are allowed by sphinx. If you need to add conditions on integer attributes then index block in model needs to have has method like author_id in following.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">define_index</span> <span class="k">do</span>
-</span><span class='line'>  <span class="n">indexes</span> <span class="n">content</span>
-</span><span class='line'>  <span class="n">indexes</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:sortable</span> <span class="o">=&gt;</span> <span class="kp">true</span>
-</span><span class='line'>  <span class="n">indexes</span> <span class="n">comments</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:comment_content</span>
-</span><span class='line'>  <span class="n">indexes</span> <span class="o">[</span><span class="n">author</span><span class="o">.</span><span class="n">first_name</span><span class="p">,</span> <span class="n">author</span><span class="o">.</span><span class="n">last_name</span><span class="o">]</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:author_name</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">has</span> <span class="n">author_id</span><span class="p">,</span> <span class="n">created_at</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/04/using-thinking-sphinx-with-rails/">Using Thinking Sphinx With Rails</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-04-12T18:19:00+05:30" pubdate data-updated="true">Apr 12<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Check out this SlideShare Presentation: <div style="width:825px" id="__ss_782883"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/sazwqa/using-thinking-sphinx-with-rails-presentation" title="Using Thinking Sphinx with rails">Using Thinking Sphinx with rails</a></strong><object width="825" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=sp4-1227528901740588-8&stripped_title=using-thinking-sphinx-with-rails-presentation" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=sp4-1227528901740588-8&stripped_title=using-thinking-sphinx-with-rails-presentation" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="825" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/sazwqa">saz wqa</a>.</div></div></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/03/aliasmethod-in-ruby/">Alias Methods in Ruby</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-03-31T17:46:00+05:30" pubdate data-updated="true">Mar 31<span>st</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Alias method in ruby</h2>
-
-<p>Ruby classes provides a alias_method that can be used to reuse the existing methods.
-Consider a situation where you need different methods which has same code and ONLY they have different names.</p>
-
-<p>In this case alias_method uses suits best choice instead duplicating same code or writing common method that will get used in all methods, as i did before. Example, I have methods search, home, index all are doing same functionality.</p>
-
-<h2>Old approach</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># URL / </span>
-</span><span class='line'><span class="k">def</span> <span class="nf">index</span>
-</span><span class='line'> <span class="n">list</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'><span class="c1"># URL /search</span>
-</span><span class='line'><span class="k">def</span> <span class="nf">search</span>
-</span><span class='line'> <span class="n">list</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">#URL /home </span>
-</span><span class='line'><span class="k">def</span> <span class="nf">home</span>
-</span><span class='line'> <span class="n">list</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'><span class="kp">private</span>
-</span><span class='line'><span class="k">def</span> <span class="nf">list</span>
-</span><span class='line'><span class="c1"># code here </span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Correct approach in ruby</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">index</span>
-</span><span class='line'> <span class="c1"># code here </span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'><span class="n">alias_method</span> <span class="ss">:home</span><span class="p">,</span> <span class="ss">:index</span>
-</span><span class='line'><span class="n">alias_method</span> <span class="ss">:search</span><span class="p">,</span> <span class="ss">:index</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Attributes aliasing in ruby</h2>
-
-<p>Same way one can easily rename existing class attribute names using alias_attribute method.</p>
-
-<h2>alias_attribute(new_name, old_name)</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">alias_attrinute</span> <span class="ss">:username</span><span class="p">,</span> <span class="ss">:login</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>More practical use</h2>
-
-<p>while deprecating attributes, methods in gems, plugins, extensions, libraries always use aliases in order to maintain backward compatibility.</p>
-
-<p>Got easy ?? that&rsquo;s where ruby rocks !</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/03/nginx-and-thin-installation/">Nginx and Thin Installation and Configuration</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-03-26T02:59:00+05:30" pubdate data-updated="true">Mar 26<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Install nginx server using following command</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>apt-get install nginx</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Edit nginx configuration and add server block inside html block.&nbsp;</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>server {
-</span><span class='line'>
-</span><span class='line'>    listen       80;
-</span><span class='line'>    server_name  boost;
-</span><span class='line'>
-</span><span class='line'>    root /home/sandip/rails_app/public;
-</span><span class='line'>
-</span><span class='line'>    location / {
-</span><span class='line'>
-</span><span class='line'>        proxy_set_header  X-Real-IP  $remote_addr;
-</span><span class='line'>        proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
-</span><span class='line'>        proxy_set_header Host $http_host;
-</span><span class='line'>        proxy_redirect off;
-</span><span class='line'>
-</span><span class='line'>        if (-f $request_filename/index.html) {
-</span><span class='line'>            rewrite (.*) $1/index.html break;
-</span><span class='line'>        }
-</span><span class='line'>
-</span><span class='line'>        if (-f $request_filename.html) {
-</span><span class='line'>            rewrite (.*) $1.html break;
-</span><span class='line'>
-</span><span class='line'>        }
-</span><span class='line'>
-</span><span class='line'>        if (!-f $request_filename) {
-</span><span class='line'>            proxy_pass http://thin;
-</span><span class='line'>            break;
-</span><span class='line'>        }
-</span><span class='line'>    }
-</span><span class='line'>
-</span><span class='line'>    error_page   500 502 503 504  /50x.html;
-</span><span class='line'>    location = /50x.html {
-</span><span class='line'>
-</span><span class='line'>        root   html;
-</span><span class='line'>
-</span><span class='line'>    }
-</span><span class='line'>
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Install thin server as gem</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo gem install thin
-</span><span class='line'>Building native extensions.  This could take a while...
-</span><span class='line'>Building native extensions.  This could take a while...
-</span><span class='line'>
-</span><span class='line'>Successfully installed eventmachine-0.12.10
-</span><span class='line'>Successfully installed thin-1.2.7
-</span><span class='line'>
-</span><span class='line'>2 gems installed</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Install thin service</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo thin install
-</span><span class='line'>Installing thin service at /etc/init.d/thin ...
-</span><span class='line'>mkdir -p /etc/init.d
-</span><span class='line'>writing /etc/init.d/thin
-</span><span class='line'>chmod +x /etc/init.d/thin
-</span><span class='line'>mkdir -p /etc/thin</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Configure thin to start at system boot</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo /usr/sbin/update-rc.d -f thin defaults</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Then put your config files in /etc/thin</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo /usr/sbin/update-rc.d -f thin defaults
-</span><span class='line'>update-rc.d: warning: thin stop runlevel arguments (0 1 6) do not match LSB Default-Stop values (S 0 1 6)
-</span><span class='line'> Adding system startup for /etc/init.d/thin ...
-</span><span class='line'>
-</span><span class='line'>   /etc/rc0.d/K20thin -&gt; ../init.d/thin
-</span><span class='line'>   /etc/rc1.d/K20thin -&gt; ../init.d/thin
-</span><span class='line'>   /etc/rc6.d/K20thin -&gt; ../init.d/thin
-</span><span class='line'>   /etc/rc2.d/S20thin -&gt; ../init.d/thin
-</span><span class='line'>   /etc/rc3.d/S20thin -&gt; ../init.d/thin
-</span><span class='line'>   /etc/rc4.d/S20thin -&gt; ../init.d/thin
-</span><span class='line'>   /etc/rc5.d/S20thin -&gt; ../init.d/thin</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Create thin configuration</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo thin config -C /etc/thin/&lt;config-name&gt;.yml -c &lt;rails-app-root-path&gt; --servers &lt;number-of-threads&gt; -e &lt;environment&gt;
-</span><span class='line'>&lt;/environment&gt;&lt;/number-of-threads&gt;&lt;/rails-app-root-path&gt;&lt;/config-name&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>In my case,</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo thin config -C /etc/thin/rails_app.yml -c /home/sandip/rails_app --servers 3 -e production
-</span><span class='line'>
-</span><span class='line'>&gt;&gt; Wrote configuration to /etc/thin/rails_app.yml</span></code></pre></td></tr></table></div></figure>
-
-
-<p>thin configuration file will look like</p>
-
-<p>Start/stop/restart Nginx &amp; thin server using command</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo service nginx start|stop|restart
-</span><span class='line'>sudo service thin start|stop|restart</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/03/ruby-on-rails-installation-on-fresh-ubuntu/">Ruby on Rails Installation on Fresh Ubuntu Machine</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-03-25T23:36:00+05:30" pubdate data-updated="true">Mar 25<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Ruby On Rails Installation on fresh ubuntu machine</p>
-
-<p>Installation steps are applicable to ubuntu versions interpid, karmic koala. Make necessary changes according to package manager provided by other linux operating systems in order install ruby and rails.</p>
-
-<p>Before getting started to installations make sure to build essential packages on fresh ubutnu machine. Ubuntu machine has built in apt-get package manager and that i loves because it is very to use as compared to other OS.</p>
+  <div class="entry-content"><p>Execute following commands in order to install ruby and rails</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install build-essential</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Now there are many versions of ruby available including latest 1.9.2</p>
-
-<p>But would like to prefer ruby version 1.8.7 as it is the most stable version as of now. I would like to recommend installtion of Ruby Enterprise Edition (REE) version as it is uses minimal system resources and consumes less memory.</p>
-
-<p>Instrunctions to setup normal ruby and rails environment</p>
-
-<h2>1. Install Ruby, Rails, MySQL, irb and neceesary packages using single command</h2>
+<p>Below command will install all necessary packages. if you don&rsquo;t want any <code>package</code> from list then remove it from command.</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install ruby ri rdoc mysql-server libmysql-ruby ruby1.8-dev irb1.8 libdbd-mysql-perl libdbi-perl libmysql-ruby1.8 libmysqlclient15off libnet-daemon-perl libplrpc-perl libreadline-ruby1.8 libruby1.8 mysql-client-5.1 mysql-common mysql-server-5.1 rdoc1.8 ri1.8 ruby1.8 irb libopenssl-ruby libopenssl-ruby1.8 libhtml-template-perl mysql-server-core-5.1 libmysqlclient16 libreadline5 psmisc</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install ruby ri rdoc mysql-server libmysql-ruby ruby1.8-dev irb1.8 libdbd-mysql-perl libdbi-perl libmysql-ruby1.8 libmysqlclient15off libnet-daemon-perl libplrpc-perl libreadline-ruby1.8 libruby1.8 mysql-client-5.0 mysql-common mysql-server-5.0 rdoc1.8 ri1.8 ruby1.8 irb libopenssl-ruby libopenssl-ruby1.8 libterm-readkey-perl psmisc</span></code></pre></td></tr></table></div></figure>
 
 
-<h2>2. Install ruby gems</h2>
+<h2>Gem Installation</h2>
+
+<p>Please find the latest stable gem version on rubyforge.</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>wget http://rubyforge.org/frs/download.php/60718/rubygems-1.3.5.tgz
-</span><span class='line'>tar xvzf rubygems-1.3.5.tgz
-</span><span class='line'>cd rubygems-1.3.5
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget http://rubyforge.org/frs/download.php/45905/rubygems-1.3.1.tgz
+</span><span class='line'>tar xvzf rubygems-1.3.1.tgz
+</span><span class='line'>cd rubygems-1.3.1
 </span><span class='line'>sudo ruby setup.rb</span></code></pre></td></tr></table></div></figure>
 
 
-<h2>3. Create symbolic links to installation paths</h2>
+<p>And last to install rails without documentation</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo ln -s /usr/bin/gem1.8 /usr/local/bin/gem
-</span><span class='line'>sudo ln -s /usr/bin/ruby1.8 /usr/local/bin/ruby
-</span><span class='line'>sudo ln -s /usr/bin/rdoc1.8 /usr/local/bin/rdoc
-</span><span class='line'>sudo ln -s /usr/bin/ri1.8 /usr/local/bin/ri
-</span><span class='line'>sudo ln -s /usr/bin/irb1.8 /usr/local/bin/irb</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo gem install rails --no-rdoc --no-ri</span></code></pre></td></tr></table></div></figure>
 
 
-<h2>4. Setup gemrc in order to avoid rdoc installation and to setup gem sources.</h2>
+<p>and finally rails server, you can either install <code>apache mongrel</code> or <code>nginx + thin</code> whichever you feel suitable.</p>
 
-<p>Add following lines to ~/.gemrc file</p>
+<h2>Mongrel install</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudu gem install mongrel</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/fix-for-ruby-1-8-7-incompatibity/">Fix for Ruby 1.8.7 Incompatibity</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-13T19:22:00+05:30" pubdate data-updated="true">May 13<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Last week i shifted from <code>ruby</code> version <code>1.8.6</code> to <code>1.8.7</code> :&ndash;)
+But over a week i found that rails <code>1.2.3</code> applications developed in ruby <code>1.8.6</code> are not working in ruby <code>1.8.7</code></p>
+
+<p>From lot of search on google, i found that its issue with ruby <code>1.8.7</code></p>
+
+<p>So in order to fix this bug, i started searching <code>fix / solution</code> for this incompatibity and got below fix.</p>
+
+<p>You just need to fix file <code>delegate.rb</code> and done</p>
+
+<h2>Diff of <code>/branches/ruby_1_8_7/lib/delegate.rb</code></h2>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -820,51 +215,617 @@ Consider a situation where you need different methods which has same code and ON
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>---
-</span><span class='line'>gem: --no-ri --no-rdoc
-</span><span class='line'>:benchmark: false
-</span><span class='line'>:verbose: true
-</span><span class='line'>:backtrace: false
-</span><span class='line'>:update_sources: true
-</span><span class='line'>:sources:
-</span><span class='line'>- http://gems.rubyforge.org
-</span><span class='line'>- http://gems.github.com
-</span><span class='line'>:bulk_threshold: 1000</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>--- branches/ruby_1_8_7/lib/delegate.rb 2008/05/31 15:17:53 16732
+</span><span class='line'>+++ branches/ruby_1_8_7/lib/delegate.rb 2008/06/02 10:52:07 16756
+</span><span class='line'>@@ -163,9 +163,9 @@
+</span><span class='line'>   # Checks for a method provided by this the delegate object by fowarding the 
+</span><span class='line'>
+</span><span class='line'>   # call through \_\_getobj\_\_.
+</span><span class='line'>   # 
+</span><span class='line'>-  def respond_to?(m)
+</span><span class='line'>+  def respond_to?(m, include_private = false)
+</span><span class='line'>     return true if super
+</span><span class='line'>-    return self.__getobj__.respond_to?(m)
+</span><span class='line'>+    return self.__getobj__.respond_to?(m, include_private)
+</span><span class='line'>
+</span><span class='line'>   end
+</span><span class='line'>
+</span><span class='line'>   #
+</span><span class='line'>@@ -270,9 +270,9 @@
+</span><span class='line'>       end
+</span><span class='line'>       @_dc_obj.__send__(m, *args)
+</span><span class='line'>     end
+</span><span class='line'>-    def respond_to?(m)  # :nodoc:
+</span><span class='line'>+    def respond_to?(m, include_private = false)  # :nodoc:
+</span><span class='line'>       return true if super
+</span><span class='line'>
+</span><span class='line'>-      return @_dc_obj.respond_to?(m)
+</span><span class='line'>+      return @_dc_obj.respond_to?(m, include_private)
+</span><span class='line'>     end
+</span><span class='line'>     def __getobj__  # :nodoc:
+</span><span class='line'>       @_dc_obj</span></code></pre></td></tr></table></div></figure>
 
 
-<h2>5. Install rails</h2>
+<p>You have to make necessary changes and you are ready to work with ruby 1.8.7.
+need not downgrade ruby version :)</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo gem install rails --no-rdoc --no-ri</span></code></pre></td></tr></table></div></figure>
+<h2>for Hash error</h2>
 
+<p>Add following line in <code>config/environment.rb</code></p>
 
-<h2>Ruby Enterprise Edition i.e. REE (ruby 1.8.7) Installation</h2>
-
-<p>This will install ruby, rails, mysql, nginx and passenger</p>
-
-<h4>1. Download REE setup and install it</h4>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>wget http://rubyforge.org/frs/download.php/68719/ruby-enterprise-1.8.7-2010.01.tar.gz /opt/ruby
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">unless</span> <span class="s1">&#39;1.9&#39;</span><span class="o">.</span><span class="n">respond_to?</span><span class="p">(</span><span class="ss">:force_encoding</span><span class="p">)</span>
+</span><span class='line'>  <span class="nb">String</span><span class="o">.</span><span class="n">class_eval</span> <span class="k">do</span>
+</span><span class='line'>    <span class="k">begin</span>
+</span><span class='line'>      <span class="n">remove_method</span> <span class="ss">:chars</span>
+</span><span class='line'>    <span class="k">rescue</span> <span class="no">NameError</span>
+</span><span class='line'>      <span class="c1"># OK</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/rails-coding-standards/">Rails Coding Standards</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-13T16:48:00+05:30" pubdate data-updated="true">May 13<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><blockquote><p>IN ESSENCE: ALL CODE SHOULD BE READABLE!</p></blockquote>
+
+<ol>
+<li>DO NOT OPTIMISE for performance &ndash; OPTIMISE FOR CLARITY OF CODE</li>
+<li>STYLE: use 2 spaces for indent (not tabs)</li>
+<li>STYLE: Line up hash arrows for readability</li>
+<li>STYLE: put spaces around => hash arrows</li>
+<li>STYLE: put spaces after ‘,’ in method params &ndash; but none between method names and ‘(’</li>
+<li>VIEWS: use HAML for views</li>
+<li>VIEWS: break up the structure with white space to help readability &ndash; VERTICALLY TOO!</li>
+<li>VIEWS STYLE: Rely on structure of page, without having to insert messages or new components…</li>
+<li>LOGIC: Rails Models should be as heavy as in logic and controllers should be lightweight as much as .</li>
+<li>Example: Effect to visually highlight then drop out an existing element rather than flash a message</li>
+<li>Example: Highlight newly added row rather than a message about it</li>
+<li>AVOID logic in views &ndash; they should be simple</li>
+<li>Views indentation should be well formatted and not like this :
+
+<h4>WRONG</h4></li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="err">&lt;</span>% for joke in @jokes %&gt;
+</span><span class='line'><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;joke&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>
+</span><span class='line'><span class="err">&lt;</span>%= h(truncate(joke.joketext, 20)) %&gt;
+</span><span class='line'><span class="err">&lt;</span>%= link_to &#39;Read this joke&#39;, {:action =&gt; &#39;show_joke&#39;, :id =&gt; joke} %&gt;
+</span><span class='line'><span class="nt">&lt;/p&gt;</span>
+</span><span class='line'><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;author</span><span class="nt">&gt;</span>
+</span><span class='line'>by <span class="err">&lt;</span>%= h(joke.author.full_name) %&gt;<span class="nt">&lt;/p&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span><span class='line'><span class="err">&lt;</span>% end %&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>CORRECT</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="err">&lt;</span>% for joke in @jokes %&gt;
+</span><span class='line'>  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;joke&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;p&gt;</span>
+</span><span class='line'>      <span class="err">&lt;</span>%= h(truncate(joke.joketext, 20)) %&gt;
+</span><span class='line'>      <span class="err">&lt;</span>%= link_to &#39;Read this joke&#39;, { :action =&gt; &#39;show_joke&#39;, :id =&gt; joke } %&gt;
+</span><span class='line'>    <span class="nt">&lt;/p&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;author</span><span class="nt">&gt;</span>
+</span><span class='line'>      by <span class="err">&lt;</span>%= h(joke.author.full_name) %&gt;
+</span><span class='line'>    <span class="nt">&lt;/p&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'><span class="err">&lt;</span>% end %&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Put html generating logic into helpers</li>
+<li>instead of inline ruby logic, add to models (filtering, checking)</li>
+<li>NEVER use ActiveRecord models in migrations unless you re-define them within the migration</li>
+<li>…otherwise the migration fails when you later remove/rename the AR class</li>
+<li>BETTER SOLUTION: use bootstrapping until deployed!!!</li>
+<li>AJAX only for sub-components of an object, and avoid over-use</li>
+</ol>
+
+
+<h2>CONTROLLER CODING STANDARDS</h2>
+
+<ol>
+<li>Before filter should be added at the top of controller.</li>
+<li>Before filter implementation should be immediate after filter declaration</li>
+<li>Standard rails actions</li>
+<li>Own custom actions</li>
+<li>Inter-related actions should be clubbed together.</li>
+<li>please, try to use of protected, private methods and they should be declared at the bottom of page in order.</li>
+<li>Controller Actions should be like :
+(use 2 spaces for indent and not tabs)</li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">published_jokes</span>
+</span><span class='line'>  <span class="n">find</span><span class="p">(</span><span class="ss">:all</span><span class="p">,</span> <span class="ss">:conditions</span> <span class="o">=&gt;</span> <span class="s2">&quot;published = 1&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>MODEL CODING STANDARDS</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#======= HEADER SECTION=========</span>
 </span><span class='line'>
-</span><span class='line'>cd /opt
-</span><span class='line'>./ruby/installer</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'><span class="c1"># SCHEMA INFORMATION WILL BE HERE</span>
+</span><span class='line'><span class="c1"># REQUIRE FILES WILL GO HERE</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Model</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>
+</span><span class='line'> <span class="c1">#======== TOP ===================</span>
+</span><span class='line'>
+</span><span class='line'> <span class="c1"># LIBRARY OR INCLUDE METHODS</span>
+</span><span class='line'> <span class="c1"># MODEL RELATIONSHIPS</span>
+</span><span class='line'> <span class="c1"># VIRTUAL ATTRIBUTES</span>
+</span><span class='line'> <span class="c1"># ACTIVE RECORD VALIDATIONS</span>
+</span><span class='line'>
+</span><span class='line'> <span class="c1">#======== MIDDLE ===============</span>
+</span><span class='line'>
+</span><span class='line'> <span class="c1"># CUSTOM VALIDATIONS</span>
+</span><span class='line'> <span class="c1"># PUBLIC METHODS</span>
+</span><span class='line'>
+</span><span class='line'> <span class="c1">#======== BASE ==================</span>
+</span><span class='line'>
+</span><span class='line'> <span class="c1"># PROTECTED METHODS</span>
+</span><span class='line'> <span class="c1"># PRIVATE METHODS</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
 
 
-<h4>2. Add ruby inside path</h4>
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/high-performance-rails-hosting/">High Performance Rails Hosting</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-08T17:48:00+05:30" pubdate data-updated="true">May 8<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>There are lot of rails hosting, like <code>wired tree</code>, etc.
+While doing search for cost effective and high performance hosting, Recently i came across with <code>joyent</code> rails hosting.
+please let me know your opinions on this.</p>
+
+<p>Here are some of the listed capabilities :</p>
+
+<h4>Scale on Demand</h4>
+
+<p>Your rails infrastructure can be dynamically expanded or reduced within minutes.</p>
+
+<h4>Support Billions of Hits</h4>
+
+<p>The largest ruby on rails application running on Joyent does over 1 Billion page views a month. Joyent’s hardware load balancers make this kind of scale possible.
+<code>Ruby 1.8.6</code>, <code>Rails 2.1</code>, <code>Mongrel</code>, <code>Nginx</code></p>
+
+<p>Everything you need to get rolling is pre-installed, including Ruby 1.8.6 and Rails 2.1, Apache, lighttpd, nginx and Mongrel.</p>
+
+<h4>Extremely Cost Effective</h4>
+
+<p>Static IPs, real storage, 10TB data transfer / bandwidth, and fantastic support all included.
+Lightning Fast Speed</p>
+
+<p>We provide direct connections to tier 1 internet back-bones, Force10 switches and f5 BigIP load-balancers.</p>
+
+<p><strong>Trusted by Companies like LinkedIn</strong></p>
+
+<h4>Check out their post</h4>
+
+<p>Official Ruby on Rails Host</p>
+
+<p>We’re the Official Ruby on Rails host. Go check it out at rubyonrails.org. “If you need hosting, Joyent is the official Ruby on Rails host, offering fantastic plans with a knowledgeable staff. Whether you need shared or dedicated hosting, these guys are experts in Ruby on Rails. ”
+Leverage a Large Community</p>
+
+<p>Over 2,400 companies run Rails applications on Joyent. You gain from our experience hosting them and you can connect directly with them through the Joyent Forums and the Joyent Wiki</p>
+
+<h4>Entirely Open Loving Cloud</h4>
+
+<p>Joyent offers open protocols, open source solutions. Use any Language, any DB. You can move your application. No vendor lock-in.</p>
+
+<p>please, help me……:(</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/working-with-rails-console/">Awesome: Working With the Rails Console and All the Tricks</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-08T16:03:00+05:30" pubdate data-updated="true">May 8<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Testing your active record methods using <em>script/console</em></p>
+
+<h4>Windows</h4>
+
+<p>If you are using windows, you start the console by using this command:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ruby script/console</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Linux:</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>./script/console</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Just use the following command whenever you make changes to your model objects:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>reload!</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Instead of accessing your MySQL database with</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mysql -u  -p</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can instead do</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>script/dbconsole</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and if you database has a password, just do</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ruby script/dbconsole -p</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Connecting to different rails environments</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ruby script/dbconsole     # connect to development database (or $RAILS_ENV)
+</span><span class='line'>ruby script/dbconsole production    # connect to production database</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/rails-acts-as-taggable-on-plugin/">Using Rails Acts as Taggable on Plugin</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-08T14:22:00+05:30" pubdate data-updated="true">May 8<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>A tagging plugin for Rails applications that allows for custom tagging along dynamic contexts.</p>
+
+<h2>Plugin Installation</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ruby script/plugin install git://github.com/mbleigh/acts-as-taggable-on.git</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Install as a Gem</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install mbleigh-acts-as-taggable-on --source http://gems.github.com</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Auto Install</h2>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>vi ~/.bashrc
-</span><span class='line'># Add following line at the end of file
-</span><span class='line'>export PATH=/opt/ruby/bin:$PATH</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'># include following line in environment.rb
+</span><span class='line'>config.gem "mbleigh-acts-as-taggable-on", :source =&gt; "http://gems.github.com", :lib =&gt; "acts-as-taggable-on"
+</span><span class='line'>rake gems:install</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Thanks to @vwadhwani!</p>
+<h2>Post Installation (Rails)</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ruby script/generate acts_as_taggable_on_migration
+</span><span class='line'>rake db:migrate</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Adding taggable to model</h2>
+
+<p>Add following line in your model for which you wanted to be tagged</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>acts_as_taggable_on :tags</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Example</h2>
+
+<p>Lets take <code>post</code> model</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">acts_as_taggable_on</span> <span class="ss">:tags</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Controller code</h2>
+
+<p>Inside controller action</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@post</span> <span class="o">=</span> <span class="no">Post</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:post</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'><span class="c1"># Or just hardcode to test</span>
+</span><span class='line'><span class="vi">@post</span><span class="o">.</span><span class="n">tag_list</span> <span class="o">=</span><span class="s2">&quot;awesome, slick, hefty&quot;</span>
+</span><span class='line'><span class="vi">@post</span><span class="o">.</span><span class="n">save</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Methods</h2>
+
+<p>What are the methods provided?</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@post</span><span class="o">.</span><span class="n">tag_list</span> <span class="o">=</span> <span class="s2">&quot;awesome, slick, hefty&quot;</span>
+</span><span class='line'><span class="no">Post</span><span class="o">.</span><span class="n">tagged_with</span><span class="p">(</span><span class="s2">&quot;awesome&quot;</span><span class="p">,</span> <span class="ss">:on</span> <span class="o">=&gt;</span> <span class="ss">:tags</span><span class="p">)</span>
+</span><span class='line'><span class="c1"># =&gt; [@post1, @post2]</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Post</span><span class="o">.</span><span class="n">tag_counts</span> <span class="c1"># =&gt; [,...]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Named Scope</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Post</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># created_at DESC</span>
+</span><span class='line'><span class="no">Post</span><span class="o">.</span><span class="n">tagged_with</span><span class="p">(</span><span class="s2">&quot;awesome&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">by_creation</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Pagination</h2>
+
+<p>It is easy to paginate tags collection using will_paginate plugin</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">List_Of_Tags</span><span class="o">.</span><span class="n">paginate</span><span class="p">(</span><span class="ss">:page</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:page</span><span class="o">]</span><span class="p">,</span> <span class="ss">:per_page</span> <span class="o">=&gt;</span> <span class="mi">20</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@post</span><span class="o">.</span><span class="n">find_related_tags</span>
+</span><span class='line'><span class="c1"># =&gt; will give related posts having related tags. [ @post1, @post2, ...]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Tag Owners</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">acts_as_tagger</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">acts_as_taggable_on</span> <span class="ss">:tags</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Console play</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@some_user</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="vi">@some_post</span><span class="p">,</span> <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&quot;paris, normandy&quot;</span><span class="p">,</span> <span class="ss">:on</span> <span class="o">=&gt;</span> <span class="ss">:tags</span><span class="p">)</span>
+</span><span class='line'><span class="vi">@some_user</span><span class="o">.</span><span class="n">owned_taggings</span>
+</span><span class='line'><span class="vi">@some_user</span><span class="o">.</span><span class="n">owned_tags</span>
+</span><span class='line'><span class="vi">@some_post</span><span class="o">.</span><span class="n">tags_from</span><span class="p">(</span><span class="vi">@some_user</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   
@@ -873,8 +834,6 @@ Consider a situation where you need different methods which has same code and ON
     </article>
   
   <div class="pagination">
-    
-      <a class="prev" href="/page/16/">&larr; Older</a>
     
     <a href="/archives">Blog Archives</a>
     

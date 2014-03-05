@@ -97,7 +97,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2010/09/rails-3-beautiful-code/">Rails 3 Beautiful Code</a></h1>
+      <h1 class="entry-title"><a href="/2009/10/how-to-map-irregular-database-tables/">How to Map Irregular Database Tables With Rails Models</a></h1>
     
     
       <p class="meta">
@@ -113,159 +113,63 @@
   
 
 
-<time datetime="2010-09-09T17:57:00+05:30" pubdate data-updated="true">Sep 9<span>th</span>, 2010</time>
+<time datetime="2009-10-21T23:53:00+05:30" pubdate data-updated="true">Oct 21<span>st</span>, 2009</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Check out this SlideShare Presentation: <div style="width:825px" id="__ss_3219240"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/GreggPollack/rails-3-beautiful-code-3219240" title="Rails 3 Beautiful Code">Rails 3 Beautiful Code</a></strong><object id="__sse3219240" width="825" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=beautifulcodeinrails3-greggpollack-100218130149-phpapp02&stripped_title=rails-3-beautiful-code-3219240" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse3219240" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=beautifulcodeinrails3-greggpollack-100218130149-phpapp02&stripped_title=rails-3-beautiful-code-3219240" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="825" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/GreggPollack">GreggPollack</a>.</div></div></p>
-</div>
-  
-  
+  <div class="entry-content"><p>Rails specifies conventions while creating models, controllers, migrations ( database tables ).</p>
 
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/08/zipcode-validation-using-geokit-in-rails/">Zipcode Validation Using Geokit in Rails</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-08-21T04:58:00+05:30" pubdate data-updated="true">Aug 21<span>st</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ol>
-<li><strong>Install geokit gem</strong></li>
-</ol>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>gem install geokit</span></code></pre></td></tr></table></div></figure>
-
-
-<p>OR</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Add following line inside rails initialize block</span>
-</span><span class='line'><span class="ss">Rails</span><span class="p">:</span><span class="ss">:Initializer</span><span class="o">.</span><span class="n">run</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
-</span><span class='line'> <span class="n">config</span><span class="o">.</span><span class="n">gem</span> <span class="s1">&#39;geokit&#39;</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>And then run command</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rake</span> <span class="ss">gems</span><span class="p">:</span><span class="n">install</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<h2>Conventions for creating database tables</h2>
 
 <ol>
-<li><strong>Consider User model with zipcode as attribute field</strong></li>
+<li>Table name should be plural</li>
+<li>id field should be primary_key for table.</li>
+<li>foreign_key should be like _id i.e. post_id, site_id</li>
 </ol>
 
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="kp">include</span> <span class="ss">Geokit</span><span class="p">:</span><span class="ss">:Geocoders</span>
-</span><span class='line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
-</span><span class='line'>  <span class="n">set_table_name</span> <span class="ss">:users</span>
-</span><span class='line'>  <span class="n">validate_presence_of</span> <span class="ss">:zipcode</span>
-</span><span class='line'>  <span class="n">validate</span> <span class="ss">:request_zipcode_validation_using_geokit</span><span class="p">,</span> <span class="ss">:if</span> <span class="o">=&gt;</span> <span class="ss">:zipcode</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kp">private</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">request_zipcode_validation_using_geokit</span>
-</span><span class='line'>    <span class="c1"># Method request google api for location</span>
-</span><span class='line'>    <span class="c1"># if location found then zipcode is valid otherwise</span>
-</span><span class='line'>    <span class="c1"># add validation error on zipcode field</span>
-</span><span class='line'>    <span class="c1"># as it method contacts with google api and takes time</span>
-</span><span class='line'>    <span class="c1"># to return result, poll request only when zipcode gets</span>
-</span><span class='line'>    <span class="c1"># changed</span>
-</span><span class='line'>    <span class="n">poll</span> <span class="o">=</span> <span class="kp">true</span> <span class="c1"># default true for new objects</span>
-</span><span class='line'>    <span class="k">if</span> <span class="nb">self</span><span class="o">.</span><span class="n">id</span> <span class="c1">## this means already existing user and zipcode is valid last time</span>
-</span><span class='line'>      <span class="c1"># Hack to find where zipcode got modified or not </span>
-</span><span class='line'>      <span class="c1"># old_user = User.find self.id</span>
-</span><span class='line'>      <span class="n">poll</span> <span class="o">=</span> <span class="kp">false</span> <span class="k">if</span> <span class="n">old_user</span><span class="o">.</span><span class="n">zipcode</span> <span class="o">==</span> <span class="nb">self</span><span class="o">.</span><span class="n">zipcode</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="c1"># Actual requesting api to return location associated with zipcode</span>
-</span><span class='line'>    <span class="k">if</span> <span class="n">poll</span>
-</span><span class='line'>      <span class="n">loc</span> <span class="o">=</span> <span class="no">MultiGeocoder</span><span class="o">.</span><span class="n">geocode</span><span class="p">(</span><span class="nb">self</span><span class="o">.</span><span class="n">zip_code</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>    <span class="c1"># Add Validation Error if location is not found</span>
-</span><span class='line'>    <span class="n">errors</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="ss">:zip_code</span><span class="p">,</span> <span class="s2">&quot;Unable to geocode your location from zipcode entered.&quot;</span><span class="p">)</span> <span class="k">unless</span> <span class="n">loc</span><span class="o">.</span><span class="n">success</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>Please note that same method can also be used to validate state, city and country.
-Again we can use combination of fields to validate each other.
-Like &ndash;</strong></p>
+<h2>Conventions for creating models &amp; Controllers</h2>
 
 <ol>
-<li><strong>Based on country entered, state validation</strong></li>
-<li><strong>Based on state, city validation</strong></li>
-<li><strong>Based on city, zipcode validation</strong>
-or</li>
-<li><strong>Based on zipcode and country, state and city validation</strong></li>
+<li>Model name should be singular</li>
+<li>controller name should be plural.</li>
 </ol>
 
 
-<p>Here is another method to validate state and city based on zipcode and country.
-Lets take example of &lsquo;US&rsquo;</p>
+<p>Although rails has standard defined, In some cases it becomes quite necessary to map irregular</p>
+
+<h4>1. Table mapping</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Review</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="c1"># Here comments is name of database table   </span>
+</span><span class='line'>  <span class="n">set_table_name</span> <span class="ss">:comments</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>2. Set primary key ( other than rails standar ‘id’ primary_key )</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Review</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="c1"># It assumes &quot;reviews&quot; as table in database   </span>
+</span><span class='line'>  <span class="c1"># Below line indicates reviews table contains column_name &quot;reviewId&quot; which is a primary_key   </span>
+</span><span class='line'>  <span class="n">set_primary_key</span> <span class="ss">:reviewId</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>3. Foreign key association</h4>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -273,61 +177,276 @@ Lets take example of &lsquo;US&rsquo;</p>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">request_state_and_city_validation_based_on_zipcode</span>
-</span><span class='line'>  <span class="n">poll</span> <span class="o">=</span> <span class="kp">true</span> <span class="c1"># default true for new objects</span>
-</span><span class='line'>  <span class="k">if</span> <span class="nb">self</span><span class="o">.</span><span class="n">id</span> <span class="c1">## this means already existing user and all attributes were valid last time</span>
-</span><span class='line'>    <span class="c1"># Hack to find any one of location attribute got modified</span>
-</span><span class='line'>    <span class="c1"># old_user = User.find self.id</span>
-</span><span class='line'>    <span class="n">loc_attrs</span> <span class="o">=</span> <span class="sx">%w{zipcode state city}</span> <span class="c1"># keep in mind country US is default assumed</span>
-</span><span class='line'>    <span class="k">if</span> <span class="n">loc_attrs</span><span class="o">.</span><span class="n">all?</span> <span class="p">{</span><span class="o">|</span><span class="kp">attr</span><span class="o">|</span> <span class="nb">self</span><span class="o">.</span><span class="n">attribute_for_inspect</span><span class="p">(</span><span class="kp">attr</span><span class="p">)</span> <span class="o">==</span> <span class="n">old_user</span><span class="o">.</span><span class="n">attribute_for_inspect</span><span class="p">(</span><span class="kp">attr</span><span class="p">)}</span>
-</span><span class='line'>      <span class="nb">self</span><span class="o">.</span><span class="n">poll</span> <span class="o">=</span> <span class="kp">false</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1"># Actual requesting api to return location associated with zipcode</span>
-</span><span class='line'>  <span class="k">if</span> <span class="n">poll</span>
-</span><span class='line'>    <span class="n">loc</span> <span class="o">=</span> <span class="no">MultiGeocoder</span><span class="o">.</span><span class="n">geocode</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="nb">self</span><span class="o">.</span><span class="n">zip_code</span><span class="si">}</span><span class="s2">, US&quot;</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>  <span class="c1"># Add Validation Error if location is not found</span>
-</span><span class='line'>  <span class="k">unless</span> <span class="n">loc</span><span class="o">.</span><span class="n">success</span>
-</span><span class='line'>    <span class="n">errors</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="ss">:zip_code</span><span class="p">,</span> <span class="s2">&quot;Unable to geocode your location from zipcode entered.&quot;</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">else</span>
-</span><span class='line'>    <span class="c1"># Validate state and city fields in compare to loc object returned by geocode</span>
-</span><span class='line'>    <span class="n">errors</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="ss">:state</span><span class="p">,</span> <span class="s2">&quot;State doesn&#39;t matches with zipcode entered&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="nb">self</span><span class="o">.</span><span class="n">state</span> <span class="o">!=</span> <span class="n">loc</span><span class="o">.</span><span class="n">state</span>
-</span><span class='line'>    <span class="n">errors</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="ss">:city</span><span class="p">,</span> <span class="s2">&quot;City doesn&#39;t matches with zipcode entered&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="nb">self</span><span class="o">.</span><span class="n">city</span> <span class="o">!=</span> <span class="n">loc</span><span class="o">.</span><span class="n">city</span>
-</span><span class='line'>  <span class="k">end</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Review</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="c1"># Below line indicates reviews table contains column_name &#39;RatingId&#39; which is foreign_key to primary_key   </span>
+</span><span class='line'>  <span class="c1"># of &#39;ratings&#39; table.   </span>
+</span><span class='line'>  <span class="c1"># It can be applied to any associan type [ has_one, has_many, belongs_to, has_many_through ]   </span>
+</span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:rating</span><span class="p">,</span> <span class="ss">:class_name</span> <span class="o">=&gt;</span> <span class="s2">&quot;SiteUser&quot;</span><span class="p">,</span> <span class="ss">:foreign_key</span> <span class="o">=&gt;</span> <span class="s2">&quot;RatingId&quot;</span>
 </span><span class='line'><span class="k">end</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p><strong>Note</strong> **
-If you are subscriber of blog and not displaying post correctly. I request you to visit post on blog itself. Somehow style is not getting correctly in email. I will try to fix this problem asap.</p>
+<h4>4. Model association ( non-standard model name )</h4>
 
-<p><strong>Upcoming Posts</strong></p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Review</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="c1"># Below line indicates reviews table contains column_name &#39;UserId&#39; which is foreign_key to primary_key   </span>
+</span><span class='line'>  <span class="c1"># of model with class_name &#39;SiteUser&#39;   </span>
+</span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:user</span><span class="p">,</span> <span class="ss">:class_name</span> <span class="o">=&gt;</span> <span class="s1">&#39;SiteUser&#39;</span><span class="p">,</span> <span class="ss">:foreign_key</span><span class="p">:</span> <span class="o">=&gt;</span> <span class="s1">&#39;UserId&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/10/getting-wireless-working-on-ubuntu/">Getting Wireless Working on Ubuntu Machine</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-10-14T21:53:00+05:30" pubdate data-updated="true">Oct 14<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Pleae follow below steps to get wireless working on ubuntu.</p>
+
+<h2>Disable wireless</h2>
+
+<p>Disable the <code>Support for Atheros 802.11 wireless LAN cards</code> on Hardware Drivers, and reboot your box.</p>
+
+<h2>In a terminal:</h2>
+
+<h4>Updates all package lists</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get update</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Update driver</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install linux-backports-modules-intrepid-generic</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Reboot</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo reboot!</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/10/feedzirra-installtion-on-ubuntu/">Feedzirra Installtion on Ubuntu Interpid</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-10-12T20:36:00+05:30" pubdate data-updated="true">Oct 12<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Feedzirra is a feed library that is designed to get and update many feeds as quickly as possible.
+This includes using <code>libcurl-multi</code> through the <code>taf2-curb</code> gem for faster <code>http gets</code> and <code>libxml</code> through <code>nokogiri</code> and <code>sax-machine</code> for faster parsing.</p>
+
+<h2>Installing packages</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install libcurl3 libxml2 libxml2-dev libxslt1-dev</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Gem install</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo gem install pauldix-feedzirra</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/10/converting-dos-windows-files-to-unix/">Converting Dos (Windows) Files to Unix Files</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-10-07T18:27:00+05:30" pubdate data-updated="true">Oct 7<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>While editing files on windows system,  we get <code>^M</code> characters added to files and those gets displayed when you open files on <code>unix</code> machines.
+To remove such <code>^M</code> characters,</p>
+
+<h2>Install dos2unix package</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install sysutils</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Convert individual file</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>dos2unix file_path</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Convert files recursively</h2>
+
+<p>Run following command to convert recursively all the files inside directory.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>find . -type f -exec dos2unix {} \;</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/10/how-to-submit-sitemap-to-search-engines/">How to Submit Sitemap to Different Search Engines</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-10-01T22:57:00+05:30" pubdate data-updated="true">Oct 1<span>st</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>There are many ways that can be used to submit sitemap to search engines.</p>
+
+<p>Lets discuss approaches :</p>
+
+<h4>1. Put sitemap.xml in public folder and you are done</h4>
+
+<p>Crawlers will be finding <code>sitemap.xml</code> file through url
+<a href="http://yourdomain.com/sitemap.xml">http://yourdomain.com/sitemap.xml</a></p>
+
+<h4>2. There are many online sites which generates sitemaps for you</h4>
+
+<p><a href="http://www.xml-sitemaps.com/">http://www.xml-sitemaps.com/</a></p>
+
+<h4>3. Open following urls in browser</h4>
+
+<p>Make sure to add <code>sitemap url</code> of your website in-place of <code>XML_SITEMAP_PATH</code> in the below urls</p>
+
+<p><strong>a. Google submit</strong></p>
+
+<p><a href="http://www.google.com/webmasters/tools/ping?sitemap=XML_SITEMAP_PATH">http://www.google.com/webmasters/tools/ping?sitemap=XML_SITEMAP_PATH</a></p>
+
+<p><strong>b. Yahoo Submit</strong></p>
+
+<p><a href="http://search.yahooapis.com/SiteExplorerService/V1/ping?sitemap=XML_SITEMAP_PATH">http://search.yahooapis.com/SiteExplorerService/V1/ping?sitemap=XML_SITEMAP_PATH</a></p>
+
+<p><strong>c. Ask Submit</strong></p>
+
+<p><a href="http://submissions.ask.com/ping?sitemap=XML_SITEMAP_PATH">http://submissions.ask.com/ping?sitemap=XML_SITEMAP_PATH</a></p>
+
+<p><strong>d. Webmaster submit</strong></p>
+
+<p><a href="http://webmaster.live.com/ping.aspx?siteMap=XML_SITEMAP_PATH">http://webmaster.live.com/ping.aspx?siteMap=XML_SITEMAP_PATH</a></p>
+
+<h4>4. Best practice in rails to submit sitemap i.e. use of scheduled task (cron job)</h4>
+
+<p>Write a rake task that will perform following actions:</p>
 
 <ol>
-<li>Geokit finders: Find locations in/within/beyond particular radius from specified location using acts_as_mappable plugin</li>
-<li>Customizing authlogic for multiple sessions i.e. using different models for role based authentication.</li>
+<li>Generate sitemap in rails public folder</li>
+<li>Submit <code>sitemap.xml</code> file to search engines</li>
 </ol>
 
+
+<p>Submitting sitemaps is already explained above and you just need to invoke above urls for each engine</p>
 </div>
   
   
@@ -340,7 +459,7 @@ If you are subscriber of blog and not displaying post correctly. I request you t
       
   <header>
     
-      <h1 class="entry-title"><a href="/2010/08/actionmailer-smtp-settings-in-rails/">ActionMailer SMTP Settings in Rails</a></h1>
+      <h1 class="entry-title"><a href="/2009/09/no-ri-no-rdoc-for-ruby-gem-installation/">&#8211;no-ri &#8211;no-rdoc for Ruby Gem Installation</a></h1>
     
     
       <p class="meta">
@@ -356,25 +475,34 @@ If you are subscriber of blog and not displaying post correctly. I request you t
   
 
 
-<time datetime="2010-08-21T03:48:00+05:30" pubdate data-updated="true">Aug 21<span>st</span>, 2010</time>
+<time datetime="2009-09-30T23:27:00+05:30" pubdate data-updated="true">Sep 30<span>th</span>, 2009</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p><strong>1. Add following line to rails environment file</strong></p>
+  <div class="entry-content"><h2>GEM install without rdoc</h2>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="ss">ActionMailer</span><span class="p">:</span><span class="ss">:Base</span><span class="o">.</span><span class="n">delivery_method</span> <span class="o">=</span> <span class="ss">:smtp</span>
-</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install GEM_NAME –no-ri –no-rdoc</span></code></pre></td></tr></table></div></figure>
 
 
-<p><strong>2. Include your email authentication</strong></p>
+<p>Skip ri rdoc for all gem installation as i haven’t seen anyone using it.</p>
 
-<p>Create a ruby file called <code>smtp_settings</code> under <code>config/initializers</code> directory</p>
+<h2>Edit gemrc file</h2>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p>Add following line to it</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># vi ~/.gemrc
+</span><span class='line'>:gem: --no-ri --no-rdoc</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here is my <code>~/.gemrc</code> file</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -383,49 +511,25 @@ If you are subscriber of blog and not displaying post correctly. I request you t
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># config/initializers/smtp_settings.rb</span>
-</span><span class='line'><span class="ss">ActionMailer</span><span class="p">:</span><span class="ss">:Base</span><span class="o">.</span><span class="n">smtp_settings</span> <span class="o">=</span> <span class="p">{</span>
-</span><span class='line'>  <span class="ss">:address</span> <span class="o">=&gt;</span> <span class="s2">&quot;smtp.gmail.com&quot;</span><span class="p">,</span>
-</span><span class='line'>  <span class="ss">:port</span> <span class="o">=&gt;</span> <span class="mi">587</span><span class="p">,</span>
-</span><span class='line'>  <span class="ss">:authentication</span> <span class="o">=&gt;</span> <span class="ss">:plain</span><span class="p">,</span>
-</span><span class='line'>  <span class="ss">:enable_starttls_auto</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span>
-</span><span class='line'>  <span class="ss">:user_name</span> <span class="o">=&gt;</span> <span class="s2">&quot;replies@gmail.com&quot;</span><span class="p">,</span>
-</span><span class='line'>  <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="s2">&quot;_my_gmail_password_&quot;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>---
+</span><span class='line'>:verbose: true
+</span><span class='line'>gem: --no-ri --no-rdoc
+</span><span class='line'>:update_sources: true
+</span><span class='line'>:sources:
+</span><span class='line'>- http://gems.rubyforge.org
+</span><span class='line'>- http://gems.github.com
+</span><span class='line'>:backtrace: false
+</span><span class='line'>:bulk_threshold: 1000
+</span><span class='line'>:benchmark: false</span></code></pre></td></tr></table></div></figure>
 
 
-<p><strong>note:</strong> Keep <code>starttls_auto</code> always <code>true</code></p>
+<p>That’s it !</p>
 
-<p><strong>3. Create sample mailer in order to ensure that your settings are correct</strong></p>
+<h2>Comments</h2>
 
-<p>Create a sample mailer</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">EmailMailer</span> <span class="o">&lt;</span> <span class="ss">ActionMailer</span><span class="p">:</span><span class="ss">:Base</span>
-</span><span class='line'> <span class="k">def</span> <span class="nf">test_email</span>
-</span><span class='line'>  <span class="n">from</span> <span class="s1">&#39;xx@gmail.com&#39;</span>
-</span><span class='line'>  <span class="n">to</span> <span class="s1">&#39;some@xx.com&#39;</span>
-</span><span class='line'>  <span class="n">subject</span> <span class="s2">&quot;This is test email&quot;</span>
-</span><span class='line'>  <span class="n">message</span> <span class="s2">&quot;It should get delivered to recipient inbox&quot;</span>
-</span><span class='line'> <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>4. Test your configuration</strong></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">EmailMailer</span><span class="o">.</span><span class="n">deliver_test_email</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<p><strong>@Tnelson</strong>
+I don’t usually reply to posts but I will in this case, great info…I will add a backlink and bookmark your site. Keep up the good work!</p>
 </div>
   
   
@@ -438,7 +542,7 @@ If you are subscriber of blog and not displaying post correctly. I request you t
       
   <header>
     
-      <h1 class="entry-title"><a href="/2010/08/email-attachments-in-ruby-rails/">Email Attachments in Ruby & Rails</a></h1>
+      <h1 class="entry-title"><a href="/2009/09/managing-multiple-ruby-versions-with-rvm/">Managing Multiple Ruby Versions With RVM</a></h1>
     
     
       <p class="meta">
@@ -454,231 +558,91 @@ If you are subscriber of blog and not displaying post correctly. I request you t
   
 
 
-<time datetime="2010-08-21T03:30:00+05:30" pubdate data-updated="true">Aug 21<span>st</span>, 2010</time>
+<time datetime="2009-09-30T18:32:00+05:30" pubdate data-updated="true">Sep 30<span>th</span>, 2009</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p><strong>1. Add ActionMailer configuration in environment</strong></p>
+  <div class="entry-content"><p>We often work on many projects at the same time and each may using different ruby and rails version.
+Now, the big problem arises that how to manage multiple ruby version on the same system.</p>
 
-<p>This configuration can be different for development and production.</p>
+<p>We know that managing multiple rails versions on same system is not a problem at all but what about ruby versions?
+How one can manage multiple ruby versions?
+Also, while upgrading or degrading ruby version we need to install gems all again including rails.
+i know this is a fucking pain in ass.. isn&rsquo;t it?</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p>Lets see, How we can overcome with this headache. meantime there also can be some incompatibilities between two different ruby and rails versions.</p>
+
+<p>Yesterday, i did some research and came to know that&hellip;</p>
+
+<ol>
+<li>ruby 1.8.7 and rails 2.3.3 got quite stability and effectively. we can use it in next developments.</li>
+<li>Also, after installing ruby 1.9.1 and dependent gems for my project, and wondering that there are many incompatibilities while installing new gems with ruby 1.9.1</li>
+</ol>
+
+
+<p>Some of the gems are mysql, ferret, acts_as_ferret, erubies, etc.</p>
+
+<p>Today, while google, i found <code>rvm</code> gem and that seems very nice to manage multiple ruby versions.</p>
+
+<p>Here are some steps explaining how to use it.</p>
+
+<h2>Install rvm gem to manage multiple ruby version</h2>
+
+<p>Before install make sure you already have ruby and rubygems installation</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo gem install rvm</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Install rvm for a particular user</h2>
+
+<p>It will also show how to use gem</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rvm-install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now, Open new shell and show all ruby &amp; jruby installations</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rvm list</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Installing ruby using rvm</h2>
+
+<p>Specify ruby version</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Include your application configuration below</span>
-</span><span class='line'><span class="c1"># You can set two configurations sendmail as well as smtp</span>
-</span><span class='line'><span class="c1"># To use SMTP you need to provide your email account credentials</span>
-</span><span class='line'><span class="c1"># Sendmail is a unix package that needs to be installed and configured while </span>
-</span><span class='line'><span class="c1"># using sendmail settings</span>
-</span><span class='line'><span class="c1"># Chances of getting emails into recipient&#39;s inbox are 100% for smtp settings</span>
-</span><span class='line'><span class="c1"># whereas sendmail needs some other configurations to be done before using.</span>
-</span><span class='line'>
-</span><span class='line'><span class="ss">ActionMailer</span><span class="p">:</span><span class="ss">:Base</span><span class="o">.</span><span class="n">delivery_method</span> <span class="o">=</span> <span class="ss">:smtp</span>
-</span><span class='line'><span class="ss">ActionMailer</span><span class="p">:</span><span class="ss">:Base</span><span class="o">.</span><span class="n">default_content_type</span> <span class="o">=</span> <span class="s2">&quot;text/html&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'># rvm install RUBY_VERSION_TO_BE_INSTALLED
+</span><span class='line'>rvm install 1.9.1</span></code></pre></td></tr></table></div></figure>
 
 
-<p><strong>2. Create Mailer Model and add method to deliver email</strong></p>
+<h2>Install jruby</h2>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p>By default it will install jruby-1.3.1</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rvm install jruby</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Specify which ruby version to use on shell</h2>
+
+<p>Note: You should have specified version installed via rvm</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">EmailMailer</span> <span class="o">&lt;</span> <span class="ss">ActionMailer</span><span class="p">:</span><span class="ss">:Base</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">email_with_attachments</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">files</span><span class="o">=[]</span><span class="p">)</span>
-</span><span class='line'>    <span class="c1"># content type also can be set in environment file as</span>
-</span><span class='line'>    <span class="c1"># ActionMailer::Base.default_content_type = &quot;text/html&quot;</span>
-</span><span class='line'>    <span class="vi">@headers</span> <span class="o">=</span> <span class="p">{</span><span class="n">content_type</span> <span class="o">=&gt;</span> <span class="s1">&#39;text/html&#39;</span><span class="p">}</span>
-</span><span class='line'>    <span class="vi">@sent_on</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">now</span>
-</span><span class='line'>    <span class="vi">@recipients</span> <span class="o">=</span> <span class="n">email</span><span class="o">.</span><span class="n">recipients</span>
-</span><span class='line'>    <span class="vi">@from</span> <span class="o">=</span> <span class="n">email</span><span class="o">.</span><span class="n">from</span>
-</span><span class='line'>    <span class="vi">@cc</span> <span class="o">=</span> <span class="no">FEEDBACK_RECIPIENT</span>
-</span><span class='line'>    <span class="vi">@subject</span> <span class="o">=</span> <span class="n">email</span><span class="o">.</span><span class="n">subject</span>
-</span><span class='line'>    <span class="vi">@body</span> <span class="o">=</span> <span class="n">email</span><span class="o">.</span><span class="n">message</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="c1"># attach files  </span>
-</span><span class='line'>    <span class="n">files</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">file</span><span class="o">|</span>
-</span><span class='line'>      <span class="n">attachment</span> <span class="s2">&quot;application/octet-stream&quot;</span> <span class="k">do</span> <span class="o">|</span><span class="n">a</span><span class="o">|</span>
-</span><span class='line'>        <span class="n">a</span><span class="o">.</span><span class="n">body</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span>
-</span><span class='line'>        <span class="n">a</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">original_filename</span>
-</span><span class='line'>      <span class="k">end</span> <span class="k">unless</span> <span class="n">file</span><span class="o">.</span><span class="n">blank?</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'># rvm use RUBY_VERSION_TO_USE 
+</span><span class='line'>rvm use 1.9.1</span></code></pre></td></tr></table></div></figure>
 
 
-<p><strong>3. Email Model</strong></p>
+<h2>Default i.e. version before rvm gem installation</h2>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># This is the virtual model in rails which has no database table associated with it</span>
-</span><span class='line'><span class="k">class</span> <span class="nc">Email</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
-</span><span class='line'>  <span class="c1"># It uses has_no_table plugin to create virtual model</span>
-</span><span class='line'>  <span class="c1"># This can also be done using following lines of code</span>
-</span><span class='line'>  <span class="c1"># </span>
-</span><span class='line'>  <span class="c1"># def self.columns() @columns ||= []; end</span>
-</span><span class='line'>  <span class="c1"># def self.column(name, sql_type = nil, default = nil, null = true)</span>
-</span><span class='line'>  <span class="c1">#  columns &lt;&lt; ActiveRecord::ConnectionAdapters::Column.new(name.to_s, default, sql_type.to_s, null)</span>
-</span><span class='line'>  <span class="c1"># end</span>
-</span><span class='line'>  <span class="c1">#</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">has_no_table</span>
-</span><span class='line'>  <span class="c1">#insert the names of the form fields here</span>
-</span><span class='line'>  <span class="n">column</span> <span class="ss">:from</span><span class="p">,</span> <span class="ss">:string</span>
-</span><span class='line'>  <span class="n">column</span> <span class="ss">:recipients</span><span class="p">,</span> <span class="ss">:string</span>
-</span><span class='line'>  <span class="n">column</span> <span class="ss">:subject</span><span class="p">,</span> <span class="ss">:string</span>
-</span><span class='line'>  <span class="n">column</span> <span class="ss">:message</span><span class="p">,</span> <span class="ss">:text</span>
-</span><span class='line'>  <span class="n">column</span> <span class="ss">:call_id</span><span class="p">,</span> <span class="ss">:integer</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kp">attr_accessor</span> <span class="ss">:is_subscribed</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">#Validations goes here</span>
-</span><span class='line'>  <span class="n">validates_presence_of</span> <span class="ss">:from</span><span class="p">,</span> <span class="ss">:message</span> <span class="o">=&gt;</span> <span class="s2">&quot;You dont have Email ID, you cannot continue!&quot;</span><span class="p">,</span> <span class="ss">:unless</span> <span class="o">=&gt;</span> <span class="s2">&quot;call_id.blank?&quot;</span>
-</span><span class='line'>  <span class="n">validates_format_of</span> <span class="ss">:from</span><span class="p">,</span> <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="sr">/^([^@]+)@((?:[-a-z0-9]+.)+[a-z]{2,})$/i</span><span class="p">,</span> <span class="ss">:unless</span> <span class="o">=&gt;</span> <span class="s2">&quot;from.blank?&quot;</span>
-</span><span class='line'>  <span class="n">validates_presence_of</span> <span class="ss">:recipients</span>
-</span><span class='line'>  <span class="n">validates_format_of</span> <span class="ss">:recipients</span><span class="p">,</span> <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="sr">/^([^@]+)@((?:[-a-z0-9]+.)+[a-z]{2,})$/i</span><span class="p">,</span> <span class="ss">:message</span> <span class="o">=&gt;</span> <span class="s2">&quot;Invalid email format&quot;</span><span class="p">,</span> <span class="ss">:unless</span> <span class="o">=&gt;</span> <span class="s2">&quot;recipients.blank?&quot;</span>
-</span><span class='line'>  <span class="n">validates_presence_of</span> <span class="ss">:subject</span><span class="p">,</span> <span class="ss">:message</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>4. Usage from console or controller</strong></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Here email is the valid object of email model</span>
-</span><span class='line'><span class="c1"># attachments is the area of files to be attached with email</span>
-</span><span class='line'><span class="c1"># In my case attachments are of kind of pdf files</span>
-</span><span class='line'><span class="c1"># you can specify type of attachment in your mailer method</span>
-</span><span class='line'><span class="no">EmailMailer</span><span class="o">.</span><span class="n">deliver_email_with_attachements</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">attachments</span><span class="p">)</span> <span class="k">if</span> <span class="n">email</span><span class="o">.</span><span class="n">valid?</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>Sending data stream as email attachments in rails</h4>
-
-<p>In some cases, We need to dynamically generate files and you don&rsquo;t want to store them locally on file system instead you always like to email them from memory itself</p>
-
-<p>Here is the way to do that:</p>
-
-<p><strong>1. Mailer data stream as attachment method</strong></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">EmailMailer</span> <span class="o">&lt;</span> <span class="ss">ActionMailer</span><span class="p">:</span><span class="ss">:Base</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">email_with_data_stream</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">data_stream</span><span class="o">=[]</span><span class="p">)</span>
-</span><span class='line'>    <span class="vi">@headers</span> <span class="o">=</span> <span class="p">{}</span>
-</span><span class='line'>    <span class="vi">@sent_on</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">now</span>
-</span><span class='line'>    <span class="vi">@recipients</span> <span class="o">=</span> <span class="n">email</span><span class="o">.</span><span class="n">recipients</span>
-</span><span class='line'>    <span class="vi">@from</span> <span class="o">=</span> <span class="n">email</span><span class="o">.</span><span class="n">from</span>
-</span><span class='line'>    <span class="vi">@subject</span> <span class="o">=</span> <span class="n">email</span><span class="o">.</span><span class="n">subject</span>
-</span><span class='line'>    <span class="vi">@body</span> <span class="o">=</span> <span class="n">email</span><span class="o">.</span><span class="n">message</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="c1"># attach files  </span>
-</span><span class='line'>    <span class="n">data_stream</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">data</span><span class="o">|</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="n">attachment</span> <span class="s2">&quot;application/octet-stream&quot;</span> <span class="k">do</span> <span class="o">|</span><span class="n">a</span><span class="o">|</span>
-</span><span class='line'>        <span class="n">a</span><span class="o">.</span><span class="n">body</span> <span class="o">=</span> <span class="n">data</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span>
-</span><span class='line'>        <span class="n">a</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">data</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span>
-</span><span class='line'>      <span class="k">end</span> <span class="k">unless</span> <span class="n">data_stream</span><span class="o">.</span><span class="n">blank?</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>2. Lets take example of pdf renderer</strong></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Assume we have pdf object</span>
-</span><span class='line'><span class="n">attachments</span> <span class="o">=</span> <span class="o">[]</span>
-</span><span class='line'><span class="n">data</span> <span class="o">=</span> <span class="n">pdf</span><span class="o">.</span><span class="n">render</span>
-</span><span class='line'><span class="c1"># Attach as many files you wanted. Be careful about email maximum size ;)</span>
-</span><span class='line'><span class="n">attachments</span> <span class="o">&lt;&lt;</span> <span class="n">data</span>
-</span><span class='line'><span class="no">EmailMailer</span><span class="o">.</span><span class="n">deliver_email_with_data_stream</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">attachments</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rvm use default</span></code></pre></td></tr></table></div></figure>
 
 </div>
   
@@ -692,7 +656,7 @@ If you are subscriber of blog and not displaying post correctly. I request you t
       
   <header>
     
-      <h1 class="entry-title"><a href="/2010/08/multiple-sites-hosting-using-radiant/">Multiple Sites Hosting Using Radiant Cms</a></h1>
+      <h1 class="entry-title"><a href="/2009/09/jruby-rails-installation-on-ubuntu/">Jruby Rails Installation on Ubuntu Interpid</a></h1>
     
     
       <p class="meta">
@@ -708,36 +672,28 @@ If you are subscriber of blog and not displaying post correctly. I request you t
   
 
 
-<time datetime="2010-08-07T20:49:00+05:30" pubdate data-updated="true">Aug 7<span>th</span>, 2010</time>
+<time datetime="2009-09-29T21:22:00+05:30" pubdate data-updated="true">Sep 29<span>th</span>, 2009</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>This involves 4-5 simple in-order to get multiple sites working using radiant cms. Follow the below steps one by one.</p>
+  <div class="entry-content"><h2>Installations</h2>
 
-<h4>Setup radiant cms</h4>
-
-<p>first Install radiant gem</p>
+<p>Install mysql if you dont have already installed</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo gem install radiant</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install mysql-server mysql-client libhtml-template-perl mailx dbishell libcompress-zlib-perl mysql-doc-5.0 tinyca</span></code></pre></td></tr></table></div></figure>
 
 
-<p>set &lsquo;radiant&rsquo; under path</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>export PATH=$PATH:/var/lib/gems/1.8/gems/radiant-0.8.0/bin</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now, As we are done with radiant installation lets create new project.</p>
+<p>Install ant and jdk</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ radiant multisite -d mysql</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install ant sun-java6-jdk</span></code></pre></td></tr></table></div></figure>
 
 
-<h4>Edit database config</h4>
+<p>Install jruby</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -745,27 +701,49 @@ If you are subscriber of blog and not displaying post correctly. I request you t
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd multisite/
-</span><span class='line'>$ vi config/database.yml
-</span><span class='line'>development:
-</span><span class='line'>  adapter: mysql
-</span><span class='line'>  database: multisite_development
-</span><span class='line'>  username: root
-</span><span class='line'>  password: abcd
-</span><span class='line'>  host: localhost</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mkdir software
+</span><span class='line'>cd software
+</span><span class='line'>wget http://dist.codehaus.org/jruby/jruby-bin-1.1.5.tar.gz
+</span><span class='line'>tar xvfz jruby-bin-1.1.5.tar.gz
+</span><span class='line'>ln -s jruby-1.1.5 jruby
+</span><span class='line'>export PATH=$PATH:$HOME/software/jruby/bin</span></code></pre></td></tr></table></div></figure>
 
 
-<h4>Migrations</h4>
+<p>Install the version of rails wanted by jruby</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rake db:create</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>jruby -S gem install jruby-openssl
+</span><span class='line'>jruby -S gem install rails</span></code></pre></td></tr></table></div></figure>
 
 
-<h4>Run the database bootstrap rake task:</h4>
+<h4>List your gems</h4>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>jruby -S gem list</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Install required gems</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>jruby -S gem install activerecord-jdbc-adapter activerecord-jdbcmysql-adapter</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Create a rails app using mysql DB</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd ~/scripts/ruby
+</span><span class='line'>jruby -S rails wherehaveyoubeen -d mysql
+</span><span class='line'>cd wherehaveyoubeen
+</span><span class='line'>jruby script/generate controller states index</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Configure access to the database server</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -774,116 +752,191 @@ If you are subscriber of blog and not displaying post correctly. I request you t
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rake db:bootstrap
-</span><span class='line'>This task will destroy any data in the database. Are you sure you want
-</span><span class='line'>to continue? [yn] yes
-</span><span class='line'>...
-</span><span class='line'>Create the admin user (press enter for defaults).
-</span><span class='line'>Name (Administrator): admin
-</span><span class='line'>Username (admin): admin
-</span><span class='line'>Password (radiant): 
-</span><span class='line'>....
-</span><span class='line'>Select a database template:
-</span><span class='line'>1. Empty
-</span><span class='line'>2. Roasters (a coffee-themed blog or brochure)
-</span><span class='line'>3. Simple Blog
-</span><span class='line'>4. Styled Blog
-</span><span class='line'>[1-4]: 2
-</span><span class='line'>....</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="c1"># vi config/database.yml</span>
+</span><span class='line'>
+</span><span class='line'><span class="l-Scalar-Plain">development</span><span class="p-Indicator">:</span>
+</span><span class='line'> <span class="l-Scalar-Plain">adapter</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">jdbcmysql &lt;- very important!</span>
+</span><span class='line'> <span class="l-Scalar-Plain">encoding</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">utf8</span>
+</span><span class='line'> <span class="l-Scalar-Plain">database</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">test_development</span>
+</span><span class='line'> <span class="l-Scalar-Plain">username</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">root</span>
+</span><span class='line'> <span class="l-Scalar-Plain">password</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">database</span>
+</span><span class='line'> <span class="l-Scalar-Plain">socket</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/var/run/mysqld/mysqld.sock</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-<h4>Now we are ready to start</h4>
+<h4>Generate DB</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">jruby -S rake db:create:all</span>
+</span><span class='line'><span class="l-Scalar-Plain">jruby -S rake db:migrate</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Edit your app</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">sudo apt-get install emacs ruby-elisp irb1.8 emacs22-el</span>
+</span><span class='line'><span class="l-Scalar-Plain">emacs -bg black -fg wheat app/views/states/index.html.erb</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Uncomment the secret in app/controllers/application.rb</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">vi app/controllers/application.rb</span>
+</span><span class='line'><span class="l-Scalar-Plain"># remove secret from this file</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Run Server</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">jruby script/server</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Comments</h2>
+
+<p><strong>@Parag</strong></p>
+
+<p>Very helpful article. Please keep up the great work! :&ndash;)</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/09/upgrading-rails-version/">Upgrading Rails Version to Rails 2.3.3</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-09-29T19:12:00+05:30" pubdate data-updated="true">Sep 29<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Here are the simple steps to be followed while upgrading rails version to use.</p>
+
+<h2>Install rails version</h2>
+
+<p>Please install rails version 2.3.3 if not already installed</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install rails 2.3.3</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Upgrade <code>environment.rb</code> for newer rails version</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>RAILS_GEM_VERSION = ‘2.3.3’ unless defined? RAILS_GEM_VERSION</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Upgrade necessary files for rails <code>2.3.3</code> version</h2>
+
+<p>Run below command to update necessary files for latest version</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake rails:upadte</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Start rails server</h2>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>ruby script/server</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Open following URL in browser:</p>
+<p>Thats, it !</p>
+</div>
+  
+  
 
-<p><code>http://localhost:3000</code></p>
 
-<p>You should see site homepage. To manage site go to admin panel.
-<code>http://localhost:3000/admin</code></p>
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/09/installing-ruby-191/">Installing Ruby 1.9.1</a></h1>
+    
+    
+      <p class="meta">
+        
 
-<p>Now Lets start with multiple sites management</p>
 
-<p><strong>1) Clone multi_site extension into <code>vendor/extensions</code> of your project</strong></p>
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-09-29T19:05:00+05:30" pubdate data-updated="true">Sep 29<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Installing ruby <code>1.9.1</code> got very easy. Please follow these simple steps :</p>
+
+<h2>Download</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget ftp://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.1-p0.tar.gz</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Extract</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>tar -xvf ruby-1.9.1-p0.tar.gz</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Configure</h2>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>  cd vendor/extensions/
-</span><span class='line'>  git clone git://github.com/zapnap/radiant-multi-site-extension.git multi_site</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd ruby-1.9.1-p0
+</span><span class='line'>./configure</span></code></pre></td></tr></table></div></figure>
 
 
-<p><strong>2) Run the extension migrations</strong></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>  rake db:migrate:extensions</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>3) Run the extension update task</strong></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>  rake radiant:extensions:multi_site:update</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>4) Restart your server</strong></p>
-
-<p>This finishes our multisite installation. Open following URL in browser.</p>
-
-<p><code>http://localhost:3000/admin/sites</code></p>
-
-<p>Add multiple sites as you wanted</p>
+<h2>Install</h2>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'> Name        Domain pattern     Base domain name
-</span><span class='line'>
-</span><span class='line'>================================================
-</span><span class='line'>
-</span><span class='line'> site 1      sandip             sandip
-</span><span class='line'>
-</span><span class='line'> site 2      gautam             gautam</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>make
+</span><span class='line'>make test
+</span><span class='line'>sudo make install</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Don&rsquo;t forget to make dns entries in <code>/etc/hosts</code></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># /etc/hosts
-</span><span class='line'> 
-</span><span class='line'>127.0.0.1 localhost
-</span><span class='line'>...
-</span><span class='line'>127.0.0.1 sandip
-</span><span class='line'>127.0.0.1 gautam</span></code></pre></td></tr></table></div></figure>
-
-
-<p>One more, by deault pages created for new sites added are not published.
-Please be sure to make them published and modify contents to identify them</p>
-
-<p>Now you can view different sites:</p>
-
-<ol>
-<li><a href="http://sandip:3000">http://sandip:3000</a></li>
-<li><a href="http://gautam:3000">http://gautam:3000</a></li>
-</ol>
-
+<p>Thats, it !</p>
 </div>
   
   

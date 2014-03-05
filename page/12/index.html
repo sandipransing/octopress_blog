@@ -97,7 +97,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2010/10/twinkle-ff-setup-click-to-call-using-telify/">Twinkle + FF Setup (Click to Call) Using Telify</a></h1>
+      <h1 class="entry-title"><a href="/2009/11/pidgin-install-and-update-pidgin/">Pidgin Install and Update Pidgin Messenger on Ubuntu Interpid</a></h1>
     
     
       <p class="meta">
@@ -113,43 +113,40 @@
   
 
 
-<time datetime="2010-10-17T00:47:00+05:30" pubdate data-updated="true">Oct 17<span>th</span>, 2010</time>
+<time datetime="2009-11-15T12:57:00+05:30" pubdate data-updated="true">Nov 15<span>th</span>, 2009</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>On linux machine following settings needs to be done in order to get in browser calling enabled for phone numbers.</p>
-
-<h2>Installation setup</h2>
-
-<ol>
-<li>Install twinkle setup (Create user profile) and get it working for outgoing and incoming calls</li>
-<li>Install telify add-on (can be un-installed once completed with all settings)</li>
-<li>Copy wrapper script <code>twinkle_tel</code>) click here to <a href="http://github.com/sandipransing/twinkle_tel">download</a> and copy it to <code>/usr/bin</code> on user’s machine (make sure it has executable permissions)</li>
-<li>In Firefox go to <em>preferences/applications</em></li>
-<li>Search for <code>tel</code> protocol and change value of tel protocol to <em>/usr/bin/twinkle_tel</em></li>
-</ol>
-
-
-<h2>Usage/ Pre-requisites</h2>
-
-<p>HTML source code of phone number should look like as below</p>
-
-<p><strong>1. Dialing source code</strong></p>
+  <div class="entry-content"><h2>Fresh pidgin Installation</h2>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;a title="phone number" class="telified" nr="9860648108" href="tel:9860648108"&gt;9860648108&lt;/a&gt;</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get update
+</span><span class='line'>sudo apt-get install pidgin</span></code></pre></td></tr></table></div></figure>
 
 
-<p><strong>2. Call disconnect source code</strong></p>
+<p>Earlier versions of pidgin has problem in connecting yahoo messenger which is solved in newer versions.
+In order to update old version of pidgin, simply follow instructions written below and you are done.
+New version provides video and voice chat, also buddy icon improvements are added.</p>
+
+<h2>Add GPG key</h2>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;a title="disconnect call" class="telified" href="tel:disconnect"&gt;Disconnect&lt;/a&gt;</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get update
+</span><span class='line'>sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys A1F196A8</span></code></pre></td></tr></table></div></figure>
 
 
-<p><img src="/images/clicktocall.png" /></p>
+<p>Goto <code>System</code> > <code>Administration</code> > <code>Software Sources</code> and select <code>Third-Party Software tab</code> and click <code>ADD</code> and simply Copy-Paste the following Repo</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>deb http://ppa.launchpad.net/pidgin-developers/ppa/ubuntu intrepid main 
+</span><span class='line'>deb-src http://ppa.launchpad.net/pidgin-developers/ppa/ubuntu intrepid main</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   
@@ -162,7 +159,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2010/10/delayedjobs-dj-fancy-methods/">DelayedJOb&#8217;s (DJ) Fancy Methods</a></h1>
+      <h1 class="entry-title"><a href="/2009/11/how-to-remove-extra-spaces-in-ruby/">How to Remove Extra Spaces in Ruby Strings</a></h1>
     
     
       <p class="meta">
@@ -178,14 +175,620 @@
   
 
 
-<time datetime="2010-10-06T19:39:00+05:30" pubdate data-updated="true">Oct 6<span>th</span>, 2010</time>
+<time datetime="2009-11-13T14:15:00+05:30" pubdate data-updated="true">Nov 13<span>th</span>, 2009</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Delayed Job provides <code>send_later</code> and <code>send_at</code> as <em>instance</em> as well as <em>class</em>  methods. It also gives us <code>handle_asynchronously</code> as <em>class</em> method to be written inside class.</p>
+  <div class="entry-content"><p>There are many methods in ruby which will allow to remove blank spaces from ruby strings (sentenses)</p>
+
+<h4>squeeze</h4>
+
+<p>This will remove extra spaces (more than one) in between two words</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;Write      your       string            here   &quot;</span><span class="o">.</span><span class="n">squeeze</span><span class="o">.</span><span class="n">strip</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>gsub</h4>
+
+<p>It can be used to match and substitue additional spaces</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;This     is my      input  string     &quot;</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="sr">/ +/</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>split &amp; join strings</h4>
+
+<p>Strings can be splitted based on spaces and joined.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;Write      your       string          here   &quot;</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;  &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/manual-active-record-db-connection/">Manual Active Record Db Connection in Ruby Using Mysql Adapter</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-12T20:27:00+05:30" pubdate data-updated="true">Nov 12<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Manual DB connection</h2>
+
+<p>Below ruby code establishes a manual database connection.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;active_record&#39;</span>
+</span><span class='line'><span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span><span class="o">.</span><span class="n">establish_connection</span><span class="p">(</span>
+</span><span class='line'>  <span class="ss">:adapter</span>  <span class="o">=&gt;</span> <span class="s2">&quot;mysql&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="ss">:host</span>     <span class="o">=&gt;</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="ss">:username</span> <span class="o">=&gt;</span> <span class="s2">&quot;root&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="s2">&quot;abcd&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="ss">:database</span> <span class="o">=&gt;</span> <span class="s2">&quot;funonrails&quot;</span>
+</span><span class='line'><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Snippet of database.yml file</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">common</span><span class="p-Indicator">:</span> <span class="nl">&amp;common</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">adapter</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">mysql</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">database</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">students_dev</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">username</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">root</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">password</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">host</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">localhost</span>
+</span><span class='line'>
+</span><span class='line'><span class="l-Scalar-Plain">students_development</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">&lt;&lt;</span><span class="p-Indicator">:</span> <span class="nv">*common</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">database</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">students_dev</span>
+</span><span class='line'>
+</span><span class='line'><span class="l-Scalar-Plain">students_production</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">&lt;&lt;</span><span class="p-Indicator">:</span> <span class="nv">*common</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">database</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">students</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Load database configurations from yml file</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">dbconfig</span> <span class="o">=</span> <span class="ss">YAML</span><span class="p">:</span><span class="ss">:load</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;database.yml&#39;</span><span class="p">))</span>
+</span><span class='line'><span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span><span class="o">.</span><span class="n">establish_connection</span><span class="p">(</span> <span class="n">dbconfig</span><span class="o">[</span><span class="ss">:students_development</span><span class="o">]</span> <span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Active Record Model &amp; DB connection</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Student</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">establish_connection</span> <span class="s2">&quot;students_production&quot;</span>
+</span><span class='line'>  <span class="n">set_table_name</span> <span class="s2">&quot;student&quot;</span>
+</span><span class='line'>  <span class="n">set_primary_key</span> <span class="s2">&quot;stud_number&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/writing-rake-task-in-rails/">Writing Rake Task in Rails With Namespace, Parameters</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-10T15:09:00+05:30" pubdate data-updated="true">Nov 10<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Rake tasks itself defines that &ldquo;they are bunch of ruby code that performs some task.&rdquo;</p>
+
+<p>Rake tasks are placed in lib/tasks directory of application and files have <code>.rake</code> extension.
+There are many lovable tasks defined in rails. They can be executed from console.</p>
+
+<h2>Benefits of writing rake task :</h2>
+
+<ol>
+<li>Testing of code</li>
+<li>Scheduled rake tasks ( backgroundRb and scheduled tasks using cron )</li>
+<li>Simplifies code.</li>
+</ol>
+
+
+<p>Lets, understand what is code inside rake tasks.</p>
+
+<h2>Simple greet rake task</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># lib/tasks/welcome.rake
+</span><span class='line'>task :greet do
+</span><span class='line'>  puts "Hello !!"
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Execute task</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake greet</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Adding description to rake task</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># lib/tasks/welcome.rake</span>
+</span><span class='line'><span class="n">desc</span> <span class="s2">&quot;This is new style of greet&quot;</span>
+</span><span class='line'><span class="n">task</span> <span class="ss">:greet</span> <span class="k">do</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;Hello !!&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Execute task</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rake</span> <span class="n">greet</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Adding namespace to rake tasks</h2>
+
+<p>It’s nothing but prefix that takes while executing rake task. Benefit of adding namespace is to categories similar rake tasks.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># lib/tasks/welcome.rake</span>
+</span><span class='line'><span class="n">namespace</span> <span class="ss">:introduction</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">desc</span> <span class="s2">&quot;This is one style of introduction&quot;</span>
+</span><span class='line'>  <span class="n">task</span> <span class="ss">:greet</span> <span class="k">do</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Hello !!&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">desc</span> <span class="s2">&quot;This is 2nd style of introduction&quot;</span>
+</span><span class='line'>  <span class="n">task</span> <span class="ss">:hi</span> <span class="k">do</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Hi &quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Execute task</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rake</span> <span class="ss">introduction</span><span class="p">:</span><span class="n">greet</span>
+</span><span class='line'><span class="n">rake</span> <span class="ss">introduction</span><span class="p">:</span><span class="n">hi</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Passing arguments to rake tasks</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># lib/tasks/welcome.rake</span>
+</span><span class='line'><span class="n">namespace</span> <span class="ss">:introduction</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">desc</span> <span class="s2">&quot;This is one style of introduction&quot;</span>
+</span><span class='line'>  <span class="n">task</span> <span class="ss">:greet</span> <span class="k">do</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Hello !!&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># Here rails environment is loaded</span>
+</span><span class='line'>  <span class="c1"># Here you can access model, controllers, etc</span>
+</span><span class='line'>  <span class="n">desc</span> <span class="s2">&quot;This is 2nd style of introduction&quot;</span>
+</span><span class='line'>  <span class="n">task</span> <span class="ss">:hi</span> <span class="o">=&gt;</span> <span class="ss">:enviroment</span> <span class="k">do</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Hi </span><span class="si">#{</span><span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;name&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Execute task</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rake</span> <span class="ss">introduction</span><span class="p">:</span><span class="n">hi</span> <span class="nb">name</span><span class="o">=</span><span class="no">Raj</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can read more on this <a href="http://www.blogger.com/For%20more%20reference%20http://railsenvy.com/2007/6/11/ruby-on-rails-rake-tutorial#namespaces">here</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/understanding-and-creating-radinat/">Understanding and Creating Radinat Extensions</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-10T13:52:00+05:30" pubdate data-updated="true">Nov 10<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Understanding and creating radinat extensions</h2>
+
+<p>To start with, first understand <em>what is radiant</em> and <em>why to use it ?</em></p>
+
+<blockquote><p>Radiant is a open source content management system designed that serves cms needs for small organisations</p></blockquote>
+
+<h2>Creating new radint application</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>radiant -d  mysql cms
+</span><span class='line'>  create
+</span><span class='line'>  create    CHANGELOG
+</span><span class='line'>  create    CONTRIBUTORS
+</span><span class='line'>  create    INSTALL
+</span><span class='line'>  create    LICENSE
+</span><span class='line'>  create    README
+</span><span class='line'>  create    config
+</span><span class='line'>  create    config/environments
+</span><span class='line'>  .....</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Radiant supports extensions. It means one can add extra features to radiant based cms to add extra capabilities.
+Extension directory structure is almost similar to any standard rails application</p>
+
+<h2>Radiant Extension Directory structure</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>|-- app
+</span><span class='line'>       |-- controllers
+</span><span class='line'>       |-- helpers
+</span><span class='line'>       |-- models
+</span><span class='line'>       |-- views
+</span><span class='line'>|-- db
+</span><span class='line'>       |-- migrate
+</span><span class='line'>       |-- seeds.rb
+</span><span class='line'>|-- lib
+</span><span class='line'>       |-- spec
+</span><span class='line'>          |-- controllers
+</span><span class='line'>          |-- helpers
+</span><span class='line'>          |-- models
+</span><span class='line'>          |-- spec.opts
+</span><span class='line'>          |-- spec_helper
+</span><span class='line'>          |-- views</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Creating radiant extension</h2>
+
+<p>radiant has generators to create new radint extension</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>script/generate extension ExtensionName</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Lets create session management extension for radint cms. It will create directory structure for extension.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>script/generate extension session_management
+</span><span class='line'>  create vendor/extensions/session_management/app/controllers
+</span><span class='line'>  create vendor/extensions/session_management/app/helpers
+</span><span class='line'>  create vendor/extensions/session_management/app/models
+</span><span class='line'>  create vendor/extensions/session_management/app/views
+</span><span class='line'>  create vendor/extensions/session_management/db/migrate
+</span><span class='line'>  create vendor/extensions/session_management/lib/tasks
+</span><span class='line'>  create vendor/extensions/session_management/README
+</span><span class='line'>  create vendor/extensions/session_management/session_management_extension.rb
+</span><span class='line'>  create vendor/extensions/session_management/lib/tasks/session_management_extension_tasks.rake
+</span><span class='line'>  create vendor/extensions/session_management/spec/controllers
+</span><span class='line'>  create vendor/extensions/session_management/spec/models
+</span><span class='line'>  create vendor/extensions/session_management/spec/views
+</span><span class='line'>  create vendor/extensions/session_management/spec/helpers
+</span><span class='line'>  create vendor/extensions/session_management/features/support
+</span><span class='line'>  create vendor/extensions/session_management/features/step_definitions/admin
+</span><span class='line'>  create vendor/extensions/session_management/Rakefile
+</span><span class='line'>  create vendor/extensions/session_management/spec/spec_helper.rb
+</span><span class='line'>  create vendor/extensions/session_management/spec/spec.opts
+</span><span class='line'>  create vendor/extensions/session_management/cucumber.yml
+</span><span class='line'>  create vendor/extensions/session_management/features/support/env.rb
+</span><span class='line'>  create vendor/extensions/session_management/features/support/paths.rb</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Edit <code>session_management_extension.rb</code> where extension version, description, and website url can be added.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># require_dependency &#39;application_controller&#39;</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">SessionManagementExtension</span> <span class="o">&lt;</span> <span class="ss">Radiant</span><span class="p">:</span><span class="ss">:Extension</span>
+</span><span class='line'>  <span class="n">version</span> <span class="s2">&quot;1.0&quot;</span>
+</span><span class='line'>  <span class="n">description</span> <span class="s2">&quot;Describe your extension here&quot;</span>
+</span><span class='line'>  <span class="n">url</span> <span class="s2">&quot;http://yourwebsite.com/session_management&quot;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># define_routes do |map|</span>
+</span><span class='line'>  <span class="c1"># map.namespace :admin, :member =&gt; { :remove =&gt; :get } do |admin|</span>
+</span><span class='line'>  <span class="c1">#     admin.resources :session_management</span>
+</span><span class='line'>  <span class="c1"># end</span>
+</span><span class='line'>  <span class="c1"># end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">activate</span>
+</span><span class='line'>    <span class="c1"># admin.tabs.add &quot;Session Management&quot;, &quot;/admin/session_management&quot;, :after =&gt;</span>
+</span><span class='line'><span class="s2">&quot;Layouts&quot;</span><span class="p">,</span> <span class="ss">:visibility</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="ss">:all</span><span class="o">]</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">deactivate</span>
+</span><span class='line'>    <span class="c1"># admin.tabs.remove &quot;Session Management&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In activate block, specify what are the library files , modules that needs to be activated while application starts. In my case, activate method looks like below..</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">activate</span>
+</span><span class='line'>  <span class="c1"># admin.tabs.add &quot;Session Management&quot;, &quot;/admin/session_management&quot;, :after =&gt;</span>
+</span><span class='line'><span class="s2">&quot;Layouts&quot;</span><span class="p">,</span> <span class="ss">:visibility</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="ss">:all</span><span class="o">]</span>
+</span><span class='line'>  <span class="no">ApplicationController</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="ss">:include</span><span class="p">,</span> <span class="ss">SessionManagementExt</span><span class="p">:</span><span class="ss">:ApplicationControllerExt</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Generating models and controllers</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">script</span><span class="o">/</span><span class="n">generate</span> <span class="n">extension_model</span> <span class="n">session_management</span> <span class="n">session_info</span>
+</span><span class='line'><span class="n">session_id</span><span class="ss">:string</span> <span class="ss">url</span><span class="p">:</span><span class="n">string</span> <span class="ss">ip</span><span class="p">:</span><span class="n">string</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In above command first attribute is the extension name and next is model name and rest specifies attributes that needs to created. It will create</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">exists</span>   <span class="n">app</span><span class="o">/</span><span class="n">models</span><span class="o">/</span>
+</span><span class='line'>     <span class="n">exists</span>   <span class="n">spec</span><span class="o">/</span><span class="n">models</span><span class="o">/</span>
+</span><span class='line'>     <span class="n">create</span>   <span class="n">app</span><span class="o">/</span><span class="n">models</span><span class="o">/</span><span class="n">session_info</span><span class="o">.</span><span class="n">rb</span>
+</span><span class='line'>     <span class="n">create</span>   <span class="n">spec</span><span class="o">/</span><span class="n">models</span><span class="o">/</span><span class="n">session_info_spec</span><span class="o">.</span><span class="n">rb</span>
+</span><span class='line'>     <span class="n">exists</span>   <span class="n">db</span><span class="o">/</span><span class="n">migrate</span>
+</span><span class='line'>     <span class="n">create</span>   <span class="n">db</span><span class="o">/</span><span class="n">migrate</span><span class="o">/</span><span class="mi">20091110075042</span><span class="n">_create_session_infos</span><span class="o">.</span><span class="n">rb</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Generating controller</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">script</span><span class="o">/</span><span class="n">generate</span> <span class="n">extension_controller</span> <span class="n">session_management</span> <span class="n">admin</span><span class="o">/</span><span class="n">session_managements</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It will create an output</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">create</span> <span class="n">app</span><span class="o">/</span><span class="n">controllers</span><span class="o">/</span><span class="n">admin</span>
+</span><span class='line'>     <span class="n">create</span> <span class="n">app</span><span class="o">/</span><span class="n">helpers</span><span class="o">/</span><span class="n">admin</span>
+</span><span class='line'>     <span class="n">create</span> <span class="n">app</span><span class="o">/</span><span class="n">views</span><span class="o">/</span><span class="n">admin</span><span class="o">/</span><span class="n">session_managements</span>
+</span><span class='line'>     <span class="n">create</span> <span class="n">spec</span><span class="o">/</span><span class="n">controllers</span><span class="o">/</span><span class="n">admin</span>
+</span><span class='line'>     <span class="n">create</span> <span class="n">spec</span><span class="o">/</span><span class="n">helpers</span><span class="o">/</span><span class="n">admin</span>
+</span><span class='line'>     <span class="n">create</span> <span class="n">spec</span><span class="o">/</span><span class="n">views</span><span class="o">/</span><span class="n">admin</span><span class="o">/</span><span class="n">session_managements</span>
+</span><span class='line'>     <span class="n">create</span> <span class="n">spec</span><span class="o">/</span><span class="n">controllers</span><span class="o">/</span><span class="n">admin</span><span class="o">/</span><span class="n">session_managements_controller_spec</span><span class="o">.</span><span class="n">rb</span>
+</span><span class='line'>     <span class="n">create</span> <span class="n">spec</span><span class="o">/</span><span class="n">helpers</span><span class="o">/</span><span class="n">admin</span><span class="o">/</span><span class="n">session_managements_helper_spec</span><span class="o">.</span><span class="n">rb</span>
+</span><span class='line'>     <span class="n">create</span> <span class="n">app</span><span class="o">/</span><span class="n">controllers</span><span class="o">/</span><span class="n">admin</span><span class="o">/</span><span class="n">session_managements_controller</span><span class="o">.</span><span class="n">rb</span>
+</span><span class='line'>     <span class="n">create</span> <span class="n">app</span><span class="o">/</span><span class="n">helpers</span><span class="o">/</span><span class="n">admin</span><span class="o">/</span><span class="n">session_managements_helper</span><span class="o">.</span><span class="n">rb</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Modify session managements controller for displaying sesssion infos tracked.</p>
+
+<p>We need before filter for every request that will capture <code>session</code>, <code>ip</code> and <code>page url</code>.
+so we need to override behaviour of application controller to add before_filter</p>
+
+<p>We have already added <code>ApplicationControllerExt</code> in activate of extension.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">ApplicationController</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="ss">:include</span><span class="p">,</span> <span class="ss">SessionManagementExt</span><span class="p">:</span><span class="ss">:ApplicationControllerExt</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Lets look into ApplicationControllerExt module.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -209,32 +812,36 @@
 <span class='line-number'>20</span>
 <span class='line-number'>21</span>
 <span class='line-number'>22</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">Delayed</span>
-</span><span class='line'>  <span class="k">module</span> <span class="nn">MessageSending</span>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">send_later</span><span class="p">(</span><span class="nb">method</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
-</span><span class='line'>      <span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Job</span><span class="o">.</span><span class="n">enqueue</span> <span class="ss">Delayed</span><span class="p">:</span><span class="ss">:PerformableMethod</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="nb">method</span><span class="o">.</span><span class="n">to_sy</span> <span class="n">m</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">SessionManagementExt</span>
+</span><span class='line'>  <span class="k">module</span> <span class="nn">ApplicationControllerExt</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">included</span><span class="p">(</span><span class="n">base</span><span class="p">)</span>
+</span><span class='line'>     <span class="n">base</span><span class="o">.</span><span class="n">class_eval</span> <span class="k">do</span>
+</span><span class='line'>       <span class="n">before_filter</span> <span class="ss">:track_session</span>
+</span><span class='line'>     <span class="k">end</span>
 </span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">send_at</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="nb">method</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
-</span><span class='line'>      <span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Job</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="ss">Delayed</span><span class="p">:</span><span class="ss">:PerformableMethod</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="nb">method</span><span class="o">.</span><span class="n">to_sy</span> <span class="n">m</span><span class="p">,</span> <span class="n">args</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">time</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">module</span> <span class="nn">ClassMethods</span>
-</span><span class='line'>      <span class="k">def</span> <span class="nf">handle_asynchronously</span><span class="p">(</span><span class="nb">method</span><span class="p">)</span>
-</span><span class='line'>        <span class="n">aliased_method</span><span class="p">,</span> <span class="n">punctuation</span> <span class="o">=</span> <span class="nb">method</span><span class="o">.</span><span class="n">to_s</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sr">/([?!=])$/</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="vg">$1</span>
-</span><span class='line'>        <span class="n">with_method</span><span class="p">,</span> <span class="n">without_method</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">aliased_method</span><span class="si">}</span><span class="s2">_with_send_later</span><span class="si">#{</span><span class="n">pu</span> <span class="n">nctuation</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">aliased_method</span><span class="si">}</span><span class="s2">_without_send_later</span><span class="si">#{</span><span class="n">punctuation</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span class='line'>        <span class="n">define_method</span><span class="p">(</span><span class="n">with_method</span><span class="p">)</span> <span class="k">do</span> <span class="o">|*</span><span class="n">args</span><span class="o">|</span>
-</span><span class='line'>          <span class="n">send_later</span><span class="p">(</span><span class="n">without_method</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
-</span><span class='line'>        <span class="k">end</span>
-</span><span class='line'>        <span class="n">alias_method_chain</span> <span class="nb">method</span><span class="p">,</span> <span class="ss">:send_later</span>
-</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">track_session</span>
+</span><span class='line'>     <span class="c1">#**&quot;Hello from Session tracker !!!&quot;**</span>
+</span><span class='line'>     <span class="c1">#TODO: location track</span>
+</span><span class='line'>     <span class="c1"># It can be delayed task</span>
+</span><span class='line'>     <span class="c1">#sudo gem install geoip_city -- --with-geoip-dir=/opt/GeoIP</span>
+</span><span class='line'>     <span class="c1"># require &#39;geoip_city&#39;</span>
+</span><span class='line'>     <span class="c1"># g = GeoIPCity::Database.new(&#39;/opt/GeoIP/share/GeoIP/GeoLiteCity.dat&#39;)</span>
+</span><span class='line'>     <span class="c1"># res = g.look_up(&#39;201.231.22.125&#39;)</span>
+</span><span class='line'>     <span class="c1"># {:latitude=&gt;-33.13330078125, :country_code3=&gt;&quot;ARG&quot;,</span>
+</span><span class='line'><span class="ss">:longitude</span><span class="o">=&gt;-</span><span class="mi">64</span><span class="o">.</span><span class="mi">3499984741211</span><span class="p">,</span> <span class="ss">:city</span><span class="o">=&gt;</span><span class="s2">&quot;Río Cuarto&quot;</span><span class="p">,</span> <span class="ss">:country_name</span><span class="o">=&gt;</span><span class="s2">&quot;Argentina&quot;</span><span class="p">,</span>
+</span><span class='line'><span class="ss">:country_code</span><span class="o">=&gt;</span><span class="s2">&quot;AR&quot;</span><span class="p">,</span> <span class="ss">:region</span><span class="o">=&gt;</span><span class="s2">&quot;05&quot;</span><span class="p">}</span>
+</span><span class='line'>     <span class="no">SessionInfo</span><span class="o">.</span><span class="n">create</span><span class="p">(</span> <span class="ss">:ip</span> <span class="o">=&gt;</span> <span class="n">request</span><span class="o">.</span><span class="n">remote_ip</span><span class="p">,</span> <span class="ss">:page_url</span> <span class="o">=&gt;</span>
+</span><span class='line'><span class="s2">&quot;http://</span><span class="si">#{</span><span class="n">request</span><span class="o">.</span><span class="n">env</span><span class="o">[</span><span class="s2">&quot;HTTP_HOST&quot;</span><span class="o">]</span><span class="si">}#{</span><span class="n">request</span><span class="o">.</span><span class="n">request_uri</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="ss">:session_id</span> <span class="o">=&gt;</span>
+</span><span class='line'><span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">session_id</span> <span class="p">)</span>
 </span><span class='line'>    <span class="k">end</span>
 </span><span class='line'>  <span class="k">end</span>
 </span><span class='line'><span class="k">end</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h2>Usage of <em>send_later</em>, <em>send_at</em> and <em>handle_asynchronously</em></h2>
+<p>That&rsquo;s all! Creating rake task for extension module here is default genrated rake task for session management under <code>vendor/extensions/session_management/lib/tasks/session_management_extension_tasks.rake</code>. It includes task to migrate database and update extension</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -246,16 +853,58 @@
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># instance method</span>
-</span><span class='line'><span class="n">user</span><span class="o">.</span><span class="n">send_later</span><span class="p">(</span><span class="ss">:deliver_welcome</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># class_method</span>
-</span><span class='line'><span class="no">Notifier</span><span class="o">.</span><span class="n">send_later</span><span class="p">(</span><span class="ss">:deliver_welcome</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="no">Notifier</span><span class="o">.</span><span class="n">send_at</span><span class="p">(</span><span class="mi">15</span><span class="o">.</span><span class="n">minutes</span><span class="o">.</span><span class="n">from_now</span><span class="p">,</span> <span class="ss">:deliver_welcome</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># Inside User class write below line after deliver_welcome method</span>
-</span><span class='line'><span class="n">handle_asynchronously</span> <span class="ss">:deliver_welcome</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">namespace</span> <span class="ss">:radiant</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">namespace</span> <span class="ss">:extensions</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">namespace</span> <span class="ss">:session_management</span> <span class="k">do</span>
+</span><span class='line'>     <span class="n">desc</span> <span class="s2">&quot;Runs the migration of the Session Management extension&quot;</span>
+</span><span class='line'>     <span class="n">task</span> <span class="ss">:migrate</span> <span class="o">=&gt;</span> <span class="ss">:environment</span> <span class="k">do</span>
+</span><span class='line'>       <span class="nb">require</span> <span class="s1">&#39;radiant/extension_migrator&#39;</span>
+</span><span class='line'>       <span class="k">if</span> <span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;VERSION&quot;</span><span class="o">]</span>
+</span><span class='line'>         <span class="no">SessionManagementExtension</span><span class="o">.</span><span class="n">migrator</span><span class="o">.</span><span class="n">migrate</span><span class="p">(</span><span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;VERSION&quot;</span><span class="o">].</span><span class="n">to_i</span><span class="p">)</span>
+</span><span class='line'>       <span class="k">else</span>
+</span><span class='line'>         <span class="no">SessionManagementExtension</span><span class="o">.</span><span class="n">migrator</span><span class="o">.</span><span class="n">migrate</span>
+</span><span class='line'>       <span class="k">end</span>
+</span><span class='line'>     <span class="k">end</span>
+</span><span class='line'>     <span class="n">desc</span> <span class="s2">&quot;Copies public assets of the Session Management to the instance public/ directory.&quot;</span>
+</span><span class='line'>     <span class="n">task</span> <span class="ss">:update</span> <span class="o">=&gt;</span> <span class="ss">:environment</span> <span class="k">do</span>
+</span><span class='line'>       <span class="n">is_svn_or_dir</span> <span class="o">=</span> <span class="nb">proc</span> <span class="p">{</span><span class="o">|</span><span class="n">path</span><span class="o">|</span> <span class="n">path</span> <span class="o">=~</span> <span class="sr">/\.svn/</span> <span class="o">||</span> <span class="no">File</span><span class="o">.</span><span class="n">directory?</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="p">}</span>
+</span><span class='line'>       <span class="nb">puts</span> <span class="s2">&quot;Copying assets from SessionManagementExtension&quot;</span>
+</span><span class='line'>       <span class="no">Dir</span><span class="o">[</span><span class="no">SessionManagementExtension</span><span class="o">.</span><span class="n">root</span> <span class="o">+</span> <span class="s2">&quot;/public/**/*&quot;</span><span class="o">].</span><span class="n">reject</span><span class="p">(</span><span class="o">&amp;</span><span class="n">is_svn_or_dir</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span>
+</span><span class='line'><span class="o">|</span><span class="n">file</span><span class="o">|</span>
+</span><span class='line'>         <span class="n">path</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="no">SessionManagementExtension</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span><span class='line'>         <span class="n">directory</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+</span><span class='line'>         <span class="n">mkdir_p</span> <span class="no">RAILS_ROOT</span> <span class="o">+</span> <span class="n">directory</span><span class="p">,</span> <span class="ss">:verbose</span> <span class="o">=&gt;</span> <span class="kp">false</span>
+</span><span class='line'>         <span class="n">cp</span> <span class="n">file</span><span class="p">,</span> <span class="no">RAILS_ROOT</span> <span class="o">+</span> <span class="n">path</span><span class="p">,</span> <span class="ss">:verbose</span> <span class="o">=&gt;</span> <span class="kp">false</span>
+</span><span class='line'>       <span class="k">end</span>
+</span><span class='line'>     <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Add as many custom tasks needed inside this file without changing default tasks.
+Migrate all radiant extensions</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rake</span> <span class="ss">db</span><span class="p">:</span><span class="ss">migrate</span><span class="p">:</span><span class="n">extensions</span>
 </span></code></pre></td></tr></table></div></figure>
 
 </div>
@@ -270,7 +919,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2010/10/solution-to-delayedjobdj-gem-server/">Solution to DelayedJob(DJ) Gem Server Start Problem</a></h1>
+      <h1 class="entry-title"><a href="/2009/11/remote-access-remote-copy-compress-decompress-on-linux/">Remote Access, Remote Copy and Files Compress, Decompress on Linux</a></h1>
     
     
       <p class="meta">
@@ -286,56 +935,67 @@
   
 
 
-<time datetime="2010-10-05T16:15:00+05:30" pubdate data-updated="true">Oct 5<span>th</span>, 2010</time>
+<time datetime="2009-11-06T18:12:00+05:30" pubdate data-updated="true">Nov 6<span>th</span>, 2009</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Solution to DelayedJob(DJ) gem server start problem</p>
+  <div class="entry-content"><h2>Remote Login</h2>
 
-<p>I had installed delayed_job gem 2.0.3, daemons gem but after staring DJ server it shows daemon started but actually process gets killed automatically.</p>
-
-<p>I performed steps given by Kevin on google group and it worked like charm</p>
-
-<p>Here are the steps:</p>
-
-<h2>1 Add github to gem sources</h2>
+<p><code>ssh</code> client is a program for logging into remote system and execute commands on that system</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo gem sources -a http://gems.github.com</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ssh [-l login_name ] hostname | user@hostname [command ]
+</span><span class='line'>
+</span><span class='line'># other options
+</span><span class='line'>ssh [-afgknqstvxACNTX1246 ] [-b bind_address ] [-c cipher_spec ] 
+</span><span class='line'>[-e escape_char ] [-i identity_file ] [-l login_name ] [-m mac_spec ] 
+</span><span class='line'>[-o option ] [-p port ] [-F configfile ] [-L port host hostport ] 
+</span><span class='line'>[-R port host hostport ] [-D port ] hostname | user@hostname [command ]</span></code></pre></td></tr></table></div></figure>
 
 
-<h2>2 Install alexvollmer-daemon-spawn</h2>
+<p>One can use putty for remote login through windows machine</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo gem install alexvollmer-daemon-spawn</span></code></pre></td></tr></table></div></figure>
+<h2>Remote Copy</h2>
 
-
-<h2>3 Move the old daemons delayed job script out of the way</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mv script/delayed_job script/delayed_job.daemons</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>4 Copy below gist to <em>script/delayed_job</em>:</h2>
-
-<script src="https://gist.github.com/akmathur/104314.js"></script>
-
-
-<p>Try it out again making sure it writes to the tmp/pids directory ok.</p>
-
-<p>My line looks like this:</p>
+<p><code>scp</code> &ndash; secure copy (remote file copy program) that copies file between computers over network</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>RAILS_ENV=production script/delayed_job start</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>scp source[ source file path] destination[user@funonrails.com:/home]
+</span><span class='line'>
+</span><span class='line'># Other options
+</span><span class='line'>[-F ssh_config ] [-S program ] [-P port ] [-c cipher ] [-i identity_file ] 
+</span><span class='line'>[-o ssh_option ] [[user@ ] host1 : file1 ] [... ] [[user@ ] host2 : file2 ]</span></code></pre></td></tr></table></div></figure>
 
 
-<p>then to check (besides running &lsquo;ps&rsquo;), you can run this:</p>
+<p>On windows system <code>pscp.exe</code> can be used for remote copy</p>
+
+<h2>Compress</h2>
+
+<p><code>tar</code> is a package that allows you to compress direcory or file</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>RAILS_ENV=production script/delayed_job status</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>tar czfv Test.tar.tgz Test/</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Decompress</h2>
+
+<p><code>gzip</code> is a package that allows to extract compressed file/directories.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gzip -dc target.tar.tgz | tar xf -</span></code></pre></td></tr></table></div></figure>
 
 </div>
   
@@ -349,7 +1009,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2010/10/introduction-to-delayed-job/">Introduction to Delayed Job</a></h1>
+      <h1 class="entry-title"><a href="/2009/11/variables-initialization-assignments/">Variables Initialization, Assignments and Swapping in Ruby</a></h1>
     
     
       <p class="meta">
@@ -365,29 +1025,75 @@
   
 
 
-<time datetime="2010-10-04T21:12:00+05:30" pubdate data-updated="true">Oct 4<span>th</span>, 2010</time>
+<time datetime="2009-11-05T18:02:00+05:30" pubdate data-updated="true">Nov 5<span>th</span>, 2009</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Check out this SlideShare Presentation:
-<strong style="display:block;margin:12px 0 4px">
-<a href="http://www.slideshare.net/jonathanjulian/introduction-to-delayed-job" title="Introduction To Delayed Job">Introduction To Delayed Job</a>
-</strong></p>
+  <div class="entry-content"><h2>Single line code to swap variables in ruby</h2>
 
-<object id="__sse2467230" width="825" height="355">
-<param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=introtodelayedjob-091110110012-phpapp01&stripped_title=introduction-to-delayed-job&userName=jonathanjulian" />
-<param name="allowFullScreen" value="true"/>
-<param name="allowScriptAccess" value="always"/>
-<embed name="__sse2467230" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=introtodelayedjob-091110110012-phpapp01&stripped_title=introduction-to-delayed-job&userName=jonathanjulian" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" height="355">
-</embed>
-</object>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span><span class="n">x</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-<div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/jonathanjulian">Jonathan Julian</a>.</div>
+<h2>Examples</h2>
 
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;Fun&quot;</span>
+</span><span class='line'><span class="n">y</span> <span class="o">=</span> <span class="s2">&quot;Rails&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span><span class="n">x</span>
+</span><span class='line'><span class="c1">#=&gt; [&quot;Rails&quot;, &quot;Fun&quot;]</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="n">x</span>
+</span><span class='line'><span class="c1">#=&gt; &quot;Rails&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="n">y</span>
+</span><span class='line'><span class="c1">#=&gt; &quot;Fun&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Variable assignments in Ruby</h2>
+
+<p>Also Multiple variables assignments can be done in a single line</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">d</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span>
+</span><span class='line'><span class="c1">#=&gt; [1, 2, 3, 4]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here is interpretation of the above line</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">puts</span> <span class="s2">&quot;a is </span><span class="si">#{</span><span class="n">a</span><span class="si">}</span><span class="s2">, b is </span><span class="si">#{</span><span class="n">b</span><span class="si">}</span><span class="s2">, c is </span><span class="si">#{</span><span class="n">c</span><span class="si">}</span><span class="s2">, d is </span><span class="si">#{</span><span class="n">d</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="c1">#=&gt; &quot;a is 1, b is 2, c is 3, d is 4&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Multiple assignments in ruby</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="n">b</span> <span class="o">=</span> <span class="n">c</span> <span class="o">=</span> <span class="n">d</span> <span class="o">=</span> <span class="mi">12</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here <code>a</code>,<code>b</code>,<code>c</code> and <code>d</code> has value 12</p>
 </div>
   
   
@@ -400,7 +1106,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2010/09/best-ways-to-populate-dynamic-array-in-ruby/">Best Ways to Populate Dynamic Array of Numbers in Ruby</a></h1>
+      <h1 class="entry-title"><a href="/2009/10/10-steps-to-get-start-with-myspace-ruby/">10 Steps to Get Start With MySpace Ruby SDK</a></h1>
     
     
       <p class="meta">
@@ -416,65 +1122,407 @@
   
 
 
-<time datetime="2010-09-29T17:56:00+05:30" pubdate data-updated="true">Sep 29<span>th</span>, 2010</time>
+<time datetime="2009-10-27T21:33:00+05:30" pubdate data-updated="true">Oct 27<span>th</span>, 2009</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><h4>Array of years using range</h4>
+  <div class="entry-content"><p>Follow 10 simple steps listed below in order to use myspace sdk api</p>
+
+<h4>1. Remove existing <code>myspace</code> gems installed if any</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem uninstall myspace</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>2. Checkout sample source code</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>svn checkout http://myspaceid-ruby-sdk.googlecode.com/svn/trunk/ myspacesdk</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>3. Move to sample dir</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd myspacesdk/samples/rails/sample</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>4. Modify DB config</h4>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="p">((</span><span class="n">yr</span><span class="o">=</span><span class="no">Date</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">year</span><span class="p">)</span><span class="o">-</span><span class="mi">9</span><span class="o">.</span><span class="n">.yr</span><span class="p">)</span><span class="o">.</span><span class="n">to_a</span>
-</span><span class='line'><span class="c1">#=&gt; [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010]</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="c1"># Modify config/database.yml accordingly</span>
+</span><span class='line'><span class="l-Scalar-Plain">development</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">adapter</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">mysql</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">database</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">sample_development</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">password</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">abcd</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">pool</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">5</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">timeout</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">5000</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h4>Array of years using lambda</h4>
+<h4>5. Download Gem</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">wget http://myspaceid-ruby-sdk.googlecode.com/files/myspaceid-sdk-0.1.11.gem</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>6. Install <code>myspaceid-sdk</code> gem locally</h4>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">Array</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="mi">10</span><span class="p">){</span><span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="no">Date</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">year</span><span class="o">-</span><span class="n">i</span><span class="p">}</span>
-</span><span class='line'><span class="c1">#=&gt; [2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001]</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">gem install --local ~/Desktop/myspaceid-sdk-0.1.11.gem</span>
+</span><span class='line'><span class="l-Scalar-Plain"># --local option taskes local PATH_TO_GEM</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h4>Array of months</h4>
+<h4>7. Above command supposed to give following error otherwise skip to step 10</h4>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="ss">Date</span><span class="p">:</span><span class="ss">:MONTHNAMES</span><span class="o">.</span><span class="n">compact</span>
-</span><span class='line'><span class="c1">#=&gt; [&quot;January&quot;, &quot;February&quot;, &quot;March&quot;, &quot;April&quot;, &quot;May&quot;, &quot;June&quot;, &quot;July&quot;, &quot;August&quot;, &quot;September&quot;, &quot;October&quot;, &quot;November&quot;, &quot;December&quot;]</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">ERROR</span><span class="p-Indicator">:</span>  <span class="l-Scalar-Plain">Error installing /home/sandip/Desktop/myspaceid-sdk-0.1.11.gem</span><span class="p-Indicator">:</span>
+</span><span class='line'><span class="l-Scalar-Plain">myspaceid-sdk requires ruby-openid (&gt;= 0, runtime)</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h4>Array of abbreviated months</h4>
+<h4>8. Install <code>ruby-openid</code> and go to &ldquo;step 6&rdquo;</h4>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="ss">Date</span><span class="p">:</span><span class="ss">:ABBR_MONTHNAMES</span><span class="o">.</span><span class="n">compact</span>
-</span><span class='line'><span class="c1">#=&gt; [&quot;Jan&quot;, &quot;Feb&quot;, &quot;Mar&quot;, &quot;Apr&quot;, &quot;May&quot;, &quot;Jun&quot;, &quot;Jul&quot;, &quot;Aug&quot;, &quot;Sep&quot;, &quot;Oct&quot;, &quot;Nov&quot;, &quot;Dec&quot;]</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">gem install ruby-openid</span>
+</span><span class='line'><span class="l-Scalar-Plain"># Go to step 6</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h4>Array of abbreviated months with index (ps. collect_with_index is core extension method added to array)</h4>
+<h4>9. Start Server</h4>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="ss">Date</span><span class="p">:</span><span class="ss">:ABBR_MONTHNAMES</span><span class="o">.</span><span class="n">compact</span><span class="o">.</span><span class="n">collect_with_index</span><span class="p">{</span><span class="o">|</span><span class="n">m</span><span class="p">,</span> <span class="n">i</span><span class="o">|</span> <span class="o">[</span><span class="n">m</span><span class="p">,</span> <span class="n">i</span><span class="o">]</span><span class="p">}</span>
-</span><span class='line'><span class="c1">#=&gt; [[&quot;Jan&quot;, 1], [&quot;Feb&quot;, 2], [&quot;Mar&quot;, 3], [&quot;Apr&quot;, 4], [&quot;May&quot;, 5], [&quot;Jun&quot;, 6], [&quot;Jul&quot;, 7], [&quot;Aug&quot;, 8], [&quot;Sep&quot;, 9], [&quot;Oct&quot;, 10], [&quot;Nov&quot;, 11], [&quot;Dec&quot;, 12]]</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">ruby script/server</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h4>or</h4>
+<h4>10.  Browse Application</h4>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p>Open URL <a href="http://localhost:3000/">http://localhost:3000/</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/10/find-processor-cpu-information-on-linux/">Find Processor (Cpu) Information on Linux</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-10-26T23:49:00+05:30" pubdate data-updated="true">Oct 26<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Below command will give you all the details about CPU</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cat /proc/cpuinfo</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Example use</h4>
+
+<p>on my ubuntu machine, It showed me below information :</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="ss">Date</span><span class="p">:</span><span class="ss">:ABBR_MONTHNAMES</span><span class="o">.</span><span class="n">compact</span><span class="o">.</span><span class="n">each_with_index</span><span class="o">.</span><span class="n">collect</span><span class="p">{</span><span class="o">|</span><span class="n">m</span><span class="p">,</span> <span class="n">i</span><span class="o">|</span> <span class="o">[</span><span class="n">m</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">}</span>
-</span><span class='line'><span class="c1">#=&gt; [[&quot;Jan&quot;, 1], [&quot;Feb&quot;, 2], [&quot;Mar&quot;, 3], [&quot;Apr&quot;, 4], [&quot;May&quot;, 5], [&quot;Jun&quot;, 6], [&quot;Jul&quot;, 7], [&quot;Aug&quot;, 8], [&quot;Sep&quot;, 9], [&quot;Oct&quot;, 10], [&quot;Nov&quot;, 11], [&quot;Dec&quot;, 12]]</span>
-</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>processor : 0
+</span><span class='line'>vendor_id : GenuineIntel
+</span><span class='line'>cpu family  : 6
+</span><span class='line'>model   : 42
+</span><span class='line'>model name  : Intel(R) Core(TM) i3-2350M CPU @ 2.30GHz
+</span><span class='line'>stepping  : 7
+</span><span class='line'>microcode : 0x1b
+</span><span class='line'>cpu MHz   : 800.000
+</span><span class='line'>cache size  : 3072 KB
+</span><span class='line'>physical id : 0
+</span><span class='line'>siblings  : 4
+</span><span class='line'>core id   : 0
+</span><span class='line'>cpu cores : 2
+</span><span class='line'>apicid    : 0
+</span><span class='line'>initial apicid  : 0
+</span><span class='line'>fpu   : yes
+</span><span class='line'>fpu_exception : yes
+</span><span class='line'>cpuid level : 13
+</span><span class='line'>wp    : yes
+</span><span class='line'>flags   : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf eagerfpu pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer xsave avx lahf_lm arat epb xsaveopt pln pts dtherm tpr_shadow vnmi flexpriority ept vpid
+</span><span class='line'>bogomips  : 4589.39
+</span><span class='line'>clflush size  : 64
+</span><span class='line'>cache_alignment : 64
+</span><span class='line'>address sizes : 36 bits physical, 48 bits virtual
+</span><span class='line'>power management:
+</span><span class='line'>
+</span><span class='line'>processor : 1
+</span><span class='line'>vendor_id : GenuineIntel
+</span><span class='line'>cpu family  : 6
+</span><span class='line'>model   : 42
+</span><span class='line'>model name  : Intel(R) Core(TM) i3-2350M CPU @ 2.30GHz
+</span><span class='line'>stepping  : 7
+</span><span class='line'>microcode : 0x1b
+</span><span class='line'>cpu MHz   : 800.000
+</span><span class='line'>cache size  : 3072 KB
+</span><span class='line'>physical id : 0
+</span><span class='line'>siblings  : 4
+</span><span class='line'>core id   : 1
+</span><span class='line'>cpu cores : 2
+</span><span class='line'>apicid    : 2
+</span><span class='line'>initial apicid  : 2
+</span><span class='line'>fpu   : yes
+</span><span class='line'>fpu_exception : yes
+</span><span class='line'>cpuid level : 13
+</span><span class='line'>wp    : yes
+</span><span class='line'>flags   : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf eagerfpu pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer xsave avx lahf_lm arat epb xsaveopt pln pts dtherm tpr_shadow vnmi flexpriority ept vpid
+</span><span class='line'>bogomips  : 4589.39
+</span><span class='line'>clflush size  : 64
+</span><span class='line'>cache_alignment : 64
+</span><span class='line'>address sizes : 36 bits physical, 48 bits virtual
+</span><span class='line'>power management:
+</span><span class='line'>
+</span><span class='line'>processor : 2
+</span><span class='line'>vendor_id : GenuineIntel
+</span><span class='line'>cpu family  : 6
+</span><span class='line'>model   : 42
+</span><span class='line'>model name  : Intel(R) Core(TM) i3-2350M CPU @ 2.30GHz
+</span><span class='line'>stepping  : 7
+</span><span class='line'>microcode : 0x1b
+</span><span class='line'>cpu MHz   : 800.000
+</span><span class='line'>cache size  : 3072 KB
+</span><span class='line'>physical id : 0
+</span><span class='line'>siblings  : 4
+</span><span class='line'>core id   : 0
+</span><span class='line'>cpu cores : 2
+</span><span class='line'>apicid    : 1
+</span><span class='line'>initial apicid  : 1
+</span><span class='line'>fpu   : yes
+</span><span class='line'>fpu_exception : yes
+</span><span class='line'>cpuid level : 13
+</span><span class='line'>wp    : yes
+</span><span class='line'>flags   : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf eagerfpu pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer xsave avx lahf_lm arat epb xsaveopt pln pts dtherm tpr_shadow vnmi flexpriority ept vpid
+</span><span class='line'>bogomips  : 4589.39
+</span><span class='line'>clflush size  : 64
+</span><span class='line'>cache_alignment : 64
+</span><span class='line'>address sizes : 36 bits physical, 48 bits virtual
+</span><span class='line'>power management:
+</span><span class='line'>
+</span><span class='line'>processor : 3
+</span><span class='line'>vendor_id : GenuineIntel
+</span><span class='line'>cpu family  : 6
+</span><span class='line'>model   : 42
+</span><span class='line'>model name  : Intel(R) Core(TM) i3-2350M CPU @ 2.30GHz
+</span><span class='line'>stepping  : 7
+</span><span class='line'>microcode : 0x1b
+</span><span class='line'>cpu MHz   : 800.000
+</span><span class='line'>cache size  : 3072 KB
+</span><span class='line'>physical id : 0
+</span><span class='line'>siblings  : 4
+</span><span class='line'>core id   : 1
+</span><span class='line'>cpu cores : 2
+</span><span class='line'>apicid    : 3
+</span><span class='line'>initial apicid  : 3
+</span><span class='line'>fpu   : yes
+</span><span class='line'>fpu_exception : yes
+</span><span class='line'>cpuid level : 13
+</span><span class='line'>wp    : yes
+</span><span class='line'>flags   : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf eagerfpu pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer xsave avx lahf_lm arat epb xsaveopt pln pts dtherm tpr_shadow vnmi flexpriority ept vpid
+</span><span class='line'>bogomips  : 4589.39
+</span><span class='line'>clflush size  : 64
+</span><span class='line'>cache_alignment : 64
+</span><span class='line'>address sizes : 36 bits physical, 48 bits virtual
+</span><span class='line'>power management:</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/10/how-to-find-os-x-version-on-linux/">How to Find OS X Version on Linux Machine</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-10-26T23:35:00+05:30" pubdate data-updated="true">Oct 26<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Command</h2>
+
+<p>Here is the command which will give you OS name with version along with other detail information.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cat /etc/*release*</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Example</h2>
+
+<p>On my ubutnu machine, It showed me :</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cat /etc/*release*
+</span><span class='line'>
+</span><span class='line'>DISTRIB_ID=Ubuntu
+</span><span class='line'>DISTRIB_RELEASE=8.10
+</span><span class='line'>DISTRIB_CODENAME=intrepid
+</span><span class='line'>DISTRIB_DESCRIPTION="Ubuntu 8.10"</span></code></pre></td></tr></table></div></figure>
 
 </div>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: delayed-job | Fun On Rails]]></title>
   <link href="http://funonrails.com/categories/delayed-job/atom.xml" rel="self"/>
   <link href="http://funonrails.com/"/>
-  <updated>2014-03-03T23:14:42+05:30</updated>
+  <updated>2014-03-05T15:42:30+05:30</updated>
   <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -15,10 +15,10 @@
   
   <entry>
     <title type="html"><![CDATA[Monitor Delayed Job in rails]]></title>
-    <link href="http://funonrails.com/2011/03/monitor-delayedjob-in-rails/"/>
+    <link href="http://funonrails.com/2011/03/monitor-delayed-job-in-rails/"/>
     <updated>2011-03-01T01:22:00+05:30</updated>
-    <id>http://funonrails.com/2011/03/monitor-delayedjob-in-rails</id>
-    <content type="html"><![CDATA[<p>Delayed Job &amp; Monit configuration</p>
+    <id>http://funonrails.com/2011/03/monitor-delayed-job-in-rails</id>
+    <content type="html"><![CDATA[<h2>Delayed Job &amp; Monit configuration</h2>
 
 <p>We were struggling through how to monit delayed_job from past few months because monit doesn&rsquo;t work seamlessly with delayed_job start/stop commands and finally we got able to monit delayed_job.</p>
 
@@ -38,11 +38,10 @@ After doing google &amp; looking at stackoverflow, we found different solutions 
 
 <p>After reading google group someone (not remembering exactly) directed to write a init script for delayed_job server and that perfectly worked for me and my headache of self moniting delayed_job ended up ;)</p>
 
-<p>Here is delayed_job init script</p>
+<h4>Delayed Job init script</h4>
 
-<h1>/etc/init.d/delayed_job</h1>
-
-<p>```</p>
+<p><em>/etc/init.d/delayed_job</em>
+```</p>
 
 <h1>! /bin/sh</h1>
 
@@ -71,8 +70,9 @@ exit 1
 <p>exit 0
 ```</p>
 
-<p>finally here is the working monit delayed_job configuration
-```
+<p>finally here is the working monit delayed_job configuration</p>
+
+<p>```
 check process delayed_job with pidfile /home/sandip/shared/pids/delayed_job.pid</p>
 
 <pre><code>stop program = "/etc/init.d/delayed_job stop"
@@ -83,8 +83,9 @@ if cpu usage &gt; 95% for 3 cycles then restart
 
 <p>```</p>
 
-<p>Thinking Sphinx monit configuration
-```
+<h4>Thinking Sphinx monit configuration</h4>
+
+<p>```
 check process sphinx with pidfile /home/sandip/shared/pids/searchd.pid</p>
 
 <pre><code>stop program = "/bin/bash -c 'cd /home/sandip/current &amp;&amp; /usr/bin/rake RAILS_ENV=production ts:stop'"
@@ -95,8 +96,9 @@ if cpu usage &gt; 95% for 3 cycles then restart
 
 <p>```</p>
 
-<p>Adhearsion (ahn) monit confiuration
-```
+<h4>Adhearsion (ahn) monit confiuration</h4>
+
+<p>```
 check process ahn with pidfile /home/josh/shared/pids/ahnctl.pid</p>
 
 <pre><code>stop program = "/bin/bash -c 'cd /home/sandip/current &amp;&amp; /usr/bin/ahnctl stop adhearsion'"
@@ -107,8 +109,9 @@ if cpu usage &gt; 95% for 3 cycles then restart
 
 <p>```</p>
 
-<p>Nginx monit configuration
-```
+<h4>Nginx monit configuration</h4>
+
+<p>```
 check process nginx with pidfile /opt/nginx/logs/nginx.pid</p>
 
 <pre><code>start program = "/opt/nginx/sbin/nginx"
@@ -124,9 +127,9 @@ if 10 restarts within 10 cycles then timeout
   
   <entry>
     <title type="html"><![CDATA[DelayedJOb's (DJ) fancy methods]]></title>
-    <link href="http://funonrails.com/2010/10/delayedjobs-dj-fancy-methods/"/>
+    <link href="http://funonrails.com/2010/10/delayed-jobs-fancy-methods/"/>
     <updated>2010-10-06T19:39:00+05:30</updated>
-    <id>http://funonrails.com/2010/10/delayedjobs-dj-fancy-methods</id>
+    <id>http://funonrails.com/2010/10/delayed-jobs-fancy-methods</id>
     <content type="html"><![CDATA[<p>Delayed Job provides <code>send_later</code> and <code>send_at</code> as <em>instance</em> as well as <em>class</em>  methods. It also gives us <code>handle_asynchronously</code> as <em>class</em> method to be written inside class.
 ```ruby
 module Delayed
@@ -179,9 +182,9 @@ end
   
   <entry>
     <title type="html"><![CDATA[Solution to DelayedJob(DJ) gem server start problem]]></title>
-    <link href="http://funonrails.com/2010/10/solution-to-delayedjobdj-gem-server/"/>
+    <link href="http://funonrails.com/2010/10/solution-to-delayed-job-gem-server-start-problem/"/>
     <updated>2010-10-05T16:15:00+05:30</updated>
-    <id>http://funonrails.com/2010/10/solution-to-delayedjobdj-gem-server</id>
+    <id>http://funonrails.com/2010/10/solution-to-delayed-job-gem-server-start-problem</id>
     <content type="html"><![CDATA[<p>Solution to DelayedJob(DJ) gem server start problem</p>
 
 <p>I had installed delayed_job gem 2.0.3, daemons gem but after staring DJ server it shows daemon started but actually process gets killed automatically.</p>

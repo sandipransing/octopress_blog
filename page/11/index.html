@@ -97,7 +97,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2010/12/rails-3-dashing-to-finish/">Rails 3: Dashing to the Finish</a></h1>
+      <h1 class="entry-title"><a href="/2009/12/hpricot-scraping-in-ruby/">Hpricot Scraping in Ruby</a></h1>
     
     
       <p class="meta">
@@ -113,222 +113,14 @@
   
 
 
-<time datetime="2010-12-29T12:11:00+05:30" pubdate data-updated="true">Dec 29<span>th</span>, 2010</time>
+<time datetime="2009-12-02T18:24:00+05:30" pubdate data-updated="true">Dec 2<span>nd</span>, 2009</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Check out this SlideShare Presentation: <div style="width:825px" id="__ss_4373311"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/wycats/rails-3-dashing-to-the-finish" title="Rails 3: Dashing to the Finish">Rails 3: Dashing to the Finish</a></strong><object id="__sse4373311" width="825" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=dashingtothefinish-100601025536-phpapp01&stripped_title=rails-3-dashing-to-the-finish&userName=wycats" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse4373311" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=dashingtothefinish-100601025536-phpapp01&stripped_title=rails-3-dashing-to-the-finish&userName=wycats" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="825" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/wycats">Yehuda Katz</a>.</div></div></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/12/active-record-inheritance-in-rails-ari/">Active Record Inheritance in Rails (ARI)</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-12-09T01:28:00+05:30" pubdate data-updated="true">Dec 9<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://www.scribd.com/doc/44922200/Active-Record-Inheritance-ARI" style="display: block; font: 14px Helvetica,Arial,Sans-serif; margin: 12px auto 6px; text-decoration: underline;" title="View Active Record Inheritance (ARI) on Scribd">Active Record Inheritance (ARI)</a> <object data="http://d1.scribdassets.com/ScribdViewer.swf" height="600" id="doc_427046804884780" name="doc_427046804884780" style="outline: medium none;" type="application/x-shockwave-flash" width="100%">  <param name="movie" value="http://d1.scribdassets.com/ScribdViewer.swf">  <param name="wmode" value="opaque">   <param name="bgcolor" value="#ffffff">   <param name="allowFullScreen" value="true">   <param name="allowScriptAccess" value="always">   <param name="FlashVars" value="document_id=44922200&access_key=key-2ix0qbm381eltbaykpu7&page=1&viewMode=list">   <embed id="doc_427046804884780" name="doc_427046804884780" src="http://d1.scribdassets.com/ScribdViewer.swf?document_id=44922200&access_key=key-2ix0qbm381eltbaykpu7&page=1&viewMode=list" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" height="600" width="100%" wmode="opaque" bgcolor="#ffffff"></embed>  </object></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/12/accessing-helper-modules-in-rails/">Accessing Helper Modules in Rails</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-12-06T15:51:00+05:30" pubdate data-updated="true">Dec 6<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Methods defined in Helper modules can directly accessed in rails views because this is what they are pretended for but we often come across with situations where we wanted to use some helper methods in controllers, views, models and mailers and obvious we don&rsquo;t want to repeat same lines of code everywhere which also rail does not permit. forgotten DRY? Oh then how to do achieve same without violating rails principle.</p>
-
-<p>Certainly there are ways to do this ..</p>
-
-<h2>1. Helper methods all the time for views</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">ApplicationController</span> <span class="o">&lt;</span> <span class="ss">ActionController</span><span class="p">:</span><span class="ss">:Base</span>
-</span><span class='line'>  <span class="n">helper</span> <span class="ss">:all</span><span class="c1"># include all helpers, all the time for views</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>2. Controller methods in views</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">ApplicationController</span> <span class="o">&lt;</span> <span class="ss">ActionController</span><span class="p">:</span><span class="ss">:Base</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">helper_method</span> <span class="ss">:current_store</span>
-</span><span class='line'>  <span class="c1">#now controller_method can be accessed in views</span>
-</span><span class='line'>  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>3. Helper methods in controller</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">ApplicationController</span> <span class="o">&lt;</span> <span class="ss">ActionController</span><span class="p">:</span><span class="ss">:Base</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kp">include</span> <span class="ss">ActionView</span><span class="p">:</span><span class="ss">:Helpers</span><span class="o">::</span><span class="no">ApplicationHelper</span>
-</span><span class='line'>  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>4. Helper methods in model</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Student</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kp">include</span> <span class="ss">ActionView</span><span class="p">:</span><span class="ss">:Helpers</span><span class="o">::</span><span class="no">ApplicationHelper</span>
-</span><span class='line'>  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>5. Helper methods in mailers</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Notifier</span> <span class="o">&lt;</span> <span class="ss">ActionMailer</span><span class="p">:</span><span class="ss">:Base</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">add_template_helper</span><span class="p">(</span><span class="no">ApplicationHelper</span><span class="p">)</span>
-</span><span class='line'>  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/11/authlogic-custom-conditions-for-authentication/">Authlogic Custom Conditions for Authentication</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-11-28T23:23:00+05:30" pubdate data-updated="true">Nov 28<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>To Add custom conditions to authlogic finders first of all we need to override authlogic find_by_login method.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">UserSession</span> <span class="o">&lt;</span> <span class="ss">Authlogic</span><span class="p">:</span><span class="ss">:Session</span><span class="o">::</span><span class="no">Base</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">after_validation</span> <span class="ss">:check_if_verified</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">find_by_login_method</span> <span class="ss">:find_by_login_and_deleted_method</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Then we need to define overridden method inside User model</p>
+  <div class="entry-content"><p>Include gems/library required before getting started</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -341,21 +133,36 @@
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;hpricot&#39;</span>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;net/http&#39;</span>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;rio&#39;</span>
+</span><span class='line'><span class="c1"># Pass website url to be scraped</span>
+</span><span class='line'><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;www.funonrails.com&quot;</span>
 </span><span class='line'>
-</span><span class='line'>  <span class="n">acts_as_authentic</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">find_by_login_and_deleted_method</span><span class="p">(</span><span class="n">login</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">find_by_email_and_deleted</span><span class="p">(</span><span class="n">login</span><span class="p">,</span> <span class="kp">false</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="c1"># Define filename to store file locally</span>
+</span><span class='line'><span class="n">file</span> <span class="o">=</span> <span class="s2">&quot;temp.html&quot;</span>
+</span><span class='line'><span class="c1"># Save page locally</span>
+</span><span class='line'><span class="n">rio</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">rio</span> <span class="p">(</span><span class="n">file</span><span class="p">)</span>
+</span><span class='line'><span class="c1"># Open page through hpricot</span>
+</span><span class='line'><span class="n">doc</span> <span class="o">=</span> <span class="no">Hpricot</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">))</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>got easy..wooooooo :)</p>
+<p>Apply hpricot library to get right contents</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">doc</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="s2">&quot;div.pageTitle&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="n">doc</span><span class="o">/</span><span class="s2">&quot;div.pageTitle&quot;</span>
+</span><span class='line'><span class="n">doc</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;div.entry&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="n">doc</span><span class="o">//</span><span class="s2">&quot;div.pageTitle&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Hpricot API Reference click <a href="http://rdoc.info/github/hpricot/hpricot/Hpricot/Doc">here</a></p>
 </div>
   
   
@@ -368,7 +175,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2010/10/overriding-tos-method-for-bigdecimal/">Overriding To_s Method for BigDecimal Instance</a></h1>
+      <h1 class="entry-title"><a href="/2009/11/passing-commandline-parameter-arguments/">Passing Commandline Parameter (Arguments) to Ruby File Using Optparser</a></h1>
     
     
       <p class="meta">
@@ -384,29 +191,22 @@
   
 
 
-<time datetime="2010-10-22T19:31:00+05:30" pubdate data-updated="true">Oct 22<span>nd</span>, 2010</time>
+<time datetime="2009-11-27T19:13:00+05:30" pubdate data-updated="true">Nov 27<span>th</span>, 2009</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><h2>Requirement</h2>
+  <div class="entry-content"><p>Ruby file accepts from command prompt in the form of array</p>
 
-<p>It was requirement to display decimal numbers which are having scale values present to be displayed in decimal format otherwise display them as integer.</p>
-
-<h2>Expectated Output</h2>
+<h2>Passing parameters</h2>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>12.23 =&gt; 12.23
-</span><span class='line'>12.00 =&gt; 12</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ruby input.rb TOI DH TimesNew</span></code></pre></td></tr></table></div></figure>
 
 
-<p>While rendering any object on html page by default <em>to_s</em> method gets executed. So, i overwrote <em>to_s</em> method of BigDecimal class as below.</p>
-
-<p>Anyone having better solution. Please reply with your solutions. Many thanks in advance!
-Put below code in file <em>config/intializers/core_extensions.rb</em></p>
+<h2>Accessing parameters</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -415,13 +215,630 @@ Put below code in file <em>config/intializers/core_extensions.rb</em></p>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">BigDecimal</span>
-</span><span class='line'>    <span class="k">alias</span> <span class="ss">:old_s</span> <span class="ss">:to_s</span>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">to_s</span>
-</span><span class='line'>      <span class="k">return</span> <span class="n">to_i</span><span class="o">.</span><span class="n">to_s</span> <span class="k">if</span> <span class="nb">eql?</span> <span class="n">to_i</span>
-</span><span class='line'>      <span class="nb">self</span><span class="o">.</span><span class="n">old_s</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># input.rb</span>
+</span><span class='line'><span class="nb">p</span> <span class="no">ARGV</span>
+</span><span class='line'><span class="c1"># =&gt; [&quot;TOI&quot;, &quot;DH&quot;, &quot;TimesNew&quot;]</span>
+</span><span class='line'><span class="nb">p</span> <span class="no">ARGV</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span>
+</span><span class='line'><span class="c1"># =&gt; &quot;TOI&quot;</span>
+</span><span class='line'><span class="nb">p</span> <span class="no">ARGV</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span>
+</span><span class='line'><span class="c1"># =&gt; &quot;DH&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Optparser : parses commandline options in more effective way using OptParser class. and we can access options as hashed parameters.</p>
+
+<h2>Passing parameters</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">ruby</span> <span class="n">input</span><span class="o">.</span><span class="n">rb</span> <span class="o">-</span><span class="n">P</span><span class="s2">&quot;The Times of India&quot;</span> <span class="o">--</span><span class="n">category</span><span class="s2">&quot;article&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Accessing parameters</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># vi input.rb</span>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;optparser&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">options</span> <span class="o">=</span> <span class="no">ARGV</span><span class="o">.</span><span class="n">getopts</span><span class="p">(</span><span class="s2">&quot;P:&quot;</span><span class="p">,</span> <span class="s1">&#39;category&#39;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">p</span> <span class="n">options</span>
+</span><span class='line'><span class="c1"># =&gt; { &#39;P&#39; =&gt; &#39;The Times of India&#39;, :category =&gt; &#39;article&#39; }</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">p</span> <span class="n">options</span><span class="o">[</span><span class="s1">&#39;P&#39;</span><span class="o">]</span>
+</span><span class='line'><span class="c1"># =&gt; &quot;The Times of India&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/how-to-get-all-associted-models-of-rails-model/">How to Get All Associated Models of Rails Model</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-26T20:40:00+05:30" pubdate data-updated="true">Nov 26<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I have Site Model and i wanted to find all associated models of Site model which are having belongs_to relationship.
+After doing lot headache, here is the solution i found</p>
+
+<h2>has_many models of Site Model</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> Site.reflect_on_all_associations.map{|mac| mac.class_name if mac.macro==:has_many}.compact
+</span><span class='line'>=&gt; ["Layout", "User", "SubmenuLink", "Snippet", "Asset"]</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>belongs_to model of Site Model</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Site.reflect_on_all_associations.map{|mac| mac.class_name if mac.macro==:belongs_to}.compact
+</span><span class='line'>=&gt; ["User", "Page", "User"]</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>To get all associations</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Site.reflect_on_all_associations.map{|mac| mac.class_name}.compact
+</span><span class='line'>=&gt; ["Layout", "User", "Page", "User", "SubmenuLink", "User", "Snippet", "Asset"]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Hari, U rocks !</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/cricket-challenge-flash-game/">Cricket Challenge Flash Game</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-24T18:16:00+05:30" pubdate data-updated="true">Nov 24<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div style="text-align: center;"><b>Advanced cricket flash game</b><br /></div>
+
+
+<div style="text-align: center;"><b><br /></b><br /></div>
+
+
+<div style="text-align: center;"><b></b><object align="middle" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://www.adobe.com/go/getflashplayer" height="800" width="800"><param name="movie" value="http://img.bollywoodsargam.com/games/files/game_4f2a798477213b30a4802e716e31a9a6.swf" /> <param name="quality" value="high" /> <param name="salign" value="T" /> <embed src="http://img.bollywoodsargam.com/games/files/game_4f2a798477213b30a4802e716e31a9a6.swf" width="800" height="800" align="middle" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash"></embed></object><br /></div>
+
+
+<div><div style="text-align: center;"><br /></div></div>
+
+
+<div><div style="text-align: center;"><br /></div></div>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/3rd-worm-game/">Flash Games</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-24T17:59:00+05:30" pubdate data-updated="true">Nov 24<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div style="text-align: left;"><b>3rd worm game</b>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-  <embed align="center" allowscriptaccess="never" height="400" pluginspage="http://www.macromedia.com/go/getflashplayer" quality="high" src="http://www.layoutshack.net/games/puzzle/1.swf" width="800"></embed><br /></div>
+
+
+<div style="text-align: center;"><a href="http://www.layoutshack.net/games/puzzle/" target="_blank">Flash Puzzle Games</a><br /></div>
+
+
+<div style="text-align: left;">&nbsp; <b>Racing Game</b>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-<br /></div>
+
+
+<div style="text-align: center;">&nbsp;  <embed align="center" allowscriptaccess="never" height="400" pluginspage="http://www.macromedia.com/go/getflashplayer" quality="high" src="http://www.layoutshack.net/games/racing/2.swf" width="800"></embed><br /></div>
+
+
+<div style="text-align: center;"><a href="http://www.layoutshack.net/games/racing/" target="_blank">Flash Racing Games</a><br /></div>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/gravity-master-game/">Gravity Master Game Challenge</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-24T17:50:00+05:30" pubdate data-updated="true">Nov 24<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Collect all rotating circles with the black ball. You can move the ball by drawing shapes with mouse and using physics. The ways of completing a level is only limited by your imagination and line limit. Complete 15 levels to unlock level editor. I recommend to lower your mouse sesitivity. P.S. This is the first game I ever made</p>
+
+<p><embed height="800" menu="false" pluginspage="http://www.macromedia.com/go/getflashplayer" quality="high" src="http://games.mochiads.com/c/g/gravity-master/Gravity Master.swf" type="application/x-shockwave-flash" width="600">
+</embed></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/upgrading-openoffice-in-ubuntu-interpid/">Upgrading Openoffice in Ubuntu Interpid</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-23T16:17:00+05:30" pubdate data-updated="true">Nov 23<span>rd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Follow simple steps defined <a href="http://ubuntumanual.org/posts/175/upgrade-to-open-office-3-1-in-ubuntu-jaunty-intrepid-hardy">in this post</a> for smooth upgrade of openoffice in linux.</p>
+
+<p>click <a href="http://ubuntumanual.org/posts/175/upgrade-to-open-office-3-1-in-ubuntu-jaunty-intrepid-hardy">here</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/bundling-gems-in-rails-application/">Bundling Gems in Rails Application</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-23T14:47:00+05:30" pubdate data-updated="true">Nov 23<span>rd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Gem Bundling is basically used to maintain all required gems at your application level and its very easy to use.
+It downloads necessary gems and maintain it under <code>/vender/gems</code> directory.</p>
+
+<h2>Install gemcutter</h2>
+
+<p>gemcutter provides hosting for ruby gems</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install gemcutter</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Install bundler</h2>
+
+<p>bundler is a tool that manages gem dependencies for your ruby application</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install bundler</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Start using</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem bundle</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/vim-cheatsheet/">VI/ VIM Cheats</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-18T01:20:00+05:30" pubdate data-updated="true">Nov 18<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Movements</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>b   previous word
+</span><span class='line'>w   next word
+</span><span class='line'>e        end of word
+</span><span class='line'>0/^      begining of line
+</span><span class='line'>$        end of line
+</span><span class='line'>G        end of file
+</span><span class='line'>1G/gg    begining of file
+</span><span class='line'>/pattern  search next
+</span><span class='line'>?pattern  search previous
+</span><span class='line'>n         repeat    search forword ( i.e next occurence )
+</span><span class='line'>N         repeat    search backword
+</span><span class='line'>:line     goto line specified</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Modes</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>i   insert mode
+</span><span class='line'>r   replace mode
+</span><span class='line'>s   delete character under cursor and eneter insert mode</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Delete</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>x    delete character under cursor
+</span><span class='line'>dd   delete current line
+</span><span class='line'>line dd delete number of lines specified</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Copy</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>yy        copy current line
+</span><span class='line'>pp        print copied contents
+</span><span class='line'>line yy   copy number of lines specified</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Visual</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>v     enter visual mode
+</span><span class='line'>aw    highlight word
+</span><span class='line'>as    highlight sentence
+</span><span class='line'>ap    highlight paragraph
+</span><span class='line'>ab    highlight block</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Undo/ Redo</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>u       undo
+</span><span class='line'>cntrl+r redo</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>autocomplete</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cntrl+x   enter completion mode
+</span><span class='line'>cntrl+p   display autocomplete options</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Uppercase/ Lowercase</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>guu   lowercase line
+</span><span class='line'>gUU   uppercase line</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Regx replace</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>range s/foo/bar/arg - replace foo with bar in 'range' with
+</span><span class='line'>
+</span><span class='line'>Values of 'range':
+</span><span class='line'>%               whole file
+</span><span class='line'>number          that particular line
+</span><span class='line'>none            apply to current line only
+</span><span class='line'>
+</span><span class='line'>values of 'arg':
+</span><span class='line'>none  apply to first occurrence
+</span><span class='line'>g     global (all occurrences)</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Select/Macros</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>qchar      start recording macro storing it in register 'char'
+</span><span class='line'>q          end recording
+</span><span class='line'>@char      replay the macro stored in 'char'
+</span><span class='line'>:1,10 norm! @char run the macro stored in 'char over the 1-10 line range</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/yaml-file-configuration-in-ruby-rails/">YAML File Configuration in Ruby & Rails</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-17T15:01:00+05:30" pubdate data-updated="true">Nov 17<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>While coding in ruby and rails, we often requires variables to be initialized that can be used across application. There are many ways to define configuration variables</p>
+
+<h2>Initialize variables inside environment</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># This agencies can be used across application
+</span><span class='line'>AGENCIES = ['TIMES NEWS NETWORK', 'AGENCIES', 'AFP', 'PTI']
+</span><span class='line'>
+</span><span class='line'># Configuration for html nodes
+</span><span class='line'>
+</span><span class='line'>Article_title_tag = "h1.heading"
+</span><span class='line'>Date_auth_agency_tag = "span[@class='byline']"
+</span><span class='line'>Location_content_tag = "div[@class='Normal']"</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Create config inside initializers</h2>
+
+<p>Just make <code>config.rb</code> inside initializers and add variables to it.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#config/initializers/config.rb
+</span><span class='line'># This agencies can be used across application
+</span><span class='line'>AGENCIES = ['TIMES NEWS NETWORK', 'AGENCIES', 'AFP', 'PTI']
+</span><span class='line'>
+</span><span class='line'># Configuration for html nodes
+</span><span class='line'>Article_title_tag = "h1.heading"
+</span><span class='line'>Date_auth_agency_tag = "span[@class='byline']"
+</span><span class='line'>Location_content_tag = "div[@class='Normal']"</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Load config using YML</h2>
+
+<p>But most efficient way to organize variables is YML file</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="c1"># config/config.yml</span>
+</span><span class='line'><span class="l-Scalar-Plain">the_times_of_india</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">article_title_tag</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">h1.heading</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">date_auth_agency_tag</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">span[@class=&#39;byline&#39;]</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">loc_content_tag</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">div[@class=&#39;Normal&#39;]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Accessing YML files</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">APP_CONFIG</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="no">RAILS_ROOT</span><span class="si">}</span><span class="s2">/config/config.yml&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; true</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="no">APP_CONFIG</span>
+</span><span class='line'><span class="c1">#=&gt; {&quot;the_times_of_india&quot;=&gt;{&quot;article_title_tag&quot;=&gt;&quot;h1.heading&quot;, &quot;loc_content_tag&quot;=&gt;&quot;div[@class=&#39;Normal&#39;]&quot;, &quot;date_auth_agency_tag&quot;=&gt;&quot;span[@class=&#39;byline&#39;]&quot;}}</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="no">APP_CONFIG</span><span class="o">[</span><span class="ss">:the_times_of_india</span><span class="o">]</span>
+</span><span class='line'><span class="c1">#=&gt; nil</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="no">APP_CONFIG</span><span class="o">[</span><span class="s1">&#39;the_times_of_india&#39;</span><span class="o">]</span>
+</span><span class='line'><span class="c1">#=&gt; {&quot;article_title_tag&quot;=&gt;&quot;h1.heading&quot;, &quot;loc_content_tag&quot;=&gt;&quot;div[@class=&#39;Normal&#39;]&quot;, &quot;date_auth_agency_tag&quot;=&gt;&quot;span[@class=&#39;byline&#39;]&quot;}</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="no">APP_CONFIG</span><span class="o">[</span><span class="s1">&#39;the_times_of_india&#39;</span><span class="o">][</span><span class="s1">&#39;article_title_tag&#39;</span><span class="o">]</span>
+</span><span class='line'><span class="c1">#=&gt; &quot;h1.heading&quot;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 </div>

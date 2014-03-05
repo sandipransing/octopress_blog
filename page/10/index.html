@@ -97,7 +97,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2011/02/auto-login-remote-server-by-copying-ssh/">Auto Login Remote Server by Copying Ssh Public Key to Authorized Keys</a></h1>
+      <h1 class="entry-title"><a href="/2010/02/copy-database-to-another-database/">Copy Database to Another Database Through Command</a></h1>
     
     
       <p class="meta">
@@ -113,25 +113,23 @@
   
 
 
-<time datetime="2011-02-03T16:21:00+05:30" pubdate data-updated="true">Feb 3<span>rd</span>, 2011</time>
+<time datetime="2010-02-16T16:53:00+05:30" pubdate data-updated="true">Feb 16<span>th</span>, 2010</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>While working on remote machine we often get headache of entering password for ssh login, scp files from one server to another server. Adding public key as authorized_keys on remote server solves this problem.</p>
-
-<h2>Copying from my system to remote server</h2>
+  <div class="entry-content"><h2>1. Copy One database to another database on same host</h2>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cat ~/.ssh/id_rsa.pub | ssh sandip@server 'cat &gt;&gt; ~/.ssh/authorized_keys'</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mysqldump -uroot -p  | mysql -uroot</span></code></pre></td></tr></table></div></figure>
 
 
-<h2>Copying from remote server to my system</h2>
+<h2>2. Copy database to another database on remote host</h2>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ssh server 'cat ~/.ssh/id_rsa.pub' | cat &gt;&gt; ~/.ssh/id_rsa_client.pub</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mysqldump -uroot -p  | ssh host2 "mysql -uroot"</span></code></pre></td></tr></table></div></figure>
 
 </div>
   
@@ -145,7 +143,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2011/01/using-hoptoad-notifier-as-gem-in-rails/">Using Hoptoad Notifier as Gem in Rails 2.3</a></h1>
+      <h1 class="entry-title"><a href="/2010/02/dynamic-creation-of-variables-in-ruby/">Dynamic Creation of Variables in Ruby</a></h1>
     
     
       <p class="meta">
@@ -161,106 +159,18 @@
   
 
 
-<time datetime="2011-01-27T21:18:00+05:30" pubdate data-updated="true">Jan 27<span>th</span>, 2011</time>
+<time datetime="2010-02-16T16:12:00+05:30" pubdate data-updated="true">Feb 16<span>th</span>, 2010</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p><strong>1.  Add GEM to environment file</strong></p>
+  <div class="entry-content"><h2>1. To create local variables in ruby dynamically</h2>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># in config/environment.rb
-</span><span class='line'>config.gem 'hoptoad_notifier'</span></code></pre></td></tr></table></div></figure>
+<p>Using eval method in ruby</p>
 
-
-<p><strong>2. Install gems</strong></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># from your Rails root:
-</span><span class='line'>rake gems:install
-</span><span class='line'>rake gems:unpack GEM=hoptoad_notifier</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>3. Generate hoptoad install using key</strong></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ruby script/generate hoptoad --api-key your_key_here</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/01/installing-and-running-cronjob-crontab/">Installing and Running Cronjob (Crontab Basics)</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-01-20T13:50:00+05:30" pubdate data-updated="true">Jan 20<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Basic handy commands while working with crontabs</p>
-
-<h2>Editing cron file</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>crontab -e</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Displaying cron file</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>crontab -l</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Removing cron file</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>crontab -r</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Cron syntax</h2>
-
-<blockquote><p>cron command basically takes 6 input parameters of which each input can take multiple arguments for that one can make use of comma or pipe separator</p></blockquote>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># min hour dom mon dow   command
-</span><span class='line'>*   *   *   *   * (command)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Here * means for every. Above command will get executed for every minute</p>
-
-<h2>Detail syntax</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -268,19 +178,22 @@
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>*     *     *   *    *        command to be executed
-</span><span class='line'>-     -     -   -    -
-</span><span class='line'>|     |     |   |    |
-</span><span class='line'>|     |     |   |    +----- day of week (0 - 6) (Sunday=0)
-</span><span class='line'>|     |     |   +------- month (1 - 12)
-</span><span class='line'>|     |     +--------- day of month (1 - 31)
-</span><span class='line'>|     +---------- hour (0 - 23)
-</span><span class='line'>+------- min (0 - 59)</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">eval</span><span class="p">(</span><span class="s2">&quot;local=4&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; 4 </span>
+</span><span class='line'><span class="nb">p</span> <span class="n">local</span>
+</span><span class='line'><span class="c1">#=&gt; 4</span>
+</span><span class='line'><span class="nb">eval</span><span class="p">(</span><span class="s2">&quot;local_</span><span class="si">#{</span><span class="mi">1</span><span class="si">}</span><span class="s2">=4&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; 4 </span>
+</span><span class='line'><span class="nb">puts</span> <span class="n">local_1</span>
+</span><span class='line'><span class="c1">#=&gt; 4</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-<h2>Example commands</h2>
+<h2>2. To create &amp; get instance variables dynamically in ruby</h2>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p><code>instance_varaiable_set</code> &amp; <code>instance_varaiable_get</code> methods are provided and no need to do it using eval</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -288,27 +201,39 @@
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># Generate progressive report for every active user at 11:45 p.m.
-</span><span class='line'>45 23 * * * (cd /home/sandip/current/; rake ace:daily_progressive_report RAILS_ENV=production)
-</span><span class='line'>
-</span><span class='line'># Take database backup every night
-</span><span class='line'>59 2 * * * (cd /home/sandip/current/; rake db:backup RAILS_ENV=production)
-</span><span class='line'>
-</span><span class='line'># Initialize grouping on database every sunday
-</span><span class='line'>29 3 * * 0 (cd /home/sandip/current/; rake ace:initializeCarGrouping RAILS_ENV=production)
-</span><span class='line'>
-</span><span class='line'># Generate daily stats on 4:30 AM & 12:30 PM and 4:30 PM
-</span><span class='line'>30 4,12,16 * * * (cd /home/sandip/current/; rake ace:daily_call_statistics RAILS_ENV=production)
-</span><span class='line'>
-</span><span class='line'># Rotate sphinx indexes updated evry hour if missed out somehow
-</span><span class='line'>0 * * * * (cd /user/local/bin/; indexer --rotate --config /home/sandip/current/config/production.sphinx.conf)</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="n">.</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
+</span><span class='line'>  <span class="nb">instance_variable_set</span><span class="p">(</span><span class="s2">&quot;@instance_</span><span class="si">#{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="o">*</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="c1">#=&gt; 0..3 </span>
+</span><span class='line'><span class="vi">@instance_0</span>
+</span><span class='line'><span class="c1">#=&gt; 1 </span>
+</span><span class='line'><span class="vi">@instance_2</span>
+</span><span class='line'><span class="c1">#=&gt; 5 </span>
+</span></code></pre></td></tr></table></div></figure>
 
+
+<h2>3. Dynamic constant variable creation in ruby</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Example</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Example</span><span class="o">.</span><span class="n">const_set</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; 200 </span>
+</span><span class='line'>
+</span><span class='line'><span class="ss">Example</span><span class="p">:</span><span class="ss">:A</span>
+</span><span class='line'><span class="c1">#=&gt; 200</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
 </div>
   
   
@@ -321,7 +246,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2011/01/testing-restful-polymorphic-resource/">Testing Restful & Polymorphic Resource Routes on Rails Console</a></h1>
+      <h1 class="entry-title"><a href="/2010/02/eval-method-in-ruby/">Eval Method in Ruby</a></h1>
     
     
       <p class="meta">
@@ -337,56 +262,71 @@
   
 
 
-<time datetime="2011-01-19T15:05:00+05:30" pubdate data-updated="true">Jan 19<span>th</span>, 2011</time>
+<time datetime="2010-02-16T15:34:00+05:30" pubdate data-updated="true">Feb 16<span>th</span>, 2010</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Testing restful &amp; polymorphic resource routes on rails console</p>
+  <div class="entry-content"><p>Eval method in ruby executes string/expression passed as parameter.</p>
 
-<h2>Open rails console</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rails</span> <span class="n">c</span> <span class="c1"># In rails 3</span>
-</span><span class='line'><span class="c1"># OR</span>
-</span><span class='line'><span class="n">ruby</span> <span class="n">script</span><span class="o">/</span><span class="n">console</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Getting app object</h2>
+<p>Example:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">=&gt;</span> <span class="c1">#&lt;ActionController::Integration::Session:0xc164fac @result=nil, @status=nil, @accept=&quot;text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5&quot;, @path=nil, @request_count=0, @application=#&lt;ActionController::Dispatcher:0xc1644f8 @output=#&lt;IO:0x85e34ec&gt;&gt;, @remote_addr=&quot;127.0.0.1&quot;, @host=&quot;www.example.com&quot;, @controller=nil, @https=false, @request=nil, @headers=nil, @cookies={}, @status_message=nil, @named_routes_configured=true, @response=nil&gt;</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">eval</span><span class="p">(</span><span class="s2">&quot;5+3&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; 8   </span>
+</span><span class='line'><span class="nb">eval</span><span class="p">(</span><span class="s2">&quot;a=5&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; 5   </span>
+</span><span class='line'><span class="nb">eval</span><span class="p">(</span><span class="s2">&quot;b||=a&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; 5   </span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h2>Root URL</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">root_url</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;http://www.example.com/&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
+<p>Its part of ruby meta-programming and not recommended approach unless there is no any alternative to do.</p>
+</div>
+  
+  
 
 
-<h2>Plural paths</h2>
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/02/hasmany-through-association-for-rails/">Has_many => Through Association for Rails Polymorphic Model</a></h1>
+    
+    
+      <p class="meta">
+        
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">calls_path</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;/calls&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
 
 
-<h2>Singular routes</h2>
+
+
+
+
+
+  
+
+
+<time datetime="2010-02-15T21:54:00+05:30" pubdate data-updated="true">Feb 15<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Example of polymorphic association using has_many, through, source</p>
+
+<p>Here post is polymorphic resource which belongs to the author [can be student, teacher]</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -402,24 +342,30 @@
 <span class='line-number'>12</span>
 <span class='line-number'>13</span>
 <span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">audio_call_path</span>
-</span><span class='line'><span class="ss">ActionController</span><span class="p">:</span><span class="ss">:RoutingError</span><span class="p">:</span> <span class="n">audio_call_url</span> <span class="n">failed</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/models/student.rb</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Student</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
 </span><span class='line'>
+</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:posts</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="n">author</span>
+</span><span class='line'><span class="k">end</span>
 </span><span class='line'>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">audio_call_path</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;/calls/1/audio&quot;</span>
+</span><span class='line'><span class="c1"># app/models/teacher.rb</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Teacher</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
 </span><span class='line'>
+</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:posts</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="n">author</span>
+</span><span class='line'><span class="k">end</span>
 </span><span class='line'>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">audio_call_path</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;/calls/13/audio&quot;</span>
+</span><span class='line'><span class="c1"># app/models/post.rb</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
 </span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">audio_call_path</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s1">&#39;san&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;/calls/13/audio?name=san&quot;</span>
+</span><span class='line'>  <span class="n">belongs</span> <span class="n">to</span> <span class="ss">:author</span><span class="p">,</span> <span class="ss">:polymorphic</span> <span class="o">=&gt;</span> <span class="kp">true</span>
+</span><span class='line'><span class="k">end</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h2>Polymorphic URLS</h2>
+<p>Has_many through association on polymorphic models</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -428,13 +374,36 @@
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">app</span><span class="o">.</span><span class="n">polymorphic_path</span><span class="p">(</span><span class="no">Call</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="ss">:action</span> <span class="o">=&gt;</span> <span class="s1">&#39;audio&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;/calls/253/audio&quot;</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/models/student.rb</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Student</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
 </span><span class='line'>
+</span><span class='line'>  <span class="n">beloyngs_to</span> <span class="ss">:division</span>
+</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:posts</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="n">author</span>
+</span><span class='line'><span class="k">end</span>
 </span><span class='line'>
+</span><span class='line'><span class="c1"># app/models/division.rb</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Division</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
 </span><span class='line'>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">polymorphic_path</span><span class="p">(</span><span class="no">Call</span><span class="o">.</span><span class="n">new</span><span class="p">)</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;/calls&quot;</span>
+</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:students</span>
+</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:student_posts</span><span class="p">,</span> <span class="ss">:through</span> <span class="o">=&gt;</span> <span class="ss">:students</span><span class="p">,</span> <span class="ss">:source</span> <span class="o">=&gt;</span> <span class="ss">:posts</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Examples</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">ruby</span> <span class="n">script</span><span class="o">/</span><span class="n">console</span>
+</span><span class='line'><span class="n">div</span> <span class="o">=</span> <span class="no">Division</span><span class="o">.</span><span class="n">first</span>
+</span><span class='line'><span class="n">div</span><span class="o">.</span><span class="n">student_posts</span>
 </span></code></pre></td></tr></table></div></figure>
 
 </div>
@@ -449,7 +418,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2011/01/getting-started-with-mysql-on-amazon/">Getting Started With MySQL on Amazon Web Services</a></h1>
+      <h1 class="entry-title"><a href="/2010/02/nginx-passenger-configuration-for-rails/">Nginx Passenger Configuration for Rails Application</a></h1>
     
     
       <p class="meta">
@@ -465,32 +434,397 @@
   
 
 
-<time datetime="2011-01-15T18:30:00+05:30" pubdate data-updated="true">Jan 15<span>th</span>, 2011</time>
+<time datetime="2010-02-15T21:43:00+05:30" pubdate data-updated="true">Feb 15<span>th</span>, 2010</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><div class='post'>
-<div style="width:825px" id="__ss_1327730">
-<strong style="display:block;margin:12px 0 4px">
-<a href="http://www.slideshare.net/ronaldbradford/getting-started-with-mysql-in-amazon-web-services" title="Getting started with MySQL on Amazon Web Services">Getting started with MySQL on Amazon Web Services</a>
-</strong>
-<object id="__sse1327730" width="825" height="355">
-<param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=usingamazonwebservices-090422111735-phpapp01&stripped_title=getting-started-with-mysql-in-amazon-web-services&userName=ronaldbradford" />
-<param name="allowFullScreen" value="true"/>
-<param name="allowScriptAccess" value="always"/>
-<embed name="__sse1327730" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=usingamazonwebservices-090422111735-phpapp01&stripped_title=getting-started-with-mysql-in-amazon-web-services&userName=ronaldbradford" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="825" height="355">
-</embed>
-</object>
-<div style="padding:5px 0 12px">View more 
-<a href="http://www.slideshare.net/">presentations</a> 
-from <a href="http://www.slideshare.net/ronaldbradford">Ronald Bradford</a>.
-</div>
-</div>
-</div>
+  <div class="entry-content"><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#user  nobody;
+</span><span class='line'>user www-data;
+</span><span class='line'>worker_processes  2;
+</span><span class='line'>
+</span><span class='line'>#error_log  logs/error.log;
+</span><span class='line'>#error_log  logs/error.log  notice;
+</span><span class='line'>#error_log  logs/error.log  info;
+</span><span class='line'>
+</span><span class='line'>#pid        logs/nginx.pid;
+</span><span class='line'>
+</span><span class='line'>events {
+</span><span class='line'>    worker_connections  1024;
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>http {
+</span><span class='line'>    passenger_root /var/lib/gems/1.8/gems/passenger-2.2.8;
+</span><span class='line'>    passenger_ruby /usr/bin/ruby1.8;
+</span><span class='line'>    passenger_max_pool_size 3;
+</span><span class='line'>
+</span><span class='line'>    include       mime.types;
+</span><span class='line'>default_type  application/octet-stream;
+</span><span class='line'>
+</span><span class='line'>    #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+</span><span class='line'>    #                  '$status $body_bytes_sent "$http_referer" '
+</span><span class='line'>    #                  '"$http_user_agent" "$http_x_forwarded_for"';
+</span><span class='line'>
+</span><span class='line'>    #access_log  logs/access.log  main;
+</span><span class='line'>
+</span><span class='line'>    sendfile        on;
+</span><span class='line'>    #tcp_nopush     on;
+</span><span class='line'>
+</span><span class='line'>    #keepalive_timeout  0;
+</span><span class='line'>    keepalive_timeout  65;
+</span><span class='line'>
+</span><span class='line'>    #gzip  on;
+</span><span class='line'> server {
+</span><span class='line'>     listen 80;
+</span><span class='line'>     server_name localhost;
+</span><span class='line'>
+</span><span class='line'>     root /home/josh/current/public;   # &lt;--- be sure to point to 'public'!
+</span><span class='line'>     passenger_enabled on;
+</span><span class='line'>     passenger_use_global_queue on;
+</span><span class='line'>   }
+</span><span class='line'>
+</span><span class='line'>    server {
+</span><span class='line'>        listen       80;
+</span><span class='line'>        server_name  localhost;
+</span><span class='line'>
+</span><span class='line'>        #charset koi8-r;
+</span><span class='line'>        #access_log  logs/host.access.log  main;
+</span><span class='line'>        
+</span><span class='line'>        location / {
+</span><span class='line'>            root   html;
+</span><span class='line'>            index  index.html index.htm;
+</span><span class='line'>        }
+</span><span class='line'>     #error_page  404              /404.html;
+</span><span class='line'>
+</span><span class='line'>        # redirect server error pages to the static page /50x.html
+</span><span class='line'>        #
+</span><span class='line'>        error_page   500 502 503 504  /50x.html;
+</span><span class='line'>        location = /50x.html {
+</span><span class='line'>            root   html;
+</span><span class='line'>        }
+</span><span class='line'>   }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/02/activerecordreadonlyrecord-while/">ActiveRecord::ReadOnlyRecord While Updating Object Fetched by Joins</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-02-15T21:34:00+05:30" pubdate data-updated="true">Feb 15<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h4>ActiveRecord find with join options retrieves object as readonly</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>station = Station.find( :first, :joins =&gt; :call, :conditions =&gt; ["customer_id = ? and date(insurance_expiry_date) = ?", customer.id, insurance_expiry_date ] )</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Readonly object cannot modified and hence below line raises &ldquo;ActiveRecord::ReadOnlyRecord&rdquo; error.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>station.update_attributes({ :customer_id =&gt; 12 })</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you have to write on read only object then you can pass following option to find query</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>:readonly =&gt; false</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now below find is permitted to do write on fetched object records.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>station = Station.find( :first, :joins =&gt; :call, :conditions =&gt; ["customer_id = ? and date(insurance_expiry_date) = ?", customer.id, insurance_expiry_date ], :readonly =&gt; false )</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/02/mysql-cheatsheet/">Mysql Cheatsheet</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-02-04T17:29:00+05:30" pubdate data-updated="true">Feb 4<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Changing Mysql password</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mysqladmin -u root -p'oldpassword' password newpass</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/02/adhearsion-and-telegraph-framework/">Adhearsion and Telegraph Framework Presentation</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-02-03T14:36:00+05:30" pubdate data-updated="true">Feb 3<span>rd</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Check out this SlideShare Presentation: <div style="width:825px;text-align:left" id="__ss_881934"><a style="font:14px Helvetica,Arial,Sans-serif;display:block;margin:12px 0 3px 0;text-decoration:underline;" href="http://www.slideshare.net/justingrammens/rumvoip" title="Adhearsion and Telegraph Framework Presentation">Adhearsion and Telegraph Framework Presentation</a><object style="margin:0px" width="825" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=rumvoip-123073798056-phpapp01&stripped_title=rumvoip" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=rumvoip-123073798056-phpapp01&stripped_title=rumvoip" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="825" height="355"></embed></object><div style="font-size:11px;font-family:tahoma,arial;height:26px;padding-top:2px;">View more <a style="text-decoration:underline;" href="http://www.slideshare.net/">presentations</a> from <a style="text-decoration:underline;" href="http://www.slideshare.net/justingrammens">Justin Grammens</a>.</div></div></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/01/delayed-job-changing-job-parameters-in-rails/">Delayed Job Changing Job Parameters in Rails</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-01-13T19:59:00+05:30" pubdate data-updated="true">Jan 13<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Delayed job variables initialization written on at collectiveidea / delayed_job doesn&rsquo;t work.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># config/initializers/delayed_job_config.rb</span>
+</span><span class='line'><span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Worker</span><span class="o">.</span><span class="n">destroy_failed_jobs</span> <span class="o">=</span> <span class="kp">false</span>
+</span><span class='line'><span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Worker</span><span class="o">.</span><span class="n">sleep_delay</span> <span class="o">=</span> <span class="mi">60</span>
+</span><span class='line'><span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Worker</span><span class="o">.</span><span class="n">max_attempts</span> <span class="o">=</span> <span class="mi">3</span>
+</span><span class='line'><span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Worker</span><span class="o">.</span><span class="n">max_run_time</span> <span class="o">=</span> <span class="mi">5</span><span class="o">.</span><span class="n">minutes</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here is the correct way of doing it as mentioned on tobi / delayed_job</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># config/initializers/delayed_job_config.rb</span>
+</span><span class='line'><span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Job</span><span class="o">.</span><span class="n">destroy_failed_jobs</span> <span class="o">=</span> <span class="kp">false</span>
+</span><span class='line'><span class="n">silence_warnings</span> <span class="k">do</span>
+</span><span class='line'>  <span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Job</span><span class="o">.</span><span class="n">const_set</span><span class="p">(</span><span class="s2">&quot;MAX_ATTEMPTS&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</span><span class='line'>  <span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Job</span><span class="o">.</span><span class="n">const_set</span><span class="p">(</span><span class="s2">&quot;MAX_RUN_TIME&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="o">.</span><span class="n">minutes</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/12/getting-wired-and-wireless-working-on-ubuntu/">Getting Wired and Wireless Working on Ubuntu 9.0.4</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-14T15:39:00+05:30" pubdate data-updated="true">Dec 14<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>It might be the case that earlier wireless was working and then it stopped working</p>
+
+<p>Follow the simple steps here&hellip;.</p>
+
+<p><strong>1. Restart networking</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo /etc/init.d/networking restart</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>2. Disable the <em>&ldquo;Support for Atheros 802.11 wireless LAN cards&rdquo;</em> on <code>system/administration/Hardware Drivers</code>, and reboot your box</strong>
+<strong>3. Restart</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo reboot</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&rsquo;s it, Cheers! Still having problem follow the instructions <a href="http://www.funonrails.com/2009/10/getting-wireless-working-on-ubuntu.html">here</a></p>
 </div>
   
   

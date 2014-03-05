@@ -97,7 +97,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2011/12/bugging-around-active-supports/">Bugging Around Active Support&#8217;s Class.class_attribute Extension</a></h1>
+      <h1 class="entry-title"><a href="/2011/03/twitter-share-and-facebook-like-button/">Twitter Share and Facebook Like Button for Haml-rails, Html/erb</a></h1>
     
     
       <p class="meta">
@@ -113,15 +113,14 @@
   
 
 
-<time datetime="2011-12-28T19:14:00+05:30" pubdate data-updated="true">Dec 28<span>th</span>, 2011</time>
+<time datetime="2011-03-17T02:45:00+05:30" pubdate data-updated="true">Mar 17<span>th</span>, 2011</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>We all know Active Support library constantly keeps adding new extensions to ruby core library and hence rails framework.
-Do you know now inside ruby class we can have class_attribute placeholder.</p>
+  <div class="entry-content"><p>Twitter share and facebook like button for <code>html/erb</code></p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -129,58 +128,16 @@ Do you know now inside ruby class we can have class_attribute placeholder.</p>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">A</span>
-</span><span class='line'>  <span class="n">class_attribute</span> <span class="ss">:counter</span><span class="p">,</span> <span class="ss">:access_time</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">A</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">12</span>
-</span><span class='line'><span class="n">A</span><span class="o">.</span><span class="n">counter</span> <span class="c1">#=&gt; 12</span>
-</span><span class='line'><span class="n">A</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">counter</span> <span class="c1">#=&gt; 12</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&#39;spread&#39;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&#39;twshare left&#39;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://twitter.com/share&quot;</span> <span class="na">class=</span><span class="s">&quot;twitter-share-button&quot;</span> <span class="na">data-count=</span><span class="s">&quot;horizontal&quot;</span> <span class="na">data-via=</span><span class="s">&quot;funonrails&quot;</span><span class="nt">&gt;</span>Tweet<span class="nt">&lt;/a&gt;&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;http://platform.twitter.com/widgets.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://connect.facebook.net/en_US/all.js#xfbml=1&quot;</span><span class="nt">&gt;&lt;/script&gt;&lt;fb:like</span> <span class="na">href=</span><span class="s">&quot;&quot;</span> <span class="na">layout=</span><span class="s">&quot;button_count&quot;</span> <span class="na">show_faces=</span><span class="s">&quot;false&quot;</span> <span class="na">width=</span><span class="s">&quot;450&quot;</span> <span class="na">font=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;&lt;/fb:like&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Inheritance</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">B</span> <span class="o">&lt;</span> <span class="n">A</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">B</span><span class="o">.</span><span class="n">counter</span> <span class="c1">#=&gt; 12</span>
-</span><span class='line'><span class="n">B</span><span class="o">.</span><span class="n">access_time</span> <span class="c1">#=&gt; nil</span>
-</span><span class='line'><span class="n">B</span><span class="o">.</span><span class="n">access_time</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">now</span>
-</span><span class='line'><span class="n">B</span><span class="o">.</span><span class="n">access_time</span> <span class="c1">#=&gt; Wed Dec 28 18:55:06 +0530 2011</span>
-</span><span class='line'><span class="n">B</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">access_time</span> <span class="c1">#=&gt; Wed Dec 28 18:55:06 +0530 2011</span>
-</span><span class='line'><span class="n">A</span><span class="o">.</span><span class="n">access_time</span> <span class="o">=</span> <span class="kp">nil</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Restricting instance from writing class_attributes</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">V</span>
-</span><span class='line'>  <span class="n">class_attribute</span> <span class="ss">:counter</span><span class="p">,</span> <span class="ss">:instance_writer</span> <span class="o">=&gt;</span> <span class="kp">false</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">V</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">12</span>
-</span><span class='line'><span class="ss">NoMethodError</span><span class="p">:</span> <span class="n">undefined</span> <span class="nb">method</span> <span class="sb">`counter=&#39; for #&lt;#&lt;Class:0x7f8f9d5c2fb8&gt;:0x7f8f9d5b1038&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Other ways</p>
+<p>Twitter share and facebook like button for <code>haml</code></p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -190,21 +147,25 @@ Do you know now inside ruby class we can have class_attribute placeholder.</p>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a_class</span> <span class="o">=</span> <span class="no">Class</span><span class="o">.</span><span class="n">new</span><span class="p">{</span><span class="n">class_atrribute</span> <span class="ss">:counter</span><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">a_class</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">13</span>
-</span><span class='line'><span class="n">a_class</span><span class="o">.</span><span class="n">counter</span> <span class="c1">#=&gt; 13</span>
-</span><span class='line'><span class="n">a_class</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">counter</span> <span class="c1">#=&gt; 13</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">p</span> <span class="o">=</span> <span class="no">Class</span><span class="o">.</span><span class="n">new</span> <span class="p">{</span> <span class="n">class_attribute</span> <span class="ss">:help</span><span class="p">,</span> <span class="ss">:instance_writer</span> <span class="o">=&gt;</span> <span class="kp">false</span> <span class="p">}</span>
-</span><span class='line'><span class="nb">p</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">help</span> <span class="o">=</span> <span class="s1">&#39;Got a second!&#39;</span>
-</span><span class='line'><span class="ss">NoMethodError</span><span class="p">:</span> <span class="n">undefined</span> <span class="nb">method</span> <span class="sb">`help=&#39; for #&lt;#:0x7f8f9d5b1038&gt;</span>
-</span><span class='line'><span class="sb">p.help = &#39;Got a second!&#39;</span>
-</span><span class='line'><span class="sb">p.help #=&gt; &quot;Got a second!&quot;</span>
+</pre></td><td class='code'><pre><code class='haml'><span class='line'><span class="nc">.spread</span>
+</span><span class='line'>  <span class="nc">.twshare.left</span>
+</span><span class='line'>    <span class="nt">%a</span><span class="nc">.twitter-share-button.left</span><span class="p">{</span><span class="s2">&quot;data-count&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;horizontal&quot;</span><span class="p">,</span> <span class="s2">&quot;data-via&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;fuonrails&quot;</span><span class="p">,</span> <span class="ss">:href</span> <span class="o">=&gt;</span> <span class="s2">&quot;http://twitter.com/share&quot;</span><span class="p">}</span> Tweet
+</span><span class='line'>    <span class="nt">%script</span><span class="p">{</span><span class="ss">:src</span> <span class="o">=&gt;</span> <span class="s2">&quot;http://platform.twitter.com/widgets.js&quot;</span><span class="p">,</span> <span class="ss">:type</span> <span class="o">=&gt;</span> <span class="s2">&quot;text/javascript&quot;</span><span class="p">}</span>
+</span><span class='line'>  <span class="nc">.fshare.left</span><span class="p">{</span><span class="ss">:style</span> <span class="o">=&gt;</span> <span class="s1">&#39;padding-left: 0px; margin-left: 10px;&#39;</span><span class="p">}</span>
+</span><span class='line'>    <span class="nt">%script</span><span class="p">{</span><span class="ss">:src</span> <span class="o">=&gt;</span> <span class="s2">&quot;http://connect.facebook.net/en_US/all.js#xfbml=1&quot;</span><span class="p">}</span>
+</span><span class='line'>    <span class="nt">%fb:like</span><span class="p">{</span><span class="ss">:layout</span> <span class="o">=&gt;</span> <span class="s2">&quot;button_count&quot;</span><span class="p">,</span> <span class="ss">:show_faces</span> <span class="o">=&gt;</span> <span class="s2">&quot;false&quot;</span><span class="p">,</span> <span class="ss">:width</span> <span class="o">=&gt;</span> <span class="s2">&quot;450&quot;</span><span class="p">}</span>
+</span><span class='line'>  <span class="nc">.CLR</span>
 </span></code></pre></td></tr></table></div></figure>
+
+
+<p>See example Buttons listed below:</p>
+
+<div class='spread'>
+  <div class='twshare left'>
+    <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="funonrails">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+  </div>
+  <script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script><fb:like href="" layout="button_count" show_faces="false" width="450" font=""></fb:like>
+</div>
 
 </div>
   
@@ -218,7 +179,7 @@ Do you know now inside ruby class we can have class_attribute placeholder.</p>
       
   <header>
     
-      <h1 class="entry-title"><a href="/2011/12/authorizenet-aim-payment-integration/">Authorize Net (AIM) Payment Integration With Rails</a></h1>
+      <h1 class="entry-title"><a href="/2011/03/number-to-indian-currency-helper-for-rails/">Number to Indian Currency Helper for Rails With WebRupee</a></h1>
     
     
       <p class="meta">
@@ -234,27 +195,20 @@ Do you know now inside ruby class we can have class_attribute placeholder.</p>
   
 
 
-<time datetime="2011-12-28T17:15:00+05:30" pubdate data-updated="true">Dec 28<span>th</span>, 2011</time>
+<time datetime="2011-03-17T02:13:00+05:30" pubdate data-updated="true">Mar 17<span>th</span>, 2011</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Authorize Net (AIM) method enables internet merchants to accept online payments via credit card.
-Below post will show you how to integrate authorize net payment gateway inside rails app to accept online payments using activemerchant library.</p>
+  <div class="entry-content"><blockquote><p>rails has built in <code>number_to_currency</code> helper which takes options like unit, delimeter, seperator which displays foreign currency correctly but somehow it is not best suited for indian currency.</p></blockquote>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># Gemfile
-</span><span class='line'>gem 'activemerchant', :require =&gt; 'active_merchant'</span></code></pre></td></tr></table></div></figure>
+<p>Below is how we managed 2 years ago to display indian currency formatted properly with comma as seperator. personally i think it could be more better than what it is currently ;)</p>
 
+<h2>Number to indian currency(rupees) helper</h2>
 
-<p>Register for authorize net sandbox account click <a href="https://developer.authorize.net/testaccount/">here</a></p>
-
-<p>Payment gateway credentials</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -265,20 +219,21 @@ Below post will show you how to integrate authorize net payment gateway inside r
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># config/authorize_net.yml
-</span><span class='line'>development: &development
-</span><span class='line'>    mode: test
-</span><span class='line'>    login: 9gdLh6T
-</span><span class='line'>    key: 67fu45xw6VP92LX1
-</span><span class='line'>
-</span><span class='line'>production:
-</span><span class='line'>   &lt;&lt;: *development
-</span><span class='line'>
-</span><span class='line'>test:
-</span><span class='line'>   &lt;&lt;: *development</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">ApplicationHelper</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">number_to_indian_currency</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">number</span>
+</span><span class='line'>      <span class="n">string</span> <span class="o">=</span> <span class="n">number</span><span class="o">.</span><span class="n">to_s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">number</span> <span class="o">=</span> <span class="n">string</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="n">gsub</span><span class="p">(</span><span class="sr">/(\d+)(\d{3})$/</span><span class="p">){</span> <span class="nb">p</span> <span class="o">=</span> <span class="vg">$2</span><span class="p">;</span><span class="s2">&quot;</span><span class="si">#{</span><span class="vg">$1</span><span class="o">.</span><span class="n">reverse</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="sr">/(\d{2})/</span><span class="p">,</span><span class="s1">&#39;\1,&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reverse</span><span class="si">}</span><span class="s2">,</span><span class="si">#{</span><span class="nb">p</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">}</span>
+</span><span class='line'>      <span class="n">number</span> <span class="o">=</span> <span class="n">number</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="sr">/^,/</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="n">string</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="k">if</span> <span class="n">string</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span>
+</span><span class='line'>      <span class="c1"># remove leading comma</span>
+</span><span class='line'>      <span class="n">number</span> <span class="o">=</span> <span class="n">number</span><span class="o">[</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="k">if</span> <span class="n">number</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">==</span> <span class="mi">44</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>    <span class="s2">&quot;Rs.</span><span class="si">#{</span><span class="n">number</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Payment &amp; creditcard form</p>
+<h2>Sample Output for different combinations</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -290,22 +245,368 @@ Below post will show you how to integrate authorize net payment gateway inside r
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='haml'><span class='line'># app/views/payments/new
-</span><span class='line'><span class="p">=</span> <span class="n">form_for</span> <span class="vi">@payment</span><span class="p">,</span> <span class="ss">:url</span> <span class="o">=&gt;</span> <span class="n">payments_url</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
-</span><span class='line'>  <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:amount</span>
-</span><span class='line'>  <span class="p">=</span> <span class="n">fields_for</span> <span class="ss">:creditcard</span><span class="p">,</span> <span class="vi">@creditcard</span> <span class="k">do</span> <span class="o">|</span><span class="n">cc</span><span class="o">|</span>
-</span><span class='line'>    <span class="p">=</span> <span class="n">cc</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:name</span>
-</span><span class='line'>    <span class="p">=</span> <span class="n">cc</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:number</span>
-</span><span class='line'>    <span class="p">=</span> <span class="n">cc</span><span class="o">.</span><span class="n">select</span> <span class="ss">:month</span><span class="p">,</span> <span class="ss">Date</span><span class="p">:</span><span class="ss">:ABBR_MONTHNAMES</span><span class="o">.</span><span class="n">compact</span><span class="o">.</span><span class="n">each_with_index</span><span class="o">.</span><span class="n">collect</span><span class="p">{</span><span class="o">|</span><span class="n">m</span><span class="p">,</span> <span class="n">i</span><span class="o">|</span> <span class="o">[</span><span class="n">m</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">},</span> <span class="p">{</span><span class="ss">:prompt</span> <span class="o">=&gt;</span> <span class="s1">&#39;Select&#39;</span><span class="p">}</span>
-</span><span class='line'>    <span class="p">=</span> <span class="n">cc</span><span class="o">.</span><span class="n">select</span> <span class="ss">:year</span><span class="p">,</span> <span class="nb">Array</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="mi">15</span><span class="p">){</span><span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="no">Date</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">year</span><span class="o">+</span><span class="n">i</span><span class="p">},</span> <span class="p">{</span><span class="ss">:prompt</span> <span class="o">=&gt;</span> <span class="s1">&#39;Select&#39;</span><span class="p">}</span>
-</span><span class='line'>    <span class="p">=</span> <span class="n">cc</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:verification_value</span>
-</span><span class='line'>  <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">submit</span> <span class="s1">&#39;Pay&#39;</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="n">helper</span><span class="o">.</span><span class="n">number_to_indian_currency</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;Rs.2,000&quot;</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">helper</span><span class="o">.</span><span class="n">number_to_indian_currency</span><span class="p">(</span><span class="mi">2040</span><span class="p">)</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;Rs.2,040&quot;</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">helper</span><span class="o">.</span><span class="n">number_to_indian_currency</span><span class="p">(</span><span class="mi">2040</span><span class="o">.</span><span class="mi">50</span><span class="p">)</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;Rs.2,040.5&quot;</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">helper</span><span class="o">.</span><span class="n">number_to_indian_currency</span><span class="p">(</span><span class="mi">2040</span><span class="o">.</span><span class="mi">54</span><span class="p">)</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;Rs.2,040.54&quot;</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">helper</span><span class="o">.</span><span class="n">number_to_indian_currency</span><span class="p">(</span><span class="mi">1222040</span><span class="o">.</span><span class="mi">54</span><span class="p">)</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;Rs.12,22,040.54&quot;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Payments Controller</p>
+<p>After doing google today found from Piyush Ranjan&rsquo;s Blog that yes there are ways to optimize code.</p>
+
+<h2>Optimized Version</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">ApplicationHelper</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">number_to_indian_currency</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+</span><span class='line'>    <span class="s2">&quot;Rs.</span><span class="si">#{</span><span class="n">number</span><span class="o">.</span><span class="n">to_s</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="sr">/(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">1,&quot;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Waw one line of code, Look at the beauty of regular expression :) Truely amazing !</p>
+
+<h2>Integrating Webrupee symbol</h2>
+
+<p>First include follwing stylesheet in your layout</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">//</span><span class="nt">public</span><span class="o">/</span><span class="nt">stylesheets</span><span class="o">/</span><span class="nt">font</span><span class="nc">.css</span>
+</span><span class='line'><span class="k">@font-face</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nt">font-family</span><span class="o">:</span> <span class="s2">&quot;WebRupee&quot;</span><span class="o">;</span>
+</span><span class='line'>  <span class="nt">font-style</span><span class="o">:</span> <span class="nt">normal</span><span class="o">;</span>
+</span><span class='line'>  <span class="nt">font-weight</span><span class="o">:</span> <span class="nt">normal</span><span class="o">;</span>
+</span><span class='line'>  <span class="nt">src</span><span class="o">:</span> <span class="nt">local</span><span class="o">(</span><span class="s2">&quot;WebRupee&quot;</span><span class="o">),</span> <span class="nt">url</span><span class="o">(</span><span class="s2">&quot;http://cdn.webrupee.com/WebRupee.V2.0.ttf&quot;</span><span class="o">)</span> <span class="nt">format</span><span class="o">(</span><span class="s2">&quot;truetype&quot;</span><span class="o">),</span> <span class="nt">url</span><span class="o">(</span><span class="s2">&quot;http://cdn.webrupee.com/WebRupee.V2.0.woff&quot;</span><span class="o">)</span> <span class="nt">format</span><span class="o">(</span><span class="s2">&quot;woff&quot;</span><span class="o">),</span> <span class="nt">url</span><span class="o">(</span><span class="s2">&quot;http://cdn.webrupee.com/WebRupee.V2.0.svg&quot;</span><span class="o">)</span> <span class="nt">format</span><span class="o">(</span><span class="s2">&quot;svg&quot;</span><span class="o">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.WebRupee</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">font-family</span><span class="o">:</span> <span class="s1">&#39;WebRupee&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Improved Version of Helper</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">ApplicationHelper</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">number_to_indian_currency</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="n">html</span><span class="o">=</span><span class="kp">true</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">txt</span> <span class="o">=</span> <span class="n">html</span> <span class="p">?</span> <span class="n">content_tag</span><span class="p">(</span><span class="ss">:span</span><span class="p">,</span> <span class="s1">&#39;Rs.&#39;</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="ss">:WebRupee</span><span class="p">)</span> <span class="p">:</span> <span class="s1">&#39;Rs.&#39;</span>
+</span><span class='line'>    <span class="s2">&quot;</span><span class="si">#{</span><span class="n">txt</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="n">number</span><span class="o">.</span><span class="n">to_s</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="sr">/(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">1,&quot;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Usage</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="n">helper</span><span class="o">.</span><span class="n">number_to_indian_currency</span><span class="p">(</span><span class="mi">400</span><span class="p">)</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;&lt;span class=&quot;</span><span class="no">WebRupee</span><span class="s2">&quot;&gt;Rs.&lt;/span&gt; 400&quot;</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">helper</span><span class="o">.</span><span class="n">number_to_indian_currency</span><span class="p">(</span><span class="mi">5921</span><span class="p">,</span> <span class="kp">false</span><span class="p">)</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;Rs. 5,921&quot;</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">helper</span><span class="o">.</span><span class="n">number_to_indian_currency</span><span class="p">(</span><span class="mi">9921</span><span class="p">)</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;&lt;span class=&quot;</span><span class="no">WebRupee</span><span class="s2">&quot;&gt;Rs.&lt;/span&gt; 9,921&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This will show you rupees symbol on your webpages.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/03/accessing-view-helpers-routes-in-rails/">Accessing View Helpers & Routes in Rails Console, Rake Tasks and Mailers</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-17T01:01:00+05:30" pubdate data-updated="true">Mar 17<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>While looking for accessing rails template tags to be accessed on rails console in order to examine whatever written needs to be correct, found that &ndash; rails template tags can be tested on rails console using <em>helper</em> object</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">ApplicationHelper</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">display_amount</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">number_to_currency</span> <span class="n">amount</span><span class="p">,</span> <span class="ss">:precision</span> <span class="o">=&gt;</span> <span class="mi">0</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Helpers on rails console</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rails</span> <span class="n">c</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">helper</span><span class="o">.</span><span class="n">text_field_tag</span> <span class="ss">:name</span><span class="p">,</span> <span class="s1">&#39;sandip&#39;</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;&lt;input id=&quot;</span><span class="nb">name</span><span class="s2">&quot; name=&quot;</span><span class="nb">name</span><span class="s2">&quot; type=&quot;</span><span class="n">text</span><span class="s2">&quot; value=&quot;</span><span class="n">sandip</span><span class="s2">&quot; /&gt;&quot;</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">helper</span><span class="o">.</span><span class="n">link_to</span> <span class="s1">&#39;my blog&#39;</span><span class="p">,</span> <span class="s1">&#39;http://funonrails.com&#39;</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;&lt;a href=&#39;&#39;http://funonrails.com&gt;my blog&lt;/a&gt;&quot;</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">helper</span><span class="o">.</span><span class="n">display_amount</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;$2,000&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>isn&rsquo;t it cool ? though it&rsquo;s not finished yet. we can include helper files on console and access custom helper methods too</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="kp">include</span> <span class="ss">ActionView</span><span class="p">:</span><span class="ss">:Helpers</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="no">Object</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="kp">include</span> <span class="no">ApplicationHelper</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="no">Object</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="kp">include</span> <span class="ss">ActionView</span><span class="p">:</span><span class="ss">:Helpers</span><span class="o">::</span><span class="no">ApplicationHelper</span><span class="o">^</span><span class="n">C</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">display_amount</span> <span class="mi">2500</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;$2,500&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Using same way one can make use helpers in rake tasks file. Make sure environment is getting loaded into rake task.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'> <span class="n">lib</span><span class="o">/</span><span class="n">tasks</span><span class="o">/</span><span class="n">helper_task</span><span class="o">.</span><span class="n">rake</span>
+</span><span class='line'><span class="n">namespace</span> <span class="ss">:helper</span> <span class="k">do</span>
+</span><span class='line'> <span class="n">desc</span> <span class="s1">&#39;Access helper methods in rake tasks&#39;</span>
+</span><span class='line'> <span class="n">task</span> <span class="ss">:test</span> <span class="o">=&gt;</span> <span class="ss">:environment</span> <span class="k">do</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="ss">ActionView</span><span class="p">:</span><span class="ss">:Helpers</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="no">ApplicationHelper</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nb">puts</span> <span class="n">display_amount</span> <span class="mi">2500</span>  <span class="c1">#=&gt; &quot;$2,500&quot;</span>
+</span><span class='line'> <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Accessing helpers in Action Mailers</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Notifier</span> <span class="o">&lt;</span> <span class="ss">ActionMailer</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">add_template_helper</span><span class="p">(</span><span class="no">ApplicationHelper</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">subject</span> <span class="s2">&quot;Hello </span><span class="si">#{</span><span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'>    <span class="n">from</span>          <span class="s1">&#39;no-reply@example.com&#39;</span>
+</span><span class='line'>    <span class="n">recipients</span>    <span class="n">user</span><span class="o">.</span><span class="n">email</span>
+</span><span class='line'>    <span class="n">sent_on</span>       <span class="no">Time</span><span class="o">.</span><span class="n">now</span>
+</span><span class='line'>    <span class="vi">@user</span> <span class="o">=</span> <span class="n">user</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'># app/views/notifier/greet.html.erb
+</span><span class='line'>Hi <span class="err">&lt;</span>%= @user.try(:name)%&gt;,
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>Greetings !!!
+</span><span class='line'>You have got <span class="err">&lt;</span>%= display_amount(3000) %&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Rails routes on rails console</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rails</span> <span class="n">c</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">root_url</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;http://www.example.com/&quot;</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">change_password_path</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;/change/password&quot;</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">change_password_url</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;http://www.example.com/change/password&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now you may have got requirement to access routes inside rake tasks. Here is the way to do that &ndash;</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># lib/tasks/route_test.rake</span>
+</span><span class='line'><span class="n">namespace</span> <span class="ss">:routes</span> <span class="k">do</span>
+</span><span class='line'> <span class="n">desc</span> <span class="s1">&#39;Access helper methods in rake tasks&#39;</span>
+</span><span class='line'> <span class="n">task</span> <span class="ss">:test</span> <span class="o">=&gt;</span> <span class="ss">:environment</span> <span class="k">do</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="ss">ActionController</span><span class="p">:</span><span class="ss">:UrlWriter</span>
+</span><span class='line'>  <span class="n">default_url_options</span><span class="o">[</span><span class="ss">:host</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;myroutes.check&quot;</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="n">root_url</span>  <span class="c1">#=&gt; &quot;http://myroutes.check&quot;</span>
+</span><span class='line'> <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Optionally you can set value of host parameter from action mailer host configuration using</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">default_url_options</span><span class="o">[</span><span class="ss">:host</span><span class="o">]</span> <span class="o">=</span> <span class="ss">ActionMailer</span><span class="p">:</span><span class="ss">:Base</span><span class="o">.</span><span class="n">default_url_options</span><span class="o">[</span><span class="ss">:host</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Attention: This is my preferred way to use helpers and routes when needed and there may have other choices to do same. Anyone having better approach please feel free to add your valuable comment. I will definitely incorporate that in further developments.
+Got Easy, Cheers ;)</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/03/monitor-delayed-job-in-rails/">Monitor Delayed Job in Rails</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-01T01:22:00+05:30" pubdate data-updated="true">Mar 1<span>st</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Delayed Job &amp; Monit configuration</h2>
+
+<p>We were struggling through how to monit delayed_job from past few months because monit doesn&rsquo;t work seamlessly with delayed_job start/stop commands and finally we got able to monit delayed_job.</p>
+
+<p>Here is our old configuration that wasn&rsquo;t working anyhow-</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>check process delayed_job with pidfile /home/sandip/shared/pids/delayed_job.pid
+</span><span class='line'>    stop program = "/bin/bash -c 'cd /home/sandip/current && RAILS_ENV=production script/delayed_job stop'"
+</span><span class='line'>    start program = "/bin/bash -c 'cd /home/sandip/current && RAILS_ENV=production script/delayed_job start'"
+</span><span class='line'>    if totalmem &gt; 100.0 MB for 3 cycles then restart
+</span><span class='line'>    if cpu usage &gt; 95% for 3 cycles then restart</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After doing google &amp; looking at stackoverflow, we found different solutions to work with but none of them found useful to me. :(</p>
+
+<p>After reading google group someone (not remembering exactly) directed to write a init script for delayed_job server and that perfectly worked for me and my headache of self moniting delayed_job ended up ;)</p>
+
+<h4>Delayed Job init script</h4>
+
+<p><em>/etc/init.d/delayed_job</em></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -326,50 +627,197 @@ Below post will show you how to integrate authorize net payment gateway inside r
 <span class='line-number'>19</span>
 <span class='line-number'>20</span>
 <span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/controllers/payments_controller.rb </span>
-</span><span class='line'><span class="k">class</span> <span class="nc">PaymentsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#! /bin/sh
+</span><span class='line'>set_path="cd /home/sandip/current"
 </span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">new</span>
-</span><span class='line'>    <span class="vi">@payment</span> <span class="o">=</span> <span class="no">Payment</span><span class="o">.</span><span class="n">new</span>
-</span><span class='line'>    <span class="vi">@creditcard</span> <span class="o">=</span> <span class="ss">ActiveMerchant</span><span class="p">:</span><span class="ss">:Billing</span><span class="o">::</span><span class="no">CreditCard</span><span class="o">.</span><span class="n">new</span>
-</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>case "$1" in
+</span><span class='line'>    start)
+</span><span class='line'>    echo -n "Starting delayed_job: "
+</span><span class='line'>    su - root -c "$set_path; RAILS_ENV=production script/delayed_job start" &gt;&gt; /var/log/delayed_job.log 2&gt;&1
+</span><span class='line'>    echo "done."
+</span><span class='line'>    ;;
+</span><span class='line'>    stop)
+</span><span class='line'>    echo -n "Stopping delayed_job: "
+</span><span class='line'>    su - root -c "$set_path; RAILS_ENV=production script/delayed_job stop" &gt;&gt; /var/log/delayed_job.log 2&gt;&1
+</span><span class='line'>    echo "done."
+</span><span class='line'>    ;;
+</span><span class='line'>    *)
+</span><span class='line'>    echo "Usage: $N {start|stop}" &gt;&2
+</span><span class='line'>    exit 1
+</span><span class='line'>    ;;
+</span><span class='line'>esac
 </span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">create</span>
-</span><span class='line'>    <span class="vi">@payment</span> <span class="o">=</span> <span class="no">Payment</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:payment</span><span class="o">]</span><span class="p">)</span>
-</span><span class='line'>    <span class="vi">@creditcard</span> <span class="o">=</span> <span class="ss">ActiveMerchant</span><span class="p">:</span><span class="ss">:Billing</span><span class="o">::</span><span class="no">CreditCard</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:creditcard</span><span class="o">]</span><span class="p">)</span>
-</span><span class='line'>    <span class="vi">@payment</span><span class="o">.</span><span class="n">valid_card</span> <span class="o">=</span> <span class="vi">@creditcard</span><span class="o">.</span><span class="n">valid?</span>
-</span><span class='line'>    <span class="k">if</span> <span class="vi">@payment</span><span class="o">.</span><span class="n">valid?</span>
-</span><span class='line'>      <span class="vi">@payment</span> <span class="o">=</span> <span class="vi">@payment</span><span class="o">.</span><span class="n">process_payment</span><span class="p">(</span><span class="vi">@creditcard</span><span class="p">)</span>
-</span><span class='line'>      <span class="k">if</span> <span class="vi">@payment</span><span class="o">.</span><span class="n">success?</span>
-</span><span class='line'>        <span class="vi">@payment</span><span class="o">.</span><span class="n">save</span>
-</span><span class='line'>        <span class="n">flash</span><span class="o">[</span><span class="ss">:notice</span><span class="o">]</span> <span class="o">=</span> <span class="no">I18n</span><span class="o">.</span><span class="n">t</span><span class="p">(</span><span class="s1">&#39;payment.success&#39;</span><span class="p">)</span>
-</span><span class='line'>        <span class="n">redirect_to</span> <span class="n">payments_url</span> <span class="ow">and</span> <span class="k">return</span>
-</span><span class='line'>      <span class="k">else</span>
-</span><span class='line'>        <span class="n">flash</span><span class="o">[</span><span class="ss">:error</span><span class="o">]</span> <span class="o">=</span> <span class="no">I18n</span><span class="o">.</span><span class="n">t</span><span class="p">(</span><span class="s1">&#39;payment.failed&#39;</span><span class="p">)</span>
-</span><span class='line'>      <span class="k">end</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>    <span class="n">render</span> <span class="ss">:action</span> <span class="o">=&gt;</span> <span class="ss">:new</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>exit 0</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Generate &amp; Migrate Payment Model</p>
+<p>finally here is the working monit delayed_job configuration</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rails</span> <span class="n">g</span> <span class="n">model</span> <span class="n">payment</span> <span class="ss">status</span><span class="p">:</span><span class="n">string</span> <span class="ss">amount</span><span class="p">:</span><span class="n">float</span> <span class="n">transaction_number</span><span class="ss">:string</span>
-</span><span class='line'><span class="n">rake</span> <span class="ss">db</span><span class="p">:</span><span class="n">migrate</span>
-</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>check process delayed_job with pidfile /home/sandip/shared/pids/delayed_job.pid
+</span><span class='line'>    stop program = "/etc/init.d/delayed_job stop"
+</span><span class='line'>    start program = "/etc/init.d/delayed_job start"
+</span><span class='line'>    if totalmem &gt; 100.0 MB for 3 cycles then restart
+</span><span class='line'>    if cpu usage &gt; 95% for 3 cycles then restart</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Payment Model</p>
+<h4>Thinking Sphinx monit configuration</h4>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>check process sphinx with pidfile /home/sandip/shared/pids/searchd.pid
+</span><span class='line'>    stop program = "/bin/bash -c 'cd /home/sandip/current && /usr/bin/rake RAILS_ENV=production ts:stop'"
+</span><span class='line'>    start program = "/bin/bash -c 'cd /home/sandip/current && /usr/bin/rake RAILS_ENV=production ts:start'"
+</span><span class='line'>    if totalmem &gt; 85.0 MB for 3 cycles then restart
+</span><span class='line'>    if cpu usage &gt; 95% for 3 cycles then restart</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Adhearsion (ahn) monit confiuration</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>check process ahn with pidfile /home/josh/shared/pids/ahnctl.pid
+</span><span class='line'>    stop program = "/bin/bash -c 'cd /home/sandip/current && /usr/bin/ahnctl stop adhearsion'"
+</span><span class='line'>    start program = "/bin/bash -c 'cd /home/sandip/current && /usr/bin/ahnctl start adhearsion'"
+</span><span class='line'>    if totalmem &gt; 100.0 MB for 3 cycles then restart
+</span><span class='line'>    if cpu usage &gt; 95% for 3 cycles then restart</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Nginx monit configuration</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>check process nginx with pidfile /opt/nginx/logs/nginx.pid
+</span><span class='line'>    start program = "/opt/nginx/sbin/nginx"
+</span><span class='line'>    stop  program = "/opt/nginx/sbin/nginx -s stop"
+</span><span class='line'>    if cpu is greater than 70% for 3 cycles then alert
+</span><span class='line'>    if cpu &gt; 80% for 5 cycles then restart
+</span><span class='line'>    if 10 restarts within 10 cycles then timeout</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/03/getting-started-with-rails-3-postgres/">Getting Started With Rails 3 & Postgres Database</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-01T00:40:00+05:30" pubdate data-updated="true">Mar 1<span>st</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Rails 3 Installation</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo gem install rails -v3.0.4</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Postgres as <code>DB</code> installation</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install postgresql</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Rails 3 App with postgres as database</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rails new pg -d postgres</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Bundle installation
+It will install dependency gems &amp; postgres adapter for db connection</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>bundle install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here by default <code>postgres</code> database user gets created while installation but i recommend to create new db user with name same as of system user owning project directory permissions.</p>
+
+<p>User owning file permission can be found using</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ls -l pg
+</span><span class='line'>drwxr-xr-x 7 sandip sandip 4096 2011-02-23 15:38 app
+</span><span class='line'>drwxr-xr-x 5 sandip sandip 4096 2011-02-23 18:14 config
+</span><span class='line'>-rw-r--r-- 1 sandip sandip  152 2011-02-23 15:38 config.ru
+</span><span class='line'>...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Default &lsquo;postgres&rsquo; database user gets created while installation</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>## Snap of database.yml
+</span><span class='line'>development:
+</span><span class='line'>  adapter: postgresql
+</span><span class='line'>  encoding: unicode
+</span><span class='line'>  database: pg_development
+</span><span class='line'>  username: sandip
+</span><span class='line'>  pool: 5</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Create new database user</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>pg $ sudo su postgres
+</span><span class='line'>pg $ createuser sandip
+</span><span class='line'>Shall the new role be a superuser? (y/n) y
+</span><span class='line'>pg $ exit
+</span><span class='line'>exit</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Create a first development database:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -395,61 +843,64 @@ Below post will show you how to integrate authorize net payment gateway inside r
 <span class='line-number'>24</span>
 <span class='line-number'>25</span>
 <span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/models/payment.rb </span>
-</span><span class='line'><span class="k">class</span> <span class="nc">Payment</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>pg $ psql template1
+</span><span class='line'>Welcome to psql 8.4.6, the PostgreSQL interactive terminal.
+</span><span class='line'>...
 </span><span class='line'>
-</span><span class='line'>  <span class="no">PROCESSING</span><span class="p">,</span> <span class="no">FAILED</span><span class="p">,</span> <span class="no">SUCCESS</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>
+</span><span class='line'>template1=# \l
+</span><span class='line'>        List of databases
+</span><span class='line'>   Name    |  Owner   | Encoding 
+</span><span class='line'>-----------+----------+----------
+</span><span class='line'> postgres  | postgres | UTF8
+</span><span class='line'> template0 | postgres | UTF8
+</span><span class='line'> template1 | postgres | UTF8
+</span><span class='line'>(3 rows)
 </span><span class='line'>
-</span><span class='line'>  <span class="n">validates</span> <span class="ss">:valid_card</span><span class="p">,</span> <span class="ss">:inclusion</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:in</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="kp">true</span><span class="o">]</span><span class="p">,</span> <span class="ss">:message</span> <span class="o">=&gt;</span> <span class="s1">&#39;Invalid Credit Card&#39;</span><span class="p">}</span>
-</span><span class='line'>  <span class="n">validates</span> <span class="ss">:amount</span><span class="p">,</span> <span class="ss">:presence</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">:numericality</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:greater_than</span> <span class="o">=&gt;</span> <span class="mi">0</span> <span class="p">}</span>
+</span><span class='line'>template1=# CREATE DATABASE pg_development;
+</span><span class='line'>CREATE DATABASE
+</span><span class='line'>template1=# \l
+</span><span class='line'>            List of databases
+</span><span class='line'>       Name        |  Owner   | Encoding 
+</span><span class='line'>-------------------+----------+----------
+</span><span class='line'> postgres          | postgres | UTF8
+</span><span class='line'> pg_development | sandip   | UTF8
+</span><span class='line'> template0         | postgres | UTF8
+</span><span class='line'> template1         | postgres | UTF8
+</span><span class='line'>(4 rows)
 </span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">process_payment</span><span class="p">(</span><span class="n">creditcard</span><span class="p">)</span>
-</span><span class='line'>    <span class="ss">ActiveMerchant</span><span class="p">:</span><span class="ss">:Billing</span><span class="o">::</span><span class="no">Base</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">auth</span><span class="o">[</span><span class="s1">&#39;mode&#39;</span><span class="o">].</span><span class="n">to_sym</span>
-</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="no">PROCESSING</span>
-</span><span class='line'>    <span class="n">response</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">purchase</span><span class="p">(</span><span class="n">amount</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="n">creditcard</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">success?</span>
-</span><span class='line'>      <span class="nb">self</span><span class="o">.</span><span class="n">transaction_number</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">subscription_id</span>
-</span><span class='line'>      <span class="nb">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="no">SUCCESS</span>
-</span><span class='line'>    <span class="k">else</span>
-</span><span class='line'>      <span class="nb">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="no">FAILED</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>    <span class="k">return</span> <span class="nb">self</span>
-</span><span class='line'>  <span class="k">rescue</span> <span class="no">Exception</span> <span class="o">=&gt;</span> <span class="n">e</span>
-</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="no">FAILED</span>
-</span><span class='line'>    <span class="k">return</span> <span class="nb">self</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">success?</span>
-</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="no">SUCCESS</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kp">private</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">gateway</span>
-</span><span class='line'>    <span class="ss">ActiveMerchant</span><span class="p">:</span><span class="ss">:Billing</span><span class="o">::</span><span class="no">AuthorizeNetGateway</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
-</span><span class='line'>      <span class="ss">:login</span>    <span class="o">=&gt;</span> <span class="n">auth</span><span class="o">[</span><span class="s1">&#39;login&#39;</span><span class="o">]</span><span class="p">,</span>
-</span><span class='line'>      <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="n">auth</span><span class="o">[</span><span class="s1">&#39;key&#39;</span><span class="o">]</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">auth</span>
-</span><span class='line'>    <span class="vc">@@auth</span> <span class="o">||=</span> <span class="no">YAML</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="no">Rails</span><span class="o">.</span><span class="n">root</span><span class="si">}</span><span class="s2">/config/authorize_net.yml&quot;</span><span class="p">)</span><span class="o">[</span><span class="no">Rails</span><span class="o">.</span><span class="n">env</span><span class="o">]</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>template1=# \q</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Start rails server</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>pg $ rails s</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Getting hands on postgres terminal</h3>
+
+<p><strong>1.  Login onto terminal</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>psql -U DB_USERNAME -d DB_NAME -W DB_PASSWORD</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>2.  List databases</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>\l</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>3.  Display tables</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>\dt</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>4.  Exit from terminal</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>\q</span></code></pre></td></tr></table></div></figure>
 
 </div>
   
@@ -463,7 +914,7 @@ Below post will show you how to integrate authorize net payment gateway inside r
       
   <header>
     
-      <h1 class="entry-title"><a href="/2011/12/active-admin-sass-and-rails-3/">Active-admin Sass and Rails 3</a></h1>
+      <h1 class="entry-title"><a href="/2011/02/auto-login-remote-server-by-copying-ssh/">Auto Login Remote Server by Copying Ssh Public Key to Authorized Keys</a></h1>
     
     
       <p class="meta">
@@ -479,38 +930,154 @@ Below post will show you how to integrate authorize net payment gateway inside r
   
 
 
-<time datetime="2011-12-28T14:58:00+05:30" pubdate data-updated="true">Dec 28<span>th</span>, 2011</time>
+<time datetime="2011-02-03T16:21:00+05:30" pubdate data-updated="true">Feb 3<span>rd</span>, 2011</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><blockquote><p>Active Admin is the good way to provide rails administrative interface. It provides front-end db administration and its customizable too :)</p></blockquote>
+  <div class="entry-content"><p>While working on remote machine we often get headache of entering password for ssh login, scp files from one server to another server. Adding public key as authorized_keys on remote server solves this problem.</p>
+
+<h2>Copying from my system to remote server</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cat ~/.ssh/id_rsa.pub | ssh sandip@server 'cat &gt;&gt; ~/.ssh/authorized_keys'</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Copying from remote server to my system</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ssh server 'cat ~/.ssh/id_rsa.pub' | cat &gt;&gt; ~/.ssh/id_rsa_client.pub</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/01/using-hoptoad-notifier-as-gem-in-rails/">Using Hoptoad Notifier as Gem in Rails 2.3</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-27T21:18:00+05:30" pubdate data-updated="true">Jan 27<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>1.  Add GEM to environment file</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># in config/environment.rb
+</span><span class='line'>config.gem 'hoptoad_notifier'</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>2. Install gems</strong></p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># Gemfile
-</span><span class='line'>gem 'activeadmin'
-</span><span class='line'>gem 'sass-rails'
-</span><span class='line'>gem "meta_search",    '&gt;= 1.1.0.pre'</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'># from your Rails root:
+</span><span class='line'>rake gems:install
+</span><span class='line'>rake gems:unpack GEM=hoptoad_notifier</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Bundle install, generate config &amp; migrate db</p>
+<p><strong>3. Generate hoptoad install using key</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ruby script/generate hoptoad --api-key your_key_here</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/01/installing-and-running-cronjob-crontab/">Installing and Running Cronjob (Crontab Basics)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-20T13:50:00+05:30" pubdate data-updated="true">Jan 20<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Basic handy commands while working with crontabs</p>
+
+<h2>Editing cron file</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>crontab -e</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Displaying cron file</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>crontab -l</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Removing cron file</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>crontab -r</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Cron syntax</h2>
+
+<blockquote><p>cron command basically takes 6 input parameters of which each input can take multiple arguments for that one can make use of comma or pipe separator</p></blockquote>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>bundle install
-</span><span class='line'>rails g active_admin:install
-</span><span class='line'>rake db:migrate</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'># min hour dom mon dow   command
+</span><span class='line'>*   *   *   *   * (command)</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Config</p>
+<p>Here * means for every. Above command will get executed for every minute</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<h2>Detail syntax</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -518,29 +1085,19 @@ Below post will show you how to integrate authorize net payment gateway inside r
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># config/initializers/active_admin.rb </span>
-</span><span class='line'><span class="no">ActiveAdmin</span><span class="o">.</span><span class="n">setup</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
-</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">site_title</span> <span class="o">=</span> <span class="s2">&quot;Web Site :: Admin Panel&quot;</span>
-</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">site_title_link</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span>
-</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">default_namespace</span> <span class="o">=</span> <span class="ss">:siteadmin</span>
-</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">authentication_method</span> <span class="o">=</span> <span class="ss">:authenticate_admin_user!</span>
-</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">current_user_method</span> <span class="o">=</span> <span class="ss">:current_admin_user</span>
-</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">logout_link_method</span> <span class="o">=</span> <span class="ss">:delete</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>*     *     *   *    *        command to be executed
+</span><span class='line'>-     -     -   -    -
+</span><span class='line'>|     |     |   |    |
+</span><span class='line'>|     |     |   |    +----- day of week (0 - 6) (Sunday=0)
+</span><span class='line'>|     |     |   +------- month (1 - 12)
+</span><span class='line'>|     |     +--------- day of month (1 - 31)
+</span><span class='line'>|     +---------- hour (0 - 23)
+</span><span class='line'>+------- min (0 - 59)</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Registering new resource</p>
+<h2>Example commands</h2>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rails</span> <span class="n">generate</span> <span class="n">active_admin</span><span class="ss">:resource</span> <span class="n">category</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Customization</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -552,46 +1109,22 @@ Below post will show you how to integrate authorize net payment gateway inside r
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/admin/categories.rb </span>
-</span><span class='line'><span class="no">ActiveAdmin</span><span class="o">.</span><span class="n">register</span> <span class="no">Category</span> <span class="k">do</span>
-</span><span class='line'>  <span class="n">scope</span> <span class="ss">:published</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># Generate progressive report for every active user at 11:45 p.m.
+</span><span class='line'>45 23 * * * (cd /home/sandip/current/; rake ace:daily_progressive_report RAILS_ENV=production)
 </span><span class='line'>
-</span><span class='line'>  <span class="n">form</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
-</span><span class='line'>    <span class="n">f</span><span class="o">.</span><span class="n">inputs</span> <span class="k">do</span>
-</span><span class='line'>      <span class="n">f</span><span class="o">.</span><span class="n">input</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:label</span> <span class="o">=&gt;</span> <span class="s1">&#39;Name&#39;</span>
-</span><span class='line'>      <span class="n">f</span><span class="o">.</span><span class="n">input</span> <span class="ss">:for_type</span><span class="p">,</span> <span class="ss">:label</span> <span class="o">=&gt;</span> <span class="s2">&quot;Category Type&quot;</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>    <span class="n">f</span><span class="o">.</span><span class="n">buttons</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Adding Dashboard</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="ss">ActiveAdmin</span><span class="p">:</span><span class="ss">:Dashboards</span><span class="o">.</span><span class="n">build</span> <span class="k">do</span>
-</span><span class='line'>  <span class="n">section</span> <span class="s2">&quot;Recent Categories&quot;</span> <span class="k">do</span>
-</span><span class='line'>    <span class="n">table_for</span> <span class="no">Category</span><span class="o">.</span><span class="n">published</span><span class="o">.</span><span class="n">recent</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">do</span>
-</span><span class='line'>      <span class="n">column</span> <span class="ss">:name</span> <span class="k">do</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span>
-</span><span class='line'>        <span class="n">link_to</span> <span class="n">c</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="o">[</span><span class="ss">:admin</span><span class="p">,</span> <span class="n">c</span><span class="o">]</span>
-</span><span class='line'>      <span class="k">end</span>
-</span><span class='line'>      <span class="n">column</span> <span class="ss">:created_at</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>    <span class="n">strong</span> <span class="p">{</span> <span class="n">link_to</span> <span class="s2">&quot;View All Categories&quot;</span><span class="p">,</span> <span class="n">admin_categories_path</span> <span class="p">}</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'># Take database backup every night
+</span><span class='line'>59 2 * * * (cd /home/sandip/current/; rake db:backup RAILS_ENV=production)
+</span><span class='line'>
+</span><span class='line'># Initialize grouping on database every sunday
+</span><span class='line'>29 3 * * 0 (cd /home/sandip/current/; rake ace:initializeCarGrouping RAILS_ENV=production)
+</span><span class='line'>
+</span><span class='line'># Generate daily stats on 4:30 AM & 12:30 PM and 4:30 PM
+</span><span class='line'>30 4,12,16 * * * (cd /home/sandip/current/; rake ace:daily_call_statistics RAILS_ENV=production)
+</span><span class='line'>
+</span><span class='line'># Rotate sphinx indexes updated evry hour if missed out somehow
+</span><span class='line'>0 * * * * (cd /user/local/bin/; indexer --rotate --config /home/sandip/current/config/production.sphinx.conf)</span></code></pre></td></tr></table></div></figure>
 
 </div>
   
@@ -605,7 +1138,7 @@ Below post will show you how to integrate authorize net payment gateway inside r
       
   <header>
     
-      <h1 class="entry-title"><a href="/2011/12/simplified-active-record-extensions/">Simplified Active Record Extensions</a></h1>
+      <h1 class="entry-title"><a href="/2011/01/testing-restful-polymorphic-resource/">Testing Restful & Polymorphic Resource Routes on Rails Console</a></h1>
     
     
       <p class="meta">
@@ -621,14 +1154,56 @@ Below post will show you how to integrate authorize net payment gateway inside r
   
 
 
-<time datetime="2011-12-28T14:21:00+05:30" pubdate data-updated="true">Dec 28<span>th</span>, 2011</time>
+<time datetime="2011-01-19T15:05:00+05:30" pubdate data-updated="true">Jan 19<span>th</span>, 2011</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Below extensions to active record base simplifies its usage while coding.</p>
+  <div class="entry-content"><p>Testing restful &amp; polymorphic resource routes on rails console</p>
+
+<h2>Open rails console</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rails</span> <span class="n">c</span> <span class="c1"># In rails 3</span>
+</span><span class='line'><span class="c1"># OR</span>
+</span><span class='line'><span class="n">ruby</span> <span class="n">script</span><span class="o">/</span><span class="n">console</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Getting app object</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">=&gt;</span> <span class="c1">#&lt;ActionController::Integration::Session:0xc164fac @result=nil, @status=nil, @accept=&quot;text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5&quot;, @path=nil, @request_count=0, @application=#&lt;ActionController::Dispatcher:0xc1644f8 @output=#&lt;IO:0x85e34ec&gt;&gt;, @remote_addr=&quot;127.0.0.1&quot;, @host=&quot;www.example.com&quot;, @controller=nil, @https=false, @request=nil, @headers=nil, @cookies={}, @status_message=nil, @named_routes_configured=true, @response=nil&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Root URL</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">root_url</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;http://www.example.com/&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Plural paths</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">calls_path</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;/calls&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Singular routes</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -644,24 +1219,24 @@ Below post will show you how to integrate authorize net payment gateway inside r
 <span class='line-number'>12</span>
 <span class='line-number'>13</span>
 <span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># config/initializers/core_extensions.rb </span>
-</span><span class='line'><span class="k">class</span> <span class="nc">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">audio_call_path</span>
+</span><span class='line'><span class="ss">ActionController</span><span class="p">:</span><span class="ss">:RoutingError</span><span class="p">:</span> <span class="n">audio_call_url</span> <span class="n">failed</span>
 </span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">pagination</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">paginate</span> <span class="ss">:per_page</span> <span class="o">=&gt;</span> <span class="n">options</span><span class="o">[</span><span class="ss">:per_page</span><span class="o">]</span> <span class="o">||</span> <span class="n">per_page</span><span class="p">,</span> <span class="ss">:page</span> <span class="o">=&gt;</span> <span class="n">options</span><span class="o">[</span><span class="ss">:page</span><span class="o">]</span>
-</span><span class='line'>  <span class="k">end</span>
 </span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">options_for_select</span><span class="p">(</span><span class="n">opts</span><span class="o">=</span><span class="p">{})</span>
-</span><span class='line'>    <span class="n">opts</span><span class="o">[</span><span class="ss">:name</span><span class="o">]</span> <span class="o">||=</span> <span class="ss">:name</span>
-</span><span class='line'>    <span class="n">opts</span><span class="o">[</span><span class="ss">:attr</span><span class="o">]</span> <span class="o">||=</span> <span class="ss">:id</span>
-</span><span class='line'>    <span class="n">opts</span><span class="o">[</span><span class="ss">:prompt</span><span class="o">]</span> <span class="o">||=</span> <span class="s1">&#39;Please Select&#39;</span>
-</span><span class='line'>    <span class="n">all</span><span class="o">.</span><span class="n">collect</span><span class="p">{</span><span class="o">|</span><span class="n">c</span><span class="o">|</span> <span class="o">[</span><span class="n">c</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">opts</span><span class="o">[</span><span class="ss">:name</span><span class="o">].</span><span class="n">to_sym</span><span class="p">),</span> <span class="n">c</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">opts</span><span class="o">[</span><span class="ss">:attr</span><span class="o">].</span><span class="n">to_sym</span><span class="p">)</span><span class="o">]</span><span class="p">}</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">[</span><span class="n">opts</span><span class="o">[</span><span class="ss">:prompt</span><span class="o">]</span><span class="p">,</span> <span class="kp">nil</span><span class="o">]</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">audio_call_path</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;/calls/1/audio&quot;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">audio_call_path</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;/calls/13/audio&quot;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">audio_call_path</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s1">&#39;san&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;/calls/13/audio?name=san&quot;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Usage</p>
+<h2>Polymorphic URLS</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -670,19 +1245,13 @@ Below post will show you how to integrate authorize net payment gateway inside r
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Student</span><span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
-</span><span class='line'> <span class="c1">#attributes #=&gt; name, age</span>
-</span><span class='line'><span class="k">end</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">app</span><span class="o">.</span><span class="n">polymorphic_path</span><span class="p">(</span><span class="no">Call</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="ss">:action</span> <span class="o">=&gt;</span> <span class="s1">&#39;audio&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;/calls/253/audio&quot;</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">## </span>
-</span><span class='line'><span class="no">Student</span><span class="o">.</span><span class="n">pagination</span><span class="p">({</span><span class="ss">:page</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">})</span>
-</span><span class='line'><span class="no">Student</span><span class="o">.</span><span class="n">pagination</span><span class="p">({</span><span class="ss">:per_page</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span> <span class="ss">:page</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">})</span>
-</span><span class='line'><span class="no">Student</span><span class="o">.</span><span class="n">options_for_select</span>
-</span><span class='line'><span class="no">Student</span><span class="o">.</span><span class="n">options_for_select</span><span class="p">({</span><span class="ss">:prompt</span> <span class="o">=&gt;</span> <span class="s1">&#39;Please select&#39;</span><span class="p">})</span>
-</span><span class='line'><span class="no">Student</span><span class="o">.</span><span class="n">options_for_select</span><span class="p">({</span><span class="ss">:name</span> <span class="o">=&gt;</span> <span class="ss">:age</span><span class="p">})</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">polymorphic_path</span><span class="p">(</span><span class="no">Call</span><span class="o">.</span><span class="n">new</span><span class="p">)</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;/calls&quot;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 </div>
@@ -697,7 +1266,7 @@ Below post will show you how to integrate authorize net payment gateway inside r
       
   <header>
     
-      <h1 class="entry-title"><a href="/2011/12/twitter-bootstrap-paginate-and-rails-3/">Twitter Bootstrap Paginate and Rails 3</a></h1>
+      <h1 class="entry-title"><a href="/2011/01/getting-started-with-mysql-on-amazon/">Getting Started With MySQL on Amazon Web Services</a></h1>
     
     
       <p class="meta">
@@ -713,130 +1282,31 @@ Below post will show you how to integrate authorize net payment gateway inside r
   
 
 
-<time datetime="2011-12-28T14:06:00+05:30" pubdate data-updated="true">Dec 28<span>th</span>, 2011</time>
+<time datetime="2011-01-15T18:30:00+05:30" pubdate data-updated="true">Jan 15<span>th</span>, 2011</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Twitter bootstrap is css toolkit for rapid front-end UI development.
-To get will-paginate working with bootstrap css we need to override default pagination link renderer.</p>
-
-<p>Using Bootstrap-sass for rails 3</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># Gemfile
-</span><span class='line'>gem 'sass-rails'
-</span><span class='line'>gem 'bootstrap-sass'</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nn">#</span> <span class="nt">app</span><span class="o">/</span><span class="nt">assets</span><span class="o">/</span><span class="nt">stylesheets</span><span class="o">/</span><span class="nt">application</span><span class="nc">.css.sass</span>
-</span><span class='line'><span class="c1">// Place all the styles related to the home controller here.</span>
-</span><span class='line'><span class="c1">// They will automatically be included in application.css.</span>
-</span><span class='line'><span class="c1">// You can use Sass (SCSS) here: http://sass-lang.com/</span>
-</span><span class='line'><span class="c1">//= require bootstrap</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Add WillPaginate LinkRenderer to intitializer</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># config/initializers/will_paginate.rb</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">module</span> <span class="nn">WillPaginate</span>
-</span><span class='line'>  <span class="k">module</span> <span class="nn">ActiveRecord</span>
-</span><span class='line'>    <span class="k">module</span> <span class="nn">RelationMethods</span>
-</span><span class='line'>      <span class="n">alias_method</span> <span class="ss">:per</span><span class="p">,</span> <span class="ss">:per_page</span>
-</span><span class='line'>      <span class="n">alias_method</span> <span class="ss">:num_pages</span><span class="p">,</span> <span class="ss">:total_pages</span>
-</span><span class='line'>      <span class="n">alias_method</span> <span class="ss">:total_count</span><span class="p">,</span> <span class="ss">:count</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">module</span> <span class="nn">ActionView</span>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">will_paginate</span><span class="p">(</span><span class="n">collection</span> <span class="o">=</span> <span class="kp">nil</span><span class="p">,</span> <span class="n">options</span> <span class="o">=</span> <span class="p">{})</span>
-</span><span class='line'>      <span class="n">options</span><span class="o">[</span><span class="ss">:inner_window</span><span class="o">]</span> <span class="o">||=</span> <span class="mi">0</span>
-</span><span class='line'>      <span class="n">options</span><span class="o">[</span><span class="ss">:outer_window</span><span class="o">]</span> <span class="o">||=</span> <span class="mi">0</span>
-</span><span class='line'>      <span class="n">options</span><span class="o">[</span><span class="ss">:class</span><span class="o">]</span> <span class="o">||=</span> <span class="s1">&#39;pagination pull-left&#39;</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="n">options</span><span class="o">[</span><span class="ss">:renderer</span><span class="o">]</span> <span class="o">||=</span> <span class="no">BootstrapLinkRenderer</span>
-</span><span class='line'>      <span class="k">super</span><span class="o">.</span><span class="n">try</span> <span class="ss">:html_safe</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">class</span> <span class="nc">BootstrapLinkRenderer</span> <span class="o">&lt;</span> <span class="no">LinkRenderer</span>
-</span><span class='line'>      <span class="kp">protected</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="k">def</span> <span class="nf">html_container</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
-</span><span class='line'>        <span class="n">tag</span> <span class="ss">:div</span><span class="p">,</span> <span class="n">tag</span><span class="p">(</span><span class="ss">:ul</span><span class="p">,</span> <span class="n">html</span><span class="p">),</span> <span class="n">container_attributes</span>
-</span><span class='line'>      <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="k">def</span> <span class="nf">page_number</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
-</span><span class='line'>        <span class="n">tag</span> <span class="ss">:li</span><span class="p">,</span> <span class="n">link</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="n">page</span><span class="p">,</span> <span class="ss">:rel</span> <span class="o">=&gt;</span> <span class="n">rel_value</span><span class="p">(</span><span class="n">page</span><span class="p">)),</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="s1">&#39;active&#39;</span> <span class="k">if</span> <span class="n">page</span> <span class="o">==</span> <span class="n">current_page</span><span class="p">)</span>
-</span><span class='line'>      <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="k">def</span> <span class="nf">previous_or_next_page</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">classname</span><span class="p">)</span>
-</span><span class='line'>        <span class="n">tag</span> <span class="ss">:li</span><span class="p">,</span> <span class="n">link</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">page</span> <span class="o">||</span> <span class="s1">&#39;javascript:void(0)&#39;</span><span class="p">),</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="n">classname</span><span class="o">[</span><span class="mi">0</span><span class="o">.</span><span class="n">.</span><span class="mi">3</span><span class="o">]</span><span class="p">,</span> <span class="n">classname</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;disabled&#39;</span> <span class="k">unless</span> <span class="n">page</span><span class="p">)</span><span class="o">].</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
-</span><span class='line'>      <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="k">def</span> <span class="nf">gap</span>
-</span><span class='line'>        <span class="n">tag</span> <span class="ss">:li</span><span class="p">,</span> <span class="n">link</span><span class="p">(</span><span class="k">super</span><span class="p">,</span> <span class="s1">&#39;javascript:void(0)&#39;</span><span class="p">),</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s1">&#39;disabled&#39;</span>
-</span><span class='line'>      <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
+  <div class="entry-content"><div class='post'>
+<div style="width:825px" id="__ss_1327730">
+<strong style="display:block;margin:12px 0 4px">
+<a href="http://www.slideshare.net/ronaldbradford/getting-started-with-mysql-in-amazon-web-services" title="Getting started with MySQL on Amazon Web Services">Getting started with MySQL on Amazon Web Services</a>
+</strong>
+<object id="__sse1327730" width="825" height="355">
+<param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=usingamazonwebservices-090422111735-phpapp01&stripped_title=getting-started-with-mysql-in-amazon-web-services&userName=ronaldbradford" />
+<param name="allowFullScreen" value="true"/>
+<param name="allowScriptAccess" value="always"/>
+<embed name="__sse1327730" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=usingamazonwebservices-090422111735-phpapp01&stripped_title=getting-started-with-mysql-in-amazon-web-services&userName=ronaldbradford" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="825" height="355">
+</embed>
+</object>
+<div style="padding:5px 0 12px">View more 
+<a href="http://www.slideshare.net/">presentations</a> 
+from <a href="http://www.slideshare.net/ronaldbradford">Ronald Bradford</a>.
+</div>
+</div>
+</div>
 
 </div>
   
