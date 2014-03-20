@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: SOAP | Fun On Rails]]></title>
+  <link href="http://funonrails.com/categories/soap/atom.xml" rel="self"/>
+  <link href="http://funonrails.com/"/>
+  <updated>2014-03-20T17:26:44+05:30</updated>
+  <id>http://funonrails.com/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[RESTful vs SOAP web services]]></title>
+    <link href="http://funonrails.com/2014/03/restful-vs-soap-web-services/"/>
+    <updated>2014-03-17T15:09:33+05:30</updated>
+    <id>http://funonrails.com/2014/03/restful-vs-soap-web-services</id>
+    <content type="html"><![CDATA[<blockquote><p><strong>A Web service</strong> is a method of communications between two electronic devices over the World Wide Web.
+It is also defined as a software system designed to support <a href="http://en.wikipedia.org/wiki/Interoperability">interoperable</a> machine-to-machine interaction over a network.</p></blockquote>
+
+<p>Web services communicate via either SOAP or REST messages.</p>
+
+<h3>REST</h3>
+
+<p>REST stands for REpresentational State Transfer. It is a term coined by Roy Fielding in his Ph.D. dissertation
+It is an architecture style for designing networked applications which typycally runs runs over HTTP.</p>
+
+<p>REST is an architecture and not a &ldquo;standard&rdquo;. There is no w3c recommendation for REST. It is concept for better web and widely accepted.</p>
+
+<p>RESTful applications use HTTP requests to post data (create and/or update), read data (e.g., make queries), and delete data. Thus, REST uses HTTP for all four CRUD (Create/Read/Update/Delete) operations.</p>
+
+<p>It expects client to have knowlege of what to send and what to expect in response. It is focused on accessing named resources through a single consistent interface.</p>
+
+<p>Highlights of REST:</p>
+
+<ol>
+<li>It is simple</li>
+<li>It is lightweight and faster</li>
+<li>Platform-independent</li>
+<li>Language-independent</li>
+<li>runs over HTTP</li>
+<li>Response can be returned in &ldquo;XML/JSON&rdquo; format</li>
+</ol>
+
+
+<p>Like Web Services, REST offers no built-in security features, encryption, session management, QoS guarantees, etc. But also as with Web Services, these can be added by building on top of <a href="HTTP:">HTTP:</a></p>
+
+<p>For security, username/password tokens are often used.
+For encryption, REST can be used on top of HTTPS (secure sockets).</p>
+
+<h4>Example:</h4>
+
+<p>The Web is comprised of resources. A resource is any item of interest. For example, the Boeing Aircraft Corp may define a 747 resource. Clients may access that resource with this URL:</p>
+
+<p><code>
+http://www.boeing.com/aircraft/747
+</code></p>
+
+<!--more-->
+
+
+<h3>SOAP</h3>
+
+<p>SOAP, originally defined as Simple Object Access Protocol, is a protocol specification for exchanging structured information in the implementation of Web Services in computer networks.</p>
+
+<p>SOAP is an XML based protocol for accessing Web Services. It is designed to handle distributed computing environments.</p>
+
+<p>It is well defined mechanism for describing the interface e.g. WSDL+XSD, WS-Policy. As it is standardised it becomes complex t
+It provides a large number of supporting standards for security, reliability, transactions.</p>
+
+<p>Here content of the message decides what to perform and reponse (payload) must comply with SOAP schema.</p>
+
+<h4>Example</h4>
+
+<p>```
+POST /InStock HTTP/1.1
+Host: www.example.org
+Content-Type: application/soap+xml; charset=utf-8
+Content-Length: 299
+SOAPAction: &ldquo;<a href="http://www.w3.org/2003/05/soap-envelope">http://www.w3.org/2003/05/soap-envelope</a>&rdquo;
+&lt;!&ndash; &ndash;>
+&lt;?xml version=&ldquo;1.0&rdquo;?>
+&lt;soap:Envelope xmlns:soap=&ldquo;<a href="http://www.w3.org/2003/05/soap-envelope">http://www.w3.org/2003/05/soap-envelope</a>&rdquo;>
+  &lt;soap:Header>
+  &lt;/soap:Header>
+  &lt;soap:Body></p>
+
+<pre><code>&lt;m:GetStockPrice xmlns:m="http://www.example.org/stock"&gt;
+  &lt;m:StockName&gt;IBM&lt;/m:StockName&gt;
+&lt;/m:GetStockPrice&gt;
+</code></pre>
+
+<p>  &lt;/soap:Body>
+&lt;/soap:Envelope>
+```
+Here are few <strong>reasons</strong> for which you may want to use SOAP:</p>
+
+<ol>
+<li>Security<br/>
+It supports SSL (just like REST). It also provides a standard implementation of data integrity and data privacy. Being &ldquo;Enterprise&rdquo; it&rsquo;s more secure.</li>
+<li>Atomic Transaction <br/>
+When ACID Transactions needed over a service</li>
+<li>Reliable Messaging <br/>
+It has successful/retry logic built in and provides end-to-end reliability even through SOAP intermediaries</li>
+</ol>
+
+
+<h4>When SOAP can be used</h4>
+
+<p>Whenever complex or likely to change API getting developed then SOAP will be more useful.</p>
+
+<h4>References</h4>
+
+<ol>
+<li><a href="http://rest.elkstein.org/">http://rest.elkstein.org/</a></li>
+<li><a href="http://www.xfront.com/REST-Web-Services.html">http://www.xfront.com/REST-Web-Services.html</a></li>
+<li><a href="http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm">http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm</a></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+</feed>

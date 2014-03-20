@@ -98,7 +98,162 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2009/12/hpricot-scraping-in-ruby/">Hpricot Scraping in Ruby</a></h1>
+      <h1 class="entry-title"><a href="/2010/02/adhearsion-and-telegraph-framework/">Adhearsion and Telegraph Framework Presentation</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-02-03T14:36:00+05:30" pubdate data-updated="true">Feb 3<span>rd</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Check out this SlideShare Presentation: <div style="width:825px;text-align:left" id="__ss_881934"><a style="font:14px Helvetica,Arial,Sans-serif;display:block;margin:12px 0 3px 0;text-decoration:underline;" href="http://www.slideshare.net/justingrammens/rumvoip" title="Adhearsion and Telegraph Framework Presentation">Adhearsion and Telegraph Framework Presentation</a><object style="margin:0px" width="825" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=rumvoip-123073798056-phpapp01&stripped_title=rumvoip" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=rumvoip-123073798056-phpapp01&stripped_title=rumvoip" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="825" height="355"></embed></object><div style="font-size:11px;font-family:tahoma,arial;height:26px;padding-top:2px;">View more <a style="text-decoration:underline;" href="http://www.slideshare.net/">presentations</a> from <a style="text-decoration:underline;" href="http://www.slideshare.net/justingrammens">Justin Grammens</a>.</div></div></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/01/delayed-job-changing-job-parameters-in-rails/">Delayed Job changing job parameters in Rails</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-01-13T19:59:00+05:30" pubdate data-updated="true">Jan 13<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Delayed job variables initialization written on at collectiveidea / delayed_job doesn&rsquo;t work.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># config/initializers/delayed_job_config.rb</span>
+</span><span class='line'><span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Worker</span><span class="o">.</span><span class="n">destroy_failed_jobs</span> <span class="o">=</span> <span class="kp">false</span>
+</span><span class='line'><span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Worker</span><span class="o">.</span><span class="n">sleep_delay</span> <span class="o">=</span> <span class="mi">60</span>
+</span><span class='line'><span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Worker</span><span class="o">.</span><span class="n">max_attempts</span> <span class="o">=</span> <span class="mi">3</span>
+</span><span class='line'><span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Worker</span><span class="o">.</span><span class="n">max_run_time</span> <span class="o">=</span> <span class="mi">5</span><span class="o">.</span><span class="n">minutes</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here is the correct way of doing it as mentioned on tobi / delayed_job</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># config/initializers/delayed_job_config.rb</span>
+</span><span class='line'><span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Job</span><span class="o">.</span><span class="n">destroy_failed_jobs</span> <span class="o">=</span> <span class="kp">false</span>
+</span><span class='line'><span class="n">silence_warnings</span> <span class="k">do</span>
+</span><span class='line'>  <span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Job</span><span class="o">.</span><span class="n">const_set</span><span class="p">(</span><span class="s2">&quot;MAX_ATTEMPTS&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</span><span class='line'>  <span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Job</span><span class="o">.</span><span class="n">const_set</span><span class="p">(</span><span class="s2">&quot;MAX_RUN_TIME&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="o">.</span><span class="n">minutes</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/12/getting-wired-and-wireless-working-on-ubuntu/">Getting wired and wireless working on ubuntu 9.0.4</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-14T15:39:00+05:30" pubdate data-updated="true">Dec 14<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>It might be the case that earlier wireless was working and then it stopped working</p>
+
+<p>Follow the simple steps here&hellip;.</p>
+
+<p><strong>1. Restart networking</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo /etc/init.d/networking restart</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>2. Disable the <em>&ldquo;Support for Atheros 802.11 wireless LAN cards&rdquo;</em> on <code>system/administration/Hardware Drivers</code>, and reboot your box</strong>
+<strong>3. Restart</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo reboot</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&rsquo;s it, Cheers! Still having problem follow the instructions <a href="http://www.funonrails.com/2009/10/getting-wireless-working-on-ubuntu.html">here</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/12/hpricot-scraping-in-ruby/">Hpricot scraping in ruby</a></h1>
     
     
       <p class="meta">
@@ -176,7 +331,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2009/11/passing-commandline-parameter-arguments/">Passing Commandline Parameter (Arguments) to Ruby File Using Optparser</a></h1>
+      <h1 class="entry-title"><a href="/2009/11/passing-commandline-parameter-arguments/">Passing commandline parameter (arguments) to ruby file using optparser</a></h1>
     
     
       <p class="meta">
@@ -271,7 +426,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2009/11/how-to-get-all-associted-models-of-rails-model/">How to Get All Associated Models of Rails Model</a></h1>
+      <h1 class="entry-title"><a href="/2009/11/how-to-get-all-associted-models-of-rails-model/">How to get all associated models of rails model</a></h1>
     
     
       <p class="meta">
@@ -334,7 +489,7 @@ After doing lot headache, here is the solution i found</p>
       
   <header>
     
-      <h1 class="entry-title"><a href="/2009/11/cricket-challenge-flash-game/">Cricket Challenge Flash Game</a></h1>
+      <h1 class="entry-title"><a href="/2009/11/cricket-challenge-flash-game/">Cricket challenge flash game</a></h1>
     
     
       <p class="meta">
@@ -383,7 +538,7 @@ After doing lot headache, here is the solution i found</p>
       
   <header>
     
-      <h1 class="entry-title"><a href="/2009/11/3rd-worm-game/">Flash Games</a></h1>
+      <h1 class="entry-title"><a href="/2009/11/3rd-worm-game/">Flash games</a></h1>
     
     
       <p class="meta">
@@ -471,7 +626,7 @@ After doing lot headache, here is the solution i found</p>
       
   <header>
     
-      <h1 class="entry-title"><a href="/2009/11/upgrading-openoffice-in-ubuntu-interpid/">Upgrading Openoffice in Ubuntu Interpid</a></h1>
+      <h1 class="entry-title"><a href="/2009/11/upgrading-openoffice-in-ubuntu-interpid/">Upgrading openoffice in ubuntu interpid</a></h1>
     
     
       <p class="meta">
@@ -504,351 +659,6 @@ After doing lot headache, here is the solution i found</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/11/bundling-gems-in-rails-application/">Bundling Gems in Rails Application</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-11-23T14:47:00+05:30" pubdate data-updated="true">Nov 23<span>rd</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Gem Bundling is basically used to maintain all required gems at your application level and its very easy to use.
-It downloads necessary gems and maintain it under <code>/vender/gems</code> directory.</p>
-
-<h2>Install gemcutter</h2>
-
-<p>gemcutter provides hosting for ruby gems</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>gem install gemcutter</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Install bundler</h2>
-
-<p>bundler is a tool that manages gem dependencies for your ruby application</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>gem install bundler</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Start using</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>gem bundle</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/11/vim-cheatsheet/">VI/ VIM Cheats</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-11-18T01:20:00+05:30" pubdate data-updated="true">Nov 18<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Movements</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>b   previous word
-</span><span class='line'>w   next word
-</span><span class='line'>e        end of word
-</span><span class='line'>0/^      begining of line
-</span><span class='line'>$        end of line
-</span><span class='line'>G        end of file
-</span><span class='line'>1G/gg    begining of file
-</span><span class='line'>/pattern  search next
-</span><span class='line'>?pattern  search previous
-</span><span class='line'>n         repeat    search forword ( i.e next occurence )
-</span><span class='line'>N         repeat    search backword
-</span><span class='line'>:line     goto line specified</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Modes</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>i   insert mode
-</span><span class='line'>r   replace mode
-</span><span class='line'>s   delete character under cursor and eneter insert mode</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Delete</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>x    delete character under cursor
-</span><span class='line'>dd   delete current line
-</span><span class='line'>line dd delete number of lines specified</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Copy</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>yy        copy current line
-</span><span class='line'>pp        print copied contents
-</span><span class='line'>line yy   copy number of lines specified</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Visual</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>v     enter visual mode
-</span><span class='line'>aw    highlight word
-</span><span class='line'>as    highlight sentence
-</span><span class='line'>ap    highlight paragraph
-</span><span class='line'>ab    highlight block</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Undo/ Redo</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>u       undo
-</span><span class='line'>cntrl+r redo</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>autocomplete</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cntrl+x   enter completion mode
-</span><span class='line'>cntrl+p   display autocomplete options</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Uppercase/ Lowercase</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>guu   lowercase line
-</span><span class='line'>gUU   uppercase line</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Regx replace</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>range s/foo/bar/arg - replace foo with bar in 'range' with
-</span><span class='line'>
-</span><span class='line'>Values of 'range':
-</span><span class='line'>%               whole file
-</span><span class='line'>number          that particular line
-</span><span class='line'>none            apply to current line only
-</span><span class='line'>
-</span><span class='line'>values of 'arg':
-</span><span class='line'>none  apply to first occurrence
-</span><span class='line'>g     global (all occurrences)</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Select/Macros</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>qchar      start recording macro storing it in register 'char'
-</span><span class='line'>q          end recording
-</span><span class='line'>@char      replay the macro stored in 'char'
-</span><span class='line'>:1,10 norm! @char run the macro stored in 'char over the 1-10 line range</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/11/yaml-file-configuration-in-ruby-rails/">YAML File Configuration in Ruby & Rails</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-11-17T15:01:00+05:30" pubdate data-updated="true">Nov 17<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>While coding in ruby and rails, we often requires variables to be initialized that can be used across application. There are many ways to define configuration variables</p>
-
-<h2>Initialize variables inside environment</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># This agencies can be used across application
-</span><span class='line'>AGENCIES = ['TIMES NEWS NETWORK', 'AGENCIES', 'AFP', 'PTI']
-</span><span class='line'>
-</span><span class='line'># Configuration for html nodes
-</span><span class='line'>
-</span><span class='line'>Article_title_tag = "h1.heading"
-</span><span class='line'>Date_auth_agency_tag = "span[@class='byline']"
-</span><span class='line'>Location_content_tag = "div[@class='Normal']"</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Create config inside initializers</h2>
-
-<p>Just make <code>config.rb</code> inside initializers and add variables to it.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#config/initializers/config.rb
-</span><span class='line'># This agencies can be used across application
-</span><span class='line'>AGENCIES = ['TIMES NEWS NETWORK', 'AGENCIES', 'AFP', 'PTI']
-</span><span class='line'>
-</span><span class='line'># Configuration for html nodes
-</span><span class='line'>Article_title_tag = "h1.heading"
-</span><span class='line'>Date_auth_agency_tag = "span[@class='byline']"
-</span><span class='line'>Location_content_tag = "div[@class='Normal']"</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Load config using YML</h2>
-
-<p>But most efficient way to organize variables is YML file</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="c1"># config/config.yml</span>
-</span><span class='line'><span class="l-Scalar-Plain">the_times_of_india</span><span class="p-Indicator">:</span>
-</span><span class='line'>  <span class="l-Scalar-Plain">article_title_tag</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">h1.heading</span>
-</span><span class='line'>  <span class="l-Scalar-Plain">date_auth_agency_tag</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">span[@class=&#39;byline&#39;]</span>
-</span><span class='line'>  <span class="l-Scalar-Plain">loc_content_tag</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">div[@class=&#39;Normal&#39;]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Accessing YML files</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">APP_CONFIG</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="no">RAILS_ROOT</span><span class="si">}</span><span class="s2">/config/config.yml&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="c1">#=&gt; true</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="no">APP_CONFIG</span>
-</span><span class='line'><span class="c1">#=&gt; {&quot;the_times_of_india&quot;=&gt;{&quot;article_title_tag&quot;=&gt;&quot;h1.heading&quot;, &quot;loc_content_tag&quot;=&gt;&quot;div[@class=&#39;Normal&#39;]&quot;, &quot;date_auth_agency_tag&quot;=&gt;&quot;span[@class=&#39;byline&#39;]&quot;}}</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="no">APP_CONFIG</span><span class="o">[</span><span class="ss">:the_times_of_india</span><span class="o">]</span>
-</span><span class='line'><span class="c1">#=&gt; nil</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="no">APP_CONFIG</span><span class="o">[</span><span class="s1">&#39;the_times_of_india&#39;</span><span class="o">]</span>
-</span><span class='line'><span class="c1">#=&gt; {&quot;article_title_tag&quot;=&gt;&quot;h1.heading&quot;, &quot;loc_content_tag&quot;=&gt;&quot;div[@class=&#39;Normal&#39;]&quot;, &quot;date_auth_agency_tag&quot;=&gt;&quot;span[@class=&#39;byline&#39;]&quot;}</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="no">APP_CONFIG</span><span class="o">[</span><span class="s1">&#39;the_times_of_india&#39;</span><span class="o">][</span><span class="s1">&#39;article_title_tag&#39;</span><span class="o">]</span>
-</span><span class='line'><span class="c1">#=&gt; &quot;h1.heading&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/12/">&larr; Older</a>
@@ -866,6 +676,14 @@ It downloads necessary gems and maintain it under <code>/vender/gems</code> dire
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/03/restful-vs-soap-web-services/">RESTful vs SOAP web services</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/03/regex-to-split-string-within-quotes-and-spaces/">regex to split string within quotes and spaces</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/02/moving-from-blogspot-to-octopress/">Migrating from blogspot to octopress</a>
       </li>
     
@@ -875,14 +693,6 @@ It downloads necessary gems and maintain it under <code>/vender/gems</code> dire
     
       <li class="post">
         <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/04/upgrading-from-rails-2-1-x-to-rails-2-3-11/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>

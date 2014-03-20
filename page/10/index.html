@@ -98,7 +98,196 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2010/02/copy-database-to-another-database/">Copy Database to Another Database Through Command</a></h1>
+      <h1 class="entry-title"><a href="/2010/02/extend-enumerable-to-add-method/">Extend enumerable to add method collect_with_index</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-02-18T14:24:00+05:30" pubdate data-updated="true">Feb 18<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Extend enumerable functionality to iterate along with index</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">Enumerable</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">collect_with_index</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">collect</span><span class="p">{</span><span class="o">|</span><span class="n">elm</span><span class="o">|</span> <span class="k">yield</span><span class="p">(</span><span class="n">elm</span><span class="p">,</span> <span class="n">i</span><span class="o">+=</span><span class="mi">1</span><span class="p">)}</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  <span class="k">alias</span> <span class="n">map_with_index</span> <span class="n">collect_with_index</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Example use :</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'> <span class="o">[</span><span class="s1">&#39;ruby&#39;</span><span class="p">,</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;sandip&#39;</span><span class="o">].</span><span class="n">map_with_index</span><span class="p">{</span> <span class="o">|</span><span class="n">w</span><span class="p">,</span><span class="n">i</span><span class="o">|</span>  <span class="o">[</span><span class="n">w</span><span class="p">,</span> <span class="n">i</span><span class="o">]</span> <span class="p">}</span>
+</span><span class='line'> <span class="c1">#=&gt; [[&quot;ruby&quot;, 1], [&quot;rails&quot;, 2], [&quot;sandip&quot;, 3]] </span>
+</span><span class='line'>
+</span><span class='line'> <span class="o">[</span><span class="s1">&#39;ruby&#39;</span><span class="p">,</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;sandip&#39;</span><span class="o">].</span><span class="n">collect_with_index</span><span class="p">{</span> <span class="o">|</span><span class="n">w</span><span class="p">,</span><span class="n">i</span><span class="o">|</span>  <span class="o">[</span><span class="n">w</span><span class="p">,</span>  <span class="n">i</span><span class="o">]</span> <span class="p">}</span>
+</span><span class='line'> <span class="c1">#=&gt; [[&quot;ruby&quot;, 1], [&quot;rails&quot;, 2], [&quot;sandip&quot;, 3]]</span>
+</span><span class='line'>
+</span><span class='line'> <span class="c1">#By default index starts from zero to specify custom index to start from,</span>
+</span><span class='line'> <span class="c1">#pass index to collect_with_index</span>
+</span><span class='line'>
+</span><span class='line'> <span class="o">[</span><span class="s1">&#39;ruby&#39;</span><span class="p">,</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;sandip&#39;</span><span class="o">].</span><span class="n">map_with_index</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">){</span> <span class="o">|</span><span class="n">w</span><span class="p">,</span><span class="n">i</span><span class="o">|</span>  <span class="o">[</span><span class="n">w</span><span class="p">,</span> <span class="n">i</span><span class="o">]</span> <span class="p">}</span>
+</span><span class='line'> <span class="c1">#=&gt; [[&quot;ruby&quot;, 0], [&quot;rails&quot;, 1], [&quot;sandip&quot;, 2]]</span>
+</span><span class='line'>
+</span><span class='line'> <span class="o">[</span><span class="s1">&#39;ruby&#39;</span><span class="p">,</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;sandip&#39;</span><span class="o">].</span><span class="n">map_with_index</span><span class="p">(</span><span class="mi">5</span><span class="p">){</span> <span class="o">|</span><span class="n">w</span><span class="p">,</span><span class="n">i</span><span class="o">|</span>  <span class="o">[</span><span class="n">w</span><span class="p">,</span> <span class="n">i</span><span class="o">]</span> <span class="p">}</span>
+</span><span class='line'> <span class="c1">#=&gt; [[&quot;ruby&quot;, 6], [&quot;rails&quot;, 7], [&quot;sandip&quot;, 8]]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/02/fixsolution-for-nomethoderror-undefined/">Fix/Solution for NoMethodError? (undefined method `controller_name&#8217; for nil:NilClass)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-02-16T20:32:00+05:30" pubdate data-updated="true">Feb 16<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This error appears when same action gets called twice. There might be chances to have controller with same name twice inside app as well as plugins</p>
+
+<p>In my case the error appeared while migrating from <code>rails 2.1</code> to <code>2.3</code>
+Application was having <code>application.rb</code> and <code>application_controller.rb</code></p>
+
+<p>Files deleted:
+<code>trunk/app/controllers/application.rb</code></p>
+
+<p>And that solved problem !</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/02/online-ruby-programming-useful-website/">Online ruby Programming useful website links</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-02-16T17:27:00+05:30" pubdate data-updated="true">Feb 16<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ol>
+<li><p>Ruby
+<a href="http://tryruby.org">http://tryruby.org</a></p></li>
+<li><p>Hpricot
+<a href="http://hpricot.com">http://hpricot.com</a></p></li>
+<li><p>Regular expressions
+<a href="http://rubular.com">http://rubular.com</a></p></li>
+<li><p>Exceptions
+<a href="http://hoptoadapp.com/">http://hoptoadapp.com/</a></p></li>
+<li><p>Application Performance
+<a href="http://newrelic.com">http://newrelic.com</a></p></li>
+<li><p>Ruby Doc
+<a href="http://www.ruby-doc.org/">http://www.ruby-doc.org/</a></p></li>
+<li><p>Rails API
+<a href="http://api.rubyonrails.org/">http://api.rubyonrails.org/</a></p></li>
+<li><p>Ruby gems sources
+<a href="http://rubyforge.org">http://rubyforge.org</a>  /
+<a href="http://gems.github.com">http://gems.github.com</a>  /
+<a href="http://gemcutter.org">http://gemcutter.org</a></p></li>
+<li><p>Listing remote gems from source
+gem list &mdash;remote &mdash;source <a href="http://gems.github.com">http://gems.github.com</a></p></li>
+<li><p>List of Rails Plugins
+<a href="http://wiki.rubyonrails.org/rails/pages/Plugins">http://wiki.rubyonrails.org/rails/pages/Plugins</a> /
+<a href="http://www.agilewebdevelopment.com/plugins">http://www.agilewebdevelopment.com/plugins</a></p></li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/02/copy-database-to-another-database/">Copy database to another database through command</a></h1>
     
     
       <p class="meta">
@@ -144,7 +333,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2010/02/dynamic-creation-of-variables-in-ruby/">Dynamic Creation of Variables in Ruby</a></h1>
+      <h1 class="entry-title"><a href="/2010/02/dynamic-creation-of-variables-in-ruby/">Dynamic creation of variables in ruby</a></h1>
     
     
       <p class="meta">
@@ -247,7 +436,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2010/02/eval-method-in-ruby/">Eval Method in Ruby</a></h1>
+      <h1 class="entry-title"><a href="/2010/02/eval-method-in-ruby/">Eval method in ruby</a></h1>
     
     
       <p class="meta">
@@ -302,7 +491,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2010/02/hasmany-through-association-for-rails/">Has_many => Through Association for Rails Polymorphic Model</a></h1>
+      <h1 class="entry-title"><a href="/2010/02/hasmany-through-association-for-rails/">has_many => through association for rails polymorphic model</a></h1>
     
     
       <p class="meta">
@@ -419,7 +608,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2010/02/nginx-passenger-configuration-for-rails/">Nginx Passenger Configuration for Rails Application</a></h1>
+      <h1 class="entry-title"><a href="/2010/02/nginx-passenger-configuration-for-rails/">nginx passenger configuration for rails application</a></h1>
     
     
       <p class="meta">
@@ -585,7 +774,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2010/02/activerecordreadonlyrecord-while/">ActiveRecord::ReadOnlyRecord While Updating Object Fetched by Joins</a></h1>
+      <h1 class="entry-title"><a href="/2010/02/activerecordreadonlyrecord-while/">ActiveRecord::ReadOnlyRecord while updating object fetched by joins</a></h1>
     
     
       <p class="meta">
@@ -643,7 +832,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2010/02/mysql-cheatsheet/">Mysql Cheatsheet</a></h1>
+      <h1 class="entry-title"><a href="/2010/02/mysql-cheatsheet/">Mysql cheatsheet</a></h1>
     
     
       <p class="meta">
@@ -678,161 +867,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/02/adhearsion-and-telegraph-framework/">Adhearsion and Telegraph Framework Presentation</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-02-03T14:36:00+05:30" pubdate data-updated="true">Feb 3<span>rd</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Check out this SlideShare Presentation: <div style="width:825px;text-align:left" id="__ss_881934"><a style="font:14px Helvetica,Arial,Sans-serif;display:block;margin:12px 0 3px 0;text-decoration:underline;" href="http://www.slideshare.net/justingrammens/rumvoip" title="Adhearsion and Telegraph Framework Presentation">Adhearsion and Telegraph Framework Presentation</a><object style="margin:0px" width="825" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=rumvoip-123073798056-phpapp01&stripped_title=rumvoip" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=rumvoip-123073798056-phpapp01&stripped_title=rumvoip" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="825" height="355"></embed></object><div style="font-size:11px;font-family:tahoma,arial;height:26px;padding-top:2px;">View more <a style="text-decoration:underline;" href="http://www.slideshare.net/">presentations</a> from <a style="text-decoration:underline;" href="http://www.slideshare.net/justingrammens">Justin Grammens</a>.</div></div></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/01/delayed-job-changing-job-parameters-in-rails/">Delayed Job Changing Job Parameters in Rails</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-01-13T19:59:00+05:30" pubdate data-updated="true">Jan 13<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Delayed job variables initialization written on at collectiveidea / delayed_job doesn&rsquo;t work.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># config/initializers/delayed_job_config.rb</span>
-</span><span class='line'><span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Worker</span><span class="o">.</span><span class="n">destroy_failed_jobs</span> <span class="o">=</span> <span class="kp">false</span>
-</span><span class='line'><span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Worker</span><span class="o">.</span><span class="n">sleep_delay</span> <span class="o">=</span> <span class="mi">60</span>
-</span><span class='line'><span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Worker</span><span class="o">.</span><span class="n">max_attempts</span> <span class="o">=</span> <span class="mi">3</span>
-</span><span class='line'><span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Worker</span><span class="o">.</span><span class="n">max_run_time</span> <span class="o">=</span> <span class="mi">5</span><span class="o">.</span><span class="n">minutes</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Here is the correct way of doing it as mentioned on tobi / delayed_job</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># config/initializers/delayed_job_config.rb</span>
-</span><span class='line'><span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Job</span><span class="o">.</span><span class="n">destroy_failed_jobs</span> <span class="o">=</span> <span class="kp">false</span>
-</span><span class='line'><span class="n">silence_warnings</span> <span class="k">do</span>
-</span><span class='line'>  <span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Job</span><span class="o">.</span><span class="n">const_set</span><span class="p">(</span><span class="s2">&quot;MAX_ATTEMPTS&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-</span><span class='line'>  <span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Job</span><span class="o">.</span><span class="n">const_set</span><span class="p">(</span><span class="s2">&quot;MAX_RUN_TIME&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="o">.</span><span class="n">minutes</span><span class="p">)</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/12/getting-wired-and-wireless-working-on-ubuntu/">Getting Wired and Wireless Working on Ubuntu 9.0.4</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-12-14T15:39:00+05:30" pubdate data-updated="true">Dec 14<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>It might be the case that earlier wireless was working and then it stopped working</p>
-
-<p>Follow the simple steps here&hellip;.</p>
-
-<p><strong>1. Restart networking</strong></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo /etc/init.d/networking restart</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>2. Disable the <em>&ldquo;Support for Atheros 802.11 wireless LAN cards&rdquo;</em> on <code>system/administration/Hardware Drivers</code>, and reboot your box</strong>
-<strong>3. Restart</strong></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo reboot</span></code></pre></td></tr></table></div></figure>
-
-
-<p>That&rsquo;s it, Cheers! Still having problem follow the instructions <a href="http://www.funonrails.com/2009/10/getting-wireless-working-on-ubuntu.html">here</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/11/">&larr; Older</a>
@@ -850,6 +884,14 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/03/restful-vs-soap-web-services/">RESTful vs SOAP web services</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/03/regex-to-split-string-within-quotes-and-spaces/">regex to split string within quotes and spaces</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/02/moving-from-blogspot-to-octopress/">Migrating from blogspot to octopress</a>
       </li>
     
@@ -859,14 +901,6 @@
     
       <li class="post">
         <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/04/upgrading-from-rails-2-1-x-to-rails-2-3-11/">Upgrading from Rails 2.1.x to Rails 2.3.11</a>
       </li>
     
   </ul>
