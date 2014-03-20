@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>A Ruby and Rails Blog - Fun On Rails</title>
+  <title>A Ruby and Rails Blog | Fun On Rails</title>
   <meta name="author" content="sandipransing">
 
   
@@ -92,340 +92,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/08/pdf-in-rails-using-prawn-library/">PDF in rails using prawn library</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-08-01T16:45:00+05:30" pubdate data-updated="true">Aug 1<span>st</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Building PDF Document in ruby &amp; rails application using prawn Library
-<strong>Brief</strong>. Before getting started with this tutorial, I would like to thanks <strong>Greg and
-Prawn team</strong> for their awesome work towards ruby and rails community</p>
-
-<h2>Installing prawn (core, layout, format, security)</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>gem install prawn</span></code></pre></td></tr></table></div></figure>
-
-
-<p>or
-Add following line in rails environment file inside initializer block</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>config.gem 'prawn'</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Optionally you can specify version to be used and then run task</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rake gems:install</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Generating pdf using rails console</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ruby script/console
-</span><span class='line'>pdf = Prawn::Document.new</span></code></pre></td></tr></table></div></figure>
-
-
-<p>It creates new pdf document object. Here you can additionally pass options parameters such as &ndash;</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="ss">Prawn</span><span class="p">:</span><span class="ss">:Document</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:page_size</span>   <span class="o">=&gt;</span> <span class="o">[</span><span class="mi">11</span><span class="o">.</span><span class="mi">32</span><span class="p">,</span> <span class="mi">8</span><span class="o">.</span><span class="mi">49</span><span class="o">]</span><span class="p">,</span> <span class="ss">:page_layout</span> <span class="o">=&gt;</span> <span class="ss">:portrait</span><span class="p">)</span>
-</span><span class='line'><span class="ss">Prawn</span><span class="p">:</span><span class="ss">:Document</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="no">A0</span><span class="p">)</span> <span class="no">Here</span> <span class="no">A0</span> <span class="n">is</span> <span class="n">page</span> <span class="n">size</span><span class="o">.</span>
-</span><span class='line'><span class="ss">Prawn</span><span class="p">:</span><span class="ss">:Document</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:page_layout</span> <span class="o">=&gt;</span> <span class="ss">:portrait</span><span class="p">,</span>
-</span><span class='line'>                     <span class="ss">:left_margin</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="o">.</span><span class="n">mm</span><span class="p">,</span>    <span class="c1"># different</span>
-</span><span class='line'>                     <span class="ss">:right_margin</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="o">.</span><span class="n">cm</span><span class="p">,</span>    <span class="c1"># units</span>
-</span><span class='line'>                     <span class="ss">:top_margin</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="n">dm</span><span class="p">,</span>    <span class="c1"># work</span>
-</span><span class='line'>                     <span class="ss">:bottom_margin</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="o">.</span><span class="mo">01</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="c1"># well</span>
-</span><span class='line'>                     <span class="ss">:page_size</span> <span class="o">=&gt;</span> <span class="s1">&#39;A4&#39;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">pdf</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s2">&quot;Prawn Rocks&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="mi">12</span>
-</span><span class='line'> <span class="n">pdf</span><span class="o">.</span><span class="n">render_file</span><span class="p">(</span><span class="s1">&#39;prawn.pdf&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="c1">#&lt;file:prawn.pdf (closed)=&quot;&quot;&gt;&lt;/file:prawn.pdf&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Here is output file generated
-<a href="http://github.com/sandipransing/prawn-example/raw/master/sample/prawn.pdf">click</a></p>
-
-<p>Now let&rsquo;s go through other goodness of prawn library</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">pdf</span>  <span class="o">=</span> <span class="ss">Prawn</span><span class="p">:</span><span class="ss">:Document</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s1">&#39;A3&#39;</span><span class="p">)</span> <span class="k">do</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>FONTS</h2>
-
-<p><a href="http://github.com/sandipransing/prawn-example/raw/master/sample/font.pdf">click</a></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Specify font to be used or specify path to font file.</span>
-</span><span class='line'><span class="n">font</span> <span class="s2">&quot;times.ttf&quot;</span>
-</span><span class='line'><span class="n">font</span><span class="p">(</span><span class="s2">&quot;/times.ttf&quot;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>TEXT</h2>
-
-<p><a href="http://github.com/sandipransing/prawn-example/raw/master/sample/font.pdf">click</a></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">text</span> <span class="s1">&#39;Sandip Ransing&#39;</span><span class="p">,</span> <span class="ss">:size</span> <span class="o">=&gt;</span> <span class="mi">41</span><span class="p">,</span> <span class="ss">:position</span> <span class="o">=&gt;</span> <span class="ss">:center</span><span class="p">,</span> <span class="ss">:style</span> <span class="o">=&gt;</span> <span class="ss">:bold</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>STROKE LINE</h2>
-
-<p><a href="http://github.com/sandipransing/prawn-example/raw/master/sample/stroke.pdf">click</a></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">stroke</span> <span class="k">do</span>
-</span><span class='line'>      <span class="n">rectangle</span> <span class="o">[</span><span class="mi">300</span><span class="p">,</span><span class="mi">300</span><span class="o">]</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">200</span>
-</span><span class='line'> <span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>IMAGE</h2>
-
-<p><a href="http://github.com/sandipransing/prawn-example/raw/master/sample/image.pdf">click</a></p>
-
-<p>Displaying Local file system Image</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">image</span> <span class="s1">&#39;sandip.png&#39;</span><span class="p">,</span> <span class="ss">:height</span> <span class="o">=&gt;</span> <span class="mi">50</span><span class="p">,</span> <span class="ss">:position</span> <span class="o">=&gt;</span> <span class="ss">:center</span><span class="p">,</span> <span class="ss">:border</span> <span class="o">=&gt;</span> <span class="mi">2</span>
-</span><span class='line'><span class="no">Scale</span> <span class="no">Image</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">image</span> <span class="s1">&#39;sandip.png&#39;</span><span class="p">,</span> <span class="ss">:scale</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="ss">:position</span> <span class="o">=&gt;</span> <span class="ss">:left</span>
-</span><span class='line'><span class="no">Display</span> <span class="no">Remote</span> <span class="n">image</span> <span class="n">from</span> <span class="no">Internet</span> <span class="n">inside</span> <span class="n">pdf</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">require</span> <span class="s2">&quot;open-uri&quot;</span>
-</span><span class='line'> <span class="n">image</span> <span class="nb">open</span><span class="p">(</span><span class="err">&#39;</span><span class="ss">http</span><span class="p">:</span><span class="sr">//</span><span class="n">t2</span><span class="o">.</span><span class="n">gstatic</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">images?q</span><span class="o">=</span><span class="ss">tbn</span><span class="p">:</span><span class="ss">kTG6gAKrnou2gM</span><span class="p">:</span><span class="ss">http</span><span class="p">:</span><span class="sr">//</span><span class="n">www</span><span class="o">.</span><span class="n">facebook</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">profile</span><span class="o">/</span><span class="n">pic</span><span class="o">.</span><span class="n">php?uid</span><span class="o">=</span><span class="no">AAAAAQAQrLXvTWfyY2ANjttV8D1c0QAAAAnDHPFJe0pPFR84iIzXPKro</span><span class="o">&amp;</span><span class="n">t</span><span class="o">=</span><span class="mi">1</span><span class="s2">&quot;)</span>
-</span><span class='line'><span class="s2">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>LINE BREAKS</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">movedown</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>TABLE/GRID</h2>
-
-<p><a href="http://github.com/sandipransing/prawn-example/raw/master/sample/table.pdf">click</a></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">data</span> <span class="o">=</span> <span class="o">[</span>
-</span><span class='line'>    <span class="o">[</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span> <span class="p">{</span><span class="ss">:text</span> <span class="o">=&gt;</span> <span class="s1">&#39;Sandip Ransing&#39;</span><span class="p">,</span> <span class="ss">:font_style</span> <span class="o">=&gt;</span> <span class="ss">:bold</span><span class="p">,</span> <span class="ss">:colspan</span> <span class="o">=&gt;</span> <span class="mi">4</span> <span class="p">}</span><span class="o">]</span><span class="p">,</span>
-</span><span class='line'>    <span class="o">[</span><span class="s2">&quot;Address&quot;</span><span class="p">,</span> <span class="p">{</span><span class="ss">:text</span> <span class="o">=&gt;</span> <span class="s1">&#39;SHIVAJINAGAR, PUNE 411005&#39;</span><span class="p">,</span> <span class="ss">:colspan</span> <span class="o">=&gt;</span> <span class="mi">4</span> <span class="p">}</span><span class="o">]</span><span class="p">,</span>
-</span><span class='line'>    <span class="o">[</span><span class="s2">&quot;Landmark&quot;</span><span class="p">,{</span><span class="ss">:text</span> <span class="o">=&gt;</span> <span class="s1">&#39;NEAR FC COLLEGE&#39;</span><span class="p">,</span> <span class="ss">:colspan</span> <span class="o">=&gt;</span> <span class="mi">4</span> <span class="p">}</span><span class="o">]</span><span class="p">,</span>
-</span><span class='line'>    <span class="o">[</span><span class="s2">&quot;Mobile&quot;</span><span class="p">,</span><span class="s2">&quot;9860648108&quot;</span><span class="p">,</span> <span class="p">{</span><span class="ss">:text</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="ss">:colspan</span> <span class="o">=&gt;</span> <span class="mi">3</span> <span class="p">}</span><span class="o">]</span><span class="p">,</span>
-</span><span class='line'>    <span class="o">[</span><span class="s2">&quot;Education&quot;</span><span class="p">,</span> <span class="p">{</span><span class="ss">:text</span> <span class="o">=&gt;</span> <span class="s2">&quot;Bachelor in Computer Engineering&quot;</span><span class="p">,</span> <span class="ss">:colspan</span> <span class="o">=&gt;</span> <span class="mi">4</span> <span class="p">}</span><span class="o">]</span><span class="p">,</span>
-</span><span class='line'>      <span class="o">[</span><span class="s2">&quot;Vehicle&quot;</span><span class="p">,</span> <span class="s1">&#39;Hero Honda&#39;</span><span class="p">,</span><span class="s2">&quot;Reg. No.&quot;</span><span class="p">,</span> <span class="p">{</span><span class="ss">:text</span> <span class="o">=&gt;</span> <span class="s2">&quot;MH 12 EN 921&quot;</span><span class="p">,</span> <span class="ss">:colspan</span> <span class="o">=&gt;</span> <span class="mi">3</span> <span class="p">}</span><span class="o">]</span><span class="p">,</span>
-</span><span class='line'>      <span class="o">[</span><span class="s2">&quot;Additional&quot;</span><span class="p">,</span> <span class="s2">&quot;GDCA&quot;</span><span class="p">,</span> <span class="s2">&quot;class&quot;</span><span class="p">,</span> <span class="s1">&#39;First&#39;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="o">]</span><span class="p">,</span>
-</span><span class='line'>      <span class="o">[</span><span class="p">{</span><span class="ss">:text</span> <span class="o">=&gt;</span> <span class="s2">&quot;Areas of Speciality&quot;</span><span class="p">,</span> <span class="ss">:font_style</span> <span class="o">=&gt;</span> <span class="ss">:bold</span><span class="p">},</span> <span class="p">{</span><span class="ss">:text</span> <span class="o">=&gt;</span> <span class="s2">&quot;Ruby, Rails, Radiant, Asterisk, Adhearsion, Geokit, Prawn, ....,...&quot;</span><span class="p">,</span> <span class="ss">:font_style</span> <span class="o">=&gt;</span> <span class="ss">:bold</span><span class="p">,</span> <span class="ss">:colspan</span> <span class="o">=&gt;</span> <span class="mi">4</span><span class="p">}</span><span class="o">]</span><span class="p">,</span>
-</span><span class='line'>      <span class="o">[</span><span class="p">{</span><span class="ss">:text</span> <span class="o">=&gt;</span> <span class="s2">&quot;Website&quot;</span><span class="p">,</span> <span class="ss">:colspan</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">},{</span><span class="ss">:text</span> <span class="o">=&gt;</span> <span class="s2">&quot;www.funonrails.com&quot;</span><span class="p">,</span> <span class="ss">:colspan</span> <span class="o">=&gt;</span> <span class="mi">3</span><span class="p">}</span><span class="o">]</span><span class="p">,</span>
-</span><span class='line'>      <span class="o">[</span><span class="p">{</span><span class="ss">:text</span> <span class="o">=&gt;</span> <span class="s2">&quot;Company&quot;</span><span class="p">,</span> <span class="ss">:colspan</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">},{</span><span class="ss">:text</span> <span class="o">=&gt;</span> <span class="s2">&quot;Josh Software&quot;</span><span class="p">,</span> <span class="ss">:colspan</span> <span class="o">=&gt;</span> <span class="mi">3</span><span class="p">}</span><span class="o">]</span>
-</span><span class='line'>  <span class="o">]</span>
-</span><span class='line'><span class="n">table</span> <span class="n">data</span><span class="p">,</span>
-</span><span class='line'>    <span class="ss">:border_style</span> <span class="o">=&gt;</span> <span class="ss">:grid</span><span class="p">,</span> <span class="c1">#:underline_header</span>
-</span><span class='line'>    <span class="ss">:font_size</span>  <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">,</span>
-</span><span class='line'>    <span class="ss">:horizontal_padding</span> <span class="o">=&gt;</span> <span class="mi">6</span><span class="p">,</span>
-</span><span class='line'>    <span class="ss">:vertical_padding</span>   <span class="o">=&gt;</span> <span class="mi">3</span><span class="p">,</span>
-</span><span class='line'>    <span class="ss">:border_width</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="o">.</span><span class="mi">7</span><span class="p">,</span>
-</span><span class='line'>    <span class="ss">:column_widths</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="mi">0</span> <span class="o">=&gt;</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">1</span> <span class="o">=&gt;</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">2</span> <span class="o">=&gt;</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">3</span> <span class="o">=&gt;</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">4</span> <span class="o">=&gt;</span> <span class="mi">80</span> <span class="p">},</span>
-</span><span class='line'>    <span class="ss">:position</span> <span class="o">=&gt;</span> <span class="ss">:left</span><span class="p">,</span>
-</span><span class='line'>    <span class="ss">:align</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="mi">0</span> <span class="o">=&gt;</span> <span class="ss">:left</span><span class="p">,</span> <span class="mi">1</span> <span class="o">=&gt;</span> <span class="ss">:right</span><span class="p">,</span> <span class="mi">2</span> <span class="o">=&gt;</span> <span class="ss">:left</span><span class="p">,</span> <span class="mi">3</span> <span class="o">=&gt;</span> <span class="ss">:right</span><span class="p">,</span> <span class="mi">4</span> <span class="o">=&gt;</span> <span class="ss">:right</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>LINKS</h2>
-
-<p><a href="http://github.com/sandipransing/prawn-example/raw/master/sample/link.pdf">click</a></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">link_annotation</span><span class="p">(</span><span class="o">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">40</span><span class="o">]</span><span class="p">,</span><span class="ss">:Border</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">]</span><span class="p">,</span> <span class="ss">:A</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:Type</span> <span class="o">=&gt;</span> <span class="ss">:Action</span><span class="p">,</span> <span class="ss">:S</span> <span class="o">=&gt;</span> <span class="ss">:URI</span><span class="p">,</span> <span class="ss">:URI</span> <span class="o">=&gt;</span> <span class="ss">Prawn</span><span class="p">:</span><span class="ss">:LiteralString</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;http://twitter.com/sandipransing&quot;</span><span class="p">)</span> <span class="p">}</span> <span class="p">)</span>
-</span><span class='line'><span class="n">link_annotation</span><span class="p">((</span><span class="o">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">150</span><span class="o">]</span><span class="p">),</span> <span class="ss">:Border</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">]</span><span class="p">,</span> <span class="ss">:Dest</span> <span class="o">=&gt;</span> <span class="n">s</span><span class="s2">&quot;http://funonrails.com&quot;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>PDF Security</h2>
-
-<p><a href="http://github.com/sandipransing/prawn-example/raw/master/sample/secure.pdf">click</a></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">encrypt_document</span> <span class="ss">:user_password</span> <span class="o">=&gt;</span> <span class="s1">&#39;hello&#39;</span><span class="p">,</span> <span class="ss">:owner_password</span> <span class="o">=&gt;</span> <span class="s1">&#39;railer&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="ss">:permissions</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:print_document</span> <span class="o">=&gt;</span> <span class="kp">false</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Prawn Inline Formatting</h2>
-
-<p>Prawn-format supports inline text formatting that gives user enough flexibility to use html tags</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;prawn/format&#39;</span>
-</span><span class='line'><span class="n">text</span> <span class="s1">&#39;This is Strong  text&#39;</span><span class="p">,</span> <span class="ss">:inline_format</span> <span class="o">=&gt;</span> <span class="kp">true</span>
-</span><span class='line'><span class="n">text</span> <span class="s1">&#39;This is bold text \n It should be on newline.&#39;</span><span class="p">,</span> <span class="ss">:inline_format</span> <span class="o">=&gt;</span> <span class="kp">true</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>SAVE Generated PDF</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">end</span>
-</span><span class='line'><span class="n">pdf</span><span class="o">.</span><span class="n">render_file</span> <span class="s1">&#39;my.pdf&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>!!! NOTE: As of time now &lsquo;prawn-format&rsquo; is incompatible with latest prawn gem, It is compatible with prawn version &lt;= 0.6 s</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/05/specify-rails-version-to-use-while/">Specify rails version to new rails app</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-05-07T18:40:00+05:30" pubdate data-updated="true">May 7<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>On my development machine, I have rails versions installed ranging from rails <code>1.2.3</code> to <code>2.3</code>
-How do i create new rails app that will use <code>rails 2.1.0</code>
-Create new app with rails version <code>2.1.0</code></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rails _2.1.0_ simple_blog</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Specify database to use while creating new rails app</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rails _2.1.0_ simple_blog -d mysql</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Comments</h2>
-
-<p>sitemap « Fun On Rails</p>
-
-<p>[…] Specify rails version to use while creating rails project « Fun On Rails […]</p>
-
-<p>sandipransing</p>
-
-<p>specify database while creating rails application</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rails demo -d 
-</span><span class='line'>rails _2.1.0_ my_rails_app -d mysql</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -1481,6 +1147,211 @@ on your system.</p>
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/03/rubyconf-2009-lt/">RubyConf 2009 LT Termtter</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-03-19T13:18:00+05:30" pubdate data-updated="true">Mar 19<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Check out this SlideShare Presentation:
+Termtter ruby gem is provides a way to work
+with twitter which is easy to use and integrate.
+Basically it can be used in ruby and rails application
+to get full control over twitter as like we have in web
+browser. Also, it works with terminal.</p>
+
+<div style="width:425px" id="__ss_2557295">
+  <strong style="display:block;margin:12px 0 4px">
+    <a href="http://www.slideshare.net/ujihisa/rubyconf-2009-lt-termtter" title="RubyConf 2009 LT &quot;Termtter&quot;">
+      RubyConf 2009 LT &quot;Termtter&quot;
+    </a>
+  </strong>
+  <object width="800" height="355">
+    <param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=rubyconflttermtter-091122030721-phpapp01&stripped_title=rubyconf-2009-lt-termtter" />
+    <param name="allowFullScreen" value="true"/>
+    <param name="allowScriptAccess" value="always"/>
+    <embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=rubyconflttermtter-091122030721-phpapp01&stripped_title=rubyconf-2009-lt-termtter" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="800" height="355"></embed>
+  </object>
+  <div style="padding:5px 0 12px">
+    View more 
+    <a href="http://www.slideshare.net/">presentations</a> 
+    from 
+    <a href="http://www.slideshare.net/ujihisa">ujihisa</a>.
+  </div>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/03/mvc-coding-principles-in-rails/">MVC coding principles in rails</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-03-13T05:26:00+05:30" pubdate data-updated="true">Mar 13<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I believe this post should clear basic coding standards before getting started with rails development.</p>
+
+<p>I just came with conversion started for declaring variables on rubyonrailstalk google group and that ended up with&nbsp;exploring the concepts of rails MVC coding principles.
+so, i thought it would be nice if they gets summarized somewhere.</p>
+
+<p>The question raised was:</p>
+
+<blockquote><p>How to declare variables like arrays so that they are available everytime that layout or its related partials are used. Putting `@myarray = MyArray.all` into every action in every controller doesn&#8217;t seem very dry, so I guess I&#8217;m just looking for a very simple straighforward convention, but can&#8217;t seem to find it documented anywhere or figure it out</p><footer><strong>@capsized</strong></footer></blockquote>
+
+
+<p>Before getting into actual conversion, I would like to notedown what rails is.</p>
+
+<blockquote><p>Rails is web framework developed in ruby language. The main purpose behind is to make programmers life easy and development would be a fun. It is  built over MVC framework and philosophy includes DRY, Convention over configuration and REST.</p></blockquote>
+
+<p>Adding conversation as it is here:</p>
+
+<blockquote><p>Noria Normally something like that goes into a high-level filter, like one  in ApplicationController.</p><footer><strong>@Xavier</strong></footer></blockquote>
+
+
+<p>Put a before_filter in your ApplicationController.</p>
+
+<figure class='code'><figcaption><span>@Andy</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'> <span class="k">class</span> <span class="nc">ApplicationController</span>
+</span><span class='line'>  <span class="n">before_filter</span> <span class="ss">:set_my_array</span>
+</span><span class='line'>  <span class="kp">private</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">set_my_array</span>
+</span><span class='line'>    <span class="vi">@myarray</span> <span class="o">=</span> <span class="no">MyArray</span><span class="o">.</span><span class="n">all</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<blockquote><p>If it is literally something as simple as MyArray.all I believe there<br/>is nothing wrong with calling the model direct from the view.</p><footer><strong>@Colin</strong></footer></blockquote>
+
+
+<p>And here started the debate conversation. First of all, i was also convinced with this suggestion but next reply started conversion.</p>
+
+<blockquote><p>It&#8217;s dirty, horrible, bad form, breaks the separation of layers&#8230;<br/>Don&#8217;t call the model from the view!</p><footer><strong>@Andy</strong></footer></blockquote>
+
+
+
+
+<blockquote><p>Beware of the MVC police Colin, this suggestion will certanly not get<br/>good housekeeping seal of approval :D<br/>I agree through. I&#8217;m not gonna add a before filter just to set<br/>MyArray.all into a class variable. I&#8217;d rather call it directly and claim<br/>to be pragmatic.</p><footer><strong>@Sharagoz</strong></footer></blockquote>
+
+
+
+
+<blockquote><p>But you are wrong.  The view should never, ever, ever touch the database.<br/>Claim all you like.  The fact is that in MVC architecture, database<br/>queries don&#8217;t belong in the view. A before_filter is the proper place for this.</p><footer><strong>@Marnen</strong></footer></blockquote>
+
+
+
+
+<blockquote><p>Is it considered ok to call model methods if they do not touch the db,<br/>or are model methods forbidden also?</p><footer><strong>@Colin</strong></footer></blockquote>
+
+
+
+
+<blockquote><p>I would say the view can call instance methods of the model (attributes - real and virtual) but no class methods. So: is OK, but:<br/>is not.  It&#8217;s a bit of a contrived example, but there you go.  Accessing the model through instance variables you&#8217;ve created is OK, going directly to the model bypassing the controller is not.</p><footer><strong>@Andy</strong></footer></blockquote>
+
+
+<p>I think it is appropriate for the view to call methods on the objects passed in by the controller, provided that these methods do not change the model or touch the database.
+Example:</p>
+
+<figure class='code'><figcaption><span>Good: @Marnen</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># controller</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">my_action</span>
+</span><span class='line'> <span class="vi">@person</span> <span class="o">=</span> <span class="no">Person</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="c1">#my_action.html.erb</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here started conclusion on topic:</p>
+
+<blockquote><p>Good example. I just want to throw in a couple more twists and see what<br/>you think.<br/>1.  What about methods on models that change themselves in some way?<br/>Suppose the last_viewed_at method returned a previously stored time,<br/>then updated the model to store a new current time. Maybe a bad example,<br/>but I hope you get my meaning.<br/>2.  What about aggregating class methods like count, sum or avg?<br/>Obviously a class methods and does touch the database. I assume it would<br/>be better to let the controller deal with stuff like this.<br/><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/></pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Controller</span><br/></span><span class='line'> <span class="vi">@person_count</span> <span class="o">=</span> <span class="no">Person</span><span class="o">.</span><span class="n">count</span><br/></span></code></pre></td></tr></table></div></figure></p><footer><strong>@Robert</strong></footer></blockquote>
+
+
+
+
+<blockquote><p>I don&#8217;t know what you mean by dirty, it saves several lines of code<br/>and when looking at the view code it is easier to see what is<br/>happening than to see a variable that has to be hunted for in a filter<br/>somewhere to find out what it is.<br/>It does not break the separation of layers any more than calling an<br/>instance method of a model does when using something like &gt; Don&#8217;t call the model from the view!<br/>`@person.name` is a model call from the view</p><footer><strong>@Colin</strong></footer></blockquote>
+
+
+
+
+<blockquote><p>But think how many lines of code you are going to have to go edit when you realize that you need to change it. <br/>Also, I wouldn&#8217;t consider Person.all to be more clean than @people. What if you need to exclude some? Person.all :conditions =&gt; {whatever}, if you are just using a before filter, it is easy to override, you can override it for any given controller, and for any given controller method. If it&#8217;s hard coded into the view, then that view has to serve everybody&#8217;s wishes, it ends up having to know how it is to be used, and having lots of brittle conditional code for each of these situations.<br/>This is why the controller must be responsible for supplying the appropriate data to the view, not the view being responsible for creating it&#8217;s own data. <br/>It might start as innocently as `Person.all`, it can easily turn into<br/><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/><span class='line-number'>6</span><br/><span class='line-number'>7</span><br/></pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">if</span> <span class="n">this</span><br/></span><span class='line'>  <span class="no">Person</span><span class="o">.</span><span class="n">all</span><br/></span><span class='line'><span class="k">elsif</span> <span class="n">that</span><br/></span><span class='line'>  <span class="no">OtherPerson</span><span class="o">.</span><span class="n">all</span><br/></span><span class='line'><span class="k">else</span><br/></span><span class='line'>  <span class="no">Person</span><span class="o">.</span><span class="n">all</span> <span class="o">+</span> <span class="no">OtherPerson</span><span class="o">.</span><span class="n">all</span><br/></span><span class='line'><span class="k">end</span><br/></span></code></pre></td></tr></table></div></figure></p><footer><strong>@Josh</strong></footer></blockquote>
+
+
+<p>This took another turn in conversion &ndash;</p>
+
+<blockquote><p>Did you misunderstand my post?  I was arguing for putting it in a filter rather than in the view (hence saying the 4 lines of before_filter, private, def and end was worth it).<br/>It sounds like - when you start with &#8220;But&#8221; - that you disagree, but the rest of your post seems to be arguing from the same side as my posts.</p><footer><strong>@Andy</strong></footer></blockquote>
+
+
+<p>And finally Colin ended up conversion with conclusion &ndash;</p>
+
+<blockquote><p>An excellent post if I may say so that brings out the salient points I think.  Can the issues be summarised as follows?<br/>The controller should provide all the data that the view should display in instance variables (@person for example).<br/>The view is expected to understand the structure of the objects and so can access attributes (virtual or otherwise) of the objects.<br/>If the model needs to access the db in order to provide an attribute value, or accessing the attribute has some side effect that affects the db, then this is ok, providing the view does not &#8216;know&#8217; that the side effect or db access is happening. (Not very well written but I hope you know what I mean).<br/>The view must not call any method of the model who&#8217;s purpose is to perform an action rather than return a value.<br/>The view should not make any explicit use of model classes.  For example there should be no reference to Person or any other model class</p></blockquote>
+
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/page/9/">&larr; Older</a>
@@ -1498,14 +1369,6 @@ on your system.</p>
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/03/restful-vs-soap-web-services/">RESTful vs SOAP web services</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/03/regex-to-split-string-within-quotes-and-spaces/">regex to split string within quotes and spaces</a>
-      </li>
-    
-      <li class="post">
         <a href="/2014/02/moving-from-blogspot-to-octopress/">Migrating from blogspot to octopress</a>
       </li>
     
@@ -1515,6 +1378,14 @@ on your system.</p>
     
       <li class="post">
         <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/03/what-is-new-in-rails-3/">what is new in rails 3</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
   </ul>

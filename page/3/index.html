@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>A Ruby and Rails Blog - Fun On Rails</title>
+  <title>A Ruby and Rails Blog | Fun On Rails</title>
   <meta name="author" content="sandipransing">
 
   
@@ -92,198 +92,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/12/using-formbuilder-in-rails/">Customizing rails default form builder</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-29T01:29:00+05:30" pubdate data-updated="true">Dec 29<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Customizing default rails form builder to adopt for labels, input fields, errors, hints, etc. in order to build forms just in minutes</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/helpers/app_form_builder.rb</span>
-</span><span class='line'><span class="k">class</span> <span class="nc">AppFormBuilder</span> <span class="o">&lt;</span> <span class="ss">ActionView</span><span class="p">:</span><span class="ss">:Helpers</span><span class="o">::</span><span class="no">FormBuilder</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="no">HELPERS</span> <span class="o">=</span> <span class="sx">%w[check_box text_field text_area password_field select date_select datetime_select file_field collection_select state_select label calendar_date_select]</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">create_tagged_field</span><span class="p">(</span><span class="n">method_name</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">define_method</span><span class="p">(</span><span class="n">method_name</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="nb">name</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="o">|</span>
-</span><span class='line'>      <span class="n">errs</span> <span class="o">=</span> <span class="n">object</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="nb">name</span><span class="o">.</span><span class="n">to_sym</span><span class="p">)</span> <span class="k">if</span> <span class="n">object</span> <span class="o">&amp;&amp;</span> <span class="n">object</span><span class="o">.</span><span class="n">errors</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="c1"># initialize some local variables</span>
-</span><span class='line'>      <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">last</span><span class="o">.</span><span class="n">is_a?</span><span class="p">(</span><span class="no">Hash</span><span class="p">)</span>
-</span><span class='line'>        <span class="n">label</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">last</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="ss">:label</span><span class="p">)</span>
-</span><span class='line'>        <span class="n">suffix</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">last</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="ss">:suffix</span><span class="p">)</span>
-</span><span class='line'>        <span class="n">klass</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">last</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="ss">:class</span><span class="p">)</span>
-</span><span class='line'>        <span class="n">req</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">last</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="ss">:required</span><span class="p">)</span>
-</span><span class='line'>      <span class="k">end</span>
-</span><span class='line'>      <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span> <span class="k">if</span> <span class="n">method_name</span> <span class="o">==</span> <span class="s1">&#39;hidden_field&#39;</span>
-</span><span class='line'>      <span class="n">label</span> <span class="o">||=</span> <span class="nb">name</span><span class="o">.</span><span class="n">to_s</span><span class="o">.</span><span class="n">titleize</span>
-</span><span class='line'>      <span class="n">label</span> <span class="o">=</span> <span class="kp">nil</span> <span class="k">if</span> <span class="n">label</span> <span class="o">==</span> <span class="s1">&#39;none&#39;</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="n">klass</span> <span class="o">=</span> <span class="n">klass</span> <span class="p">?</span> <span class="o">[</span><span class="n">klass</span><span class="o">]</span> <span class="p">:</span> <span class="o">[]</span>
-</span><span class='line'>      <span class="c1"># Custom class if it exists</span>
-</span><span class='line'>      <span class="k">if</span> <span class="n">method_name</span> <span class="o">=~</span> <span class="sr">/text_field|check_box|select/</span>
-</span><span class='line'>        <span class="n">klass</span> <span class="o">&lt;&lt;</span> <span class="n">method_name</span>
-</span><span class='line'>      <span class="k">end</span>
-</span><span class='line'>      <span class="n">klass</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39;f&#39;</span> <span class="c1">#A default selector</span>
-</span><span class='line'>      <span class="n">klass</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39;error&#39;</span> <span class="k">if</span> <span class="n">errs</span><span class="o">.</span><span class="n">present?</span>
-</span><span class='line'>      <span class="n">klass</span> <span class="o">=</span> <span class="n">klass</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="c1"># Required Field Notations</span>
-</span><span class='line'>      <span class="k">if</span> <span class="n">req</span> <span class="o">==</span> <span class="s1">&#39;all&#39;</span> <span class="o">||</span> <span class="p">(</span><span class="n">req</span> <span class="o">==</span> <span class="s1">&#39;new&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">object</span><span class="o">.</span><span class="n">new_record?</span><span class="p">)</span>
-</span><span class='line'>        <span class="n">label</span> <span class="o">&lt;&lt;</span> <span class="vi">@template</span><span class="o">.</span><span class="n">content_tag</span><span class="p">(</span><span class="ss">:span</span><span class="p">,</span> <span class="ss">:*</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="ss">:req</span><span class="p">)</span>
-</span><span class='line'>      <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="n">suffix</span> <span class="o">=</span> <span class="vi">@template</span><span class="o">.</span><span class="n">content_tag</span><span class="p">(</span><span class="ss">:label</span><span class="p">,</span> <span class="n">suffix</span><span class="p">)</span> <span class="k">if</span> <span class="n">suffix</span><span class="o">.</span><span class="n">present?</span>
-</span><span class='line'>      <span class="n">label</span> <span class="o">=</span> <span class="vi">@template</span><span class="o">.</span><span class="n">content_tag</span><span class="p">(</span><span class="ss">:label</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span> <span class="k">if</span> <span class="n">label</span><span class="o">.</span><span class="n">present?</span>
-</span><span class='line'>      <span class="n">errs</span> <span class="o">=</span> <span class="vi">@template</span><span class="o">.</span><span class="n">content_tag</span><span class="p">(</span><span class="ss">:span</span><span class="p">,</span> <span class="n">errs</span><span class="o">.</span><span class="n">to_s</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="ss">:message</span><span class="p">)</span> <span class="k">if</span> <span class="n">errs</span><span class="o">.</span><span class="n">present?</span>
-</span><span class='line'>      <span class="n">reverse</span> <span class="o">=</span> <span class="kp">true</span> <span class="k">if</span> <span class="n">method_name</span> <span class="o">==</span> <span class="s1">&#39;check_box&#39;</span>
-</span><span class='line'>      <span class="k">if</span> <span class="n">reverse</span>
-</span><span class='line'>        <span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="k">super</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="n">suffix</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="n">label</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="n">errs</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span class='line'>      <span class="k">else</span>
-</span><span class='line'>        <span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">label</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="k">super</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="n">suffix</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="n">errs</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span class='line'>      <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="vi">@template</span><span class="o">.</span><span class="n">content_tag</span><span class="p">(</span><span class="ss">:div</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="n">klass</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="no">HELPERS</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="nb">name</span><span class="o">|</span>
-</span><span class='line'>    <span class="n">create_tagged_field</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/12/authorize-net-payment-gateway-with-rails/">Authorize Net Payment Gateway integration with rails</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-29T00:36:00+05:30" pubdate data-updated="true">Dec 29<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Authorize Net Payment gateway provides api access to enable online payments
-Gateway provides different api options to integrate &ndash;</p>
-
-<ol>
-<li><p>Direct Post Method
-In this method gateway handles all steps required in payment transaction flow securely and clean manner. To know more on this click <a href="https://developer.authorize.net/api/dpm">here</a>.</p></li>
-<li><p>Server Integration Method (SIM)
-Here, Payment form and creditcard detail form resides on gateway site and all the steps in transaction carried out at gateway server</p></li>
-<li><p>Advance Integration Method (AIM)
-Provides full control of all the transaction steps at merchant server. Payment form resides on merchant side. merchnat server sends authorization and payment capture requests to gateway server where actual transaction takes place and response is sent back to merchant server to notify transaction status. To know detail integration on this click <a href="http://www.funonrails.com/2011/12/authorizenet-aim-payment-integration">here</a>.</p></li>
-</ol>
-
-
-<p><strong>Prerequisites before getting started with integration</strong></p>
-
-<p><a href="https://developer.authorize.net/testaccount">Sign up for a test account</a> to obtain an API Login ID and Transaction Key. These keys will authenticate requests to the payment gateway.</p>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -1481,6 +1289,212 @@ To know more on below code <a href="http://www.funonrails.com/2011/12/multiple-r
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/12/using-jquery-rails-and-datepicker/">using jQuery-rails and datepicker, timepicker & datetimepicker</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-22T03:52:00+05:30" pubdate data-updated="true">Dec 22<span>nd</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>jQuery datepicker plugin is used to display inline calendar popup that eases user input experience while entering date/time fields. Calendar can be easily binded to any html DOM element. To Apply different styles download css from <a href="http://jqueryui.com/demos/datepicker">here</a></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># Gemfile
+</span><span class='line'>gem "jquery-rails"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Install Bundle</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>bundle install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Add inside <code>application.js.coffee</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="c1"># app/assets/javascripts/application.js.coffee </span>
+</span><span class='line'><span class="o">//=</span> <span class="nx">require</span> <span class="nx">jquery</span>
+</span><span class='line'><span class="o">//=</span> <span class="nx">require</span> <span class="nx">jquery_ujs</span>
+</span><span class='line'><span class="o">//=</span> <span class="nx">require</span> <span class="nx">jquery</span><span class="o">-</span><span class="nx">ui</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Access in layout</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='haml'><span class='line'># app/views/layouts/application.html.haml
+</span><span class='line'><span class="p">=</span> <span class="n">stylesheet_link_tag</span> <span class="s2">&quot;application&quot;</span>
+</span><span class='line'><span class="p">=</span> <span class="n">stylesheet_link_tag</span> <span class="s2">&quot;http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css&quot;</span>
+</span><span class='line'><span class="p">=</span> <span class="n">javascript_include_tag</span> <span class="s2">&quot;application&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Before using timepicker download jquery-ui-timepicker js</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='haml'><span class='line'>wget http://trentrichardson.com/examples/timepicker/js/jquery-ui-timepicker-addon.js app/assets/javascripts/
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Add timepcker js to <code>application.js.coffee</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="o">//=</span> <span class="nx">require</span> <span class="nx">jquery</span><span class="o">-</span><span class="nx">ui</span><span class="o">-</span><span class="nx">timepicker</span><span class="o">-</span><span class="nx">addon</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>View form</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='haml'><span class='line'>## inside views
+</span><span class='line'># app/views/users/_form.html.haml
+</span><span class='line'><span class="p">=</span> <span class="n">form_for</span> <span class="vi">@user</span> <span class="o">||=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
+</span><span class='line'>  <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:birth_date</span><span class="p">,</span> <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="s1">&#39;birthDate&#39;</span>
+</span><span class='line'>  <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:birth_time</span><span class="p">,</span> <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="s1">&#39;birthTime&#39;</span>
+</span><span class='line'>  <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:exam_on</span><span class="p">,</span> <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="s1">&#39;examOn&#39;</span>
+</span><span class='line'><span class="nd">:javascript</span>
+</span><span class='line'>  <span class="nd">$(document).ready(function() {</span>
+</span><span class='line'>    <span class="nd">$(&quot;#birthDate&quot;).datepicker();</span>
+</span><span class='line'>    <span class="nd">$(&quot;#birthTime&quot;).timepicker();</span>
+</span><span class='line'>    <span class="nd">$(&quot;#examOn&quot;).datetimepicker();</span>
+</span><span class='line'>    <span class="nd">$(&#39;#ui-datepicker-div&#39;).removeClass(&#39;ui-helper-hidden-accessible&#39;)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Customizations</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#birth_date&#39;</span><span class="p">).</span><span class="nx">datepicker</span><span class="p">({</span> <span class="nx">dateFormat</span><span class="o">:</span> <span class="s1">&#39;dd-mm-yy&#39;</span> <span class="p">});</span>
+</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#birth_date&#39;</span><span class="p">).</span><span class="nx">datepicker</span><span class="p">({</span> <span class="nx">disabled</span><span class="o">:</span> <span class="kc">true</span> <span class="p">});</span>
+</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#examOn&quot;</span><span class="p">).</span><span class="nx">datetimepicker</span><span class="p">({</span> <span class="nx">ampm</span><span class="o">:</span> <span class="kc">true</span> <span class="p">});</span>
+</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#examOn&quot;</span><span class="p">).</span><span class="nx">datetimepicker</span><span class="p">({</span> <span class="nx">timeFormat</span><span class="o">:</span> <span class="s1">&#39;h:m&#39;</span><span class="p">,</span> <span class="nx">separator</span><span class="o">:</span> <span class="s1">&#39; @ &#39;</span> <span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/12/getting-assets-working-on-heroku/">Getting assets pipeline working on heroku</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-22T03:14:00+05:30" pubdate data-updated="true">Dec 22<span>nd</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><blockquote><p>Heroku is readonly file system hence write operations can only be done inside tmp directory. Asset compilation on heroku can be handled in different ways.</p></blockquote>
+
+<p><strong>1. compiling locally and placing inside assets directory</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>RAILS_ENV=production bundle exec rake assets:precompile</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>2. It compiles assets while slug compiles</strong></p>
+
+<p><strong>3. Run time asset compilation</strong>
+It compiles assets for every rails request if it notifies assets got modified</p>
+
+<p>Configurations</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">config</span><span class="o">/</span><span class="n">application</span><span class="o">.</span><span class="n">rb</span>
+</span><span class='line'><span class="c1"># Enable the asset pipeline</span>
+</span><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">assets</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="kp">true</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Version of your assets, change this if you want to expire all your assets</span>
+</span><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">assets</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="s1">&#39;1.0&#39;</span>
+</span><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">assets</span><span class="o">.</span><span class="n">prefix</span> <span class="o">=</span> <span class="no">Rails</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;tmp/assets&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_s</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># config/environments/production.rb</span>
+</span><span class='line'><span class="c1"># Don&#39;t fallback to assets pipeline if a precompiled asset is missed</span>
+</span><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">assets</span><span class="o">.</span><span class="n">compile</span> <span class="o">=</span> <span class="kp">true</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note: write operation made inside tmp directory can not make any guarantee of being persisted hence be careful while using.</p>
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/page/4/">&larr; Older</a>
@@ -1498,14 +1512,6 @@ To know more on below code <a href="http://www.funonrails.com/2011/12/multiple-r
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/03/restful-vs-soap-web-services/">RESTful vs SOAP web services</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/03/regex-to-split-string-within-quotes-and-spaces/">regex to split string within quotes and spaces</a>
-      </li>
-    
-      <li class="post">
         <a href="/2014/02/moving-from-blogspot-to-octopress/">Migrating from blogspot to octopress</a>
       </li>
     
@@ -1515,6 +1521,14 @@ To know more on below code <a href="http://www.funonrails.com/2011/12/multiple-r
     
       <li class="post">
         <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/03/what-is-new-in-rails-3/">what is new in rails 3</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
   </ul>

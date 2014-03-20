@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>A Ruby and Rails Blog - Fun On Rails</title>
+  <title>A Ruby and Rails Blog | Fun On Rails</title>
   <meta name="author" content="sandipransing">
 
   
@@ -92,252 +92,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/01/installing-and-running-cronjob-crontab/">Installing and running cronjob (crontab basics)</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-01-20T13:50:00+05:30" pubdate data-updated="true">Jan 20<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Basic handy commands while working with crontabs</p>
-
-<h2>Editing cron file</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>crontab -e</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Displaying cron file</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>crontab -l</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Removing cron file</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>crontab -r</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Cron syntax</h2>
-
-<blockquote><p>cron command basically takes 6 input parameters of which each input can take multiple arguments for that one can make use of comma or pipe separator</p></blockquote>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># min hour dom mon dow   command
-</span><span class='line'>*   *   *   *   * (command)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Here * means for every. Above command will get executed for every minute</p>
-
-<h2>Detail syntax</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>*     *     *   *    *        command to be executed
-</span><span class='line'>-     -     -   -    -
-</span><span class='line'>|     |     |   |    |
-</span><span class='line'>|     |     |   |    +----- day of week (0 - 6) (Sunday=0)
-</span><span class='line'>|     |     |   +------- month (1 - 12)
-</span><span class='line'>|     |     +--------- day of month (1 - 31)
-</span><span class='line'>|     +---------- hour (0 - 23)
-</span><span class='line'>+------- min (0 - 59)</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Example commands</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># Generate progressive report for every active user at 11:45 p.m.
-</span><span class='line'>45 23 * * * (cd /home/sandip/current/; rake ace:daily_progressive_report RAILS_ENV=production)
-</span><span class='line'>
-</span><span class='line'># Take database backup every night
-</span><span class='line'>59 2 * * * (cd /home/sandip/current/; rake db:backup RAILS_ENV=production)
-</span><span class='line'>
-</span><span class='line'># Initialize grouping on database every sunday
-</span><span class='line'>29 3 * * 0 (cd /home/sandip/current/; rake ace:initializeCarGrouping RAILS_ENV=production)
-</span><span class='line'>
-</span><span class='line'># Generate daily stats on 4:30 AM & 12:30 PM and 4:30 PM
-</span><span class='line'>30 4,12,16 * * * (cd /home/sandip/current/; rake ace:daily_call_statistics RAILS_ENV=production)
-</span><span class='line'>
-</span><span class='line'># Rotate sphinx indexes updated evry hour if missed out somehow
-</span><span class='line'>0 * * * * (cd /user/local/bin/; indexer --rotate --config /home/sandip/current/config/production.sphinx.conf)</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/01/testing-restful-polymorphic-resource/">Testing restful & polymorphic resource routes on rails console</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-01-19T15:05:00+05:30" pubdate data-updated="true">Jan 19<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Testing restful &amp; polymorphic resource routes on rails console</p>
-
-<h2>Open rails console</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rails</span> <span class="n">c</span> <span class="c1"># In rails 3</span>
-</span><span class='line'><span class="c1"># OR</span>
-</span><span class='line'><span class="n">ruby</span> <span class="n">script</span><span class="o">/</span><span class="n">console</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Getting app object</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">=&gt;</span> <span class="c1">#&lt;ActionController::Integration::Session:0xc164fac @result=nil, @status=nil, @accept=&quot;text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5&quot;, @path=nil, @request_count=0, @application=#&lt;ActionController::Dispatcher:0xc1644f8 @output=#&lt;IO:0x85e34ec&gt;&gt;, @remote_addr=&quot;127.0.0.1&quot;, @host=&quot;www.example.com&quot;, @controller=nil, @https=false, @request=nil, @headers=nil, @cookies={}, @status_message=nil, @named_routes_configured=true, @response=nil&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Root URL</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">root_url</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;http://www.example.com/&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Plural paths</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">calls_path</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;/calls&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Singular routes</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">audio_call_path</span>
-</span><span class='line'><span class="ss">ActionController</span><span class="p">:</span><span class="ss">:RoutingError</span><span class="p">:</span> <span class="n">audio_call_url</span> <span class="n">failed</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">audio_call_path</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;/calls/1/audio&quot;</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">audio_call_path</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;/calls/13/audio&quot;</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">audio_call_path</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s1">&#39;san&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;/calls/13/audio?name=san&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Polymorphic URLS</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">app</span><span class="o">.</span><span class="n">polymorphic_path</span><span class="p">(</span><span class="no">Call</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="ss">:action</span> <span class="o">=&gt;</span> <span class="s1">&#39;audio&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;/calls/253/audio&quot;</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">polymorphic_path</span><span class="p">(</span><span class="no">Call</span><span class="o">.</span><span class="n">new</span><span class="p">)</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;/calls&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -905,6 +659,136 @@ Put below code in file <em>config/intializers/core_extensions.rb</em></p>
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/10/solution-to-delayed-job-gem-server-start-problem/">Solution to DelayedJob(DJ) gem server start problem</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-10-05T16:15:00+05:30" pubdate data-updated="true">Oct 5<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Solution to DelayedJob(DJ) gem server start problem</p>
+
+<p>I had installed delayed_job gem 2.0.3, daemons gem but after staring DJ server it shows daemon started but actually process gets killed automatically.</p>
+
+<p>I performed steps given by Kevin on google group and it worked like charm</p>
+
+<p>Here are the steps:</p>
+
+<h2>1 Add github to gem sources</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo gem sources -a http://gems.github.com</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>2 Install alexvollmer-daemon-spawn</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo gem install alexvollmer-daemon-spawn</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>3 Move the old daemons delayed job script out of the way</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mv script/delayed_job script/delayed_job.daemons</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>4 Copy below gist to <em>script/delayed_job</em>:</h2>
+
+<script src="https://gist.github.com/akmathur/104314.js"></script>
+
+
+<p>Try it out again making sure it writes to the tmp/pids directory ok.</p>
+
+<p>My line looks like this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>RAILS_ENV=production script/delayed_job start</span></code></pre></td></tr></table></div></figure>
+
+
+<p>then to check (besides running &lsquo;ps&rsquo;), you can run this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>RAILS_ENV=production script/delayed_job status</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/10/introduction-to-delayed-job/">Introduction To Delayed Job</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-10-04T21:12:00+05:30" pubdate data-updated="true">Oct 4<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Check out this SlideShare Presentation:
+<strong style="display:block;margin:12px 0 4px">
+<a href="http://www.slideshare.net/jonathanjulian/introduction-to-delayed-job" title="Introduction To Delayed Job">Introduction To Delayed Job</a>
+</strong></p>
+
+<object id="__sse2467230" width="825" height="355">
+<param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=introtodelayedjob-091110110012-phpapp01&stripped_title=introduction-to-delayed-job&userName=jonathanjulian" />
+<param name="allowFullScreen" value="true"/>
+<param name="allowScriptAccess" value="always"/>
+<embed name="__sse2467230" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=introtodelayedjob-091110110012-phpapp01&stripped_title=introduction-to-delayed-job&userName=jonathanjulian" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" height="355">
+</embed>
+</object>
+
+
+<div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/jonathanjulian">Jonathan Julian</a>.</div>
+
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/page/7/">&larr; Older</a>
@@ -922,14 +806,6 @@ Put below code in file <em>config/intializers/core_extensions.rb</em></p>
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/03/restful-vs-soap-web-services/">RESTful vs SOAP web services</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/03/regex-to-split-string-within-quotes-and-spaces/">regex to split string within quotes and spaces</a>
-      </li>
-    
-      <li class="post">
         <a href="/2014/02/moving-from-blogspot-to-octopress/">Migrating from blogspot to octopress</a>
       </li>
     
@@ -939,6 +815,14 @@ Put below code in file <em>config/intializers/core_extensions.rb</em></p>
     
       <li class="post">
         <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/03/what-is-new-in-rails-3/">what is new in rails 3</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
   </ul>
