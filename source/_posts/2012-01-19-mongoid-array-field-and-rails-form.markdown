@@ -7,11 +7,13 @@ categories:
  - mongoid
  - rails 3
 ---
-Mongoid document supports array as field. array field in mongoid document is a ruby array but its quite complex to manage array field in rails forms.
+Mongoid document supports `array` field. Mongoid array field is a ruby `array` but it becomes quite complex to manage array field in rails forms.
 
-After lot of google and reading comments from stack-overflow at last i felt helpless. Finally after doing research on rails form helper object(form_for, fields_for) am pleased to get it working as expected :)
+I didn't find anything matching on google as well on stackoverflow hence decided to dig into rails form helpers (`form_for`, `fields_for`).
 
-In below example, product can have multiple categories
+Finally i am pleased to get it working as expected :)
+
+In below example, `product` can have multiple `categories` :
 ```ruby
 class Product
   CATEGORIES = %w(Apparel Media Software Sports Agri Education)
@@ -21,7 +23,7 @@ class Product
 end
 ```
 <!--more-->
-Here is form code 
+Here is form code
 ```haml
 = form_for(@product) do |f|
   = f.text_field :name

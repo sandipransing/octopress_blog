@@ -9,7 +9,7 @@ categories:
  - rails
 ---
 
-Delayed Job & Monit configuration 
+## Delayed Job & Monit configuration 
 
 We were struggling through how to monit delayed_job from past few months because monit doesn't work seamlessly with delayed_job start/stop commands and finally we got able to monit delayed_job. 
 
@@ -26,8 +26,9 @@ After doing google & looking at stackoverflow, we found different solutions to w
 
 After reading google group someone (not remembering exactly) directed to write a init script for delayed_job server and that perfectly worked for me and my headache of self moniting delayed_job ended up ;)
 
-Here is delayed_job init script
-# /etc/init.d/delayed_job
+#### Delayed Job init script
+
+*/etc/init.d/delayed_job*
 ```
 #! /bin/sh
 set_path="cd /home/sandip/current"
@@ -53,6 +54,7 @@ exit 0
 ```
 
 finally here is the working monit delayed_job configuration
+
 ```
 check process delayed_job with pidfile /home/sandip/shared/pids/delayed_job.pid
     stop program = "/etc/init.d/delayed_job stop"
@@ -61,7 +63,7 @@ check process delayed_job with pidfile /home/sandip/shared/pids/delayed_job.pid
     if cpu usage > 95% for 3 cycles then restart
 ```
 
-Thinking Sphinx monit configuration
+#### Thinking Sphinx monit configuration
 ```
 check process sphinx with pidfile /home/sandip/shared/pids/searchd.pid
     stop program = "/bin/bash -c 'cd /home/sandip/current && /usr/bin/rake RAILS_ENV=production ts:stop'"
@@ -70,7 +72,7 @@ check process sphinx with pidfile /home/sandip/shared/pids/searchd.pid
     if cpu usage > 95% for 3 cycles then restart
 ```
 
-Adhearsion (ahn) monit confiuration
+#### Adhearsion (ahn) monit confiuration
 ```
 check process ahn with pidfile /home/josh/shared/pids/ahnctl.pid
     stop program = "/bin/bash -c 'cd /home/sandip/current && /usr/bin/ahnctl stop adhearsion'"
@@ -79,7 +81,7 @@ check process ahn with pidfile /home/josh/shared/pids/ahnctl.pid
     if cpu usage > 95% for 3 cycles then restart
 ```
 
-Nginx monit configuration
+#### Nginx monit configuration
 ```
 check process nginx with pidfile /opt/nginx/logs/nginx.pid
     start program = "/opt/nginx/sbin/nginx"

@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "thank you"
+title: "Thank You"
 comments: false
 sharing: false
 footer: false

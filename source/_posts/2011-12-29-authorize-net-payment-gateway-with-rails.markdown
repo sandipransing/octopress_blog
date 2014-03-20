@@ -17,7 +17,7 @@ In this method gateway handles all steps required in payment transaction flow se
 Here, Payment form and creditcard detail form resides on gateway site and all the steps in transaction carried out at gateway server 
 
 3. Advance Integration Method (AIM)
-Provides full control of all the transaction steps at merchant server. Payment form resides on merchant side. merchnat server sends authorization and payment capture requests to gateway server where actual transaction takes place and response is sent back to merchant server to notify transaction status. To know detail integration on this click [here](http://www.funonrails.com/2011/12/authorizenet-aim-payment-integration.html).
+Provides full control of all the transaction steps at merchant server. Payment form resides on merchant side. merchnat server sends authorization and payment capture requests to gateway server where actual transaction takes place and response is sent back to merchant server to notify transaction status. To know detail integration on this click [here](http://www.funonrails.com/2011/12/authorizenet-aim-payment-integration).
 
 **Prerequisites before getting started with integration**
 

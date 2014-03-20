@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "contact"
+title: "Contact Me"
 date: 2009-09-21 18:43
 comments: false
 sharing: false
@@ -9,8 +9,8 @@ footer: false
 I would be very grateful for any feedback or suggestion you could give me for the improvement of this blog.
 
 <form method="post" action="http://www.emailmeform.com/fid.php?formid=622173" enctype="multipart/form-data" accept-charset="UTF-8">
-<table cellpadding="2" cellspacing="0" border="0" bgcolor="#FFFFFF">
-<tbody>
+  <table cellpadding="2" cellspacing="0" border="0" bgcolor="#FFFFFF">
+  <tbody>
   <tr valign="top"> <td>Your Name</td> <td><input type="text" name="FieldData0" size="30"> </td></tr>
   <tr valign="top"> <td>Your Email Address </td> <td><input type="text" name="FieldData1" size="30"> </td></tr>
   <tr valign="top"> <td>Website/Blog </td> <td><input type="text" name="FieldData2" size="30"> </td></tr>

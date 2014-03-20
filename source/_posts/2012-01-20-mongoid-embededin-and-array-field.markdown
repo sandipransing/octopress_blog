@@ -7,7 +7,7 @@ categories:
  - mongoid
  - rails
 ---
-Previous post explains on [mongoid document array field and rails form implementation](http://www.funonrails.com/2012/01/mongoid-array-field-and-rails-form.html)
+Previous post explains on [mongoid document array field and rails form implementation](http://www.funonrails.com/2012/01/mongoid-array-field-and-rails-form)
 
 Below example shows rails form integration of array field of embedded mongoid document
 
