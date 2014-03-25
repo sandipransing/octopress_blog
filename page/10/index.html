@@ -98,6 +98,134 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2010/02/extend-enumerable-to-add-method/">Extend enumerable to add method collect_with_index</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-02-18T14:24:00+05:30" pubdate data-updated="true">Feb 18<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Extend enumerable functionality to iterate along with index</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">Enumerable</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">collect_with_index</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">collect</span><span class="p">{</span><span class="o">|</span><span class="n">elm</span><span class="o">|</span> <span class="k">yield</span><span class="p">(</span><span class="n">elm</span><span class="p">,</span> <span class="n">i</span><span class="o">+=</span><span class="mi">1</span><span class="p">)}</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  <span class="k">alias</span> <span class="n">map_with_index</span> <span class="n">collect_with_index</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Example use :</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'> <span class="o">[</span><span class="s1">&#39;ruby&#39;</span><span class="p">,</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;sandip&#39;</span><span class="o">].</span><span class="n">map_with_index</span><span class="p">{</span> <span class="o">|</span><span class="n">w</span><span class="p">,</span><span class="n">i</span><span class="o">|</span>  <span class="o">[</span><span class="n">w</span><span class="p">,</span> <span class="n">i</span><span class="o">]</span> <span class="p">}</span>
+</span><span class='line'> <span class="c1">#=&gt; [[&quot;ruby&quot;, 1], [&quot;rails&quot;, 2], [&quot;sandip&quot;, 3]] </span>
+</span><span class='line'>
+</span><span class='line'> <span class="o">[</span><span class="s1">&#39;ruby&#39;</span><span class="p">,</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;sandip&#39;</span><span class="o">].</span><span class="n">collect_with_index</span><span class="p">{</span> <span class="o">|</span><span class="n">w</span><span class="p">,</span><span class="n">i</span><span class="o">|</span>  <span class="o">[</span><span class="n">w</span><span class="p">,</span>  <span class="n">i</span><span class="o">]</span> <span class="p">}</span>
+</span><span class='line'> <span class="c1">#=&gt; [[&quot;ruby&quot;, 1], [&quot;rails&quot;, 2], [&quot;sandip&quot;, 3]]</span>
+</span><span class='line'>
+</span><span class='line'> <span class="c1">#By default index starts from zero to specify custom index to start from,</span>
+</span><span class='line'> <span class="c1">#pass index to collect_with_index</span>
+</span><span class='line'>
+</span><span class='line'> <span class="o">[</span><span class="s1">&#39;ruby&#39;</span><span class="p">,</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;sandip&#39;</span><span class="o">].</span><span class="n">map_with_index</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">){</span> <span class="o">|</span><span class="n">w</span><span class="p">,</span><span class="n">i</span><span class="o">|</span>  <span class="o">[</span><span class="n">w</span><span class="p">,</span> <span class="n">i</span><span class="o">]</span> <span class="p">}</span>
+</span><span class='line'> <span class="c1">#=&gt; [[&quot;ruby&quot;, 0], [&quot;rails&quot;, 1], [&quot;sandip&quot;, 2]]</span>
+</span><span class='line'>
+</span><span class='line'> <span class="o">[</span><span class="s1">&#39;ruby&#39;</span><span class="p">,</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;sandip&#39;</span><span class="o">].</span><span class="n">map_with_index</span><span class="p">(</span><span class="mi">5</span><span class="p">){</span> <span class="o">|</span><span class="n">w</span><span class="p">,</span><span class="n">i</span><span class="o">|</span>  <span class="o">[</span><span class="n">w</span><span class="p">,</span> <span class="n">i</span><span class="o">]</span> <span class="p">}</span>
+</span><span class='line'> <span class="c1">#=&gt; [[&quot;ruby&quot;, 6], [&quot;rails&quot;, 7], [&quot;sandip&quot;, 8]]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/02/fixsolution-for-nomethoderror-undefined/">Fix/Solution for NoMethodError? (undefined method `controller_name&#8217; for nil:NilClass)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-02-16T20:32:00+05:30" pubdate data-updated="true">Feb 16<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This error appears when same action gets called twice. There might be chances to have controller with same name twice inside app as well as plugins</p>
+
+<p>In my case the error appeared while migrating from <code>rails 2.1</code> to <code>2.3</code>
+Application was having <code>application.rb</code> and <code>application_controller.rb</code></p>
+
+<p>Files deleted:
+<code>trunk/app/controllers/application.rb</code></p>
+
+<p>And that solved problem !</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2010/02/online-ruby-programming-useful-website/">Online ruby Programming useful website links</a></h1>
     
     
@@ -739,108 +867,6 @@ gem list &mdash;remote &mdash;source <a href="http://gems.github.com">http://gem
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/02/adhearsion-and-telegraph-framework/">Adhearsion and Telegraph Framework Presentation</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-02-03T14:36:00+05:30" pubdate data-updated="true">Feb 3<span>rd</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Check out this SlideShare Presentation: <div style="width:825px;text-align:left" id="__ss_881934"><a style="font:14px Helvetica,Arial,Sans-serif;display:block;margin:12px 0 3px 0;text-decoration:underline;" href="http://www.slideshare.net/justingrammens/rumvoip" title="Adhearsion and Telegraph Framework Presentation">Adhearsion and Telegraph Framework Presentation</a><object style="margin:0px" width="825" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=rumvoip-123073798056-phpapp01&stripped_title=rumvoip" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=rumvoip-123073798056-phpapp01&stripped_title=rumvoip" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="825" height="355"></embed></object><div style="font-size:11px;font-family:tahoma,arial;height:26px;padding-top:2px;">View more <a style="text-decoration:underline;" href="http://www.slideshare.net/">presentations</a> from <a style="text-decoration:underline;" href="http://www.slideshare.net/justingrammens">Justin Grammens</a>.</div></div></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/01/delayed-job-changing-job-parameters-in-rails/">Delayed Job changing job parameters in Rails</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-01-13T19:59:00+05:30" pubdate data-updated="true">Jan 13<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Delayed job variables initialization written on at collectiveidea / delayed_job doesn&rsquo;t work.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># config/initializers/delayed_job_config.rb</span>
-</span><span class='line'><span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Worker</span><span class="o">.</span><span class="n">destroy_failed_jobs</span> <span class="o">=</span> <span class="kp">false</span>
-</span><span class='line'><span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Worker</span><span class="o">.</span><span class="n">sleep_delay</span> <span class="o">=</span> <span class="mi">60</span>
-</span><span class='line'><span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Worker</span><span class="o">.</span><span class="n">max_attempts</span> <span class="o">=</span> <span class="mi">3</span>
-</span><span class='line'><span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Worker</span><span class="o">.</span><span class="n">max_run_time</span> <span class="o">=</span> <span class="mi">5</span><span class="o">.</span><span class="n">minutes</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Here is the correct way of doing it as mentioned on tobi / delayed_job</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># config/initializers/delayed_job_config.rb</span>
-</span><span class='line'><span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Job</span><span class="o">.</span><span class="n">destroy_failed_jobs</span> <span class="o">=</span> <span class="kp">false</span>
-</span><span class='line'><span class="n">silence_warnings</span> <span class="k">do</span>
-</span><span class='line'>  <span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Job</span><span class="o">.</span><span class="n">const_set</span><span class="p">(</span><span class="s2">&quot;MAX_ATTEMPTS&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-</span><span class='line'>  <span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Job</span><span class="o">.</span><span class="n">const_set</span><span class="p">(</span><span class="s2">&quot;MAX_RUN_TIME&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="o">.</span><span class="n">minutes</span><span class="p">)</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/11/">&larr; Older</a>
@@ -858,6 +884,14 @@ gem list &mdash;remote &mdash;source <a href="http://gems.github.com">http://gem
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/03/understanding-restful-vs-soap-web-services/">Understanding RESTful vs SOAP web services</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/03/regex-to-split-string-within-quotes-and-spaces/">regex to split string within quotes and spaces</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/02/moving-from-blogspot-to-octopress/">Migrating from blogspot to octopress</a>
       </li>
     
@@ -867,14 +901,6 @@ gem list &mdash;remote &mdash;source <a href="http://gems.github.com">http://gem
     
       <li class="post">
         <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/03/what-is-new-in-rails-3/">what is new in rails 3</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
   </ul>

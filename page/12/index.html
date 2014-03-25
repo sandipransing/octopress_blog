@@ -98,6 +98,231 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2009/11/bundling-gems-in-rails-application/">bundling gems in rails application</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-23T14:47:00+05:30" pubdate data-updated="true">Nov 23<span>rd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Gem Bundling is basically used to maintain all required gems at your application level and its very easy to use.
+It downloads necessary gems and maintain it under <code>/vender/gems</code> directory.</p>
+
+<h2>Install gemcutter</h2>
+
+<p>gemcutter provides hosting for ruby gems</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install gemcutter</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Install bundler</h2>
+
+<p>bundler is a tool that manages gem dependencies for your ruby application</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install bundler</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Start using</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem bundle</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/vim-cheatsheet/">VI/ VIM cheats</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-18T01:20:00+05:30" pubdate data-updated="true">Nov 18<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Movements</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>b   previous word
+</span><span class='line'>w   next word
+</span><span class='line'>e        end of word
+</span><span class='line'>0/^      begining of line
+</span><span class='line'>$        end of line
+</span><span class='line'>G        end of file
+</span><span class='line'>1G/gg    begining of file
+</span><span class='line'>/pattern  search next
+</span><span class='line'>?pattern  search previous
+</span><span class='line'>n         repeat    search forword ( i.e next occurence )
+</span><span class='line'>N         repeat    search backword
+</span><span class='line'>:line     goto line specified</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Modes</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>i   insert mode
+</span><span class='line'>r   replace mode
+</span><span class='line'>s   delete character under cursor and eneter insert mode</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Delete</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>x    delete character under cursor
+</span><span class='line'>dd   delete current line
+</span><span class='line'>line dd delete number of lines specified</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Copy</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>yy        copy current line
+</span><span class='line'>pp        print copied contents
+</span><span class='line'>line yy   copy number of lines specified</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Visual</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>v     enter visual mode
+</span><span class='line'>aw    highlight word
+</span><span class='line'>as    highlight sentence
+</span><span class='line'>ap    highlight paragraph
+</span><span class='line'>ab    highlight block</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Undo/ Redo</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>u       undo
+</span><span class='line'>cntrl+r redo</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>autocomplete</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cntrl+x   enter completion mode
+</span><span class='line'>cntrl+p   display autocomplete options</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Uppercase/ Lowercase</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>guu   lowercase line
+</span><span class='line'>gUU   uppercase line</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Regx replace</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>range s/foo/bar/arg - replace foo with bar in 'range' with
+</span><span class='line'>
+</span><span class='line'>Values of 'range':
+</span><span class='line'>%               whole file
+</span><span class='line'>number          that particular line
+</span><span class='line'>none            apply to current line only
+</span><span class='line'>
+</span><span class='line'>values of 'arg':
+</span><span class='line'>none  apply to first occurrence
+</span><span class='line'>g     global (all occurrences)</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Select/Macros</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>qchar      start recording macro storing it in register 'char'
+</span><span class='line'>q          end recording
+</span><span class='line'>@char      replay the macro stored in 'char'
+</span><span class='line'>:1,10 norm! @char run the macro stored in 'char over the 1-10 line range</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2009/11/yaml-file-configuration-in-ruby-rails/">YAML file configuration in ruby & rails</a></h1>
     
     
@@ -1222,376 +1447,6 @@ Migrate all radiant extensions</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/10/10-steps-to-get-start-with-myspace-ruby/">10 steps to get start with MySpace Ruby SDK</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-10-27T21:33:00+05:30" pubdate data-updated="true">Oct 27<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Follow 10 simple steps listed below in order to use myspace sdk api</p>
-
-<h4>1. Remove existing <code>myspace</code> gems installed if any</h4>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>gem uninstall myspace</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>2. Checkout sample source code</h4>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>svn checkout http://myspaceid-ruby-sdk.googlecode.com/svn/trunk/ myspacesdk</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>3. Move to sample dir</h4>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd myspacesdk/samples/rails/sample</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>4. Modify DB config</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="c1"># Modify config/database.yml accordingly</span>
-</span><span class='line'><span class="l-Scalar-Plain">development</span><span class="p-Indicator">:</span>
-</span><span class='line'>  <span class="l-Scalar-Plain">adapter</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">mysql</span>
-</span><span class='line'>  <span class="l-Scalar-Plain">database</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">sample_development</span>
-</span><span class='line'>  <span class="l-Scalar-Plain">password</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">abcd</span>
-</span><span class='line'>  <span class="l-Scalar-Plain">pool</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">5</span>
-</span><span class='line'>  <span class="l-Scalar-Plain">timeout</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">5000</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>5. Download Gem</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">wget http://myspaceid-ruby-sdk.googlecode.com/files/myspaceid-sdk-0.1.11.gem</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>6. Install <code>myspaceid-sdk</code> gem locally</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">gem install --local ~/Desktop/myspaceid-sdk-0.1.11.gem</span>
-</span><span class='line'><span class="l-Scalar-Plain"># --local option taskes local PATH_TO_GEM</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>7. Above command supposed to give following error otherwise skip to step 10</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">ERROR</span><span class="p-Indicator">:</span>  <span class="l-Scalar-Plain">Error installing /home/sandip/Desktop/myspaceid-sdk-0.1.11.gem</span><span class="p-Indicator">:</span>
-</span><span class='line'><span class="l-Scalar-Plain">myspaceid-sdk requires ruby-openid (&gt;= 0, runtime)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>8. Install <code>ruby-openid</code> and go to &ldquo;step 6&rdquo;</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">gem install ruby-openid</span>
-</span><span class='line'><span class="l-Scalar-Plain"># Go to step 6</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>9. Start Server</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">ruby script/server</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>10.  Browse Application</h4>
-
-<p>Open URL <a href="http://localhost:3000/">http://localhost:3000/</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/10/find-processor-cpu-information-on-linux/">Find processor (cpu) information on linux</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-10-26T23:49:00+05:30" pubdate data-updated="true">Oct 26<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Below command will give you all the details about CPU</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cat /proc/cpuinfo</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>Example use</h4>
-
-<p>on my ubuntu machine, It showed me below information :</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-<span class='line-number'>66</span>
-<span class='line-number'>67</span>
-<span class='line-number'>68</span>
-<span class='line-number'>69</span>
-<span class='line-number'>70</span>
-<span class='line-number'>71</span>
-<span class='line-number'>72</span>
-<span class='line-number'>73</span>
-<span class='line-number'>74</span>
-<span class='line-number'>75</span>
-<span class='line-number'>76</span>
-<span class='line-number'>77</span>
-<span class='line-number'>78</span>
-<span class='line-number'>79</span>
-<span class='line-number'>80</span>
-<span class='line-number'>81</span>
-<span class='line-number'>82</span>
-<span class='line-number'>83</span>
-<span class='line-number'>84</span>
-<span class='line-number'>85</span>
-<span class='line-number'>86</span>
-<span class='line-number'>87</span>
-<span class='line-number'>88</span>
-<span class='line-number'>89</span>
-<span class='line-number'>90</span>
-<span class='line-number'>91</span>
-<span class='line-number'>92</span>
-<span class='line-number'>93</span>
-<span class='line-number'>94</span>
-<span class='line-number'>95</span>
-<span class='line-number'>96</span>
-<span class='line-number'>97</span>
-<span class='line-number'>98</span>
-<span class='line-number'>99</span>
-<span class='line-number'>100</span>
-<span class='line-number'>101</span>
-<span class='line-number'>102</span>
-<span class='line-number'>103</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>processor : 0
-</span><span class='line'>vendor_id : GenuineIntel
-</span><span class='line'>cpu family  : 6
-</span><span class='line'>model   : 42
-</span><span class='line'>model name  : Intel(R) Core(TM) i3-2350M CPU @ 2.30GHz
-</span><span class='line'>stepping  : 7
-</span><span class='line'>microcode : 0x1b
-</span><span class='line'>cpu MHz   : 800.000
-</span><span class='line'>cache size  : 3072 KB
-</span><span class='line'>physical id : 0
-</span><span class='line'>siblings  : 4
-</span><span class='line'>core id   : 0
-</span><span class='line'>cpu cores : 2
-</span><span class='line'>apicid    : 0
-</span><span class='line'>initial apicid  : 0
-</span><span class='line'>fpu   : yes
-</span><span class='line'>fpu_exception : yes
-</span><span class='line'>cpuid level : 13
-</span><span class='line'>wp    : yes
-</span><span class='line'>flags   : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf eagerfpu pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer xsave avx lahf_lm arat epb xsaveopt pln pts dtherm tpr_shadow vnmi flexpriority ept vpid
-</span><span class='line'>bogomips  : 4589.39
-</span><span class='line'>clflush size  : 64
-</span><span class='line'>cache_alignment : 64
-</span><span class='line'>address sizes : 36 bits physical, 48 bits virtual
-</span><span class='line'>power management:
-</span><span class='line'>
-</span><span class='line'>processor : 1
-</span><span class='line'>vendor_id : GenuineIntel
-</span><span class='line'>cpu family  : 6
-</span><span class='line'>model   : 42
-</span><span class='line'>model name  : Intel(R) Core(TM) i3-2350M CPU @ 2.30GHz
-</span><span class='line'>stepping  : 7
-</span><span class='line'>microcode : 0x1b
-</span><span class='line'>cpu MHz   : 800.000
-</span><span class='line'>cache size  : 3072 KB
-</span><span class='line'>physical id : 0
-</span><span class='line'>siblings  : 4
-</span><span class='line'>core id   : 1
-</span><span class='line'>cpu cores : 2
-</span><span class='line'>apicid    : 2
-</span><span class='line'>initial apicid  : 2
-</span><span class='line'>fpu   : yes
-</span><span class='line'>fpu_exception : yes
-</span><span class='line'>cpuid level : 13
-</span><span class='line'>wp    : yes
-</span><span class='line'>flags   : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf eagerfpu pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer xsave avx lahf_lm arat epb xsaveopt pln pts dtherm tpr_shadow vnmi flexpriority ept vpid
-</span><span class='line'>bogomips  : 4589.39
-</span><span class='line'>clflush size  : 64
-</span><span class='line'>cache_alignment : 64
-</span><span class='line'>address sizes : 36 bits physical, 48 bits virtual
-</span><span class='line'>power management:
-</span><span class='line'>
-</span><span class='line'>processor : 2
-</span><span class='line'>vendor_id : GenuineIntel
-</span><span class='line'>cpu family  : 6
-</span><span class='line'>model   : 42
-</span><span class='line'>model name  : Intel(R) Core(TM) i3-2350M CPU @ 2.30GHz
-</span><span class='line'>stepping  : 7
-</span><span class='line'>microcode : 0x1b
-</span><span class='line'>cpu MHz   : 800.000
-</span><span class='line'>cache size  : 3072 KB
-</span><span class='line'>physical id : 0
-</span><span class='line'>siblings  : 4
-</span><span class='line'>core id   : 0
-</span><span class='line'>cpu cores : 2
-</span><span class='line'>apicid    : 1
-</span><span class='line'>initial apicid  : 1
-</span><span class='line'>fpu   : yes
-</span><span class='line'>fpu_exception : yes
-</span><span class='line'>cpuid level : 13
-</span><span class='line'>wp    : yes
-</span><span class='line'>flags   : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf eagerfpu pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer xsave avx lahf_lm arat epb xsaveopt pln pts dtherm tpr_shadow vnmi flexpriority ept vpid
-</span><span class='line'>bogomips  : 4589.39
-</span><span class='line'>clflush size  : 64
-</span><span class='line'>cache_alignment : 64
-</span><span class='line'>address sizes : 36 bits physical, 48 bits virtual
-</span><span class='line'>power management:
-</span><span class='line'>
-</span><span class='line'>processor : 3
-</span><span class='line'>vendor_id : GenuineIntel
-</span><span class='line'>cpu family  : 6
-</span><span class='line'>model   : 42
-</span><span class='line'>model name  : Intel(R) Core(TM) i3-2350M CPU @ 2.30GHz
-</span><span class='line'>stepping  : 7
-</span><span class='line'>microcode : 0x1b
-</span><span class='line'>cpu MHz   : 800.000
-</span><span class='line'>cache size  : 3072 KB
-</span><span class='line'>physical id : 0
-</span><span class='line'>siblings  : 4
-</span><span class='line'>core id   : 1
-</span><span class='line'>cpu cores : 2
-</span><span class='line'>apicid    : 3
-</span><span class='line'>initial apicid  : 3
-</span><span class='line'>fpu   : yes
-</span><span class='line'>fpu_exception : yes
-</span><span class='line'>cpuid level : 13
-</span><span class='line'>wp    : yes
-</span><span class='line'>flags   : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf eagerfpu pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer xsave avx lahf_lm arat epb xsaveopt pln pts dtherm tpr_shadow vnmi flexpriority ept vpid
-</span><span class='line'>bogomips  : 4589.39
-</span><span class='line'>clflush size  : 64
-</span><span class='line'>cache_alignment : 64
-</span><span class='line'>address sizes : 36 bits physical, 48 bits virtual
-</span><span class='line'>power management:</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/13/">&larr; Older</a>
@@ -1609,6 +1464,14 @@ Migrate all radiant extensions</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/03/understanding-restful-vs-soap-web-services/">Understanding RESTful vs SOAP web services</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/03/regex-to-split-string-within-quotes-and-spaces/">regex to split string within quotes and spaces</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/02/moving-from-blogspot-to-octopress/">Migrating from blogspot to octopress</a>
       </li>
     
@@ -1618,14 +1481,6 @@ Migrate all radiant extensions</p>
     
       <li class="post">
         <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/03/what-is-new-in-rails-3/">what is new in rails 3</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
   </ul>

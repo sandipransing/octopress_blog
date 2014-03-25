@@ -98,6 +98,129 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2012/01/puts-tos-and-inspect-on-ruby-object/">puts, to_s and inspect on ruby object</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-31T01:07:00+05:30" pubdate data-updated="true">Jan 31<span>st</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><code>puts</code> converts ruby object into string by invoking to_s method on object. The default to_s prints the object&rsquo;s class and an encoding of the object id. In order to print human readable form of object use inspect</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">locs</span> <span class="o">=</span> <span class="no">Location</span><span class="o">.</span><span class="n">find_by_sql</span><span class="p">(</span><span class="s1">&#39;select * from locations&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="no">Location</span> <span class="no">Load</span> <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span><span class="n">ms</span><span class="p">)</span>  <span class="nb">select</span> <span class="o">*</span> <span class="n">from</span> <span class="n">locations</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Puts Object internally invokes to_s method on object to print</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">locs</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">l</span><span class="o">|</span>
+</span><span class='line'>  <span class="c1"># it calls to_s method on object</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="n">l</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#&lt;Location:0x000000055bb328&gt;</span>
+</span><span class='line'><span class="c1">#&lt;Location:0x000000055bb058&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2012/01/puts-tos-and-inspect-on-ruby-object/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/01/csv-file-import-export-in-rails-3/">csv file import / export in rails 3</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-27T14:28:00+05:30" pubdate data-updated="true">Jan 27<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>CSV (comma separated values) files are frequently used to import/export data.</p>
+
+<p>In rails 3, <code>FasterCSV</code> comes as default and below is the way to upload csv files inside rails applications. The code below will also show you how to generate csv in memory, parse on csv data, skip header, iterate over records, save records inside db, export upload error file and many more.</p>
+
+<h4>Upload form</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='haml'><span class='line'><span class="p">=</span> <span class="n">form_tag</span> <span class="n">upload_url</span><span class="p">,</span> <span class="ss">:multipart</span> <span class="o">=&gt;</span> <span class="kp">true</span> <span class="k">do</span>
+</span><span class='line'>  <span class="nt">%label</span><span class="p">{</span><span class="ss">:for</span> <span class="o">=&gt;</span> <span class="s2">&quot;file&quot;</span><span class="p">}</span> File to Upload
+</span><span class='line'>  <span class="p">=</span> <span class="n">file_field_tag</span> <span class="s2">&quot;file&quot;</span>
+</span><span class='line'>  <span class="p">=</span> <span class="n">submit_tag</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2012/01/csv-file-import-export-in-rails-3/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2012/01/mongoid-embededin-and-array-field/">Mongoid embeded_in and Array field management</a></h1>
     
     
@@ -1649,198 +1772,6 @@ Billing routes</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/12/using-formbuilder-in-rails/">Customizing rails default form builder</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-29T01:29:00+05:30" pubdate data-updated="true">Dec 29<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Customizing default rails form builder to adopt for labels, input fields, errors, hints, etc. in order to build forms just in minutes</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/helpers/app_form_builder.rb</span>
-</span><span class='line'><span class="k">class</span> <span class="nc">AppFormBuilder</span> <span class="o">&lt;</span> <span class="ss">ActionView</span><span class="p">:</span><span class="ss">:Helpers</span><span class="o">::</span><span class="no">FormBuilder</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="no">HELPERS</span> <span class="o">=</span> <span class="sx">%w[check_box text_field text_area password_field select date_select datetime_select file_field collection_select state_select label calendar_date_select]</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">create_tagged_field</span><span class="p">(</span><span class="n">method_name</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">define_method</span><span class="p">(</span><span class="n">method_name</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="nb">name</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="o">|</span>
-</span><span class='line'>      <span class="n">errs</span> <span class="o">=</span> <span class="n">object</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="nb">name</span><span class="o">.</span><span class="n">to_sym</span><span class="p">)</span> <span class="k">if</span> <span class="n">object</span> <span class="o">&amp;&amp;</span> <span class="n">object</span><span class="o">.</span><span class="n">errors</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="c1"># initialize some local variables</span>
-</span><span class='line'>      <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">last</span><span class="o">.</span><span class="n">is_a?</span><span class="p">(</span><span class="no">Hash</span><span class="p">)</span>
-</span><span class='line'>        <span class="n">label</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">last</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="ss">:label</span><span class="p">)</span>
-</span><span class='line'>        <span class="n">suffix</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">last</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="ss">:suffix</span><span class="p">)</span>
-</span><span class='line'>        <span class="n">klass</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">last</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="ss">:class</span><span class="p">)</span>
-</span><span class='line'>        <span class="n">req</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">last</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="ss">:required</span><span class="p">)</span>
-</span><span class='line'>      <span class="k">end</span>
-</span><span class='line'>      <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span> <span class="k">if</span> <span class="n">method_name</span> <span class="o">==</span> <span class="s1">&#39;hidden_field&#39;</span>
-</span><span class='line'>      <span class="n">label</span> <span class="o">||=</span> <span class="nb">name</span><span class="o">.</span><span class="n">to_s</span><span class="o">.</span><span class="n">titleize</span>
-</span><span class='line'>      <span class="n">label</span> <span class="o">=</span> <span class="kp">nil</span> <span class="k">if</span> <span class="n">label</span> <span class="o">==</span> <span class="s1">&#39;none&#39;</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="n">klass</span> <span class="o">=</span> <span class="n">klass</span> <span class="p">?</span> <span class="o">[</span><span class="n">klass</span><span class="o">]</span> <span class="p">:</span> <span class="o">[]</span>
-</span><span class='line'>      <span class="c1"># Custom class if it exists</span>
-</span><span class='line'>      <span class="k">if</span> <span class="n">method_name</span> <span class="o">=~</span> <span class="sr">/text_field|check_box|select/</span>
-</span><span class='line'>        <span class="n">klass</span> <span class="o">&lt;&lt;</span> <span class="n">method_name</span>
-</span><span class='line'>      <span class="k">end</span>
-</span><span class='line'>      <span class="n">klass</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39;f&#39;</span> <span class="c1">#A default selector</span>
-</span><span class='line'>      <span class="n">klass</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39;error&#39;</span> <span class="k">if</span> <span class="n">errs</span><span class="o">.</span><span class="n">present?</span>
-</span><span class='line'>      <span class="n">klass</span> <span class="o">=</span> <span class="n">klass</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="c1"># Required Field Notations</span>
-</span><span class='line'>      <span class="k">if</span> <span class="n">req</span> <span class="o">==</span> <span class="s1">&#39;all&#39;</span> <span class="o">||</span> <span class="p">(</span><span class="n">req</span> <span class="o">==</span> <span class="s1">&#39;new&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">object</span><span class="o">.</span><span class="n">new_record?</span><span class="p">)</span>
-</span><span class='line'>        <span class="n">label</span> <span class="o">&lt;&lt;</span> <span class="vi">@template</span><span class="o">.</span><span class="n">content_tag</span><span class="p">(</span><span class="ss">:span</span><span class="p">,</span> <span class="ss">:*</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="ss">:req</span><span class="p">)</span>
-</span><span class='line'>      <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="n">suffix</span> <span class="o">=</span> <span class="vi">@template</span><span class="o">.</span><span class="n">content_tag</span><span class="p">(</span><span class="ss">:label</span><span class="p">,</span> <span class="n">suffix</span><span class="p">)</span> <span class="k">if</span> <span class="n">suffix</span><span class="o">.</span><span class="n">present?</span>
-</span><span class='line'>      <span class="n">label</span> <span class="o">=</span> <span class="vi">@template</span><span class="o">.</span><span class="n">content_tag</span><span class="p">(</span><span class="ss">:label</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span> <span class="k">if</span> <span class="n">label</span><span class="o">.</span><span class="n">present?</span>
-</span><span class='line'>      <span class="n">errs</span> <span class="o">=</span> <span class="vi">@template</span><span class="o">.</span><span class="n">content_tag</span><span class="p">(</span><span class="ss">:span</span><span class="p">,</span> <span class="n">errs</span><span class="o">.</span><span class="n">to_s</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="ss">:message</span><span class="p">)</span> <span class="k">if</span> <span class="n">errs</span><span class="o">.</span><span class="n">present?</span>
-</span><span class='line'>      <span class="n">reverse</span> <span class="o">=</span> <span class="kp">true</span> <span class="k">if</span> <span class="n">method_name</span> <span class="o">==</span> <span class="s1">&#39;check_box&#39;</span>
-</span><span class='line'>      <span class="k">if</span> <span class="n">reverse</span>
-</span><span class='line'>        <span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="k">super</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="n">suffix</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="n">label</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="n">errs</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span class='line'>      <span class="k">else</span>
-</span><span class='line'>        <span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">label</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="k">super</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="n">suffix</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="n">errs</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span class='line'>      <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="vi">@template</span><span class="o">.</span><span class="n">content_tag</span><span class="p">(</span><span class="ss">:div</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="n">klass</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="no">HELPERS</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="nb">name</span><span class="o">|</span>
-</span><span class='line'>    <span class="n">create_tagged_field</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/12/authorize-net-payment-gateway-with-rails/">Authorize Net Payment Gateway integration with rails</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-29T00:36:00+05:30" pubdate data-updated="true">Dec 29<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Authorize Net Payment gateway provides api access to enable online payments
-Gateway provides different api options to integrate &ndash;</p>
-
-<ol>
-<li><p>Direct Post Method
-In this method gateway handles all steps required in payment transaction flow securely and clean manner. To know more on this click <a href="https://developer.authorize.net/api/dpm">here</a>.</p></li>
-<li><p>Server Integration Method (SIM)
-Here, Payment form and creditcard detail form resides on gateway site and all the steps in transaction carried out at gateway server</p></li>
-<li><p>Advance Integration Method (AIM)
-Provides full control of all the transaction steps at merchant server. Payment form resides on merchant side. merchnat server sends authorization and payment capture requests to gateway server where actual transaction takes place and response is sent back to merchant server to notify transaction status. To know detail integration on this click <a href="http://www.funonrails.com/2011/12/authorizenet-aim-payment-integration">here</a>.</p></li>
-</ol>
-
-
-<p><strong>Prerequisites before getting started with integration</strong></p>
-
-<p><a href="https://developer.authorize.net/testaccount">Sign up for a test account</a> to obtain an API Login ID and Transaction Key. These keys will authenticate requests to the payment gateway.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/3/">&larr; Older</a>
@@ -1858,6 +1789,14 @@ Provides full control of all the transaction steps at merchant server. Payment f
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/03/understanding-restful-vs-soap-web-services/">Understanding RESTful vs SOAP web services</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/03/regex-to-split-string-within-quotes-and-spaces/">regex to split string within quotes and spaces</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/02/moving-from-blogspot-to-octopress/">Migrating from blogspot to octopress</a>
       </li>
     
@@ -1867,14 +1806,6 @@ Provides full control of all the transaction steps at merchant server. Payment f
     
       <li class="post">
         <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/03/what-is-new-in-rails-3/">what is new in rails 3</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
   </ul>

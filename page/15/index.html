@@ -98,6 +98,271 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2009/05/render-partial-or-view-from-another/">Render partial or view from another controller</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-22T19:50:00+05:30" pubdate data-updated="true">May 22<span>nd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>To render view files from another controller&rsquo;s view files</p>
+
+<h2>In rail 2.3</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>render "controller/action"</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>In rails 2.2 or below</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>render :template =&gt; 'controller/action'</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>To render partial from another controller’s views folder</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>render :partial =&gt; "controller/partial"</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/vi-vim-shortcuts/">vi / vim Shortcuts</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-22T18:23:00+05:30" pubdate data-updated="true">May 22<span>nd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>As i am newb on linux macine, i dont know vi shortcuts.
+so, i am listing down shortcuts which i am getting familier :)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># Open file
+</span><span class='line'>vi filename
+</span><span class='line'>
+</span><span class='line'># Insert in file
+</span><span class='line'>i
+</span><span class='line'>
+</span><span class='line'># Exit file
+</span><span class='line'>q
+</span><span class='line'>
+</span><span class='line'># Forced exit
+</span><span class='line'>q!
+</span><span class='line'>
+</span><span class='line'># Save file
+</span><span class='line'>wq
+</span><span class='line'>
+</span><span class='line'># Forced save
+</span><span class='line'>wq!
+</span><span class='line'>
+</span><span class='line'># Copy no of lines
+</span><span class='line'>yy
+</span><span class='line'>
+</span><span class='line'># Paste copied lines
+</span><span class='line'>pp
+</span><span class='line'>
+</span><span class='line'># Undo changes
+</span><span class='line'>uu
+</span><span class='line'>
+</span><span class='line'># Delete lines
+</span><span class='line'>dd
+</span><span class='line'>
+</span><span class='line'># To search and replace string in vi
+</span><span class='line'>:%s/search_string/replacement_string/g
+</span><span class='line'>
+</span><span class='line'># To find particular word in file
+</span><span class='line'>?string1</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you have any quick list, please let me know !</p>
+
+<p>Below post is reblogged from <a href="http://nakuls77.wordpress.com/2008/09/14/using-vi-editor/#comment-144">http://nakuls77.wordpress.com/2008/09/14/using-vi-editor/#comment-144</a></p>
+
+<blockquote><p>Vi is a very powerful editor that has been part of nearly every linux/unix distro for a very long time. Many people stray away from Vi due to the curve involved in learning this editor. This guide will help you dive into the world of Vi. Once you do, you will understand why many prefer Vi over other editors.</p></blockquote>
+
+<p>There are countless options for Vi that can be set up inside the /etc/vimrc file.</p>
+
+<p>Auto-indent and creating a macro to change the color of the background.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># vi /etc/vimrc</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Auto-Indent Option &ndash;</h2>
+
+<p>This option is so when you tab-space out a line and then press enter, the cursor will move to the next line, automatically indented to the start of the previous line. This helps programmers indent out code easily to create clean looking code. To implement this feature, please add the following line to the bottom of your /etc/vimrc file:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>set ai</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Please note that generally speaking only programmers will want to turn ON auto-indent.</p>
+
+<h2>Background Color &ndash;</h2>
+
+<p>Some SSH clients have white backgrounds and some have black backgrounds. This can make it very difficult to see the screen depending on the color of the text. This macro allows you to configure F11 to change the background color &amp; color of the text. To implement this feature, please add the following lines to the bottom of your /etc/vimrc file:</p>
+
+<p>set background=dark
+map :let &amp;background = ( &amp;background == “dark”? “light” : “dark” )</p>
+
+<p>I would highly recommend adding in the Background Color option. However if you do not wish to implement either of these features, then please proceed on in the guide.</p>
+
+<p>Commands</p>
+
+<h2>Cursor Movement</h2>
+
+<p>0 (Zero) Start of Line
+^ – First non-Blank Character of Line
+$ – End of Line
+G Go To Command (prefix with number 5G goes to line 5)</p>
+
+<p>Insert Mode Inserting/Appending Text
+Insert Start Insert Mode at Cursor
+A Append at the end of the Line
+o open (append) blank link below current line
+I Open blank line above current line
+Esc Exit Insert Mode</p>
+
+<h2>Editing</h2>
+
+<p>r Replace a single character (does not use insert mode)
+J Join line below with the current one
+cc Change (replace) an entire line
+cw Change (replace) to the end of word
+c$ – Change (replace) to the end of line
+s Delete character at cursor and substitute text
+S Delete line at cursor and substitute text (same as cc)
+u Undo
+. – Repeat last command</p>
+
+<h2>Cut and Paste</h2>
+
+<p>yy Copy(yank) a line
+2yy Copy(yank) two lines
+yw Copy(yank) word
+p Paste the clipboard after the cursor
+P Paste the clipboard before the cursor
+dd Delete a line
+dw Delete the current word
+x Delete the current character</p>
+
+<h2>Exiting</h2>
+
+<p>:w Write (save) the file, but don’t exit
+:wq Write &amp; Quit
+:q Quit
+:q! – Quit and don’t save changes</p>
+
+<h2>Searching</h2>
+
+<p>/pattern Search for a pattern
+?pattern Search backward for a pattern
+n Repeat last search in same direction
+N Repeat last search in opposite direction
+:%2/old/new/g Replace all old with new throughout file
+:%s/old/new/gc Replace all old with new throughout file with confirmations</p>
+
+<h2>Working with Multiple Files</h2>
+
+<p>:e filename Edit a file in a new buffer
+:bn Go to next buffer
+:bp Go to previous buffer
+:bd Close file(buffer)
+:sp filename Open a file in a new buffer and split window
+ctrl-ws Split windows
+ctrl-ww Switch between windows
+ctrl-wq Quite a window
+ctrl-wv Split windows vertically
+ctrl-wq Quite a window
+ctrl-wv Split windows vertically</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2009/05/working-with-multiple-ruby-versions-on-same-server/">Working with multiple ruby versions on same server</a></h1>
     
     
@@ -1063,6 +1328,14 @@ Leverage a Large Community</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/03/understanding-restful-vs-soap-web-services/">Understanding RESTful vs SOAP web services</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/03/regex-to-split-string-within-quotes-and-spaces/">regex to split string within quotes and spaces</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/02/moving-from-blogspot-to-octopress/">Migrating from blogspot to octopress</a>
       </li>
     
@@ -1072,14 +1345,6 @@ Leverage a Large Community</p>
     
       <li class="post">
         <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/03/what-is-new-in-rails-3/">what is new in rails 3</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a>
       </li>
     
   </ul>
