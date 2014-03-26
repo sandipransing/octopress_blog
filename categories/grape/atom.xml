@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Grape | Fun On Rails]]></title>
   <link href="http://funonrails.com/categories/grape/atom.xml" rel="self"/>
   <link href="http://funonrails.com/"/>
-  <updated>2014-03-26T18:09:11+05:30</updated>
+  <updated>2014-03-27T01:06:32+05:30</updated>
   <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -156,8 +156,11 @@ end
 end
 <code>
 Now, you can plug this module inside *API::Root*
-</code>
-module API
+</code>ruby</p>
+
+<h1>lib/api/root.rb</h1>
+
+<p>module API
   class Root &lt; Grape::API</p>
 
 <pre><code>#...
@@ -240,6 +243,65 @@ GET        /api/v1/authors(.:format)
 </code></pre>
 
 <p>```</p>
+
+<h2>Securing API</h2>
+
+<p>Now we have got Grape <em>API</em> ready and working properly. Lets see how we can secure <em>API</em>. There are many approaches to authenticate API. Here lets first get it working with simple <em>HTTP Basic authentication</em>.</p>
+
+<h4>HTTP Basic authentication</h4>
+
+<p>In our case, lets add basic authentication to the <em>API::Root</em> and it will get applied to all versions of API.
+```ruby</p>
+
+<h1>lib/api/root.rb</h1>
+
+<p>module API
+  class Root &lt; Grape::API</p>
+
+<pre><code>#...
+
+http_basic do |email, password|
+  user = User.find_by_email(email)
+  user &amp;&amp; user.valid_password?(password)
+end
+#...
+</code></pre>
+
+<p>  end
+end
+<code>
+Requesting API using basic http auth credentials:
+</code>
+curl <a href="http://localhost:3000/api/products">http://localhost:3000/api/products</a> -u &ldquo;admin:secret&rdquo;
+```</p>
+
+<h4>Authenticate using email and password</h4>
+
+<p>Grape provides us with <em>before block</em> inside that we can add authenctication code.
+```ruby</p>
+
+<h1>lib/api/root.rb</h1>
+
+<p>module API
+  class Root &lt; Grape::API</p>
+
+<pre><code>#...
+before do
+  error!("401 Unauthorized", 401) unless authenticated
+end
+
+helpers do
+  def authenticated
+    user = User.find_by_email(params[:email])
+    user &amp;&amp; user.valid_password?(params[:password])
+  end
+end
+#...
+</code></pre>
+
+<p>  end
+end
+```</p>
 ]]></content>
   </entry>
   

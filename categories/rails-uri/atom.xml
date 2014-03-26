@@ -4,7 +4,7 @@
   <title><![CDATA[Category: rails-uri | Fun On Rails]]></title>
   <link href="http://funonrails.com/categories/rails-uri/atom.xml" rel="self"/>
   <link href="http://funonrails.com/"/>
-  <updated>2014-03-26T18:09:11+05:30</updated>
+  <updated>2014-03-27T01:06:32+05:30</updated>
   <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -39,9 +39,9 @@ url.password #=&gt; "2121"
 <h2>Extracting urls form string paragraph</h2>
 
 <p>```ruby
-URI.extract(&lsquo;<a href="http://funonrails.com">http://funonrails.com</a> is rails blog authored by <a href="http://sandipransing.github.com">http://sandipransing.github.com</a> contact <a href="&#109;&#97;&#x69;&#108;&#x74;&#x6f;&#58;&#x2f;&#x2f;&#x73;&#97;&#110;&#100;&#105;&#x70;&#64;&#102;&#x75;&#110;&#x6f;&#x6e;&#x72;&#97;&#x69;&#x6c;&#115;&#x2e;&#99;&#111;&#x6d;">&#47;&#47;&#x73;&#x61;&#110;&#100;&#x69;&#112;&#x40;&#102;&#117;&#x6e;&#111;&#110;&#x72;&#97;&#105;&#x6c;&#x73;&#46;&#x63;&#111;&#x6d;</a>&rsquo;)</p>
+URI.extract(&lsquo;<a href="http://funonrails.com">http://funonrails.com</a> is rails blog authored by <a href="http://sandipransing.github.com">http://sandipransing.github.com</a> contact <a href="&#109;&#x61;&#x69;&#108;&#116;&#111;&#58;&#47;&#47;&#115;&#97;&#110;&#100;&#x69;&#112;&#64;&#x66;&#117;&#x6e;&#x6f;&#x6e;&#x72;&#x61;&#x69;&#108;&#x73;&#x2e;&#x63;&#x6f;&#x6d;">&#x2f;&#x2f;&#115;&#97;&#x6e;&#100;&#105;&#112;&#x40;&#102;&#117;&#x6e;&#x6f;&#110;&#114;&#x61;&#105;&#x6c;&#x73;&#x2e;&#99;&#111;&#x6d;</a>&rsquo;)</p>
 
-<h1>=> [&ldquo;<a href="http://funonrails.com">http://funonrails.com</a>&rdquo;, &ldquo;<a href="http://sandipransing.github.com">http://sandipransing.github.com</a>&rdquo;, &ldquo;<a href="&#x6d;&#x61;&#105;&#x6c;&#116;&#x6f;&#x3a;&#x2f;&#x2f;&#x73;&#97;&#x6e;&#x64;&#x69;&#112;&#64;&#102;&#117;&#110;&#111;&#x6e;&#114;&#x61;&#x69;&#x6c;&#x73;&#46;&#x63;&#111;&#109;">&#x2f;&#x2f;&#x73;&#x61;&#x6e;&#x64;&#105;&#112;&#64;&#102;&#117;&#110;&#x6f;&#x6e;&#x72;&#x61;&#x69;&#108;&#x73;&#x2e;&#99;&#111;&#109;</a>&rdquo;]</h1>
+<h1>=> [&ldquo;<a href="http://funonrails.com">http://funonrails.com</a>&rdquo;, &ldquo;<a href="http://sandipransing.github.com">http://sandipransing.github.com</a>&rdquo;, &ldquo;<a href="&#x6d;&#x61;&#x69;&#108;&#116;&#111;&#x3a;&#x2f;&#x2f;&#x73;&#x61;&#110;&#100;&#105;&#112;&#64;&#x66;&#x75;&#110;&#111;&#110;&#x72;&#97;&#x69;&#x6c;&#x73;&#46;&#x63;&#x6f;&#109;">&#47;&#47;&#x73;&#x61;&#x6e;&#x64;&#105;&#112;&#64;&#x66;&#x75;&#x6e;&#x6f;&#110;&#x72;&#97;&#105;&#108;&#x73;&#x2e;&#99;&#x6f;&#109;</a>&rdquo;]</h1>
 
 <p>```</p>
 
