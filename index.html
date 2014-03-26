@@ -98,6 +98,53 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2014/03/building-restful-api-using-grape-in-rails/">Building RESTful API using Grape in Rails</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-26T12:39:27+05:30" pubdate data-updated="true">Mar 26<span>th</span>, 2014</time>
+        
+         | <a href="/2014/03/building-restful-api-using-grape-in-rails/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>We have a web app developed in rails which uses backbone.js as a front-end framework. Recently we wanted to build a mobile app which will interact with the rails app hence we decided to build a RESTful API. There are many gems available on ruby toolbox to build APIs but it looks like <em>grape</em> can be a good choice.</p>
+
+<blockquote><p>Grape is a RESTful API microframework built to easily and quickly produce APIs for Ruby-rootd web applications.</p></blockquote>
+
+<p>Let&rsquo;s have a quick look how to build RESTful apis using <em>grape</em>.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2014/03/building-restful-api-using-grape-in-rails/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2014/03/understanding-restful-vs-soap-web-services/">Understanding RESTful vs SOAP web services</a></h1>
     
     
@@ -597,73 +644,6 @@ Then following changes needs to be done for upgrading your application to Rails 
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/01/dynamic-bounded-parameters-and-named-scopes/">dynamic & bounded parameters and named routes</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-31T02:43:00+05:30" pubdate data-updated="true">Jan 31<span>st</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Rails routes can be customized to include your own parameters inside it. Lets first understand how named routes works:</p>
-
-<h2>Adding dynamic parameters to routes</h2>
-
-<p>Here exact parameters are matched to route and presence of each parameter is mandatory in order to construct urls. If blank parameter is supplied then it will raise <code>RoutingError</code> exception.</p>
-
-<h2>Exact matched named route declared as :</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">match</span> <span class="s1">&#39;:a/:b/:c&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;home#index&#39;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:q</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>rails console :</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">app</span><span class="o">.</span><span class="n">q_url</span><span class="p">(</span><span class="ss">:a</span><span class="p">,</span> <span class="ss">:b</span><span class="p">,</span> <span class="ss">:c</span><span class="p">)</span>
-</span><span class='line'><span class="c1">#=&gt; &quot;http://www.example.com/a/b/c&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">app</span><span class="o">.</span><span class="n">q_url</span><span class="p">(</span><span class="ss">:a</span><span class="p">,</span> <span class="ss">:b</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="c1">#=&gt; ActionController::RoutingError: No route matches {:controller=&gt;&quot;home&quot;, :a=&gt;:a, :b=&gt;:b, :c=&gt;&quot;&quot;}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/01/dynamic-bounded-parameters-and-named-scopes/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/2/">&larr; Older</a>
@@ -679,6 +659,10 @@ Then following changes needs to be done for upgrading your application to Rails 
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/03/building-restful-api-using-grape-in-rails/">Building RESTful API using Grape in Rails</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/03/understanding-restful-vs-soap-web-services/">Understanding RESTful vs SOAP web services</a>
       </li>
     
@@ -692,10 +676,6 @@ Then following changes needs to be done for upgrading your application to Rails 
     
       <li class="post">
         <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
   </ul>

@@ -98,6 +98,76 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2011/07/how-to-get-started-with-tata-photon-on-ubuntu/">How to get started with tata photon on ubuntu machine</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-07-05T14:06:00+05:30" pubdate data-updated="true">Jul 5<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In order to get tata photon working on ubuntu machine you need to install following packages</p>
+
+<p><strong>1. usb-modeswitch-data 2. usb-modeswitch</strong></p>
+
+<p>Either you can download them from ubuntu site and install locally or install using apt manager</p>
+
+<p>Download links</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>http://packages.debian.org/squeeze/usb-modeswitch-data
+</span><span class='line'>http://packages.debian.org/squeeze/usb-modeswitch</span></code></pre></td></tr></table></div></figure>
+
+
+<p>apt installation</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install usb-modeswitch-data usb-modeswitch usb-modeswitch</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After successful installation,</p>
+
+<ol>
+<li>Connect photon usb card</li>
+<li>Execute following commands one after another</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo usb_modeswitch -c /etc/usb_modeswitch.d/12d1\:1446
+</span><span class='line'>wvdial</span></code></pre></td></tr></table></div></figure>
+
+
+<p>..and you should get connected via photon!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2011/04/setup-active-scaffold-with-rails-3/">Setup Active Scaffold with rails 3 using jQuery</a></h1>
     
     
@@ -1299,64 +1369,6 @@ It will install dependency gems &amp; postgres adapter for db connection</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/01/using-hoptoad-notifier-as-gem-in-rails/">Using hoptoad notifier as gem in rails 2.3</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-01-27T21:18:00+05:30" pubdate data-updated="true">Jan 27<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><strong>1.  Add GEM to environment file</strong></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># in config/environment.rb
-</span><span class='line'>config.gem 'hoptoad_notifier'</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>2. Install gems</strong></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># from your Rails root:
-</span><span class='line'>rake gems:install
-</span><span class='line'>rake gems:unpack GEM=hoptoad_notifier</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>3. Generate hoptoad install using key</strong></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ruby script/generate hoptoad --api-key your_key_here</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/6/">&larr; Older</a>
@@ -1374,6 +1386,10 @@ It will install dependency gems &amp; postgres adapter for db connection</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/03/building-restful-api-using-grape-in-rails/">Building RESTful API using Grape in Rails</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/03/understanding-restful-vs-soap-web-services/">Understanding RESTful vs SOAP web services</a>
       </li>
     
@@ -1387,10 +1403,6 @@ It will install dependency gems &amp; postgres adapter for db connection</p>
     
       <li class="post">
         <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
   </ul>

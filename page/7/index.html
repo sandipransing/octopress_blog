@@ -98,6 +98,114 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2010/10/delayed-jobs-fancy-methods/">DelayedJOb&#8217;s (DJ) fancy methods</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-10-06T19:39:00+05:30" pubdate data-updated="true">Oct 6<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Delayed Job provides <code>send_later</code> and <code>send_at</code> as <em>instance</em> as well as <em>class</em>  methods. It also gives us <code>handle_asynchronously</code> as <em>class</em> method to be written inside class.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">Delayed</span>
+</span><span class='line'>  <span class="k">module</span> <span class="nn">MessageSending</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">send_later</span><span class="p">(</span><span class="nb">method</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+</span><span class='line'>      <span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Job</span><span class="o">.</span><span class="n">enqueue</span> <span class="ss">Delayed</span><span class="p">:</span><span class="ss">:PerformableMethod</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="nb">method</span><span class="o">.</span><span class="n">to_sy</span> <span class="n">m</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">send_at</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="nb">method</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+</span><span class='line'>      <span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Job</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="ss">Delayed</span><span class="p">:</span><span class="ss">:PerformableMethod</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="nb">method</span><span class="o">.</span><span class="n">to_sy</span> <span class="n">m</span><span class="p">,</span> <span class="n">args</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">time</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">module</span> <span class="nn">ClassMethods</span>
+</span><span class='line'>      <span class="k">def</span> <span class="nf">handle_asynchronously</span><span class="p">(</span><span class="nb">method</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">aliased_method</span><span class="p">,</span> <span class="n">punctuation</span> <span class="o">=</span> <span class="nb">method</span><span class="o">.</span><span class="n">to_s</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sr">/([?!=])$/</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="vg">$1</span>
+</span><span class='line'>        <span class="n">with_method</span><span class="p">,</span> <span class="n">without_method</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">aliased_method</span><span class="si">}</span><span class="s2">_with_send_later</span><span class="si">#{</span><span class="n">pu</span> <span class="n">nctuation</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">aliased_method</span><span class="si">}</span><span class="s2">_without_send_later</span><span class="si">#{</span><span class="n">punctuation</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'>        <span class="n">define_method</span><span class="p">(</span><span class="n">with_method</span><span class="p">)</span> <span class="k">do</span> <span class="o">|*</span><span class="n">args</span><span class="o">|</span>
+</span><span class='line'>          <span class="n">send_later</span><span class="p">(</span><span class="n">without_method</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">end</span>
+</span><span class='line'>        <span class="n">alias_method_chain</span> <span class="nb">method</span><span class="p">,</span> <span class="ss">:send_later</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Usage of <em>send_later</em>, <em>send_at</em> and <em>handle_asynchronously</em></h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># instance method</span>
+</span><span class='line'><span class="n">user</span><span class="o">.</span><span class="n">send_later</span><span class="p">(</span><span class="ss">:deliver_welcome</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># class_method</span>
+</span><span class='line'><span class="no">Notifier</span><span class="o">.</span><span class="n">send_later</span><span class="p">(</span><span class="ss">:deliver_welcome</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Notifier</span><span class="o">.</span><span class="n">send_at</span><span class="p">(</span><span class="mi">15</span><span class="o">.</span><span class="n">minutes</span><span class="o">.</span><span class="n">from_now</span><span class="p">,</span> <span class="ss">:deliver_welcome</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Inside User class write below line after deliver_welcome method</span>
+</span><span class='line'><span class="n">handle_asynchronously</span> <span class="ss">:deliver_welcome</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2010/10/solution-to-delayed-job-gem-server-start-problem/">Solution to DelayedJob(DJ) gem server start problem</a></h1>
     
     
@@ -1249,44 +1357,6 @@ Please be sure to make them published and modify contents to identify them</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/08/rails-3-beautiful-code/">Rails 3 Beautiful Code</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-08-02T14:57:00+05:30" pubdate data-updated="true">Aug 2<span>nd</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-Check out this SlideShare Presentation: <div style="width:425px" id="__ss_3219240"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/GreggPollack/rails-3-beautiful-code-3219240" title="Rails 3 Beautiful Code">Rails 3 Beautiful Code</a></strong><object id="__sse3219240" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=beautifulcodeinrails3-greggpollack-100218130149-phpapp02&stripped_title=rails-3-beautiful-code-3219240" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse3219240" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=beautifulcodeinrails3-greggpollack-100218130149-phpapp02&stripped_title=rails-3-beautiful-code-3219240" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/GreggPollack">GreggPollack</a>.</div></div></div>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/8/">&larr; Older</a>
@@ -1304,6 +1374,10 @@ Check out this SlideShare Presentation: <div style="width:425px" id="__ss_321924
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/03/building-restful-api-using-grape-in-rails/">Building RESTful API using Grape in Rails</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/03/understanding-restful-vs-soap-web-services/">Understanding RESTful vs SOAP web services</a>
       </li>
     
@@ -1317,10 +1391,6 @@ Check out this SlideShare Presentation: <div style="width:425px" id="__ss_321924
     
       <li class="post">
         <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
   </ul>

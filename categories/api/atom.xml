@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: api | Fun On Rails]]></title>
+  <title><![CDATA[Category: API, | Fun On Rails]]></title>
   <link href="http://funonrails.com/categories/api/atom.xml" rel="self"/>
   <link href="http://funonrails.com/"/>
-  <updated>2014-03-25T18:28:27+05:30</updated>
+  <updated>2014-03-26T18:09:11+05:30</updated>
   <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -14,248 +14,232 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Zipcode validation using geokit in rails]]></title>
-    <link href="http://funonrails.com/2010/08/zipcode-validation-using-geokit-in-rails/"/>
-    <updated>2010-08-21T04:58:00+05:30</updated>
-    <id>http://funonrails.com/2010/08/zipcode-validation-using-geokit-in-rails</id>
-    <content type="html"><![CDATA[<ol>
-<li><strong>Install geokit gem</strong>
+    <title type="html"><![CDATA[Building RESTful API using Grape in Rails]]></title>
+    <link href="http://funonrails.com/2014/03/building-restful-api-using-grape-in-rails/"/>
+    <updated>2014-03-26T12:39:27+05:30</updated>
+    <id>http://funonrails.com/2014/03/building-restful-api-using-grape-in-rails</id>
+    <content type="html"><![CDATA[<p>We have a web app developed in rails which uses backbone.js as a front-end framework. Recently we wanted to build a mobile app which will interact with the rails app hence we decided to build a RESTful API. There are many gems available on ruby toolbox to build APIs but it looks like <em>grape</em> can be a good choice.</p>
+
+<blockquote><p>Grape is a RESTful API microframework built to easily and quickly produce APIs for Ruby-rootd web applications.</p></blockquote>
+
+<p>Let&rsquo;s have a quick look how to build RESTful apis using <em>grape</em>.</p>
+
+<!--more-->
+
+
+<h2>Getting Started</h2>
+
+<p>Add <em>grape</em> to your <em>Gemfile</em> and then run <em>bundle</em> install
 <code>
-gem install geokit
+gem 'grape'
+</code></p>
+
+<h2>Modularizing API directory structure</h2>
+
+<p>Place API files into <em>lib/api</em>. You need to create <em>api</em> folder inside <em>lib</em> directory.
+As we are placing api directory inside lib you don&rsquo;t need to explicitly load it inside <em>application.rb</em>
+If you want to place <em>api</em> directory at some other place then add below lines to to <em>application.rb</em>
+<code>ruby
+config.paths.add "app/api", glob: "**/*.rb"
+config.autoload_paths += Dir["#{Rails.root}/app/api/*"]
 </code>
-OR<br/>
-```ruby
+First, Let&rsquo;s create <em>API::Root</em> class that will mount available api versions.
+```ruby</p>
 
-<h1>Add following line inside rails initialize block</h1>
+<h1>lib/api/root.rb</h1>
 
-<p>Rails::Initializer.run do |config|
-config.gem &lsquo;geokit&rsquo;
+<p>module API
+  class Root &lt; Grape::API</p>
+
+<pre><code>prefix 'api'
+mount API::V1::Root
+# mount API::V2::Root (next version)
+</code></pre>
+
+<p>  end
 end
 <code>
-And then run command
-</code>
-rake gems:install
-```</p></li>
-<li><strong>Consider User model with zipcode as attribute field</strong>
-```ruby
-include Geokit::Geocoders
-class User &lt; ActiveRecord::Base
-set_table_name :users
-validate_presence_of :zipcode
-validate :request_zipcode_validation_using_geokit, :if => :zipcode</li>
-</ol>
+Now, create a *API::V1::Root* class that will mount resources for version 1
+</code>ruby</p>
 
+<h1>lib/api/v1/root.rb</h1>
 
-<p>  private
-  def request_zipcode_validation_using_geokit</p>
+<p>module API
+  module V1</p>
 
-<pre><code># Method request google api for location
-# if location found then zipcode is valid otherwise
-# add validation error on zipcode field
-# as it method contacts with google api and takes time
-# to return result, poll request only when zipcode gets
-# changed
-poll = true # default true for new objects
-if self.id ## this means already existing user and zipcode is valid last time
-  # Hack to find where zipcode got modified or not 
-  # old_user = User.find self.id
-  poll = false if old_user.zipcode == self.zipcode
+<pre><code>class Root &lt; Grape::API
+  mount API::V1::Posts
+  mount API::V1::Authors
 end
-
-# Actual requesting api to return location associated with zipcode
-if poll
-  loc = MultiGeocoder.geocode(self.zip_code)
-end
-# Add Validation Error if location is not found
-errors.add(:zip_code, "Unable to geocode your location from zipcode entered.") unless loc.success
 </code></pre>
 
 <p>  end
 end
-```
-<strong>Please note that same method can also be used to validate state, city and country.
-Again we can use combination of fields to validate each other.
-Like &ndash;</strong></p>
-
-<ol>
-<li><strong>Based on country entered, state validation</strong></li>
-<li><strong>Based on state, city validation</strong></li>
-<li><strong>Based on city, zipcode validation</strong>
-or</li>
-<li><strong>Based on zipcode and country, state and city validation</strong></li>
-</ol>
-
-
-<p>Here is another method to validate state and city based on zipcode and country.
-Lets take example of &lsquo;US&rsquo;
-```ruby
-def request_state_and_city_validation_based_on_zipcode
-  poll = true # default true for new objects
-  if self.id ## this means already existing user and all attributes were valid last time</p>
-
-<pre><code># Hack to find any one of location attribute got modified
-# old_user = User.find self.id
-loc_attrs = %w{zipcode state city} # keep in mind country US is default assumed
-if loc_attrs.all? {|attr| self.attribute_for_inspect(attr) == old_user.attribute_for_inspect(attr)}
-  self.poll = false
-end
-</code></pre>
-
-<p>  end</p>
-
-<p>  # Actual requesting api to return location associated with zipcode
-  if poll</p>
-
-<pre><code>loc = MultiGeocoder.geocode("#{self.zip_code}, US")
-</code></pre>
-
-<p>  end
-  # Add Validation Error if location is not found
-  unless loc.success</p>
-
-<pre><code>errors.add(:zip_code, "Unable to geocode your location from zipcode entered.")
-</code></pre>
-
-<p>  else</p>
-
-<pre><code># Validate state and city fields in compare to loc object returned by geocode
-errors.add(:state, "State doesn't matches with zipcode entered") if self.state != loc.state
-errors.add(:city, "City doesn't matches with zipcode entered") if self.city != loc.city
-</code></pre>
-
-<p>  end
-end
-```
-<strong>Note</strong> **
-If you are subscriber of blog and not displaying post correctly. I request you to visit post on blog itself. Somehow style is not getting correctly in email. I will try to fix this problem asap.</p>
-
-<p><strong>Upcoming Posts</strong></p>
-
-<ol>
-<li>Geokit finders: Find locations in/within/beyond particular radius from specified location using acts_as_mappable plugin</li>
-<li>Customizing authlogic for multiple sessions i.e. using different models for role based authentication.</li>
-</ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Hpricot scraping in ruby]]></title>
-    <link href="http://funonrails.com/2009/12/hpricot-scraping-in-ruby/"/>
-    <updated>2009-12-02T18:24:00+05:30</updated>
-    <id>http://funonrails.com/2009/12/hpricot-scraping-in-ruby</id>
-    <content type="html"><![CDATA[<p>Include gems/library required before getting started
-```ruby
-require &lsquo;hpricot&rsquo;
-require &lsquo;net/http&rsquo;
-require &lsquo;rio&rsquo;</p>
-
-<h1>Pass website url to be scraped</h1>
-
-<p>url = &ldquo;www.funonrails.com&rdquo;</p>
-
-<h1>Define filename to store file locally</h1>
-
-<p>file = &ldquo;temp.html&rdquo;</p>
-
-<h1>Save page locally</h1>
-
-<p>rio(url) &lt; rio (file)</p>
-
-<h1>Open page through hpricot</h1>
-
-<p>doc = Hpricot(open(file))
 <code>
-Apply hpricot library to get right contents
-</code>ruby
-doc.at(&ldquo;div.pageTitle&rdquo;)
-doc/&ldquo;div.pageTitle&rdquo;
-doc.search(&ldquo;div.entry&rdquo;)
-doc//&ldquo;div.pageTitle&rdquo;
-```
-Hpricot API Reference click <a href="http://rdoc.info/github/hpricot/hpricot/Hpricot/Doc">here</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[10 steps to get start with MySpace Ruby SDK]]></title>
-    <link href="http://funonrails.com/2009/10/10-steps-to-get-start-with-myspace-ruby/"/>
-    <updated>2009-10-27T21:33:00+05:30</updated>
-    <id>http://funonrails.com/2009/10/10-steps-to-get-start-with-myspace-ruby</id>
-    <content type="html"><![CDATA[<p>Follow 10 simple steps listed below in order to use myspace sdk api</p>
+Now, add resource *Posts* available for api access in json format
+</code>ruby</p>
 
-<h4>1. Remove existing <code>myspace</code> gems installed if any</h4>
+<h1>lib/api/v1/posts.rb</h1>
 
-<p><code>
-gem uninstall myspace
-</code></p>
+<p>module API
+  module V1</p>
 
-<h4>2. Checkout sample source code</h4>
+<pre><code>class Posts &lt; Grape::API
+  version 'v1'
+  format :json
 
-<p><code>
-svn checkout http://myspaceid-ruby-sdk.googlecode.com/svn/trunk/ myspacesdk
-</code></p>
+  resource :posts do
+    desc "Return list of recent posts"
+    get do
+      Post.recent.all
+    end
+  end
+end
+</code></pre>
 
-<h4>3. Move to sample dir</h4>
+<p>  end
+end
+<code>
+Now, lets add one more resource `Authors` to version v1
+</code>ruby</p>
 
-<p><code>
-cd myspacesdk/samples/rails/sample
-</code></p>
+<h1>lib/api/v1/authors.rb</h1>
 
-<h4>4. Modify DB config</h4>
+<p>module API
+  module V1</p>
 
-<p>```yml</p>
+<pre><code>class Authors &lt; Grape::API
+  version 'v1' 
+  format :json 
 
-<h1>Modify config/database.yml accordingly</h1>
+  resource :authors do
+    desc "Return list of authors"
+    get do
+      Author.all
+    end
+  end
+end
+</code></pre>
 
-<p>development:
-  adapter: mysql
-  database: sample_development
-  password: abcd
-  pool: 5
-  timeout: 5000
+<p>  end
+end
 ```</p>
 
-<h4>5. Download Gem</h4>
+<h2>Mounting <em>API</em> under rails routes</h2>
+
+<p>Mount <em>API::Root</em> under routes pointing to rails root
+```</p>
+
+<h1>config/routes.rb</h1>
+
+<p>SampleApp::Application.routes.draw do
+  mount API::Root => &lsquo;/&rsquo;
+end
+```</p>
+
+<h2>Customize JSON API Errors</h2>
+
+<p>We can control the api raised errors and customize them so that response is in our own format whenever there are exceptions.
+```ruby</p>
+
+<h1>lib/api/error_formatter.rb</h1>
+
+<p>module API
+  module ErrorFormatter</p>
+
+<pre><code>def self.call message, backtrace, options, env
+  { :response_type =&gt; 'error', :response =&gt; message }.to_json
+end
+</code></pre>
+
+<p>  end
+end
+<code>
+Now, you can plug this module inside *API::Root*
+</code>
+module API
+  class Root &lt; Grape::API</p>
+
+<pre><code>#...
+error_formatter :json, API::ErrorFormatter
+#...
+</code></pre>
+
+<p>  end
+end
+<code>
+You can override error formatter for particular api version. Let's customize errors for *API::v1::Root*:
+</code>ruby</p>
+
+<h1>lib/api/v1/error_formatter.rb</h1>
+
+<p>module API
+  module V1</p>
+
+<pre><code>module ErrorFormatter
+  def self.call message, backtrace, options, env
+    { :response_type =&gt; 'error', :response =&gt; message }.to_json
+  end
+end
+</code></pre>
+
+<p>  end
+end</p>
+
+<h1>lib/api/v1/root.rb</h1>
+
+<p>module API
+  module V1</p>
+
+<pre><code>class Root &lt; Grape::API
+  #...
+  error_formatter :json, API::V1::ErrorFormatter
+  #...
+end
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<h2>Accessing <em>API</em> routes</h2>
+
+<p>If you do <code>rake routes | grep api</code> then it will list only mount path for api but do not list all the paths.
+```
+rake routes | grep api</p>
+
+<pre><code>api_root        /api                API::Root
+</code></pre>
 
 <p><code>
-wget http://myspaceid-ruby-sdk.googlecode.com/files/myspaceid-sdk-0.1.11.gem
-</code></p>
+So, in-order to list all api paths, you may have to create api routes task:
+</code>ruby</p>
 
-<h4>6. Install <code>myspaceid-sdk</code> gem locally</h4>
+<h1>lib/tasks/routes.rake</h1>
 
-<p>```
-gem install &mdash;local ~/Desktop/myspaceid-sdk-0.1.11.gem</p>
+<p>namespace :api do
+  desc &ldquo;API Routes&rdquo;
+  task :routes => :environment do</p>
 
-<h1>&mdash;local option taskes local PATH_TO_GEM</h1>
+<pre><code>API::Root.routes.each do |api|
+  method = api.route_method.ljust(10)
+  path = api.route_path.gsub(":version", api.route_version)
+  puts "     #{method} #{path}"
+end
+</code></pre>
+
+<p>  end
+end
+<code>
+Now, run task and it should print routes like this:
+</code>
+rake api:routes</p>
+
+<pre><code>GET        /api/v1/posts(.:format)
+GET        /api/v1/authors(.:format)
+</code></pre>
 
 <p>```</p>
-
-<h4>7. Above command supposed to give following error otherwise skip to step 10</h4>
-
-<p><code>
-ERROR:  Error installing /home/sandip/Desktop/myspaceid-sdk-0.1.11.gem:
-myspaceid-sdk requires ruby-openid (&gt;= 0, runtime)
-</code></p>
-
-<h4>8. Install <code>ruby-openid</code> and go to &ldquo;step 6&rdquo;</h4>
-
-<p>```
-gem install ruby-openid</p>
-
-<h1>Go to step 6</h1>
-
-<p>```</p>
-
-<h4>9. Start Server</h4>
-
-<p><code>
-ruby script/server
-</code></p>
-
-<h4>10.  Browse Application</h4>
-
-<p>Open URL <a href="http://localhost:3000/">http://localhost:3000/</a></p>
 ]]></content>
   </entry>
   

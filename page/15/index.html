@@ -98,6 +98,297 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2009/05/interesting-string-inflections-in-rails/">Intresting String inflections in rails</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-22T19:58:00+05:30" pubdate data-updated="true">May 22<span>nd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Here is list of string inflections :</p>
+
+<ul>
+<li>camelcase</li>
+<li>camelize</li>
+<li>classify</li>
+<li>constantize</li>
+<li>dasherize</li>
+<li>demodulize</li>
+<li>foreign_key</li>
+<li>humanize</li>
+<li>parameterize</li>
+<li>pluralize</li>
+<li>singularize</li>
+<li>tableize</li>
+<li>titlecase</li>
+<li>titleize</li>
+<li>underscore</li>
+</ul>
+
+
+<h4>camelcase()</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>camelcase(first_letter = :upper)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Alias for camelize</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">camelize</span><span class="p">(</span><span class="n">first_letter</span> <span class="o">=</span> <span class="ss">:upper</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>By default, camelize converts strings to UpperCamelCase. If the argument to camelize is set to :lower then camelize produces lowerCamelCase.</p>
+
+<p>camelize will also convert ’/’ to ’::’ which is useful for converting paths to namespaces.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;active_record&quot;</span><span class="o">.</span><span class="n">camelize</span> <span class="c1"># =&gt; &quot;ActiveRecord&quot;</span>
+</span><span class='line'><span class="s2">&quot;active_record&quot;</span><span class="o">.</span><span class="n">camelize</span><span class="p">(</span><span class="ss">:lower</span><span class="p">)</span> <span class="c1"># =&gt; &quot;activeRecord&quot;</span>
+</span><span class='line'><span class="s2">&quot;active_record/errors&quot;</span><span class="o">.</span><span class="n">camelize</span> <span class="c1"># =&gt; &quot;ActiveRecord::Errors&quot;</span>
+</span><span class='line'><span class="s2">&quot;active_record/errors&quot;</span><span class="o">.</span><span class="n">camelize</span><span class="p">(</span><span class="ss">:lower</span><span class="p">)</span> <span class="c1"># =&gt; &quot;activeRecord::Errors&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This method is also aliased as camelcase</p>
+
+<h4>classify()</h4>
+
+<p>Create a class name from a plural table name like Rails does for table names to models. Note that this returns a string and not a class. (To convert to an actual class follow classify with constantize.)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;egg_and_hams&quot;</span><span class="o">.</span><span class="n">classify</span> <span class="c1"># =&gt; &quot;EggAndHam&quot;</span>
+</span><span class='line'><span class="s2">&quot;posts&quot;</span><span class="o">.</span><span class="n">classify</span> <span class="c1"># =&gt; &quot;Post&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Singular names are not handled correctly.</span>
+</span><span class='line'>
+</span><span class='line'><span class="s2">&quot;business&quot;</span><span class="o">.</span><span class="n">classify</span> <span class="c1"># =&gt; &quot;Busines&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>constantize()</h4>
+
+<p>constantize tries to find a declared constant with the name specified in the string. It raises a NameError when the name is not in CamelCase or is not initialized.</p>
+
+<p><strong>Examples :</strong></p>
+
+<p>&ldquo;Module&rdquo;.constantize # => Module
+&ldquo;Class&rdquo;.constantize # => Class</p>
+
+<h4>dasherize()</h4>
+
+<p>Replaces underscores with dashes in the string.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;puni_puni&quot;</span> <span class="c1"># =&gt; &quot;puni-puni&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>demodulize()</h4>
+
+<p>Removes the module part from the constant expression in the string.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;ActiveRecord::CoreExtensions::String::Inflections&quot;</span><span class="o">.</span><span class="n">demodulize</span> <span class="c1"># =&gt; &quot;Inflections&quot;</span>
+</span><span class='line'><span class="s2">&quot;Inflections&quot;</span><span class="o">.</span><span class="n">demodulize</span> <span class="c1"># =&gt; &quot;Inflections&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>foreign_key(separate_class_name_and_id_with_underscore = true)</h4>
+
+<p>Creates a foreign key name from a class name. separate_class_name_and_id_with_underscore sets whether the method should put &ldquo;_&rdquo; between the name and &lsquo;id&rsquo;.</p>
+
+<p><strong>Examples :</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;Message&quot;</span><span class="o">.</span><span class="n">foreign_key</span> <span class="c1"># =&gt; &quot;message_id&quot;</span>
+</span><span class='line'><span class="s2">&quot;Message&quot;</span><span class="o">.</span><span class="n">foreign_key</span><span class="p">(</span><span class="kp">false</span><span class="p">)</span> <span class="c1"># =&gt; &quot;messageid&quot;</span>
+</span><span class='line'><span class="s2">&quot;Admin::Post&quot;</span><span class="o">.</span><span class="n">foreign_key</span> <span class="c1"># =&gt; &quot;post_id&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>humanize()</h4>
+
+<p>Capitalizes the first word, turns underscores into spaces, and strips <code>_id</code>. Like titleize, this is meant for creating pretty output.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;employee_salary&quot;</span> <span class="c1"># =&gt; &quot;Employee salary&quot;</span>
+</span><span class='line'><span class="s2">&quot;author_id&quot;</span> <span class="c1"># =&gt; &quot;Author&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>`</p>
+
+<h4>parameterize()</h4>
+
+<p>Replaces special characters in a string so that it may be used as part of a ‘pretty’ URL.
+<strong>Examples :</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Person</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">to_param</span>
+</span><span class='line'>  <span class="s2">&quot;</span><span class="si">#{</span><span class="nb">id</span><span class="si">}</span><span class="s2">-</span><span class="si">#{</span><span class="nb">name</span><span class="o">.</span><span class="n">parameterize</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="vi">@person</span> <span class="o">=</span> <span class="no">Person</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span class='line'><span class="c1"># =&gt; Donald E. Knuth</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>pluralize()</h4>
+
+<p>Returns the plural form of the word in the string.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;post&quot;</span><span class="o">.</span><span class="n">pluralize</span> <span class="c1"># =&gt; &quot;posts&quot;</span>
+</span><span class='line'><span class="s2">&quot;octopus&quot;</span><span class="o">.</span><span class="n">pluralize</span> <span class="c1"># =&gt; &quot;octopi&quot;</span>
+</span><span class='line'><span class="s2">&quot;sheep&quot;</span><span class="o">.</span><span class="n">pluralize</span> <span class="c1"># =&gt; &quot;sheep&quot;</span>
+</span><span class='line'><span class="s2">&quot;words&quot;</span><span class="o">.</span><span class="n">pluralize</span> <span class="c1"># =&gt; &quot;words&quot;</span>
+</span><span class='line'><span class="s2">&quot;the blue mailman&quot;</span><span class="o">.</span><span class="n">pluralize</span> <span class="c1"># =&gt; &quot;the blue mailmen&quot;</span>
+</span><span class='line'><span class="s2">&quot;CamelOctopus&quot;</span><span class="o">.</span><span class="n">pluralize</span> <span class="c1"># =&gt; &quot;CamelOctopi&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>singularize()</h4>
+
+<p>The reverse of pluralize, returns the singular form of a word in a string.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;posts&quot;</span><span class="o">.</span><span class="n">singularize</span> <span class="c1"># =&gt; &quot;post&quot;</span>
+</span><span class='line'><span class="s2">&quot;octopi&quot;</span><span class="o">.</span><span class="n">singularize</span> <span class="c1"># =&gt; &quot;octopus&quot;</span>
+</span><span class='line'><span class="s2">&quot;sheep&quot;</span><span class="o">.</span><span class="n">singularize</span> <span class="c1"># =&gt; &quot;sheep&quot;</span>
+</span><span class='line'><span class="s2">&quot;word&quot;</span><span class="o">.</span><span class="n">singularize</span> <span class="c1"># =&gt; &quot;word&quot;</span>
+</span><span class='line'><span class="s2">&quot;the blue mailmen&quot;</span><span class="o">.</span><span class="n">singularize</span> <span class="c1"># =&gt; &quot;the blue mailman&quot;</span>
+</span><span class='line'><span class="s2">&quot;CamelOctopi&quot;</span><span class="o">.</span><span class="n">singularize</span> <span class="c1"># =&gt; &quot;CamelOctopus&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>tableize()</h4>
+
+<p>Creates the name of a table like Rails does for models to table names. This method uses the pluralize method on the last word in the string.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;RawScaledScorer&quot;</span><span class="o">.</span><span class="n">tableize</span> <span class="c1"># =&gt; &quot;raw_scaled_scorers&quot;</span>
+</span><span class='line'><span class="s2">&quot;egg_and_ham&quot;</span><span class="o">.</span><span class="n">tableize</span> <span class="c1"># =&gt; &quot;egg_and_hams&quot;</span>
+</span><span class='line'><span class="s2">&quot;fancyCategory&quot;</span><span class="o">.</span><span class="n">tableize</span> <span class="c1"># =&gt; &quot;fancy_categories&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>titlecase()</h4>
+
+<p>Alias for titleize
+titleize()</p>
+
+<p>Capitalizes all the words and replaces some characters in the string to create a nicer looking title. titleize is meant for creating pretty output. It is not used in the Rails internals.</p>
+
+<p>titleize is also aliased as titlecase.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;man from the boondocks&quot;</span><span class="o">.</span><span class="n">titleize</span>
+</span><span class='line'><span class="c1"># =&gt; &quot;Man From The Boondocks&quot;</span>
+</span><span class='line'><span class="s2">&quot;x-men: the last stand&quot;</span><span class="o">.</span><span class="n">titleize</span>
+</span><span class='line'><span class="c1"># =&gt; &quot;X Men: The Last Stand&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This method is also aliased as titlecase</p>
+
+<h4>underscore()</h4>
+
+<p>The reverse of camelize. Makes an underscored, lowercase form from the expression in the string.
+underscore will also change ’::’ to ’/’ to convert namespaces to paths.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;ActiveRecord&quot;</span><span class="o">.</span><span class="n">underscore</span>
+</span><span class='line'><span class="c1"># =&gt; &quot;active_record&quot;</span>
+</span><span class='line'><span class="s2">&quot;ActiveRecord::Errors&quot;</span><span class="o">.</span><span class="n">underscore</span>
+</span><span class='line'><span class="c1"># =&gt; active_record/errors</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Remove special characters from string</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;STRING&quot;</span><span class="o">.</span><span class="n">.gsub</span><span class="p">(</span><span class="sr">/[^a-zA-Z 0-9]/</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># escape special chars before save</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">before_save</span>
+</span><span class='line'>  <span class="nb">self</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="sr">/[^a-zA-Z 0-9]/</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2009/05/render-partial-or-view-from-another/">Render partial or view from another controller</a></h1>
     
     
@@ -1328,6 +1619,10 @@ Leverage a Large Community</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/03/building-restful-api-using-grape-in-rails/">Building RESTful API using Grape in Rails</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/03/understanding-restful-vs-soap-web-services/">Understanding RESTful vs SOAP web services</a>
       </li>
     
@@ -1341,10 +1636,6 @@ Leverage a Large Community</p>
     
       <li class="post">
         <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
   </ul>

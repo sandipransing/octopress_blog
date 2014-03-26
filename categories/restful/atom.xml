@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: RESTful, | Fun On Rails]]></title>
+  <link href="http://funonrails.com/categories/restful/atom.xml" rel="self"/>
+  <link href="http://funonrails.com/"/>
+  <updated>2014-03-26T18:09:11+05:30</updated>
+  <id>http://funonrails.com/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Building RESTful API using Grape in Rails]]></title>
+    <link href="http://funonrails.com/2014/03/building-restful-api-using-grape-in-rails/"/>
+    <updated>2014-03-26T12:39:27+05:30</updated>
+    <id>http://funonrails.com/2014/03/building-restful-api-using-grape-in-rails</id>
+    <content type="html"><![CDATA[<p>We have a web app developed in rails which uses backbone.js as a front-end framework. Recently we wanted to build a mobile app which will interact with the rails app hence we decided to build a RESTful API. There are many gems available on ruby toolbox to build APIs but it looks like <em>grape</em> can be a good choice.</p>
+
+<blockquote><p>Grape is a RESTful API microframework built to easily and quickly produce APIs for Ruby-rootd web applications.</p></blockquote>
+
+<p>Let&rsquo;s have a quick look how to build RESTful apis using <em>grape</em>.</p>
+
+<!--more-->
+
+
+<h2>Getting Started</h2>
+
+<p>Add <em>grape</em> to your <em>Gemfile</em> and then run <em>bundle</em> install
+<code>
+gem 'grape'
+</code></p>
+
+<h2>Modularizing API directory structure</h2>
+
+<p>Place API files into <em>lib/api</em>. You need to create <em>api</em> folder inside <em>lib</em> directory.
+As we are placing api directory inside lib you don&rsquo;t need to explicitly load it inside <em>application.rb</em>
+If you want to place <em>api</em> directory at some other place then add below lines to to <em>application.rb</em>
+<code>ruby
+config.paths.add "app/api", glob: "**/*.rb"
+config.autoload_paths += Dir["#{Rails.root}/app/api/*"]
+</code>
+First, Let&rsquo;s create <em>API::Root</em> class that will mount available api versions.
+```ruby</p>
+
+<h1>lib/api/root.rb</h1>
+
+<p>module API
+  class Root &lt; Grape::API</p>
+
+<pre><code>prefix 'api'
+mount API::V1::Root
+# mount API::V2::Root (next version)
+</code></pre>
+
+<p>  end
+end
+<code>
+Now, create a *API::V1::Root* class that will mount resources for version 1
+</code>ruby</p>
+
+<h1>lib/api/v1/root.rb</h1>
+
+<p>module API
+  module V1</p>
+
+<pre><code>class Root &lt; Grape::API
+  mount API::V1::Posts
+  mount API::V1::Authors
+end
+</code></pre>
+
+<p>  end
+end
+<code>
+Now, add resource *Posts* available for api access in json format
+</code>ruby</p>
+
+<h1>lib/api/v1/posts.rb</h1>
+
+<p>module API
+  module V1</p>
+
+<pre><code>class Posts &lt; Grape::API
+  version 'v1'
+  format :json
+
+  resource :posts do
+    desc "Return list of recent posts"
+    get do
+      Post.recent.all
+    end
+  end
+end
+</code></pre>
+
+<p>  end
+end
+<code>
+Now, lets add one more resource `Authors` to version v1
+</code>ruby</p>
+
+<h1>lib/api/v1/authors.rb</h1>
+
+<p>module API
+  module V1</p>
+
+<pre><code>class Authors &lt; Grape::API
+  version 'v1' 
+  format :json 
+
+  resource :authors do
+    desc "Return list of authors"
+    get do
+      Author.all
+    end
+  end
+end
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<h2>Mounting <em>API</em> under rails routes</h2>
+
+<p>Mount <em>API::Root</em> under routes pointing to rails root
+```</p>
+
+<h1>config/routes.rb</h1>
+
+<p>SampleApp::Application.routes.draw do
+  mount API::Root => &lsquo;/&rsquo;
+end
+```</p>
+
+<h2>Customize JSON API Errors</h2>
+
+<p>We can control the api raised errors and customize them so that response is in our own format whenever there are exceptions.
+```ruby</p>
+
+<h1>lib/api/error_formatter.rb</h1>
+
+<p>module API
+  module ErrorFormatter</p>
+
+<pre><code>def self.call message, backtrace, options, env
+  { :response_type =&gt; 'error', :response =&gt; message }.to_json
+end
+</code></pre>
+
+<p>  end
+end
+<code>
+Now, you can plug this module inside *API::Root*
+</code>
+module API
+  class Root &lt; Grape::API</p>
+
+<pre><code>#...
+error_formatter :json, API::ErrorFormatter
+#...
+</code></pre>
+
+<p>  end
+end
+<code>
+You can override error formatter for particular api version. Let's customize errors for *API::v1::Root*:
+</code>ruby</p>
+
+<h1>lib/api/v1/error_formatter.rb</h1>
+
+<p>module API
+  module V1</p>
+
+<pre><code>module ErrorFormatter
+  def self.call message, backtrace, options, env
+    { :response_type =&gt; 'error', :response =&gt; message }.to_json
+  end
+end
+</code></pre>
+
+<p>  end
+end</p>
+
+<h1>lib/api/v1/root.rb</h1>
+
+<p>module API
+  module V1</p>
+
+<pre><code>class Root &lt; Grape::API
+  #...
+  error_formatter :json, API::V1::ErrorFormatter
+  #...
+end
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<h2>Accessing <em>API</em> routes</h2>
+
+<p>If you do <code>rake routes | grep api</code> then it will list only mount path for api but do not list all the paths.
+```
+rake routes | grep api</p>
+
+<pre><code>api_root        /api                API::Root
+</code></pre>
+
+<p><code>
+So, in-order to list all api paths, you may have to create api routes task:
+</code>ruby</p>
+
+<h1>lib/tasks/routes.rake</h1>
+
+<p>namespace :api do
+  desc &ldquo;API Routes&rdquo;
+  task :routes => :environment do</p>
+
+<pre><code>API::Root.routes.each do |api|
+  method = api.route_method.ljust(10)
+  path = api.route_path.gsub(":version", api.route_version)
+  puts "     #{method} #{path}"
+end
+</code></pre>
+
+<p>  end
+end
+<code>
+Now, run task and it should print routes like this:
+</code>
+rake api:routes</p>
+
+<pre><code>GET        /api/v1/posts(.:format)
+GET        /api/v1/authors(.:format)
+</code></pre>
+
+<p>```</p>
+]]></content>
+  </entry>
+  
+</feed>
