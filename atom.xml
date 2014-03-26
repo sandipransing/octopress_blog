@@ -4,7 +4,7 @@
   <title><![CDATA[Fun On Rails]]></title>
   <link href="http://funonrails.com/atom.xml" rel="self"/>
   <link href="http://funonrails.com/"/>
-  <updated>2014-03-27T01:06:32+05:30</updated>
+  <updated>2014-03-27T02:03:59+05:30</updated>
   <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -20,9 +20,12 @@
     <id>http://funonrails.com/2014/03/building-restful-api-using-grape-in-rails</id>
     <content type="html"><![CDATA[<p>We have a web app developed in rails which uses backbone.js as a front-end framework. Recently we wanted to build a mobile app which will interact with the rails app hence we decided to build a RESTful API. There are many gems available on ruby toolbox to build APIs but it looks like <em>grape</em> can be a good choice.</p>
 
-<blockquote><p>Grape is a RESTful API microframework built to easily and quickly produce APIs for Ruby-rootd web applications.</p></blockquote>
+<p><img class="left no-border" src="https://raw.githubusercontent.com/wiki/intridea/grape/grape_logo.png" width="186" height="67" title="Grape" > <em>Grape is a RESTful API microframework built to easily and quickly produce APIs for Ruby-rooted web applications.</em></p>
 
-<p>Let&rsquo;s have a quick look how to build RESTful apis using <em>grape</em>.</p>
+<p style='clear:both'>
+Let&#8217;s have a quick look how to build RESTful apis using <i>grape</i>.
+</p>
+
 
 <!--more-->
 
