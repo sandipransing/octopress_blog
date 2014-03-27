@@ -4,7 +4,7 @@
   <title><![CDATA[Fun On Rails]]></title>
   <link href="http://funonrails.com/atom.xml" rel="self"/>
   <link href="http://funonrails.com/"/>
-  <updated>2014-03-27T15:27:50+05:30</updated>
+  <updated>2014-03-27T17:03:05+05:30</updated>
   <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -26,23 +26,7 @@
 
 <p>In <em>user.rb</em> add <em>:token_authenticatable</em> to the list of devise modules, it should look something like below:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
 </span><span class='line'><span class="c1"># ..code..</span>
 </span><span class='line'>  <span class="n">devise</span> <span class="ss">:database_authenticatable</span><span class="p">,</span>
 </span><span class='line'>    <span class="ss">:token_authenticatable</span><span class="p">,</span>
@@ -66,10 +50,7 @@
 
 <h2>Add migration for authentiction token</h2>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rails</span> <span class="n">g</span> <span class="n">migration</span> <span class="n">add_auth_token_to_users</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="n">rails</span> <span class="n">g</span> <span class="n">migration</span> <span class="n">add_auth_token_to_users</span>
 </span><span class='line'>      <span class="n">invoke</span>  <span class="n">active_record</span>
 </span><span class='line'>      <span class="n">create</span>    <span class="n">db</span><span class="o">/</span><span class="n">migrate</span><span class="o">/</span><span class="mi">20140326204628</span><span class="n">_add_auth_token_to_users</span><span class="o">.</span><span class="n">rb</span>
 </span></code></pre></td></tr></table></div></figure>
@@ -77,21 +58,7 @@
 
 <p>Edit migration file to add <code>:authentication_token</code> column to users</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># db/migrate/20140326204628_add_auth_token_to_users.rb</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># db/migrate/20140326204628_add_auth_token_to_users.rb</span>
 </span><span class='line'><span class="k">class</span> <span class="nc">AddAuthTokenToUsers</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Migration</span>
 </span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">up</span>
 </span><span class='line'>    <span class="n">change_table</span> <span class="ss">:users</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
@@ -110,8 +77,7 @@
 
 <h4>Run migrations</h4>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rake</span> <span class="ss">db</span><span class="p">:</span><span class="n">migrate</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="n">rake</span> <span class="ss">db</span><span class="p">:</span><span class="n">migrate</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -119,8 +85,7 @@
 
 <p>We need to call save on every instance of user that will ensure authentication token is present for each user.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">User</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">each</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:save</span><span class="p">)</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="no">User</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">each</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:save</span><span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -132,39 +97,7 @@
 &ndash; If user is logged on to the web app then use the same session
 &ndash; If session is not available and <em>auth token</em> is passed then find user based on the token</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># lib/api/root.rb</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># lib/api/root.rb</span>
 </span><span class='line'><span class="k">module</span> <span class="nn">API</span>
 </span><span class='line'>  <span class="k">class</span> <span class="nc">Root</span> <span class="o">&lt;</span> <span class="ss">Grape</span><span class="p">:</span><span class="ss">:API</span>
 </span><span class='line'>    <span class="n">prefix</span>    <span class="s1">&#39;api&#39;</span>
@@ -222,8 +155,7 @@ Let&#8217;s have a quick look how to build RESTful apis using <i>grape</i>.
 
 <p>Add <em>grape</em> to your <em>Gemfile</em> and then run <em>bundle</em> install</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>gem 'grape'</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr> <td class='code'><pre><code class=''><span class='line'>gem 'grape'</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>Modularizing API directory structure</h2>
@@ -232,24 +164,14 @@ Let&#8217;s have a quick look how to build RESTful apis using <i>grape</i>.
 As we are placing api directory inside lib you don&rsquo;t need to explicitly load it inside <em>application.rb</em>
 If you want to place <em>api</em> directory at some other place then add below lines to to <em>application.rb</em></p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">paths</span><span class="o">.</span><span class="n">add</span> <span class="s2">&quot;app/api&quot;</span><span class="p">,</span> <span class="ss">glob</span><span class="p">:</span> <span class="s2">&quot;**/*.rb&quot;</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">paths</span><span class="o">.</span><span class="n">add</span> <span class="s2">&quot;app/api&quot;</span><span class="p">,</span> <span class="ss">glob</span><span class="p">:</span> <span class="s2">&quot;**/*.rb&quot;</span>
 </span><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">autoload_paths</span> <span class="o">+=</span> <span class="no">Dir</span><span class="o">[</span><span class="s2">&quot;</span><span class="si">#{</span><span class="no">Rails</span><span class="o">.</span><span class="n">root</span><span class="si">}</span><span class="s2">/app/api/*&quot;</span><span class="o">]</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>First, Let&rsquo;s create <em>API::Root</em> class that will mount available api versions.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># lib/api/root.rb</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># lib/api/root.rb</span>
 </span><span class='line'><span class="k">module</span> <span class="nn">API</span>
 </span><span class='line'>  <span class="k">class</span> <span class="nc">Root</span> <span class="o">&lt;</span> <span class="ss">Grape</span><span class="p">:</span><span class="ss">:API</span>
 </span><span class='line'>    <span class="n">prefix</span> <span class="s1">&#39;api&#39;</span>
@@ -262,16 +184,7 @@ If you want to place <em>api</em> directory at some other place then add below l
 
 <p>Now, create a <em>API::V1::Root</em> class that will mount resources for version 1</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># lib/api/v1/root.rb</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># lib/api/v1/root.rb</span>
 </span><span class='line'><span class="k">module</span> <span class="nn">API</span>
 </span><span class='line'>  <span class="k">module</span> <span class="nn">V1</span>
 </span><span class='line'>    <span class="k">class</span> <span class="nc">Root</span> <span class="o">&lt;</span> <span class="ss">Grape</span><span class="p">:</span><span class="ss">:API</span>
@@ -285,23 +198,7 @@ If you want to place <em>api</em> directory at some other place then add below l
 
 <p>Now, add resource <em>Posts</em> available for api access in json format</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># lib/api/v1/posts.rb</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># lib/api/v1/posts.rb</span>
 </span><span class='line'><span class="k">module</span> <span class="nn">API</span>
 </span><span class='line'>  <span class="k">module</span> <span class="nn">V1</span>
 </span><span class='line'>    <span class="k">class</span> <span class="nc">Posts</span> <span class="o">&lt;</span> <span class="ss">Grape</span><span class="p">:</span><span class="ss">:API</span>
@@ -322,23 +219,7 @@ If you want to place <em>api</em> directory at some other place then add below l
 
 <p>Now, lets add one more resource <code>Authors</code> to version v1</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># lib/api/v1/authors.rb</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># lib/api/v1/authors.rb</span>
 </span><span class='line'><span class="k">module</span> <span class="nn">API</span>
 </span><span class='line'>  <span class="k">module</span> <span class="nn">V1</span>
 </span><span class='line'>    <span class="k">class</span> <span class="nc">Authors</span> <span class="o">&lt;</span> <span class="ss">Grape</span><span class="p">:</span><span class="ss">:API</span>
@@ -361,11 +242,7 @@ If you want to place <em>api</em> directory at some other place then add below l
 
 <p>Mount <em>API::Root</em> under routes pointing to rails root</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># config/routes.rb</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># config/routes.rb</span>
 </span><span class='line'><span class="ss">SampleApp</span><span class="p">:</span><span class="ss">:Application</span><span class="o">.</span><span class="n">routes</span><span class="o">.</span><span class="n">draw</span> <span class="k">do</span>
 </span><span class='line'>  <span class="n">mount</span> <span class="ss">API</span><span class="p">:</span><span class="ss">:Root</span> <span class="o">=&gt;</span> <span class="s1">&#39;/&#39;</span>
 </span><span class='line'><span class="k">end</span>
@@ -376,15 +253,7 @@ If you want to place <em>api</em> directory at some other place then add below l
 
 <p>We can control the api raised errors and customize them so that response is in our own format whenever there are exceptions.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># lib/api/error_formatter.rb</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># lib/api/error_formatter.rb</span>
 </span><span class='line'><span class="k">module</span> <span class="nn">API</span>
 </span><span class='line'>  <span class="k">module</span> <span class="nn">ErrorFormatter</span>
 </span><span class='line'>    <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">call</span> <span class="n">message</span><span class="p">,</span> <span class="n">backtrace</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">env</span>
@@ -397,15 +266,7 @@ If you want to place <em>api</em> directory at some other place then add below l
 
 <p>Now, you can plug this module inside <em>API::Root</em></p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># lib/api/root.rb</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># lib/api/root.rb</span>
 </span><span class='line'><span class="k">module</span> <span class="nn">API</span>
 </span><span class='line'>  <span class="k">class</span> <span class="nc">Root</span> <span class="o">&lt;</span> <span class="ss">Grape</span><span class="p">:</span><span class="ss">:API</span>
 </span><span class='line'>    <span class="c1">#...</span>
@@ -418,28 +279,7 @@ If you want to place <em>api</em> directory at some other place then add below l
 
 <p>You can override error formatter for particular api version. Let&rsquo;s customize errors for <em>API::v1::Root</em>:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#lib/api/v1/error_formatter.rb</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#lib/api/v1/error_formatter.rb</span>
 </span><span class='line'><span class="k">module</span> <span class="nn">API</span>
 </span><span class='line'>  <span class="k">module</span> <span class="nn">V1</span>
 </span><span class='line'>    <span class="k">module</span> <span class="nn">ErrorFormatter</span>
@@ -467,27 +307,14 @@ If you want to place <em>api</em> directory at some other place then add below l
 
 <p>If you do <code>rake routes | grep api</code> then it will list only mount path for api but do not list all the paths.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rake</span> <span class="n">routes</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">api</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="n">rake</span> <span class="n">routes</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">api</span>
 </span><span class='line'>    <span class="n">api_root</span>        <span class="sr">/api                API::Root</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>So, in-order to list all api paths, you may have to create api routes task:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># lib/tasks/routes.rake</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># lib/tasks/routes.rake</span>
 </span><span class='line'><span class="n">namespace</span> <span class="ss">:api</span> <span class="k">do</span>
 </span><span class='line'>  <span class="n">desc</span> <span class="s2">&quot;API Routes&quot;</span>
 </span><span class='line'>  <span class="n">task</span> <span class="ss">:routes</span> <span class="o">=&gt;</span> <span class="ss">:environment</span> <span class="k">do</span>
@@ -503,10 +330,7 @@ If you want to place <em>api</em> directory at some other place then add below l
 
 <p>Now, run task and it should print routes like this:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rake</span> <span class="ss">api</span><span class="p">:</span><span class="n">routes</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="n">rake</span> <span class="ss">api</span><span class="p">:</span><span class="n">routes</span>
 </span><span class='line'>    <span class="no">GET</span>        <span class="sr">/api/</span><span class="n">v1</span><span class="o">/</span><span class="n">posts</span><span class="p">(</span><span class="o">.</span><span class="ss">:format</span><span class="p">)</span>
 </span><span class='line'>    <span class="no">GET</span>        <span class="sr">/api/</span><span class="n">v1</span><span class="o">/</span><span class="n">authors</span><span class="p">(</span><span class="o">.</span><span class="ss">:format</span><span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure>
@@ -520,19 +344,7 @@ If you want to place <em>api</em> directory at some other place then add below l
 
 <p>In our case, lets add basic authentication to the <em>API::Root</em> and it will get applied to all versions of API.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># lib/api/root.rb</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># lib/api/root.rb</span>
 </span><span class='line'><span class="k">module</span> <span class="nn">API</span>
 </span><span class='line'>  <span class="k">class</span> <span class="nc">Root</span> <span class="o">&lt;</span> <span class="ss">Grape</span><span class="p">:</span><span class="ss">:API</span>
 </span><span class='line'>    <span class="c1">#...</span>
@@ -549,8 +361,7 @@ If you want to place <em>api</em> directory at some other place then add below l
 
 <p>Requesting API using basic http auth credentials:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">curl</span> <span class="ss">http</span><span class="p">:</span><span class="sr">//</span><span class="ss">localhost</span><span class="p">:</span><span class="mi">3000</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">products</span> <span class="o">-</span><span class="n">u</span> <span class="s2">&quot;admin:secret&quot;</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="n">curl</span> <span class="ss">http</span><span class="p">:</span><span class="sr">//</span><span class="ss">localhost</span><span class="p">:</span><span class="mi">3000</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">products</span> <span class="o">-</span><span class="n">u</span> <span class="s2">&quot;admin:secret&quot;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -558,24 +369,7 @@ If you want to place <em>api</em> directory at some other place then add below l
 
 <p>Grape provides us with <em>before block</em> inside that we can add authenctication code.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># lib/api/root.rb</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># lib/api/root.rb</span>
 </span><span class='line'><span class="k">module</span> <span class="nn">API</span>
 </span><span class='line'>  <span class="k">class</span> <span class="nc">Root</span> <span class="o">&lt;</span> <span class="ss">Grape</span><span class="p">:</span><span class="ss">:API</span>
 </span><span class='line'>    <span class="c1">#...</span>
@@ -630,15 +424,12 @@ Thanks to <a href="https://gist.github.com/juniorz">Reinaldo de Souza </a> for s
 <p>Script requires <code>nokogiri</code>. if you not don&rsquo;t have already then install using <code>gem install nokogiri</code>
 After successful run, this will be creating static markdown octopress formatted posts inside <code>_posts</code> and <code>_drafts</code> directories.</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ruby import.rb blog-02-09-2014.xml</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr> <td class='code'><pre><code class=''><span class='line'>ruby import.rb blog-02-09-2014.xml</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>Copy generated posts to octopress blog posts</h2>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mv _posts/* blog/_posts/`
+<figure class='code'><div class="highlight"><table><tr> <td class='code'><pre><code class=''><span class='line'>mv _posts/* blog/_posts/`
 </span><span class='line'>mv _drafts/* blog/_drafts/`</span></code></pre></td></tr></table></div></figure>
 
 
@@ -670,12 +461,7 @@ After successful run, this will be creating static markdown octopress formatted 
 
 <h2>Ruby</h2>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">A</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">A</span>
 </span><span class='line'>  <span class="k">def</span> <span class="nf">abc</span>
 </span><span class='line'>    <span class="nb">puts</span> <span class="s1">&#39;hii&#39;</span>
 </span><span class='line'>  <span class="k">end</span>
@@ -685,24 +471,17 @@ After successful run, this will be creating static markdown octopress formatted 
 
 <h2>Console</h2>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">cakePHP</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">cakePHP</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">git</span> <span class="nb">clone</span> <span class="n">git</span><span class="vi">@github</span><span class="o">.</span><span class="n">com</span><span class="ss">:imathis</span><span class="o">/</span><span class="n">octopress</span><span class="o">.</span><span class="n">git</span> <span class="c1"># fork octopress</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">git</span> <span class="nb">clone</span> <span class="n">git</span><span class="vi">@github</span><span class="o">.</span><span class="n">com</span><span class="ss">:imathis</span><span class="o">/</span><span class="n">octopress</span><span class="o">.</span><span class="n">git</span> <span class="c1"># fork octopress</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <h2>Coffeescript</h2>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="s">&#39;.help&#39;</span><span class="p">).</span><span class="nx">html</span> <span class="s">&quot;(?)&quot;</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='coffeescript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="s">&#39;.help&#39;</span><span class="p">).</span><span class="nx">html</span> <span class="s">&quot;(?)&quot;</span>
 </span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s">&quot;print something&quot;</span>
 </span><span class='line'><span class="c1"># sum function</span>
 </span><span class='line'><span class="nv">sum = </span><span class="nf">(a, b) -&gt;</span>
@@ -759,10 +538,7 @@ almost exactly like the default, right pullquotes, but a little different.
 
 <h2>Inline HTML</h2>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="o">&lt;</span><span class="nx">div</span> <span class="k">class</span><span class="o">=</span><span class="s">&#39;well&#39;</span><span class="o">&gt;</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='coffeescript'><span class='line'><span class="o">&lt;</span><span class="nx">div</span> <span class="k">class</span><span class="o">=</span><span class="s">&#39;well&#39;</span><span class="o">&gt;</span>
 </span><span class='line'>  <span class="nx">All</span> <span class="o">is</span> <span class="nx">well</span><span class="p">.</span> <span class="nx">Way</span> <span class="nx">to</span> <span class="nx">go</span> <span class="o">!!</span>
 </span><span class='line'><span class="o">&lt;/</span><span class="nx">div</span><span class="o">&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
@@ -792,17 +568,13 @@ So, Lets first understand about octopress framework and its features.</p>
 <p><strong>1.  Before starting make sure you have <code>git</code> installed.</strong>
 If not then do install using,</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install git</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr> <td class='code'><pre><code class=''><span class='line'>sudo apt-get install git</span></code></pre></td></tr></table></div></figure>
 
 
 <p><strong>2.  Install <code>ruby 1.9.3</code> or higher</strong>
 Make git clone of octopress source code</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git://github.com/imathis/octopress.git octopress
+<figure class='code'><div class="highlight"><table><tr> <td class='code'><pre><code class=''><span class='line'>git clone git://github.com/imathis/octopress.git octopress
 </span><span class='line'>cd octopress
 </span><span class='line'>bundle install</span></code></pre></td></tr></table></div></figure>
 
@@ -811,26 +583,21 @@ Make git clone of octopress source code</p>
 
 <p>Install the default Octopress theme using</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rake install</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr> <td class='code'><pre><code class=''><span class='line'>rake install</span></code></pre></td></tr></table></div></figure>
 
 
 <p>In order to install custom themes,
 Please <a href="http://opthemes.com/">browse through themes</a> and make a selection for your blog.
 Once choice is made, you need to do <code>git clone</code> of theme source and install it.</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd octopress
+<figure class='code'><div class="highlight"><table><tr> <td class='code'><pre><code class=''><span class='line'>cd octopress
 </span><span class='line'>git clone https://github.com/kAworu/octostrap3 .themes/octostrap3
 </span><span class='line'>rake 'install[octostrap3]'</span></code></pre></td></tr></table></div></figure>
 
 
 <p>To genrate infrastrcture for your blog i.e. <code>layouts</code>, <code>js</code> and <code>css</code></p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rake generate</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr> <td class='code'><pre><code class=''><span class='line'>rake generate</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Edit <code>_config.yml</code> to configure blog <code>title</code>, <code>header</code>, <code>metadata</code>, <code>plugins</code> and <code>3rd Party Settings</code>.
@@ -838,10 +605,7 @@ more on configurations can be found <a href="http://octopress.org/docs/configuri
 
 <p>We are almost done, and now ready to create our first blog post &ndash;</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rake new_post["My first octopress post"]
+<figure class='code'><div class="highlight"><table><tr> <td class='code'><pre><code class=''><span class='line'>rake new_post["My first octopress post"]
 </span><span class='line'>mkdir -p source/_posts
 </span><span class='line'>Creating new post: source/_posts/2014-02-09-my-first-octopress-post.markdown</span></code></pre></td></tr></table></div></figure>
 
@@ -850,10 +614,7 @@ more on configurations can be found <a href="http://octopress.org/docs/configuri
 
 <p>Well ! Now its time to see, how our blog looks like &ndash;</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd octopress
+<figure class='code'><div class="highlight"><table><tr> <td class='code'><pre><code class=''><span class='line'>cd octopress
 </span><span class='line'>rake watch
 </span><span class='line'>rake preview</span></code></pre></td></tr></table></div></figure>
 
@@ -873,12 +634,7 @@ Github provides free static website hosting using github pages and deployment is
 
 <p>Note: You should have a github repository called <code>username.github.io</code></p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd octopress
+<figure class='code'><div class="highlight"><table><tr> <td class='code'><pre><code class=''><span class='line'>cd octopress
 </span><span class='line'>rake setup_github_pages
 </span><span class='line'>git remote add origin git@github.com:username/username.github.io.git
 </span><span class='line'>rake generate
@@ -888,10 +644,7 @@ Github provides free static website hosting using github pages and deployment is
 <p>Visit <code>http://username.github.io</code> to see your blog hosted on github.
 Also, do not forget to commit and push your source code on github.</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git add .
+<figure class='code'><div class="highlight"><table><tr> <td class='code'><pre><code class=''><span class='line'>git add .
 </span><span class='line'>git commit -m 'octopress first blog'
 </span><span class='line'>git push origin source</span></code></pre></td></tr></table></div></figure>
 
@@ -900,8 +653,7 @@ Also, do not forget to commit and push your source code on github.</p>
 
 <p>First create a <code>CNAME</code> file and add naked domain name to it.</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>echo 'funonrails.com' &gt;&gt; source/CNAME</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr> <td class='code'><pre><code class=''><span class='line'>echo 'funonrails.com' &gt;&gt; source/CNAME</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Then goto your domain provider website and point your <code>domain</code> i.e A record to github ip address <code>204.232.175.78</code>.</p>
@@ -910,8 +662,7 @@ Also, do not forget to commit and push your source code on github.</p>
 
 <p>If you want to point subdomain to github blog then &ndash;</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>echo 'blog.sandipransing.in' &gt;&gt; source/CNAME</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr> <td class='code'><pre><code class=''><span class='line'>echo 'blog.sandipransing.in' &gt;&gt; source/CNAME</span></code></pre></td></tr></table></div></figure>
 
 
 <p>then go to your domain provider website and create a CNAME record for your <code>subdomain</code> i.e. <code>blog</code> pointing to <code>yourname.github.io.</code>
@@ -951,15 +702,13 @@ If you want more help on this then please see <a href="http://octopress.org/docs
 
 <p>Below line explains <strong>how to</strong> define dynamic associations :</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">has_one</span> <span class="ss">:code_sequence</span><span class="p">,</span> <span class="ss">:class_name</span> <span class="o">=&gt;</span> <span class="s1">&#39;Sequence&#39;</span><span class="p">,</span> <span class="ss">:conditions</span> <span class="o">=&gt;</span> <span class="s1">&#39;kind = &quot;#{self.kind}&quot;&#39;</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="n">has_one</span> <span class="ss">:code_sequence</span><span class="p">,</span> <span class="ss">:class_name</span> <span class="o">=&gt;</span> <span class="s1">&#39;Sequence&#39;</span><span class="p">,</span> <span class="ss">:conditions</span> <span class="o">=&gt;</span> <span class="s1">&#39;kind = &quot;#{self.kind}&quot;&#39;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>Please make a note that below code will not work :</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">has_one</span> <span class="ss">:code_sequence</span><span class="p">,</span> <span class="ss">:class_name</span> <span class="o">=&gt;</span> <span class="s1">&#39;Sequence&#39;</span><span class="p">,</span> <span class="ss">:conditions</span> <span class="o">=&gt;</span> <span class="nb">proc</span> <span class="p">{</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span> <span class="o">[</span><span class="s1">&#39;kind = ?&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">kind</span><span class="o">]</span> <span class="p">}</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="n">has_one</span> <span class="ss">:code_sequence</span><span class="p">,</span> <span class="ss">:class_name</span> <span class="o">=&gt;</span> <span class="s1">&#39;Sequence&#39;</span><span class="p">,</span> <span class="ss">:conditions</span> <span class="o">=&gt;</span> <span class="nb">proc</span> <span class="p">{</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span> <span class="o">[</span><span class="s1">&#39;kind = ?&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">kind</span><span class="o">]</span> <span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 ]]></content>
@@ -975,14 +724,12 @@ Then following changes needs to be done for upgrading your application to Rails 
 
 <p><strong>1. First install Rails version <code>2.3.11</code></strong></p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>gem install rails -v2.3.11</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr> <td class='code'><pre><code class=''><span class='line'>gem install rails -v2.3.11</span></code></pre></td></tr></table></div></figure>
 
 
 <p><strong>2. Freeze app ruby gems</strong></p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rake rails:freeze:gems</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr> <td class='code'><pre><code class=''><span class='line'>rake rails:freeze:gems</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Hopefully it should work for you but it gave me following error</p>
@@ -991,8 +738,7 @@ Then following changes needs to be done for upgrading your application to Rails 
 
 <p><strong>3. Create sample rails 2.3.11 app</strong></p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rails _2.3.11_ testsapp</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr> <td class='code'><pre><code class=''><span class='line'>rails _2.3.11_ testsapp</span></code></pre></td></tr></table></div></figure>
 
 
 <!--more-->
@@ -1000,15 +746,12 @@ Then following changes needs to be done for upgrading your application to Rails 
 
 <p>Now, Copy all missing &ldquo;config/initializers/*&rdquo; files from newly created &ldquo;testapp&rdquo; to the application that is to be upgraded.</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cp testapp/config/initializers/* config/initializers</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr> <td class='code'><pre><code class=''><span class='line'>cp testapp/config/initializers/* config/initializers</span></code></pre></td></tr></table></div></figure>
 
 
 <p><strong>4. Change Rails version inside <code>environment.rb</code> to <code>Rails 2.3.11</code></strong></p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Specifies gem version of Rails to use when vendor/rails is not present</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Specifies gem version of Rails to use when vendor/rails is not present</span>
 </span><span class='line'><span class="no">RAILS_GEM_VERSION</span> <span class="o">=</span> <span class="s1">&#39;2.3.11&#39;</span>
 </span></code></pre></td></tr></table></div></figure>
 
@@ -1017,15 +760,13 @@ Then following changes needs to be done for upgrading your application to Rails 
 
 <p><strong>OR</strong></p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="ss">rails</span><span class="p">:</span><span class="ss">update</span><span class="p">:</span><span class="n">application_controller</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="ss">rails</span><span class="p">:</span><span class="ss">update</span><span class="p">:</span><span class="n">application_controller</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p><strong>6. Start rails server and fix the issues one by one</strong></p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">ruby</span> <span class="n">script</span><span class="o">/</span><span class="n">server</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="n">ruby</span> <span class="n">script</span><span class="o">/</span><span class="n">server</span>
 </span></code></pre></td></tr></table></div></figure>
 
 ]]></content>
@@ -1044,19 +785,7 @@ Then following changes needs to be done for upgrading your application to Rails 
 
 <p><strong>Different ways to define blocks</strong></p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">proc</span> <span class="k">do</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">proc</span> <span class="k">do</span>
 </span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;hello&quot;</span>
 </span><span class='line'><span class="k">end</span>
 </span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">call</span> <span class="c1">#=&gt; hello</span>
@@ -1078,30 +807,7 @@ Then following changes needs to be done for upgrading your application to Rails 
 
 <p>Lets assume we have collection array of strings and we want to print it</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="o">[</span><span class="s1">&#39;hi&#39;</span><span class="p">,</span> <span class="s1">&#39;sandip&#39;</span><span class="p">,</span> <span class="s1">&#39;how&#39;</span><span class="p">,</span> <span class="s1">&#39;you&#39;</span><span class="p">,</span> <span class="s1">&#39;doing&#39;</span><span class="p">,</span> <span class="s1">&#39;?&#39;</span><span class="o">]</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="o">[</span><span class="s1">&#39;hi&#39;</span><span class="p">,</span> <span class="s1">&#39;sandip&#39;</span><span class="p">,</span> <span class="s1">&#39;how&#39;</span><span class="p">,</span> <span class="s1">&#39;you&#39;</span><span class="p">,</span> <span class="s1">&#39;doing&#39;</span><span class="p">,</span> <span class="s1">&#39;?&#39;</span><span class="o">]</span>
 </span><span class='line'><span class="o">=&gt;</span> <span class="o">[</span><span class="s2">&quot;hi&quot;</span><span class="p">,</span> <span class="s2">&quot;sandip&quot;</span><span class="p">,</span> <span class="s2">&quot;how&quot;</span><span class="p">,</span> <span class="s2">&quot;you&quot;</span><span class="p">,</span> <span class="s2">&quot;doing&quot;</span><span class="p">,</span> <span class="s2">&quot;?&quot;</span><span class="o">]</span>
 </span><span class='line'>
 </span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span><span class="o">|</span><span class="n">w</span><span class="o">|</span> <span class="nb">puts</span> <span class="n">w</span> <span class="p">}</span>
@@ -1133,12 +839,7 @@ Then following changes needs to be done for upgrading your application to Rails 
 
 <p><strong> How to_proc got implemented inside Symbol class</strong></p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Symbol</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Symbol</span>
 </span><span class='line'>  <span class="k">def</span> <span class="nf">to_proc</span>
 </span><span class='line'>    <span class="no">Proc</span><span class="o">.</span><span class="n">new</span> <span class="p">{</span> <span class="o">|*</span><span class="n">args</span><span class="o">|</span> <span class="n">args</span><span class="o">.</span><span class="n">shift</span><span class="o">.</span><span class="n">__send__</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="p">}</span>
 </span><span class='line'>  <span class="k">end</span>
@@ -1148,11 +849,7 @@ Then following changes needs to be done for upgrading your application to Rails 
 
 <p><strong>Lets have some examples:</strong></p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">v</span> <span class="o">=</span> <span class="ss">:even?</span><span class="o">.</span><span class="n">to_proc</span> <span class="c1"># equivalent to proc {|a| a.even?} </span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="n">v</span> <span class="o">=</span> <span class="ss">:even?</span><span class="o">.</span><span class="n">to_proc</span> <span class="c1"># equivalent to proc {|a| a.even?} </span>
 </span><span class='line'><span class="c1">#=&gt; #&lt;Proc:0x00007f9d2bddcb90@(irb):97&gt; </span>
 </span><span class='line'><span class="n">q</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">67</span><span class="o">]</span>
 </span><span class='line'><span class="n">q</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="n">v</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="kp">false</span><span class="p">,</span> <span class="kp">true</span><span class="p">,</span> <span class="kp">false</span><span class="p">,</span> <span class="kp">false</span><span class="p">,</span> <span class="kp">false</span><span class="o">]</span>
@@ -1162,13 +859,7 @@ Then following changes needs to be done for upgrading your application to Rails 
 <p> <strong>Is there any shortcut?</strong>
 Yes, there is shortcut to have block passed to enumerators on the fly using ampersand followed by colon (i.e. symbol)</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">q</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">67</span><span class="o">]</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="n">q</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">67</span><span class="o">]</span>
 </span><span class='line'><span class="n">q</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:even?</span><span class="p">)</span> <span class="o">&lt;=&gt;</span> <span class="n">q</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:even?</span><span class="o">.</span><span class="n">to_proc</span><span class="p">)</span>
 </span><span class='line'><span class="n">q</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:even?</span><span class="o">.</span><span class="n">to_proc</span><span class="p">)</span>
 </span><span class='line'><span class="c1">#=&gt; [false, true, false, false, false]  </span>
@@ -1179,12 +870,7 @@ Yes, there is shortcut to have block passed to enumerators on the fly using ampe
 
 <p><strong>Some handy examples</strong></p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">67</span><span class="o">].</span><span class="n">inject</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:+</span><span class="p">)</span> <span class="c1">#=&gt; 78 </span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">67</span><span class="o">].</span><span class="n">inject</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:+</span><span class="p">)</span> <span class="c1">#=&gt; 78 </span>
 </span><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">67</span><span class="o">].</span><span class="n">inject</span><span class="p">(</span><span class="ss">:+</span><span class="p">)</span> <span class="c1">#=&gt; 78 </span>
 </span><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">67</span><span class="o">].</span><span class="n">any?</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:even?</span><span class="p">)</span> <span class="c1">#=&gt; true </span>
 </span><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">67</span><span class="o">].</span><span class="n">detect</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:even?</span><span class="p">)</span> <span class="c1">#=&gt; 2 </span>
@@ -1207,19 +893,13 @@ Yes, there is shortcut to have block passed to enumerators on the fly using ampe
 
 <h2>Exact matched named route declared as :</h2>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">match</span> <span class="s1">&#39;:a/:b/:c&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;home#index&#39;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:q</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="n">match</span> <span class="s1">&#39;:a/:b/:c&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;home#index&#39;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:q</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <h4>rails console :</h4>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">app</span><span class="o">.</span><span class="n">q_url</span><span class="p">(</span><span class="ss">:a</span><span class="p">,</span> <span class="ss">:b</span><span class="p">,</span> <span class="ss">:c</span><span class="p">)</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="n">app</span><span class="o">.</span><span class="n">q_url</span><span class="p">(</span><span class="ss">:a</span><span class="p">,</span> <span class="ss">:b</span><span class="p">,</span> <span class="ss">:c</span><span class="p">)</span>
 </span><span class='line'><span class="c1">#=&gt; &quot;http://www.example.com/a/b/c&quot;</span>
 </span><span class='line'>
 </span><span class='line'><span class="n">app</span><span class="o">.</span><span class="n">q_url</span><span class="p">(</span><span class="ss">:a</span><span class="p">,</span> <span class="ss">:b</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
@@ -1234,19 +914,13 @@ Yes, there is shortcut to have block passed to enumerators on the fly using ampe
 
 <p>If you are sure that certain parameters can be blank then you can define them as optional parameter inside route</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">match</span> <span class="s1">&#39;:a/:b(/:c)&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;home#index&#39;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:q</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="n">match</span> <span class="s1">&#39;:a/:b(/:c)&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;home#index&#39;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:q</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <h4>rails console :</h4>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">app</span><span class="o">.</span><span class="n">q_url</span><span class="p">(</span><span class="ss">:a</span><span class="p">,</span> <span class="ss">:b</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="n">app</span><span class="o">.</span><span class="n">q_url</span><span class="p">(</span><span class="ss">:a</span><span class="p">,</span> <span class="ss">:b</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
 </span><span class='line'><span class="c1">#=&gt; &quot;http://www.example.com/a/b?c=&quot;</span>
 </span><span class='line'>
 </span><span class='line'><span class="n">app</span><span class="o">.</span><span class="n">q_url</span><span class="p">(</span><span class="ss">:a</span><span class="p">,</span> <span class="ss">:b</span><span class="p">)</span>
@@ -1263,23 +937,14 @@ Yes, there is shortcut to have block passed to enumerators on the fly using ampe
     <id>http://funonrails.com/2012/01/puts-tos-and-inspect-on-ruby-object</id>
     <content type="html"><![CDATA[<p><code>puts</code> converts ruby object into string by invoking to_s method on object. The default to_s prints the object&rsquo;s class and an encoding of the object id. In order to print human readable form of object use inspect</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">locs</span> <span class="o">=</span> <span class="no">Location</span><span class="o">.</span><span class="n">find_by_sql</span><span class="p">(</span><span class="s1">&#39;select * from locations&#39;</span><span class="p">)</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="n">locs</span> <span class="o">=</span> <span class="no">Location</span><span class="o">.</span><span class="n">find_by_sql</span><span class="p">(</span><span class="s1">&#39;select * from locations&#39;</span><span class="p">)</span>
 </span><span class='line'><span class="no">Location</span> <span class="no">Load</span> <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span><span class="n">ms</span><span class="p">)</span>  <span class="nb">select</span> <span class="o">*</span> <span class="n">from</span> <span class="n">locations</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>Puts Object internally invokes to_s method on object to print</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">locs</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">l</span><span class="o">|</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="n">locs</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">l</span><span class="o">|</span>
 </span><span class='line'>  <span class="c1"># it calls to_s method on object</span>
 </span><span class='line'>  <span class="nb">puts</span> <span class="n">l</span>
 </span><span class='line'><span class="k">end</span>
@@ -1294,13 +959,7 @@ Yes, there is shortcut to have block passed to enumerators on the fly using ampe
 
 <p>puts object followed by subsequent invoke of inspect method outputs readable object</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">locs</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">l</span><span class="o">|</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="n">locs</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">l</span><span class="o">|</span>
 </span><span class='line'>  <span class="nb">puts</span> <span class="n">l</span><span class="o">.</span><span class="n">inspect</span> <span class="c1"># prints actual object</span>
 </span><span class='line'><span class="k">end</span>
 </span><span class='line'>
@@ -1322,11 +981,7 @@ Yes, there is shortcut to have block passed to enumerators on the fly using ampe
 
 <h4>Upload form</h4>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='haml'><span class='line'><span class="p">=</span> <span class="n">form_tag</span> <span class="n">upload_url</span><span class="p">,</span> <span class="ss">:multipart</span> <span class="o">=&gt;</span> <span class="kp">true</span> <span class="k">do</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='haml'><span class='line'><span class="p">=</span> <span class="n">form_tag</span> <span class="n">upload_url</span><span class="p">,</span> <span class="ss">:multipart</span> <span class="o">=&gt;</span> <span class="kp">true</span> <span class="k">do</span>
 </span><span class='line'>  <span class="nt">%label</span><span class="p">{</span><span class="ss">:for</span> <span class="o">=&gt;</span> <span class="s2">&quot;file&quot;</span><span class="p">}</span> File to Upload
 </span><span class='line'>  <span class="p">=</span> <span class="n">file_field_tag</span> <span class="s2">&quot;file&quot;</span>
 </span><span class='line'>  <span class="p">=</span> <span class="n">submit_tag</span>
@@ -1340,47 +995,7 @@ Yes, there is shortcut to have block passed to enumerators on the fly using ampe
 
 <h4>Controller code</h4>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">CustomersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">CustomersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
 </span><span class='line'>  <span class="o">[.</span><span class="n">.</span><span class="o">.]</span>
 </span><span class='line'>  <span class="k">def</span> <span class="nf">import</span>
 </span><span class='line'>    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">post?</span> <span class="o">&amp;&amp;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:file</span><span class="o">].</span><span class="n">present?</span>
@@ -1425,33 +1040,7 @@ Yes, there is shortcut to have block passed to enumerators on the fly using ampe
 
 <h4>Customer model</h4>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Customer</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Customer</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
 </span><span class='line'>  <span class="n">scope</span> <span class="ss">:active</span><span class="p">,</span> <span class="n">where</span><span class="p">(</span><span class="ss">:active</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">)</span>
 </span><span class='line'>  <span class="n">scope</span> <span class="ss">:latest</span><span class="p">,</span> <span class="n">order</span><span class="p">(</span><span class="s1">&#39;created_at desc&#39;</span><span class="p">)</span>
 </span><span class='line'>
@@ -1486,22 +1075,7 @@ Yes, there is shortcut to have block passed to enumerators on the fly using ampe
 
 <p>Note: As we are not writing on file system hence code can easily work heroku.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">export</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">export</span>
 </span><span class='line'>  <span class="c1"># CRITERIA : to select customer records</span>
 </span><span class='line'>  <span class="c1">#=&gt; Customer.active.latest.limit(100)</span>
 </span><span class='line'>  <span class="n">custs</span> <span class="o">=</span> <span class="no">Customer</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
@@ -1532,18 +1106,7 @@ Yes, there is shortcut to have block passed to enumerators on the fly using ampe
 
 <p>Lets consider scenario that <code>student</code> embeds one <code>family</code> who has many <code>assets</code></p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Student</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Student</span>
 </span><span class='line'>  <span class="kp">include</span> <span class="ss">Mongoid</span><span class="p">:</span><span class="ss">:Document</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="n">field</span> <span class="ss">:name</span>
@@ -1560,17 +1123,7 @@ Yes, there is shortcut to have block passed to enumerators on the fly using ampe
 <!--more-->
 
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Family</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Family</span>
 </span><span class='line'>  <span class="kp">include</span> <span class="ss">Mongoid</span><span class="p">:</span><span class="ss">:Document</span>
 </span><span class='line'>  <span class="no">ASSETS</span> <span class="o">=</span> <span class="o">[</span><span class="s1">&#39;flat&#39;</span><span class="p">,</span> <span class="s1">&#39;car&#39;</span><span class="p">,</span> <span class="s1">&#39;business&#39;</span><span class="p">,</span> <span class="s1">&#39;bunglow&#39;</span><span class="p">,</span> <span class="s1">&#39;cash&#39;</span><span class="o">]</span>
 </span><span class='line'>
@@ -1585,23 +1138,7 @@ Yes, there is shortcut to have block passed to enumerators on the fly using ampe
 
 <p>Brief controller code</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">StudentsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">StudentsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
 </span><span class='line'> <span class="k">def</span> <span class="nf">new</span>
 </span><span class='line'>   <span class="vi">@student</span> <span class="o">=</span> <span class="no">Student</span><span class="o">.</span><span class="n">new</span>
 </span><span class='line'>   <span class="vi">@student</span><span class="o">.</span><span class="n">family</span> <span class="o">||=</span> <span class="vi">@student</span><span class="o">.</span><span class="n">build_family</span>
@@ -1622,16 +1159,7 @@ Yes, there is shortcut to have block passed to enumerators on the fly using ampe
 
 <p>view form will look like-</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='haml'><span class='line'><span class="p">=</span> <span class="n">form_for</span><span class="p">(</span><span class="vi">@student</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">s</span><span class="o">|</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='haml'><span class='line'><span class="p">=</span> <span class="n">form_for</span><span class="p">(</span><span class="vi">@student</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">s</span><span class="o">|</span>
 </span><span class='line'>  <span class="p">=</span> <span class="n">s</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:name</span>
 </span><span class='line'>  <span class="p">=</span> <span class="n">s</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:phone</span>
 </span><span class='line'>  <span class="p">-</span> <span class="n">s</span><span class="o">.</span><span class="n">fields_for</span> <span class="ss">:family</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
@@ -1658,13 +1186,7 @@ Yes, there is shortcut to have block passed to enumerators on the fly using ampe
 
 <p>In below example, <code>product</code> can have multiple <code>categories</code> :</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Product</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Product</span>
 </span><span class='line'>  <span class="no">CATEGORIES</span> <span class="o">=</span> <span class="sx">%w(Apparel Media Software Sports Agri Education)</span>
 </span><span class='line'>  <span class="kp">include</span> <span class="ss">Mongoid</span><span class="p">:</span><span class="ss">:Document</span>
 </span><span class='line'>  <span class="n">field</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:type</span> <span class="o">=&gt;</span> <span class="nb">String</span>
@@ -1678,11 +1200,7 @@ Yes, there is shortcut to have block passed to enumerators on the fly using ampe
 
 <p>Here is form code</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='haml'><span class='line'><span class="p">=</span> <span class="n">form_for</span><span class="p">(</span><span class="vi">@product</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='haml'><span class='line'><span class="p">=</span> <span class="n">form_for</span><span class="p">(</span><span class="vi">@product</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
 </span><span class='line'>  <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:name</span>
 </span><span class='line'>  <span class="p">-</span> <span class="ss">Product</span><span class="p">:</span><span class="ss">:CATEGORIES</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">category</span><span class="o">|</span>
 </span><span class='line'>    <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">check_box</span> <span class="ss">:categories</span><span class="p">,</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&quot;product[categories][]&quot;</span><span class="p">,</span> <span class="n">category</span>
@@ -1691,33 +1209,7 @@ Yes, there is shortcut to have block passed to enumerators on the fly using ampe
 
 <p>Here is products controller code</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">ProductsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">ProductsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
 </span><span class='line'>  <span class="n">before_filter</span> <span class="ss">:load_product</span><span class="p">,</span> <span class="ss">:only</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="ss">:new</span><span class="p">,</span> <span class="ss">:create</span><span class="o">]</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="o">[.</span><span class="n">.</span><span class="o">.]</span>
@@ -1764,70 +1256,7 @@ MainForm can be used as base version of form builder and can be overriden for it
 </ol>
 
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/helpers/main_form.rb </span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/helpers/main_form.rb </span>
 </span><span class='line'><span class="k">class</span> <span class="nc">MainForm</span> <span class="o">&lt;</span> <span class="ss">ActionView</span><span class="p">:</span><span class="ss">:Helpers</span><span class="o">::</span><span class="no">FormBuilder</span> <span class="c1"># NestedForm::Builder</span>
 </span><span class='line'>  <span class="no">CSS</span> <span class="o">=</span> <span class="p">{</span>
 </span><span class='line'>    <span class="ss">:label</span> <span class="o">=&gt;</span> <span class="s1">&#39;label-control&#39;</span><span class="p">,</span>
@@ -1899,39 +1328,7 @@ MainForm can be used as base version of form builder and can be overriden for it
 <p>ZeroForm is custom form builder which is inherited from <code>main_form</code> and its going to be actually used inside forms.
 Feel free to make custom form related changes inside this</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/helpers/zero_form.rb</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/helpers/zero_form.rb</span>
 </span><span class='line'><span class="k">class</span> <span class="nc">ZeroForm</span> <span class="o">&lt;</span> <span class="no">MainForm</span>
 </span><span class='line'>  <span class="c1"># Overridden label_class here as we dont need class to be applied</span>
 </span><span class='line'>  <span class="k">def</span> <span class="nf">label_class</span>
@@ -1970,23 +1367,14 @@ Feel free to make custom form related changes inside this</p>
 
 <p><strong>Integrate NestedForm with FormBuilder</strong></p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">MainForm</span> <span class="o">&lt;</span> <span class="ss">NestedForm</span><span class="p">:</span><span class="ss">:Builder</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">MainForm</span> <span class="o">&lt;</span> <span class="ss">NestedForm</span><span class="p">:</span><span class="ss">:Builder</span>
 </span><span class='line'><span class="k">end</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p><strong>View Form</strong></p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='haml'><span class='line'><span class="p">=</span> <span class="n">form_for</span> <span class="vi">@address</span> <span class="o">||=</span> <span class="no">Address</span><span class="o">.</span><span class="n">new</span><span class="p">,</span> <span class="ss">:builder</span> <span class="o">=&gt;</span> <span class="no">ZeroForm</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='haml'><span class='line'><span class="p">=</span> <span class="n">form_for</span> <span class="vi">@address</span> <span class="o">||=</span> <span class="no">Address</span><span class="o">.</span><span class="n">new</span><span class="p">,</span> <span class="ss">:builder</span> <span class="o">=&gt;</span> <span class="no">ZeroForm</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
 </span><span class='line'>  <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:street_address</span>
 </span><span class='line'>  <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_area</span> <span class="ss">:detail_address</span><span class="p">,</span> <span class="ss">:rows</span> <span class="o">=&gt;</span> <span class="mi">2</span>
 </span><span class='line'>  <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:city</span>
@@ -2008,10 +1396,7 @@ Lets have a look at different ways starting from worst &ndash;</p>
 
 <p>Get table names inside database and then iterating over to get model name</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@models</span> <span class="o">=</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">tables</span><span class="o">.</span><span class="n">collect</span><span class="p">{</span><span class="o">|</span><span class="n">t</span><span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">underscore</span><span class="o">.</span><span class="n">singularize</span><span class="o">.</span><span class="n">camelize</span><span class="p">}</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@models</span> <span class="o">=</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">tables</span><span class="o">.</span><span class="n">collect</span><span class="p">{</span><span class="o">|</span><span class="n">t</span><span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">underscore</span><span class="o">.</span><span class="n">singularize</span><span class="o">.</span><span class="n">camelize</span><span class="p">}</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">#=&gt; [&quot;AdhearsionAudit&quot;, &quot;AudioLog&quot;, &quot;AuditDetail&quot;,&quot;TinyPrint&quot;, &quot;TinyVideo&quot;, &quot;UnknownCall&quot;, &quot;UserAudit&quot;, &quot;User&quot;]</span>
 </span></code></pre></td></tr></table></div></figure>
@@ -2019,37 +1404,25 @@ Lets have a look at different ways starting from worst &ndash;</p>
 
 <p>Select those with associated class</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@models</span><span class="o">.</span><span class="n">delete_if</span><span class="p">{</span><span class="o">|</span><span class="n">m</span><span class="o">|</span> <span class="n">m</span><span class="o">.</span><span class="n">constantize</span> <span class="k">rescue</span> <span class="kp">true</span><span class="p">}</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@models</span><span class="o">.</span><span class="n">delete_if</span><span class="p">{</span><span class="o">|</span><span class="n">m</span><span class="o">|</span> <span class="n">m</span><span class="o">.</span><span class="n">constantize</span> <span class="k">rescue</span> <span class="kp">true</span><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>Load models dir</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@models</span> <span class="o">=</span> <span class="no">Dir</span><span class="o">[</span><span class="s1">&#39;app/models/*.rb&#39;</span><span class="o">].</span><span class="n">map</span> <span class="p">{</span><span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s1">&#39;.*&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">camelize</span><span class="o">.</span><span class="n">constantize</span><span class="o">.</span><span class="n">name</span> <span class="p">}</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@models</span> <span class="o">=</span> <span class="no">Dir</span><span class="o">[</span><span class="s1">&#39;app/models/*.rb&#39;</span><span class="o">].</span><span class="n">map</span> <span class="p">{</span><span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s1">&#39;.*&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">camelize</span><span class="o">.</span><span class="n">constantize</span><span class="o">.</span><span class="n">name</span> <span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>Select ActiveRecord::Base extended class only</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@models</span><span class="o">.</span><span class="n">reject!</span><span class="p">{</span><span class="o">|</span><span class="n">m</span><span class="o">|</span> <span class="n">m</span><span class="o">.</span><span class="n">constantize</span><span class="o">.</span><span class="n">superclass</span> <span class="o">!=</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span> <span class="p">}</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@models</span><span class="o">.</span><span class="n">reject!</span><span class="p">{</span><span class="o">|</span><span class="n">m</span><span class="o">|</span> <span class="n">m</span><span class="o">.</span><span class="n">constantize</span><span class="o">.</span><span class="n">superclass</span> <span class="o">!=</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span> <span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>Get Active Record subclasses</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># make sure relevant models are loaded otherwise</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># make sure relevant models are loaded otherwise</span>
 </span><span class='line'><span class="c1"># require them prior</span>
 </span><span class='line'><span class="c1"># Dir.glob(RAILS_ROOT + &#39;/app/models/*.rb&#39;).each { |file| require file }</span>
 </span><span class='line'><span class="k">class</span> <span class="nc">A</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
@@ -2063,13 +1436,7 @@ Lets have a look at different ways starting from worst &ndash;</p>
 
 <p>How to get Inherited models too</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">A</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">A</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
 </span><span class='line'><span class="k">end</span>
 </span><span class='line'><span class="k">class</span> <span class="nc">B</span> <span class="o">&lt;</span> <span class="n">A</span>
 </span><span class='line'><span class="k">end</span>
@@ -2080,21 +1447,7 @@ Lets have a look at different ways starting from worst &ndash;</p>
 
 <p>Below is more elegant solution provide by <a href="http://stackoverflow.com/users/268/vincent-robert">Vincent-robert</a> over stack overflow which recursively looks for subsequent descendent&rsquo;s of class and gives you list from all over application</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Class</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Class</span>
 </span><span class='line'>  <span class="k">def</span> <span class="nf">extend?</span><span class="p">(</span><span class="n">klass</span><span class="p">)</span>
 </span><span class='line'>    <span class="ow">not</span> <span class="n">superclass</span><span class="o">.</span><span class="n">nil?</span> <span class="ow">and</span> <span class="p">(</span> <span class="n">superclass</span> <span class="o">==</span> <span class="n">klass</span> <span class="ow">or</span> <span class="n">superclass</span><span class="o">.</span><span class="n">extend?</span> <span class="n">klass</span> <span class="p">)</span>
 </span><span class='line'>  <span class="k">end</span>
@@ -2137,19 +1490,13 @@ Rails Integration</p>
 
 <p>Rails Integration</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># Gemfile
+<figure class='code'><div class="highlight"><table><tr> <td class='code'><pre><code class=''><span class='line'># Gemfile
 </span><span class='line'>gem stripe</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Add api key and public key</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># config/initializers/stripe.rb</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># config/initializers/stripe.rb</span>
 </span><span class='line'>
 </span><span class='line'><span class="no">Stripe</span><span class="o">.</span><span class="n">api_key</span> <span class="o">=</span> <span class="s2">&quot;rGaNWsIG3Gy6zvXB8wv4rEcizJp6XjF5&quot;</span>
 </span><span class='line'><span class="no">STRIPE_PUBLIC_KEY</span> <span class="o">=</span> <span class="s2">&quot;vk_BcSyS2qPWdT5SdrwkQg0vTSyhZgqN&quot;</span>
@@ -2158,11 +1505,7 @@ Rails Integration</p>
 
 <p>View</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='haml'><span class='line'># app/views/layouts/application.html.haml
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='haml'><span class='line'># app/views/layouts/application.html.haml
 </span><span class='line'>
 </span><span class='line'><span class="p">=</span> <span class="n">javascript_include_tag</span> <span class="s1">&#39;https://js.stripe.com/v1/&#39;</span>
 </span><span class='line'><span class="p">=</span> <span class="n">tag</span> <span class="ss">:meta</span><span class="p">,</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s1">&#39;stripe-key&#39;</span><span class="p">,</span> <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="no">STRIPE_PUBLIC_KEY</span>
@@ -2171,32 +1514,7 @@ Rails Integration</p>
 
 <p>Payment Form</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-</pre></td><td class='code'><pre><code class='haml'><span class='line'># app/views/payments/new.html.haml
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='haml'><span class='line'># app/views/payments/new.html.haml
 </span><span class='line'>
 </span><span class='line'><span class="nf">#stripe_error</span>
 </span><span class='line'>  <span class="nt">%noscript</span> JavaScript is not enabled and is required for this form. First enable it in your web browser settings.
@@ -2226,54 +1544,7 @@ Rails Integration</p>
 
 <p>Javascript Code</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="err">#</span> <span class="nx">app</span><span class="o">/</span><span class="nx">views</span><span class="o">/</span><span class="nx">payments</span><span class="o">/</span><span class="k">new</span><span class="p">.</span><span class="nx">js</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='javascript'><span class='line'><span class="err">#</span> <span class="nx">app</span><span class="o">/</span><span class="nx">views</span><span class="o">/</span><span class="nx">payments</span><span class="o">/</span><span class="k">new</span><span class="p">.</span><span class="nx">js</span>
 </span><span class='line'>
 </span><span class='line'><span class="kd">var</span> <span class="nx">payment</span><span class="p">;</span>
 </span><span class='line'><span class="nx">jQuery</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
@@ -2325,51 +1596,14 @@ Rails Integration</p>
 
 <p>Generate &amp; Migrate Payment Model</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">rails</span> <span class="nx">g</span> <span class="nx">model</span> <span class="nx">payment</span> <span class="nx">status</span><span class="o">:</span><span class="nx">string</span> <span class="nx">amount</span><span class="o">:</span><span class="kr">float</span> <span class="nx">email</span><span class="o">:</span><span class="nx">string</span> <span class="nx">transaction_number</span><span class="o">:</span><span class="nx">string</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='javascript'><span class='line'><span class="nx">rails</span> <span class="nx">g</span> <span class="nx">model</span> <span class="nx">payment</span> <span class="nx">status</span><span class="o">:</span><span class="nx">string</span> <span class="nx">amount</span><span class="o">:</span><span class="kr">float</span> <span class="nx">email</span><span class="o">:</span><span class="nx">string</span> <span class="nx">transaction_number</span><span class="o">:</span><span class="nx">string</span>
 </span><span class='line'><span class="nx">rake</span> <span class="nx">db</span><span class="o">:</span><span class="nx">migrate</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>Payment Model</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/models/payment.rb </span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/models/payment.rb </span>
 </span><span class='line'><span class="k">class</span> <span class="nc">Payment</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
 </span><span class='line'>  <span class="no">PROCESSING</span><span class="p">,</span> <span class="no">FAILED</span><span class="p">,</span> <span class="no">SUCCESS</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>
 </span><span class='line'>
@@ -2409,21 +1643,7 @@ Rails Integration</p>
 
 <p>Payments Controller</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/controllers/payments_controller.rb </span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/controllers/payments_controller.rb </span>
 </span><span class='line'>
 </span><span class='line'><span class="k">class</span> <span class="nc">PaymentsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
 </span><span class='line'>  <span class="k">def</span> <span class="nf">create</span>
@@ -2451,10 +1671,7 @@ Rails Integration</p>
 
 <h2>Parse string url</h2>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;http://funonrails.com/categories/rails-3&#39;</span><span class="p">)</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;http://funonrails.com/categories/rails-3&#39;</span><span class="p">)</span>
 </span><span class='line'><span class="n">url</span><span class="o">.</span><span class="n">host</span> <span class="c1">#=&gt; &quot;http://funonrails.com&quot;</span>
 </span><span class='line'><span class="n">url</span><span class="o">.</span><span class="n">port</span> <span class="c1">#=&gt; 80</span>
 </span></code></pre></td></tr></table></div></figure>
@@ -2462,10 +1679,7 @@ Rails Integration</p>
 
 <h2>URL with Basic Authentication</h2>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;http://sandip:2121@funonrails.com/categories/rails-3&#39;</span><span class="p">)</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;http://sandip:2121@funonrails.com/categories/rails-3&#39;</span><span class="p">)</span>
 </span><span class='line'><span class="n">url</span><span class="o">.</span><span class="n">user</span> <span class="c1">#=&gt; &quot;sandip&quot;</span>
 </span><span class='line'><span class="n">url</span><span class="o">.</span><span class="n">password</span> <span class="c1">#=&gt; &quot;2121&quot;</span>
 </span></code></pre></td></tr></table></div></figure>
@@ -2473,23 +1687,14 @@ Rails Integration</p>
 
 <h2>Extracting urls form string paragraph</h2>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">URI</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="s1">&#39;http://funonrails.com is rails blog authored by http://sandipransing.github.com contact mailto://sandip@funonrails.com&#39;</span><span class="p">)</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="no">URI</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="s1">&#39;http://funonrails.com is rails blog authored by http://sandipransing.github.com contact mailto://sandip@funonrails.com&#39;</span><span class="p">)</span>
 </span><span class='line'><span class="c1">#=&gt; [&quot;http://funonrails.com&quot;, &quot;http://sandipransing.github.com&quot;, &quot;mailto://sandip@funonrails.com&quot;]</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <h2>Split &amp; Join URI</h2>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">URI</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;http://sandip:2121@funonrails.com/categories/rails-3&#39;</span><span class="p">)</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="no">URI</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;http://sandip:2121@funonrails.com/categories/rails-3&#39;</span><span class="p">)</span>
 </span><span class='line'><span class="c1">#=&gt; [&quot;http&quot;, &quot;sandip:2121&quot;, &quot;funonrails.com&quot;, nil, nil, &quot;/categories/rails-3&quot;, nil, nil, nil]</span>
 </span><span class='line'>
 </span><span class='line'><span class="o">&lt;=&gt;</span> <span class="o">[</span><span class="no">Scheme</span><span class="p">,</span> <span class="no">Userinfo</span><span class="p">,</span> <span class="no">Host</span><span class="p">,</span> <span class="no">Port</span><span class="p">,</span> <span class="no">Registry</span><span class="p">,</span> <span class="no">Path</span><span class="p">,</span> <span class="no">Opaque</span><span class="p">,</span> <span class="no">Query</span><span class="p">,</span> <span class="no">Fragment</span><span class="o">]</span>
@@ -2501,18 +1706,7 @@ Rails Integration</p>
 
 <h2>Escape &amp; Unescape alias encode/decode URI</h2>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">URI</span><span class="o">.</span><span class="n">escape</span> <span class="s2">&quot;http://funonrails.com/categories/named scopes&quot;</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="no">URI</span><span class="o">.</span><span class="n">escape</span> <span class="s2">&quot;http://funonrails.com/categories/named scopes&quot;</span>
 </span><span class='line'><span class="c1">#=&gt; &quot;http://funonrails.com/categories/named%20scopes&quot;</span>
 </span><span class='line'>
 </span><span class='line'><span class="no">URI</span><span class="o">.</span><span class="n">encode</span> <span class="s2">&quot;http://funonrails.com/categories/named scopes&quot;</span>
@@ -2528,20 +1722,7 @@ Rails Integration</p>
 
 <h2>Match urls using regular expressions</h2>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># extract first URI from html_string</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># extract first URI from html_string</span>
 </span><span class='line'><span class="s2">&quot;ftp://localhost http://funonrails.com/categories/rails-3&quot;</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="no">URI</span><span class="o">.</span><span class="n">regexp</span><span class="p">)</span>
 </span><span class='line'><span class="c1">#=&gt; &quot;ftp://localhost&quot;</span>
 </span><span class='line'>
@@ -2559,17 +1740,14 @@ Rails Integration</p>
 
 <h2>Getting requested url inside rails</h2>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">request</span><span class="o">.</span><span class="n">request_uri</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="n">request</span><span class="o">.</span><span class="n">request_uri</span>
 </span><span class='line'><span class="n">request</span><span class="o">.</span><span class="n">env</span><span class="o">[</span><span class="s1">&#39;REQUEST_URI&#39;</span><span class="o">]</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <h2>Getting previous page url inside rails</h2>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">request</span><span class="o">.</span><span class="n">referrer</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="n">request</span><span class="o">.</span><span class="n">referrer</span>
 </span></code></pre></td></tr></table></div></figure>
 
 ]]></content>
@@ -2592,28 +1770,13 @@ Before implementing payments inside rails app needs to have following things in 
 
 <p>Bundle Install</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># Gemfile     
+<figure class='code'><div class="highlight"><table><tr> <td class='code'><pre><code class=''><span class='line'># Gemfile     
 </span><span class='line'>gem 'activemerchant </span></code></pre></td></tr></table></div></figure>
 
 
 <p>Gateway config</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># config/gateway.yml 
+<figure class='code'><div class="highlight"><table><tr> <td class='code'><pre><code class=''><span class='line'># config/gateway.yml 
 </span><span class='line'>development: &development     
 </span><span class='line'>  mode: test     
 </span><span class='line'>  login: rana_1317365002_biz_api1.gmail.com     
@@ -2630,10 +1793,7 @@ Before implementing payments inside rails app needs to have following things in 
 
 <p>New Payment Form</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='haml'><span class='line'><span class="p">=</span> <span class="n">form_for</span> <span class="vi">@payment</span> <span class="o">||=</span> <span class="no">Payment</span><span class="o">.</span><span class="n">new</span><span class="p">,</span> <span class="ss">:url</span> <span class="o">=&gt;</span> <span class="n">pay_bill_url</span><span class="p">,</span> <span class="ss">:html</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:id</span> <span class="o">=&gt;</span> <span class="ss">:payForm</span><span class="p">}</span> <span class="k">do</span> <span class="o">|</span><span class="nb">p</span><span class="o">|</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='haml'><span class='line'><span class="p">=</span> <span class="n">form_for</span> <span class="vi">@payment</span> <span class="o">||=</span> <span class="no">Payment</span><span class="o">.</span><span class="n">new</span><span class="p">,</span> <span class="ss">:url</span> <span class="o">=&gt;</span> <span class="n">pay_bill_url</span><span class="p">,</span> <span class="ss">:html</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:id</span> <span class="o">=&gt;</span> <span class="ss">:payForm</span><span class="p">}</span> <span class="k">do</span> <span class="o">|</span><span class="nb">p</span><span class="o">|</span>
 </span><span class='line'>  <span class="p">=</span> <span class="nb">p</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:amount</span>
 </span><span class='line'>  <span class="p">=</span> <span class="nb">p</span><span class="o">.</span><span class="n">submit</span> <span class="s1">&#39;Pay&#39;</span>
 </span></code></pre></td></tr></table></div></figure>
@@ -2641,65 +1801,14 @@ Before implementing payments inside rails app needs to have following things in 
 
 <p>Generate &amp; Migrate Payment Model</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='haml'><span class='line'>rails g model payment status:string amount:float transaction_number:string
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='haml'><span class='line'>rails g model payment status:string amount:float transaction_number:string
 </span><span class='line'>rake db:migrate
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>Payment Model</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/models/payment.rb  </span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/models/payment.rb  </span>
 </span><span class='line'><span class="k">class</span> <span class="nc">Payment</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="no">PROCESSING</span><span class="p">,</span> <span class="no">FAILED</span><span class="p">,</span> <span class="no">SUCCESS</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>
@@ -2754,14 +1863,7 @@ Before implementing payments inside rails app needs to have following things in 
 <p>
 Billing routes</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">## Callback URL   </span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="c1">## Callback URL   </span>
 </span><span class='line'><span class="n">match</span> <span class="s1">&#39;/billing/paypal/:id/confirm&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;billing#paypal&#39;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:confirm_paypal</span>
 </span><span class='line'><span class="c1">## Create payment   </span>
 </span><span class='line'><span class="n">match</span> <span class="s1">&#39;/billing&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;billing#create&#39;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:pay_bill</span>
@@ -2773,40 +1875,7 @@ Billing routes</p>
 
 <p>Billing Controller</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/controllers/billing_controller.rb</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/controllers/billing_controller.rb</span>
 </span><span class='line'><span class="k">class</span> <span class="nc">BillingController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
 </span><span class='line'>  <span class="n">before_filter</span> <span class="ss">:get_payment</span><span class="p">,</span> <span class="ss">:only</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="ss">:checkout</span><span class="p">,</span> <span class="ss">:paypal</span><span class="p">,</span> <span class="ss">:thank_you</span><span class="o">]</span>
 </span><span class='line'>
@@ -2844,12 +1913,7 @@ Billing routes</p>
 
 <p>Views</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='haml'><span class='line'># app/views/billing/thank_you.html.haml
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='haml'><span class='line'># app/views/billing/thank_you.html.haml
 </span><span class='line'><span class="p">-</span> <span class="k">if</span> <span class="vi">@payment</span><span class="o">.</span><span class="n">success?</span>
 </span><span class='line'>  <span class="nt">%p</span> The transaction is successfully completed
 </span><span class='line'><span class="p">-</span> <span class="k">else</span>
@@ -2868,9 +1932,7 @@ Billing routes</p>
     <id>http://funonrails.com/2011/12/authorize-net-sim-payment-integration-with-rails</id>
     <content type="html"><![CDATA[<p>Authorize Net SIM gateway transaction skips merchant side creditcard details form and directs transaction to be take place on gateway server.</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># Gemfile
+<figure class='code'><div class="highlight"><table><tr> <td class='code'><pre><code class=''><span class='line'># Gemfile
 </span><span class='line'>gem 'authorize-net'</span></code></pre></td></tr></table></div></figure>
 
 
@@ -2878,18 +1940,7 @@ Billing routes</p>
 
 <p>Payment gateway credentials</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># config/gateway.yml
+<figure class='code'><div class="highlight"><table><tr> <td class='code'><pre><code class=''><span class='line'># config/gateway.yml
 </span><span class='line'>development: &development
 </span><span class='line'>    mode: test
 </span><span class='line'>    login: 9gdLh6T
@@ -2904,47 +1955,14 @@ Billing routes</p>
 
 <p>Generate &amp; Migrate Payment Model</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rails</span> <span class="n">g</span> <span class="n">model</span> <span class="n">payment</span> <span class="ss">status</span><span class="p">:</span><span class="n">string</span> <span class="ss">amount</span><span class="p">:</span><span class="n">float</span> <span class="n">transaction_number</span><span class="ss">:string</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="n">rails</span> <span class="n">g</span> <span class="n">model</span> <span class="n">payment</span> <span class="ss">status</span><span class="p">:</span><span class="n">string</span> <span class="ss">amount</span><span class="p">:</span><span class="n">float</span> <span class="n">transaction_number</span><span class="ss">:string</span>
 </span><span class='line'><span class="n">rake</span> <span class="ss">db</span><span class="p">:</span><span class="n">migrate</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>SIM gateway methods extracted and added to payment model</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/models/payment.rb</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/models/payment.rb</span>
 </span><span class='line'><span class="k">class</span> <span class="nc">Payment</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="no">PROCESSING</span><span class="p">,</span> <span class="no">FAILED</span><span class="p">,</span> <span class="no">SUCCESS</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>
@@ -2980,13 +1998,7 @@ Billing routes</p>
 
 <p>Payment routes</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">## Callback URL</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="c1">## Callback URL</span>
 </span><span class='line'><span class="n">match</span> <span class="s1">&#39;/billing/:id/confirm&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;billing#authorize&#39;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:confirm_billing</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">## Request URL</span>
@@ -2997,43 +2009,7 @@ Billing routes</p>
 
 <p>Billing controller</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/controllers/billing_controller.rb </span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/controllers/billing_controller.rb </span>
 </span><span class='line'><span class="k">class</span> <span class="nc">BillingController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
 </span><span class='line'>  <span class="n">helper</span> <span class="ss">:authorize_net</span>
 </span><span class='line'>
@@ -3074,14 +2050,7 @@ Billing routes</p>
 
 <p>View Forms</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='haml'><span class='line'># app/views/billing/checkout.html.haml
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='haml'><span class='line'># app/views/billing/checkout.html.haml
 </span><span class='line'><span class="p">=</span> <span class="n">form_for</span> <span class="ss">:sim_transaction</span><span class="p">,</span> <span class="ss">:url</span> <span class="o">=&gt;</span> <span class="ss">AuthorizeNet</span><span class="p">:</span><span class="ss">:SIM</span><span class="o">::</span><span class="ss">Transaction</span><span class="p">:</span><span class="ss">:Gateway</span><span class="o">::</span><span class="no">TEST</span><span class="p">,</span> <span class="ss">:html</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:id</span> <span class="o">=&gt;</span> <span class="ss">:authForm</span><span class="p">}</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
 </span><span class='line'>  <span class="p">=</span> <span class="n">sim_fields</span><span class="p">(</span><span class="vi">@transaction</span><span class="p">)</span>
 </span><span class='line'><span class="nd">:javascript</span>
@@ -3091,12 +2060,7 @@ Billing routes</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='haml'><span class='line'># app/views/billing/thank_you.html.haml
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='haml'><span class='line'># app/views/billing/thank_you.html.haml
 </span><span class='line'><span class="p">-</span> <span class="k">if</span> <span class="vi">@order</span><span class="o">.</span><span class="n">success?</span>
 </span><span class='line'>  <span class="nt">%p</span> The transaction is successfully completed
 </span><span class='line'><span class="p">-</span> <span class="k">else</span>

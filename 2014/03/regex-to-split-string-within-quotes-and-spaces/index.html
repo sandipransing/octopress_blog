@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>High Performance Rails Hosting | Fun On Rails</title>
+  <title>regex to split string within quotes and spaces | Fun On Rails</title>
   <meta name="author" content="sandipransing">
 
   
-  <meta name="description" content="There are lot of rails hosting, like wired tree, etc.
-While doing search for cost effective and high performance hosting, Recently i came across with &hellip;">
+  <meta name="description" content="I wanted to split a string based on white spaces except when if anything is enclosed inside quotes then i don&rsquo;t want to split that piece of &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ While doing search for cost effective and high performance hosting, Recently i c
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://funonrails.com/2009/05/high-performance-rails-hosting">
+  <link rel="canonical" href="http://funonrails.com/2014/03/regex-to-split-string-within-quotes-and-spaces">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="http://feeds.feedburner.com/funonrails" rel="alternate" title="Fun On Rails" type="application/atom+xml">
@@ -96,7 +95,7 @@ While doing search for cost effective and high performance hosting, Recently i c
   
   <header>
     
-      <h1 class="entry-title">High Performance Rails Hosting</h1>
+      <h1 class="entry-title">regex to split string within quotes and spaces</h1>
     
     
       <p class="meta">
@@ -112,53 +111,103 @@ While doing search for cost effective and high performance hosting, Recently i c
   
 
 
-<time datetime="2009-05-08T17:48:00+05:30" pubdate data-updated="true">May 8<span>th</span>, 2009</time>
+<time datetime="2014-03-08T21:32:37+05:30" pubdate data-updated="true">Mar 8<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>There are lot of rails hosting, like <code>wired tree</code>, etc.
-While doing search for cost effective and high performance hosting, Recently i came across with <code>joyent</code> rails hosting.
-please let me know your opinions on this.</p>
+<div class="entry-content"><p>I wanted to split a string based on white spaces except when if anything is enclosed inside quotes then i don&rsquo;t want to split that piece of string from getting splitted.</p>
 
-<p>Here are some of the listed capabilities :</p>
+<p>It means string will be splitted based on consecutive double quotes from left to right and remaining string will be spitted on spaces.</p>
 
-<h4>Scale on Demand</h4>
+<!--more-->
 
-<p>Your rails infrastructure can be dynamically expanded or reduced within minutes.</p>
 
-<h4>Support Billions of Hits</h4>
+<h4>Example:</h4>
 
-<p>The largest ruby on rails application running on Joyent does over 1 Billion page views a month. Joyent’s hardware load balancers make this kind of scale possible.
-<code>Ruby 1.8.6</code>, <code>Rails 2.1</code>, <code>Mongrel</code>, <code>Nginx</code></p>
+<p>Splitting of below string</p>
 
-<p>Everything you need to get rolling is pre-installed, including Ruby 1.8.6 and Rails 2.1, Apache, lighttpd, nginx and Mongrel.</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>"html css java 'ruby on rails' python jquery 1's" </span></code></pre></td></tr></table></div></figure>
 
-<h4>Extremely Cost Effective</h4>
 
-<p>Static IPs, real storage, 10TB data transfer / bandwidth, and fantastic support all included.
-Lightning Fast Speed</p>
+<p>should give array of below resulting strings</p>
 
-<p>We provide direct connections to tier 1 internet back-bones, Force10 switches and f5 BigIP load-balancers.</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>html
+</span><span class='line'>css
+</span><span class='line'>java
+</span><span class='line'>ruby on rails
+</span><span class='line'>python
+</span><span class='line'>jquery
+</span><span class='line'>1's</span></code></pre></td></tr></table></div></figure>
 
-<p><strong>Trusted by Companies like LinkedIn</strong></p>
 
-<h4>Check out their post</h4>
+<h4>Regular expression</h4>
 
-<p>Official Ruby on Rails Host</p>
+<p>Below regular expression gives array matched string seperated by quotes and then spaces</p>
 
-<p>We’re the Official Ruby on Rails host. Go check it out at rubyonrails.org. “If you need hosting, Joyent is the official Ruby on Rails host, offering fantastic plans with a knowledgeable staff. Whether you need shared or dedicated hosting, these guys are experts in Ruby on Rails. ”
-Leverage a Large Community</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>/'.*?'|".*?"|\S+/g</span></code></pre></td></tr></table></div></figure>
 
-<p>Over 2,400 companies run Rails applications on Joyent. You gain from our experience hosting them and you can connect directly with them through the Joyent Forums and the Joyent Wiki</p>
 
-<h4>Entirely Open Loving Cloud</h4>
 
-<p>Joyent offers open protocols, open source solutions. Use any Language, any DB. You can move your application. No vendor lock-in.</p>
 
-<p>please, help me……:(</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">tokens</span> <span class="o">=</span> <span class="s2">&quot;html css java &#39;ruby on rails&#39; python jquery 1&#39;s&quot;</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/&#39;.*?&#39;|&quot;.*?&quot;|\S+/g</span><span class="p">);</span>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">tokens</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Result</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="mi">0</span><span class="o">:</span> <span class="s2">&quot;html&quot;</span>
+</span><span class='line'><span class="mi">1</span><span class="o">:</span> <span class="s2">&quot;css&quot;</span>
+</span><span class='line'><span class="mi">2</span><span class="o">:</span> <span class="s2">&quot;java&quot;</span>
+</span><span class='line'><span class="mi">3</span><span class="o">:</span> <span class="s2">&quot;&#39;ruby on rails&#39;&quot;</span>
+</span><span class='line'><span class="mi">4</span><span class="o">:</span> <span class="s2">&quot;python&quot;</span>
+</span><span class='line'><span class="mi">5</span><span class="o">:</span> <span class="s2">&quot;jquery&quot;</span>
+</span><span class='line'><span class="mi">6</span><span class="o">:</span> <span class="s2">&quot;1&#39;s&quot;</span>
+</span><span class='line'><span class="nx">length</span><span class="o">:</span> <span class="mi">7</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Demo</h4>
+
+<p><input type='text' data-id='split' placeholde='Say something' /></p>
+
+<div data-id='result'>
+</div>
+
+
+<script type='text/javascript'>
+  $("[data-id=split]").keyup(function(){
+    query = $(this).val();
+    if(query.length) {
+      tokens = query.match(/'.*?'|".*?"|\S+/g);
+      result = $.map(tokens, function(t, i){ return(i+1+": "+t); }).join('<br/>');
+      $("[data-id=result]").html("<b>Result:</b><br/>").append(result)
+    }
+  })
+</script>
+
 </div>
 
 
@@ -181,12 +230,12 @@ Leverage a Large Community</p>
   
 
 
-<time datetime="2009-05-08T17:48:00+05:30" pubdate data-updated="true">May 8<span>th</span>, 2009</time>
+<time datetime="2014-03-08T21:32:37+05:30" pubdate data-updated="true">Mar 8<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/categories/rails/'>rails</a>
+    <a class='category' href='/categories/jquery/'>jquery</a>
   
 </span>
 
@@ -195,7 +244,7 @@ Leverage a Large Community</p>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://funonrails.com/2009/05/high-performance-rails-hosting/" data-via="sandipransing" data-counturl="http://funonrails.com/2009/05/high-performance-rails-hosting/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://funonrails.com/2014/03/regex-to-split-string-within-quotes-and-spaces/" data-via="sandipransing" data-counturl="http://funonrails.com/2014/03/regex-to-split-string-within-quotes-and-spaces/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -206,10 +255,10 @@ Leverage a Large Community</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2009/05/working-with-rails-console/" title="Previous Post: Awesome: Working with the Rails console and all the tricks">&laquo; Awesome: Working with the Rails console and all the tricks</a>
+        <a class="basic-alignment left" href="/2014/02/moving-from-blogspot-to-octopress/" title="Previous Post: Migrating from blogspot to octopress">&laquo; Migrating from blogspot to octopress</a>
       
       
-        <a class="basic-alignment right" href="/2009/05/rails-coding-standards/" title="Next Post: Rails Coding Standards">Rails Coding Standards &raquo;</a>
+        <a class="basic-alignment right" href="/2014/03/understanding-restful-vs-soap-web-services/" title="Next Post: Understanding RESTful vs SOAP web services">Understanding RESTful vs SOAP web services &raquo;</a>
       
     </p>
     <p class="meta">
