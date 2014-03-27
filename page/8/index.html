@@ -98,44 +98,6 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2010/08/rails-3-beautiful-code/">Rails 3 Beautiful Code</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-08-02T14:57:00+05:30" pubdate data-updated="true">Aug 2<span>nd</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-Check out this SlideShare Presentation: <div style="width:425px" id="__ss_3219240"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/GreggPollack/rails-3-beautiful-code-3219240" title="Rails 3 Beautiful Code">Rails 3 Beautiful Code</a></strong><object id="__sse3219240" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=beautifulcodeinrails3-greggpollack-100218130149-phpapp02&stripped_title=rails-3-beautiful-code-3219240" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse3219240" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=beautifulcodeinrails3-greggpollack-100218130149-phpapp02&stripped_title=rails-3-beautiful-code-3219240" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/GreggPollack">GreggPollack</a>.</div></div></div>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
       <h1 class="entry-title"><a href="/2010/08/pdf-in-rails-using-prawn-library/">PDF in rails using prawn library</a></h1>
     
     
@@ -1455,6 +1417,70 @@ Consider a situation where you need different methods which has same code and ON
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/03/imagemagick-rmagick-installation-on-ubuntu/">Imagemagick/ RMagick Installation on ubuntu</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-03-23T18:11:00+05:30" pubdate data-updated="true">Mar 23<span>rd</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h4>ImageMagick Installation</h4>
+
+<p>Ubuntu machine has default apt-get package manager.
+To install imagemagick following packages needs to be installed.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install imagemagick librmagick-ruby libmagickwand-dev</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>RMagick gem install</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install rmagick</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you still facing problems with gem installation, Please look that following packages are installed
+on your system.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>dpkg -l | grep libmagickcore-dev graphicsmagick-libmagick-dev-compat</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If there are no packages installed then try to install then first.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install libmagickcore-dev graphicsmagick-libmagick-dev-compat</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Try to install rmagick gem again. Now it should be installed without any error.</p>
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/page/9/">&larr; Older</a>
@@ -1472,15 +1498,11 @@ Consider a situation where you need different methods which has same code and ON
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/03/api-authentication-using-devise-token/">Grape API authentication using Devise Auth Token</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/03/building-restful-api-using-grape-in-rails/">Building RESTful API using Grape in Rails</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/03/understanding-restful-vs-soap-web-services/">Understanding RESTful vs SOAP web services</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/03/regex-to-split-string-within-quotes-and-spaces/">regex to split string within quotes and spaces</a>
       </li>
     
       <li class="post">
@@ -1489,6 +1511,10 @@ Consider a situation where you need different methods which has same code and ON
     
       <li class="post">
         <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
   </ul>

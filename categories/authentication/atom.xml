@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Authentication | Fun On Rails]]></title>
+  <link href="http://funonrails.com/categories/authentication/atom.xml" rel="self"/>
+  <link href="http://funonrails.com/"/>
+  <updated>2014-03-27T15:27:50+05:30</updated>
+  <id>http://funonrails.com/</id>
+  <author>
+    <name><![CDATA[sandipransing]]></name>
+    <email><![CDATA[sandip@funonrails.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Grape API authentication using Devise Auth Token]]></title>
+    <link href="http://funonrails.com/2014/03/api-authentication-using-devise-token/"/>
+    <updated>2014-03-27T02:18:53+05:30</updated>
+    <id>http://funonrails.com/2014/03/api-authentication-using-devise-token</id>
+    <content type="html"><![CDATA[<p>In <a href="http://funonrails.com/2014/03/building-restful-api-using-grape-in-rails/">previous post</a> we saw how to buil RESTful API using Grape. In this post we will see how to add <em>devise auth token</em> to <em>users</em> and how to use it in <em>Grape API</em> authentication.</p>
+
+<p>Lets see how this can be done assuming you already have devise setup ready.</p>
+
+<h2>Add <em>token_authenticable</em> to devise modules</h2>
+
+<p>In <em>user.rb</em> add <em>:token_authenticatable</em> to the list of devise modules, it should look something like below:
+```ruby
+class User &lt; ActiveRecord::Base</p>
+
+<h1>..code..</h1>
+
+<p>  devise :database_authenticatable,</p>
+
+<pre><code>:token_authenticatable,
+:invitable,
+:registerable, 
+:recoverable, 
+:rememberable, 
+:trackable, 
+:validatable
+</code></pre>
+
+<p>  attr_accessible :name, :email, :authentication_token</p>
+
+<p>  before_save :ensure_authentication_token</p>
+
+<h1>..code..</h1>
+
+<p>end
+```</p>
+
+<!-- more -->
+
+
+<h2>Add migration for authentiction token</h2>
+
+<p>```
+rails g migration add_auth_token_to_users</p>
+
+<pre><code>  invoke  active_record
+  create    db/migrate/20140326204628_add_auth_token_to_users.rb
+</code></pre>
+
+<p><code>
+Edit migration file to add `:authentication_token` column to users
+</code></p>
+
+<h1>db/migrate/20140326204628_add_auth_token_to_users.rb</h1>
+
+<p>class AddAuthTokenToUsers &lt; ActiveRecord::Migration
+  def self.up</p>
+
+<pre><code>change_table :users do |t|
+  t.string :authentication_token
+end
+
+add_index  :users, :authentication_token, :unique =&gt; true
+</code></pre>
+
+<p>  end</p>
+
+<p>  def self.down</p>
+
+<pre><code>remove_column :users, :authentication_token
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<h4>Run migrations</h4>
+
+<p><code>
+rake db:migrate
+</code></p>
+
+<h4>Generate token for existing users</h4>
+
+<p>We need to call save on every instance of user that will ensure authentication token is present for each user.
+<code>
+User.all.each(&amp;:save)
+</code></p>
+
+<h4>Secure Grape API using auth token</h4>
+
+<p>You need to add below code to the <em>API::Root</em> in-order to add token based authentication. If you are unware of <em>API::Root</em> then please read <a href="http://funonrails.com/2014/03/building-restful-api-using-grape-in-rails/">Building RESTful API using Grape</a></p>
+
+<p>In below example, We are authenticating user based on two scenarios
+&ndash; If user is logged on to the web app then use the same session
+&ndash; If session is not available and <em>auth token</em> is passed then find user based on the token
+```ruby</p>
+
+<h1>lib/api/root.rb</h1>
+
+<p>module API
+  class Root &lt; Grape::API</p>
+
+<pre><code>prefix    'api'
+format    :json
+
+rescue_from :all, :backtrace =&gt; true
+error_formatter :json, API::ErrorFormatter
+
+before do
+  error!("401 Unauthorized", 401) unless authenticated
+end
+
+helpers do
+  def warden
+    env['warden']
+  end
+
+  def authenticated
+    return true if warden.authenticated?
+    params[:access_token] &amp;&amp; @user = User.find_by_authentication_token(params[:access_token])
+  end
+
+  def current_user
+    warden.user || @user
+  end
+end
+
+mount API::V1::Root
+mount API::V2::Root
+</code></pre>
+
+<p>  end
+end
+```</p>
+]]></content>
+  </entry>
+  
+</feed>

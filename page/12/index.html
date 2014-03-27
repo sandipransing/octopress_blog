@@ -98,44 +98,6 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2009/11/upgrading-openoffice-in-ubuntu-interpid/">Upgrading openoffice in ubuntu interpid</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-11-23T16:17:00+05:30" pubdate data-updated="true">Nov 23<span>rd</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Follow simple steps defined <a href="http://ubuntumanual.org/posts/175/upgrade-to-open-office-3-1-in-ubuntu-jaunty-intrepid-hardy">in this post</a> for smooth upgrade of openoffice in linux.</p>
-
-<p>click <a href="http://ubuntumanual.org/posts/175/upgrade-to-open-office-3-1-in-ubuntu-jaunty-intrepid-hardy">here</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
       <h1 class="entry-title"><a href="/2009/11/bundling-gems-in-rails-application/">bundling gems in rails application</a></h1>
     
     
@@ -1388,6 +1350,103 @@ Migrate all radiant extensions</p>
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/variables-initialization-assignments/">Variables initialization, assignments and swapping in ruby</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-05T18:02:00+05:30" pubdate data-updated="true">Nov 5<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Single line code to swap variables in ruby</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span><span class="n">x</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Examples</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;Fun&quot;</span>
+</span><span class='line'><span class="n">y</span> <span class="o">=</span> <span class="s2">&quot;Rails&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span><span class="n">x</span>
+</span><span class='line'><span class="c1">#=&gt; [&quot;Rails&quot;, &quot;Fun&quot;]</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="n">x</span>
+</span><span class='line'><span class="c1">#=&gt; &quot;Rails&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="n">y</span>
+</span><span class='line'><span class="c1">#=&gt; &quot;Fun&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Variable assignments in Ruby</h2>
+
+<p>Also Multiple variables assignments can be done in a single line</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">d</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span>
+</span><span class='line'><span class="c1">#=&gt; [1, 2, 3, 4]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here is interpretation of the above line</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">puts</span> <span class="s2">&quot;a is </span><span class="si">#{</span><span class="n">a</span><span class="si">}</span><span class="s2">, b is </span><span class="si">#{</span><span class="n">b</span><span class="si">}</span><span class="s2">, c is </span><span class="si">#{</span><span class="n">c</span><span class="si">}</span><span class="s2">, d is </span><span class="si">#{</span><span class="n">d</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="c1">#=&gt; &quot;a is 1, b is 2, c is 3, d is 4&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Multiple assignments in ruby</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="n">b</span> <span class="o">=</span> <span class="n">c</span> <span class="o">=</span> <span class="n">d</span> <span class="o">=</span> <span class="mi">12</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here <code>a</code>,<code>b</code>,<code>c</code> and <code>d</code> has value 12</p>
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/page/13/">&larr; Older</a>
@@ -1405,15 +1464,11 @@ Migrate all radiant extensions</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/03/api-authentication-using-devise-token/">Grape API authentication using Devise Auth Token</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/03/building-restful-api-using-grape-in-rails/">Building RESTful API using Grape in Rails</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/03/understanding-restful-vs-soap-web-services/">Understanding RESTful vs SOAP web services</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/03/regex-to-split-string-within-quotes-and-spaces/">regex to split string within quotes and spaces</a>
       </li>
     
       <li class="post">
@@ -1422,6 +1477,10 @@ Migrate all radiant extensions</p>
     
       <li class="post">
         <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
   </ul>
