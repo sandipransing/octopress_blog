@@ -98,6 +98,179 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2010/10/twinkle-ff-setup-click-to-call-using-telify/">Twinkle + FF Setup (Click To Call) using telify</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-10-17T00:47:00+05:30" pubdate data-updated="true">Oct 17<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>On linux machine following settings needs to be done in order to get in browser calling enabled for phone numbers.</p>
+
+<h2>Installation setup</h2>
+
+<ol>
+<li>Install twinkle setup (Create user profile) and get it working for outgoing and incoming calls</li>
+<li>Install telify add-on (can be un-installed once completed with all settings)</li>
+<li>Copy wrapper script <code>twinkle_tel</code>) click here to <a href="http://github.com/sandipransing/twinkle_tel">download</a> and copy it to <code>/usr/bin</code> on user’s machine (make sure it has executable permissions)</li>
+<li>In Firefox go to <em>preferences/applications</em></li>
+<li>Search for <code>tel</code> protocol and change value of tel protocol to <em>/usr/bin/twinkle_tel</em></li>
+</ol>
+
+
+<h2>Usage/ Pre-requisites</h2>
+
+<p>HTML source code of phone number should look like as below</p>
+
+<p><strong>1. Dialing source code</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;a title="phone number" class="telified" nr="9860648108" href="tel:9860648108"&gt;9860648108&lt;/a&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>2. Call disconnect source code</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;a title="disconnect call" class="telified" href="tel:disconnect"&gt;Disconnect&lt;/a&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/clicktocall.png" /></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/10/delayed-jobs-fancy-methods/">DelayedJOb&#8217;s (DJ) fancy methods</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-10-06T19:39:00+05:30" pubdate data-updated="true">Oct 6<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Delayed Job provides <code>send_later</code> and <code>send_at</code> as <em>instance</em> as well as <em>class</em>  methods. It also gives us <code>handle_asynchronously</code> as <em>class</em> method to be written inside class.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">Delayed</span>
+</span><span class='line'>  <span class="k">module</span> <span class="nn">MessageSending</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">send_later</span><span class="p">(</span><span class="nb">method</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+</span><span class='line'>      <span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Job</span><span class="o">.</span><span class="n">enqueue</span> <span class="ss">Delayed</span><span class="p">:</span><span class="ss">:PerformableMethod</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="nb">method</span><span class="o">.</span><span class="n">to_sy</span> <span class="n">m</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">send_at</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="nb">method</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+</span><span class='line'>      <span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Job</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="ss">Delayed</span><span class="p">:</span><span class="ss">:PerformableMethod</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="nb">method</span><span class="o">.</span><span class="n">to_sy</span> <span class="n">m</span><span class="p">,</span> <span class="n">args</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">time</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">module</span> <span class="nn">ClassMethods</span>
+</span><span class='line'>      <span class="k">def</span> <span class="nf">handle_asynchronously</span><span class="p">(</span><span class="nb">method</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">aliased_method</span><span class="p">,</span> <span class="n">punctuation</span> <span class="o">=</span> <span class="nb">method</span><span class="o">.</span><span class="n">to_s</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sr">/([?!=])$/</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="vg">$1</span>
+</span><span class='line'>        <span class="n">with_method</span><span class="p">,</span> <span class="n">without_method</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">aliased_method</span><span class="si">}</span><span class="s2">_with_send_later</span><span class="si">#{</span><span class="n">pu</span> <span class="n">nctuation</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">aliased_method</span><span class="si">}</span><span class="s2">_without_send_later</span><span class="si">#{</span><span class="n">punctuation</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'>        <span class="n">define_method</span><span class="p">(</span><span class="n">with_method</span><span class="p">)</span> <span class="k">do</span> <span class="o">|*</span><span class="n">args</span><span class="o">|</span>
+</span><span class='line'>          <span class="n">send_later</span><span class="p">(</span><span class="n">without_method</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">end</span>
+</span><span class='line'>        <span class="n">alias_method_chain</span> <span class="nb">method</span><span class="p">,</span> <span class="ss">:send_later</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Usage of <em>send_later</em>, <em>send_at</em> and <em>handle_asynchronously</em></h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># instance method</span>
+</span><span class='line'><span class="n">user</span><span class="o">.</span><span class="n">send_later</span><span class="p">(</span><span class="ss">:deliver_welcome</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># class_method</span>
+</span><span class='line'><span class="no">Notifier</span><span class="o">.</span><span class="n">send_later</span><span class="p">(</span><span class="ss">:deliver_welcome</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Notifier</span><span class="o">.</span><span class="n">send_at</span><span class="p">(</span><span class="mi">15</span><span class="o">.</span><span class="n">minutes</span><span class="o">.</span><span class="n">from_now</span><span class="p">,</span> <span class="ss">:deliver_welcome</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Inside User class write below line after deliver_welcome method</span>
+</span><span class='line'><span class="n">handle_asynchronously</span> <span class="ss">:deliver_welcome</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2010/10/solution-to-delayed-job-gem-server-start-problem/">Solution to DelayedJob(DJ) gem server start problem</a></h1>
     
     
@@ -1110,183 +1283,6 @@ Please be sure to make them published and modify contents to identify them</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/08/spell-check-in-ruby-and-rails-using/">Spell Check in ruby and rails using BOSSMan</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-08-04T02:26:00+05:30" pubdate data-updated="true">Aug 4<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Wrong English is an often problem while developing any website product as it gives bad view to website user and thus does direct impact on product. <strong>BOSSMan</strong> is a ruby gem that interacts with <strong>yahoo web service</strong> and provides a simplest way to overcome such errors.</p>
-
-<h4>Installation:</h4>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>gem sources -a http://gems.github.com
-</span><span class='line'>gem install jpignata-bossman</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Apply and get Application ID from yahoo developer network</p>
-
-<p><code>URl https://developer.apps.yahoo.com/</code></p>
-
-<p>Make sure to note it for reference</p>
-
-<p>Usage in ruby app</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;rubygems&#39;</span>
-</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;bossman&#39;</span>
-</span><span class='line'><span class="kp">include</span> <span class="no">BOSSMan</span>
-</span><span class='line'>
-</span><span class='line'><span class="no">BOSSMan</span><span class="o">.</span><span class="n">application_id</span> <span class="o">=</span> <span class="s2">&quot;Your Application ID here&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>Spelling Suggestions</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">text</span> <span class="o">=</span> <span class="ss">BOSSMan</span><span class="p">:</span><span class="ss">:Search</span><span class="o">.</span><span class="n">spelling</span><span class="p">(</span><span class="s2">&quot;gooogle&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="c1">#{&quot;resultset_spell&quot;=&gt;[{&quot;suggestion&quot;=&gt;&quot;google&quot;}], &quot;responsecode&quot;=&gt;&quot;200&quot;, &quot;deephits&quot;=&gt;&quot;1&quot;, &quot;start&quot;=&gt;&quot;0&quot;, &quot;count&quot;=&gt;&quot;1&quot;, &quot;totalhits&quot;=&gt;&quot;1&quot;}}&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">text</span><span class="o">.</span><span class="n">suggestion</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;google&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>More sophisticated way of use &ndash;</p>
-
-<ol>
-<li>Create a YML file containing list of kewords</li>
-<li>Load YML file</li>
-<li>Iterate YML hash to find out spell suggestions
-<strong>Example: spelling.yml</strong></li>
-</ol>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="mi">1</span> <span class="ss">keywords</span><span class="p">:</span>
-</span><span class='line'>  <span class="mi">2</span>   <span class="ss">gooogle</span><span class="p">:</span>
-</span><span class='line'>  <span class="mi">3</span>   <span class="no">Barack</span> <span class="ss">Oabama</span><span class="p">:</span>
-</span><span class='line'>  <span class="mi">4</span>   <span class="ss">Indian</span><span class="p">:</span>
-</span><span class='line'>  <span class="mi">5</span>   <span class="ss">Latuur</span><span class="p">:</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">keywords</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span><span class="s1">&#39;spelling.yml&#39;</span><span class="p">)</span><span class="o">[</span><span class="s1">&#39;keywords&#39;</span><span class="o">].</span><span class="n">keys</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;Correction suggested&quot;</span>
-</span><span class='line'>  <span class="n">keywords</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">keyword</span><span class="o">|</span>
-</span><span class='line'>    <span class="n">text</span> <span class="o">=</span> <span class="ss">BOSSMan</span><span class="p">:</span><span class="ss">:Search</span><span class="o">.</span><span class="n">spelling</span><span class="p">(</span><span class="n">keyword</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">if</span> <span class="n">defined?</span> <span class="n">text</span><span class="o">.</span><span class="n">suggestion</span>
-</span><span class='line'>      <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">keyword</span><span class="si">}</span><span class="s2"> =&gt; </span><span class="si">#{</span><span class="n">text</span><span class="o">.</span><span class="n">suggestion</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>Output</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Correction</span> <span class="n">suggested</span>
-</span><span class='line'><span class="n">gooogle</span> <span class="o">=&gt;</span> <span class="n">google</span>
-</span><span class='line'><span class="no">Barack</span> <span class="no">Oabama</span> <span class="o">=&gt;</span> <span class="no">Barack</span> <span class="no">Obama</span>
-</span><span class='line'><span class="no">Latuur</span> <span class="o">=&gt;</span> <span class="no">Latour</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Analyze suggestions manually and make neccesary corrections..</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/08/rails-3-beautiful-code/">Rails 3 Beautiful Code</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-08-02T14:57:00+05:30" pubdate data-updated="true">Aug 2<span>nd</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-Check out this SlideShare Presentation: <div style="width:425px" id="__ss_3219240"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/GreggPollack/rails-3-beautiful-code-3219240" title="Rails 3 Beautiful Code">Rails 3 Beautiful Code</a></strong><object id="__sse3219240" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=beautifulcodeinrails3-greggpollack-100218130149-phpapp02&stripped_title=rails-3-beautiful-code-3219240" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse3219240" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=beautifulcodeinrails3-greggpollack-100218130149-phpapp02&stripped_title=rails-3-beautiful-code-3219240" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/GreggPollack">GreggPollack</a>.</div></div></div>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/8/">&larr; Older</a>
@@ -1312,15 +1308,15 @@ Check out this SlideShare Presentation: <div style="width:425px" id="__ss_321924
       </li>
     
       <li class="post">
+        <a href="/2014/03/understanding-restful-vs-soap-web-services/">Understanding RESTful vs SOAP web services</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/03/regex-to-split-string-within-quotes-and-spaces/">regex to split string within quotes and spaces</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/02/moving-from-blogspot-to-octopress/">Migrating from blogspot to octopress</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
   </ul>

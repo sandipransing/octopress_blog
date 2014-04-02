@@ -98,6 +98,183 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2010/08/spell-check-in-ruby-and-rails-using/">Spell Check in ruby and rails using BOSSMan</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-08-04T02:26:00+05:30" pubdate data-updated="true">Aug 4<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Wrong English is an often problem while developing any website product as it gives bad view to website user and thus does direct impact on product. <strong>BOSSMan</strong> is a ruby gem that interacts with <strong>yahoo web service</strong> and provides a simplest way to overcome such errors.</p>
+
+<h4>Installation:</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem sources -a http://gems.github.com
+</span><span class='line'>gem install jpignata-bossman</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Apply and get Application ID from yahoo developer network</p>
+
+<p><code>URl https://developer.apps.yahoo.com/</code></p>
+
+<p>Make sure to note it for reference</p>
+
+<p>Usage in ruby app</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;rubygems&#39;</span>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;bossman&#39;</span>
+</span><span class='line'><span class="kp">include</span> <span class="no">BOSSMan</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">BOSSMan</span><span class="o">.</span><span class="n">application_id</span> <span class="o">=</span> <span class="s2">&quot;Your Application ID here&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Spelling Suggestions</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">text</span> <span class="o">=</span> <span class="ss">BOSSMan</span><span class="p">:</span><span class="ss">:Search</span><span class="o">.</span><span class="n">spelling</span><span class="p">(</span><span class="s2">&quot;gooogle&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="c1">#{&quot;resultset_spell&quot;=&gt;[{&quot;suggestion&quot;=&gt;&quot;google&quot;}], &quot;responsecode&quot;=&gt;&quot;200&quot;, &quot;deephits&quot;=&gt;&quot;1&quot;, &quot;start&quot;=&gt;&quot;0&quot;, &quot;count&quot;=&gt;&quot;1&quot;, &quot;totalhits&quot;=&gt;&quot;1&quot;}}&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">text</span><span class="o">.</span><span class="n">suggestion</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;google&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>More sophisticated way of use &ndash;</p>
+
+<ol>
+<li>Create a YML file containing list of kewords</li>
+<li>Load YML file</li>
+<li>Iterate YML hash to find out spell suggestions
+<strong>Example: spelling.yml</strong></li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="mi">1</span> <span class="ss">keywords</span><span class="p">:</span>
+</span><span class='line'>  <span class="mi">2</span>   <span class="ss">gooogle</span><span class="p">:</span>
+</span><span class='line'>  <span class="mi">3</span>   <span class="no">Barack</span> <span class="ss">Oabama</span><span class="p">:</span>
+</span><span class='line'>  <span class="mi">4</span>   <span class="ss">Indian</span><span class="p">:</span>
+</span><span class='line'>  <span class="mi">5</span>   <span class="ss">Latuur</span><span class="p">:</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">keywords</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span><span class="s1">&#39;spelling.yml&#39;</span><span class="p">)</span><span class="o">[</span><span class="s1">&#39;keywords&#39;</span><span class="o">].</span><span class="n">keys</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;Correction suggested&quot;</span>
+</span><span class='line'>  <span class="n">keywords</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">keyword</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">text</span> <span class="o">=</span> <span class="ss">BOSSMan</span><span class="p">:</span><span class="ss">:Search</span><span class="o">.</span><span class="n">spelling</span><span class="p">(</span><span class="n">keyword</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">defined?</span> <span class="n">text</span><span class="o">.</span><span class="n">suggestion</span>
+</span><span class='line'>      <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">keyword</span><span class="si">}</span><span class="s2"> =&gt; </span><span class="si">#{</span><span class="n">text</span><span class="o">.</span><span class="n">suggestion</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Output</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Correction</span> <span class="n">suggested</span>
+</span><span class='line'><span class="n">gooogle</span> <span class="o">=&gt;</span> <span class="n">google</span>
+</span><span class='line'><span class="no">Barack</span> <span class="no">Oabama</span> <span class="o">=&gt;</span> <span class="no">Barack</span> <span class="no">Obama</span>
+</span><span class='line'><span class="no">Latuur</span> <span class="o">=&gt;</span> <span class="no">Latour</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Analyze suggestions manually and make neccesary corrections..</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/08/rails-3-beautiful-code/">Rails 3 Beautiful Code</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-08-02T14:57:00+05:30" pubdate data-updated="true">Aug 2<span>nd</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+Check out this SlideShare Presentation: <div style="width:425px" id="__ss_3219240"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/GreggPollack/rails-3-beautiful-code-3219240" title="Rails 3 Beautiful Code">Rails 3 Beautiful Code</a></strong><object id="__sse3219240" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=beautifulcodeinrails3-greggpollack-100218130149-phpapp02&stripped_title=rails-3-beautiful-code-3219240" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse3219240" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=beautifulcodeinrails3-greggpollack-100218130149-phpapp02&stripped_title=rails-3-beautiful-code-3219240" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/GreggPollack">GreggPollack</a>.</div></div></div>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2010/08/pdf-in-rails-using-prawn-library/">PDF in rails using prawn library</a></h1>
     
     
@@ -1373,114 +1550,6 @@ Consider a situation where you need different methods which has same code and ON
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/03/download-rails-api-to-work-offline/">Download Rails API to work offline</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-03-23T19:08:00+05:30" pubdate data-updated="true">Mar 23<span>rd</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>We often need rails API help while working without internet connection.</p>
-
-<p>Below command can be used to <a href="http://github.com/sandipransing/rails_api">download/copy</a> rails api to work locally(offline) mode</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>wget -mk www.api.rubyonrails.org</span></code></pre></td></tr></table></div></figure>
-
-
-<p>For more information on this click <a href="http://github.com/sandipransing/rails_api">here</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/03/imagemagick-rmagick-installation-on-ubuntu/">Imagemagick/ RMagick Installation on ubuntu</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-03-23T18:11:00+05:30" pubdate data-updated="true">Mar 23<span>rd</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h4>ImageMagick Installation</h4>
-
-<p>Ubuntu machine has default apt-get package manager.
-To install imagemagick following packages needs to be installed.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install imagemagick librmagick-ruby libmagickwand-dev</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>RMagick gem install</h4>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>gem install rmagick</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If you still facing problems with gem installation, Please look that following packages are installed
-on your system.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>dpkg -l | grep libmagickcore-dev graphicsmagick-libmagick-dev-compat</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If there are no packages installed then try to install then first.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install libmagickcore-dev graphicsmagick-libmagick-dev-compat</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Try to install rmagick gem again. Now it should be installed without any error.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/9/">&larr; Older</a>
@@ -1506,15 +1575,15 @@ on your system.</p>
       </li>
     
       <li class="post">
+        <a href="/2014/03/understanding-restful-vs-soap-web-services/">Understanding RESTful vs SOAP web services</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/03/regex-to-split-string-within-quotes-and-spaces/">regex to split string within quotes and spaces</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/02/moving-from-blogspot-to-octopress/">Migrating from blogspot to octopress</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
   </ul>

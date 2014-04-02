@@ -4,7 +4,7 @@
   <title><![CDATA[Fun On Rails]]></title>
   <link href="http://funonrails.com/atom.xml" rel="self"/>
   <link href="http://funonrails.com/"/>
-  <updated>2014-03-27T17:03:05+05:30</updated>
+  <updated>2014-04-02T15:54:48+05:30</updated>
   <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -139,12 +139,14 @@
     <link href="http://funonrails.com/2014/03/building-restful-api-using-grape-in-rails/"/>
     <updated>2014-03-26T12:39:27+05:30</updated>
     <id>http://funonrails.com/2014/03/building-restful-api-using-grape-in-rails</id>
-    <content type="html"><![CDATA[<p>We have a web app developed in rails which uses backbone.js as a front-end framework. Recently we wanted to build a mobile app which will interact with the rails app hence we decided to build a RESTful API. There are many gems available on ruby toolbox to build APIs but it looks like <em>grape</em> can be a good choice.</p>
+    <content type="html"><![CDATA[<p>While developing a <em>rich client side web</em> application or <em>mobile app</em>, we need <em>RESTful JSON API</em> which interacts with the <em>front-end javascript framework</em>. Here you may use <strong>backbone.js</strong>, <strong>ember.js</strong> or <strong>angular.js</strong> on the front-end side of application.</p>
+
+<p>Here we&rsquo;ll be using <em>Ruby on Rails</em> on the <em>back-end</em> which will serve <em>JSON API</em> consumable by fron-end framework. If you look at the <a href="https://www.ruby-toolbox.com/categories/API_Builders">ruby toolbox</a> you&rsquo;ll see many API Builder gems available but it seems <em>grape</em> can be a good choice.</p>
 
 <p><img class="left no-border" src="https://raw.githubusercontent.com/wiki/intridea/grape/grape_logo.png" width="186" height="67" title="Grape" > <em>Grape is a RESTful API microframework built to easily and quickly produce APIs for Ruby-rooted web applications.</em></p>
 
 <p style='clear:both'>
-Let&#8217;s have a quick look how to build RESTful apis using <i>grape</i>.
+Let&#8217;s see how we can build RESTful JSON apis using <i>Grape</i> library:
 </p>
 
 
@@ -387,6 +389,230 @@ If you want to place <em>api</em> directory at some other place then add below l
 </span><span class='line'>  <span class="k">end</span>
 </span><span class='line'><span class="k">end</span>
 </span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Understanding RESTful vs SOAP web services]]></title>
+    <link href="http://funonrails.com/2014/03/understanding-restful-vs-soap-web-services/"/>
+    <updated>2014-03-17T15:09:33+05:30</updated>
+    <id>http://funonrails.com/2014/03/understanding-restful-vs-soap-web-services</id>
+    <content type="html"><![CDATA[<blockquote><p><strong>A Web service</strong> is a method of communications between two electronic devices over the World Wide Web.
+It is also defined as a software system designed to support <a href="http://en.wikipedia.org/wiki/Interoperability">interoperable</a> machine-to-machine interaction over a network.</p></blockquote>
+
+<p>In simple words, &ldquo;Web services are developed to use by other software applications&rdquo;</p>
+
+<p>Web services communicate via either SOAP or REST messages.</p>
+
+<h2>REST</h2>
+
+<p>REST stands for REpresentational State Transfer. It is a term coined by Roy Fielding in his Ph.D. dissertation
+It is an architecture style for designing networked applications which typycally runs runs over HTTP.</p>
+
+<p>REST is an architecture and not a &ldquo;standard&rdquo;. There is no w3c recommendation for REST. It is concept for better web and widely accepted.</p>
+
+<p>RESTful applications use HTTP requests to post data (create and/or update), read data (e.g., make queries), and delete data. Thus, REST uses HTTP for all four CRUD (Create/Read/Update/Delete) operations.</p>
+
+<p>It expects client to have knowlege of what to send and what to expect in response. It is focused on accessing named resources through a single consistent interface.</p>
+
+<h4>Highlights:</h4>
+
+<ol>
+<li>It is simple</li>
+<li>It is lightweight and faster</li>
+<li>Platform-independent</li>
+<li>Language-independent</li>
+<li>runs over HTTP</li>
+<li>Response can be returned in &ldquo;XML/JSON&rdquo; format</li>
+</ol>
+
+
+<!--more-->
+
+
+<p>Like Web Services, REST offers no built-in security features, encryption, session management, QoS guarantees, etc. But also as with Web Services, these can be added by building on top of <a href="HTTP:">HTTP:</a></p>
+
+<p>For security, username/password tokens are often used.
+For encryption, REST can be used on top of HTTPS (secure sockets).</p>
+
+<h4>Example:</h4>
+
+<p>The Web is comprised of resources. A resource is any item of interest. For example, A software company may have many products. Clients may access particular product with this URL:</p>
+
+<figure class='code'><div class="highlight"><table><tr> <td class='code'><pre><code class=''><span class='line'>http://www.&lt;company&gt;.com/products/7</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>SOAP</h2>
+
+<p>SOAP, originally defined as Simple Object Access Protocol. It is a protocol specification for exchanging structured information in the implementation of Web Services in computer networks.</p>
+
+<p>SOAP is an XML based protocol for accessing Web Services.
+It is designed to handle distributed computing environments.</p>
+
+<p>It is well defined mechanism for describing the interface e.g. WSDL+XSD, WS-Policy. As it is standardised it becomes complex t
+It provides a large number of supporting standards for security, reliability, transactions.</p>
+
+<p>Here content of the message decides what to perform and reponse (payload) must comply with SOAP schema.</p>
+
+<h4>Example</h4>
+
+<p>It defines 3 fundamental properties:</p>
+
+<ol>
+<li>What service does: Operations provides</li>
+<li>How service is accessed: Data format and protocol details</li>
+<li>Where a service is located: Adress (URL) details</li>
+</ol>
+
+
+<h4>Sample SOAP request structure:</h4>
+
+<p>In the example below, a GetStockPrice request is sent to a server. The request has a StockName parameter, and a Price parameter that will be returned in the response. The namespace for the function is defined in &ldquo;<a href="http://www.example.org/stock">http://www.example.org/stock</a>&rdquo;.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='xml'><span class='line'>POST /InStock HTTP/1.1
+</span><span class='line'>Host: www.example.org
+</span><span class='line'>Content-Type: application/soap+xml; charset=utf-8
+</span><span class='line'>Content-Length: 299
+</span><span class='line'>SOAPAction: &quot;http://www.w3.org/2003/05/soap-envelope&quot;
+</span><span class='line'><span class="cp">&lt;!- -&gt;</span>
+</span><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+</span><span class='line'><span class="nt">&lt;soap:Envelope</span> <span class="na">xmlns:soap=</span><span class="s">&quot;http://www.w3.org/2003/05/soap-envelope&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;soap:Header&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/soap:Header&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;soap:Body&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;m:GetStockPrice</span> <span class="na">xmlns:m=</span><span class="s">&quot;http://www.example.org/stock&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;m:StockName&gt;</span>IBM<span class="nt">&lt;/m:StockName&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/m:GetStockPrice&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/soap:Body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/soap:Envelope&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Sample SOAP response structure:</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='xml'><span class='line'>HTTP/1.1 200 OK
+</span><span class='line'>Content-Type: application/soap+xml; charset=utf-8
+</span><span class='line'>Content-Length: nnn
+</span><span class='line'>
+</span><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+</span><span class='line'><span class="nt">&lt;soap:Envelope</span>
+</span><span class='line'><span class="na">xmlns:soap=</span><span class="s">&quot;http://www.w3.org/2001/12/soap-envelope&quot;</span>
+</span><span class='line'><span class="na">soap:encodingStyle=</span><span class="s">&quot;http://www.w3.org/2001/12/soap-encoding&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;soap:Body</span> <span class="na">xmlns:m=</span><span class="s">&quot;http://www.example.org/stock&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;m:GetStockPriceResponse&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;m:Price&gt;</span>34.5<span class="nt">&lt;/m:Price&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/m:GetStockPriceResponse&gt;</span>
+</span><span class='line'><span class="nt">&lt;/soap:Body&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;/soap:Envelope&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Highlights</h4>
+
+<p>Here are few <strong>reasons</strong> for which you may want to use SOAP:
+1. Platform and laguage independent
+2. Follows W3C standard
+WSDL (Web services description language) is a W3C standard based on xml and is used to describe web services.
+3. Security
+It supports SSL (just like REST). It also provides a standard implementation of data integrity and data privacy. Being &ldquo;Enterprise&rdquo; it&rsquo;s more secure.
+4. Atomic Transactions
+It supports ACID Transactions (WS- Atomic Transactions) so it can provide two phase commit over distributed transactional resources.
+5. Reliable Messaging <br/>
+It has successful/retry logic built in and provides end-to-end reliability even through SOAP intermediaries</p>
+
+<p>Whenever complex or likely to change API getting developed then SOAP could be a good choice.</p>
+
+<h4>References used</h4>
+
+<ol>
+<li><a href="http://rest.elkstein.org/">http://rest.elkstein.org/</a></li>
+<li><a href="http://www.xfront.com/REST-Web-Services.html">http://www.xfront.com/REST-Web-Services.html</a></li>
+<li><a href="http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm">http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm</a></li>
+<li><a href="http://www.w3schools.com/webservices/ws_soap_example.asp">http://www.w3schools.com/webservices/ws_soap_example.asp</a></li>
+<li><a href="http://www.slideshare.net/kverbert/soapbased-web-services">http://www.slideshare.net/kverbert/soapbased-web-services</a></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[regex to split string within quotes and spaces]]></title>
+    <link href="http://funonrails.com/2014/03/regex-to-split-string-within-quotes-and-spaces/"/>
+    <updated>2014-03-08T21:32:37+05:30</updated>
+    <id>http://funonrails.com/2014/03/regex-to-split-string-within-quotes-and-spaces</id>
+    <content type="html"><![CDATA[<p>I wanted to split a string based on white spaces except when if anything is enclosed inside quotes then i don&rsquo;t want to split that piece of string from getting splitted.</p>
+
+<p>It means string will be splitted based on consecutive double quotes from left to right and remaining string will be spitted on spaces.</p>
+
+<!--more-->
+
+
+<h4>Example:</h4>
+
+<p>Splitting of below string</p>
+
+<figure class='code'><div class="highlight"><table><tr> <td class='code'><pre><code class=''><span class='line'>"html css java 'ruby on rails' python jquery 1's" </span></code></pre></td></tr></table></div></figure>
+
+
+<p>should give array of below resulting strings</p>
+
+<figure class='code'><div class="highlight"><table><tr> <td class='code'><pre><code class=''><span class='line'>html
+</span><span class='line'>css
+</span><span class='line'>java
+</span><span class='line'>ruby on rails
+</span><span class='line'>python
+</span><span class='line'>jquery
+</span><span class='line'>1's</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Regular expression</h4>
+
+<p>Below regular expression gives array matched string seperated by quotes and then spaces</p>
+
+<figure class='code'><div class="highlight"><table><tr> <td class='code'><pre><code class=''><span class='line'>/'.*?'|".*?"|\S+/g</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='javascript'><span class='line'><span class="nx">tokens</span> <span class="o">=</span> <span class="s2">&quot;html css java &#39;ruby on rails&#39; python jquery 1&#39;s&quot;</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/&#39;.*?&#39;|&quot;.*?&quot;|\S+/g</span><span class="p">);</span>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">tokens</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Result</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='javascript'><span class='line'><span class="mi">0</span><span class="o">:</span> <span class="s2">&quot;html&quot;</span>
+</span><span class='line'><span class="mi">1</span><span class="o">:</span> <span class="s2">&quot;css&quot;</span>
+</span><span class='line'><span class="mi">2</span><span class="o">:</span> <span class="s2">&quot;java&quot;</span>
+</span><span class='line'><span class="mi">3</span><span class="o">:</span> <span class="s2">&quot;&#39;ruby on rails&#39;&quot;</span>
+</span><span class='line'><span class="mi">4</span><span class="o">:</span> <span class="s2">&quot;python&quot;</span>
+</span><span class='line'><span class="mi">5</span><span class="o">:</span> <span class="s2">&quot;jquery&quot;</span>
+</span><span class='line'><span class="mi">6</span><span class="o">:</span> <span class="s2">&quot;1&#39;s&quot;</span>
+</span><span class='line'><span class="nx">length</span><span class="o">:</span> <span class="mi">7</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Demo</h4>
+
+<p><input type='text' data-id='split' placeholde='Say something' /></p>
+
+<div data-id='result'>
+</div>
+
+
+<script type='text/javascript'>
+  $("[data-id=split]").keyup(function(){
+    query = $(this).val();
+    if(query.length) {
+      tokens = query.match(/'.*?'|".*?"|\S+/g);
+      result = $.map(tokens, function(t, i){ return(i+1+": "+t); }).join('<br/>');
+      $("[data-id=result]").html("<b>Result:</b><br/>").append(result)
+    }
+  })
+</script>
 
 ]]></content>
   </entry>
@@ -1748,323 +1974,6 @@ Rails Integration</p>
 <h2>Getting previous page url inside rails</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="n">request</span><span class="o">.</span><span class="n">referrer</span>
-</span></code></pre></td></tr></table></div></figure>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Paypal payments integration with rails]]></title>
-    <link href="http://funonrails.com/2011/12/paypal-payments-integration-with-rails/"/>
-    <updated>2011-12-30T18:00:00+05:30</updated>
-    <id>http://funonrails.com/2011/12/paypal-payments-integration-with-rails</id>
-    <content type="html"><![CDATA[<p>Paypal standard website payment service allows online payment transactions for websites.
-Before implementing payments inside rails app needs to have following things in place &ndash;</p>
-
-<ol>
-<li><a href="http://developer.paypal.com/">Register Paypal sandbox account</a></li>
-<li>Paypal Merchant account api credentials i.e. login, password, signature, application_id</li>
-<li>Paypal Buyer account creds to test payments</li>
-</ol>
-
-
-<p>Bundle Install</p>
-
-<figure class='code'><div class="highlight"><table><tr> <td class='code'><pre><code class=''><span class='line'># Gemfile     
-</span><span class='line'>gem 'activemerchant </span></code></pre></td></tr></table></div></figure>
-
-
-<p>Gateway config</p>
-
-<figure class='code'><div class="highlight"><table><tr> <td class='code'><pre><code class=''><span class='line'># config/gateway.yml 
-</span><span class='line'>development: &development     
-</span><span class='line'>  mode: test     
-</span><span class='line'>  login: rana_1317365002_biz_api1.gmail.com     
-</span><span class='line'>  password: '1311235050'     
-</span><span class='line'>  signature: ACxcVrB3mFChvPIe8aDWQlLhAPN46oPBQCj7rJWPza6CDZmBURg.     
-</span><span class='line'>  application_id: APP-76y884485P519543T  
-</span><span class='line'>
-</span><span class='line'>production:    
-</span><span class='line'>  &lt;&lt;: *development
-</span><span class='line'>
-</span><span class='line'>test:
-</span><span class='line'>  &lt;&lt;: *development</span></code></pre></td></tr></table></div></figure>
-
-
-<p>New Payment Form</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='haml'><span class='line'><span class="p">=</span> <span class="n">form_for</span> <span class="vi">@payment</span> <span class="o">||=</span> <span class="no">Payment</span><span class="o">.</span><span class="n">new</span><span class="p">,</span> <span class="ss">:url</span> <span class="o">=&gt;</span> <span class="n">pay_bill_url</span><span class="p">,</span> <span class="ss">:html</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:id</span> <span class="o">=&gt;</span> <span class="ss">:payForm</span><span class="p">}</span> <span class="k">do</span> <span class="o">|</span><span class="nb">p</span><span class="o">|</span>
-</span><span class='line'>  <span class="p">=</span> <span class="nb">p</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:amount</span>
-</span><span class='line'>  <span class="p">=</span> <span class="nb">p</span><span class="o">.</span><span class="n">submit</span> <span class="s1">&#39;Pay&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Generate &amp; Migrate Payment Model</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='haml'><span class='line'>rails g model payment status:string amount:float transaction_number:string
-</span><span class='line'>rake db:migrate
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Payment Model</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/models/payment.rb  </span>
-</span><span class='line'><span class="k">class</span> <span class="nc">Payment</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="no">PROCESSING</span><span class="p">,</span> <span class="no">FAILED</span><span class="p">,</span> <span class="no">SUCCESS</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">validates</span> <span class="ss">:amount</span><span class="p">,</span> <span class="ss">:presence</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">:numericality</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:greater_than</span> <span class="o">=&gt;</span> <span class="mi">0</span> <span class="p">}</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">conf</span>
-</span><span class='line'>    <span class="vc">@@gateway_conf</span> <span class="o">||=</span> <span class="no">YAML</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span><span class="no">Rails</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;config/gateway.yml&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_s</span><span class="p">)</span><span class="o">[</span><span class="no">Rails</span><span class="o">.</span><span class="n">env</span><span class="o">]</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">## Paypal    </span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">setup_purchase</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">gateway</span><span class="o">.</span><span class="n">setup_purchase</span><span class="p">(</span><span class="n">amount</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">redirect_url_for</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">gateway</span><span class="o">.</span><span class="n">redirect_url_for</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">purchase</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="p">{})</span>
-</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="no">PROCESSING</span>
-</span><span class='line'>    <span class="c1">#:ip       =&gt; request.remote_ip,</span>
-</span><span class='line'>    <span class="c1">#:payer_id =&gt; params[:payer_id],</span>
-</span><span class='line'>    <span class="c1">#:token    =&gt; params[:token]</span>
-</span><span class='line'>    <span class="n">response</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">purchase</span><span class="p">(</span><span class="n">amt</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">success?</span>
-</span><span class='line'>      <span class="nb">self</span><span class="o">.</span><span class="n">transaction_num</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">params</span><span class="o">[</span><span class="s1">&#39;transaction_id&#39;</span><span class="o">]</span>
-</span><span class='line'>      <span class="nb">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="no">SUCCESS</span>
-</span><span class='line'>    <span class="k">else</span>
-</span><span class='line'>      <span class="nb">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="no">FAILED</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>    <span class="k">return</span> <span class="nb">self</span>
-</span><span class='line'>  <span class="k">rescue</span> <span class="no">Exception</span> <span class="o">=&gt;</span> <span class="n">e</span>
-</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="no">FAILED</span>
-</span><span class='line'>    <span class="k">return</span> <span class="nb">self</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kp">private</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">gateway</span>
-</span><span class='line'>    <span class="ss">ActiveMerchant</span><span class="p">:</span><span class="ss">:Billing</span><span class="o">::</span><span class="no">Base</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">auth</span><span class="o">[</span><span class="s1">&#39;mode&#39;</span><span class="o">].</span><span class="n">to_sym</span>
-</span><span class='line'>    <span class="ss">ActiveMerchant</span><span class="p">:</span><span class="ss">:Billing</span><span class="o">::</span><span class="no">PaypalExpressGateway</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
-</span><span class='line'>      <span class="ss">:login</span> <span class="o">=&gt;</span> <span class="n">auth</span><span class="o">[</span><span class="s1">&#39;login&#39;</span><span class="o">]</span><span class="p">,</span> <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="n">auth</span><span class="o">[</span><span class="s1">&#39;password&#39;</span><span class="o">]</span><span class="p">,</span>
-</span><span class='line'>      <span class="ss">:signature</span> <span class="o">=&gt;</span> <span class="n">auth</span><span class="o">[</span><span class="s1">&#39;signature&#39;</span><span class="o">]</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">auth</span>
-</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">class</span><span class="o">.</span><span class="n">conf</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>
-Billing routes</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="c1">## Callback URL   </span>
-</span><span class='line'><span class="n">match</span> <span class="s1">&#39;/billing/paypal/:id/confirm&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;billing#paypal&#39;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:confirm_paypal</span>
-</span><span class='line'><span class="c1">## Create payment   </span>
-</span><span class='line'><span class="n">match</span> <span class="s1">&#39;/billing&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;billing#create&#39;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:pay_bill</span>
-</span><span class='line'><span class="c1">## Request URL   </span>
-</span><span class='line'><span class="n">match</span> <span class="s1">&#39;/billing/paypal/:id&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;billing#checkout&#39;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:billing</span>
-</span><span class='line'><span class="n">match</span> <span class="s1">&#39;/billing/thank_you/:id&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;billing#checkout&#39;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:billing_thank_you</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Billing Controller</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/controllers/billing_controller.rb</span>
-</span><span class='line'><span class="k">class</span> <span class="nc">BillingController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
-</span><span class='line'>  <span class="n">before_filter</span> <span class="ss">:get_payment</span><span class="p">,</span> <span class="ss">:only</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="ss">:checkout</span><span class="p">,</span> <span class="ss">:paypal</span><span class="p">,</span> <span class="ss">:thank_you</span><span class="o">]</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">create</span>
-</span><span class='line'>    <span class="vi">@payment</span> <span class="o">=</span> <span class="no">Payment</span><span class="o">.</span><span class="n">new</span> <span class="n">params</span><span class="o">[</span><span class="ss">:payment</span><span class="o">]</span>
-</span><span class='line'>    <span class="k">if</span> <span class="vi">@payment</span><span class="o">.</span><span class="n">save</span>
-</span><span class='line'>      <span class="c1">## Paypal Checkout page       </span>
-</span><span class='line'>      <span class="n">redirect_to</span> <span class="n">billing_url</span>
-</span><span class='line'>    <span class="k">else</span>
-</span><span class='line'>      <span class="n">render</span> <span class="ss">:action</span> <span class="o">=&gt;</span> <span class="ss">:new</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1"># ASSUMPTION   # payment is valid i.e. amount is entered   </span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">checkout</span>
-</span><span class='line'>    <span class="n">response</span> <span class="o">=</span> <span class="vi">@payment</span><span class="o">.</span><span class="n">setup_purchase</span><span class="p">(</span><span class="ss">:return_url</span> <span class="o">=&gt;</span> <span class="n">confirm_paypal_url</span><span class="p">(</span><span class="vi">@payment</span><span class="p">),</span> <span class="ss">:cancel_return_url</span> <span class="o">=&gt;</span> <span class="n">root_url</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">redirect_to</span> <span class="vi">@payment</span><span class="o">.</span><span class="n">redirect_url_for</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">token</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">## CALL BACK   </span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">paypal</span>
-</span><span class='line'>    <span class="vi">@payment</span> <span class="o">=</span> <span class="vi">@payment</span><span class="o">.</span><span class="n">purchase</span><span class="p">(</span><span class="ss">:token</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:token</span><span class="o">]</span><span class="p">,</span> <span class="ss">:payer_id</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:PayerID</span><span class="o">]</span><span class="p">,</span> <span class="ss">:ip</span> <span class="o">=&gt;</span> <span class="n">request</span><span class="o">.</span><span class="n">remote_ip</span><span class="p">)</span>
-</span><span class='line'>    <span class="vi">@payment</span><span class="o">.</span><span class="n">save</span>
-</span><span class='line'>    <span class="n">redirect_to</span> <span class="n">thank_you_billing_url</span><span class="p">(</span><span class="vi">@order</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kp">private</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">get_payment</span>
-</span><span class='line'>    <span class="vi">@payment</span> <span class="o">=</span> <span class="no">Payment</span><span class="o">.</span><span class="n">find_by_id</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
-</span><span class='line'>    <span class="vi">@payment</span> <span class="o">&amp;&amp;</span> <span class="vi">@payment</span><span class="o">.</span><span class="n">valid?</span> <span class="o">||</span> <span class="n">invalid_url</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Views</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='haml'><span class='line'># app/views/billing/thank_you.html.haml
-</span><span class='line'><span class="p">-</span> <span class="k">if</span> <span class="vi">@payment</span><span class="o">.</span><span class="n">success?</span>
-</span><span class='line'>  <span class="nt">%p</span> The transaction is successfully completed
-</span><span class='line'><span class="p">-</span> <span class="k">else</span>
-</span><span class='line'>  <span class="nt">%p</span> The transaction failed
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Authorize Net (SIM) payment integration with rails]]></title>
-    <link href="http://funonrails.com/2011/12/authorize-net-sim-payment-integration-with-rails/"/>
-    <updated>2011-12-30T16:16:00+05:30</updated>
-    <id>http://funonrails.com/2011/12/authorize-net-sim-payment-integration-with-rails</id>
-    <content type="html"><![CDATA[<p>Authorize Net SIM gateway transaction skips merchant side creditcard details form and directs transaction to be take place on gateway server.</p>
-
-<figure class='code'><div class="highlight"><table><tr> <td class='code'><pre><code class=''><span class='line'># Gemfile
-</span><span class='line'>gem 'authorize-net'</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Register for authorize net sandbox account click <a href="https://developer.authorize.net/testaccount/">here</a></p>
-
-<p>Payment gateway credentials</p>
-
-<figure class='code'><div class="highlight"><table><tr> <td class='code'><pre><code class=''><span class='line'># config/gateway.yml
-</span><span class='line'>development: &development
-</span><span class='line'>    mode: test
-</span><span class='line'>    login: 9gdLh6T
-</span><span class='line'>    key: 67fu45xw6VP92LX1
-</span><span class='line'>
-</span><span class='line'>production:
-</span><span class='line'>   &lt;&lt;: *development
-</span><span class='line'>
-</span><span class='line'>test:
-</span><span class='line'>   &lt;&lt;: *development</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Generate &amp; Migrate Payment Model</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="n">rails</span> <span class="n">g</span> <span class="n">model</span> <span class="n">payment</span> <span class="ss">status</span><span class="p">:</span><span class="n">string</span> <span class="ss">amount</span><span class="p">:</span><span class="n">float</span> <span class="n">transaction_number</span><span class="ss">:string</span>
-</span><span class='line'><span class="n">rake</span> <span class="ss">db</span><span class="p">:</span><span class="n">migrate</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>SIM gateway methods extracted and added to payment model</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/models/payment.rb</span>
-</span><span class='line'><span class="k">class</span> <span class="nc">Payment</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="no">PROCESSING</span><span class="p">,</span> <span class="no">FAILED</span><span class="p">,</span> <span class="no">SUCCESS</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">validates</span> <span class="ss">:amount</span><span class="p">,</span> <span class="ss">:presence</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">:numericality</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:greater_than</span> <span class="o">=&gt;</span> <span class="mi">0</span> <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">conf</span>
-</span><span class='line'>    <span class="vc">@@gateway_conf</span> <span class="o">||=</span> <span class="no">YAML</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span><span class="no">Rails</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;config/gateway.yml&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_s</span><span class="p">)</span><span class="o">[</span><span class="no">Rails</span><span class="o">.</span><span class="n">env</span><span class="o">]</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">success?</span>
-</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="no">SUCCESS</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">## Authorize :: SIM</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">setup_transaction</span><span class="p">(</span><span class="n">options</span> <span class="o">=</span><span class="p">{})</span>
-</span><span class='line'>    <span class="n">options</span><span class="o">.</span><span class="n">merge!</span><span class="p">(</span><span class="ss">:link_method</span> <span class="o">=&gt;</span> <span class="ss">AuthorizeNet</span><span class="p">:</span><span class="ss">:SIM</span><span class="o">::</span><span class="ss">HostedReceiptPage</span><span class="p">:</span><span class="ss">:LinkMethod</span><span class="o">::</span><span class="no">POST</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">t</span> <span class="o">=</span> <span class="ss">AuthorizeNet</span><span class="p">:</span><span class="ss">:SIM</span><span class="o">::</span><span class="no">Transaction</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
-</span><span class='line'>      <span class="n">auth</span><span class="o">[</span><span class="s1">&#39;login&#39;</span><span class="o">]</span><span class="p">,</span> <span class="n">auth</span><span class="o">[</span><span class="s1">&#39;key&#39;</span><span class="o">]</span><span class="p">,</span> <span class="n">amount</span><span class="p">,</span>
-</span><span class='line'>      <span class="ss">:hosted_payment_form</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span>
-</span><span class='line'>      <span class="ss">:test</span> <span class="o">=&gt;</span> <span class="n">auth</span><span class="o">[</span><span class="s1">&#39;mode&#39;</span><span class="o">]</span>
-</span><span class='line'>    <span class="p">)</span>
-</span><span class='line'>    <span class="n">t</span><span class="o">.</span><span class="n">set_hosted_payment_receipt</span><span class="p">(</span><span class="ss">AuthorizeNet</span><span class="p">:</span><span class="ss">:SIM</span><span class="o">::</span><span class="no">HostedReceiptPage</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">options</span><span class="p">))</span>
-</span><span class='line'>    <span class="k">return</span> <span class="n">t</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">auth</span>
-</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">class</span><span class="o">.</span><span class="n">conf</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Payment routes</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="c1">## Callback URL</span>
-</span><span class='line'><span class="n">match</span> <span class="s1">&#39;/billing/:id/confirm&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;billing#authorize&#39;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:confirm_billing</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">## Request URL</span>
-</span><span class='line'><span class="n">match</span> <span class="s1">&#39;/billing/:id&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;billing#checkout&#39;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:billing</span>
-</span><span class='line'><span class="n">match</span> <span class="s1">&#39;/billing/:id/thank_you&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;billing#thank_you&#39;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:thank_you_billing</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Billing controller</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/controllers/billing_controller.rb </span>
-</span><span class='line'><span class="k">class</span> <span class="nc">BillingController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
-</span><span class='line'>  <span class="n">helper</span> <span class="ss">:authorize_net</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">before_filter</span> <span class="ss">:get_order</span><span class="p">,</span> <span class="ss">:only</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="ss">:checkout</span><span class="p">,</span> <span class="ss">:authorize</span><span class="p">,</span> <span class="ss">:thank_you</span><span class="o">]</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">checkout</span>
-</span><span class='line'>    <span class="c1"># ASSUMPTION order is valid means amount is entered</span>
-</span><span class='line'>    <span class="vi">@transaction</span> <span class="o">=</span> <span class="vi">@order</span><span class="o">.</span><span class="n">setup_transaction</span><span class="p">(</span>
-</span><span class='line'>      <span class="p">{</span><span class="ss">:link_text</span> <span class="o">=&gt;</span> <span class="s1">&#39;Continue&#39;</span><span class="p">,</span>
-</span><span class='line'>        <span class="ss">:link_url</span> <span class="o">=&gt;</span> <span class="n">confirm_billing_url</span><span class="p">(</span><span class="vi">@order</span><span class="p">)})</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">## CALL BACK</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">authorize</span>
-</span><span class='line'>    <span class="n">resp</span> <span class="o">=</span> <span class="ss">AuthorizeNet</span><span class="p">:</span><span class="ss">:SIM</span><span class="o">::</span><span class="no">Response</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">if</span> <span class="n">resp</span><span class="o">.</span><span class="n">approved?</span>
-</span><span class='line'>      <span class="vi">@order</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="ss">Payment</span><span class="p">:</span><span class="ss">:SUCCESS</span>
-</span><span class='line'>      <span class="vi">@order</span><span class="o">.</span><span class="n">transaction_num</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">transaction_id</span>
-</span><span class='line'>    <span class="k">else</span>
-</span><span class='line'>      <span class="vi">@order</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="ss">Payment</span><span class="p">:</span><span class="ss">:FAILED</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>    <span class="vi">@order</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="ss">:validate</span> <span class="o">=&gt;</span> <span class="kp">false</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">redirect_to</span> <span class="n">thank_you_billing_url</span><span class="p">(</span><span class="vi">@order</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kp">private</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">auth</span>
-</span><span class='line'>    <span class="no">Payment</span><span class="o">.</span><span class="n">conf</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">get_order</span>
-</span><span class='line'>    <span class="vi">@order</span> <span class="o">=</span> <span class="no">Payment</span><span class="o">.</span><span class="n">find_by_id</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
-</span><span class='line'>    <span class="vi">@order</span> <span class="o">&amp;&amp;</span> <span class="vi">@order</span><span class="o">.</span><span class="n">valid?</span> <span class="o">||</span> <span class="n">invalid_url</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>View Forms</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='haml'><span class='line'># app/views/billing/checkout.html.haml
-</span><span class='line'><span class="p">=</span> <span class="n">form_for</span> <span class="ss">:sim_transaction</span><span class="p">,</span> <span class="ss">:url</span> <span class="o">=&gt;</span> <span class="ss">AuthorizeNet</span><span class="p">:</span><span class="ss">:SIM</span><span class="o">::</span><span class="ss">Transaction</span><span class="p">:</span><span class="ss">:Gateway</span><span class="o">::</span><span class="no">TEST</span><span class="p">,</span> <span class="ss">:html</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:id</span> <span class="o">=&gt;</span> <span class="ss">:authForm</span><span class="p">}</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
-</span><span class='line'>  <span class="p">=</span> <span class="n">sim_fields</span><span class="p">(</span><span class="vi">@transaction</span><span class="p">)</span>
-</span><span class='line'><span class="nd">:javascript</span>
-</span><span class='line'>  <span class="nd">$(document).ready(function(){</span>
-</span><span class='line'>    <span class="nd">$(&#39;#authForm&#39;).submit();</span>
-</span><span class='line'>  <span class="nd">})</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='haml'><span class='line'># app/views/billing/thank_you.html.haml
-</span><span class='line'><span class="p">-</span> <span class="k">if</span> <span class="vi">@order</span><span class="o">.</span><span class="n">success?</span>
-</span><span class='line'>  <span class="nt">%p</span> The transaction is successfully completed
-</span><span class='line'><span class="p">-</span> <span class="k">else</span>
-</span><span class='line'>  <span class="nt">%p</span> The transaction failed
 </span></code></pre></td></tr></table></div></figure>
 
 ]]></content>

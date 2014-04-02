@@ -98,6 +98,83 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2009/11/gravity-master-game/">Gravity Master Game Challenge</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-24T17:50:00+05:30" pubdate data-updated="true">Nov 24<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Collect all rotating circles with the black ball. You can move the ball by drawing shapes with mouse and using physics. The ways of completing a level is only limited by your imagination and line limit. Complete 15 levels to unlock level editor. I recommend to lower your mouse sesitivity. P.S. This is the first game I ever made</p>
+
+<p><embed height="800" menu="false" pluginspage="http://www.macromedia.com/go/getflashplayer" quality="high" src="http://games.mochiads.com/c/g/gravity-master/Gravity Master.swf" type="application/x-shockwave-flash" width="600">
+</embed></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/upgrading-openoffice-in-ubuntu-interpid/">Upgrading openoffice in ubuntu interpid</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-23T16:17:00+05:30" pubdate data-updated="true">Nov 23<span>rd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Follow simple steps defined <a href="http://ubuntumanual.org/posts/175/upgrade-to-open-office-3-1-in-ubuntu-jaunty-intrepid-hardy">in this post</a> for smooth upgrade of openoffice in linux.</p>
+
+<p>click <a href="http://ubuntumanual.org/posts/175/upgrade-to-open-office-3-1-in-ubuntu-jaunty-intrepid-hardy">here</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2009/11/bundling-gems-in-rails-application/">bundling gems in rails application</a></h1>
     
     
@@ -1260,193 +1337,6 @@ Migrate all radiant extensions</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/11/remote-access-remote-copy-compress-decompress-on-linux/">remote access, remote copy and files compress, decompress on linux</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-11-06T18:12:00+05:30" pubdate data-updated="true">Nov 6<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Remote Login</h2>
-
-<p><code>ssh</code> client is a program for logging into remote system and execute commands on that system</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ssh [-l login_name ] hostname | user@hostname [command ]
-</span><span class='line'>
-</span><span class='line'># other options
-</span><span class='line'>ssh [-afgknqstvxACNTX1246 ] [-b bind_address ] [-c cipher_spec ] 
-</span><span class='line'>[-e escape_char ] [-i identity_file ] [-l login_name ] [-m mac_spec ] 
-</span><span class='line'>[-o option ] [-p port ] [-F configfile ] [-L port host hostport ] 
-</span><span class='line'>[-R port host hostport ] [-D port ] hostname | user@hostname [command ]</span></code></pre></td></tr></table></div></figure>
-
-
-<p>One can use putty for remote login through windows machine</p>
-
-<h2>Remote Copy</h2>
-
-<p><code>scp</code> &ndash; secure copy (remote file copy program) that copies file between computers over network</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>scp source[ source file path] destination[user@funonrails.com:/home]
-</span><span class='line'>
-</span><span class='line'># Other options
-</span><span class='line'>[-F ssh_config ] [-S program ] [-P port ] [-c cipher ] [-i identity_file ] 
-</span><span class='line'>[-o ssh_option ] [[user@ ] host1 : file1 ] [... ] [[user@ ] host2 : file2 ]</span></code></pre></td></tr></table></div></figure>
-
-
-<p>On windows system <code>pscp.exe</code> can be used for remote copy</p>
-
-<h2>Compress</h2>
-
-<p><code>tar</code> is a package that allows you to compress direcory or file</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>tar czfv Test.tar.tgz Test/</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Decompress</h2>
-
-<p><code>gzip</code> is a package that allows to extract compressed file/directories.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>gzip -dc target.tar.tgz | tar xf -</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/11/variables-initialization-assignments/">Variables initialization, assignments and swapping in ruby</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-11-05T18:02:00+05:30" pubdate data-updated="true">Nov 5<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Single line code to swap variables in ruby</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span><span class="n">x</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Examples</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;Fun&quot;</span>
-</span><span class='line'><span class="n">y</span> <span class="o">=</span> <span class="s2">&quot;Rails&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span><span class="n">x</span>
-</span><span class='line'><span class="c1">#=&gt; [&quot;Rails&quot;, &quot;Fun&quot;]</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">puts</span> <span class="n">x</span>
-</span><span class='line'><span class="c1">#=&gt; &quot;Rails&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">puts</span> <span class="n">y</span>
-</span><span class='line'><span class="c1">#=&gt; &quot;Fun&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Variable assignments in Ruby</h2>
-
-<p>Also Multiple variables assignments can be done in a single line</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">d</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span>
-</span><span class='line'><span class="c1">#=&gt; [1, 2, 3, 4]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Here is interpretation of the above line</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">puts</span> <span class="s2">&quot;a is </span><span class="si">#{</span><span class="n">a</span><span class="si">}</span><span class="s2">, b is </span><span class="si">#{</span><span class="n">b</span><span class="si">}</span><span class="s2">, c is </span><span class="si">#{</span><span class="n">c</span><span class="si">}</span><span class="s2">, d is </span><span class="si">#{</span><span class="n">d</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span class='line'><span class="c1">#=&gt; &quot;a is 1, b is 2, c is 3, d is 4&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Multiple assignments in ruby</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="n">b</span> <span class="o">=</span> <span class="n">c</span> <span class="o">=</span> <span class="n">d</span> <span class="o">=</span> <span class="mi">12</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Here <code>a</code>,<code>b</code>,<code>c</code> and <code>d</code> has value 12</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/13/">&larr; Older</a>
@@ -1472,15 +1362,15 @@ Migrate all radiant extensions</p>
       </li>
     
       <li class="post">
+        <a href="/2014/03/understanding-restful-vs-soap-web-services/">Understanding RESTful vs SOAP web services</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/03/regex-to-split-string-within-quotes-and-spaces/">regex to split string within quotes and spaces</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/02/moving-from-blogspot-to-octopress/">Migrating from blogspot to octopress</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
   </ul>

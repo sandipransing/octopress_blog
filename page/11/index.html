@@ -98,6 +98,104 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2010/02/activerecordreadonlyrecord-while/">ActiveRecord::ReadOnlyRecord while updating object fetched by joins</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-02-15T21:34:00+05:30" pubdate data-updated="true">Feb 15<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h4>ActiveRecord find with join options retrieves object as readonly</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>station = Station.find( :first, :joins =&gt; :call, :conditions =&gt; ["customer_id = ? and date(insurance_expiry_date) = ?", customer.id, insurance_expiry_date ] )</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Readonly object cannot modified and hence below line raises &ldquo;ActiveRecord::ReadOnlyRecord&rdquo; error.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>station.update_attributes({ :customer_id =&gt; 12 })</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you have to write on read only object then you can pass following option to find query</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>:readonly =&gt; false</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now below find is permitted to do write on fetched object records.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>station = Station.find( :first, :joins =&gt; :call, :conditions =&gt; ["customer_id = ? and date(insurance_expiry_date) = ?", customer.id, insurance_expiry_date ], :readonly =&gt; false )</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/02/mysql-cheatsheet/">Mysql cheatsheet</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-02-04T17:29:00+05:30" pubdate data-updated="true">Feb 4<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Changing Mysql password</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mysqladmin -u root -p'oldpassword' password newpass</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2010/02/adhearsion-and-telegraph-framework/">Adhearsion and Telegraph Framework Presentation</a></h1>
     
     
@@ -582,83 +680,6 @@ After doing lot headache, here is the solution i found</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/11/gravity-master-game/">Gravity Master Game Challenge</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-11-24T17:50:00+05:30" pubdate data-updated="true">Nov 24<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Collect all rotating circles with the black ball. You can move the ball by drawing shapes with mouse and using physics. The ways of completing a level is only limited by your imagination and line limit. Complete 15 levels to unlock level editor. I recommend to lower your mouse sesitivity. P.S. This is the first game I ever made</p>
-
-<p><embed height="800" menu="false" pluginspage="http://www.macromedia.com/go/getflashplayer" quality="high" src="http://games.mochiads.com/c/g/gravity-master/Gravity Master.swf" type="application/x-shockwave-flash" width="600">
-</embed></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/11/upgrading-openoffice-in-ubuntu-interpid/">Upgrading openoffice in ubuntu interpid</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-11-23T16:17:00+05:30" pubdate data-updated="true">Nov 23<span>rd</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Follow simple steps defined <a href="http://ubuntumanual.org/posts/175/upgrade-to-open-office-3-1-in-ubuntu-jaunty-intrepid-hardy">in this post</a> for smooth upgrade of openoffice in linux.</p>
-
-<p>click <a href="http://ubuntumanual.org/posts/175/upgrade-to-open-office-3-1-in-ubuntu-jaunty-intrepid-hardy">here</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/12/">&larr; Older</a>
@@ -684,15 +705,15 @@ After doing lot headache, here is the solution i found</p>
       </li>
     
       <li class="post">
+        <a href="/2014/03/understanding-restful-vs-soap-web-services/">Understanding RESTful vs SOAP web services</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/03/regex-to-split-string-within-quotes-and-spaces/">regex to split string within quotes and spaces</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/02/moving-from-blogspot-to-octopress/">Migrating from blogspot to octopress</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
   </ul>

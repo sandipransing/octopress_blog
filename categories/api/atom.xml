@@ -4,7 +4,7 @@
   <title><![CDATA[Category: API | Fun On Rails]]></title>
   <link href="http://funonrails.com/categories/api/atom.xml" rel="self"/>
   <link href="http://funonrails.com/"/>
-  <updated>2014-03-27T17:03:05+05:30</updated>
+  <updated>2014-04-02T15:54:48+05:30</updated>
   <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -18,12 +18,14 @@
     <link href="http://funonrails.com/2014/03/building-restful-api-using-grape-in-rails/"/>
     <updated>2014-03-26T12:39:27+05:30</updated>
     <id>http://funonrails.com/2014/03/building-restful-api-using-grape-in-rails</id>
-    <content type="html"><![CDATA[<p>We have a web app developed in rails which uses backbone.js as a front-end framework. Recently we wanted to build a mobile app which will interact with the rails app hence we decided to build a RESTful API. There are many gems available on ruby toolbox to build APIs but it looks like <em>grape</em> can be a good choice.</p>
+    <content type="html"><![CDATA[<p>While developing a <em>rich client side web</em> application or <em>mobile app</em>, we need <em>RESTful JSON API</em> which interacts with the <em>front-end javascript framework</em>. Here you may use <strong>backbone.js</strong>, <strong>ember.js</strong> or <strong>angular.js</strong> on the front-end side of application.</p>
+
+<p>Here we&rsquo;ll be using <em>Ruby on Rails</em> on the <em>back-end</em> which will serve <em>JSON API</em> consumable by fron-end framework. If you look at the <a href="https://www.ruby-toolbox.com/categories/API_Builders">ruby toolbox</a> you&rsquo;ll see many API Builder gems available but it seems <em>grape</em> can be a good choice.</p>
 
 <p><img class="left no-border <a" src="href="https://raw.githubusercontent.com/wiki/intridea/grape/grape_logo.png">https://raw.githubusercontent.com/wiki/intridea/grape/grape_logo.png</a>" width="186" height="67" title="Grape" > <em>Grape is a RESTful API microframework built to easily and quickly produce APIs for Ruby-rooted web applications.</em></p>
 
 <p style='clear:both'>
-Let's have a quick look how to build RESTful apis using <i>grape</i>.
+Let's see how we can build RESTful JSON apis using <i>Grape</i> library:
 </p>
 
 

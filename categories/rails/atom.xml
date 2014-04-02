@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: rails | Fun On Rails]]></title>
+  <title><![CDATA[Category: Rails | Fun On Rails]]></title>
   <link href="http://funonrails.com/categories/rails/atom.xml" rel="self"/>
   <link href="http://funonrails.com/"/>
-  <updated>2014-03-27T17:03:05+05:30</updated>
+  <updated>2014-04-02T15:54:48+05:30</updated>
   <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -14,480 +14,299 @@
 
   
   <entry>
-    <title type="html"><![CDATA[what is new in rails 3]]></title>
-    <link href="http://funonrails.com/2013/03/what-is-new-in-rails-3/"/>
-    <updated>2013-03-17T14:33:56+05:30</updated>
-    <id>http://funonrails.com/2013/03/what-is-new-in-rails-3</id>
-    <content type="html"><![CDATA[<p>Rails 3 has released with various notable features and said that it&rsquo;s one of the best version rails community has released so far.</p>
+    <title type="html"><![CDATA[Building RESTful API using Grape in Rails]]></title>
+    <link href="http://funonrails.com/2014/03/building-restful-api-using-grape-in-rails/"/>
+    <updated>2014-03-26T12:39:27+05:30</updated>
+    <id>http://funonrails.com/2014/03/building-restful-api-using-grape-in-rails</id>
+    <content type="html"><![CDATA[<p>While developing a <em>rich client side web</em> application or <em>mobile app</em>, we need <em>RESTful JSON API</em> which interacts with the <em>front-end javascript framework</em>. Here you may use <strong>backbone.js</strong>, <strong>ember.js</strong> or <strong>angular.js</strong> on the front-end side of application.</p>
 
-<p>Highlights of major features:</p>
+<p>Here we&rsquo;ll be using <em>Ruby on Rails</em> on the <em>back-end</em> which will serve <em>JSON API</em> consumable by fron-end framework. If you look at the <a href="https://www.ruby-toolbox.com/categories/API_Builders">ruby toolbox</a> you&rsquo;ll see many API Builder gems available but it seems <em>grape</em> can be a good choice.</p>
 
-<h4>1. Brand new router with an emphasis on RESTful declarations</h4>
+<p><img class="left no-border <a" src="href="https://raw.githubusercontent.com/wiki/intridea/grape/grape_logo.png">https://raw.githubusercontent.com/wiki/intridea/grape/grape_logo.png</a>" width="186" height="67" title="Grape" > <em>Grape is a RESTful API microframework built to easily and quickly produce APIs for Ruby-rooted web applications.</em></p>
 
-<h4>2. New Action Mailer API modeled after Action Controller</h4>
+<p style='clear:both'>
+Let's see how we can build RESTful JSON apis using <i>Grape</i> library:
+</p>
 
-<h4>3. New Active Record chainable query language built on top of relational algebra</h4>
 
-<h4>4. Unobtrusive JavaScript helpers with drivers for Prototype, jQuery, and more coming (end of inline JS)</h4>
+<!--more-->
 
-<h4>5. Explicit dependency management with Bundler</h4>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Upgrading from Rails 2.1.x to Rails 2.3.11]]></title>
-    <link href="http://funonrails.com/2012/04/upgrading-from-rails-2-1-x-to-rails-2-3-11/"/>
-    <updated>2012-04-04T22:13:00+05:30</updated>
-    <id>http://funonrails.com/2012/04/upgrading-from-rails-2-1-x-to-rails-2-3-11</id>
-    <content type="html"><![CDATA[<p>If your application is currently on any version of Rails 2.1.x,
-Then following changes needs to be done for upgrading your application to Rails <code>2.3.11</code></p>
 
-<p><strong>1. First install Rails version <code>2.3.11</code></strong>
+<h2>Getting Started</h2>
+
+<p>Add <em>grape</em> to your <em>Gemfile</em> and then run <em>bundle</em> install
 <code>
-gem install rails -v2.3.11
+gem 'grape'
 </code></p>
 
-<p><strong>2. Freeze app ruby gems</strong>
-<code>
-rake rails:freeze:gems
+<h2>Modularizing API directory structure</h2>
+
+<p>Place API files into <em>lib/api</em>. You need to create <em>api</em> folder inside <em>lib</em> directory.
+As we are placing api directory inside lib you don&rsquo;t need to explicitly load it inside <em>application.rb</em>
+If you want to place <em>api</em> directory at some other place then add below lines to to <em>application.rb</em>
+<code>ruby
+config.paths.add "app/api", glob: "**/*.rb"
+config.autoload_paths += Dir["#{Rails.root}/app/api/*"]
 </code>
-Hopefully it should work for you but it gave me following error</p>
-
-<blockquote><p>undefined method `manage_gems' for Gem:Module</p></blockquote>
-
-<p><strong>3. Create sample rails 2.3.11 app</strong>
-<code>
-rails _2.3.11_ testsapp
-</code></p>
-
-<!--more-->
-
-
-<p>Now, Copy all missing &ldquo;config/initializers/*&rdquo; files from newly created &ldquo;testapp&rdquo; to the application that is to be upgraded.
-<code>
-cp testapp/config/initializers/* config/initializers
-</code></p>
-
-<p><strong>4. Change Rails version inside <code>environment.rb</code> to <code>Rails 2.3.11</code></strong>
+First, Let&rsquo;s create <em>API::Root</em> class that will mount available api versions.
 ```ruby</p>
 
-<h1>Specifies gem version of Rails to use when vendor/rails is not present</h1>
+<h1>lib/api/root.rb</h1>
 
-<p>RAILS_GEM_VERSION = &lsquo;2.3.11&rsquo;
-```</p>
+<p>module API
+  class Root &lt; Grape::API</p>
 
-<p><strong>5. Rename <i>app/controllers/application.rb</i> file to <i>app/controllers/application_controller.rb</i></strong></p>
-
-<p><strong>OR</strong>
-<code>
-rails:update:application_controller
-</code></p>
-
-<p><strong>6. Start rails server and fix the issues one by one</strong>
-<code>
-ruby script/server
-</code></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mongoid embeded_in and Array field management]]></title>
-    <link href="http://funonrails.com/2012/01/mongoid-embededin-and-array-field/"/>
-    <updated>2012-01-20T01:12:00+05:30</updated>
-    <id>http://funonrails.com/2012/01/mongoid-embededin-and-array-field</id>
-    <content type="html"><![CDATA[<p>Previous post explains on <a href="http://www.funonrails.com/2012/01/mongoid-array-field-and-rails-form">mongoid document array field and rails form implementation</a></p>
-
-<p>Below example shows rails form integration of array field of embedded mongoid document</p>
-
-<p>Lets consider scenario that <code>student</code> embeds one <code>family</code> who has many <code>assets</code>
-```ruby
-class Student
-  include Mongoid::Document</p>
-
-<p>  field :name
-  field :phone</p>
-
-<p>  embeds_one  :family</p>
-
-<p>  validates_associated :family
-  accepts_nested_attributes_for :family
-end
-```</p>
-
-<!--more-->
-
-
-<p>```ruby
-class Family
-  include Mongoid::Document
-  ASSETS = [&lsquo;flat&rsquo;, &lsquo;car&rsquo;, &lsquo;business&rsquo;, &lsquo;bunglow&rsquo;, &lsquo;cash&rsquo;]</p>
-
-<p>  field :members, type: Integer
-  field :assets, type: Array
-  field :religon</p>
-
-<p>  embedded_in :student
-end
-<code>
-Brief controller code
-</code>ruby
-class StudentsController &lt; ApplicationController
- def new
-   @student = Student.new
-   @student.family ||= @student.build_family
- end</p>
-
-<p> def create
-   @student = Student.new(params[:student])
-   @student.family.assets.reject!(&amp;:blank?)
-   if @student.save</p>
-
-<pre><code> [...]
-</code></pre>
-
-<p>   else</p>
-
-<pre><code> render :action =&gt; :new
-</code></pre>
-
-<p>   end
- end
-end
-<code>
-view form will look like-
-</code>haml
-= form_for(@student) do |s|
-  = s.text_field :name
-  = s.text_field :phone
-  &ndash; s.fields_for :family do |f|</p>
-
-<pre><code>= f.text_field :members
-= f.text_field :religion
-- Family::ASSETS.each do |asset|
-  /Here f.object_name #=&gt; student[family]
-  = f.check_box :assets, :name =&gt; "#{f.object_name}[assets][]", asset
-</code></pre>
-
-<p>```</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[understanding rails uri]]></title>
-    <link href="http://funonrails.com/2012/01/understanding-rails-uri/"/>
-    <updated>2012-01-14T02:18:00+05:30</updated>
-    <id>http://funonrails.com/2012/01/understanding-rails-uri</id>
-    <content type="html"><![CDATA[<p><code>rails-uri</code> module provides us with url manipulation methods</p>
-
-<h2>Parse string url</h2>
-
-<p><code>ruby
-url = URI.parse('http://funonrails.com/categories/rails-3')
-url.host #=&gt; "http://funonrails.com"
-url.port #=&gt; 80
-</code></p>
-
-<h2>URL with Basic Authentication</h2>
-
-<p><code>ruby
-url = URI.parse('http://sandip:2121@funonrails.com/categories/rails-3')
-url.user #=&gt; "sandip"
-url.password #=&gt; "2121"
-</code></p>
-
-<h2>Extracting urls form string paragraph</h2>
-
-<p>```ruby
-URI.extract(&lsquo;<a href="http://funonrails.com">http://funonrails.com</a> is rails blog authored by <a href="http://sandipransing.github.com">http://sandipransing.github.com</a> contact <a href="&#109;&#x61;&#105;&#x6c;&#x74;&#111;&#x3a;&#47;&#x2f;&#x73;&#x61;&#x6e;&#x64;&#105;&#112;&#x40;&#102;&#117;&#x6e;&#111;&#110;&#x72;&#97;&#105;&#x6c;&#x73;&#x2e;&#x63;&#111;&#109;">&#47;&#47;&#x73;&#x61;&#x6e;&#100;&#x69;&#x70;&#64;&#102;&#117;&#x6e;&#x6f;&#x6e;&#x72;&#x61;&#105;&#108;&#115;&#46;&#99;&#111;&#x6d;</a>&rsquo;)</p>
-
-<h1>=> [&ldquo;<a href="http://funonrails.com">http://funonrails.com</a>&rdquo;, &ldquo;<a href="http://sandipransing.github.com">http://sandipransing.github.com</a>&rdquo;, &ldquo;<a href="&#109;&#x61;&#105;&#108;&#116;&#x6f;&#58;&#47;&#47;&#115;&#x61;&#x6e;&#100;&#x69;&#112;&#x40;&#102;&#117;&#x6e;&#x6f;&#x6e;&#114;&#x61;&#x69;&#x6c;&#x73;&#x2e;&#x63;&#x6f;&#x6d;">&#47;&#x2f;&#115;&#x61;&#x6e;&#100;&#105;&#x70;&#64;&#102;&#117;&#x6e;&#x6f;&#110;&#x72;&#x61;&#x69;&#x6c;&#x73;&#46;&#99;&#x6f;&#109;</a>&rdquo;]</h1>
-
-<p>```</p>
-
-<h2>Split &amp; Join URI</h2>
-
-<p>```ruby
-URI.split(&lsquo;<a href="http://sandip:2121@funonrails.com/categories/rails-3">http://sandip:2121@funonrails.com/categories/rails-3</a>&rsquo;)</p>
-
-<h1>=> [&ldquo;http&rdquo;, &ldquo;sandip:2121&rdquo;, &ldquo;funonrails.com&rdquo;, nil, nil, &ldquo;/categories/rails-3&rdquo;, nil, nil, nil]</h1>
-
-<p>&lt;=> [Scheme, Userinfo, Host, Port, Registry, Path, Opaque, Query, Fragment]</p>
-
-<p>URI.join(&lsquo;<a href="http://funonrails.com">http://funonrails.com</a>&rsquo;,&lsquo;categories/rails-3&rsquo;)</p>
-
-<h1>=> #&lt;URI::<a href="HTTP:0x7fbf9202efc8">HTTP:0x7fbf9202efc8</a> URL:<a href="http://funonrails.com/categories/rails-3">http://funonrails.com/categories/rails-3</a>></h1>
-
-<p>```</p>
-
-<h2>Escape &amp; Unescape alias encode/decode URI</h2>
-
-<p>```ruby
-URI.escape &ldquo;<a href="http://funonrails.com/categories/named">http://funonrails.com/categories/named</a> scopes&rdquo;</p>
-
-<h1>=> &ldquo;<a href="http://funonrails.com/categories/named%20scopes">http://funonrails.com/categories/named%20scopes</a>&rdquo;</h1>
-
-<p>URI.encode &ldquo;<a href="http://funonrails.com/categories/named">http://funonrails.com/categories/named</a> scopes&rdquo;</p>
-
-<h1>=> &ldquo;<a href="http://funonrails.com/categories/named%20scopes">http://funonrails.com/categories/named%20scopes</a>&rdquo;</h1>
-
-<p>URI.decode &ldquo;<a href="http://funonrails.com/categories/named%20scopes">http://funonrails.com/categories/named%20scopes</a>&rdquo;</p>
-
-<h1>=> &ldquo;<a href="http://funonrails.com/categories/named">http://funonrails.com/categories/named</a> scopes&rdquo;</h1>
-
-<p>URI.unescape &ldquo;<a href="http://funonrails.com/categories/named%20scopes">http://funonrails.com/categories/named%20scopes</a>&rdquo;</p>
-
-<h1>=> &ldquo;<a href="http://funonrails.com/categories/named">http://funonrails.com/categories/named</a> scopes&rdquo;</h1>
-
-<p>```</p>
-
-<h2>Match urls using regular expressions</h2>
-
-<p>```</p>
-
-<h1>extract first URI from html_string</h1>
-
-<p>&ldquo;<a href="ftp://localhost">ftp://localhost</a> <a href="http://funonrails.com/categories/rails-3">http://funonrails.com/categories/rails-3</a>&rdquo;.slice(URI.regexp)</p>
-
-<h1>=> &ldquo;<a href="ftp://localhost">ftp://localhost</a>&rdquo;</h1>
-
-<h1>remove ftp URIs</h1>
-
-<p>&ldquo;<a href="ftp://localhost">ftp://localhost</a> <a href="http://funonrails.com/categories/rails-3">http://funonrails.com/categories/rails-3</a>&rdquo;.sub(URI.regexp([&lsquo;ftp&rsquo;]))</p>
-
-<h1>=> &ldquo; <a href="http://funonrails.com/categories/rails-3">http://funonrails.com/categories/rails-3</a>&rdquo;</h1>
-
-<h1>You should not rely on the number of parentheses</h1>
-
-<p>&ldquo;<a href="ftp://localhost">ftp://localhost</a> <a href="http://funonrails.com/categories/rails-3">http://funonrails.com/categories/rails-3</a>&rdquo;.scan(URI.regexp([&lsquo;ftp&rsquo;])) do |*matchs|
-  p $&amp;
-  #=> <a href="ftp://localhost">ftp://localhost</a>
-end
-```</p>
-
-<h2>Getting requested url inside rails</h2>
-
-<p><code>ruby
-request.request_uri
-request.env['REQUEST_URI']
-</code></p>
-
-<h2>Getting previous page url inside rails</h2>
-
-<p><code>
-request.referrer
-</code></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Paypal payments integration with rails]]></title>
-    <link href="http://funonrails.com/2011/12/paypal-payments-integration-with-rails/"/>
-    <updated>2011-12-30T18:00:00+05:30</updated>
-    <id>http://funonrails.com/2011/12/paypal-payments-integration-with-rails</id>
-    <content type="html"><![CDATA[<p>Paypal standard website payment service allows online payment transactions for websites.
-Before implementing payments inside rails app needs to have following things in place &ndash;</p>
-
-<ol>
-<li><a href="http://developer.paypal.com/">Register Paypal sandbox account</a></li>
-<li>Paypal Merchant account api credentials i.e. login, password, signature, application_id</li>
-<li>Paypal Buyer account creds to test payments</li>
-</ol>
-
-
-<p>Bundle Install
-```</p>
-
-<h1>Gemfile</h1>
-
-<p>gem &lsquo;activemerchant
-<code>
-Gateway config
-</code></p>
-
-<h1>config/gateway.yml</h1>
-
-<p>development: &amp;development   <br/>
-  mode: test   <br/>
-  login: rana_1317365002_biz_api1.gmail.com   <br/>
-  password: &lsquo;1311235050&rsquo;   <br/>
-  signature: ACxcVrB3mFChvPIe8aDWQlLhAPN46oPBQCj7rJWPza6CDZmBURg.   <br/>
-  application_id: APP-76y884485P519543T</p>
-
-<p>production:  <br/>
-  &lt;&lt;: *development</p>
-
-<p>test:
-  &lt;&lt;: *development
-<code>
-New Payment Form
-</code>haml
-= form_for @payment ||= Payment.new, :url => pay_bill_url, :html => {:id => :payForm} do |p|  <br/>
-  = p.text_field :amount <br/>
-  = p.submit &lsquo;Pay&rsquo;
-```</p>
-
-<p>Generate &amp; Migrate Payment Model
-<code>
-rails g model payment status:string amount:float transaction_number:string   
-rake db:migrate
-</code></p>
-
-<p>Payment Model
-```ruby</p>
-
-<h1>app/models/payment.rb</h1>
-
-<p>class Payment &lt; ActiveRecord::Base</p>
-
-<p>  PROCESSING, FAILED, SUCCESS = 1, 2, 3</p>
-
-<p>  validates :amount, :presence => true, :numericality => { :greater_than => 0 }  <br/>
-  def self.conf</p>
-
-<pre><code>@@gateway_conf ||= YAML.load_file(Rails.root.join('config/gateway.yml').to_s)[Rails.env]   
-</code></pre>
-
-<p>  end</p>
-
-<p>  ## Paypal  <br/>
-  def setup_purchase(options)</p>
-
-<pre><code>gateway.setup_purchase(amount * 100, options)   
-</code></pre>
-
-<p>  end</p>
-
-<p>  def redirect_url_for(token)</p>
-
-<pre><code>gateway.redirect_url_for(token)   
-</code></pre>
-
-<p>  end</p>
-
-<p>  def purchase(options={})</p>
-
-<pre><code>self.status = PROCESSING  
-#:ip       =&gt; request.remote_ip,
-#:payer_id =&gt; params[:payer_id],
-#:token    =&gt; params[:token]
-response = gateway.purchase(amt, options)      
-if response.success?       
-  self.transaction_num = response.params['transaction_id']       
-  self.status = SUCCESS     
-else       
-  self.status = FAILED     
-end     
-return self   
-</code></pre>
-
-<p>  rescue Exception => e</p>
-
-<pre><code>self.status = FAILED     
-return self   
-</code></pre>
-
-<p>  end</p>
-
-<p>  private <br/>
-  def gateway</p>
-
-<pre><code>ActiveMerchant::Billing::Base.mode = auth['mode'].to_sym 
-ActiveMerchant::Billing::PaypalExpressGateway.new(
-  :login =&gt; auth['login'], :password =&gt; auth['password'],
-  :signature =&gt; auth['signature']) 
-</code></pre>
-
-<p>  end</p>
-
-<p>  def auth</p>
-
-<pre><code>self.class.conf 
+<pre><code>prefix 'api'
+mount API::V1::Root
+# mount API::V2::Root (next version)
 </code></pre>
 
 <p>  end
 end
 <code>
-Billing routes
+Now, create a *API::V1::Root* class that will mount resources for version 1
 </code>ruby</p>
 
-<h2>Callback URL</h2>
+<h1>lib/api/v1/root.rb</h1>
 
-<p>match &lsquo;/billing/paypal/:id/confirm&rsquo;, :to => &lsquo;billing#paypal&rsquo;, :as => :confirm_paypal</p>
+<p>module API
+  module V1</p>
 
-<h2>Create payment</h2>
-
-<p>match &lsquo;/billing&rsquo;, :to => &lsquo;billing#create&rsquo;, :as => :pay_bill</p>
-
-<h2>Request URL</h2>
-
-<p>match &lsquo;/billing/paypal/:id&rsquo;, :to => &lsquo;billing#checkout&rsquo;, :as => :billing <br/>
-match &lsquo;/billing/thank_you/:id&rsquo;, :to => &lsquo;billing#checkout&rsquo;, :as => :billing_thank_you
-```</p>
-
-<p>Billing Controller
-```ruby</p>
-
-<h1>app/controllers/billing_controller.rb</h1>
-
-<p>class BillingController &lt; ApplicationController
-  before_filter :get_payment, :only => [:checkout, :paypal, :thank_you]</p>
-
-<p>  def create</p>
-
-<pre><code>@payment = Payment.new params[:payment]     
-if @payment.save       
-  ## Paypal Checkout page       
-  redirect_to billing_url    
-else     
-  render :action =&gt; :new    
-end 
+<pre><code>class Root &lt; Grape::API
+  mount API::V1::Posts
+  mount API::V1::Authors
+end
 </code></pre>
 
-<p>  end</p>
+<p>  end
+end
+<code>
+Now, add resource *Posts* available for api access in json format
+</code>ruby</p>
 
-<p>  # ASSUMPTION   # payment is valid i.e. amount is entered <br/>
-  def checkout</p>
+<h1>lib/api/v1/posts.rb</h1>
 
-<pre><code>response = @payment.setup_purchase(:return_url =&gt; confirm_paypal_url(@payment), :cancel_return_url =&gt; root_url)     
-redirect_to @payment.redirect_url_for(response.token)   
+<p>module API
+  module V1</p>
+
+<pre><code>class Posts &lt; Grape::API
+  version 'v1'
+  format :json
+
+  resource :posts do
+    desc "Return list of recent posts"
+    get do
+      Post.recent.all
+    end
+  end
+end
 </code></pre>
 
-<p>  end</p>
+<p>  end
+end
+<code>
+Now, lets add one more resource `Authors` to version v1
+</code>ruby</p>
 
-<p>  ## CALL BACK <br/>
-  def paypal</p>
+<h1>lib/api/v1/authors.rb</h1>
 
-<pre><code>@payment = @payment.purchase(:token =&gt; params[:token], :payer_id =&gt; params[:PayerID], :ip =&gt; request.remote_ip)    
-@payment.save    
-redirect_to thank_you_billing_url(@order)  
-</code></pre>
+<p>module API
+  module V1</p>
 
-<p>  end</p>
+<pre><code>class Authors &lt; Grape::API
+  version 'v1' 
+  format :json 
 
-<p>  private <br/>
-  def get_payment</p>
-
-<pre><code>@payment = Payment.find_by_id(params[:id])     
-@payment &amp;&amp; @payment.valid? || invalid_url   
+  resource :authors do
+    desc "Return list of authors"
+    get do
+      Author.all
+    end
+  end
+end
 </code></pre>
 
 <p>  end
 end
 ```</p>
 
-<p>Views
-```haml</p>
+<h2>Mounting <em>API</em> under rails routes</h2>
 
-<h1>app/views/billing/thank_you.html.haml</h1>
+<p>Mount <em>API::Root</em> under routes pointing to rails root
+```</p>
 
-<ul>
-<li>if @payment.success? <br/>
-%p The transaction is successfully completed</li>
-<li>else <br/>
-%p The transaction failed
-```</li>
-</ul>
+<h1>config/routes.rb</h1>
 
+<p>SampleApp::Application.routes.draw do
+  mount API::Root => &lsquo;/&rsquo;
+end
+```</p>
+
+<h2>Customize JSON API Errors</h2>
+
+<p>We can control the api raised errors and customize them so that response is in our own format whenever there are exceptions.
+```ruby</p>
+
+<h1>lib/api/error_formatter.rb</h1>
+
+<p>module API
+  module ErrorFormatter</p>
+
+<pre><code>def self.call message, backtrace, options, env
+  { :response_type =&gt; 'error', :response =&gt; message }.to_json
+end
+</code></pre>
+
+<p>  end
+end
+<code>
+Now, you can plug this module inside *API::Root*
+</code>ruby</p>
+
+<h1>lib/api/root.rb</h1>
+
+<p>module API
+  class Root &lt; Grape::API</p>
+
+<pre><code>#...
+error_formatter :json, API::ErrorFormatter
+#...
+</code></pre>
+
+<p>  end
+end
+<code>
+You can override error formatter for particular api version. Let's customize errors for *API::v1::Root*:
+</code>ruby</p>
+
+<h1>lib/api/v1/error_formatter.rb</h1>
+
+<p>module API
+  module V1</p>
+
+<pre><code>module ErrorFormatter
+  def self.call message, backtrace, options, env
+    { :response_type =&gt; 'error', :response =&gt; message }.to_json
+  end
+end
+</code></pre>
+
+<p>  end
+end</p>
+
+<h1>lib/api/v1/root.rb</h1>
+
+<p>module API
+  module V1</p>
+
+<pre><code>class Root &lt; Grape::API
+  #...
+  error_formatter :json, API::V1::ErrorFormatter
+  #...
+end
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<h2>Accessing <em>API</em> routes</h2>
+
+<p>If you do <code>rake routes | grep api</code> then it will list only mount path for api but do not list all the paths.
+```
+rake routes | grep api</p>
+
+<pre><code>api_root        /api                API::Root
+</code></pre>
+
+<p><code>
+So, in-order to list all api paths, you may have to create api routes task:
+</code>ruby</p>
+
+<h1>lib/tasks/routes.rake</h1>
+
+<p>namespace :api do
+  desc &ldquo;API Routes&rdquo;
+  task :routes => :environment do</p>
+
+<pre><code>API::Root.routes.each do |api|
+  method = api.route_method.ljust(10)
+  path = api.route_path.gsub(":version", api.route_version)
+  puts "     #{method} #{path}"
+end
+</code></pre>
+
+<p>  end
+end
+<code>
+Now, run task and it should print routes like this:
+</code>
+rake api:routes</p>
+
+<pre><code>GET        /api/v1/posts(.:format)
+GET        /api/v1/authors(.:format)
+</code></pre>
+
+<p>```</p>
+
+<h2>Securing API</h2>
+
+<p>Now we have got Grape <em>API</em> ready and working properly. Lets see how we can secure <em>API</em>. There are many approaches to authenticate API. Here lets first get it working with simple <em>HTTP Basic authentication</em>.</p>
+
+<h4>HTTP Basic authentication</h4>
+
+<p>In our case, lets add basic authentication to the <em>API::Root</em> and it will get applied to all versions of API.
+```ruby</p>
+
+<h1>lib/api/root.rb</h1>
+
+<p>module API
+  class Root &lt; Grape::API</p>
+
+<pre><code>#...
+
+http_basic do |email, password|
+  user = User.find_by_email(email)
+  user &amp;&amp; user.valid_password?(password)
+end
+#...
+</code></pre>
+
+<p>  end
+end
+<code>
+Requesting API using basic http auth credentials:
+</code>
+curl <a href="http://localhost:3000/api/products">http://localhost:3000/api/products</a> -u &ldquo;admin:secret&rdquo;
+```</p>
+
+<h4>Authenticate using email and password</h4>
+
+<p>Grape provides us with <em>before block</em> inside that we can add authenctication code.
+```ruby</p>
+
+<h1>lib/api/root.rb</h1>
+
+<p>module API
+  class Root &lt; Grape::API</p>
+
+<pre><code>#...
+before do
+  error!("401 Unauthorized", 401) unless authenticated
+end
+
+helpers do
+  def authenticated
+    user = User.find_by_email(params[:email])
+    user &amp;&amp; user.valid_password?(params[:password])
+  end
+end
+#...
+</code></pre>
+
+<p>  end
+end
+```</p>
 ]]></content>
   </entry>
   
