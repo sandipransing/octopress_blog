@@ -7,7 +7,7 @@ categories: rails
 
 Rails 3 has released with various notable features and said that it's one of the best version rails community has released so far.
 
-Lets understand what are major features we are getting:
+Highlights of major features:
 
 #### 1. Brand new router with an emphasis on RESTful declarations
 
