@@ -98,114 +98,6 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2010/03/download-rails-api-to-work-offline/">Download Rails API to work offline</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-03-23T19:08:00+05:30" pubdate data-updated="true">Mar 23<span>rd</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>We often need rails API help while working without internet connection.</p>
-
-<p>Below command can be used to <a href="http://github.com/sandipransing/rails_api">download/copy</a> rails api to work locally(offline) mode</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>wget -mk www.api.rubyonrails.org</span></code></pre></td></tr></table></div></figure>
-
-
-<p>For more information on this click <a href="http://github.com/sandipransing/rails_api">here</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/03/imagemagick-rmagick-installation-on-ubuntu/">Imagemagick/ RMagick Installation on ubuntu</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-03-23T18:11:00+05:30" pubdate data-updated="true">Mar 23<span>rd</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h4>ImageMagick Installation</h4>
-
-<p>Ubuntu machine has default apt-get package manager.
-To install imagemagick following packages needs to be installed.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install imagemagick librmagick-ruby libmagickwand-dev</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>RMagick gem install</h4>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>gem install rmagick</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If you still facing problems with gem installation, Please look that following packages are installed
-on your system.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>dpkg -l | grep libmagickcore-dev graphicsmagick-libmagick-dev-compat</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If there are no packages installed then try to install then first.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install libmagickcore-dev graphicsmagick-libmagick-dev-compat</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Try to install rmagick gem again. Now it should be installed without any error.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
       <h1 class="entry-title"><a href="/2010/03/rubyconf-2009-lt/">RubyConf 2009 LT Termtter</a></h1>
     
     
@@ -903,6 +795,165 @@ There are two ways to do that to invalidate radiant cache immediately.</p>
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/03/remove-svn-files-inside-directory-rm-rf/">Programming ruby Linux basics</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-03-02T12:29:00+05:30" pubdate data-updated="true">Mar 2<span>nd</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Remove svn files inside directory</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rm -rf `find . -type d -name .svn</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Set path in linux</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>export PATH=$PATH:/usr/ruby/bin</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here /usr/ruby/bin is the path to ruby extecuatble.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>grep and print process pid
+</span><span class='line'>ps -ef | grep search_string | grep -v grep | awk '{print  $2 }'</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Kill process</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>kill -9 process_id_here
+</span><span class='line'>ps -ef | grep search_string | grep -v grep | awk '{print  $2 }' | xargs kill -9</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Store pid of process in a variable for further process</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>tokill=`ps -ef|grep ruby|grep -v grep|awk '{print $2}'`;kill -9 $tokill;</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Mirror a website</h2>
+
+<p>Command to clone/copy a website for offline/local browsing.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget -mk www.funonrails.com</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Above command downloads all website pages in depth level with stylesheets, images and javascripts.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/02/vim-editor-for-ruby-on-rails/">Vim editor for ruby on rails development using rails.vim</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-02-19T20:20:00+05:30" pubdate data-updated="true">Feb 19<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h4>Vim install On CentOS</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>yum install vim-enhanced</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Vim install on Ubuntu machine</h4>
+
+<p>Install vim-full using command</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>apt-get install vim</span></code></pre></td></tr></table></div></figure>
+
+
+<p>While coding with ruby, html, erb, haml, js and stylesheets.
+It is great pain to indent code. Using rails vim one can easily keep code always indented.</p>
+
+<p>This increases code readability and minimizes effort, bugs and finally proves ease of using vim editor.</p>
+
+<p><code>rails.vim</code> script contains lot of syntax highlighter and indentation plugins that really helps development needs.</p>
+
+<p>If you have git installed then clone it under .vim directory of your profile</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git://github.com/sandipransing/rails_vim.git ~/.vim</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>To install from zip file download and extract it inside <code>~/.vim</code> directory</h4>
+
+<p>Command to <a href="http://www.vim.org/scripts/download_script.php?src_id=11920">download</a> from console</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget http://www.vim.org/scripts/download_script.php?src_id=11920 /rails.vim </span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is how my editor looks like</p>
+
+<p><a href="http://1.bp.blogspot.com/_WmOmsgqsanw/S5voyvHVstI/AAAAAAAAAJI/bi-mSfyN5no/s1600-h/IDE.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="215" src="http://1.bp.blogspot.com/_WmOmsgqsanw/S5voyvHVstI/AAAAAAAAAJI/bi-mSfyN5no/s400/IDE.png" width="500" /></a></p>
+
+<p>Open your ~/.bashrc and at the bottom add:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>alias vi=vim
+</span><span class='line'>export EDITOR=vim</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/page/10/">&larr; Older</a>
@@ -928,15 +979,15 @@ There are two ways to do that to invalidate radiant cache immediately.</p>
       </li>
     
       <li class="post">
-        <a href="/2014/03/understanding-restful-vs-soap-web-services/">Understanding RESTful vs SOAP web services</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/03/regex-to-split-string-within-quotes-and-spaces/">regex to split string within quotes and spaces</a>
-      </li>
-    
-      <li class="post">
         <a href="/2014/02/moving-from-blogspot-to-octopress/">Migrating from blogspot to octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
   </ul>

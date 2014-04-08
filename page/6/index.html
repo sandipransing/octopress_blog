@@ -98,112 +98,6 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2011/02/auto-login-remote-server-by-copying-ssh/">Auto login remote server by copying ssh public key to authorized keys</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-02-03T16:21:00+05:30" pubdate data-updated="true">Feb 3<span>rd</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>While working on remote machine we often get headache of entering password for ssh login, scp files from one server to another server. Adding public key as authorized_keys on remote server solves this problem.</p>
-
-<h2>Copying from my system to remote server</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cat ~/.ssh/id_rsa.pub | ssh sandip@server 'cat &gt;&gt; ~/.ssh/authorized_keys'</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Copying from remote server to my system</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ssh server 'cat ~/.ssh/id_rsa.pub' | cat &gt;&gt; ~/.ssh/id_rsa_client.pub</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/01/using-hoptoad-notifier-as-gem-in-rails/">Using hoptoad notifier as gem in rails 2.3</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-01-27T21:18:00+05:30" pubdate data-updated="true">Jan 27<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><strong>1.  Add GEM to environment file</strong></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># in config/environment.rb
-</span><span class='line'>config.gem 'hoptoad_notifier'</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>2. Install gems</strong></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># from your Rails root:
-</span><span class='line'>rake gems:install
-</span><span class='line'>rake gems:unpack GEM=hoptoad_notifier</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>3. Generate hoptoad install using key</strong></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ruby script/generate hoptoad --api-key your_key_here</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
       <h1 class="entry-title"><a href="/2011/01/installing-and-running-cronjob-crontab/">Installing and running cronjob (crontab basics)</a></h1>
     
     
@@ -838,6 +732,179 @@ Put below code in file <em>config/intializers/core_extensions.rb</em></p>
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/10/twinkle-ff-setup-click-to-call-using-telify/">Twinkle + FF Setup (Click To Call) using telify</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-10-17T00:47:00+05:30" pubdate data-updated="true">Oct 17<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>On linux machine following settings needs to be done in order to get in browser calling enabled for phone numbers.</p>
+
+<h2>Installation setup</h2>
+
+<ol>
+<li>Install twinkle setup (Create user profile) and get it working for outgoing and incoming calls</li>
+<li>Install telify add-on (can be un-installed once completed with all settings)</li>
+<li>Copy wrapper script <code>twinkle_tel</code>) click here to <a href="http://github.com/sandipransing/twinkle_tel">download</a> and copy it to <code>/usr/bin</code> on user’s machine (make sure it has executable permissions)</li>
+<li>In Firefox go to <em>preferences/applications</em></li>
+<li>Search for <code>tel</code> protocol and change value of tel protocol to <em>/usr/bin/twinkle_tel</em></li>
+</ol>
+
+
+<h2>Usage/ Pre-requisites</h2>
+
+<p>HTML source code of phone number should look like as below</p>
+
+<p><strong>1. Dialing source code</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;a title="phone number" class="telified" nr="9860648108" href="tel:9860648108"&gt;9860648108&lt;/a&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>2. Call disconnect source code</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;a title="disconnect call" class="telified" href="tel:disconnect"&gt;Disconnect&lt;/a&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/clicktocall.png" /></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/10/delayed-jobs-fancy-methods/">DelayedJOb&#8217;s (DJ) fancy methods</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-10-06T19:39:00+05:30" pubdate data-updated="true">Oct 6<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Delayed Job provides <code>send_later</code> and <code>send_at</code> as <em>instance</em> as well as <em>class</em>  methods. It also gives us <code>handle_asynchronously</code> as <em>class</em> method to be written inside class.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">Delayed</span>
+</span><span class='line'>  <span class="k">module</span> <span class="nn">MessageSending</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">send_later</span><span class="p">(</span><span class="nb">method</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+</span><span class='line'>      <span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Job</span><span class="o">.</span><span class="n">enqueue</span> <span class="ss">Delayed</span><span class="p">:</span><span class="ss">:PerformableMethod</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="nb">method</span><span class="o">.</span><span class="n">to_sy</span> <span class="n">m</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">send_at</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="nb">method</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+</span><span class='line'>      <span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Job</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="ss">Delayed</span><span class="p">:</span><span class="ss">:PerformableMethod</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="nb">method</span><span class="o">.</span><span class="n">to_sy</span> <span class="n">m</span><span class="p">,</span> <span class="n">args</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">time</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">module</span> <span class="nn">ClassMethods</span>
+</span><span class='line'>      <span class="k">def</span> <span class="nf">handle_asynchronously</span><span class="p">(</span><span class="nb">method</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">aliased_method</span><span class="p">,</span> <span class="n">punctuation</span> <span class="o">=</span> <span class="nb">method</span><span class="o">.</span><span class="n">to_s</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sr">/([?!=])$/</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="vg">$1</span>
+</span><span class='line'>        <span class="n">with_method</span><span class="p">,</span> <span class="n">without_method</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">aliased_method</span><span class="si">}</span><span class="s2">_with_send_later</span><span class="si">#{</span><span class="n">pu</span> <span class="n">nctuation</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">aliased_method</span><span class="si">}</span><span class="s2">_without_send_later</span><span class="si">#{</span><span class="n">punctuation</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'>        <span class="n">define_method</span><span class="p">(</span><span class="n">with_method</span><span class="p">)</span> <span class="k">do</span> <span class="o">|*</span><span class="n">args</span><span class="o">|</span>
+</span><span class='line'>          <span class="n">send_later</span><span class="p">(</span><span class="n">without_method</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">end</span>
+</span><span class='line'>        <span class="n">alias_method_chain</span> <span class="nb">method</span><span class="p">,</span> <span class="ss">:send_later</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Usage of <em>send_later</em>, <em>send_at</em> and <em>handle_asynchronously</em></h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># instance method</span>
+</span><span class='line'><span class="n">user</span><span class="o">.</span><span class="n">send_later</span><span class="p">(</span><span class="ss">:deliver_welcome</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># class_method</span>
+</span><span class='line'><span class="no">Notifier</span><span class="o">.</span><span class="n">send_later</span><span class="p">(</span><span class="ss">:deliver_welcome</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Notifier</span><span class="o">.</span><span class="n">send_at</span><span class="p">(</span><span class="mi">15</span><span class="o">.</span><span class="n">minutes</span><span class="o">.</span><span class="n">from_now</span><span class="p">,</span> <span class="ss">:deliver_welcome</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Inside User class write below line after deliver_welcome method</span>
+</span><span class='line'><span class="n">handle_asynchronously</span> <span class="ss">:deliver_welcome</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/page/7/">&larr; Older</a>
@@ -863,15 +930,15 @@ Put below code in file <em>config/intializers/core_extensions.rb</em></p>
       </li>
     
       <li class="post">
-        <a href="/2014/03/understanding-restful-vs-soap-web-services/">Understanding RESTful vs SOAP web services</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/03/regex-to-split-string-within-quotes-and-spaces/">regex to split string within quotes and spaces</a>
-      </li>
-    
-      <li class="post">
         <a href="/2014/02/moving-from-blogspot-to-octopress/">Migrating from blogspot to octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
   </ul>

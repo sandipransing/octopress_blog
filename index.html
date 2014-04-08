@@ -234,118 +234,6 @@ Let&#8217;s see how we can build RESTful JSON apis using <i>Grape</i> library:
       
   <header>
     
-      <h1 class="entry-title"><a href="/2014/03/understanding-restful-vs-soap-web-services/">Understanding RESTful vs SOAP web services</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-03-17T15:09:33+05:30" pubdate data-updated="true">Mar 17<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><blockquote><p><strong>A Web service</strong> is a method of communications between two electronic devices over the World Wide Web.
-It is also defined as a software system designed to support <a href="http://en.wikipedia.org/wiki/Interoperability">interoperable</a> machine-to-machine interaction over a network.</p></blockquote>
-
-<p>In simple words, &ldquo;Web services are developed to use by other software applications&rdquo;</p>
-
-<p>Web services communicate via either SOAP or REST messages.</p>
-
-<h2>REST</h2>
-
-<p>REST stands for REpresentational State Transfer. It is a term coined by Roy Fielding in his Ph.D. dissertation
-It is an architecture style for designing networked applications which typycally runs runs over HTTP.</p>
-
-<p>REST is an architecture and not a &ldquo;standard&rdquo;. There is no w3c recommendation for REST. It is concept for better web and widely accepted.</p>
-
-<p>RESTful applications use HTTP requests to post data (create and/or update), read data (e.g., make queries), and delete data. Thus, REST uses HTTP for all four CRUD (Create/Read/Update/Delete) operations.</p>
-
-<p>It expects client to have knowlege of what to send and what to expect in response. It is focused on accessing named resources through a single consistent interface.</p>
-
-<h4>Highlights:</h4>
-
-<ol>
-<li>It is simple</li>
-<li>It is lightweight and faster</li>
-<li>Platform-independent</li>
-<li>Language-independent</li>
-<li>runs over HTTP</li>
-<li>Response can be returned in &ldquo;XML/JSON&rdquo; format</li>
-</ol>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2014/03/understanding-restful-vs-soap-web-services/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2014/03/regex-to-split-string-within-quotes-and-spaces/">regex to split string within quotes and spaces</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-03-08T21:32:37+05:30" pubdate data-updated="true">Mar 8<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I wanted to split a string based on white spaces except when if anything is enclosed inside quotes then i don&rsquo;t want to split that piece of string from getting splitted.</p>
-
-<p>It means string will be splitted based on consecutive double quotes from left to right and remaining string will be spitted on spaces.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2014/03/regex-to-split-string-within-quotes-and-spaces/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
       <h1 class="entry-title"><a href="/2014/02/moving-from-blogspot-to-octopress/">Migrating from blogspot to octopress</a></h1>
     
     
@@ -659,6 +547,147 @@ Then following changes needs to be done for upgrading your application to Rails 
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/02/ruby-enumerable-toproc-ampersond-colon/">ruby enumerable & to_proc (ampersond & symbol shortcut)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-23T02:09:00+05:30" pubdate data-updated="true">Feb 23<span>rd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Basically Enumerable mixin gives collection classes a variety of traverse, search, sort methods.</p>
+
+<p><strong>Understanding ruby blocks</strong></p>
+
+<blockquote><p>Blocks are statements of code written in ruby. one can take them as similar to c language macro&rsquo;s</p></blockquote>
+
+<p><strong>Different ways to define blocks</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">proc</span> <span class="k">do</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;hello&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">call</span> <span class="c1">#=&gt; hello</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">b</span> <span class="o">=</span> <span class="nb">lambda</span> <span class="k">do</span> <span class="o">|</span><span class="n">u</span><span class="o">|</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;hello </span><span class="si">#{</span><span class="n">u</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="n">b</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;sandip&#39;</span><span class="p">)</span><span class="c1">#=&gt; hello sandip</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">c</span> <span class="o">=</span> <span class="nb">proc</span> <span class="p">{</span><span class="o">|</span><span class="n">user</span><span class="o">|</span> <span class="nb">puts</span> <span class="n">user</span> <span class="p">}</span>
+</span><span class='line'><span class="n">c</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;sandip&#39;</span><span class="p">)</span> <span class="c1">#=&gt; sandip</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2012/02/ruby-enumerable-toproc-ampersond-colon/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/01/dynamic-bounded-parameters-and-named-scopes/">dynamic & bounded parameters and named routes</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-31T02:43:00+05:30" pubdate data-updated="true">Jan 31<span>st</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Rails routes can be customized to include your own parameters inside it. Lets first understand how named routes works:</p>
+
+<h2>Adding dynamic parameters to routes</h2>
+
+<p>Here exact parameters are matched to route and presence of each parameter is mandatory in order to construct urls. If blank parameter is supplied then it will raise <code>RoutingError</code> exception.</p>
+
+<h2>Exact matched named route declared as :</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">match</span> <span class="s1">&#39;:a/:b/:c&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;home#index&#39;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:q</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>rails console :</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">app</span><span class="o">.</span><span class="n">q_url</span><span class="p">(</span><span class="ss">:a</span><span class="p">,</span> <span class="ss">:b</span><span class="p">,</span> <span class="ss">:c</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; &quot;http://www.example.com/a/b/c&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">app</span><span class="o">.</span><span class="n">q_url</span><span class="p">(</span><span class="ss">:a</span><span class="p">,</span> <span class="ss">:b</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt; ActionController::RoutingError: No route matches {:controller=&gt;&quot;home&quot;, :a=&gt;:a, :b=&gt;:b, :c=&gt;&quot;&quot;}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2012/01/dynamic-bounded-parameters-and-named-scopes/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/page/2/">&larr; Older</a>
@@ -682,15 +711,15 @@ Then following changes needs to be done for upgrading your application to Rails 
       </li>
     
       <li class="post">
-        <a href="/2014/03/understanding-restful-vs-soap-web-services/">Understanding RESTful vs SOAP web services</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/03/regex-to-split-string-within-quotes-and-spaces/">regex to split string within quotes and spaces</a>
-      </li>
-    
-      <li class="post">
         <a href="/2014/02/moving-from-blogspot-to-octopress/">Migrating from blogspot to octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
   </ul>

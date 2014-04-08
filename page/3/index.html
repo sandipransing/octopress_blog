@@ -98,591 +98,6 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2011/12/paypal-payments-integration-with-rails/">Paypal payments integration with rails</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-30T18:00:00+05:30" pubdate data-updated="true">Dec 30<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Paypal standard website payment service allows online payment transactions for websites.
-Before implementing payments inside rails app needs to have following things in place &ndash;</p>
-
-<ol>
-<li><a href="http://developer.paypal.com/">Register Paypal sandbox account</a></li>
-<li>Paypal Merchant account api credentials i.e. login, password, signature, application_id</li>
-<li>Paypal Buyer account creds to test payments</li>
-</ol>
-
-
-<p>Bundle Install</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># Gemfile     
-</span><span class='line'>gem 'activemerchant </span></code></pre></td></tr></table></div></figure>
-
-
-<p>Gateway config</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># config/gateway.yml 
-</span><span class='line'>development: &development     
-</span><span class='line'>  mode: test     
-</span><span class='line'>  login: rana_1317365002_biz_api1.gmail.com     
-</span><span class='line'>  password: '1311235050'     
-</span><span class='line'>  signature: ACxcVrB3mFChvPIe8aDWQlLhAPN46oPBQCj7rJWPza6CDZmBURg.     
-</span><span class='line'>  application_id: APP-76y884485P519543T  
-</span><span class='line'>
-</span><span class='line'>production:    
-</span><span class='line'>  &lt;&lt;: *development
-</span><span class='line'>
-</span><span class='line'>test:
-</span><span class='line'>  &lt;&lt;: *development</span></code></pre></td></tr></table></div></figure>
-
-
-<p>New Payment Form</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='haml'><span class='line'><span class="p">=</span> <span class="n">form_for</span> <span class="vi">@payment</span> <span class="o">||=</span> <span class="no">Payment</span><span class="o">.</span><span class="n">new</span><span class="p">,</span> <span class="ss">:url</span> <span class="o">=&gt;</span> <span class="n">pay_bill_url</span><span class="p">,</span> <span class="ss">:html</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:id</span> <span class="o">=&gt;</span> <span class="ss">:payForm</span><span class="p">}</span> <span class="k">do</span> <span class="o">|</span><span class="nb">p</span><span class="o">|</span>
-</span><span class='line'>  <span class="p">=</span> <span class="nb">p</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:amount</span>
-</span><span class='line'>  <span class="p">=</span> <span class="nb">p</span><span class="o">.</span><span class="n">submit</span> <span class="s1">&#39;Pay&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Generate &amp; Migrate Payment Model</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='haml'><span class='line'>rails g model payment status:string amount:float transaction_number:string
-</span><span class='line'>rake db:migrate
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Payment Model</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/models/payment.rb  </span>
-</span><span class='line'><span class="k">class</span> <span class="nc">Payment</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="no">PROCESSING</span><span class="p">,</span> <span class="no">FAILED</span><span class="p">,</span> <span class="no">SUCCESS</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">validates</span> <span class="ss">:amount</span><span class="p">,</span> <span class="ss">:presence</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">:numericality</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:greater_than</span> <span class="o">=&gt;</span> <span class="mi">0</span> <span class="p">}</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">conf</span>
-</span><span class='line'>    <span class="vc">@@gateway_conf</span> <span class="o">||=</span> <span class="no">YAML</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span><span class="no">Rails</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;config/gateway.yml&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_s</span><span class="p">)</span><span class="o">[</span><span class="no">Rails</span><span class="o">.</span><span class="n">env</span><span class="o">]</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">## Paypal    </span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">setup_purchase</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">gateway</span><span class="o">.</span><span class="n">setup_purchase</span><span class="p">(</span><span class="n">amount</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">redirect_url_for</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">gateway</span><span class="o">.</span><span class="n">redirect_url_for</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">purchase</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="p">{})</span>
-</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="no">PROCESSING</span>
-</span><span class='line'>    <span class="c1">#:ip       =&gt; request.remote_ip,</span>
-</span><span class='line'>    <span class="c1">#:payer_id =&gt; params[:payer_id],</span>
-</span><span class='line'>    <span class="c1">#:token    =&gt; params[:token]</span>
-</span><span class='line'>    <span class="n">response</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">purchase</span><span class="p">(</span><span class="n">amt</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">success?</span>
-</span><span class='line'>      <span class="nb">self</span><span class="o">.</span><span class="n">transaction_num</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">params</span><span class="o">[</span><span class="s1">&#39;transaction_id&#39;</span><span class="o">]</span>
-</span><span class='line'>      <span class="nb">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="no">SUCCESS</span>
-</span><span class='line'>    <span class="k">else</span>
-</span><span class='line'>      <span class="nb">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="no">FAILED</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>    <span class="k">return</span> <span class="nb">self</span>
-</span><span class='line'>  <span class="k">rescue</span> <span class="no">Exception</span> <span class="o">=&gt;</span> <span class="n">e</span>
-</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="no">FAILED</span>
-</span><span class='line'>    <span class="k">return</span> <span class="nb">self</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kp">private</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">gateway</span>
-</span><span class='line'>    <span class="ss">ActiveMerchant</span><span class="p">:</span><span class="ss">:Billing</span><span class="o">::</span><span class="no">Base</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">auth</span><span class="o">[</span><span class="s1">&#39;mode&#39;</span><span class="o">].</span><span class="n">to_sym</span>
-</span><span class='line'>    <span class="ss">ActiveMerchant</span><span class="p">:</span><span class="ss">:Billing</span><span class="o">::</span><span class="no">PaypalExpressGateway</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
-</span><span class='line'>      <span class="ss">:login</span> <span class="o">=&gt;</span> <span class="n">auth</span><span class="o">[</span><span class="s1">&#39;login&#39;</span><span class="o">]</span><span class="p">,</span> <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="n">auth</span><span class="o">[</span><span class="s1">&#39;password&#39;</span><span class="o">]</span><span class="p">,</span>
-</span><span class='line'>      <span class="ss">:signature</span> <span class="o">=&gt;</span> <span class="n">auth</span><span class="o">[</span><span class="s1">&#39;signature&#39;</span><span class="o">]</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">auth</span>
-</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">class</span><span class="o">.</span><span class="n">conf</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>
-Billing routes</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">## Callback URL   </span>
-</span><span class='line'><span class="n">match</span> <span class="s1">&#39;/billing/paypal/:id/confirm&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;billing#paypal&#39;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:confirm_paypal</span>
-</span><span class='line'><span class="c1">## Create payment   </span>
-</span><span class='line'><span class="n">match</span> <span class="s1">&#39;/billing&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;billing#create&#39;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:pay_bill</span>
-</span><span class='line'><span class="c1">## Request URL   </span>
-</span><span class='line'><span class="n">match</span> <span class="s1">&#39;/billing/paypal/:id&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;billing#checkout&#39;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:billing</span>
-</span><span class='line'><span class="n">match</span> <span class="s1">&#39;/billing/thank_you/:id&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;billing#checkout&#39;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:billing_thank_you</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Billing Controller</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/controllers/billing_controller.rb</span>
-</span><span class='line'><span class="k">class</span> <span class="nc">BillingController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
-</span><span class='line'>  <span class="n">before_filter</span> <span class="ss">:get_payment</span><span class="p">,</span> <span class="ss">:only</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="ss">:checkout</span><span class="p">,</span> <span class="ss">:paypal</span><span class="p">,</span> <span class="ss">:thank_you</span><span class="o">]</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">create</span>
-</span><span class='line'>    <span class="vi">@payment</span> <span class="o">=</span> <span class="no">Payment</span><span class="o">.</span><span class="n">new</span> <span class="n">params</span><span class="o">[</span><span class="ss">:payment</span><span class="o">]</span>
-</span><span class='line'>    <span class="k">if</span> <span class="vi">@payment</span><span class="o">.</span><span class="n">save</span>
-</span><span class='line'>      <span class="c1">## Paypal Checkout page       </span>
-</span><span class='line'>      <span class="n">redirect_to</span> <span class="n">billing_url</span>
-</span><span class='line'>    <span class="k">else</span>
-</span><span class='line'>      <span class="n">render</span> <span class="ss">:action</span> <span class="o">=&gt;</span> <span class="ss">:new</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1"># ASSUMPTION   # payment is valid i.e. amount is entered   </span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">checkout</span>
-</span><span class='line'>    <span class="n">response</span> <span class="o">=</span> <span class="vi">@payment</span><span class="o">.</span><span class="n">setup_purchase</span><span class="p">(</span><span class="ss">:return_url</span> <span class="o">=&gt;</span> <span class="n">confirm_paypal_url</span><span class="p">(</span><span class="vi">@payment</span><span class="p">),</span> <span class="ss">:cancel_return_url</span> <span class="o">=&gt;</span> <span class="n">root_url</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">redirect_to</span> <span class="vi">@payment</span><span class="o">.</span><span class="n">redirect_url_for</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">token</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">## CALL BACK   </span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">paypal</span>
-</span><span class='line'>    <span class="vi">@payment</span> <span class="o">=</span> <span class="vi">@payment</span><span class="o">.</span><span class="n">purchase</span><span class="p">(</span><span class="ss">:token</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:token</span><span class="o">]</span><span class="p">,</span> <span class="ss">:payer_id</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:PayerID</span><span class="o">]</span><span class="p">,</span> <span class="ss">:ip</span> <span class="o">=&gt;</span> <span class="n">request</span><span class="o">.</span><span class="n">remote_ip</span><span class="p">)</span>
-</span><span class='line'>    <span class="vi">@payment</span><span class="o">.</span><span class="n">save</span>
-</span><span class='line'>    <span class="n">redirect_to</span> <span class="n">thank_you_billing_url</span><span class="p">(</span><span class="vi">@order</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kp">private</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">get_payment</span>
-</span><span class='line'>    <span class="vi">@payment</span> <span class="o">=</span> <span class="no">Payment</span><span class="o">.</span><span class="n">find_by_id</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
-</span><span class='line'>    <span class="vi">@payment</span> <span class="o">&amp;&amp;</span> <span class="vi">@payment</span><span class="o">.</span><span class="n">valid?</span> <span class="o">||</span> <span class="n">invalid_url</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Views</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='haml'><span class='line'># app/views/billing/thank_you.html.haml
-</span><span class='line'><span class="p">-</span> <span class="k">if</span> <span class="vi">@payment</span><span class="o">.</span><span class="n">success?</span>
-</span><span class='line'>  <span class="nt">%p</span> The transaction is successfully completed
-</span><span class='line'><span class="p">-</span> <span class="k">else</span>
-</span><span class='line'>  <span class="nt">%p</span> The transaction failed
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/12/authorize-net-sim-payment-integration-with-rails/">Authorize Net (SIM) payment integration with rails</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-30T16:16:00+05:30" pubdate data-updated="true">Dec 30<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Authorize Net SIM gateway transaction skips merchant side creditcard details form and directs transaction to be take place on gateway server.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># Gemfile
-</span><span class='line'>gem 'authorize-net'</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Register for authorize net sandbox account click <a href="https://developer.authorize.net/testaccount/">here</a></p>
-
-<p>Payment gateway credentials</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># config/gateway.yml
-</span><span class='line'>development: &development
-</span><span class='line'>    mode: test
-</span><span class='line'>    login: 9gdLh6T
-</span><span class='line'>    key: 67fu45xw6VP92LX1
-</span><span class='line'>
-</span><span class='line'>production:
-</span><span class='line'>   &lt;&lt;: *development
-</span><span class='line'>
-</span><span class='line'>test:
-</span><span class='line'>   &lt;&lt;: *development</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Generate &amp; Migrate Payment Model</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rails</span> <span class="n">g</span> <span class="n">model</span> <span class="n">payment</span> <span class="ss">status</span><span class="p">:</span><span class="n">string</span> <span class="ss">amount</span><span class="p">:</span><span class="n">float</span> <span class="n">transaction_number</span><span class="ss">:string</span>
-</span><span class='line'><span class="n">rake</span> <span class="ss">db</span><span class="p">:</span><span class="n">migrate</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>SIM gateway methods extracted and added to payment model</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/models/payment.rb</span>
-</span><span class='line'><span class="k">class</span> <span class="nc">Payment</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="no">PROCESSING</span><span class="p">,</span> <span class="no">FAILED</span><span class="p">,</span> <span class="no">SUCCESS</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">validates</span> <span class="ss">:amount</span><span class="p">,</span> <span class="ss">:presence</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">:numericality</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:greater_than</span> <span class="o">=&gt;</span> <span class="mi">0</span> <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">conf</span>
-</span><span class='line'>    <span class="vc">@@gateway_conf</span> <span class="o">||=</span> <span class="no">YAML</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span><span class="no">Rails</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;config/gateway.yml&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_s</span><span class="p">)</span><span class="o">[</span><span class="no">Rails</span><span class="o">.</span><span class="n">env</span><span class="o">]</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">success?</span>
-</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="no">SUCCESS</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">## Authorize :: SIM</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">setup_transaction</span><span class="p">(</span><span class="n">options</span> <span class="o">=</span><span class="p">{})</span>
-</span><span class='line'>    <span class="n">options</span><span class="o">.</span><span class="n">merge!</span><span class="p">(</span><span class="ss">:link_method</span> <span class="o">=&gt;</span> <span class="ss">AuthorizeNet</span><span class="p">:</span><span class="ss">:SIM</span><span class="o">::</span><span class="ss">HostedReceiptPage</span><span class="p">:</span><span class="ss">:LinkMethod</span><span class="o">::</span><span class="no">POST</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">t</span> <span class="o">=</span> <span class="ss">AuthorizeNet</span><span class="p">:</span><span class="ss">:SIM</span><span class="o">::</span><span class="no">Transaction</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
-</span><span class='line'>      <span class="n">auth</span><span class="o">[</span><span class="s1">&#39;login&#39;</span><span class="o">]</span><span class="p">,</span> <span class="n">auth</span><span class="o">[</span><span class="s1">&#39;key&#39;</span><span class="o">]</span><span class="p">,</span> <span class="n">amount</span><span class="p">,</span>
-</span><span class='line'>      <span class="ss">:hosted_payment_form</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span>
-</span><span class='line'>      <span class="ss">:test</span> <span class="o">=&gt;</span> <span class="n">auth</span><span class="o">[</span><span class="s1">&#39;mode&#39;</span><span class="o">]</span>
-</span><span class='line'>    <span class="p">)</span>
-</span><span class='line'>    <span class="n">t</span><span class="o">.</span><span class="n">set_hosted_payment_receipt</span><span class="p">(</span><span class="ss">AuthorizeNet</span><span class="p">:</span><span class="ss">:SIM</span><span class="o">::</span><span class="no">HostedReceiptPage</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">options</span><span class="p">))</span>
-</span><span class='line'>    <span class="k">return</span> <span class="n">t</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">auth</span>
-</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">class</span><span class="o">.</span><span class="n">conf</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Payment routes</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">## Callback URL</span>
-</span><span class='line'><span class="n">match</span> <span class="s1">&#39;/billing/:id/confirm&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;billing#authorize&#39;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:confirm_billing</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">## Request URL</span>
-</span><span class='line'><span class="n">match</span> <span class="s1">&#39;/billing/:id&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;billing#checkout&#39;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:billing</span>
-</span><span class='line'><span class="n">match</span> <span class="s1">&#39;/billing/:id/thank_you&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;billing#thank_you&#39;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:thank_you_billing</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Billing controller</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/controllers/billing_controller.rb </span>
-</span><span class='line'><span class="k">class</span> <span class="nc">BillingController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
-</span><span class='line'>  <span class="n">helper</span> <span class="ss">:authorize_net</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">before_filter</span> <span class="ss">:get_order</span><span class="p">,</span> <span class="ss">:only</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="ss">:checkout</span><span class="p">,</span> <span class="ss">:authorize</span><span class="p">,</span> <span class="ss">:thank_you</span><span class="o">]</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">checkout</span>
-</span><span class='line'>    <span class="c1"># ASSUMPTION order is valid means amount is entered</span>
-</span><span class='line'>    <span class="vi">@transaction</span> <span class="o">=</span> <span class="vi">@order</span><span class="o">.</span><span class="n">setup_transaction</span><span class="p">(</span>
-</span><span class='line'>      <span class="p">{</span><span class="ss">:link_text</span> <span class="o">=&gt;</span> <span class="s1">&#39;Continue&#39;</span><span class="p">,</span>
-</span><span class='line'>        <span class="ss">:link_url</span> <span class="o">=&gt;</span> <span class="n">confirm_billing_url</span><span class="p">(</span><span class="vi">@order</span><span class="p">)})</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">## CALL BACK</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">authorize</span>
-</span><span class='line'>    <span class="n">resp</span> <span class="o">=</span> <span class="ss">AuthorizeNet</span><span class="p">:</span><span class="ss">:SIM</span><span class="o">::</span><span class="no">Response</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">if</span> <span class="n">resp</span><span class="o">.</span><span class="n">approved?</span>
-</span><span class='line'>      <span class="vi">@order</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="ss">Payment</span><span class="p">:</span><span class="ss">:SUCCESS</span>
-</span><span class='line'>      <span class="vi">@order</span><span class="o">.</span><span class="n">transaction_num</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">transaction_id</span>
-</span><span class='line'>    <span class="k">else</span>
-</span><span class='line'>      <span class="vi">@order</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="ss">Payment</span><span class="p">:</span><span class="ss">:FAILED</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>    <span class="vi">@order</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="ss">:validate</span> <span class="o">=&gt;</span> <span class="kp">false</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">redirect_to</span> <span class="n">thank_you_billing_url</span><span class="p">(</span><span class="vi">@order</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kp">private</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">auth</span>
-</span><span class='line'>    <span class="no">Payment</span><span class="o">.</span><span class="n">conf</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">get_order</span>
-</span><span class='line'>    <span class="vi">@order</span> <span class="o">=</span> <span class="no">Payment</span><span class="o">.</span><span class="n">find_by_id</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
-</span><span class='line'>    <span class="vi">@order</span> <span class="o">&amp;&amp;</span> <span class="vi">@order</span><span class="o">.</span><span class="n">valid?</span> <span class="o">||</span> <span class="n">invalid_url</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>View Forms</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='haml'><span class='line'># app/views/billing/checkout.html.haml
-</span><span class='line'><span class="p">=</span> <span class="n">form_for</span> <span class="ss">:sim_transaction</span><span class="p">,</span> <span class="ss">:url</span> <span class="o">=&gt;</span> <span class="ss">AuthorizeNet</span><span class="p">:</span><span class="ss">:SIM</span><span class="o">::</span><span class="ss">Transaction</span><span class="p">:</span><span class="ss">:Gateway</span><span class="o">::</span><span class="no">TEST</span><span class="p">,</span> <span class="ss">:html</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:id</span> <span class="o">=&gt;</span> <span class="ss">:authForm</span><span class="p">}</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
-</span><span class='line'>  <span class="p">=</span> <span class="n">sim_fields</span><span class="p">(</span><span class="vi">@transaction</span><span class="p">)</span>
-</span><span class='line'><span class="nd">:javascript</span>
-</span><span class='line'>  <span class="nd">$(document).ready(function(){</span>
-</span><span class='line'>    <span class="nd">$(&#39;#authForm&#39;).submit();</span>
-</span><span class='line'>  <span class="nd">})</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='haml'><span class='line'># app/views/billing/thank_you.html.haml
-</span><span class='line'><span class="p">-</span> <span class="k">if</span> <span class="vi">@order</span><span class="o">.</span><span class="n">success?</span>
-</span><span class='line'>  <span class="nt">%p</span> The transaction is successfully completed
-</span><span class='line'><span class="p">-</span> <span class="k">else</span>
-</span><span class='line'>  <span class="nt">%p</span> The transaction failed
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
       <h1 class="entry-title"><a href="/2011/12/using-formbuilder-in-rails/">Customizing rails default form builder</a></h1>
     
     
@@ -1784,6 +1199,288 @@ To get will-paginate working with bootstrap css we need to override default pagi
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/12/best-practices-to-use-named-scopes/">Best practices to use named scopes inside models</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-22T18:50:00+05:30" pubdate data-updated="true">Dec 22<span>nd</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><blockquote><p>Scopes are partial query conditions to database queries. scopes are always prefixed to class finders. There are several ways to use scopes inside rails models.</p></blockquote>
+
+<p><strong>1.  Scope defined below gets loaded while class definition loads</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">scope</span> <span class="ss">:active</span><span class="p">,</span> <span class="n">where</span><span class="p">(</span><span class="ss">:active</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">)</span>
+</span><span class='line'><span class="n">scope</span> <span class="ss">:archived</span><span class="p">,</span> <span class="n">where</span><span class="p">(</span><span class="ss">:archived</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">:post_type</span> <span class="o">=&gt;</span> <span class="ss">:general</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>2.  Dynamic scopes needs to be always defined inside lambda</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">scope</span> <span class="ss">:not_expired</span><span class="p">,</span> <span class="nb">lambda</span> <span class="p">{</span> <span class="n">where</span><span class="p">(</span><span class="s1">&#39;expiry_date &lt;= ?&#39;</span><span class="p">,</span> <span class="no">Date</span><span class="o">.</span><span class="n">today</span><span class="p">)</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>3.  Combining scopes</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">scope</span> <span class="ss">:visible</span><span class="p">,</span> <span class="n">published</span><span class="o">.</span><span class="n">not_expired</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>4.  Passing parameters to scopes</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># avoid below</span>
+</span><span class='line'><span class="n">scope</span> <span class="ss">:created_by_user</span><span class="p">,</span> <span class="nb">lambda</span> <span class="p">{</span><span class="o">|</span><span class="n">user</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">where</span><span class="p">(</span><span class="s1">&#39;user_id = ?&#39;</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># use this</span>
+</span><span class='line'><span class="n">scope</span> <span class="ss">:created_by_user</span><span class="p">,</span> <span class="nb">lambda</span> <span class="p">{</span><span class="o">|</span><span class="n">user</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">where</span><span class="p">(</span><span class="ss">:user_id</span> <span class="o">=&gt;</span> <span class="n">user</span><span class="p">)</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>5.  passing multiple parameters</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># avoid below</span>
+</span><span class='line'><span class="n">scope</span> <span class="ss">:made_between</span><span class="p">,</span> <span class="nb">lambda</span><span class="p">{</span><span class="o">|</span><span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">where</span><span class="p">(</span><span class="s1">&#39;created_date &gt;= ? and created_date &lt;= ?&#39;</span><span class="p">,</span> <span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="p">)</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="c1"># use this</span>
+</span><span class='line'><span class="n">scope</span> <span class="ss">:made_between</span><span class="p">,</span> <span class="nb">lambda</span><span class="p">{</span><span class="o">|</span><span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">where</span><span class="p">(</span><span class="s1">&#39;created_date &gt;= :from and created_date &lt;= :to&#39;</span><span class="p">,</span> <span class="ss">:from</span> <span class="o">=&gt;</span> <span class="n">from</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="n">to</span><span class="p">)</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>6.  associations inside scope (joins and includes)</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># below will perform eager loading effective when rendering posts with comments</span>
+</span><span class='line'><span class="n">scope</span> <span class="ss">:with_user_comments</span><span class="p">,</span> <span class="nb">lambda</span><span class="p">{</span><span class="o">|</span><span class="n">user</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">includes</span><span class="p">(</span><span class="ss">:comments</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s1">&#39;comments.user_id = ?&#39;</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># faster</span>
+</span><span class='line'><span class="c1"># also can be done as post.comments.where(:user_id =&gt; user)</span>
+</span><span class='line'><span class="n">scope</span> <span class="ss">:with_user_comments</span><span class="p">,</span> <span class="nb">lambda</span><span class="p">{</span><span class="o">|</span><span class="n">user</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">joins</span><span class="p">(</span><span class="ss">:comments</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s1">&#39;comments.user_id = ?&#39;</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, at last would suggest making use of symbols when there are multiple parameters to scopes and make maximum use of scopes rather than having where conditions everywhere :)</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/12/dynamic-methods-inside-ruby-classes/">Dynamic methods inside ruby classes</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-22T17:54:00+05:30" pubdate data-updated="true">Dec 22<span>nd</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Ruby language is dynamic and robust. We can define methods inside ruby classes at runtime.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">A</span>
+</span><span class='line'>  <span class="n">define_method</span> <span class="ss">:a</span> <span class="k">do</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;hello&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">define_method</span> <span class="ss">:greeting</span> <span class="k">do</span> <span class="o">|</span><span class="n">message</span><span class="o">|</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="n">message</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">A</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">a</span> <span class="c1">#=&gt; hello</span>
+</span><span class='line'><span class="n">A</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">greeting</span> <span class="s1">&#39;Ram ram&#39;</span> <span class="c1">#=&gt; Ram ram</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Can you imagine using dynamic methods below 24 lines of code is optimized to just 8 lines
+To know more on below code <a href="http://www.funonrails.com/2011/12/multiple-resources-registrations-with">read</a></p>
+
+<h3>Before code</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">ApplicationController</span> <span class="o">&lt;</span> <span class="ss">ActionController</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">protect_from_forgery</span>
+</span><span class='line'>  <span class="n">helper_method</span> <span class="ss">:current_staff</span><span class="p">,</span> <span class="ss">:current_employee</span><span class="p">,</span> <span class="n">current_admin</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">authenticate_staff!</span><span class="p">(</span><span class="n">opts</span><span class="o">=</span><span class="p">{})</span>
+</span><span class='line'>    <span class="n">current_staff</span> <span class="o">||</span> <span class="n">not_authorized</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">current_staff</span>
+</span><span class='line'>    <span class="n">current_user</span> <span class="k">if</span> <span class="n">current_user</span><span class="o">.</span><span class="n">is_a?</span> <span class="no">Staff</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">authenticate_employee!</span><span class="p">(</span><span class="n">opts</span><span class="o">=</span><span class="p">{})</span>
+</span><span class='line'>    <span class="n">current_employee</span> <span class="o">||</span> <span class="n">not_authorized</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">current_employee</span>
+</span><span class='line'>    <span class="n">current_user</span> <span class="k">if</span> <span class="n">current_user</span><span class="o">.</span><span class="n">is_a?</span> <span class="no">Employee</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">authenticate_admin!</span><span class="p">(</span><span class="n">opts</span><span class="o">=</span><span class="p">{})</span>
+</span><span class='line'>    <span class="n">current_admin</span> <span class="o">||</span> <span class="n">not_authorized</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">current_admin</span>
+</span><span class='line'>    <span class="n">current_user</span> <span class="k">if</span> <span class="n">current_user</span><span class="o">.</span><span class="n">is_a?</span> <span class="no">Admin</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>After code</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># New Version using dynamic methods</span>
+</span><span class='line'><span class="sx">%w(Staff Employee Admin)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">k</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">define_method</span> <span class="s2">&quot;current_</span><span class="si">#{</span><span class="n">k</span><span class="o">.</span><span class="n">underscore</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">current_user</span> <span class="k">if</span> <span class="n">current_user</span><span class="o">.</span><span class="n">is_a?</span><span class="p">(</span><span class="n">k</span><span class="o">.</span><span class="n">constantize</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">define_method</span> <span class="s2">&quot;authenticate_</span><span class="si">#{</span><span class="n">k</span><span class="o">.</span><span class="n">underscore</span><span class="si">}</span><span class="s2">!&quot;</span> <span class="k">do</span> <span class="o">|</span><span class="n">opts</span><span class="o">=</span><span class="p">{}</span><span class="o">|</span>
+</span><span class='line'>    <span class="nb">send</span><span class="p">(</span><span class="s2">&quot;current_</span><span class="si">#{</span><span class="n">k</span><span class="o">.</span><span class="n">underscore</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="o">||</span> <span class="n">not_authorized</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/page/4/">&larr; Older</a>
@@ -1809,15 +1506,15 @@ To get will-paginate working with bootstrap css we need to override default pagi
       </li>
     
       <li class="post">
-        <a href="/2014/03/understanding-restful-vs-soap-web-services/">Understanding RESTful vs SOAP web services</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/03/regex-to-split-string-within-quotes-and-spaces/">regex to split string within quotes and spaces</a>
-      </li>
-    
-      <li class="post">
         <a href="/2014/02/moving-from-blogspot-to-octopress/">Migrating from blogspot to octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
   </ul>

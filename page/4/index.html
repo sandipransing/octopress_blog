@@ -98,288 +98,6 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2011/12/best-practices-to-use-named-scopes/">Best practices to use named scopes inside models</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-22T18:50:00+05:30" pubdate data-updated="true">Dec 22<span>nd</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><blockquote><p>Scopes are partial query conditions to database queries. scopes are always prefixed to class finders. There are several ways to use scopes inside rails models.</p></blockquote>
-
-<p><strong>1.  Scope defined below gets loaded while class definition loads</strong></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">scope</span> <span class="ss">:active</span><span class="p">,</span> <span class="n">where</span><span class="p">(</span><span class="ss">:active</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">)</span>
-</span><span class='line'><span class="n">scope</span> <span class="ss">:archived</span><span class="p">,</span> <span class="n">where</span><span class="p">(</span><span class="ss">:archived</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">:post_type</span> <span class="o">=&gt;</span> <span class="ss">:general</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>2.  Dynamic scopes needs to be always defined inside lambda</strong></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">scope</span> <span class="ss">:not_expired</span><span class="p">,</span> <span class="nb">lambda</span> <span class="p">{</span> <span class="n">where</span><span class="p">(</span><span class="s1">&#39;expiry_date &lt;= ?&#39;</span><span class="p">,</span> <span class="no">Date</span><span class="o">.</span><span class="n">today</span><span class="p">)</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>3.  Combining scopes</strong></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">scope</span> <span class="ss">:visible</span><span class="p">,</span> <span class="n">published</span><span class="o">.</span><span class="n">not_expired</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>4.  Passing parameters to scopes</strong></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># avoid below</span>
-</span><span class='line'><span class="n">scope</span> <span class="ss">:created_by_user</span><span class="p">,</span> <span class="nb">lambda</span> <span class="p">{</span><span class="o">|</span><span class="n">user</span><span class="o">|</span>
-</span><span class='line'>  <span class="n">where</span><span class="p">(</span><span class="s1">&#39;user_id = ?&#39;</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># use this</span>
-</span><span class='line'><span class="n">scope</span> <span class="ss">:created_by_user</span><span class="p">,</span> <span class="nb">lambda</span> <span class="p">{</span><span class="o">|</span><span class="n">user</span><span class="o">|</span>
-</span><span class='line'>  <span class="n">where</span><span class="p">(</span><span class="ss">:user_id</span> <span class="o">=&gt;</span> <span class="n">user</span><span class="p">)</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>5.  passing multiple parameters</strong></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># avoid below</span>
-</span><span class='line'><span class="n">scope</span> <span class="ss">:made_between</span><span class="p">,</span> <span class="nb">lambda</span><span class="p">{</span><span class="o">|</span><span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="o">|</span>
-</span><span class='line'>  <span class="n">where</span><span class="p">(</span><span class="s1">&#39;created_date &gt;= ? and created_date &lt;= ?&#39;</span><span class="p">,</span> <span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="p">)</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="c1"># use this</span>
-</span><span class='line'><span class="n">scope</span> <span class="ss">:made_between</span><span class="p">,</span> <span class="nb">lambda</span><span class="p">{</span><span class="o">|</span><span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="o">|</span>
-</span><span class='line'>  <span class="n">where</span><span class="p">(</span><span class="s1">&#39;created_date &gt;= :from and created_date &lt;= :to&#39;</span><span class="p">,</span> <span class="ss">:from</span> <span class="o">=&gt;</span> <span class="n">from</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="n">to</span><span class="p">)</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>6.  associations inside scope (joins and includes)</strong></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># below will perform eager loading effective when rendering posts with comments</span>
-</span><span class='line'><span class="n">scope</span> <span class="ss">:with_user_comments</span><span class="p">,</span> <span class="nb">lambda</span><span class="p">{</span><span class="o">|</span><span class="n">user</span><span class="o">|</span>
-</span><span class='line'>  <span class="n">includes</span><span class="p">(</span><span class="ss">:comments</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s1">&#39;comments.user_id = ?&#39;</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># faster</span>
-</span><span class='line'><span class="c1"># also can be done as post.comments.where(:user_id =&gt; user)</span>
-</span><span class='line'><span class="n">scope</span> <span class="ss">:with_user_comments</span><span class="p">,</span> <span class="nb">lambda</span><span class="p">{</span><span class="o">|</span><span class="n">user</span><span class="o">|</span>
-</span><span class='line'>  <span class="n">joins</span><span class="p">(</span><span class="ss">:comments</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s1">&#39;comments.user_id = ?&#39;</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>So, at last would suggest making use of symbols when there are multiple parameters to scopes and make maximum use of scopes rather than having where conditions everywhere :)</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/12/dynamic-methods-inside-ruby-classes/">Dynamic methods inside ruby classes</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-22T17:54:00+05:30" pubdate data-updated="true">Dec 22<span>nd</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Ruby language is dynamic and robust. We can define methods inside ruby classes at runtime.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">A</span>
-</span><span class='line'>  <span class="n">define_method</span> <span class="ss">:a</span> <span class="k">do</span>
-</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;hello&quot;</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">define_method</span> <span class="ss">:greeting</span> <span class="k">do</span> <span class="o">|</span><span class="n">message</span><span class="o">|</span>
-</span><span class='line'>    <span class="nb">puts</span> <span class="n">message</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">A</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">a</span> <span class="c1">#=&gt; hello</span>
-</span><span class='line'><span class="n">A</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">greeting</span> <span class="s1">&#39;Ram ram&#39;</span> <span class="c1">#=&gt; Ram ram</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Can you imagine using dynamic methods below 24 lines of code is optimized to just 8 lines
-To know more on below code <a href="http://www.funonrails.com/2011/12/multiple-resources-registrations-with">read</a></p>
-
-<h3>Before code</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">ApplicationController</span> <span class="o">&lt;</span> <span class="ss">ActionController</span><span class="p">:</span><span class="ss">:Base</span>
-</span><span class='line'>  <span class="n">protect_from_forgery</span>
-</span><span class='line'>  <span class="n">helper_method</span> <span class="ss">:current_staff</span><span class="p">,</span> <span class="ss">:current_employee</span><span class="p">,</span> <span class="n">current_admin</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">authenticate_staff!</span><span class="p">(</span><span class="n">opts</span><span class="o">=</span><span class="p">{})</span>
-</span><span class='line'>    <span class="n">current_staff</span> <span class="o">||</span> <span class="n">not_authorized</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">current_staff</span>
-</span><span class='line'>    <span class="n">current_user</span> <span class="k">if</span> <span class="n">current_user</span><span class="o">.</span><span class="n">is_a?</span> <span class="no">Staff</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">authenticate_employee!</span><span class="p">(</span><span class="n">opts</span><span class="o">=</span><span class="p">{})</span>
-</span><span class='line'>    <span class="n">current_employee</span> <span class="o">||</span> <span class="n">not_authorized</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">current_employee</span>
-</span><span class='line'>    <span class="n">current_user</span> <span class="k">if</span> <span class="n">current_user</span><span class="o">.</span><span class="n">is_a?</span> <span class="no">Employee</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">authenticate_admin!</span><span class="p">(</span><span class="n">opts</span><span class="o">=</span><span class="p">{})</span>
-</span><span class='line'>    <span class="n">current_admin</span> <span class="o">||</span> <span class="n">not_authorized</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">current_admin</span>
-</span><span class='line'>    <span class="n">current_user</span> <span class="k">if</span> <span class="n">current_user</span><span class="o">.</span><span class="n">is_a?</span> <span class="no">Admin</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>After code</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># New Version using dynamic methods</span>
-</span><span class='line'><span class="sx">%w(Staff Employee Admin)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">k</span><span class="o">|</span>
-</span><span class='line'>  <span class="n">define_method</span> <span class="s2">&quot;current_</span><span class="si">#{</span><span class="n">k</span><span class="o">.</span><span class="n">underscore</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">do</span>
-</span><span class='line'>    <span class="n">current_user</span> <span class="k">if</span> <span class="n">current_user</span><span class="o">.</span><span class="n">is_a?</span><span class="p">(</span><span class="n">k</span><span class="o">.</span><span class="n">constantize</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">define_method</span> <span class="s2">&quot;authenticate_</span><span class="si">#{</span><span class="n">k</span><span class="o">.</span><span class="n">underscore</span><span class="si">}</span><span class="s2">!&quot;</span> <span class="k">do</span> <span class="o">|</span><span class="n">opts</span><span class="o">=</span><span class="p">{}</span><span class="o">|</span>
-</span><span class='line'>    <span class="nb">send</span><span class="p">(</span><span class="s2">&quot;current_</span><span class="si">#{</span><span class="n">k</span><span class="o">.</span><span class="n">underscore</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="o">||</span> <span class="n">not_authorized</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
       <h1 class="entry-title"><a href="/2011/12/using-jquery-rails-and-datepicker/">using jQuery-rails and datepicker, timepicker & datetimepicker</a></h1>
     
     
@@ -1339,6 +1057,163 @@ In cases where you want only one particular model connecting other database tabl
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/08/migrating-from-svn-to-git/">Migrating from svn to git</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-08-17T19:44:00+05:30" pubdate data-updated="true">Aug 17<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Migrating from svn to git</p>
+
+<p><strong>1. Install git-svn</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install git-svn</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>2. Clone svn repositoy</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git svn clone -s svn://server/project_myt/trunk proj</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To add svn users and git users mapping
+Create author-file</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># authorsfile 
+</span><span class='line'>sandip = sandipransing 
+</span><span class='line'>amit = amitk 
+</span><span class='line'>root = sandipransing </span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git svn --author-file=authorfile clone -s svn://server/project_myt/trunk proj</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>3. Add git repository ur</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd proj
+</span><span class='line'>git remote add git@github.com:USERNAME/project.git</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>4. Push repository to git</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git push origin master</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To do svn pull for latest changes</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git svn rebase</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/07/how-to-get-started-with-tata-photon-on-ubuntu/">How to get started with tata photon on ubuntu machine</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-07-05T14:06:00+05:30" pubdate data-updated="true">Jul 5<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In order to get tata photon working on ubuntu machine you need to install following packages</p>
+
+<p><strong>1. usb-modeswitch-data 2. usb-modeswitch</strong></p>
+
+<p>Either you can download them from ubuntu site and install locally or install using apt manager</p>
+
+<p>Download links</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>http://packages.debian.org/squeeze/usb-modeswitch-data
+</span><span class='line'>http://packages.debian.org/squeeze/usb-modeswitch</span></code></pre></td></tr></table></div></figure>
+
+
+<p>apt installation</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install usb-modeswitch-data usb-modeswitch usb-modeswitch</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After successful installation,</p>
+
+<ol>
+<li>Connect photon usb card</li>
+<li>Execute following commands one after another</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo usb_modeswitch -c /etc/usb_modeswitch.d/12d1\:1446
+</span><span class='line'>wvdial</span></code></pre></td></tr></table></div></figure>
+
+
+<p>..and you should get connected via photon!</p>
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/page/5/">&larr; Older</a>
@@ -1364,15 +1239,15 @@ In cases where you want only one particular model connecting other database tabl
       </li>
     
       <li class="post">
-        <a href="/2014/03/understanding-restful-vs-soap-web-services/">Understanding RESTful vs SOAP web services</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/03/regex-to-split-string-within-quotes-and-spaces/">regex to split string within quotes and spaces</a>
-      </li>
-    
-      <li class="post">
         <a href="/2014/02/moving-from-blogspot-to-octopress/">Migrating from blogspot to octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a>
       </li>
     
   </ul>
