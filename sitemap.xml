@@ -595,6 +595,10 @@
         <lastmod>2014-03-03T17:10:04+05:30</lastmod>
     </url>
     <url>
+        <loc>http://funonrails.com/2014/03/understanding-restful-vs-soap-web-services/</loc>
+        <lastmod>2014-04-22T16:15:08+05:30</lastmod>
+    </url>
+    <url>
         <loc>http://funonrails.com/2014/03/building-restful-api-using-grape-in-rails/</loc>
         <lastmod>2014-04-02T15:52:57+05:30</lastmod>
     </url>
@@ -604,7 +608,7 @@
     </url>
     <url>
         <loc>http://funonrails.com/</loc>
-        <lastmod>2014-04-02T15:52:57+05:30</lastmod>
+        <lastmod>2014-04-22T16:15:08+05:30</lastmod>
     </url>
     <url>
         <loc>http://funonrails.com/thank-you/</loc>
@@ -620,7 +624,7 @@
     </url>
     <url>
         <loc>http://funonrails.com/archives/</loc>
-        <lastmod>2014-04-02T15:52:57+05:30</lastmod>
+        <lastmod>2014-04-22T16:15:08+05:30</lastmod>
     </url>
     <url>
         <loc>http://funonrails.com/robots.txt</loc>
