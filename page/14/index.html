@@ -98,6 +98,89 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2009/09/no-ri-no-rdoc-for-ruby-gem-installation/">&#8211;no-ri &#8211;no-rdoc for ruby gem installation</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-09-30T23:27:00+05:30" pubdate data-updated="true">Sep 30<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>GEM install without rdoc</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install GEM_NAME –no-ri –no-rdoc</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Skip ri rdoc for all gem installation as i haven’t seen anyone using it.</p>
+
+<h2>Edit gemrc file</h2>
+
+<p>Add following line to it</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># vi ~/.gemrc
+</span><span class='line'>:gem: --no-ri --no-rdoc</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here is my <code>~/.gemrc</code> file</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>---
+</span><span class='line'>:verbose: true
+</span><span class='line'>gem: --no-ri --no-rdoc
+</span><span class='line'>:update_sources: true
+</span><span class='line'>:sources:
+</span><span class='line'>- http://gems.rubyforge.org
+</span><span class='line'>- http://gems.github.com
+</span><span class='line'>:backtrace: false
+</span><span class='line'>:bulk_threshold: 1000
+</span><span class='line'>:benchmark: false</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That’s it !</p>
+
+<h2>Comments</h2>
+
+<p><strong>@Tnelson</strong>
+I don’t usually reply to posts but I will in this case, great info…I will add a backlink and bookmark your site. Keep up the good work!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2009/09/managing-multiple-ruby-versions-with-rvm/">Managing multiple ruby versions with RVM</a></h1>
     
     
@@ -1001,70 +1084,6 @@ website pages will appear in search results.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/08/easy-sphinx-install-on-ubuntu-interpid/">Easy sphinx install on ubuntu interpid</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-08-17T13:02:00+05:30" pubdate data-updated="true">Aug 17<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h4>Download <code>sphinx source</code> from website</h4>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install libmysqlclient15-dev
-</span><span class='line'>wget http://sphinxsearch.com/downloads/sphinx-0.9.8-rc2.tar.gz</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>Extract source code</h4>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>tar xvf sphinx-0.9.8-rc2.tar.gz && rm sphinx-0.9.8-rc2.tar.gz</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>Configure</h4>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd sphinx-0.9.8-rc2
-</span><span class='line'>./configure</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>Install</h4>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>make
-</span><span class='line'>sudo make install</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/15/">&larr; Older</a>
@@ -1094,11 +1113,11 @@ website pages will appear in search results.</p>
       </li>
     
       <li class="post">
-        <a href="/2014/02/moving-from-blogspot-to-octopress/">Migrating from blogspot to octopress</a>
+        <a href="/2014/03/regex-to-split-string-within-quotes-and-spaces/">regex to split string within quotes and spaces</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/moving-from-blogspot-to-octopress/">Migrating from blogspot to octopress</a>
       </li>
     
   </ul>

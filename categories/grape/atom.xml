@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Grape | Fun On Rails]]></title>
   <link href="http://funonrails.com/categories/grape/atom.xml" rel="self"/>
   <link href="http://funonrails.com/"/>
-  <updated>2014-04-22T17:04:16+05:30</updated>
+  <updated>2014-05-06T14:20:12+05:30</updated>
   <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -22,7 +22,7 @@
 
 <p>Lets see how this can be done assuming you already have devise setup ready.</p>
 
-<h2>Add <em>token_authenticable</em> to devise modules</h2>
+<h2>Add <em>token_authenticable</em> to devise modules (works with devise versions &lt;=3.2)</h2>
 
 <p>In <em>user.rb</em> add <em>:token_authenticatable</em> to the list of devise modules, it should look something like below:
 ```ruby
@@ -52,6 +52,47 @@ class User &lt; ActiveRecord::Base</p>
 
 <!-- more -->
 
+
+<h2>Generate Authentication token on your own (If devise version > 3.2)</h2>
+
+<p>```ruby
+class User &lt; ActiveRecord::Base</p>
+
+<h1>..code..</h1>
+
+<p>  devise :database_authenticatable,</p>
+
+<pre><code>:invitable,
+:registerable, 
+:recoverable, 
+:rememberable, 
+:trackable, 
+:validatable
+</code></pre>
+
+<p>  attr_accessible :name, :email, :authentication_token</p>
+
+<p>  before_save :ensure_authentication_token</p>
+
+<p>  def ensure_authentication_token</p>
+
+<pre><code>self.authentication_token ||= generate_authentication_token
+</code></pre>
+
+<p>  end</p>
+
+<p>  private</p>
+
+<p>  def generate_authentication_token</p>
+
+<pre><code>loop do
+  token = Devise.friendly_token
+  break token unless User.where(authentication_token: token).first
+end
+</code></pre>
+
+<p>  end
+```</p>
 
 <h2>Add migration for authentiction token</h2>
 

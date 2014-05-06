@@ -4,7 +4,7 @@
   <title><![CDATA[Fun On Rails]]></title>
   <link href="http://funonrails.com/atom.xml" rel="self"/>
   <link href="http://funonrails.com/"/>
-  <updated>2014-04-22T17:04:16+05:30</updated>
+  <updated>2014-05-06T14:20:12+05:30</updated>
   <id>http://funonrails.com/</id>
   <author>
     <name><![CDATA[sandipransing]]></name>
@@ -22,7 +22,7 @@
 
 <p>Lets see how this can be done assuming you already have devise setup ready.</p>
 
-<h2>Add <em>token_authenticable</em> to devise modules</h2>
+<h2>Add <em>token_authenticable</em> to devise modules (works with devise versions &lt;=3.2)</h2>
 
 <p>In <em>user.rb</em> add <em>:token_authenticatable</em> to the list of devise modules, it should look something like below:</p>
 
@@ -46,6 +46,37 @@
 
 
 <!-- more -->
+
+
+<h2>Generate Authentication token on your own (If devise version > 3.2)</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'><span class="c1"># ..code..</span>
+</span><span class='line'>  <span class="n">devise</span> <span class="ss">:database_authenticatable</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:invitable</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:registerable</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:recoverable</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:rememberable</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:trackable</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:validatable</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">attr_accessible</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">:authentication_token</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">before_save</span> <span class="ss">:ensure_authentication_token</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">ensure_authentication_token</span>
+</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">authentication_token</span> <span class="o">||=</span> <span class="n">generate_authentication_token</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">private</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">generate_authentication_token</span>
+</span><span class='line'>    <span class="kp">loop</span> <span class="k">do</span>
+</span><span class='line'>      <span class="n">token</span> <span class="o">=</span> <span class="no">Devise</span><span class="o">.</span><span class="n">friendly_token</span>
+</span><span class='line'>      <span class="k">break</span> <span class="n">token</span> <span class="k">unless</span> <span class="no">User</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">authentication_token</span><span class="p">:</span> <span class="n">token</span><span class="p">)</span><span class="o">.</span><span class="n">first</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>Add migration for authentiction token</h2>
@@ -538,6 +569,85 @@ It has successful/retry logic built in and provides end-to-end reliability even 
 <li><a href="http://www.w3schools.com/webservices/ws_soap_example.asp">http://www.w3schools.com/webservices/ws_soap_example.asp</a></li>
 <li><a href="http://www.slideshare.net/kverbert/soapbased-web-services">http://www.slideshare.net/kverbert/soapbased-web-services</a></li>
 </ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[regex to split string within quotes and spaces]]></title>
+    <link href="http://funonrails.com/2014/03/regex-to-split-string-within-quotes-and-spaces/"/>
+    <updated>2014-03-08T21:32:37+05:30</updated>
+    <id>http://funonrails.com/2014/03/regex-to-split-string-within-quotes-and-spaces</id>
+    <content type="html"><![CDATA[<p>I wanted to split a string based on white spaces except when if anything is enclosed inside quotes then i don&rsquo;t want to split that piece of string from getting splitted.</p>
+
+<p>It means string will be splitted based on consecutive double quotes from left to right and remaining string will be spitted on spaces.</p>
+
+<!--more-->
+
+
+<h4>Example:</h4>
+
+<p>Splitting of below string</p>
+
+<figure class='code'><div class="highlight"><table><tr> <td class='code'><pre><code class=''><span class='line'>"html css java 'ruby on rails' python jquery 1's" </span></code></pre></td></tr></table></div></figure>
+
+
+<p>should give array of below resulting strings</p>
+
+<figure class='code'><div class="highlight"><table><tr> <td class='code'><pre><code class=''><span class='line'>html
+</span><span class='line'>css
+</span><span class='line'>java
+</span><span class='line'>ruby on rails
+</span><span class='line'>python
+</span><span class='line'>jquery
+</span><span class='line'>1's</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Regular expression</h4>
+
+<p>Below regular expression gives array matched string seperated by quotes and then spaces</p>
+
+<figure class='code'><div class="highlight"><table><tr> <td class='code'><pre><code class=''><span class='line'>/'.*?'|".*?"|\S+/g</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='javascript'><span class='line'><span class="nx">tokens</span> <span class="o">=</span> <span class="s2">&quot;html css java &#39;ruby on rails&#39; python jquery 1&#39;s&quot;</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/&#39;.*?&#39;|&quot;.*?&quot;|\S+/g</span><span class="p">);</span>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">tokens</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Result</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='javascript'><span class='line'><span class="mi">0</span><span class="o">:</span> <span class="s2">&quot;html&quot;</span>
+</span><span class='line'><span class="mi">1</span><span class="o">:</span> <span class="s2">&quot;css&quot;</span>
+</span><span class='line'><span class="mi">2</span><span class="o">:</span> <span class="s2">&quot;java&quot;</span>
+</span><span class='line'><span class="mi">3</span><span class="o">:</span> <span class="s2">&quot;&#39;ruby on rails&#39;&quot;</span>
+</span><span class='line'><span class="mi">4</span><span class="o">:</span> <span class="s2">&quot;python&quot;</span>
+</span><span class='line'><span class="mi">5</span><span class="o">:</span> <span class="s2">&quot;jquery&quot;</span>
+</span><span class='line'><span class="mi">6</span><span class="o">:</span> <span class="s2">&quot;1&#39;s&quot;</span>
+</span><span class='line'><span class="nx">length</span><span class="o">:</span> <span class="mi">7</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Demo</h4>
+
+<p><input type='text' data-id='split' placeholde='Say something' /></p>
+
+<div data-id='result'>
+</div>
+
+
+<script type='text/javascript'>
+  $("[data-id=split]").keyup(function(){
+    query = $(this).val();
+    if(query.length) {
+      tokens = query.match(/'.*?'|".*?"|\S+/g);
+      result = $.map(tokens, function(t, i){ return(i+1+": "+t); }).join('<br/>');
+      $("[data-id=result]").html("<b>Result:</b><br/>").append(result)
+    }
+  })
+</script>
 
 ]]></content>
   </entry>
@@ -1901,178 +2011,6 @@ Rails Integration</p>
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="n">request</span><span class="o">.</span><span class="n">referrer</span>
 </span></code></pre></td></tr></table></div></figure>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Paypal payments integration with rails]]></title>
-    <link href="http://funonrails.com/2011/12/paypal-payments-integration-with-rails/"/>
-    <updated>2011-12-30T18:00:00+05:30</updated>
-    <id>http://funonrails.com/2011/12/paypal-payments-integration-with-rails</id>
-    <content type="html"><![CDATA[<p>Paypal standard website payment service allows online payment transactions for websites.
-Before implementing payments inside rails app needs to have following things in place &ndash;</p>
-
-<ol>
-<li><a href="http://developer.paypal.com/">Register Paypal sandbox account</a></li>
-<li>Paypal Merchant account api credentials i.e. login, password, signature, application_id</li>
-<li>Paypal Buyer account creds to test payments</li>
-</ol>
-
-
-<p>Bundle Install</p>
-
-<figure class='code'><div class="highlight"><table><tr> <td class='code'><pre><code class=''><span class='line'># Gemfile     
-</span><span class='line'>gem 'activemerchant </span></code></pre></td></tr></table></div></figure>
-
-
-<p>Gateway config</p>
-
-<figure class='code'><div class="highlight"><table><tr> <td class='code'><pre><code class=''><span class='line'># config/gateway.yml 
-</span><span class='line'>development: &development     
-</span><span class='line'>  mode: test     
-</span><span class='line'>  login: rana_1317365002_biz_api1.gmail.com     
-</span><span class='line'>  password: '1311235050'     
-</span><span class='line'>  signature: ACxcVrB3mFChvPIe8aDWQlLhAPN46oPBQCj7rJWPza6CDZmBURg.     
-</span><span class='line'>  application_id: APP-76y884485P519543T  
-</span><span class='line'>
-</span><span class='line'>production:    
-</span><span class='line'>  &lt;&lt;: *development
-</span><span class='line'>
-</span><span class='line'>test:
-</span><span class='line'>  &lt;&lt;: *development</span></code></pre></td></tr></table></div></figure>
-
-
-<p>New Payment Form</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='haml'><span class='line'><span class="p">=</span> <span class="n">form_for</span> <span class="vi">@payment</span> <span class="o">||=</span> <span class="no">Payment</span><span class="o">.</span><span class="n">new</span><span class="p">,</span> <span class="ss">:url</span> <span class="o">=&gt;</span> <span class="n">pay_bill_url</span><span class="p">,</span> <span class="ss">:html</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:id</span> <span class="o">=&gt;</span> <span class="ss">:payForm</span><span class="p">}</span> <span class="k">do</span> <span class="o">|</span><span class="nb">p</span><span class="o">|</span>
-</span><span class='line'>  <span class="p">=</span> <span class="nb">p</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:amount</span>
-</span><span class='line'>  <span class="p">=</span> <span class="nb">p</span><span class="o">.</span><span class="n">submit</span> <span class="s1">&#39;Pay&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Generate &amp; Migrate Payment Model</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='haml'><span class='line'>rails g model payment status:string amount:float transaction_number:string
-</span><span class='line'>rake db:migrate
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Payment Model</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/models/payment.rb  </span>
-</span><span class='line'><span class="k">class</span> <span class="nc">Payment</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="no">PROCESSING</span><span class="p">,</span> <span class="no">FAILED</span><span class="p">,</span> <span class="no">SUCCESS</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">validates</span> <span class="ss">:amount</span><span class="p">,</span> <span class="ss">:presence</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">:numericality</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:greater_than</span> <span class="o">=&gt;</span> <span class="mi">0</span> <span class="p">}</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">conf</span>
-</span><span class='line'>    <span class="vc">@@gateway_conf</span> <span class="o">||=</span> <span class="no">YAML</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span><span class="no">Rails</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;config/gateway.yml&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_s</span><span class="p">)</span><span class="o">[</span><span class="no">Rails</span><span class="o">.</span><span class="n">env</span><span class="o">]</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">## Paypal    </span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">setup_purchase</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">gateway</span><span class="o">.</span><span class="n">setup_purchase</span><span class="p">(</span><span class="n">amount</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">redirect_url_for</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">gateway</span><span class="o">.</span><span class="n">redirect_url_for</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">purchase</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="p">{})</span>
-</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="no">PROCESSING</span>
-</span><span class='line'>    <span class="c1">#:ip       =&gt; request.remote_ip,</span>
-</span><span class='line'>    <span class="c1">#:payer_id =&gt; params[:payer_id],</span>
-</span><span class='line'>    <span class="c1">#:token    =&gt; params[:token]</span>
-</span><span class='line'>    <span class="n">response</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">purchase</span><span class="p">(</span><span class="n">amt</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">success?</span>
-</span><span class='line'>      <span class="nb">self</span><span class="o">.</span><span class="n">transaction_num</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">params</span><span class="o">[</span><span class="s1">&#39;transaction_id&#39;</span><span class="o">]</span>
-</span><span class='line'>      <span class="nb">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="no">SUCCESS</span>
-</span><span class='line'>    <span class="k">else</span>
-</span><span class='line'>      <span class="nb">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="no">FAILED</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>    <span class="k">return</span> <span class="nb">self</span>
-</span><span class='line'>  <span class="k">rescue</span> <span class="no">Exception</span> <span class="o">=&gt;</span> <span class="n">e</span>
-</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="no">FAILED</span>
-</span><span class='line'>    <span class="k">return</span> <span class="nb">self</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kp">private</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">gateway</span>
-</span><span class='line'>    <span class="ss">ActiveMerchant</span><span class="p">:</span><span class="ss">:Billing</span><span class="o">::</span><span class="no">Base</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">auth</span><span class="o">[</span><span class="s1">&#39;mode&#39;</span><span class="o">].</span><span class="n">to_sym</span>
-</span><span class='line'>    <span class="ss">ActiveMerchant</span><span class="p">:</span><span class="ss">:Billing</span><span class="o">::</span><span class="no">PaypalExpressGateway</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
-</span><span class='line'>      <span class="ss">:login</span> <span class="o">=&gt;</span> <span class="n">auth</span><span class="o">[</span><span class="s1">&#39;login&#39;</span><span class="o">]</span><span class="p">,</span> <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="n">auth</span><span class="o">[</span><span class="s1">&#39;password&#39;</span><span class="o">]</span><span class="p">,</span>
-</span><span class='line'>      <span class="ss">:signature</span> <span class="o">=&gt;</span> <span class="n">auth</span><span class="o">[</span><span class="s1">&#39;signature&#39;</span><span class="o">]</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">auth</span>
-</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">class</span><span class="o">.</span><span class="n">conf</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>
-Billing routes</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="c1">## Callback URL   </span>
-</span><span class='line'><span class="n">match</span> <span class="s1">&#39;/billing/paypal/:id/confirm&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;billing#paypal&#39;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:confirm_paypal</span>
-</span><span class='line'><span class="c1">## Create payment   </span>
-</span><span class='line'><span class="n">match</span> <span class="s1">&#39;/billing&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;billing#create&#39;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:pay_bill</span>
-</span><span class='line'><span class="c1">## Request URL   </span>
-</span><span class='line'><span class="n">match</span> <span class="s1">&#39;/billing/paypal/:id&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;billing#checkout&#39;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:billing</span>
-</span><span class='line'><span class="n">match</span> <span class="s1">&#39;/billing/thank_you/:id&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;billing#checkout&#39;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:billing_thank_you</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Billing Controller</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/controllers/billing_controller.rb</span>
-</span><span class='line'><span class="k">class</span> <span class="nc">BillingController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
-</span><span class='line'>  <span class="n">before_filter</span> <span class="ss">:get_payment</span><span class="p">,</span> <span class="ss">:only</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="ss">:checkout</span><span class="p">,</span> <span class="ss">:paypal</span><span class="p">,</span> <span class="ss">:thank_you</span><span class="o">]</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">create</span>
-</span><span class='line'>    <span class="vi">@payment</span> <span class="o">=</span> <span class="no">Payment</span><span class="o">.</span><span class="n">new</span> <span class="n">params</span><span class="o">[</span><span class="ss">:payment</span><span class="o">]</span>
-</span><span class='line'>    <span class="k">if</span> <span class="vi">@payment</span><span class="o">.</span><span class="n">save</span>
-</span><span class='line'>      <span class="c1">## Paypal Checkout page       </span>
-</span><span class='line'>      <span class="n">redirect_to</span> <span class="n">billing_url</span>
-</span><span class='line'>    <span class="k">else</span>
-</span><span class='line'>      <span class="n">render</span> <span class="ss">:action</span> <span class="o">=&gt;</span> <span class="ss">:new</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1"># ASSUMPTION   # payment is valid i.e. amount is entered   </span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">checkout</span>
-</span><span class='line'>    <span class="n">response</span> <span class="o">=</span> <span class="vi">@payment</span><span class="o">.</span><span class="n">setup_purchase</span><span class="p">(</span><span class="ss">:return_url</span> <span class="o">=&gt;</span> <span class="n">confirm_paypal_url</span><span class="p">(</span><span class="vi">@payment</span><span class="p">),</span> <span class="ss">:cancel_return_url</span> <span class="o">=&gt;</span> <span class="n">root_url</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">redirect_to</span> <span class="vi">@payment</span><span class="o">.</span><span class="n">redirect_url_for</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">token</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">## CALL BACK   </span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">paypal</span>
-</span><span class='line'>    <span class="vi">@payment</span> <span class="o">=</span> <span class="vi">@payment</span><span class="o">.</span><span class="n">purchase</span><span class="p">(</span><span class="ss">:token</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:token</span><span class="o">]</span><span class="p">,</span> <span class="ss">:payer_id</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:PayerID</span><span class="o">]</span><span class="p">,</span> <span class="ss">:ip</span> <span class="o">=&gt;</span> <span class="n">request</span><span class="o">.</span><span class="n">remote_ip</span><span class="p">)</span>
-</span><span class='line'>    <span class="vi">@payment</span><span class="o">.</span><span class="n">save</span>
-</span><span class='line'>    <span class="n">redirect_to</span> <span class="n">thank_you_billing_url</span><span class="p">(</span><span class="vi">@order</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kp">private</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">get_payment</span>
-</span><span class='line'>    <span class="vi">@payment</span> <span class="o">=</span> <span class="no">Payment</span><span class="o">.</span><span class="n">find_by_id</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
-</span><span class='line'>    <span class="vi">@payment</span> <span class="o">&amp;&amp;</span> <span class="vi">@payment</span><span class="o">.</span><span class="n">valid?</span> <span class="o">||</span> <span class="n">invalid_url</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Views</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr> <td class='code'><pre><code class='haml'><span class='line'># app/views/billing/thank_you.html.haml
-</span><span class='line'><span class="p">-</span> <span class="k">if</span> <span class="vi">@payment</span><span class="o">.</span><span class="n">success?</span>
-</span><span class='line'>  <span class="nt">%p</span> The transaction is successfully completed
-</span><span class='line'><span class="p">-</span> <span class="k">else</span>
-</span><span class='line'>  <span class="nt">%p</span> The transaction failed
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
 ]]></content>
   </entry>
   

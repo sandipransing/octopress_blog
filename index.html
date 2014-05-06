@@ -127,7 +127,7 @@
 
 <p>Lets see how this can be done assuming you already have devise setup ready.</p>
 
-<h2>Add <em>token_authenticable</em> to devise modules</h2>
+<h2>Add <em>token_authenticable</em> to devise modules (works with devise versions &lt;=3.2)</h2>
 
 <p>In <em>user.rb</em> add <em>:token_authenticatable</em> to the list of devise modules, it should look something like below:</p>
 
@@ -292,6 +292,49 @@ It is an architecture style for designing networked applications which typycally
   
     <footer>
       <a rel="full-article" href="/2014/03/understanding-restful-vs-soap-web-services/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/03/regex-to-split-string-within-quotes-and-spaces/">regex to split string within quotes and spaces</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-08T21:32:37+05:30" pubdate data-updated="true">Mar 8<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I wanted to split a string based on white spaces except when if anything is enclosed inside quotes then i don&rsquo;t want to split that piece of string from getting splitted.</p>
+
+<p>It means string will be splitted based on consecutive double quotes from left to right and remaining string will be spitted on spaces.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2014/03/regex-to-split-string-within-quotes-and-spaces/">Read on &rarr;</a>
     </footer>
   
 
@@ -616,80 +659,6 @@ Then following changes needs to be done for upgrading your application to Rails 
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/02/ruby-enumerable-toproc-ampersond-colon/">ruby enumerable & to_proc (ampersond & symbol shortcut)</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-23T02:09:00+05:30" pubdate data-updated="true">Feb 23<span>rd</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Basically Enumerable mixin gives collection classes a variety of traverse, search, sort methods.</p>
-
-<p><strong>Understanding ruby blocks</strong></p>
-
-<blockquote><p>Blocks are statements of code written in ruby. one can take them as similar to c language macro&rsquo;s</p></blockquote>
-
-<p><strong>Different ways to define blocks</strong></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="nb">proc</span> <span class="k">do</span>
-</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;hello&quot;</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">call</span> <span class="c1">#=&gt; hello</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">b</span> <span class="o">=</span> <span class="nb">lambda</span> <span class="k">do</span> <span class="o">|</span><span class="n">u</span><span class="o">|</span>
-</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;hello </span><span class="si">#{</span><span class="n">u</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'><span class="n">b</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;sandip&#39;</span><span class="p">)</span><span class="c1">#=&gt; hello sandip</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">c</span> <span class="o">=</span> <span class="nb">proc</span> <span class="p">{</span><span class="o">|</span><span class="n">user</span><span class="o">|</span> <span class="nb">puts</span> <span class="n">user</span> <span class="p">}</span>
-</span><span class='line'><span class="n">c</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;sandip&#39;</span><span class="p">)</span> <span class="c1">#=&gt; sandip</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/02/ruby-enumerable-toproc-ampersond-colon/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/2/">&larr; Older</a>
@@ -717,11 +686,11 @@ Then following changes needs to be done for upgrading your application to Rails 
       </li>
     
       <li class="post">
-        <a href="/2014/02/moving-from-blogspot-to-octopress/">Migrating from blogspot to octopress</a>
+        <a href="/2014/03/regex-to-split-string-within-quotes-and-spaces/">regex to split string within quotes and spaces</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/moving-from-blogspot-to-octopress/">Migrating from blogspot to octopress</a>
       </li>
     
   </ul>

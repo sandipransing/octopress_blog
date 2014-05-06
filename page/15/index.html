@@ -98,6 +98,70 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2009/08/easy-sphinx-install-on-ubuntu-interpid/">Easy sphinx install on ubuntu interpid</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-08-17T13:02:00+05:30" pubdate data-updated="true">Aug 17<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h4>Download <code>sphinx source</code> from website</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install libmysqlclient15-dev
+</span><span class='line'>wget http://sphinxsearch.com/downloads/sphinx-0.9.8-rc2.tar.gz</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Extract source code</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>tar xvf sphinx-0.9.8-rc2.tar.gz && rm sphinx-0.9.8-rc2.tar.gz</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Configure</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd sphinx-0.9.8-rc2
+</span><span class='line'>./configure</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Install</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>make
+</span><span class='line'>sudo make install</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2009/05/interesting-string-inflections-in-rails/">Intresting String inflections in rails</a></h1>
     
     
@@ -1420,191 +1484,9 @@ Leverage a Large Community</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/05/rails-acts-as-taggable-on-plugin/">using rails acts as taggable on plugin</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-05-08T14:22:00+05:30" pubdate data-updated="true">May 8<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>A tagging plugin for Rails applications that allows for custom tagging along dynamic contexts.</p>
-
-<h2>Plugin Installation</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ruby script/plugin install git://github.com/mbleigh/acts-as-taggable-on.git</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Install as a Gem</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>gem install mbleigh-acts-as-taggable-on --source http://gems.github.com</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Auto Install</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># include following line in environment.rb
-</span><span class='line'>config.gem "mbleigh-acts-as-taggable-on", :source =&gt; "http://gems.github.com", :lib =&gt; "acts-as-taggable-on"
-</span><span class='line'>rake gems:install</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Post Installation (Rails)</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ruby script/generate acts_as_taggable_on_migration
-</span><span class='line'>rake db:migrate</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Adding taggable to model</h2>
-
-<p>Add following line in your model for which you wanted to be tagged</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>acts_as_taggable_on :tags</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Example</h2>
-
-<p>Lets take <code>post</code> model</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
-</span><span class='line'>  <span class="n">acts_as_taggable_on</span> <span class="ss">:tags</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Controller code</h2>
-
-<p>Inside controller action</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@post</span> <span class="o">=</span> <span class="no">Post</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:post</span><span class="o">]</span><span class="p">)</span>
-</span><span class='line'><span class="c1"># Or just hardcode to test</span>
-</span><span class='line'><span class="vi">@post</span><span class="o">.</span><span class="n">tag_list</span> <span class="o">=</span><span class="s2">&quot;awesome, slick, hefty&quot;</span>
-</span><span class='line'><span class="vi">@post</span><span class="o">.</span><span class="n">save</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Methods</h2>
-
-<p>What are the methods provided?</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@post</span><span class="o">.</span><span class="n">tag_list</span> <span class="o">=</span> <span class="s2">&quot;awesome, slick, hefty&quot;</span>
-</span><span class='line'><span class="no">Post</span><span class="o">.</span><span class="n">tagged_with</span><span class="p">(</span><span class="s2">&quot;awesome&quot;</span><span class="p">,</span> <span class="ss">:on</span> <span class="o">=&gt;</span> <span class="ss">:tags</span><span class="p">)</span>
-</span><span class='line'><span class="c1"># =&gt; [@post1, @post2]</span>
-</span><span class='line'>
-</span><span class='line'><span class="no">Post</span><span class="o">.</span><span class="n">tag_counts</span> <span class="c1"># =&gt; [,...]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Named Scope</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Post</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># created_at DESC</span>
-</span><span class='line'><span class="no">Post</span><span class="o">.</span><span class="n">tagged_with</span><span class="p">(</span><span class="s2">&quot;awesome&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">by_creation</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Pagination</h2>
-
-<p>It is easy to paginate tags collection using will_paginate plugin</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">List_Of_Tags</span><span class="o">.</span><span class="n">paginate</span><span class="p">(</span><span class="ss">:page</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:page</span><span class="o">]</span><span class="p">,</span> <span class="ss">:per_page</span> <span class="o">=&gt;</span> <span class="mi">20</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@post</span><span class="o">.</span><span class="n">find_related_tags</span>
-</span><span class='line'><span class="c1"># =&gt; will give related posts having related tags. [ @post1, @post2, ...]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Tag Owners</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
-</span><span class='line'>  <span class="n">acts_as_tagger</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
-</span><span class='line'>  <span class="n">acts_as_taggable_on</span> <span class="ss">:tags</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Console play</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@some_user</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="vi">@some_post</span><span class="p">,</span> <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&quot;paris, normandy&quot;</span><span class="p">,</span> <span class="ss">:on</span> <span class="o">=&gt;</span> <span class="ss">:tags</span><span class="p">)</span>
-</span><span class='line'><span class="vi">@some_user</span><span class="o">.</span><span class="n">owned_taggings</span>
-</span><span class='line'><span class="vi">@some_user</span><span class="o">.</span><span class="n">owned_tags</span>
-</span><span class='line'><span class="vi">@some_post</span><span class="o">.</span><span class="n">tags_from</span><span class="p">(</span><span class="vi">@some_user</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/page/16/">&larr; Older</a>
     
     <a href="/archives">Blog Archives</a>
     
@@ -1631,11 +1513,11 @@ Leverage a Large Community</p>
       </li>
     
       <li class="post">
-        <a href="/2014/02/moving-from-blogspot-to-octopress/">Migrating from blogspot to octopress</a>
+        <a href="/2014/03/regex-to-split-string-within-quotes-and-spaces/">regex to split string within quotes and spaces</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/moving-from-blogspot-to-octopress/">Migrating from blogspot to octopress</a>
       </li>
     
   </ul>

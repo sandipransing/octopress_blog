@@ -98,6 +98,50 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2010/03/download-rails-api-to-work-offline/">Download Rails API to work offline</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-03-23T19:08:00+05:30" pubdate data-updated="true">Mar 23<span>rd</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>We often need rails API help while working without internet connection.</p>
+
+<p>Below command can be used to <a href="http://github.com/sandipransing/rails_api">download/copy</a> rails api to work locally(offline) mode</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget -mk www.api.rubyonrails.org</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For more information on this click <a href="http://github.com/sandipransing/rails_api">here</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2010/03/imagemagick-rmagick-installation-on-ubuntu/">Imagemagick/ RMagick Installation on ubuntu</a></h1>
     
     
@@ -859,84 +903,6 @@ There are two ways to do that to invalidate radiant cache immediately.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/03/remove-svn-files-inside-directory-rm-rf/">Programming ruby Linux basics</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-03-02T12:29:00+05:30" pubdate data-updated="true">Mar 2<span>nd</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Remove svn files inside directory</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rm -rf `find . -type d -name .svn</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Set path in linux</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>export PATH=$PATH:/usr/ruby/bin</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Here /usr/ruby/bin is the path to ruby extecuatble.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>grep and print process pid
-</span><span class='line'>ps -ef | grep search_string | grep -v grep | awk '{print  $2 }'</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Kill process</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>kill -9 process_id_here
-</span><span class='line'>ps -ef | grep search_string | grep -v grep | awk '{print  $2 }' | xargs kill -9</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Store pid of process in a variable for further process</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>tokill=`ps -ef|grep ruby|grep -v grep|awk '{print $2}'`;kill -9 $tokill;</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Mirror a website</h2>
-
-<p>Command to clone/copy a website for offline/local browsing.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>wget -mk www.funonrails.com</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Above command downloads all website pages in depth level with stylesheets, images and javascripts.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/10/">&larr; Older</a>
@@ -966,11 +932,11 @@ There are two ways to do that to invalidate radiant cache immediately.</p>
       </li>
     
       <li class="post">
-        <a href="/2014/02/moving-from-blogspot-to-octopress/">Migrating from blogspot to octopress</a>
+        <a href="/2014/03/regex-to-split-string-within-quotes-and-spaces/">regex to split string within quotes and spaces</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/moving-from-blogspot-to-octopress/">Migrating from blogspot to octopress</a>
       </li>
     
   </ul>

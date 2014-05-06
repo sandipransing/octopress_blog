@@ -98,6 +98,71 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2010/10/twinkle-ff-setup-click-to-call-using-telify/">Twinkle + FF Setup (Click To Call) using telify</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-10-17T00:47:00+05:30" pubdate data-updated="true">Oct 17<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>On linux machine following settings needs to be done in order to get in browser calling enabled for phone numbers.</p>
+
+<h2>Installation setup</h2>
+
+<ol>
+<li>Install twinkle setup (Create user profile) and get it working for outgoing and incoming calls</li>
+<li>Install telify add-on (can be un-installed once completed with all settings)</li>
+<li>Copy wrapper script <code>twinkle_tel</code>) click here to <a href="http://github.com/sandipransing/twinkle_tel">download</a> and copy it to <code>/usr/bin</code> on user’s machine (make sure it has executable permissions)</li>
+<li>In Firefox go to <em>preferences/applications</em></li>
+<li>Search for <code>tel</code> protocol and change value of tel protocol to <em>/usr/bin/twinkle_tel</em></li>
+</ol>
+
+
+<h2>Usage/ Pre-requisites</h2>
+
+<p>HTML source code of phone number should look like as below</p>
+
+<p><strong>1. Dialing source code</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;a title="phone number" class="telified" nr="9860648108" href="tel:9860648108"&gt;9860648108&lt;/a&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>2. Call disconnect source code</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;a title="disconnect call" class="telified" href="tel:disconnect"&gt;Disconnect&lt;/a&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/clicktocall.png" /></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2010/10/delayed-jobs-fancy-methods/">DelayedJOb&#8217;s (DJ) fancy methods</a></h1>
     
     
@@ -1218,145 +1283,6 @@ Please be sure to make them published and modify contents to identify them</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/08/spell-check-in-ruby-and-rails-using/">Spell Check in ruby and rails using BOSSMan</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-08-04T02:26:00+05:30" pubdate data-updated="true">Aug 4<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Wrong English is an often problem while developing any website product as it gives bad view to website user and thus does direct impact on product. <strong>BOSSMan</strong> is a ruby gem that interacts with <strong>yahoo web service</strong> and provides a simplest way to overcome such errors.</p>
-
-<h4>Installation:</h4>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>gem sources -a http://gems.github.com
-</span><span class='line'>gem install jpignata-bossman</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Apply and get Application ID from yahoo developer network</p>
-
-<p><code>URl https://developer.apps.yahoo.com/</code></p>
-
-<p>Make sure to note it for reference</p>
-
-<p>Usage in ruby app</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;rubygems&#39;</span>
-</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;bossman&#39;</span>
-</span><span class='line'><span class="kp">include</span> <span class="no">BOSSMan</span>
-</span><span class='line'>
-</span><span class='line'><span class="no">BOSSMan</span><span class="o">.</span><span class="n">application_id</span> <span class="o">=</span> <span class="s2">&quot;Your Application ID here&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>Spelling Suggestions</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">text</span> <span class="o">=</span> <span class="ss">BOSSMan</span><span class="p">:</span><span class="ss">:Search</span><span class="o">.</span><span class="n">spelling</span><span class="p">(</span><span class="s2">&quot;gooogle&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="c1">#{&quot;resultset_spell&quot;=&gt;[{&quot;suggestion&quot;=&gt;&quot;google&quot;}], &quot;responsecode&quot;=&gt;&quot;200&quot;, &quot;deephits&quot;=&gt;&quot;1&quot;, &quot;start&quot;=&gt;&quot;0&quot;, &quot;count&quot;=&gt;&quot;1&quot;, &quot;totalhits&quot;=&gt;&quot;1&quot;}}&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">text</span><span class="o">.</span><span class="n">suggestion</span>
-</span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;google&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>More sophisticated way of use &ndash;</p>
-
-<ol>
-<li>Create a YML file containing list of kewords</li>
-<li>Load YML file</li>
-<li>Iterate YML hash to find out spell suggestions
-<strong>Example: spelling.yml</strong></li>
-</ol>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="mi">1</span> <span class="ss">keywords</span><span class="p">:</span>
-</span><span class='line'>  <span class="mi">2</span>   <span class="ss">gooogle</span><span class="p">:</span>
-</span><span class='line'>  <span class="mi">3</span>   <span class="no">Barack</span> <span class="ss">Oabama</span><span class="p">:</span>
-</span><span class='line'>  <span class="mi">4</span>   <span class="ss">Indian</span><span class="p">:</span>
-</span><span class='line'>  <span class="mi">5</span>   <span class="ss">Latuur</span><span class="p">:</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">keywords</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span><span class="s1">&#39;spelling.yml&#39;</span><span class="p">)</span><span class="o">[</span><span class="s1">&#39;keywords&#39;</span><span class="o">].</span><span class="n">keys</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;Correction suggested&quot;</span>
-</span><span class='line'>  <span class="n">keywords</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">keyword</span><span class="o">|</span>
-</span><span class='line'>    <span class="n">text</span> <span class="o">=</span> <span class="ss">BOSSMan</span><span class="p">:</span><span class="ss">:Search</span><span class="o">.</span><span class="n">spelling</span><span class="p">(</span><span class="n">keyword</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">if</span> <span class="n">defined?</span> <span class="n">text</span><span class="o">.</span><span class="n">suggestion</span>
-</span><span class='line'>      <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">keyword</span><span class="si">}</span><span class="s2"> =&gt; </span><span class="si">#{</span><span class="n">text</span><span class="o">.</span><span class="n">suggestion</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>Output</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Correction</span> <span class="n">suggested</span>
-</span><span class='line'><span class="n">gooogle</span> <span class="o">=&gt;</span> <span class="n">google</span>
-</span><span class='line'><span class="no">Barack</span> <span class="no">Oabama</span> <span class="o">=&gt;</span> <span class="no">Barack</span> <span class="no">Obama</span>
-</span><span class='line'><span class="no">Latuur</span> <span class="o">=&gt;</span> <span class="no">Latour</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Analyze suggestions manually and make neccesary corrections..</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/8/">&larr; Older</a>
@@ -1386,11 +1312,11 @@ Please be sure to make them published and modify contents to identify them</p>
       </li>
     
       <li class="post">
-        <a href="/2014/02/moving-from-blogspot-to-octopress/">Migrating from blogspot to octopress</a>
+        <a href="/2014/03/regex-to-split-string-within-quotes-and-spaces/">regex to split string within quotes and spaces</a>
       </li>
     
       <li class="post">
-        <a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a>
+        <a href="/2014/02/moving-from-blogspot-to-octopress/">Migrating from blogspot to octopress</a>
       </li>
     
   </ul>
