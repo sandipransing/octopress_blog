@@ -2,7 +2,7 @@
 layout: post
 title: "Understanding RESTful vs SOAP web services"
 date: 2014-03-17 15:09:33 +0530
-published: false
+published: true
 comments: false
 categories: REST SOAP
 ---
@@ -104,13 +104,14 @@ soap:encodingStyle="http://www.w3.org/2001/12/soap-encoding">
 ```
 #### Highlights 
 Here are few **reasons** for which you may want to use SOAP: 
-1. Platform and laguage independent
-2. Follows W3C standard 
+
+1. Platform and laguage independent  
+2. Follows W3C standard  
 WSDL (Web services description language) is a W3C standard based on xml and is used to describe web services.
-3. Security 
-It supports SSL (just like REST). It also provides a standard implementation of data integrity and data privacy. Being "Enterprise" it's more secure. 
-4. Atomic Transactions
-It supports ACID Transactions (WS- Atomic Transactions) so it can provide two phase commit over distributed transactional resources.
+3. Security  
+It supports SSL (just like REST). It also provides a standard implementation of data integrity and data privacy. Being "Enterprise" it's more secure.  
+4. Atomic Transactions  
+It supports ACID Transactions (WS- Atomic Transactions) so it can provide two phase commit over distributed transactional resources.  
 5. Reliable Messaging   
 It has successful/retry logic built in and provides end-to-end reliability even through SOAP intermediaries 
 
