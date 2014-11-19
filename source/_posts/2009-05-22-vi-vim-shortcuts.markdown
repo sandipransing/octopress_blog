@@ -12,7 +12,7 @@ categories:
 As i am newb on linux macine, i dont know vi shortcuts.
 so, i am listing down shortcuts which i am getting familier :)
 
-```
+``` bash
 # Open file
 vi filename
 
@@ -49,6 +49,7 @@ dd
 # To find particular word in file
 ?string1
 ```
+
 If you have any quick list, please let me know !
 
 Below post is reblogged from http://nakuls77.wordpress.com/2008/09/14/using-vi-editor/#comment-144
@@ -58,15 +59,17 @@ Below post is reblogged from http://nakuls77.wordpress.com/2008/09/14/using-vi-e
 There are countless options for Vi that can be set up inside the /etc/vimrc file.
 
 Auto-indent and creating a macro to change the color of the background.
-```
+``` bash
 # vi /etc/vimrc
 ```
+
 ## Auto-Indent Option -
 
 This option is so when you tab-space out a line and then press enter, the cursor will move to the next line, automatically indented to the start of the previous line. This helps programmers indent out code easily to create clean looking code. To implement this feature, please add the following line to the bottom of your /etc/vimrc file:
-```
+``` bash
 set ai
 ```
+
 Please note that generally speaking only programmers will want to turn ON auto-indent.
 
 ## Background Color -

@@ -1,8 +1,5 @@
 ---
 layout: default
-title: 'A Ruby and Rails Blog'
-description: Journal of a web developer containing learnings and experiences while developing with ruby, rails, JS and linux
-keywords: ruby, rails, gems, plugins, radiant, cms, SEO, geokit, asterisk, adhearsion, pdf, prawn, ubuntu, vim, linux, jQuery, sass, haml, nginx, passenger
 ---
 
 <div class="blog-index">
@@ -15,11 +12,11 @@ keywords: ruby, rails, gems, plugins, radiant, cms, SEO, geokit, asterisk, adhea
   {% endfor %}
   <div class="pagination">
     {% if paginator.next_page %}
-      <a class="prev" href="{{paginator.next_page}}">&larr; Older</a>
+      <a class="prev" href="{{paginator.next_page_path}}">&larr; Older</a>
     {% endif %}
-    <a href="/archives">Blog Archives</a>
+    <a href="/blog/archives">Blog Archives</a>
     {% if paginator.previous_page %}
-    <a class="next" href="{{paginator.previous_page}}">Newer &rarr;</a>
+    <a class="next" href="{{paginator.previous_page_path}}">Newer &rarr;</a>
     {% endif %}
   </div>
 </div>
